@@ -1,11 +1,14 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from "react";
 
 type Props = {
-    children: ReactNode | (() => void);
-    value: any;
+  children: ReactNode | (() => void);
+  value: Boolean;
 };
 
 export function When({ children, value }: Props) {
-    if (value) return (typeof children === 'function' ? children() : children) as ReactElement;
-    return <React.Fragment />;
+  if (value)
+    return (
+      typeof children === "function" ? children() : children
+    ) as ReactElement;
+  return <React.Fragment />;
 }
