@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from "react";
 
 type Props = {
   children: ReactNode | (() => void);
-  value: Boolean;
+  value: boolean;
 };
 
 export function When({ children, value }: Props) {
