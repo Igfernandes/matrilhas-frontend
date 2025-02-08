@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Footer } from "@components/Footer";
 import { poppins } from "@assets/fonts/poppins";
+import SnackbarProvider from "@contexts/Snackbar";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,10 +17,12 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className={poppins.className}>
-        <Component {...pageProps} />
-        <Footer />
-      </div>
+      <SnackbarProvider>
+        <div className={poppins.className}>
+          <Component {...pageProps} />
+          <Footer />
+        </div>
+      </SnackbarProvider>
     </QueryClientProvider>
   );
 }
