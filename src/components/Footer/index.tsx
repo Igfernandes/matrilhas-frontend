@@ -1,4 +1,4 @@
-import { When } from "@components/utilities/when";
+import { When } from "@components/utilities/When";
 import { FooterSimple } from "./Simple";
 
 export type FooterProps = {
