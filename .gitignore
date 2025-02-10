@@ -42,3 +42,7 @@ next-env.d.ts
 
 # log files
 package-lock.json
+public/locales/en/common.json
+public/locales/en/forgot-password.json
+public/locales/pt-BR/common.json
+public/locales/pt-BR/forgot-password.json
