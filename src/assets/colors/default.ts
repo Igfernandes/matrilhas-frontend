@@ -35,3 +35,10 @@ export const borderColors = {
   "cross-black-primary": "#464646",
   "cross-black-secondary": "#a3a3a3",
 };
+
+export const statusColors = {
+  success: "#018C75",
+  notice: "#6984ed",
+  error: "#ffc63b",
+  void: "#6b7280",
+};
