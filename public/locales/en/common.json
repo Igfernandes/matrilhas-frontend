@@ -22,14 +22,20 @@
     "has_min_one_lowercase": "Pelo menos  1 letra minúscula.",
     "has_min_one_number": "At least 1 lowercase letter.",
     "has_min_one_special_character": "At least 1 special character.",
-    "password_need_equal": "The password entered must be identical."
+    "password_need_equal": "The password entered must be identical.",
+    "need_go_back_login": "Go to login to access the platform.",
+    "go_back_login": "Go to login",
+    "will_redirect": "You'll redirect!"
   },
   "words": {
+    "success": "Success",
     "send": "Send",
     "enter_email": "Enter the your e-mail",
     "created_new_password": "Create new password",
     "await": "Await",
     "password": "Password",
-    "password_confirmation": "Password Confirmation"
+    "password_confirmation": "Password Confirmation",
+    "created_account": "Account created",
+    "created_password": "Password created"
   }
 }
