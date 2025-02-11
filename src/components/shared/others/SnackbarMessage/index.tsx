@@ -3,6 +3,7 @@ import { SnackbarProps } from "@contexts/Snackbar/types";
 import useSnackbarMessage from "./hooks/useSnackbarMessage";
 import { CircleClose } from "@assets/Icons/black/CircleClose";
 import { Close } from "@assets/Icons/black/CloseClean";
+import { statusColors } from "@assets/colors/default";
 
 interface Props {
   snackbar: SnackbarProps;
@@ -10,11 +11,6 @@ interface Props {
 }
 
 const SnackbarMessage = ({ deleteSnackbar, snackbar }: Props) => {
-  const colors = {
-    success: "border-l-green",
-    notice: "border-l-indigo",
-    error: "border-l-yellow",
-  };
   const { handleDeleteSnackbar, show, typeSnackbar } = useSnackbarMessage({
     deleteSnackbar,
     snackbar,
@@ -22,13 +18,16 @@ const SnackbarMessage = ({ deleteSnackbar, snackbar }: Props) => {
 
   return (
     <div
-      className={`bg-white ${colors[typeSnackbar ?? "notice"]} border-l-[6px]
+      className={`bg-white border-l-[6px]
             transition-opacity duration-200 animate-fadeInAnimation ${
               show ? "opacity-1" : "opacity-0"
             }
             flex pointer-events-auto overflow-hidden 
             p-4 w-[400px] rounded-2xl text-primary-white bg-no-repeat ml-auto mt-8 mr-4`}
-      style={{ boxShadow: "0 0 10px #00000084" }}
+      style={{
+        boxShadow: "0 0 10px #00000084",
+        borderLeftColor: statusColors[typeSnackbar ?? "notice"],
+      }}
       data-testid={"snackbarMessage-" + typeSnackbar}
     >
       <div>
