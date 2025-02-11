@@ -37,7 +37,7 @@ export function LoginForm() {
           <Password
             errors={errors.password}
             dataTestId="password"
-            label={"Password"}
+            label={tCommon("Password")}
             {...register("password")}
           />
         </div>
