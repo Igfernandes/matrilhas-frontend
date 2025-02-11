@@ -5,7 +5,7 @@ export type SnackbarContextData = {
 };
 
 export type SnackbarProps = {
-  type?: "error" | "success";
+  type?: "error" | "success" | "notice";
   message?: string;
   title?: string;
   timestamp: Date;
