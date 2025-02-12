@@ -38,6 +38,8 @@
     "new_password": "Nova senha",
     "created_account": "Conta criada",
     "created_password": "Senha criada",
-    "unknown_operation": "Operação desconhecida"
+    "unknown_operation": "Operação desconhecida",
+    "name": "Nome",
+    "first_access": "Primeiro acesso"
   }
 }

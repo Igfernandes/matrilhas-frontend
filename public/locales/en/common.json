@@ -37,6 +37,7 @@
     "password_confirmation": "Password Confirmation",
     "created_account": "Account created",
     "created_password": "Password created",
-    "unknown_operation": "Operação desconhecida"
+    "unknown_operation": "Operação desconhecida",
+    "Name": "Nome"
   }
 }
