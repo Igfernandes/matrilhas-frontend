@@ -1,4 +1,3 @@
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 import { ExternalContainer } from "@components/shared/layouts/ExternalContainer";
 import { EmailForward } from "@assets/Icons/colorful/EmailForward";
@@ -20,11 +19,11 @@ export default function ForgotPassword() {
           </div>
           <div className="mb-1">
             <h2 className="text-2xl">
-              <strong>{t("forgot-password.title")}</strong>
+              <strong>{t("forgot_password.title")}</strong>
             </h2>
           </div>
           <div className="mb-6">
-            <p className="text-sm">{t("forgot-password.text")}</p>
+            <p className="text-sm">{t("forgot_password.text")}</p>
           </div>
           <RecoverPasswordForm />
           <div className="sm:px-8 mt-4">
@@ -33,20 +32,11 @@ export default function ForgotPassword() {
               href={login}
             >
               <SquareRoundedChevronLeft className="mr-2" />
-              <strong>{t("forgot-password.back_page")}</strong>
+              <strong>{t("forgot_password.back_page")}</strong>
             </Link>
           </div>
         </div>
       </div>
     </ExternalContainer>
   );
-}
-
-export async function getStaticProps({ locale }: Record<string, string>) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common", "recover-password"])),
-      // Will be passed to the page component as props
-    },
-  };
 }

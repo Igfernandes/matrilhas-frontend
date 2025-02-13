@@ -3,13 +3,12 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { usePostRememberMeService } from ".";
 import { PostRememberMePayload } from "./type";
-import { useTranslation } from "next-i18next";
+import i18n from "@configs/i18n";
 
 export default function usePostRememberMe() {
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
   const { postRememberMe } = usePostRememberMeService();
-  const { t } = useTranslation("common");
 
   const handleMutate = async (payload: PostRememberMePayload) => {
     const { data } = await postRememberMe(payload);
@@ -20,8 +19,8 @@ export default function usePostRememberMe() {
   return useMutation(handleMutate, {
     onSuccess: () => {
       dispatchSnackbar({
-        message: t("success.already_conecte_redirect"),
-        title: t("words.await"),
+        message: i18n("success.already_conecte_redirect"),
+        title: i18n("words.await"),
         type: "notice",
       });
     },

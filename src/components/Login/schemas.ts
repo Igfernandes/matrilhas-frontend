@@ -1,10 +1,10 @@
-import { i18n } from "next-i18next";
+import i18n from "@configs/i18n";
 import { z } from "zod";
 
 export const loginFormSchema = z.object({
   login: z
-    .string({ required_error: i18n?.t("errors.required") })
-    .email({ message: i18n?.t("errors.fields.invalid_email") }),
-  password: z.string({ required_error: i18n?.t("errors.required") }),
+    .string({ required_error: i18n("errors.fields.required") })
+    .email({ message: i18n("errors.fields.invalid_email") }),
+  password: z.string({ required_error: i18n("errors.fields.required") }),
   rememberMe: z.boolean().nullable(),
 });

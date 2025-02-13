@@ -4,14 +4,13 @@ import { usePostAuthService } from ".";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { useRememberMe } from "@hooks/useRememberMe";
-import { useTranslation } from "next-i18next";
+import i18n from "@configs/i18n";
 
 export default function usePostAuth() {
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
   const { postAuth } = usePostAuthService();
   const { saveReferenceToken } = useRememberMe();
-  const { t } = useTranslation();
 
   const handleMutate = async (payload: PostAuthPayload) => {
     const { data } = await postAuth(payload);
@@ -24,8 +23,8 @@ export default function usePostAuth() {
       const data = JSON.parse(res);
 
       dispatchSnackbar({
-        message: t("success.will_redirect"),
-        title: t("success.already_conecte"),
+        message: i18n("success.login.will_redirect"),
+        title: i18n("success.login.already_conecte"),
         type: "success",
       });
 

@@ -3,12 +3,11 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { PostRecoverPasswordPayload } from "./type";
 import { usePostRecoverPasswordRequestService } from ".";
-import { useTranslation } from "next-i18next";
+import i18n from "@configs/i18n";
 
 export default function usePostRecoverPasswordRequest() {
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
-  const { t } = useTranslation("recover-password");
   const { postRecoverPasswordRequest } = usePostRecoverPasswordRequestService();
 
   const handleMutate = async (payload: PostRecoverPasswordPayload) => {
@@ -20,8 +19,8 @@ export default function usePostRecoverPasswordRequest() {
   return useMutation(handleMutate, {
     onSuccess: () => {
       dispatchSnackbar({
-        message: t("forgot-password.success.text"),
-        title: t("forgot-password.success.title"),
+        message: i18n("success.forgot_password.text"),
+        title: i18n("success.forgot_password.title"),
         type: "notice",
       });
     },

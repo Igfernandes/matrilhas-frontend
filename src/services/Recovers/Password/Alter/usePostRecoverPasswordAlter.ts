@@ -5,10 +5,9 @@ import { PostRecoverPasswordAlterPayload } from "./type";
 import { usePostRecoverPasswordAlterService } from ".";
 import { useRouter } from "next/router";
 import { userRoutes } from "@configs/routes/Web/navigation";
-import { useTranslation } from "next-i18next";
+import i18n from "@configs/i18n";
 
 export default function usePostRecoverPasswordAlter() {
-  const { t } = useTranslation("common");
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
   const { postRecoverPasswordAlter } = usePostRecoverPasswordAlterService();
@@ -24,8 +23,8 @@ export default function usePostRecoverPasswordAlter() {
   return useMutation(handleMutate, {
     onSuccess: () => {
       dispatchSnackbar({
-        message:  t("texts.will_redirect"),
-        title: t("words.success"),
+        message:  i18n("success.alter_password.will_redirect"),
+        title: i18n("words.success"),
         type: "success",
       });
 

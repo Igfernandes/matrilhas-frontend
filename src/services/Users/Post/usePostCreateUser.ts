@@ -3,12 +3,11 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { useRouter } from "next/router";
 import { userRoutes } from "@configs/routes/Web/navigation";
-import { useTranslation } from "next-i18next";
 import { usePostCreateUserService } from ".";
 import { PostCreateUserPayload } from "./type";
+import i18n from "@configs/i18n";
 
 export default function usePostCreateUser() {
-  const { t } = useTranslation("common");
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
   const { postCreateUser } = usePostCreateUserService();
@@ -24,8 +23,8 @@ export default function usePostCreateUser() {
   return useMutation(handleMutate, {
     onSuccess: () => {
       dispatchSnackbar({
-        message: t("texts.will_redirect"),
-        title: t("words.success"),
+        message: i18n("words.will_redirect"),
+        title: i18n("words.success"),
         type: "success",
       });
 

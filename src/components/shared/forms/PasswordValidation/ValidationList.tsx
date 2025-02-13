@@ -1,7 +1,7 @@
-import { useTranslation } from "next-i18next";
 import { CriteriaStatusShape } from "./type";
 import { COLORS } from "@constants/colors";
 import { statusColors } from "@assets/colors/default";
+import i18n from "@configs/i18n";
 
 export function ValidationList({
   hasLowercase,
@@ -10,7 +10,6 @@ export function ValidationList({
   hasSpecialLetter,
   hasUppercase,
 }: CriteriaStatusShape) {
-  const { t } = useTranslation("common");
 
   return (
     <div className="mt-2">
@@ -21,7 +20,7 @@ export function ValidationList({
             color: statusColors[hasMinEightLetters],
           }}
         >
-          {t("texts.has_min_eight_letters")}
+          {i18n("errors.fields.has_min_eight_letters")}
         </li>
         <li
           className={`text-xs`}
@@ -29,7 +28,7 @@ export function ValidationList({
             color: statusColors[hasUppercase],
           }}
         >
-          {t("texts.has_min_one_uppercase")}
+          {i18n("errors.fields.has_min_one_uppercase")}
         </li>
         <li
           className={`${COLORS[hasLowercase]} text-xs`}
@@ -37,7 +36,7 @@ export function ValidationList({
             color: statusColors[hasLowercase],
           }}
         >
-          {t("texts.has_min_one_lowercase")}
+          {i18n("errors.fields.has_min_one_lowercase")}
         </li>
         <li
           className={`text-xs`}
@@ -45,7 +44,7 @@ export function ValidationList({
             color: statusColors[hasNumber],
           }}
         >
-          {t("texts.has_min_one_number")}
+          {i18n("errors.fields.has_min_one_number")}
         </li>
         <li
           className={`text-xs`}
@@ -53,7 +52,7 @@ export function ValidationList({
             color: statusColors[hasSpecialLetter],
           }}
         >
-          {t("texts.has_min_one_special_character")}
+          {i18n("errors.fields.has_min_one_special_character")}
         </li>
       </ul>
     </div>

@@ -1,24 +1,26 @@
+import i18n from "@configs/i18n";
 import {
   hasSomeLetterLowercase,
   hasSomeLetterUppercase,
   hasSomeNumber,
   hasSomeSpecialCharacter,
 } from "@helpers/string";
-import { i18n } from "next-i18next";
 import { z } from "zod";
 
 export const alterPasswordFormSchema = z
   .object({
     password: z
-      .string({ required_error: i18n?.t("errors.required") })
+      .string({ required_error: i18n("errors.fields.required") })
       .min(8)
       .refine(hasSomeLetterUppercase)
       .refine(hasSomeLetterLowercase)
       .refine(hasSomeNumber)
       .refine(hasSomeSpecialCharacter),
-    passwordConfirm: z.string({ required_error: i18n?.t("errors.required") }),
+    passwordConfirm: z.string({
+      required_error: i18n("errors.fields.required"),
+    }),
   })
   .refine((data) => data.password === data.passwordConfirm, {
-    message: i18n?.t("errors.required"),
+    message: i18n("errors.fields.required"),
     path: ["passwordConfirm"],
   });
