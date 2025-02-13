@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "./hooks/useForm";
 import { Input } from "@components/shared/forms/Input";
 import { FormProvider } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import i18n from "@configs/i18n";
 
 export function LoginForm() {
   const {
@@ -19,8 +19,6 @@ export function LoginForm() {
     updateValueRememberMe,
   } = useForm();
   const { forgotPassword } = userRoutes;
-  const { t: tLogin } = useTranslation("login");
-  const { t: tCommon } = useTranslation("common");
 
   return (
     <FormProvider {...formMethods}>
@@ -37,7 +35,7 @@ export function LoginForm() {
           <Password
             errors={errors.password}
             dataTestId="password"
-            label={tCommon("Password")}
+            label={i18n("words.password")}
             {...register("password")}
           />
         </div>
@@ -47,7 +45,7 @@ export function LoginForm() {
               errors={errors.rememberMe}
               dataTestId="remember-me"
               {...register("rememberMe")}
-              label={tLogin("remember_me")}
+              label={i18n("words.remember_me")}
               onChecked={updateValueRememberMe}
             />
           </div>
@@ -56,13 +54,13 @@ export function LoginForm() {
               href={forgotPassword}
               className="text-sm text-red relative top-[-3.5]"
             >
-              <strong>{tLogin("forgot_password")}</strong>
+              <strong>{i18n("words.forgot_password")}</strong>
             </Link>
           </div>
         </div>
         <div className="form-submit mt-6">
           <Button
-            text={tCommon("words.send")}
+            text={i18n("words.send")}
             type="submit"
             isLoading={isLoading}
             disabled={!hasAllFilledFields()}

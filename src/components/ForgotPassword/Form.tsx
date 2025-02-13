@@ -2,7 +2,7 @@ import { Button } from "@components/shared/forms/Button";
 import { useForm } from "./hooks/useForm";
 import { Input } from "@components/shared/forms/Input";
 import { FormProvider } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+import i18n from "@configs/i18n";
 
 export function RecoverPasswordForm() {
   const {
@@ -13,7 +13,6 @@ export function RecoverPasswordForm() {
     isLoading,
     errors,
   } = useForm();
-  const { t: tCommon } = useTranslation("common");
 
   return (
     <FormProvider {...formMethods}>
@@ -24,12 +23,12 @@ export function RecoverPasswordForm() {
             {...register("email")}
             dataTestId="email"
             label={"E-mail"}
-            placeholder={tCommon("words.enter_email")}
+            placeholder={i18n("words.enter_email")}
           />
         </div>
         <div className="form-submit mt-6">
           <Button
-            text={tCommon("words.send")}
+            text={i18n("words.send")}
             type="submit"
             isLoading={isLoading}
             disabled={!hasAllFilledFields()}
