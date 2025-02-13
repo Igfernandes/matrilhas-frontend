@@ -1,14 +1,14 @@
-import { useTranslation } from "next-i18next";
+
 import { ExternalContainer } from "@components/shared/layouts/ExternalContainer";
 import { EmailForward } from "@assets/Icons/colorful/EmailForward";
 import Link from "next/link";
 import { userRoutes } from "@configs/routes/Web/navigation";
 import { SquareRoundedChevronLeft } from "@assets/Icons/black/SquareRoundedChevronLeft";
 import { RecoverPasswordForm } from "@components/ForgotPassword/Form";
+import i18n from "@configs/i18n";
 
 export default function ForgotPassword() {
   const { login } = userRoutes;
-  const { t } = useTranslation("recover-password");
 
   return (
     <ExternalContainer>
@@ -19,11 +19,11 @@ export default function ForgotPassword() {
           </div>
           <div className="mb-1">
             <h2 className="text-2xl">
-              <strong>{t("forgot_password.title")}</strong>
+              <strong>{i18n("forgot_password.title")}</strong>
             </h2>
           </div>
           <div className="mb-6">
-            <p className="text-sm">{t("forgot_password.text")}</p>
+            <p className="text-sm">{i18n("forgot_password.text")}</p>
           </div>
           <RecoverPasswordForm />
           <div className="sm:px-8 mt-4">
@@ -32,7 +32,7 @@ export default function ForgotPassword() {
               href={login}
             >
               <SquareRoundedChevronLeft className="mr-2" />
-              <strong>{t("forgot_password.back_page")}</strong>
+              <strong>{i18n("forgot_password.back_page")}</strong>
             </Link>
           </div>
         </div>
