@@ -1,6 +1,6 @@
 import { EnvironmentProprieties, EnvironmentTypes } from "./type";
 
-export const LANGUAGE_I18N = process.env.NEXT_PUBLIC_LANGUAGE;
+export const LANGUAGE_I18N = process.env.NEXT_PUBLIC_LANGUAGE ?? "pt-br";
 export const env: EnvironmentProprieties = {
   PROD: {
     API_URL: process.env.NEXT_PUBLIC_PROD_URL,
