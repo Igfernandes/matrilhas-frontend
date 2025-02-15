@@ -32,7 +32,7 @@
       "text": "If the email address provided is registered on the platform, you will receive a link to recover your password."
     }
   },
-  "dictionary": {
+  "words": {
     "need_go_back_login": "Go to login to access the platform.",
     "go_back_login": "Go to login",
     "will_redirect": "You'll redirect!",
@@ -48,7 +48,18 @@
     "unknown_operation": "Operação desconhecida",
     "Name": "Nome",
     "forgot_password": "I forgot my password",
-    "remember_me": "Remember me"
+    "remember_me": "Remember me",
+    "main": "Main",
+    "my_users": "My users",
+    "sending_management": "Sending Management",
+    "users_manager": "User Manager",
+    "apis_manager": "Apis Manager",
+    "go_out": "Logout",
+    "schedule": "Schedule",
+    "services": "Services",
+    "finance": "Finance",
+    "system": "System",
+    "settings": "Settings"
   },
   "login": {
     "welcome": "Welcome!",
