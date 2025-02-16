@@ -27,7 +27,9 @@ export function Item({
         setItemStyle(isActive ? textColors.red : textDefaultColors.primary)
       }
       className={`hover:text-red text-xs ${
-        index != menu.length - 1 ? "border-b-2 border-b-zinc-200" : ""
+        index != menu.length - 1 && sidebarState
+          ? "border-b-2 border-b-zinc-200"
+          : ""
       } py-3  ${sidebarState ? "px-1" : ""}`}
       style={{
         color: isActive ? textColors.red : textDefaultColors.primary,

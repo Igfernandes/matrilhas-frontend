@@ -10,12 +10,12 @@ export function Sidebar() {
 
   return (
     <aside
-      className="w-60 h-[100vh] overflow-auto hidden-scroll bg-white transition-all duration-500"
+      className="w-[320] bg-white transition-all duration-500"
       style={{
-        marginLeft: !showSidebar ? "-11rem" : "",
+        marginLeft: !showSidebar ? "-15rem" : "",
       }}
     >
-      <div className="px-6 pt-6 ">
+      <div className="px-6 pt-6">
         <div className="flex justify-between mb-8">
           <div>
             <h3 className="text-2xl">
@@ -26,7 +26,7 @@ export function Sidebar() {
             <Bars onClick={handleToggleSidebar} />
           </div>
         </div>
-        <div className="transition-all duration-500">
+        <div className="h-[83vh] overflow-auto hidden-scroll transition-all duration-500">
           <Navbar
             sidebarState={showSidebar}
             menu={MAIN_MENU}
@@ -36,7 +36,7 @@ export function Sidebar() {
           <Navbar
             sidebarState={showSidebar}
             menu={ADMINISTRATIVE_MENU}
-            title={i18n("words.main")}
+            title={i18n("words.administrative")}
             className="mb-8"
           />
           <Navbar

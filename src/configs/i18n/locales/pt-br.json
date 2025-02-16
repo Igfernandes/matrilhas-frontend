@@ -61,7 +61,8 @@
     "services": "Serviços",
     "finance": "Financeiro",
     "system": "Sistema",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "administrative": "Administrativo"
   },
   "login": {
     "welcome": "Seja bem-vindo!",

@@ -10,6 +10,7 @@ import { Spreadsheet } from "@assets/Icons/black/Spreadsheet";
 import { Schedule } from "@assets/Icons/black/schedule";
 import { GoOut } from "@assets/Icons/black/GoOut";
 import { Peoples } from "@assets/Icons/black/Peoples";
+import { Config } from "@assets/Icons/black/Config";
 
 export const MAIN_MENU = [
   {
@@ -53,7 +54,7 @@ export const ADMINISTRATIVE_MENU = [
   },
   {
     title: i18n("words.apis_manager"),
-    Icon: Graphic,
+    Icon: Config,
     link: privateRoutes.apisManager,
   },
   {
