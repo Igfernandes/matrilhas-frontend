@@ -1,19 +1,26 @@
-import { FieldValues, useForm as useFormReactHook } from "react-hook-form";
+import {
+  DefaultValues,
+  FieldValues,
+  useForm as useFormReactHook,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType } from "zod";
 
-type Props<FieldsKey> = {
+type Props<Payload> = {
   schema: ZodType;
-  exclude?: Array<FieldsKey>;
+  exclude?: Array<keyof Payload>;
+  defaultValues?: DefaultValues<Payload>;
 };
 
 export function useFormRules<Payload extends FieldValues>({
   schema,
   exclude = [],
-}: Props<keyof Payload>) {
+  defaultValues,
+}: Props<Payload>) {
   const formMethods = useFormReactHook<Payload>({
     resolver: zodResolver(schema),
     mode: "onChange",
+    defaultValues,
   });
   const {
     register,
