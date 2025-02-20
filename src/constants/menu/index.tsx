@@ -16,7 +16,6 @@ export const MAIN_MENU = [
   {
     title: "Dashboard",
     Icon: Graphic,
-    isActive: true,
     link: privateRoutes.dashboard,
   },
   {

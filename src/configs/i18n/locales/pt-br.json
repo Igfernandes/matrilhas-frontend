@@ -15,10 +15,11 @@
       "required": "O campo é obrigatório",
       "has_min_eight_letters": "Pelo menos de 8 caracteres.",
       "has_min_one_uppercase": "Pelo menos 1 letra maiúscula.",
-      "has_min_one_lowercase": "Pelo menos  1 letra minúscula.",
+      "has_min_one_lowercase": "Pelo menos 1 letra minúscula.",
       "has_min_one_number": "Pelo menos 1 número.",
       "has_min_one_special_character": "Pelo menos 1 caracteres especial.",
-      "password_need_equal": "A senha informada deve ser idêntica."
+      "password_need_equal": "A senha informada deve ser idêntica.",
+      "min_length": "O ${field} deve conter pelo menos ${length} caracteres"
     }
   },
   "success": {
@@ -80,7 +81,15 @@
     "users": "Usuários",
     "edit": "Editar",
     "group_desative": "Desativar grupo",
-    "exclude": "Excluir"
+    "exclude": "Excluir",
+    "users_group": "Grupo de Usuários",
+    "user_group": "Grupo de Usuário",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "continue": "Continuar",
+    "attention": "Atenção",
+    "new_user": "Novo usuário",
+    "update_user": "Atualizar usuário"
   },
   "configs": {
     "formats": {
@@ -104,5 +113,22 @@
   },
   "create_user": {
     "text": "Para acessar a plataforma, informe como gostaria de ser chamado e crie uma senha."
+  },
+  "my_users": {
+    "modal": {
+      "group": {
+        "text_insert_name": "Insira um nome para o grupo de usuários:",
+        "text_select_permissions": "Selecione as permissões que estarão ativas para este grupo:",
+        "title_already_desative": "Você deseja desativar este grupo de usuários?",
+        "text_awaiting_after_delete_desative": "Ao continuar, todos os usuários deste grupo perderão o acesso, pois suas permissões serão bloqueadas.",
+        "title_already_exclude": "Você deseja excluir este grupo de usuários?"
+      },
+      "user": {
+        "text_select_group": "Selecione os grupos ao qual o usuário pertencerá:",
+        "text_fill_information": "Preencha as informações abaixo para convidar um novo usuário:",
+        "text_awaiting_after_delete_desative": "Ao continuar, todos os usuários perderão o acesso, pois suas permissões serão bloqueadas.",
+        "title_already_exclude": "Você deseja excluir este usuário?"
+      }
+    }
   }
 }
