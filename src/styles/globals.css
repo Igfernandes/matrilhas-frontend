@@ -11,6 +11,15 @@ body {
   font-family: var(--font-poppins);
 }
 
-.hidden-scroll::-webkit-scrollbar{
+.hidden-scroll::-webkit-scrollbar {
   display: none;
+}
+.bg-scroll-transparent::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar {
+  scrollbar-color: #575757 #fff;
+  scrollbar-width: inherit;
+  padding-right: .3rem ;
 }

@@ -1,6 +1,6 @@
 import { Search } from "@components/shared/forms/Search";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
-import { Button } from "@components/shared/others/Button";
+import { Button } from "@components/shared/layouts/Button";
 import i18n from "@configs/i18n";
 import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
 import { UsersGroup } from "@components/Private/UsersManager/UsersGroup";
