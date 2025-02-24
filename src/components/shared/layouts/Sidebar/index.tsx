@@ -12,7 +12,7 @@ export function Sidebar() {
     <aside
       className="w-[320px] bg-white transition-all duration-500"
       style={{
-        marginLeft: !showSidebar ? "-15rem" : "",
+        marginLeft: !showSidebar ? "-15rem" : "auto",
       }}
     >
       <div className="px-6 pt-6">
