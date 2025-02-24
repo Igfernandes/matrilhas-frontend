@@ -1,9 +1,9 @@
 import i18n from "@configs/i18n";
-import { Button } from "@components/shared/others/Button";
+import { Button } from "@components/shared/layouts/Button";
 import { Modal } from "@components/shared/layouts/Modal";
 import { NoticeProps } from "./type";
 
-export function Notice({ isShowModal, onModal, onSubmit, headerTitle, title}: NoticeProps) {
+export function Notice({ isShowModal, onModal, onSubmit, headerTitle, title, text}: NoticeProps) {
   return (
     <Modal title={headerTitle} isShowModal={isShowModal} handleModal={onModal}>
       <div className="w-[424px]">
@@ -16,7 +16,7 @@ export function Notice({ isShowModal, onModal, onSubmit, headerTitle, title}: No
         </div>
         <div className="text-center mb-4">
           <p>
-            {i18n("my_users.modal.group.text_awaiting_after_delete_desative")}
+            {text}
           </p>
         </div>
         <div className="form-btn flex justify-around pt-4 border-t-2 border-secondary">
