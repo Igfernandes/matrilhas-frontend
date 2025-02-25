@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 type Props = {
   value: SelectorValue;
   onChange?: () => SelectorShape | undefined;
+  textSize: string;
 };
 
 export type SelectorProps = Omit<

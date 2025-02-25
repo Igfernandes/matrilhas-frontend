@@ -5,7 +5,7 @@ import { bgDefaultColor } from "@assets/colors/default";
 import { useSelectorContext } from "./contexts";
 import { useEffect, useState } from "react";
 
-export function Selector({ label, value, ...props }: SelectorProps) {
+export function Selector({ label, value, textSize, ...props }: SelectorProps) {
   const IdCurrent = `selector_${label}`;
   const { selectors, handleChangeSelector } = useSelectorContext();
   const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -37,7 +37,10 @@ export function Selector({ label, value, ...props }: SelectorProps) {
           <SymbolChecked className="absolute left-1 top-[25%]" />
         </label>
       </div>
-      <label htmlFor={IdCurrent} className="text-sm ml-2 cursor-pointer">
+      <label
+        htmlFor={IdCurrent}
+        className={`${textSize ? textSize : "text-sm"} ml-2 cursor-pointer`}
+      >
         {label}
       </label>
     </div>

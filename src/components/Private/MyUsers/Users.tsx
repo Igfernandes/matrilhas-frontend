@@ -45,7 +45,7 @@ export function Users({ search, filterObjects }: UsersStructProps) {
                 },
               ],
               buttons: (
-                <Selector value={"all"} label={i18n(`words.select_all`)} />
+                <Selector value={"all"} label={i18n(`words.select_all`)} textSize="text-[0px] md:text-lg" />
               ),
               filters: {
                 tag: {
