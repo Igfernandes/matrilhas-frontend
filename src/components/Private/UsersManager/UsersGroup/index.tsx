@@ -26,7 +26,7 @@ export function UsersGroup({ search, filterObjects }: Props) {
 
   return (
     <>
-      <div>
+      <div className="mb-6">
         <Table
           options={{
             pagination: {

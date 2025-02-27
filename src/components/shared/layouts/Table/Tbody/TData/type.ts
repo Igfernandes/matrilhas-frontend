@@ -5,8 +5,5 @@ export type TDataOptions = {
 
 export type TDataProps<TableData> = {
   data: TableData[];
-  onManagerColumn: (
-    el: HTMLTableCellElement,
-    { value, index }: TDataOptions
-  ) => void;
+  keyRow: number;
 };

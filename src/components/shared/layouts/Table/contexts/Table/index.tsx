@@ -23,6 +23,7 @@ const TableProvider = ({
   pagination: paginationInstance,
   data,
   excludes,
+  amountHiddenCols
 }: TableData) => {
   const [tRows, setTRows] = useState<Array<unknown[]>>([]);
   const [paginatedTRows, setPaginatedTRows] = useState<Array<unknown[]>>([]);
@@ -71,6 +72,7 @@ const TableProvider = ({
     const sortedData = sortTableData(sort);
     const filteredData = handleFilteredData(sortedData);
     const newRows = getTRows(filteredData, excludes);
+
     setTRows(newRows);
     const paginatedRows = getPaginatedData(newRows, pagination);
 
@@ -90,8 +92,9 @@ const TableProvider = ({
       filters,
       handleChangeFilters,
       handleChangeEvent,
+      amountHiddenCols
     }),
-    [sort, pagination, tRows, filters]
+    [sort, pagination, tRows, filters, amountHiddenCols]
   );
 
   return (

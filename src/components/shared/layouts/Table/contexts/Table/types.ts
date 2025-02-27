@@ -17,6 +17,7 @@ export type TableContextData = {
   filters: Record<string, FilterCallback>;
   handleChangeFilters: (callback: Record<string, FilterCallback>) => void;
   handleChangeEvent: (isEvent: boolean) => void;
+  amountHiddenCols: Array<boolean>;
 };
 
 export type TableProps = {
@@ -25,6 +26,8 @@ export type TableProps = {
   data: TableDataShape;
   tHeads?: THeadProps;
   excludes: Array<string>;
+  table: React.RefObject<HTMLTableElement | null>;
+  amountHiddenCols: Array<boolean>;
   children: React.ReactNode;
 };
 
