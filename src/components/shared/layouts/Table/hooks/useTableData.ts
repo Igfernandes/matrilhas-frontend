@@ -3,6 +3,7 @@ import { HookTableDataProps } from "../type";
 import { REGEXES } from "@constants/regexes";
 import { TDataOptions } from "../Tbody/TData/type";
 import { useColumnMetrics } from "./useColumnMetrics";
+import { useTableMetrics } from "./useTableMetrics";
 
 export function useTableData<TableData extends Array<Record<string, unknown>>>({
   data,
@@ -12,28 +13,7 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
   const [tHeads, setTHeads] = useState<string[]>([]);
   const { getCurrentWidthColumn, getTextSize, truncateTextToFit } =
     useColumnMetrics({ widths });
-
-  /**
-   * Obtém o conteúdo da coluna, garantindo que não seja um tipo inválido.
-   *
-   * @param {unknown} value - O valor da célula da tabela.
-   * @returns {string | null} - O conteúdo da coluna como string ou null se o valor for inválido.
-   */
-  const getColumnContent = (value: unknown): string | null => {
-    if (["object", "function"].includes(typeof value)) return null;
-    return value?.toString() || null;
-  };
-
-  /**
-   * Calcula a largura da célula com base na tabela e no índice da coluna.
-   *
-   * @param {HTMLTableElement} table - A tabela onde a coluna está localizada.
-   * @param {number} index - O índice da coluna na tabela.
-   * @returns {number} - A largura da célula (em pixels).
-   */
-  const getCellWidth = (table: HTMLTableElement, index: number): number => {
-    return getCurrentWidthColumn(table, index);
-  };
+  const { getColumnContent, getTableElement } = useTableMetrics();
 
   /**
    * Ajusta o conteúdo da célula com base na largura da coluna e no tamanho do texto.
@@ -73,13 +53,13 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
   ) => {
     if (!el || widths.length === 0 || !value) return;
 
-    const table = el.closest("table");
+    const table = getTableElement(el);
     if (!table) return;
 
     const columnContent = getColumnContent(value);
     if (!columnContent) return;
 
-    const currentWidthColumn = getCellWidth(table, index);
+    const currentWidthColumn = getCurrentWidthColumn(table, index);
     el.setAttribute("width", currentWidthColumn.toString());
 
     adjustCellContent(el, columnContent, currentWidthColumn);
