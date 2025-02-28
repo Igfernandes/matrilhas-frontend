@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Accordion } from "../../../../Accordion";
 import { AccordionItemHeader } from "../../../../Accordion/AccordionItemHeader";
 import { AccordionItem } from "../../../../Accordion/AccordionItem";
@@ -17,18 +17,21 @@ export function MobileView({ tHeaders }: Props) {
       {paginatedTRows.map((row) => {
         const [id, ...data] = row;
         const actions = data.pop(); // Último item como ações
+        const filteredId = React.isValidElement(id)
+          ? (id.props as Record<string, number>)["value"]
+          : (id as number);
 
         return (
-          <AccordionItem key={`accordion_item_${id}`}>
+          <AccordionItem key={`accordion_item_${filteredId}`}>
             <AccordionItemHeader
-              accordionId={id as number}
-              title={id as ReactNode}
+              accordionId={filteredId}
+              title={filteredId as ReactNode}
               buttons={actions as ReactNode}
             />
-            <AccordionItemContent accordionId={id as number}>
+            <AccordionItemContent accordionId={filteredId as number}>
               <ul className="p-2">
                 {data.map((cell, cellIndex) => (
-                  <li key={`accordion_item__${id}_${cellIndex}`}>
+                  <li key={`accordion_item__${filteredId}_${cellIndex}`}>
                     <strong>{`${tHeaders[cellIndex]}:`}</strong>
                     <span className="ml-2">{cell as ReactNode}</span>
                   </li>
