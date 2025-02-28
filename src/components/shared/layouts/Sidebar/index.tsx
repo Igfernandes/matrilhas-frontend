@@ -3,16 +3,27 @@ import { COMPANY_PROFILE } from "@configs/envs";
 import { Navbar } from "./Navbar";
 import i18n from "@configs/i18n";
 import { ADMINISTRATIVE_MENU, MAIN_MENU, SYSTEM_MENU } from "@constants/menu";
-import { useSidebar } from "./hooks/useSidebar";
+import useWindow from "@hooks/useWindow";
+import { useEffect, useState } from "react";
 
-export function Sidebar() {
-  const { handleToggleSidebar, showSidebar } = useSidebar();
+type Props = {
+  showSidebar: boolean;
+  handleToggleSidebar: () => void;
+};
+
+export function Sidebar({ handleToggleSidebar, showSidebar }: Props) {
+  const { screenType } = useWindow();
+  const [indentValue, setIndentValue] = useState<string>();
+
+  useEffect(() => {
+    setIndentValue(screenType === "MOBILE" ? "-100vw" : "-15rem");
+  }, [screenType]);
 
   return (
     <aside
-      className={`w-[320px] bg-white transition-all duration-500`}
+      className={`fixed lg:relative z-40 w-full h-full lg:w-[320px] bg-white transition-all duration-300`}
       style={{
-        marginLeft: !showSidebar ? "-15rem" : "auto",
+        marginLeft: !showSidebar ? indentValue : "0",
       }}
     >
       <div className="px-6 pt-6">
@@ -26,7 +37,7 @@ export function Sidebar() {
             <Bars onClick={handleToggleSidebar} />
           </div>
         </div>
-        <div className="max-h-[83vh] overflow-x-auto overflow-y-auto hidden-scroll transition-all duration-500">
+        <div className="h-[85vh] flex flex-col justify-between overflow-x-hidden overflow-y-auto hidden-scroll transition-all duration-500">
           <Navbar
             sidebarState={showSidebar}
             menu={MAIN_MENU}

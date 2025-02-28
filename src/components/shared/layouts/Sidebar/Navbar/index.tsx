@@ -28,10 +28,7 @@ export function Navbar({
 
     if (!foundCurrentNavbarItem && !defaultActiveItem) return;
     setIsActiveItem(foundCurrentNavbarItem?.title ?? defaultActiveItem);
-
-    console.log(defaultActiveItem)
   }, []);
-
 
   return (
     <div {...rest}>
