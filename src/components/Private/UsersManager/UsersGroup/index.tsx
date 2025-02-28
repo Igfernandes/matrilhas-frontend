@@ -1,9 +1,9 @@
-import { Table } from "@components/shared/layouts/Table";
 import { ModalFormUsersGroup } from "../Modals/UsersGroup";
 import i18n from "@configs/i18n";
 import { useUsersGroup } from "./hooks/useUsersGroup";
 import { MOCK_USERS_GROUP } from "../../../../data/users/__mocks__/usersGroups";
 import { Notice } from "@components/shared/others/Notice";
+import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 
 type Props = {
   filterObjects: <ObjectShape extends Record<string, unknown>>(
@@ -27,7 +27,7 @@ export function UsersGroup({ search, filterObjects }: Props) {
   return (
     <>
       <div className="mb-6">
-        <Table
+        <SmartTable
           options={{
             pagination: {
               max: 5,

@@ -10,7 +10,7 @@ import { UserSharedModal } from "./Modals/UserShared";
 import { UserCategoriesModal } from "./Modals/UserCategories";
 import { UserCreateModal } from "./Modals/Users";
 import SelectorProvider from "@components/shared/layouts/Seletor/contexts";
-import { SmartTable } from "@components/shared/layouts/SmartTable";
+import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 
 export function Users({ search, filterObjects }: UsersStructProps) {
   const { tDataUsers, tHeadsUser, selectors, setSelectors } = useUsers({
