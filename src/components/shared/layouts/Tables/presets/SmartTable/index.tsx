@@ -59,10 +59,10 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
       <div className="bg-white p-6 rounded-2xl">
         <div className=" mb-6">
           <div className="flex justify-between">
-            <div className="flex items-center w-[50%]">
+            <div className="flex items-center w-[60%]">
               <div className="mr-4">
                 <h2 className="text-2xl">
-                  <strong>{title}</strong>
+                  <strong> {title}</strong>
                 </h2>
               </div>
               <When

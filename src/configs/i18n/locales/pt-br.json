@@ -122,7 +122,13 @@
     "profile_picture": "Foto do perfil",
     "bank_statement": "Anexos do banco",
     "resume": "Currículo",
-    "new_data": "Novo dado"
+    "new_data": "Novo dado",
+    "my_services": "Meus serviços",
+    "type": "Tipo",
+    "responsible": "Responsável",
+    "initial": "Início",
+    "data_initial": "Data inicial",
+    "new_service": "Novo serviço"
   },
   "configs": {
     "formats": {
@@ -162,6 +168,12 @@
         "text_awaiting_after_delete_desative": "Ao continuar, todos os usuários perderão o acesso, pois suas permissões serão bloqueadas.",
         "title_already_exclude": "Você deseja excluir este usuário?"
       }
+    }
+  },
+  "services": {
+    "modal": {
+      "text_already_exclude": "Ao continuar, todos os dados do serviço serão excluídos, e ele não poderá mais ser acessado até que seja recadastrado.",
+      "title_already_exclude": "Você deseja excluir este serviço?"
     }
   },
   "my_users": {
