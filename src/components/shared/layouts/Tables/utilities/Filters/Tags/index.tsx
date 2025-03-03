@@ -8,7 +8,7 @@ export function Tags<TableData extends Array<Record<string, unknown>>>(
   const { tags, totalTags, handleChangeTargetTag } = useTags<TableData>(props);
 
   return (
-    <div className="relative">
+    <div className="relative w-2/3">
       <ul className="flex items-center px-2 w-full lg:w-[30vw] h-11 mb-[-15px] only-arrows overflow-y-hidden overflow-x-auto whitespace-nowrap ">
         <li
           className="border-[1px] border-secondary px-3 rounded-xl cursor-pointer mx-[.25rem] inline-block"

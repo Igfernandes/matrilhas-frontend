@@ -18,12 +18,12 @@ export function Pagination() {
   } = usePagination();
 
   useEffect(() => {
-    const nextGroupPage = Math.ceil(pagination.current / (pagination.max ?? 0));
+    const nextGroupPage = Math.ceil(pagination.current / 3);
 
+    console.log(displayedGroupPage, amountGroups);
     handleChangeDisplayedPages(nextGroupPage);
     handleChangeDisplayedGroupPage(nextGroupPage);
   }, [pagination]);
-
   return (
     <div className="flex justify-between mt-3">
       <div>
@@ -52,7 +52,7 @@ export function Pagination() {
                   <span>{value}</span>
                 </li>
               ))}
-              <When value={displayedGroupPage < amountGroups}>
+              <When value={(displayedGroupPage + 1) < amountGroups}>
                 <li
                   key={`pagination_key_more`}
                   className={`px-2 hover:bg-rose-800 text-black hover:text-white cursor-pointer`}
