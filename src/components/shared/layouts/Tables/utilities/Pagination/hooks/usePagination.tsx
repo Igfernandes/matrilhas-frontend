@@ -21,17 +21,18 @@ export function usePagination() {
     const pageNumbers = Array(pagination.amount)
       .fill(<></>)
       .map((value, index) => index + 1);
+    const MAX_NUMBERS_PAGE = 3;
 
-    const nextLastedElementDisplayed = nextGroupPage * pagination.max;
+    const nextLastedElementDisplayed = nextGroupPage * MAX_NUMBERS_PAGE;
 
     setDisplayedPages(
       pageNumbers.slice(
-        nextLastedElementDisplayed - pagination.max,
+        nextLastedElementDisplayed - MAX_NUMBERS_PAGE,
         nextLastedElementDisplayed
       )
     );
   };
-  
+
   /**
    * Updates the currently active group of pages for pagination.
    *
