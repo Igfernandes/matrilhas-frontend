@@ -1,16 +1,14 @@
 import { Close } from "@assets/Icons/black/CloseClean";
 import { Photo } from "@assets/Icons/black/Photo";
 import { formatFileSize } from "@helpers/file";
-import { FieldValues, UseFormSetValue } from "react-hook-form";
 
 type Props = {
   file?: File;
-  name: string;
-  setValue: UseFormSetValue<FieldValues>;
   progress: number;
+  onCleanFile: () => void;
 };
 
-export function UploadPreview({ file, name, setValue, progress }: Props) {
+export function UploadPreview({ file, onCleanFile, progress }: Props) {
   return (
     <div className="relative">
       <label className="block max-h-[104px] w-[376px] rounded-lg border border-secondary py-2 pl-2 cursor-pointer">
@@ -42,10 +40,7 @@ export function UploadPreview({ file, name, setValue, progress }: Props) {
           </div>
         </div>
       </label>
-      <Close
-        className="w-4 absolute right-2 top-2"
-        onClick={() => setValue(`${name}`, undefined)}
-      />
+      <Close className="w-4 absolute right-2 top-2" onClick={onCleanFile} />
     </div>
   );
 }

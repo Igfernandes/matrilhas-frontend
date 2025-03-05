@@ -48,7 +48,9 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
           <label
             className={`${
               !!errors ? "border-amber-500 outline-amber-500" : ""
-            } ${className} block w-full px-3 pb-3 pt-5 h-14  bg-white  border-secondary  cursor-pointer border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+            } ${
+              className ?? ""
+            } block w-full px-3 pb-3 pt-5 h-14  bg-white  border-secondary  cursor-pointer border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
             onClick={() => setIsShowModal(true)}
           >
             <span className="font-medium"> {currentValue?.name as string}</span>
@@ -74,32 +76,31 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
               className="absolute right-4 top-4 cursor-pointer"
               fill={textColors.red}
               onClick={() => {
-                setValue(`${name}`, "");
+                setValue(`${name}`, undefined);
                 setCurrentValue(undefined);
               }}
             />
           </When>
+          <input
+            {...rest}
+            ref={ref}
+            name={name}
+            type={type}
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+              if (rest.onChange) rest.onChange(ev);
+              if (handledChange) handledChange(ev);
+            }}
+            className={`${className} hidden`}
+            data-testid={dataTestId}
+            id={IdCurrent}
+          />
         </div>
         <FileModal
           isShowModal={isShowModal}
           handleModal={setIsShowModal}
           fileId={IdCurrent}
           name={`${name}`}
-          input={
-            <input
-              {...rest}
-              ref={ref}
-              name={name}
-              type={type}
-              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                if (rest.onChange) rest.onChange(ev);
-                if (handledChange) handledChange(ev);
-              }}
-              className={`${className} hidden`}
-              data-testid={dataTestId}
-              id={IdCurrent}
-            />
-          }
+          accept={rest.accept}
         />
         <ErrorMessage errors={errors?.message} />
       </>

@@ -6,13 +6,17 @@ type Props = {
 };
 
 export function useFileModal({ name }: Props) {
-  const { watch } = useFormContext();
+  const { setValue } = useFormContext();
   const [progress, setProgress] = useState(0);
+  const [files, setFiles] = useState<FileList>();
 
-  const file = watch(name)?.[0];
+  const handleCleanFile = () => {
+    setFiles(undefined);
+    setValue(`${name}`, undefined);
+  };
 
   useEffect(() => {
-    if (!file) return;
+    if (!files) return setProgress(0);
 
     // Reseta o progresso quando um novo arquivo é selecionado
     setProgress(0);
@@ -31,13 +35,17 @@ export function useFileModal({ name }: Props) {
       }, 300);
     });
 
-    fakeUpload.then(() => console.log("Upload concluído:", file.name));
+    fakeUpload.then();
 
     // Limpa o intervalo se o componente desmontar ou se um novo arquivo for selecionado
     return () => clearInterval(interval);
-  }, [file]);
+  }, [files]);
 
   return {
     progress,
+    setFiles,
+    files,
+    handleCleanFile,
+    setValue,
   };
 }

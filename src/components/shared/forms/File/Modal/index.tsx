@@ -5,39 +5,40 @@ import { Button } from "@components/shared/layouts/Button";
 import { UploadPreview } from "./UploadPreview";
 import { UploadPrompt } from "./UploadPrompt";
 import { When } from "@components/utilities/When";
-import { useFormContext } from "react-hook-form";
 import { useFileModal } from "./hook/useFileModal";
 
 type Props = Omit<ModalProps, "children" | "title"> & {
-  input: React.ReactNode;
   fileId: string;
   name: string;
+  accept?: string;
 };
 
 export function FileModal({
   handleModal,
   isShowModal,
-  input,
-  fileId,
   name,
+  fileId,
+  accept,
 }: Props) {
-  const { watch, setValue } = useFormContext();
-  const fileValue = watch(`${name}`);
-  const { progress } = useFileModal({ name });
+  const { progress, files, setFiles, handleCleanFile, setValue } = useFileModal(
+    {
+      name,
+    }
+  );
+  const fileIdModal = `modal_${fileId}`;
 
   return (
     <Modal title={"Upload"} isShowModal={isShowModal} handleModal={handleModal}>
       <div>
-        <When value={!!fileValue}>
+        <When value={!!files}>
           <UploadPreview
-            name={name}
-            file={fileValue ? fileValue[0] : null}
-            setValue={setValue}
+            file={files && files.length > 0 ? files[0] : undefined}
+            onCleanFile={handleCleanFile}
             progress={progress}
           />
         </When>
-        <When value={!fileValue}>
-          <UploadPrompt fileId={fileId} />
+        <When value={!files}>
+          <UploadPrompt fileId={fileIdModal} />
         </When>
         <div className="flex justify-between mt-4">
           <div>
@@ -49,7 +50,21 @@ export function FileModal({
             <p className="text-[.63rem]">{i18n(`words.allowed_size_image`)}</p>
           </div>
         </div>
-        <div>{input}</div>
+        <div>
+          <input
+            id={fileIdModal}
+            className="hidden"
+            type="file"
+            accept={accept}
+            onChange={(ev) => {
+              const currentFiles = ev.currentTarget.files;
+
+              if (!currentFiles || currentFiles.length == 0) return;
+
+              setFiles(currentFiles);
+            }}
+          />
+        </div>
       </div>
       <div className="flex justify-between border-t-2 border-secondary mt-6 pt-4">
         <div className="w-[47%]">
@@ -66,7 +81,10 @@ export function FileModal({
             text={i18n(`words.save`)}
             className="bg-red  text-white font-semibold disabled:bg-disable"
             disabled={progress == 100 ? false : true}
-            onClick={() => handleModal(false)}
+            onClick={() => {
+              handleModal(false);
+              setValue(`${name}`, files);
+            }}
           />
         </div>
       </div>
