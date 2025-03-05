@@ -1,12 +1,14 @@
 import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { useServicesForm } from "./hooks/useServicesForm";
-import { Select } from "@components/shared/forms/Select";
-import { Input } from "@components/shared/forms/Input";
-import { TextArea } from "@components/shared/forms/TextArea";
 import { Checkbox } from "@components/shared/forms/Checkbox";
 import { Button } from "@components/shared/layouts/Button";
 import { File } from "@components/shared/forms/File";
+import { LimitAndReservationForm } from "./LimitAndReservationForm";
+import { DefinitionsForm } from "./DefinationsForm";
+import { RadioBox } from "@components/shared/forms/RadioBox";
+import { UserGroup } from "@assets/Icons/black/UserGroup";
+import { Lock } from "@assets/Icons/black/Lock";
 
 export function ServicesForm() {
   const { formMethods, register } = useServicesForm();
@@ -20,80 +22,41 @@ export function ServicesForm() {
       </div>
       <div>
         <FormProvider {...formMethods}>
-          <form action="">
-            <div className="form-row flex  justify-between">
-              <div className="form-select w-full lg:w-[48%]">
-                <Select
-                  dataTestId="type"
-                  label={i18n(`words.service_type`)}
-                  options={[
-                    {
-                      text: "Recorrente",
-                      value: "APPELLANT",
-                    },
-                    {
-                      text: "Pontual",
-                      value: "PUNCTUAL",
-                    },
-                  ]}
-                  required={true}
-                />
-              </div>
-              <div className="form-group w-full lg:w-[48%]">
-                <Input
-                  dataTestId="name"
-                  label={i18n("words.service_name")}
-                  required={true}
-                />
-              </div>
-            </div>
-            <div className="form-row mt-6">
-              <TextArea
-                dataTestId="describe"
-                className="h-28"
-                label={i18n(`words.describe`)}
-              />
-            </div>
+          <form>
+            <DefinitionsForm register={register} />
             <div className="form-subtitle my-6">
               <h2>
                 <strong>{i18n(`services.settings_privacy`)}</strong>
               </h2>
             </div>
-            <div></div>
-            <div className="my-6">
-              <div>
-                <p>{i18n(`services.has_limit_vacancies`)}</p>
+            <div className="flex justify-between">
+              <div className="w-full lg:w-[48%]">
+                <RadioBox
+                  {...register("access")}
+                  icon={<UserGroup />}
+                  defaultValue={"PUBLIC"}
+                  dataTestId="access_public"
+                  label={i18n(`words.public`)}
+                />
               </div>
-              <div></div>
-            </div>
-            <div className="my-6">
-              <Input
-                type="number"
-                dataTestId="limit_vacancies"
-                label={i18n("services.inform_limit_vacancies")}
-                disabled={true}
-              />
-            </div>
-            <div className="my-6">
-              <div>
-                <p>{i18n(`services.has_limit_reservation`)}</p>
+              <div className="w-full lg:w-[48%]">
+                <RadioBox
+                  {...register("access")}
+                  icon={<Lock />}
+                  defaultValue={"PRIVATE"}
+                  dataTestId="access_private"
+                  defaultChecked={true}
+                  label={i18n(`words.private`)}
+                />
               </div>
-              <div></div>
             </div>
-            <div className="my-6">
-              <Input
-                type="number"
-                dataTestId="limit_vacancies"
-                label={i18n("services.inform_limit_reservation")}
-                disabled={true}
-              />
-            </div>
+            <LimitAndReservationForm register={register} />
             <div className="form-subtitle">
               <h2>
                 <strong>{i18n(`services.service_image`)}</strong>
               </h2>
             </div>
-            <div>
+            <div className="mt-2 w-1/2">
               <File
                 {...register("image")}
                 dataTestId="service_image"
