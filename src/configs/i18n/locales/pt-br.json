@@ -128,7 +128,17 @@
     "responsible": "Responsável",
     "initial": "Início",
     "data_initial": "Data inicial",
-    "new_service": "Novo serviço"
+    "new_service": "Novo serviço",
+    "definition": "Definições",
+    "service_type": "Tipo de serviço",
+    "service_name": "Nome do serviço",
+    "describe": "Descrição",
+    "clean": "Limpar",
+    "keep_creating": "Continuar criando",
+    "service_image": "Imagem do serviço",
+    "text_upload": "Clique para adicionar uma imagem",
+    "allowed_formats_image": "Formatos aceitos: PDF, PNG e JPEG",
+    "allowed_size_image": "Tamanho máximo aceito: 5MB"
   },
   "configs": {
     "formats": {
@@ -174,7 +184,13 @@
     "modal": {
       "text_already_exclude": "Ao continuar, todos os dados do serviço serão excluídos, e ele não poderá mais ser acessado até que seja recadastrado.",
       "title_already_exclude": "Você deseja excluir este serviço?"
-    }
+    },
+    "settings_privacy": "Configure a privacidade do serviço:",
+    "has_limit_vacancies": "Haverá um limite de vagas?",
+    "inform_limit_vacancies": "Informe o limite máximo de vagas*",
+    "has_limit_reservation": "Será possível aderir a vagas de reserva?",
+    "inform_limit_reservation": "Será possível aderir a vagas de reserva?",
+    "service_image": "Adicione uma imagem ao serviço:"
   },
   "my_users": {
     "modal": {
