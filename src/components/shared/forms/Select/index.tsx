@@ -45,8 +45,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             className={`${className} ${
               !!errors ? "border-amber-500 outline-amber-500" : ""
             } ${
-              multiple ? "h-[16vh]" : "h-[4rem]"
-            } w-full px-3   pt-7 pb-2 cursor-pointer bg-scroll-transparent bg-white border-secondary border-2 rounded-lg text-primary text-md font-medium`}
+              multiple ? "h-[16vh]" : "h-[3.5rem]"
+            } w-full px-3   pt-5  cursor-pointer bg-scroll-transparent bg-white border-secondary border-2 rounded-lg text-primary text-md font-medium`}
             data-testid={dataTestId}
             multiple={multiple}
             id={IdCurrent}
