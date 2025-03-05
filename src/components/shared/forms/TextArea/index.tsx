@@ -1,13 +1,13 @@
 import { When } from "@components/utilities/When";
-import { InputProps } from "./type";
 import { RotateClockwise } from "@assets/Icons/white/RotateClockwise";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import ErrorMessage from "@components/shared/others/ErrorMessage";
 import { useFieldsAnimation } from "@hooks/Forms/useFieldsAnimation";
+import { TextAreaProps } from "./type";
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  function Input(
+export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
+  function TextArea(
     {
       dataTestId,
       isLoading = false,
@@ -20,7 +20,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       required,
       handledChange,
       ...rest
-    }: InputProps,
+    }: TextAreaProps,
     ref
   ) {
     const { labelStyledState, handleTransitionLabel, changeLabelClass } =
@@ -51,11 +51,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               <span className="text-red">*</span>
             </When>
           </label>
-          <input
+          <textarea
             {...rest}
             ref={ref}
             name={name}
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={(ev: React.ChangeEvent<HTMLTextAreaElement>) => {
               if (rest.onChange) rest.onChange(ev);
               if (handledChange) handledChange(ev);
             }}
@@ -64,7 +64,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             placeholder={placeholder}
             className={`${className} ${
               !!errors ? "border-amber-500 outline-amber-500" : ""
-            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm`}
             data-testid={dataTestId}
             id={IdCurrent}
           />
