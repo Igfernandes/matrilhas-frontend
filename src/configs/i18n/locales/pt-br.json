@@ -145,7 +145,8 @@
     "public": "Público",
     "forms": "Formulários",
     "new_form": "Novo formulário",
-    "welcome_message": "Seja Bem vindo, {name}!"
+    "welcome_message": "Seja Bem vindo, {name}!",
+    "clients": "Clientes"
   },
   "configs": {
     "formats": {
@@ -199,15 +200,16 @@
     "inform_limit_reservation": "Será possível aderir a vagas de reserva?",
     "service_image": "Adicione uma imagem ao serviço:"
   },
-  "my_users": {
+  "clients": {
     "modal": {
       "category": {
         "text_create_category": "Para criar uma categoria, clique em adicionar ou edite uma categoria abaixo:",
         "text_organized_items": "Para ordenar a categoria, segure e arraste.",
-        "text_select_category": "Selecione a nova categoria para a base escolhida"
+        "text_select_category": "Selecione a nova categoria para a base escolhida",
+        "success_title": "Categoria criada",
+        "success_text": "Sua categoria está disponível para vincular a usuários."
       },
-      "user": {
-        "text_select_group": "Selecione os grupos ao qual o usuário pertencerá:",
+      "client": {
         "text_fill_information": "Preencha as informações abaixo para convidar um novo usuário:",
         "text_already_exclude": "Ao continuar, todos os dados dos usuários selecionados serão excluídos, e eles não poderão mais acessar até que sejam recadastrados.",
         "title_already_exclude": "Você deseja excluir este usuário?"
