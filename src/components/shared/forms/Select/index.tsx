@@ -7,7 +7,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   function Select(
     {
       dataTestId,
-      className,
+      className = "",
       id,
       label,
       errors,
@@ -27,7 +27,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <div className="relative">
           <label
             htmlFor={IdCurrent}
-            className={`absolute top-[2px] pt-2 pb-1 left-4 w-[90%] transition-all duration-350 bg-white text-xs`}
+            className={`absolute top-[2px] pt-2 pb-1 left-4  transition-all duration-350 bg-white text-xs`}
           >
             {label}
             <When value={required}>

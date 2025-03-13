@@ -15,6 +15,7 @@ export function Pagination() {
     handleChangeDisplayedGroupPage,
     handleChangeDisplayedPages,
     handleChangePagination,
+    amountRegisters,
   } = usePagination();
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export function Pagination() {
   return (
     <div className="flex justify-between mt-3">
       <div>
-        <p className="text-sm">{`Exibindo ${pagination.max} de ${tRows.length} resultados`}</p>
+        <p className="text-sm">{`Exibindo ${tRows.length} de ${amountRegisters} resultados`}</p>
       </div>
       <div>
         <div className="flex justify-end">
@@ -51,7 +52,7 @@ export function Pagination() {
                   <span>{value}</span>
                 </li>
               ))}
-              <When value={(displayedGroupPage + 1) < amountGroups}>
+              <When value={displayedGroupPage + 1 < amountGroups}>
                 <li
                   key={`pagination_key_more`}
                   className={`px-2 hover:bg-rose-800 text-black hover:text-white cursor-pointer`}

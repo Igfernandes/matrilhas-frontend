@@ -38,7 +38,7 @@ export function GroupFields<Payload extends FieldValues>({
             <ul>
               {items.map((item, key) => (
                 <SortableItem<Payload>
-                  key={item.id}
+                  key={`${item.id}_${item.value}`}
                   id={item.id}
                   position={key}
                   value={item.value as string}

@@ -14,7 +14,7 @@ export function useGroupFields<Payload extends FieldValues>({
   name,
 }: Props<Payload>) {
   const [items, setItems] = useState<ItemShape[]>([]);
-  const [targetItem, setTargetItem] = useState<UniqueIdentifier>();
+  const [targetItem, setTargetItem] = useState<UniqueIdentifier>(-1);
   const {
     register,
     setValue,
@@ -34,7 +34,7 @@ export function useGroupFields<Payload extends FieldValues>({
       );
       const updatedItems = arrayMove(updatedItemsValue, oldIndex, newIndex);
       setItems(updatedItems);
-      handleUpdateItemsId(updatedItems);
+      handleUpdateValues(updatedItems);
     }
   };
   const handleUpdateItemsValue = (items: ItemShape[]) => {
@@ -45,18 +45,34 @@ export function useGroupFields<Payload extends FieldValues>({
       value: itemsValue[key],
     }));
   };
-  const handleUpdateItemsId = (items: ItemShape[]) => {
+  const handleUpdateValues = (items: ItemShape[]) => {
     setValue(
       name as Path<Payload>,
       items.map((item) => item.value) as PathValue<Payload, Path<Payload>>
     );
   };
 
+  const handleUpdateItems = (name: Path<Payload>) => {
+    const itemsValue = getValues(name);
+
+    setItems(
+      items.map((item) => ({
+        ...item,
+        value: itemsValue[item.id],
+      })) as PathValue<Payload, Path<Payload>>
+    );
+  };
+
   const handleAddingItem = () => {
     const itemId = items.length;
     const newItem = { id: itemId, value: "" };
+    const itemsUpdated = [...items, newItem].map((item, key) => ({
+      ...item,
+      id: key,
+    }));
 
-    setItems([...items, newItem]);
+    handleUpdateValues(itemsUpdated)
+    setItems(itemsUpdated);
     setTargetItem(itemId);
   };
 
@@ -66,11 +82,12 @@ export function useGroupFields<Payload extends FieldValues>({
   ) => {
     if (action === "DELETE") {
       const itemsFiltered = items.filter((item) => item.id != id);
-      handleUpdateItemsId(itemsFiltered);
+      handleUpdateValues(itemsFiltered);
       return setItems(itemsFiltered);
     }
 
-    setTargetItem(id !== targetItem ? id : undefined);
+    handleUpdateItems(name);
+    setTargetItem(id !== targetItem ? id : -1);
   };
 
   const handleErrors = () => {

@@ -16,7 +16,6 @@ export function Tags<TableData extends Array<Record<string, unknown>>>(
       <Swiper
         spaceBetween={10}
         slidesPerView={"auto"}
-        onSwiper={(swiper) => console.log(swiper)}
       >
         <SwiperSlide style={{ width: 'auto' }}
           className="border-[1px] border-secondary px-3 rounded-xl cursor-pointer "

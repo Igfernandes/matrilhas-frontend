@@ -1,3 +1,4 @@
 export const clientsRoutes = {
-  category: "/clients/categories",
+  clients: "/clients",
+  categories: "/clients/categories",
 };
