@@ -13,7 +13,7 @@ export function useForm() {
     formState: { isSubmitting },
   } = formMethods;
 
-  const onSubmit = async (payload: Payload) => {};
+  const onSubmit = async () => {};
 
   return {
     register,
