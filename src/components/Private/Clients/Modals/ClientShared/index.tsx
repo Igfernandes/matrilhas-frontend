@@ -46,7 +46,10 @@ export function ClientSharedModal({
               <GroupChecks<UserSharedPayload>
                 name="sectors"
                 register={register}
-                values={MOCK_USER_FIELDS_GROUP.map((group) => group.name)}
+                items={MOCK_USER_FIELDS_GROUP.map((group) => ({
+                  label: group.name,
+                  value: group.id,
+                }))}
               />
             </div>
           </div>
