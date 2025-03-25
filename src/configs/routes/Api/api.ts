@@ -3,6 +3,7 @@ import { clientsRoutes } from "./clients";
 import { invitesRoutes } from "./invites";
 import { permissionsRoutes } from "./permissions";
 import { recoverRoutes } from "./recover";
+import { servicesRoutes } from "./services";
 import { usersRoutes } from "./users";
 
 export const API_ROUTES = {
@@ -12,4 +13,5 @@ export const API_ROUTES = {
   ...clientsRoutes,
   ...invitesRoutes,
   ...permissionsRoutes,
+  ...servicesRoutes,
 };
