@@ -155,7 +155,10 @@
     "created_at": "Criado em",
     "invites": "Convites",
     "resend": "Reenviar",
-    "ative": "Ativar"
+    "ative": "Ativar",
+    "stock": "Estoque",
+    "appellant": "Recorrente",
+    "pontual": "Pontual"
   },
   "permissions": {
     "users_create": "Criar usuários",
