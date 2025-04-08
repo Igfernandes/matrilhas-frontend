@@ -13,12 +13,14 @@ export function Form() {
     isShowModal,
   } = useForm();
 
+  console.log(fieldByGroup)
   return (
     <>
       {/** Formulário Básico */}
       {fieldByGroup.map(([groupName, fields], key) => (
         <When value={targetTab == "ALL" || targetTab == groupName} key={key}>
           <Builder
+            createdAt={fields[fields.length - 1]?.created_at}
             title={groupName}
             fields={fields}
             isEditing={fieldsGroupEditing == groupName}

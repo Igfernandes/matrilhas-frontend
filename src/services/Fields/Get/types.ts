@@ -5,7 +5,6 @@ export type GetFieldsRequest = {
   component?: "INPUT" | "SELECT" | "TEXTAREA" | "TEXT" | "LINK";
   type?: string;
   is_sensitive?: boolean;
-  is_file?: boolean;
   is_required?: boolean;
   group_id?: number;
 };

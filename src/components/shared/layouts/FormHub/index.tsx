@@ -10,9 +10,11 @@ export function FormHub({
   groups,
   handleShared,
   entityType,
+  handleSubmitFields,
 }: FormBuildProps) {
   return (
     <FieldsProvider
+      handleSubmitFields={handleSubmitFields}
       entityType={entityType}
       entity={entity}
       fieldsRelation={fields}

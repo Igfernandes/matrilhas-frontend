@@ -1,18 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
-import { PostCreateServicesPayload } from "./type";
+import { PostClientsFieldsPayload } from "./type";
 import i18n from "@configs/i18n";
-import { AxiosError } from "axios";
 import { usePostServicesService } from ".";
+import { AxiosError } from "axios";
 
-export default function usePostCreateService() {
+export default function usePostClientsFields() {
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
   const { postCreateServices } = usePostServicesService();
   const queryClient = useQueryClient();
 
-  const handleMutate = async (payload: PostCreateServicesPayload) => {
+  const handleMutate = async (payload: PostClientsFieldsPayload) => {
     const { data } = await postCreateServices(payload);
 
     return data;
@@ -22,12 +22,12 @@ export default function usePostCreateService() {
     mutationFn: handleMutate,
     onSuccess: () => {
       dispatchSnackbar({
-        message: i18n("services.create.success_text"),
-        title: i18n("services.create.success_title"),
+        message: i18n("clients.fields.save.success_text"),
+        title: i18n("clients.fields.save.success_title"),
         type: "success",
       });
       queryClient.invalidateQueries({
-        queryKey: ["services"],
+        queryKey: ["clients/fields"],
         refetchType: "active",
       });
     },

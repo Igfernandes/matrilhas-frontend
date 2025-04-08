@@ -21,6 +21,7 @@ function FieldsProvider({
   entity,
   Groups,
   entityType,
+  handleSubmitFields,
 }: FieldProviderProps) {
   const [viewedField, setViewedField] = useState<ViewedEntityShape>(entity);
   const [targetTab, setTargetTab] = useState<OptionsFieldTabTarget>("ALL");
@@ -74,8 +75,9 @@ function FieldsProvider({
       fields,
       fieldsGroups,
       entityType,
+      handleSubmitFields,
     }),
-    [viewedField, fields, fieldsGroups, entityType]
+    [viewedField, fields, fieldsGroups, entityType, fieldsRelation]
   );
 
   return (

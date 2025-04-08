@@ -11,4 +11,5 @@ export type FormBuildProps = {
   handleEdit: (fieldGroupName: string) => void;
   onModal: (isShowModal: boolean) => void;
   isShowModal: boolean;
+  createdAt: string;
 };

@@ -11,9 +11,8 @@ export const StoreFieldsSchema = z.object({
   component: z.enum(["INPUT", "SELECT", "TEXTAREA"]).default("INPUT"),
   is_required: z.enum(["YES", "NOT"]).default("NOT"),
   is_sensitive: z.enum(["YES", "NOT"]).default("NOT"),
-  is_file: z.enum(["YES", "NOT"]).default("NOT"),
   type: z
-    .enum(["TEXT", "COLOR", "NUMBER", "DATE", "DATETIME-LOCAL"])
+    .enum(["TEXT", "COLOR", "NUMBER", "DATE", "DATETIME-LOCAL", "FILE"])
     .default("TEXT"),
   value: z
     .string({ required_error: i18n("errors.fields.required") })

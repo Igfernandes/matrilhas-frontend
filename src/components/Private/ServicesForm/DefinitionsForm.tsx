@@ -13,7 +13,7 @@ type Props = {
 export function DefinitionsForm({ register, errors }: Props) {
   return (
     <>
-      <div className="form-group w-full mb-6">
+      <div className="form-group w-full mb-4 lg:mb-6">
         <Input
           {...register("name")}
           dataTestId="name"
@@ -22,7 +22,7 @@ export function DefinitionsForm({ register, errors }: Props) {
           errors={errors.name}
         />
       </div>
-      <div className="form-row flex  justify-between">
+      <div className="form-row flex flex-wrap lg:flex-none justify-between">
         <div className="form-select w-full lg:w-[48%]">
           <Select
             {...register("type")}
@@ -42,7 +42,7 @@ export function DefinitionsForm({ register, errors }: Props) {
             errors={errors.type}
           />
         </div>
-        <div className="form-select w-full lg:w-[48%]">
+        <div className="form-select w-full lg:w-[48%] mt-4 lg:mt-auto">
           <Select
             {...register("status")}
             dataTestId="status"

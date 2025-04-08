@@ -20,15 +20,19 @@ export function FormBuilderViewed({ isEditing, fields }: Props) {
                 </label>
               </div>
               <div className="w-full lg:w-[70%]">
-                <input
-                  id={`field_${field.id}`}
-                  type={field.type ?? "text"}
-                  defaultValue={
-                    field.value ?? (field.type != "file" ? "-" : "")
-                  }
-                  disabled={true}
-                  className="w-full border-none text-secondary"
-                />
+                <When value={field.type != "FILE"}>
+                  <input
+                    id={`field_${field.id}`}
+                    type={field.type ?? "text"}
+                    value={field.value}
+                    disabled={true}
+                    required={!!field.is_required}
+                    className="w-full border-none text-secondary"
+                  />
+                </When>
+                <When value={field.type == "FILE"}>
+                  <span>{field.value?.split("uploads/")[1]}</span>
+                </When>
               </div>
             </li>
           ))}

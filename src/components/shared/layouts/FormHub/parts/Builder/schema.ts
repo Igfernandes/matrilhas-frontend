@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const formBuilderSchema = z.object({
-  field: z.array(
+  fields: z.array(
     z.object({
       id: z.string(),
       value: z.any(),

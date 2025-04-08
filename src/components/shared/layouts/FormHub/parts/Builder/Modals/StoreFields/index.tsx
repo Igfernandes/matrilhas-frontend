@@ -14,7 +14,7 @@ export function StoreFieldsModal({
   groups,
 }: StoreFieldsModalProps) {
   const { formMethods, register, errors, handleSubmit, submit } =
-    useStoreFieldsModal();
+    useStoreFieldsModal({ handleModal: onModal });
 
   return (
     <Modal
@@ -74,6 +74,7 @@ export function StoreFieldsModal({
                       "COLOR",
                       "NUMBER",
                       "DATE",
+                      "FILE",
                       "DATETIME-LOCAL",
                     ].map((type) => ({
                       text: i18n(`words.${type.toLowerCase()}`),
@@ -107,19 +108,6 @@ export function StoreFieldsModal({
                     defaultValue={"NOT"}
                     label={i18n("words.is_sensitive")}
                     dataTestId="is_sensitive"
-                    errors={errors.group}
-                  />
-                </div>
-                <div className="form-group my-4">
-                  <Select
-                    {...register("is_file")}
-                    options={["YES", "NOT"].map((type) => ({
-                      text: i18n(`words.${type.toLowerCase()}`),
-                      value: type,
-                    }))}
-                    defaultValue={"NOT"}
-                    label={i18n("words.is_file")}
-                    dataTestId="is_file"
                     errors={errors.group}
                   />
                 </div>

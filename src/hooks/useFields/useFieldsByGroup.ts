@@ -49,7 +49,7 @@ export function useFieldsByGroup({ fields, fieldGroups }: Props) {
       if (!filteredFieldsByGroup[group.name])
         filteredFieldsByGroup[group.name] = [];
 
-      if (field.is_file)
+      if (field.type == "FILE")
         return filteredFieldsByGroup["ATTACHMENTS"].push(field);
 
       filteredFieldsByGroup[group.name].push(field);

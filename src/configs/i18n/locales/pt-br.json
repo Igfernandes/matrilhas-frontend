@@ -20,7 +20,8 @@
       "has_min_one_special_character": "Pelo menos 1 caracteres especial.",
       "password_need_equal": "A senha informada deve ser idêntica.",
       "min_length": "O ${field} deve conter pelo menos ${length} caracteres",
-      "image_valid": "O arquivo é obrigatório e deve ser uma imagem válida."
+      "image_valid": "O arquivo é obrigatório e deve ser uma imagem válida.",
+      "file": "O arquivo excede o limite de tamanho de 5 megas"
     },
     "system": {
       "not_found_user": "O usuário que tentou acessar está com problemas, não exista ou é inacessível ao perfil atual.",
@@ -226,7 +227,10 @@
     "number": "Numero",
     "is_sensitive": "É sensível?",
     "is_required": "É obrigatório",
-    "is_file": "É um arquivo?"
+    "is_file": "É um arquivo?",
+    "prev": "Anterior",
+    "next": "Próximo",
+    "exclude_people": "Pessoas Excluídas"
   },
   "permissions": {
     "users_create": "Criar usuários",
@@ -334,6 +338,12 @@
     }
   },
   "clients": {
+    "fields": {
+      "save": {
+        "success_text": "O campo foi salvo com sucesso!",
+        "success_title": "Campo salvo"
+      }
+    },
     "modal": {
       "category": {
         "text_create_category": "Para criar uma categoria, clique em adicionar ou edite uma categoria abaixo:",
@@ -367,6 +377,10 @@
     "create": {
       "success_title": "Campo criado",
       "success_text": "O campo foi criado com sucesso!"
+    },
+    "delete": {
+      "success_text": "Campo excluído",
+      "success_title": "O campo foi excluído com sucesso!"
     }
   },
   "users": {

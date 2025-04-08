@@ -8,11 +8,14 @@ import { useClientsUpdate } from "@components/Private/Clients/Update/hooks/useCl
 import { getClients } from "../../../services/Clients/Get/SSR";
 
 export default function ClientPerfil({ targetClient }: ClientPageProps) {
-  const { fields, fieldsGroups } = useClientsUpdate({ client: targetClient });
+  const { fields, fieldsGroups, handleSubmitFields } = useClientsUpdate({
+    client: targetClient,
+  });
 
   return (
     <DashboardContainer>
       <FormHub
+        handleSubmitFields={handleSubmitFields}
         entityType="CLIENT"
         entity={targetClient}
         groups={fieldsGroups}

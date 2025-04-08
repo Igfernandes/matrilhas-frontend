@@ -11,6 +11,7 @@ export type FieldContextData = {
   isShowModal: boolean;
   handleToggleModal: (isShowModal: boolean) => void;
   entityType: ScopeFields;
+  handleSubmitFields: (viewedId: number, payload: PayloadFieldValues) => void;
 };
 
 export type OptionsFieldTabTarget = string | "ALL" | "FILES";
@@ -21,6 +22,14 @@ export type FieldProviderProps = {
   entity: ViewedEntityShape;
   children: React.ReactNode;
   entityType: ScopeFields;
+  handleSubmitFields: (viewedId: number, payload: PayloadFieldValues) => void;
+};
+
+export type PayloadFieldValues = {
+  fields: Array<{
+    id: number;
+    value: string;
+  }>;
 };
 
 export type ViewedEntityShape = {

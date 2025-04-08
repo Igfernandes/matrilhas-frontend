@@ -18,8 +18,8 @@ export function OptionsBar({ handleSearch }: Props) {
         handleSearch={handleSearch}
         className="w-full md:w-[45%] xl:w-[25%]"
       />
-      <div className="mt-5 md:mt-0 w-full md:w-[75%] flex justify-around md:justify-end">
-        <div className="mx-0 md:mx-2">
+      <div className="mt-5 md:mt-0 w-full flex-wrap lg:flex-none md:w-[75%] flex justify-around md:justify-end">
+        <div className="w-full lg:w-auto mx-0 md:mx-2 mb-3 lg:my-0">
           <Button
             className="border border-zinc-300 px-3 font-bold rounded-xl bg-secondary text-primary"
             text={i18n("words.register")}
@@ -27,7 +27,7 @@ export function OptionsBar({ handleSearch }: Props) {
             onClick={() => handleToggleModal("CLIENT")}
           />
         </div>
-        <div className="mx-2">
+        <div className="w-full lg:w-auto mx-0 lg:mx-2">
           <Button
             className="border border-zinc-300 px-3 font-bold rounded-xl"
             text={i18n("words.category_manager")}

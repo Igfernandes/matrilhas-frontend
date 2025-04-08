@@ -17,14 +17,14 @@ export function ModalFormCategories({
   return (
     <Modal title={title} isShowModal={isShowModal} handleModal={onModal}>
       <FormProvider {...formMethods}>
-        <form className="w-[424px]" onSubmit={handleSubmit(submit)}>
+        <form className="lg:w-[424px]" onSubmit={handleSubmit(submit)}>
           <div className="form-title mb-4">
-            <h4 className="text-lg leading-6">
+            <h4 className="text-base text-justify lg:text-left xl:text-lg leading-6">
               <strong>
                 {i18n("clients.modal.category.text_create_category")}
               </strong>
             </h4>
-            <span>{i18n("clients.modal.category.text_organized_items")}</span>
+            <span className="text-xs lg:text-base">{i18n("clients.modal.category.text_organized_items")}</span>
           </div>
           <GroupFields
             name="categories"
