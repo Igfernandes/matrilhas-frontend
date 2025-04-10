@@ -20,14 +20,14 @@ export default function usePostIntegrationChats() {
 
   return useMutation({
     mutationFn: handleMutate,
-    onSuccess: () => {
+    onSuccess: (resp, payload) => {
       dispatchSnackbar({
         message: i18n("integrations.chats.post.success_text"),
         title: i18n("integrations.chats.post.success_title"),
         type: "success",
       });
       queryClient.invalidateQueries({
-        queryKey: ["integration/chats"],
+        queryKey: ["integration/chats", payload.type],
         refetchType: "active",
       });
     },

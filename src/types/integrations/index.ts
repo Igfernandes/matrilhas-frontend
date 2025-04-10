@@ -21,4 +21,4 @@ export type IntegrationChatsShape = {
   password?: string;
   created_at?: string;
 };
-export type IntegrationChatsTypes = "FACEBOOK" | "INSTAGRAM" | "WHATSAPP"
+export type IntegrationChatsTypes = "FACEBOOK" | "INSTAGRAM" | "WHATSAPP";
