@@ -2,10 +2,10 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { IntegrationsPayload, integrationsSchema } from "../schemas";
-import { IntegrationShape } from "@type/Integrations";
 import usePostIntegrations from "@services/Integrations/Post/usePostIntegrations";
 import { useEffect, useState } from "react";
 import { useModalContext } from "@contexts/Modal";
+import { IntegrationShape } from "@type/Integrations";
 
 dayjs.extend(customParseFormat);
 
