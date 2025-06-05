@@ -1,10 +1,12 @@
+import { Button } from "../../fields/Button";
+import { Input } from "../../fields/Input";
 import { FieldShape } from "../../type";
 
 export const classNameDefault = "h-7 py-1 px-2 ";
 
 export const fieldsSimple = {
   text: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="text"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
@@ -31,57 +33,56 @@ export const fieldsSimple = {
     />
   ),
   date: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="date"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
   "datetime-local": ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="datetime-local"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
   color: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="color"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
   file: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="file"
       className={`${classNameDefault} w-full h-auto ${className}`}
       {...props}
     />
   ),
   hidden: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="hidden"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
   number: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="number"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
   url: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="url"
       className={`${classNameDefault} ${className}`}
       {...props}
     />
   ),
   button: ({ className, ...props }: FieldShape) => (
-    <input
-      type="button"
+    <Button
       className={`${classNameDefault} ${className}`}
       {...props}
     />

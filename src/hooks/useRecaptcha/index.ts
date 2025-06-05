@@ -23,8 +23,15 @@ export function useRecaptcha(siteKey: string, action: string) {
    * determinando a ordem de precedência de execução das coisas e o que mais for necessário.
    */
   const loadReCaptcha = useCallback(() => {
+    if (document.querySelector(`script[src*="recaptcha/api.js"]`)) {
+      handleLoaded(); // já existe o script? só executa
+      return;
+    }
+
     const script = document.createElement("script");
     script.src = `https://www.recaptcha.net/recaptcha/api.js?render=${siteKey}`;
+    script.async = true;
+    script.defer = true;
     script.addEventListener("load", handleLoaded);
     document.body.appendChild(script);
   }, [handleLoaded, siteKey]);
@@ -33,5 +40,5 @@ export function useRecaptcha(siteKey: string, action: string) {
     loadReCaptcha();
   }, []);
 
-  return { token };
+  return { token, handleLoaded };
 }

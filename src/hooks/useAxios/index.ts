@@ -2,7 +2,7 @@ import { Axios } from "axios";
 import { useSnackbar } from "../useSnackbar";
 import { CustomAxiosError, ShapeError } from "./type";
 import i18n from "@configs/i18n";
-import { STATUS_SERVICE } from "@constants/services";
+import { STATUS_SERVICE } from "@constants/http";
 import { isValidJSON } from "@helpers/json";
 import { AuthenticationsInterceptor } from "./interceptores/Authentication";
 import { DataInterceptor } from "./interceptores/Data";
@@ -31,13 +31,13 @@ export function useAxios() {
    *
    * @returns {ShapeError} error
    */
-  function handleAxiosError(error: unknown): ShapeError {
+  function handleAxiosError(error: unknown, title?: string): ShapeError {
     const shapeError = {
       title: i18n("errors.service.default.title") as string,
       message: i18n("errors.service.default.message") as string,
     };
     const typedError = error as CustomAxiosError;
-    
+
     const jsonResponseData = typedError.response?.data ?? "";
     const responseData = isValidJSON(jsonResponseData)
       ? JSON.parse(jsonResponseData)
@@ -46,6 +46,10 @@ export function useAxios() {
     const responseError = !!responseData && responseData.errors;
     if (responseError) {
       shapeError["message"] = responseError as string;
+    }
+
+    if (title) {
+      shapeError["title"] = title;
     }
 
     dispatchSnackbar({ ...shapeError, type: "error" });

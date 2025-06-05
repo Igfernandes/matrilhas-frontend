@@ -1,8 +1,14 @@
+import { ChargeShape } from "@type/Charges";
+import {
+  OperationFailureShape,
+  StatusOperationsFailures,
+} from "@type/OperationsFailures";
 import { JSX } from "react";
 
-export type HookFinancesProps<ClientType> = {
+export type HookFinancesProps<EntityType> = {
   filter: string;
-  handleFilter: (data: ClientType) => boolean;
+  handleFilter: (data: EntityType) => boolean;
+  charges: Array<ChargeShape>;
 };
 
 export type TDataFinance = {
@@ -15,11 +21,12 @@ export type TDataFinance = {
   actions: JSX.Element;
 };
 
-export type FinancesStructProps = {
-  filterObjects: <ObjectShape extends Record<string, unknown>>(
-    object: ObjectShape
+export type OperationFailuresStructProps = {
+  filterObjects: <OperationFailureShape extends Record<string, unknown>>(
+    object: OperationFailureShape
   ) => boolean;
   search: string;
+  operationsFailures: Array<OperationFailureShape>;
 };
 
 export type ModalFinancesOperationType =
@@ -29,3 +36,14 @@ export type ModalFinancesOperationType =
   | "SHARED"
   | "CHANGE_CATEGORY"
   | boolean;
+
+export type TDataOperationsFailures = {
+  id: React.ReactNode;
+  operation_type?: string;
+  error?: string;
+  code?: number;
+  should_retry?: number;
+  status: StatusOperationsFailures;
+  resolved_at?: string;
+  actions: JSX.Element;
+};

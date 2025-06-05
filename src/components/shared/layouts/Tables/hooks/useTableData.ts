@@ -8,8 +8,9 @@ import { useTableMetrics } from "./useTableMetrics";
 export function useTableData<TableData extends Array<Record<string, unknown>>>({
   data,
   excludes,
-  tHeads: { data: tHeadsData = [], widths },
+  tHeads: tHeadProps,
 }: HookTableDataProps<TableData>) {
+  const { data: tHeadsData = [], widths } = tHeadProps ?? {};
   const [tHeads, setTHeads] = useState<string[]>([]);
   const { getCurrentWidthColumn, getTextSize, truncateTextToFit } =
     useColumnMetrics({ widths });

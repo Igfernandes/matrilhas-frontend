@@ -5,10 +5,10 @@ import { ModalFormProps } from "./type";
 import { Modal } from "../../../../../shared/layouts/Modal";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
-import { Select } from "@components/shared/forms/Select";
 import { Checkbox } from "@components/shared/layouts/Checkbox";
 import { handleMaskDate } from "@helpers/date";
 import { handleMaskPhone } from "@helpers/string";
+import { SelectSearch } from "@components/shared/forms/SelectSearch";
 
 export function ClientCreateModal({
   isShowModal,
@@ -16,14 +16,7 @@ export function ClientCreateModal({
   title,
   categories,
 }: ModalFormProps) {
-  const {
-    formMethods,
-    handleSubmit,
-    submit,
-    isLoading,
-    handleToggleContinueRegistering,
-    shouldContinueRegistering,
-  } = useModalForm();
+  const { formMethods, handleSubmit, submit, isLoading } = useModalForm();
   const {
     setValue,
     register,
@@ -42,7 +35,7 @@ export function ClientCreateModal({
             </h4>
           </div>
           <div className="form-category">
-            <Select
+            <SelectSearch
               {...register("category")}
               options={categories.map((category) => {
                 return {
@@ -118,10 +111,9 @@ export function ClientCreateModal({
           <div className="form-btn flex justify-between pt-4 border-t-2 border-secondary">
             <div className="flex items-center">
               <Checkbox
+                {...register("hasContinueRegister")}
                 dataTestId="continue_register"
                 label={i18n(`words.continue_register`)}
-                defaultChecked={shouldContinueRegistering}
-                onClick={handleToggleContinueRegistering}
               />
             </div>
             <div className="w-1/2">

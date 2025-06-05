@@ -4,25 +4,32 @@ import { formatNumber } from "@helpers/numbers";
 import { USER_OPTIONS } from "@constants/options";
 import { Button } from "@components/shared/layouts/Button";
 import i18n from "@configs/i18n";
-import { Avatar } from "@assets/Icons/black/Avatar";
-import { useFieldContext } from "../../context";
 import { FormBuildProps } from "../../type";
+import { useModalContext } from "../../context/Modal";
+import { useFieldContext } from "../../context/Fields";
+import { Pencil } from "@assets/Icons/black/Pencil";
 
-type Props = Pick<FormBuildProps, "handleShared">;
+type Props = Pick<FormBuildProps, "handleShared" | "handleUpdateClient">;
 
-export function OptionsBar({ handleShared }: Props) {
-  const { viewedField, handleToggleModal } = useFieldContext();
+export function OptionsBar({ handleShared, handleUpdateClient }: Props) {
+  const { handleToggleModal } = useModalContext();
+  const { viewedField } = useFieldContext();
 
   return (
     <div className="flex justify-center lg:justify-between flex-wrap lg:flex-none mt-2 lg:mt-0">
       <div className="flex items-center relative">
-        <div className="flex items-center">
+        <div
+          className="flex items-center"
+          onClick={() => handleUpdateClient(true)}
+        >
           <div className="mr-2">
             <When value={!!viewedField.avatar}>
               <Image src={`${viewedField.avatar}`} alt="Profile photo" />
             </When>
             <When value={!viewedField.avatar}>
-              <Avatar />
+              <div className="bg-white p-2 rounded-full cursor-pointer">
+                <Pencil />
+              </div>
             </When>
           </div>
           <div className="mx-2">

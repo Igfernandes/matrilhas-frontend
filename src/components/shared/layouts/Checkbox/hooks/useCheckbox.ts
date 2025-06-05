@@ -1,27 +1,10 @@
-import { bgColors } from "@assets/colors/colors";
-import { bgDefaultColor } from "@assets/colors/default";
+import { useState } from "react";
 
-type Props = {
-  onChecked?: (prop: boolean) => void;
-  onChange?: () => boolean;
-};
-
-export function useCheckbox({ onChecked }: Props) {
-  const handleChecked = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const divElement = ev.currentTarget as HTMLDivElement;
-    const inputElement = divElement.querySelector("input");
-
-    if (!inputElement) return;
-
-    const isChecked = inputElement.checked;
-
-    inputElement.style.background = isChecked
-      ? bgColors.red
-      : bgDefaultColor.disable;
-    if (onChecked) onChecked(inputElement.checked);
-  };
+export function useCheckbox() {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   return {
-    handleChecked,
+    setIsChecked,
+    isChecked,
   };
 }

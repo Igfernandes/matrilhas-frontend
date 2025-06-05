@@ -29,10 +29,10 @@ export function ModalAlterPassword({ handleModal, isShowModal }: Props) {
             label={i18n("words.current_password")}
             dataTestId="password"
             errors={errors.current_password}
-            className="mb-4"
+         
           />
           <PasswordValidation
-            className="mt-1"
+            className="mt-4"
             dataTestId="new_password"
             label={i18n("words.new_password")}
           />

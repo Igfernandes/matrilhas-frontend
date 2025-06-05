@@ -1,7 +1,7 @@
 import { MenuShape } from "@constants/menu/type";
 import { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from "react";
 import { Item } from "./Item";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { When } from "@components/utilities/When";
 
 type Props = DetailedHTMLProps<

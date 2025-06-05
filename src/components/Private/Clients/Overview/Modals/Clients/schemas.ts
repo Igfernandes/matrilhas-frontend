@@ -30,7 +30,10 @@ export const ClientCreateSchema = z.object({
     .refine((email) => email === "" || REGEXES.EMAIL.test(`${email}`), {
       message: i18n("errors.fields.invalid_email"),
     }),
-  phone: z.string({ required_error: i18n("errors.fields.required") }),
+  hasContinueRegister: z.boolean(),
+  phone: z
+    .string({ required_error: i18n("errors.fields.required") })
+    .nonempty(i18n("errors.fields.required")),
 });
 
 export type ClientCreatePayload = z.infer<typeof ClientCreateSchema>;

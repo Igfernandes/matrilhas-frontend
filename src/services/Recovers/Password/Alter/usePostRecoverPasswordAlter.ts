@@ -3,7 +3,7 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { PostRecoverPasswordAlterPayload } from "./type";
 import { usePostRecoverPasswordAlterService } from ".";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import i18n from "@configs/i18n";
 

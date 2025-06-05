@@ -30,6 +30,7 @@ export default function Home() {
 }
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const tokenNavigation = req.cookies["token_navigation"] ?? "";
+  
   if (tokenNavigation)
     return {
       redirect: {

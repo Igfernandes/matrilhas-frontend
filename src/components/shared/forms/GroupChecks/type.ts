@@ -3,6 +3,7 @@ import { FieldValues, Path, UseFormRegister } from "react-hook-form";
 type GroupCheckItemShape = {
   label: string;
   value: string | number;
+  isChecked?: boolean;
 };
 
 export type GroupChecksProps<Payload extends FieldValues> = {

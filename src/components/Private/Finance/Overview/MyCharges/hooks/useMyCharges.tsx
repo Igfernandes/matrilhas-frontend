@@ -3,52 +3,102 @@ import i18n from "@configs/i18n";
 
 import { SelectorShape } from "@components/shared/layouts/Seletor/type";
 import { HookFinancesProps } from "../../type";
-import { ChargesShape } from "@type/Charges";
+import { ChargeShape } from "@type/Charges";
+import dayjs from "dayjs";
+import { ChargesActions } from "../ChargesActions";
+import { useModalContext } from "@contexts/Modal";
+import { TDataCharges } from "../type";
+import useDeleteCharges from "@services/Charges/Delete/useDelete";
 
-export function useMyCharges({filter, handleFilter}: HookFinancesProps<ChargesShape>) {
+export function useMyCharges({
+  filter,
+  handleFilter,
+  charges,
+}: HookFinancesProps<ChargeShape>) {
   const [selectors, setSelectors] = useState<SelectorShape[]>([]);
   const [tDataCharges, setTDataCharges] = useState<
     Array<Record<string, unknown>>
   >([]);
+  const { handleToggleModal, modal } = useModalContext();
+  const { mutateAsync: deleteCharge, isPending } = useDeleteCharges();
+
+  const handleDeleteCharge = () => {
+    deleteCharge({
+      id: modal.id as number,
+    }).then(() => {
+      handleToggleModal(false);
+    });
+  };
 
   const tHeadsFinance = useRef<Array<string>>([
     "ID",
-    i18n("words.service"),
+    i18n("words.name"),
     i18n("words.type"),
     i18n("words.status"),
     i18n("words.clients_amount"),
     i18n("words.actions"),
   ]);
 
-  // useEffect(() => {
-  //   if (!charges) return;
+  const updateChargeForTable = ({
+    id,
+    title,
+    type,
+    status,
+    clients,
+    created_at,
+  }: ChargeShape): TDataCharges => {
+    return {
+      id,
+      title,
+      type: i18n(`words.${type?.toLowerCase()}`),
+      status: (
+        <span
+          className={`font-semibold ${
+            status === "ACTIVE" ? "text-emerald-600" : "text-red"
+          }`}
+        >
+          {i18n(`words.${status?.toLowerCase()}`)}
+        </span>
+      ),
+      clients: clients?.length ?? 0,
+      created_at: dayjs(created_at).format(i18n("configs.formats.date")),
+      actions: <ChargesActions handleToggleModal={handleToggleModal} id={id} />,
+    };
+  };
 
-  //   const chargesFiltered = charges.filter((tDataClient) =>
-  //     handleFilter(tDataClient)
-  //   );
+  useEffect(() => {
+    if (!charges) return;
 
-  //   setSelectors([
-  //     ...chargesFiltered.map((charge) => ({
-  //       value: charge.id.toString(),
-  //       isChecked: false,
-  //     })),
-  //     {
-  //       value: "all",
-  //       isChecked: false,
-  //     },
-  //   ] as Array<SelectorShape>);
+    const chargesFiltered = charges.filter((tDataClient) =>
+      handleFilter(tDataClient)
+    );
 
-  //   const tDataClient = chargesFiltered.map((ClientProps) =>
-  //     updateChargeForTable(ClientProps)
-  //   );
+    setSelectors([
+      ...chargesFiltered.map((charge) => ({
+        value: charge.id.toString(),
+        isChecked: false,
+      })),
+      {
+        value: "all",
+        isChecked: false,
+      },
+    ] as Array<SelectorShape>);
 
-  //   setTDataCharges(tDataClient);
-  // }, [charges, filter]);
+    const tDataClient = chargesFiltered.map((ClientProps) =>
+      updateChargeForTable(ClientProps)
+    );
+
+    setTDataCharges(tDataClient);
+  }, [charges, filter]);
 
   return {
     tHeadsFinance,
     setSelectors,
     selectors,
-    tDataCharges
+    tDataCharges,
+    modal,
+    handleToggleModal,
+    handleDeleteCharge,
+    isLoading: isPending,
   };
 }

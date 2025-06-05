@@ -2,7 +2,10 @@ import { Forms } from "@components/Private/Forms";
 import { FooterForms } from "@components/Private/Forms/FooterForms";
 import { useForms } from "@components/Private/Forms/hooks/useForms";
 import { useFormStep } from "@components/Private/Forms/hooks/useFormsStep";
-import { FormsPayload, formsSchema } from "@components/Private/Forms/schema";
+import {
+  FormsPayload,
+  formsSchema,
+} from "@components/Private/Forms/schema";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 import { StepBar } from "@components/shared/layouts/StepBar";
 import i18n from "@configs/i18n";
@@ -12,9 +15,6 @@ import { FormProvider } from "react-hook-form";
 export default function Create() {
   const { formMethods } = useFormRules<FormsPayload>({
     schema: formsSchema,
-    defaultValues: {
-      type: "PEOPLE",
-    },
   });
   const { handleNextStep, handlePrevStep, stepActive, isLastStep } =
     useFormStep({

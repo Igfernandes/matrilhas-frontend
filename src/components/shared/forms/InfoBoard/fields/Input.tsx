@@ -28,7 +28,7 @@ export function TInput({
         type == "hidden" ? "hidden" : ""
       }`}
     >
-      <td className="py-2 pl-4">
+      <td className="py-2 pl-4 w-2/6">
         <strong>{label}</strong>
       </td>
       <td className="py-2">

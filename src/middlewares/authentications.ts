@@ -1,7 +1,7 @@
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserAuth } from "../services/Users/GetAuth/SSR";
-import { STATUS_SERVICE } from "@constants/services";
+import { STATUS_SERVICE } from "@constants/http";
 import { deleteCookie } from "cookies-next";
 import { jsonWebToken } from "@helpers/JsonWebToken";
 
@@ -16,7 +16,7 @@ export async function authenticationsMiddleware(
 
   const userAuth = req.cookies.get("userAuth");
 
-  if (typeof userAuth != "undefined") return;
+  if (typeof userAuth != "undefined") return null;
 
   try {
     const { data, status } = await getUserAuth(token_navigation.value);
@@ -39,6 +39,8 @@ export async function authenticationsMiddleware(
       sameSite: "lax",
     });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+    return null;
   } catch (error) {
     console.log(error);
     // Se falhar ao obter as informações do usuário, redireciona para login

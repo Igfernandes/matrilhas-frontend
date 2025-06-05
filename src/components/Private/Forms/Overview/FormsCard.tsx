@@ -4,17 +4,22 @@ import { useModalContext } from "@contexts/Modal";
 import { FormsCardProps, ModalFormsOperationType } from "../type";
 import { Cards } from "@components/shared/layouts/Cards";
 import { useFormsOverview } from "./hooks/useFormsOverview";
-import { privateRoutes } from "@configs/routes/Web/navigation";
+import { privateRoutes, publicRoutes } from "@configs/routes/Web/navigation";
 import { AmountInscribes } from "./AmountInscribes";
+import { useNavigator } from "@hooks/useNavigator";
+import useWindow from "@hooks/useWindow";
 
 export function FormsCard({ search, filterObjects }: FormsCardProps) {
-  const { forms, handleCopy, handleToggleStatusForm } = useFormsOverview({
+  const { forms, handleToggleStatusForm, isLoadingDeleteForm } = useFormsOverview({
     filter: search,
     handleFilter: filterObjects,
   });
+  const { forms: formsRoutePublic } = publicRoutes;
+  const { handleCopy } = useNavigator();
   const { forms: formsRoute } = privateRoutes;
   const { handleToggleModal, modal } =
     useModalContext<ModalFormsOperationType>();
+  const { baseUrl } = useWindow();
 
   return (
     <>
@@ -23,16 +28,17 @@ export function FormsCard({ search, filterObjects }: FormsCardProps) {
           items={forms.map((form) => ({
             description: form.description,
             alert: form.name,
-            link: `${formsRoute}/create`,
+            link: `${formsRoute}/${form.id}`,
             createdAt: form.created_at,
             dotsActions: [
               {
-                handle: () => handleCopy(form.slug),
+                handle: () =>
+                  handleCopy(`${baseUrl}${formsRoutePublic}/${form.slug}`),
                 text: i18n(`words.link_copy`),
               },
               {
-                handle: () => handleToggleModal("DESATIVE"),
-                text: i18n(`words.desative`),
+                handle: () => handleToggleModal("EXCLUDE", form.id),
+                text: i18n(`words.exclude`),
               },
             ],
             foot: {
@@ -43,11 +49,12 @@ export function FormsCard({ search, filterObjects }: FormsCardProps) {
       </div>
       <Notice
         headerTitle={i18n("words.attention")}
-        title={i18n("services.modal.title_already_exclude")}
-        text={i18n("services.modal.text_already_exclude")}
+        title={i18n("custom_forms.modal.title_already_exclude")}
+        text={i18n("custom_forms.modal.text_already_exclude")}
         onSubmit={handleToggleStatusForm}
-        isShowModal={modal.type === "DESATIVE"}
+        isShowModal={modal.type === "EXCLUDE"}
         onModal={handleToggleModal}
+        isLoading={isLoadingDeleteForm}
       />
     </>
   );

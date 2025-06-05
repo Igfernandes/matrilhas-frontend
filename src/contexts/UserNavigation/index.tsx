@@ -8,7 +8,7 @@ import React, {
 import { UserNavigationContextData, UserNavigationProps } from "./types";
 import { UsersShape } from "../../types/Users/Users";
 import useGetUserAuth from "../../services/Users/GetAuth/useGetUser";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import { getCookie } from "cookies-next";
 import { handleLogout } from "@helpers/handlers";

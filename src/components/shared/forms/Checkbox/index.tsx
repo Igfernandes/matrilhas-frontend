@@ -1,8 +1,7 @@
 import { SymbolChecked } from "@assets/Icons/white/SymbolChecked";
-import { useCheckbox } from "./hooks/useCheckbox";
 import { CheckboxProps } from "./type";
 import { When } from "@components/utilities/When";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
@@ -13,38 +12,34 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       id,
       dataTestId,
       errors,
-      onChecked,
       defaultValue,
-      groupName,
       ...props
     }: CheckboxProps,
     ref
   ) {
-    const { handleChecked, isChecked, setIsChecked } = useCheckbox({
-      onChecked,
-    });
-    const currentReferenceName = (groupName ?? props.name) as string;
     const IdCurrent = id ?? dataTestId;
     const { watch } = useFormContext();
+    const [isChecked, setIsChecked] = useState<boolean>();
 
     useEffect(() => {
-      const values = watch(currentReferenceName);
+      const value = watch(props.name ?? "");
 
-      if (!values) return;
-
-      if (Array.isArray(values)) {
-        setIsChecked(values.includes(String(defaultValue)));
-      } else {
-        setIsChecked(values == String(defaultValue));
-      }
-    }, [watch(currentReferenceName)]);
+      setIsChecked(!!value);
+    }, []);
 
     return (
       <div>
         <div className="flex">
           <div
             className="border-2 border-secondary w-6 h-6 relative rounded-[.25rem] cursor-pointer"
-            onClick={handleChecked}
+            onClick={(ev) => {
+              const div = ev.currentTarget;
+              const input = div.querySelector("input");
+
+              if (!input) return;
+
+              setIsChecked(input.checked);
+            }}
           >
             <input
               {...props}

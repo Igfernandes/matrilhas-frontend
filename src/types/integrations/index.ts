@@ -1,24 +1,16 @@
-export type IntegrationBanksShape = {
+import { Status } from "@type/status";
+
+export type IntegrationShape = {
   id: number;
-  type: IntegrationBanksTypes;
+  provider: string;
+  type: string;
+  status: Status;
+  logotype: string;
   public_token?: string;
   private_token?: string;
   username?: string;
   login?: string;
   password?: string;
+  action?: string;
   created_at?: string;
 };
-
-export type IntegrationBanksTypes = "MERCADO_PAGO";
-
-export type IntegrationChatsShape = {
-  id: number;
-  type: IntegrationChatsTypes;
-  public_token?: string;
-  private_token?: string;
-  username?: string;
-  login?: string;
-  password?: string;
-  created_at?: string;
-};
-export type IntegrationChatsTypes = "FACEBOOK" | "INSTAGRAM" | "WHATSAPP";

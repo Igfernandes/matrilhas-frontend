@@ -2,7 +2,7 @@ import { alterPasswordFormSchema } from "../schemas";
 import { PostRecoverPasswordAlterPayload } from "../../../../services/Recovers/Password/Alter/type";
 import usePostRecoverPasswordAlter from "../../../../services/Recovers/Password/Alter/usePostRecoverPasswordAlter";
 import { useFormRules } from "@hooks/Forms/useFormRules";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 
 type Payload = PostRecoverPasswordAlterPayload;

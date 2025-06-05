@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { FieldsShape } from "../../types/Fields";
 import { FieldsGroupsShape } from "@type/Fields/fieldsGroups";
 
@@ -8,61 +8,42 @@ type Props = {
 };
 
 export function useFieldsByGroup({ fields, fieldGroups }: Props) {
-  const [fieldByGroup, setFieldByGroup] = useState<[string, FieldsShape[]][]>(
-    []
-  );
+  return useMemo(() => {
+    const grouped: Record<string, FieldsShape[]> = { ATTACHMENTS: [] };
 
-  const organizedFieldsByGroupPosition = (
-    userFieldsByGroup: [string, FieldsShape[]][]
-  ) => {
-    // 🟢 Criando um mapa para facilitar a busca de posições
-    const positionMap = fieldGroups.reduce(
-      (acc: Record<string, number>, item) => {
-        acc[item.name] = Number(item.position); // Convertendo position para número
-        return acc;
-      },
-      {}
-    );
+    const groupMap = fieldGroups.reduce((acc, group) => {
+      acc[group.id] = group;
+      return acc;
+    }, {} as Record<number, FieldsGroupsShape>);
 
-    // 🟢 Ordenando matriz com base no mapa de posições
-    return userFieldsByGroup.sort((a, b) => {
-      const lastedPosition = Object.values(positionMap).length + 1;
-      const afterElement =
-        String(positionMap[b[0]]) == "undefined"
-          ? lastedPosition
-          : positionMap[b[0]];
-
-      return positionMap[a[0]] - afterElement;
-    });
-  };
-
-  useEffect(() => {
-    const filteredFieldsByGroup = {
-      ATTACHMENTS: [],
-    } as Record<string, FieldsShape[]>;
-
-    fields.forEach((field: FieldsShape) => {
-      const group = fieldGroups.find((group) => group.id === field.group_id);
-
+    fields.forEach((field) => {
+      const group = groupMap[field.group_id];
       if (!group) return;
 
-      if (!filteredFieldsByGroup[group.name])
-        filteredFieldsByGroup[group.name] = [];
+      if (field.type === "FILE") {
+        grouped.ATTACHMENTS.push(field);
+        return;
+      }
 
-      if (field.type == "FILE")
-        return filteredFieldsByGroup["ATTACHMENTS"].push(field);
-
-      filteredFieldsByGroup[group.name].push(field);
+      if (!grouped[group.name]) grouped[group.name] = [];
+      grouped[group.name].push(field);
     });
 
-    const matriz = Object.entries(filteredFieldsByGroup).sort(
-      ([prevKey], [nextKey]) => prevKey.length - nextKey.length
-    );
+    const positionMap = fieldGroups.reduce((acc, group) => {
+      acc[group.name] = Number(group.position);
+      return acc;
+    }, {} as Record<string, number>);
 
-    setFieldByGroup(organizedFieldsByGroupPosition(matriz));
+    const sorted = Object.entries(grouped).sort(([groupA], [groupB]) => {
+      const posA = positionMap[groupA] ?? Infinity;
+      const posB = positionMap[groupB] ?? Infinity;
+      return posA - posB;
+    });
+    const final = sorted.filter(([key]) => key !== "ATTACHMENTS");
+    const attachments = sorted.find(([key]) => key === "ATTACHMENTS");
+
+    if (attachments) final.push(attachments);
+    
+    return { fieldByGroup: final };
   }, [fields, fieldGroups]);
-
-  return {
-    fieldByGroup,
-  };
 }

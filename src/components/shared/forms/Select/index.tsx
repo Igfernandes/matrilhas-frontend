@@ -28,8 +28,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
           <label
             htmlFor={IdCurrent}
             className={`absolute ${
-              multiple ? "w-[93%]" : ""
-            } cursor-pointer top-[2px] pt-2 pb-1 left-2 pl-2  transition-all duration-350  text-xs`}
+              multiple ? "w-[99%]" : ""
+            } cursor-pointer top-[2px] pt-2 pb-0 left-[2px] rounded-lg pl-2  transition-all duration-350  text-xs bg-white`}
           >
             {label}
             <When value={required}>
@@ -53,8 +53,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             multiple={multiple}
             id={IdCurrent}
           >
-            {options.map(({ text, value }, index) => (
-              <option key={index} value={value} className=" cursor-pointer">
+            {options.map(({ text, value, selected }, index) => (
+              <option
+                key={index}
+                value={value ?? ""}
+                className=" cursor-pointer"
+                selected={selected}
+              >
                 {text}
               </option>
             ))}

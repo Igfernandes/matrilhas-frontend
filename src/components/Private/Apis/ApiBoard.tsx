@@ -1,37 +1,34 @@
-import { When } from "@components/utilities/When";
-import { Banks } from "./Banks";
-import { TabsApis } from "./Tabs";
-import { useState } from "react";
-import { Chats } from "./Chats";
-import {
-  IntegrationBanksTypes,
-  IntegrationChatsTypes,
-} from "@type/integrations";
+import { OptionsBar } from "./OptionsBar";
+import { useApi } from "./hooks/useApi";
+import { Cards } from "./Cards";
+import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
+import { API_SETTINGS } from "./constants/settings";
+import { IntegrationsModal } from "./Modals/Integrations";
 
 export function ApiBoard() {
-  const [isActiveTab, setIsActiveTab] = useState<string>("Bancos");
+  const { handleSearch, filterObjects, search } = useSearch();
+  const { integrations, handleToggleModal, modal } = useApi({
+    search,
+    filterObjects,
+  });
 
   return (
     <div>
-      <div>
-        <TabsApis
-          isActiveTab={isActiveTab}
-          handleToggleTab={setIsActiveTab}
-          items={["Bancos", "Mídias Sociais"]}
-        />
-        <When value={isActiveTab === "Bancos"}>
-          {(["MERCADO_PAGO"] as IntegrationBanksTypes[]).map((bank) => (
-            <Banks key={bank} type={bank} />
-          ))}
-        </When>
-        <When value={isActiveTab === "Mídias Sociais"}>
-          {(
-            ["FACEBOOK", "INSTAGRAM", "WHATSAPP"] as IntegrationChatsTypes[]
-          ).map((chat) => (
-            <Chats key={chat} type={chat} />
-          ))}
-        </When>
-      </div>
+      <OptionsBar handleSearch={handleSearch} />
+      <Cards
+        items={integrations.map((integration) => ({
+          id: integration.id,
+          img: integration.logotype,
+          status: integration.status,
+          text: API_SETTINGS[integration.provider] ?? "",
+          handleModal: () => handleToggleModal("INTEGRATION", integration.id),
+        }))}
+      />
+      <IntegrationsModal
+        integrations={integrations}
+        onModal={handleToggleModal}
+        isShowModal={modal.type === "INTEGRATION"}
+      />
     </div>
   );
 }

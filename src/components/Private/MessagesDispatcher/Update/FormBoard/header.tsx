@@ -1,0 +1,68 @@
+import i18n from "@configs/i18n";
+import dayjs from "dayjs";
+import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
+import { Select } from "@components/shared/forms/Select";
+import { useFormContext } from "react-hook-form";
+import { DispatcherUpdatePayload } from "../schemas";
+
+type Props = {
+  dispatcher: MessagesDispatcherShape;
+};
+
+export function FormBoardHeader({ dispatcher }: Props) {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<DispatcherUpdatePayload>();
+
+  return (
+    <div className="header mb-4">
+      <div className="content flex justify-between">
+        <div className="title mb-4">
+          <h1 className="font-bold text-xl">{i18n(`words.notification`)}</h1>
+        </div>
+        <div className="status w-15 ml-auto  mr-2">
+          <div>
+            <Select
+              {...register("status")}
+              dataTestId="status"
+              label={i18n(`words.status`)}
+              options={[
+                {
+                  text: i18n("words.active"),
+                  value: "ACTIVE",
+                },
+                {
+                  text: i18n("words.inactive"),
+                  value: "INACTIVE",
+                },
+              ]}
+              required={true}
+              errors={errors.status}
+            />
+          </div>
+        </div>
+        <div className="dates flex">
+          <span className="block border-[1px] border-tertiary mb-4 mx-2"></span>
+          <div className="linked text-center text-xs mr-2">
+            <div>
+              <span className="font-semibold">{i18n("words.linked")}</span>
+            </div>
+            <div>
+              <span>{String(dispatcher.linked).padStart(5, "0")}</span>
+            </div>
+          </div>
+          <span className="block border-[1px] border-tertiary mb-4 mx-2"></span>
+          <div className="created_at text-center text-xs mr-2">
+            <div>
+              <span className="font-semibold">{i18n("words.created_at")}</span>
+            </div>
+            <div>
+              <span>{dayjs(dispatcher.created_at).format("DD/MM/YYYY")}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

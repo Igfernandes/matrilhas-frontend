@@ -263,7 +263,132 @@
     "login": "Login",
     "mercado_pago": "Mercado Pago",
     "instagram": "Instagram",
-    "whatsapp": "Whatsapp"
+    "whatsapp": "Whatsapp",
+    "link_clients": "Clientes vinculados",
+    "clients_add": "Adicionar clientes",
+    "promotional_price": "Preço promocional",
+    "price": "Preço",
+    "charge_type": "Tipo de Cobrança",
+    "charge_name": "Nome da Cobrança",
+    "charge_expired_at": "Expiração da cobrança",
+    "optional": "Opcional",
+    "select_service": "Selecione o serviço",
+    "charge_amount": "Quantidade de cobranças",
+    "privacy": "Privacidade",
+    "checkout": "Checkout",
+    "order_summary": "Resumo do pedido",
+    "products": "Produtos",
+    "amount": "Quantidade",
+    "payment_process": "Processar Pagamento",
+    "page_not_available": "No momento essa página não está mais disponível",
+    "contact": "Contato",
+    "only_for": "Por apenas",
+    "sold_out": "Esgotado",
+    "lasted_operations": "Ultimas Operações",
+    "make_payment": "Realizar pagamento",
+    "paid": "Pago",
+    "updated_at": "Atualizado em",
+    "last_updated": "Ultima atualização",
+    "created": "Criado",
+    "more_details": "Mais detalhes",
+    "payments": "Pagamentos",
+    "paid_amount": "Valor pago",
+    "bank": "Banco",
+    "await_sending": "Aguarde, estamos enviando",
+    "transaction": "Transação",
+    "operation_type": "Tipo de operação",
+    "order": "Pedido",
+    "status_detail": "Detalhe do status",
+    "ip_address_payer": "Endereço IP do pagador",
+    "taxes_amount": "Taxas da cobrança",
+    "payment_type": "Tipo do pagamento",
+    "date_approved": "Data de aprovação",
+    "currency_type": "Tipo da moeda",
+    "transaction_amount": "Valor da transação",
+    "transaction_amount_refunded": "Valor devolvido na transação",
+    "shipping_cost": "Custo de envio",
+    "total_paid_amount": "Total do valor pago",
+    "payer_name": "Nome do pagador",
+    "identification": "Identificação",
+    "flag": "Bandeira",
+    "payment_method": "Método de pagamento",
+    "bank_tax": "Taxa bancária",
+    "bank_tax_refunded": "Taxa bancária estornada",
+    "operations_failures": "Operações Falhadas",
+    "error_code": "Código do erro",
+    "error_message": "Mensagem de erro",
+    "resolved_at": "Resolvido em",
+    "fixing": "Corrigir",
+    "pending": "Pendente",
+    "my_shipments": "Meus envios",
+    "dispatch": "Envio",
+    "linked_clients": "Clientes vinculados",
+    "linked": "Vinculados",
+    "period": "Período",
+    "author": "Autor",
+    "new_send": "Novo envio",
+    "daily": "Diário",
+    "weekly": "Semanal",
+    "monthly": "Mensal",
+    "started_at": "Início em",
+    "weekdays": "Dias da Semana",
+    "sunday": "Domingo-feira",
+    "monday": "Segunda-feira",
+    "tuesday": "Terça-feira",
+    "wednesday": "Quarta-feira",
+    "thursday": "Quinta-feira",
+    "friday": "Sexta-feira",
+    "saturday": "Sábado",
+    "sms": "SMS",
+    "scheduled_at": "Todo dia",
+    "categories": "Categorias",
+    "overlay_text": "Texto de sobreposição",
+    "charges": "Cobranças",
+    "platforms": "Plataformas",
+    "notification": "Notificação",
+    "update_client": "Atualizar cliente",
+    "scheduled_day": "Dia do agendamento",
+    "connect": "Conecte",
+    "banks": "Bancos",
+    "integration": "Integração",
+    "link_copied": "Link Copiado",
+    "copied_success": "O link foi copiado com sucesso",
+    "realized_at": "Realizado em",
+    "started_date": "Data de início",
+    "vacancies_total": "Total de Vagas",
+    "clients_categories": "Categoria de clientes",
+    "clients_historic": "Histórico de clientes",
+    "new_client_created": "Novo cliente criado em",
+    "new_updates": "Novas atualizações",
+    "clients_by_ddd": "Clientes pelo DDD",
+    "dependencies_historic": "Histórico de dependências",
+    "invite_pending": "Convite não confirmado",
+    "not_fill_email": "Email não preenchido",
+    "today": "Hoje",
+    "birthdays": "Aniversários",
+    "birthday": "Aniversário",
+    "see_list": "Ver lista",
+    "previous": "Anterior",
+    "list": "Lista",
+    "month_birthdays": "Aniversariantes do mês",
+    "month_events": "Eventos do mês",
+    "event": "Evento",
+    "birthday_of": "Aniversário de",
+    "expired_charge": "Cobrança expirada",
+    "realized_service_at": "Serviço realizado em",
+    "calendar": "Calendário",
+    "schedule_event": "Agendar Evento",
+    "new_scheduling": "Novo agendamento",
+    "list_linked_users": "Lista de usuário vinculados",
+    "start_hour": "Hora inicial",
+    "end_hour": "Hora final",
+    "until": "Até",
+    "dispatchers_historic": "Histórico de disparos",
+    "message": "Mensagem",
+    "platform": "Plataforma",
+    "send_at": "Enviado em",
+    "not_found_templates": "Não há templates disponíveis",
+    "templates": "Modelos"
   },
   "permissions": {
     "users_create": "Criar usuários",
@@ -293,6 +418,9 @@
     }
   },
   "login": {
+    "invalid": {
+      "not_access_account": "Não foi possível acessar a sua conta"
+    },
     "welcome": "Seja bem-vindo!",
     "text_presentation": "Entre com sua conta de e-mail cadastrada"
   },
@@ -353,21 +481,37 @@
       "success_title": "Serviço criado",
       "success_text": "O serviço foi criado com sucesso!"
     },
+    "update": {
+      "success_title": "Serviço atualizado",
+      "success_text": "O serviço foi atualizado com sucesso!"
+    },
     "delete": {
       "success_title": "Serviço Deletado",
       "success_text": "O serviço foi deletado com sucesso."
     },
     "settings_privacy": "Configure a privacidade do serviço:",
     "has_limit_vacancies": "Haverá um limite de vagas?",
-    "inform_limit_vacancies": "Informe o limite máximo de vagas*",
+    "inform_limit_vacancies": "Informe o limite máximo de vagas",
     "has_limit_reservation": "Será possível aderir a vagas de reserva?",
-    "inform_limit_reservation": "Será possível aderir a vagas de reserva?",
+    "inform_limit_reservation": "Informe o limite máximo de reserva",
     "service_image": "Adicione uma imagem ao serviço:"
   },
   "custom_forms": {
-    "create": {
+    "post": {
       "success_title": "Formulário criado",
       "success_text": "Seu formulário foi criado com sucesso."
+    },
+    "put": {
+      "success_title": "Formulário Atualizado!",
+      "success_text": "Seu formulário foi atualizado com sucesso."
+    },
+    "delete": {
+      "success_title": "Formulário Excluído!",
+      "success_text": "Seu formulário foi excluído com sucesso."
+    },
+    "modal": {
+      "text_already_exclude": "Ao continuar, os dados vinculados a esse formulário serão excluído do sistema.",
+      "title_already_exclude": "Você deseja excluir este formulário?"
     }
   },
   "clients": {
@@ -378,12 +522,13 @@
       }
     },
     "modal": {
+      "add_clients_text": "Selecione abaixo os clientes que deseja adicionar",
       "category": {
         "text_create_category": "Para criar uma categoria, clique em adicionar ou edite uma categoria abaixo:",
         "text_organized_items": "Para ordenar a categoria, segure e arraste.",
         "text_select_category": "Selecione a nova categoria para a base escolhida",
-        "success_title": "Categoria criada",
-        "success_text": "Sua categoria está disponível para vincular ao cliente."
+        "success_title": "Categoria Alterada",
+        "success_text": "A categoria foi altera com sucesso."
       },
       "client": {
         "text_fill_information": "Preencha as informações abaixo para convidar um novo cliente:",
@@ -401,8 +546,29 @@
         "success_text": "Seu cliente foi criado com sucesso."
       },
       "delete": {
-        "success_title": "Cliente Excluído",
-        "success_text": "Seu cliente foi excluído com sucesso."
+        "success_title": "Cliente(s) Excluído(s)",
+        "success_text": "Os dados foram apagados do nosso sistema permanentemente."
+      }
+    }
+  },
+  "charges": {
+    "modal": {
+      "text_already_exclude": "Ao continuar, todos os dados da cobrança serão excluídos, e ela não poderá mais ser acessado até que seja recadastrado.",
+      "title_already_exclude": "Você deseja excluir esta cobrança?"
+    },
+    "about_name_and_service": "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",
+    "about_privacy_and_services": "Ao escolher um serviço, a privacidade será definida por ele*",
+    "create": {
+      "success_title": "Cobrança criada!",
+      "success_text": "Sua cobrança foi criada com sucesso."
+    },
+    "delete": {
+      "success_title": "Cobrança excluída",
+      "success_text": "A cobrança foi excluída com sucesso!"
+    },
+    "clients": {
+      "success": {
+        "post": "Cobrança enviada com sucesso!"
       }
     }
   },
@@ -412,11 +578,15 @@
       "success_text": "O campo foi criado com sucesso!"
     },
     "delete": {
-      "success_text": "Campo excluído",
-      "success_title": "O campo foi excluído com sucesso!"
+      "success_title": "Campo excluído",
+      "success_text": "O campo foi excluído com sucesso!"
     }
   },
   "users": {
+    "create": {
+      "success_title": "Usuário criado",
+      "success_text": "O usuário foi criado com sucesso!"
+    },
     "put": {
       "success_title": "Configurações Atualizadas",
       "success_text": "As suas configurações foram atualizadas"
@@ -454,17 +624,52 @@
     }
   },
   "integrations": {
-    "banks": {
-      "post": {
-        "success_title": "Credenciais Atualizadas",
-        "success_text": "As credencias de conexão bancárias foram atualizadas"
-      }
+    "post": {
+      "success_title": "Credenciais Atualizadas",
+      "success_text": "As credencias de conexão foram atualizadas"
+    }
+  },
+  "schedules": {
+    "post": {
+      "success_title": "Agenda atualizada",
+      "success_text": "O novo compromisso foi atribuído a agenda"
+    }
+  },
+  "message_dispatcher": {
+    "delete": {
+      "success_title": "Envio Deletado",
+      "success_text": "O envio foi deletado com sucesso."
     },
-    "chats": {
-      "post": {
-        "success_title": "Credenciais Atualizadas",
-        "success_text": "As credencias de conexão foram atualizadas"
-      }
+    "post": {
+      "success_title": "Envio programado!",
+      "success_text": "Os envios estão sendo processados para serem enviadas conforme definido."
+    },
+    "put": {
+      "success_title": "Envio Atualizado!",
+      "success_text": "O envio foi atualizado com sucesso."
+    },
+    "modal": {
+      "text_already_exclude": "Ao continuar, todos os envios faltantes serão interrompidos",
+      "title_already_exclude": "Você deseja excluir este envio?"
+    }
+  },
+  "notifications": {
+    "post": {
+      "success_title": "Notificação programada!",
+      "success_text": "As notificações estão sendo processadas para serem enviadas conforme definido."
+    },
+    "modal": {
+      "text_already_exclude": "Ao continuar, todos os envios faltantes serão interrompidos",
+      "title_already_exclude": "Você deseja excluir esta notificação?"
+    }
+  },
+  "finances": {
+    "modal": {
+      "add_clients_text": "Selecione abaixo os clientes que deseja enviar essa cobrança"
+    },
+    "checkout": {
+      "success_title": "Você será redirecionado!",
+      "success_text": "Aguarde enquanto concluímos processamos dos dados para o pagamento."
     }
   }
 }

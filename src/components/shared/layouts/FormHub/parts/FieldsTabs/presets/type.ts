@@ -1,6 +1,6 @@
 import { FieldsShape } from "@type/Fields";
 import { FieldsGroupsShape } from "@type/Fields/fieldsGroups";
-import { OptionsFieldTabTarget } from "../../../context/types";
+import { OptionsFieldTabTarget } from "../../../context/Tabs/types";
 
 export type PresetsFieldsTabsProps = {
   tailwindClass: string;

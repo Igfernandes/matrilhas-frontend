@@ -7,6 +7,8 @@ import { Modal } from "@components/shared/layouts/Modal";
 import { useStoreFieldsModal } from "./hooks/useStoreFieldsModal";
 import { Select } from "@components/shared/forms/Select";
 import { StoreFieldsModalProps } from "./type";
+import { useEffect, useState } from "react";
+import { When } from "@components/utilities/When";
 
 export function StoreFieldsModal({
   isShowModal,
@@ -15,6 +17,12 @@ export function StoreFieldsModal({
 }: StoreFieldsModalProps) {
   const { formMethods, register, errors, handleSubmit, submit } =
     useStoreFieldsModal({ handleModal: onModal });
+  const [isFileField, setIsFileField] = useState<boolean>(false);
+  const { watch } = formMethods;
+
+  useEffect(() => {
+    setIsFileField(watch("type") === "FILE");
+  }, [watch("type")]);
 
   return (
     <Modal
@@ -58,14 +66,6 @@ export function StoreFieldsModal({
                 />
               </div>
               <div className="form-group my-4">
-                <Input
-                  {...register("value")}
-                  label={i18n("words.value")}
-                  dataTestId="identify"
-                  errors={errors.value}
-                />
-              </div>
-              <div className="form-group my-4">
                 <div className="form-group">
                   <Select
                     {...register("type")}
@@ -85,19 +85,16 @@ export function StoreFieldsModal({
                     errors={errors.type}
                   />
                 </div>
-                <div className="form-group my-4">
-                  <Select
-                    {...register("is_required")}
-                    options={["YES", "NOT"].map((type) => ({
-                      text: i18n(`words.${type.toLowerCase()}`),
-                      value: type,
-                    }))}
-                    defaultValue={"NOT"}
-                    label={i18n("words.is_required")}
-                    dataTestId="is_required"
-                    errors={errors.group}
-                  />
-                </div>
+                <When value={!isFileField}>
+                  <div className="form-group my-4">
+                    <Input
+                      {...register("value")}
+                      label={i18n("words.value")}
+                      dataTestId="identify"
+                      errors={errors.value}
+                    />
+                  </div>
+                </When>
                 <div className="form-group my-4">
                   <Select
                     {...register("is_sensitive")}
@@ -117,6 +114,7 @@ export function StoreFieldsModal({
           <div className="form-btn flex justify-between pt-4 border-t-2 border-secondary">
             <div className="flex items-center">
               <Checkbox
+                {...register("hasContinueRegister")}
                 dataTestId="continue_register"
                 label={i18n(`words.continue_register`)}
               />

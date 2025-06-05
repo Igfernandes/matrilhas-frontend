@@ -54,7 +54,7 @@ export function GroupFields<Payload extends FieldValues>({
         </DndContext>
       </div>
       <div>
-        <span className="text-xs">{handleErrors()}</span>
+        <span className="text-xs text-warning">{handleErrors()}</span>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 export const othersColors = {
+  "red-strong": "#BC2224",
   white: "#fff",
   indigo: "#6984ed",
   blue: "#4da1f7",

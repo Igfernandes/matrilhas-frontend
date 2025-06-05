@@ -10,7 +10,7 @@ import {
 import { useFormContext } from "react-hook-form";
 
 export function useValidations() {
-  const { watch } = useFormContext();
+  const { watch, getValues } = useFormContext();
   const password = watch("password");
   const [validationsStatus, setValidationsStatus] =
     useState<StatusValidation>("void");
@@ -26,21 +26,6 @@ export function useValidations() {
   const [criteriaStatus, setCriteriaStatus] =
     useState<CriteriaStatusShape>(fieldsAllEmpties);
 
-  const handleChangeValidationsStatus = () => {
-    const password = watch("password");
-   
-    if (!password) return setValidationsStatus("void");
-
-   
-    const criteriaFiltered = Object.entries(criteriaStatus).filter(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ([key, value]) => value !== "success"
-    );
-    setValidationsStatus(criteriaFiltered.length == 0 ? "success" : "error");
-  };
-
-  const getStatus = (resp: boolean) => (resp ? "success" : "error");
-
   useEffect(() => {
     if (!password) return setCriteriaStatus(fieldsAllEmpties);
 
@@ -51,7 +36,28 @@ export function useValidations() {
       hasNumber: getStatus(hasSomeNumber(password)),
       hasSpecialLetter: getStatus(hasSomeSpecialCharacter(password)),
     });
-  }, [password, fieldsAllEmpties, watch]);
+  }, [password, fieldsAllEmpties]);
+
+  const handleChangeValidationsStatus = () => {
+    const password = getValues("password");
+    if (!password) return setValidationsStatus("void");
+
+    const criteria = {
+      hasMinEightLetters: getStatus(hasMinLength(8, password)),
+      hasUppercase: getStatus(hasSomeLetterUppercase(password)),
+      hasLowercase: getStatus(hasSomeLetterLowercase(password)),
+      hasNumber: getStatus(hasSomeNumber(password)),
+      hasSpecialLetter: getStatus(hasSomeSpecialCharacter(password)),
+    };
+
+    const criteriaFiltered = Object.entries(criteria).filter(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ([key, value]) => value !== "success"
+    );
+    setValidationsStatus(criteriaFiltered.length == 0 ? "success" : "error");
+  };
+
+  const getStatus = (resp: boolean) => (resp ? "success" : "error");
 
   return {
     handleChangeValidationsStatus,

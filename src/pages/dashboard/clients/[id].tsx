@@ -6,9 +6,16 @@ import { ClientPageProps } from "@components/Private/Clients/type";
 import { FormHub } from "@components/shared/layouts/FormHub";
 import { useClientsUpdate } from "@components/Private/Clients/Update/hooks/useClientsUpdate";
 import { getClients } from "../../../services/Clients/Get/SSR";
+import { ClientUpdateModal } from "@components/Private/Clients/Update/Modals/Clients";
 
 export default function ClientPerfil({ targetClient }: ClientPageProps) {
-  const { fields, fieldsGroups, handleSubmitFields } = useClientsUpdate({
+  const {
+    fields,
+    fieldsGroups,
+    handleSubmitFields,
+    handleToggleModal,
+    isShowModalUpdateUser,
+  } = useClientsUpdate({
     client: targetClient,
   });
 
@@ -21,6 +28,12 @@ export default function ClientPerfil({ targetClient }: ClientPageProps) {
         groups={fieldsGroups}
         fields={fields ?? []}
         handleShared={() => ""}
+        handleUpdateClient={handleToggleModal}
+      />
+      <ClientUpdateModal
+        client={targetClient}
+        isShowModal={isShowModalUpdateUser}
+        onModal={handleToggleModal}
       />
     </DashboardContainer>
   );
@@ -33,11 +46,10 @@ export const getServerSideProps: GetServerSideProps<ClientPageProps> = async ({
 }) => {
   const tokenNavigation = req.cookies["token_navigation"] ?? "";
   const { id } = params as { id: string }; // Tipando o params
-  
+
   const clients = await getClients(tokenNavigation, { id: +id });
   const currentClient = Array.isArray(clients) ? clients[0] : clients;
 
- 
   if (!currentClient || Object.hasOwn(currentClient, "errors")) {
     return {
       redirect: {

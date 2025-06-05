@@ -5,7 +5,7 @@ import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { useRememberMe } from "@hooks/useRememberMe";
 import i18n from "@configs/i18n";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { useCookies } from "@hooks/useCookies";
 
@@ -49,7 +49,7 @@ export default function usePostAuth() {
       }, 500);
     },
     onError: (err) => {
-      handleAxiosError(err);
+      handleAxiosError(err, i18n('login.invalid.not_access_account'));
     },
   });
 }

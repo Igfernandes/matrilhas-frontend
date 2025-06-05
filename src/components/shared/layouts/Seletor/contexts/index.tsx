@@ -38,6 +38,19 @@ const SelectorProvider = ({
     if (!currentSelector) return;
 
     currentSelector.isChecked = !currentSelector.isChecked;
+    const isLastedChecked =
+      selectors.filter((selector) => !!selector.isChecked).length == 1;
+
+    if (isLastedChecked && currentSelector.isChecked === false) {
+      return setSelectors((prevSelectors: Array<SelectorShape>) =>
+        prevSelectors.map((selector: SelectorShape) => {
+          selector.isChecked = false;
+
+          return selector;
+        })
+      );
+    }
+
     setSelectors((prevSelectors: Array<SelectorShape>) =>
       prevSelectors.map((selector: SelectorShape) => {
         if (selector.value != value) return selector;

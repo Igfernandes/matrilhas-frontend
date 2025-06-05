@@ -9,16 +9,17 @@ import "swiper/css";
 export function Tags<TableData extends Array<Record<string, unknown>>>(
   props: TagProps<TableData>
 ) {
-  const { tags, totalTags, handleChangeTargetTag } = useTags<TableData>(props);
+  const { tags, totalTags, handleChangeTargetTag, targetTag } =
+    useTags<TableData>(props);
 
   return (
     <div className="relative z-0">
-      <Swiper
-        spaceBetween={10}
-        slidesPerView={"auto"}
-      >
-        <SwiperSlide style={{ width: 'auto' }}
-          className="border-[1px] border-secondary px-3 rounded-xl cursor-pointer "
+      <Swiper spaceBetween={10} slidesPerView={"auto"}>
+        <SwiperSlide
+          style={{ width: "auto" }}
+          className={`border-[1px] border-secondary px-3 rounded-xl cursor-pointer ${
+            !targetTag ? "bg-red text-white" : ""
+          }`}
           onClick={() => handleChangeTargetTag("")}
         >
           <span className="uppercase font-semibold text-xs">
@@ -26,27 +27,18 @@ export function Tags<TableData extends Array<Record<string, unknown>>>(
           </span>
         </SwiperSlide>
         {tags.map((tag) => (
-          <SwiperSlide style={{ width: 'auto' }}
+          <SwiperSlide
+            style={{ width: "auto" }}
             key={`tag_${tag.text}`}
-            className="border-[1px] border-secondary px-3 rounded-xl cursor-pointer"
+            className={`border-[1px] border-secondary px-3 rounded-xl cursor-pointer ${
+              targetTag == tag.text ? "bg-red text-white" : ""
+            }`}
             onClick={() => handleChangeTargetTag(tag.text)}
           >
             <span className="uppercase font-semibold text-xs">{`${tag.text} (${tag.amount})`}</span>
           </SwiperSlide>
         ))}
       </Swiper>
-      <span
-        className="absolute bottom-0 lg:bottom-[1px] right-[-10px] w-[5%] lg:w-[20px] h-8  z-10"
-        style={gradientStyle}
-      ></span>
-      <span
-        className="absolute bottom-0 lg:bottom-0 left-[0px] w-[1%] lg:w-[12px] h-8  z-10"
-        style={gradientStyle}
-      ></span>
     </div>
   );
 }
-const gradientStyle = {
-  background: "linear-gradient(350deg, #ffffff, #ffffffce)",
-  filter: "blur(4px)",
-};

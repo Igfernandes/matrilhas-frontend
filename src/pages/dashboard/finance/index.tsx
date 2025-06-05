@@ -1,21 +1,32 @@
 import { CardBoard } from "@components/shared/layouts/CardBoard";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
-import { financeCardsBoard } from "../../../data/finance/cardsBoard";
 import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
 import { OptionsBar } from "@components/Private/Finance/Overview/OptionsBar";
 import { MyCharges } from "@components/Private/Finance/Overview/MyCharges";
-import { ChargesExtract } from "@components/Private/Finance/Overview/ChargesExtract";
+import { useOverviewCharge } from "@components/Private/Finance/Overview/hooks/useOverviewCharge";
+import { OperationsFailures } from "@components/Private/Finance/Overview/OperationsFailures";
 
 export default function Finance() {
+  const { charges, cardsBoard } = useOverviewCharge();
   const { handleSearch, search, filterObjects } = useSearch();
 
   return (
     <DashboardContainer>
       <div>
         <OptionsBar handleSearch={handleSearch} />
-        <CardBoard viewLimit={5} items={financeCardsBoard} />
-        <MyCharges filterObjects={filterObjects} search={search} />
-        <ChargesExtract filterObjects={filterObjects} search={search} />
+        <CardBoard viewLimit={5} items={cardsBoard} />
+        <div className="relative z-10">
+          <MyCharges
+            handleFilter={filterObjects}
+            filter={search}
+            charges={charges}
+          />
+          <OperationsFailures
+            operationsFailures={[]}
+            search={search}
+            filterObjects={filterObjects}
+          />
+        </div>
       </div>
     </DashboardContainer>
   );

@@ -31,8 +31,8 @@ export function MobileView({ tHeaders }: Props) {
             <AccordionItemContent accordionId={filteredId as number}>
               <ul className="p-2">
                 {data.map((cell, cellIndex) => (
-                  <li key={`accordion_item__${filteredId}_${cellIndex}`}>
-                    <strong>{`${tHeaders[cellIndex]}:`}</strong>
+                  <li key={`accordion_item__${filteredId}_${cellIndex}`} className="text-sm">
+                    <strong>{`${tHeaders[cellIndex + 1]}:`}</strong>
                     <span className="ml-2">{cell as ReactNode}</span>
                   </li>
                 ))}

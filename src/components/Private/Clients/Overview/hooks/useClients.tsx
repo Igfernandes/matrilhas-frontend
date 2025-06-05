@@ -16,6 +16,7 @@ import {
 import { useClientsData } from "./useClientsData";
 import useDeleteClient from "../../../../../services/Clients/Delete/useDeleteClient";
 import { DeleteClientPayload } from "../../../../../services/Clients/Delete/type";
+import { getNumberFormatted } from "@helpers/string";
 
 export function useClients({
   handleFilter,
@@ -28,13 +29,13 @@ export function useClients({
   >([]);
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();
-  const { mutateAsync: deleteClient } = useDeleteClient();
+  const { mutateAsync: deleteClient, isPending: isLoadingClientDelete } =
+    useDeleteClient();
 
   const tHeadsClient = useRef<Array<string>>([
     "ID",
     i18n("words.name"),
-    i18n("words.cpf_cnpj"),
-    i18n("words.email"),
+    i18n("words.status"),
     i18n("words.phone"),
     i18n("words.category"),
     i18n("words.actions"),
@@ -51,18 +52,16 @@ export function useClients({
     id,
     name,
     status,
-    email,
     phone,
     categories = [],
   }: ClientShape): TDataClient => {
     const clientId = id.toString();
 
     return {
-      id: <Selector value={clientId} label={clientId} />,
+      id: <Selector label={clientId} value={clientId} /> ,
       name,
       status: i18n(`words.${status.toLocaleLowerCase()}`),
-      email: `${email ?? "Não informado"}`,
-      phone,
+      phone: getNumberFormatted(phone),
       category: categories
         .map((category: UserCategoryData) => category.name)
         .join(", "),
@@ -119,5 +118,6 @@ export function useClients({
     categories,
     handleDeleteClient,
     getSelectedClientsName,
+    isLoadingClientDelete,
   };
 }

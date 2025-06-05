@@ -7,18 +7,19 @@ import { FormBuilderEditing } from "./states/Editing";
 import { StoreFieldsModal } from "./Modals/StoreFields";
 import useWindow from "@hooks/useWindow";
 import { When } from "@components/utilities/When";
+import { useModalContext } from "../../context/Modal";
+import { useFieldsGroupsContext } from "../../context/FieldsGroups";
 
 export function Builder({
   fields = [],
   title = "",
   isEditing,
-  handleEdit,
-  onModal,
-  isShowModal,
-  fieldGroups = [],
   createdAt,
 }: FormBuildProps) {
   const { screenType } = useWindow();
+  const { handleToggleModal, isShowModal } = useModalContext();
+  const { handleFieldsGroupToEditing, fieldsGroupEditing, fieldsGroups } =
+    useFieldsGroupsContext();
 
   return (
     <div className="mt-5 p-6 rounded-2xl bg-white">
@@ -30,13 +31,13 @@ export function Builder({
               {capitalize(i18n(`words.${title?.toLowerCase()}`) || title)}
             </strong>
           </h2>
-          <When value={screenType === "MOBILE"}>
+          <When value={screenType === "MOBILE" && fieldsGroupEditing != title}>
             <div>
               <DotsOptions
                 actions={[
                   {
-                    text: i18n("words.edit") || "Edit",
-                    handle: () => handleEdit(title),
+                    text: i18n("words.edit"),
+                    handle: () => handleFieldsGroupToEditing(title),
                   },
                 ]}
               />
@@ -51,13 +52,13 @@ export function Builder({
               </span>
             </div>
           </When>
-          <When value={screenType === "DESKTOP"}>
+          <When value={screenType === "DESKTOP" && fieldsGroupEditing != title}>
             <div>
               <DotsOptions
                 actions={[
                   {
                     text: i18n("words.edit") || "Edit",
-                    handle: () => handleEdit(title),
+                    handle: () => handleFieldsGroupToEditing(title),
                   },
                 ]}
               />
@@ -69,13 +70,13 @@ export function Builder({
       <FormBuilderEditing
         fields={fields}
         isEditing={isEditing}
-        handleEdit={handleEdit}
-        onModal={onModal}
+        handleEdit={handleFieldsGroupToEditing}
+        onModal={handleToggleModal}
       />
       <StoreFieldsModal
         isShowModal={isShowModal}
-        onModal={onModal}
-        groups={fieldGroups}
+        onModal={handleToggleModal}
+        groups={fieldsGroups}
       />
     </div>
   );

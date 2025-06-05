@@ -7,24 +7,29 @@ import { UserCancel } from "@assets/Icons/black/UserCancel";
 
 export const financeCardsBoard = [
   {
+    key: "monthly_income",
     icon: <ChartPie />,
     prefix: "R$ ",
     title: i18n("words.monthly_income"),
   },
   {
+    key: "annual_revenue",
     icon: <ChartPie />,
     prefix: "R$ ",
     title: i18n("words.annual_revenue"),
   },
   {
+    key: "linked_customers",
     icon: <UserCode />,
     title: i18n("words.linked_customers"),
   },
   {
+    key: "non_compliant",
     icon: <UserDollar />,
     title: i18n("words.non_compliant"),
   },
   {
+    key: "defaulter",
     icon: <UserCancel />,
     title: i18n("words.defaulter"),
   },

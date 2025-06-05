@@ -1,4 +1,5 @@
 import { authenticationRoutes } from "./authentications";
+import { financesRoutes } from "./finances";
 import { clientsRoutes } from "./clients";
 import { fieldsRoutes } from "./fields";
 import { formsRoutes } from "./forms";
@@ -8,6 +9,9 @@ import { permissionsRoutes } from "./permissions";
 import { recoverRoutes } from "./recover";
 import { servicesRoutes } from "./services";
 import { usersRoutes } from "./users";
+import { notificationsRoutes } from "./notifications";
+import { messagesDispatcherRoutes } from "./MessagesDispatcher";
+import { scheduleRoutes } from "./schedule";
 
 export const API_ROUTES = {
   ...authenticationRoutes,
@@ -20,4 +24,8 @@ export const API_ROUTES = {
   ...formsRoutes,
   ...fieldsRoutes,
   ...integrationsRoutes,
+  ...financesRoutes,
+  ...notificationsRoutes,
+  ...scheduleRoutes,
+  ...messagesDispatcherRoutes,
 };

@@ -1,5 +1,5 @@
 import { publicRoutes } from "@configs/routes/Web/navigation";
-import { STATUS_SERVICE } from "@constants/services";
+import { STATUS_SERVICE } from "@constants/http";
 import { handleLogout } from "@helpers/handlers";
 import { isValidJSON } from "@helpers/json";
 import { AxiosError } from "axios";

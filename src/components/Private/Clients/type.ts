@@ -10,7 +10,6 @@ export type TDataClient = {
   id: React.ReactNode;
   name: string;
   status: "ACTIVE" | "INACTIVE";
-  email: string;
   phone: string;
   category: string;
   actions: JSX.Element;

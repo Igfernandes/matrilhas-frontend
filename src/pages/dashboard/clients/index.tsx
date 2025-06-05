@@ -6,7 +6,7 @@ import { OptionsBar } from "@components/Private/Clients/Overview/OptionsBar";
 
 export default function Clients() {
   const { handleSearch, search, filterObjects } = useSearch();
-
+  
   return (
     <DashboardContainer<ModalClientsOperationType>>
       <div>

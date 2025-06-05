@@ -38,7 +38,7 @@ export function handleMaskPhone(e: React.ChangeEvent<HTMLInputElement>) {
 export function getNumberFormatted(number?: string) {
   if (!number) return "";
 
-  let value = number.replace(/\D/g, "");
+  let value = number.replace("+55", "").replace(/\D/g, "");
 
   // Adicionar a máscara conforme o número de dígitos
   if (value.length <= 1) {
@@ -51,7 +51,7 @@ export function getNumberFormatted(number?: string) {
     value = value.replace(/^(\d{2})(\d{1})(\d{1,4})(\d{1,4})/, "($1) $2 $3-$4");
   }
 
-  return value.slice(0, 16);
+  return `+55 ${value.slice(0, 16)}`;
 }
 
 export function handleMaskCPF(e: React.ChangeEvent<HTMLInputElement>) {
@@ -66,4 +66,11 @@ export function getCPFFormatted(cpf: string = ""): string {
     .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
     .replace(/\.(\d{3})\.(\d{3})(\d)/, ".$1.$2-$3")
     .replace(/(-\d{2})\d+?$/, "$1"); // Limita em 11 dígitos formatados
+}
+
+export function getMoneyBrFormatted(money: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(+money);
 }

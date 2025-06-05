@@ -15,12 +15,12 @@ export function UserCancel({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_932_40953)">
+      <g clipPath="url(#clip0_932_40953)">
         <path
           d="M8.2002 7C8.2002 8.06087 8.62162 9.07828 9.37177 9.82843C10.1219 10.5786 11.1393 11 12.2002 11C13.2611 11 14.2785 10.5786 15.0286 9.82843C15.7788 9.07828 16.2002 8.06087 16.2002 7C16.2002 5.93913 15.7788 4.92172 15.0286 4.17157C14.2785 3.42143 13.2611 3 12.2002 3C11.1393 3 10.1219 3.42143 9.37177 4.17157C8.62162 4.92172 8.2002 5.93913 8.2002 7Z"
           stroke={fill}
           strokeWidth="2"
-          stroke-linecap="round"
+          strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path

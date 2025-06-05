@@ -1,47 +1,65 @@
 import SelectorProvider from "@components/shared/layouts/Seletor/contexts";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { useMyCharges } from "./hooks/useMyCharges";
-import { FinancesStructProps } from "../type";
-import { Selector } from "@components/shared/layouts/Seletor";
+import { HookFinancesProps } from "../type";
 import i18n from "@configs/i18n";
+import { Notice } from "@components/shared/others/Notice";
+import { ChargeShape } from "@type/Charges";
 
-export function MyCharges({ filterObjects, search }: FinancesStructProps) {
-  const { selectors, setSelectors, tHeadsFinance } = useMyCharges({
-    filter: search,
-    handleFilter: filterObjects,
+export function MyCharges({
+  filter,
+  handleFilter,
+  charges,
+}: HookFinancesProps<ChargeShape>) {
+  const {
+    selectors,
+    setSelectors,
+    tHeadsFinance,
+    tDataCharges,
+    handleToggleModal,
+    modal,
+    handleDeleteCharge,
+    isLoading,
+  } = useMyCharges({
+    filter,
+    handleFilter,
+    charges,
   });
 
   return (
-    <div className="mt-6">
-      <SelectorProvider selectors={selectors} setSelectors={setSelectors}>
-        <SmartTable
-          options={{
-            pagination: {
-              max: 4,
-            },
-            actions: [],
-            buttons: (
-              <Selector
-                value={"all"}
-                label={i18n(`words.select_all`)}
-                textSize="text-[0px] md:text-lg"
-              />
-            ),
-            filters: {
-              tag: {
-                key: "status",
+    <>
+      <div className="mt-6 relative z-0">
+        <SelectorProvider selectors={selectors} setSelectors={setSelectors}>
+          <SmartTable
+            options={{
+              pagination: {
+                max: 10,
               },
-            },
-          }}
-          data={[]}
-          title={i18n("words.my_charges")}
-          excludes={["created_at", "updated_at"]}
-          tHeads={{
-            data: tHeadsFinance.current,
-            widths: [60, 166.5, 120, 166.5, 166.5, 166.5, 48],
-          }}
-        />
-      </SelectorProvider>
-    </div>
+              filters: {
+                tag: {
+                  key: "type",
+                },
+              },
+            }}
+            data={tDataCharges}
+            title={i18n("words.my_charges")}
+            excludes={["created_at", "updated_at"]}
+            tHeads={{
+              data: tHeadsFinance.current,
+              widths: [60, 300, 100, 100, 100, 48],
+            }}
+          />
+        </SelectorProvider>
+      </div>
+      <Notice
+        headerTitle={i18n("words.attention")}
+        title={i18n("charges.modal.title_already_exclude")}
+        text={i18n("charges.modal.text_already_exclude")}
+        onSubmit={handleDeleteCharge}
+        isShowModal={modal.type === "DELETE"}
+        isLoading={isLoading}
+        onModal={handleToggleModal}
+      />
+    </>
   );
 }

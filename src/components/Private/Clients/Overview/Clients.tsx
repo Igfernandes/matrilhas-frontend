@@ -19,6 +19,7 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
     categories,
     handleDeleteClient,
     getSelectedClientsName,
+    isLoadingClientDelete,
   } = useClients({
     filter: search,
     handleFilter: filterObjects,
@@ -33,7 +34,7 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
           <SmartTable
             options={{
               pagination: {
-                max: 4,
+                max: 6,
               },
               actions: [
                 {
@@ -71,7 +72,7 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
             excludes={["created_at", "updated_at"]}
             tHeads={{
               data: tHeadsClient.current,
-              widths: [60, 166.5, 120, 166.5, 166.5, 166.5, 48],
+              widths: [60, 250, 70, 200, 100, 48],
             }}
           />
         </SelectorProvider>
@@ -91,6 +92,7 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
           onSubmit={handleDeleteClient}
           isShowModal={modal.type === "DELETE"}
           onModal={handleToggleModal}
+          isLoading={isLoadingClientDelete}
         />
         <ClientSharedModal
           isShowModal={modal.type === "SHARED"}

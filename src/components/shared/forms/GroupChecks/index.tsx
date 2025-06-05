@@ -16,14 +16,14 @@ export function GroupChecks<Payload extends FieldValues>({
               {...register(`${name}.${index}` as Path<Payload>)}
               label={item.label}
               defaultValue={item.value}
-              groupName="permissions"
+              groupName={name}
               dataTestId={`key_group_checks_${index}`}
             />
           </div>
         ))}
       </div>
       <div
-        className="absolute bottom-0 left-0 w-[95%] h-20"
+        className="absolute bottom-[1%] left-0 w-[95%] h-10"
         style={{
           background: "linear-gradient(357deg, #ffffff, transparent)",
         }}

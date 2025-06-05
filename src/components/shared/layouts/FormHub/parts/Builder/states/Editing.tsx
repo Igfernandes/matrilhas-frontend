@@ -10,10 +10,10 @@ import { File } from "@components/shared/forms/File";
 import { DotsOptions } from "@components/shared/others/DotsOptions";
 import useWindow from "@hooks/useWindow";
 
-type Props = Pick<
-  FormBuildProps,
-  "isEditing" | "fields" | "handleEdit" | "onModal"
->;
+type Props = Pick<FormBuildProps, "isEditing" | "fields"> & {
+  onModal: (isShowModal: boolean) => void;
+  handleEdit: (fieldGroupName: string) => void;
+};
 
 export function FormBuilderEditing({
   fields,
@@ -59,6 +59,7 @@ export function FormBuilderEditing({
                         label={translateOrFallback(field.name)}
                         dataTestId={`field_${field.name}_${field.id}`}
                         type={field.type ?? "text"}
+                        required={field.is_required}
                         errors={
                           errors.fields && errors.fields[index]
                             ? (errors.fields[index].value as FieldError)

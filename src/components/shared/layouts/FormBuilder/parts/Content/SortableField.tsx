@@ -42,7 +42,7 @@ export function SortableField({ id, index, width, margin, ...rest }: Props) {
       }}
     >
       <When value={!over}>
-        <div className="flex items-center absolute right-1 top-3 z-[999]">
+        <div className="flex items-center justify-end z-[999]">
           <div className="mx-1 cursor-pointer">
             <Settings
               onClick={() => handleToggleModal(true, id)}

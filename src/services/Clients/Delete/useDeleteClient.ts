@@ -24,7 +24,7 @@ export default function useDeleteClient() {
       dispatchSnackbar({
         message: i18n("clients.modal.delete.success_text"),
         title: i18n("clients.modal.delete.success_title"),
-        type: "success",
+        type: "notice",
       });
       queryClient.invalidateQueries({
         queryKey: ["clients"],

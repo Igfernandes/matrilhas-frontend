@@ -1,4 +1,3 @@
-export const integrationsRoutes ={
-    integrationBanks: '/integrations/banks/{id}',
-    integrationChats: '/integrations/chats/{id}',
-}
+export const integrationsRoutes = {
+  integrations: "/integrations/{id}",
+};

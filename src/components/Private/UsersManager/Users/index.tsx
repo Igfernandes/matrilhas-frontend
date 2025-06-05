@@ -8,7 +8,7 @@ import useDeleteUsers from "../../../../services/Users/Delete/useDelete";
 import usePatchStatusUsers from "../../../../services/Users/Patch/Status/usePatchStatus";
 
 export function Users({ search, filterObjects, groups }: UsersStructProps) {
-  const { tDataUsers, tHeadsUser, handleToggleModal, modal } = useUsers({
+  const { tDataUsers, tHeadsUser, handleToggleModal, modal, users } = useUsers({
     filter: search,
     handleFilter: filterObjects,
   });
@@ -35,6 +35,7 @@ export function Users({ search, filterObjects, groups }: UsersStructProps) {
       </div>
       <div>
         <ModalFormUsers
+          users={users}
           groups={groups}
           title={i18n("words.update_user")}
           isShowModal={modal.type === "DEFAULT_USER"}

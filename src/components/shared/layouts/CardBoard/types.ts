@@ -4,6 +4,7 @@ export type CardBoardProps = {
 };
 
 export type CardItemShape = {
+  key?: string;
   title?: string;
   suffix?: string;
   prefix?: string;

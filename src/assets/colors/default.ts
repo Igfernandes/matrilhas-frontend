@@ -25,6 +25,7 @@ export const bgDefaultColor = {
   "cross-gray": "#464646",
   "cross-black-primary": "#101010",
   "cross-black-secondary": "#1b1b1b",
+  success: "#018C75",
 };
 
 export const borderColors = {
@@ -35,6 +36,7 @@ export const borderColors = {
   "cross-white-secondary": "#464646",
   "cross-black-primary": "#464646",
   "cross-black-secondary": "#a3a3a3",
+  success: "#018C75",
 };
 
 export const statusColors = {
