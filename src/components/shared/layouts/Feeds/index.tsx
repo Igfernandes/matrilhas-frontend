@@ -3,7 +3,7 @@ import { FeedProps } from "./type";
 
 export function Feeds({ title, data }: FeedProps) {
   return (
-    <div className="feed shadow-sm bg-white p-4 w-full md:w-[400px] my-4 xl:my-0 rounded-md">
+    <div className="feed shadow-sm bg-white p-4 w-full my-4 xl:my-0 rounded-md">
       <div className="header text-center shadow-xl py-1 border-2 border-tertiary">
         <span className="font-semibold">{title}</span>
       </div>

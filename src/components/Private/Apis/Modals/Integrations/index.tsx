@@ -6,7 +6,7 @@ import { ModalFormProps } from "./type";
 import { Modal } from "@components/shared/layouts/Modal";
 import { useIntegrationModal } from "./hooks/useIntegrationModal";
 import { Select } from "@components/shared/forms/Select";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function IntegrationsModal({
   isShowModal,
@@ -24,10 +24,14 @@ export function IntegrationsModal({
   } = useIntegrationModal({
     integrations,
   });
+  const formMethodsRef = useRef(formMethods);
 
   useEffect(() => {
-    formMethods.setValue("private_token", integration?.private_token);
-    formMethods.setValue("public_token", integration?.public_token);
+    formMethodsRef.current.setValue(
+      "private_token",
+      integration?.private_token
+    );
+    formMethodsRef.current.setValue("public_token", integration?.public_token);
   }, [integration]);
 
   return (

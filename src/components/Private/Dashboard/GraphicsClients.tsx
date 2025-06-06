@@ -74,7 +74,7 @@ export function GraphicsClients({
             }}
           />
         </div>
-        <div className="w-full md:w-auto xl:ml-4">
+        <div className="w-full md:w-[30%] ml-2">
           <Feeds
             title={i18n("words.dependencies_historic")}
             data={[

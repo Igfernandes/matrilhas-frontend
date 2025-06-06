@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import {
   HookClientsProps,
@@ -48,26 +48,31 @@ export function useClients({
       .join(",");
   };
 
-  const updateClientForTable = ({
-    id,
-    name,
-    status,
-    phone,
-    categories = [],
-  }: ClientShape): TDataClient => {
-    const clientId = id.toString();
-
-    return {
-      id: <Selector label={clientId} value={clientId} /> ,
+  const updateClientForTable = useCallback(
+    ({
+      id,
       name,
-      status: i18n(`words.${status.toLocaleLowerCase()}`),
-      phone: getNumberFormatted(phone),
-      category: categories
-        .map((category: UserCategoryData) => category.name)
-        .join(", "),
-      actions: <ClientActions handleToggleModal={handleToggleModal} id={id} />,
-    };
-  };
+      status,
+      phone,
+      categories = [],
+    }: ClientShape): TDataClient => {
+      const clientId = id.toString();
+
+      return {
+        id: <Selector label={clientId} value={clientId} />,
+        name,
+        status: i18n(`words.${status.toLocaleLowerCase()}`),
+        phone: getNumberFormatted(phone),
+        category: categories
+          .map((category: UserCategoryData) => category.name)
+          .join(", "),
+        actions: (
+          <ClientActions handleToggleModal={handleToggleModal} id={id} />
+        ),
+      };
+    },
+    [handleToggleModal]
+  );
 
   const handleDeleteClient = () => {
     const payload = {} as DeleteClientPayload;
@@ -108,7 +113,7 @@ export function useClients({
     );
 
     setTDataClients(tDataClient);
-  }, [clients, filter]);
+  }, [clients, filter, updateClientForTable, handleFilter]);
 
   return {
     tDataClients,

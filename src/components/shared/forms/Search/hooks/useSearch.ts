@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export function useSearch() {
   const [search, setSearch] = useState<string>("");
 
-  const handleSearch = (words: string) => {
+  const handleSearch = useCallback((words: string) => {
     setSearch(words.toLowerCase());
-  };
+  }, []);
 
   const filterObjects = <ObjectShape extends Record<string, unknown>>(
     object: ObjectShape
@@ -15,7 +15,7 @@ export function useSearch() {
     const objectValues = Object.values(object);
     const foundValues = objectValues.filter((value) => {
       if (!value) return false;
-      
+
       const convertStringValue = (value as string).toString().toLowerCase();
 
       return convertStringValue.includes(search);

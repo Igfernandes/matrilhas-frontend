@@ -26,6 +26,7 @@
 - **Possibilidade de escolher um modelo já existente, para que ele seja usado como base inicial**
     - Corrigir os bugs de exibição para tornar mais fluído.
     - Criar nomenclaturas mais claras sobre os valores de preenchimento no modal.
+- Criar área de visualizar formulários preenchidos
 - **Corrigir o fluxo de exclusão do formulário. Está cm texto e outras coisas incorretas**
 - **Área de edição não está funcionando**
 - **Copiar link está vindo com o link errado.**
