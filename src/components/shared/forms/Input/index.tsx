@@ -46,7 +46,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div className={`relative ${errors?.message ? "border-yellow" : ""}`}>
           <label
             htmlFor={IdCurrent}
-            className={`absolute transition-all duration-350 line-clamp-1`}
+            className={`absolute text-x md:text-base transition-all duration-350 line-clamp-1`}
             style={{
               ...labelStyledState,
             }}

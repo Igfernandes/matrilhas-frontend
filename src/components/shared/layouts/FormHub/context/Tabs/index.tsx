@@ -18,7 +18,7 @@ function TabsProvider({ children }: TabProviderProps) {
   const handleChangeTab = (tab: OptionsFieldTabTarget) => {
     setTargetTab(tab);
   };
-  console.log("render_TABS")
+  
   const props = useMemo(
     () => ({
       targetTab,

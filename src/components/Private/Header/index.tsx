@@ -17,7 +17,7 @@ export function Header({ handleSidebar }: Props) {
   return (
     <header className="w-full border-b-2 border-zinc-200 p-6">
       <div className="flex justify-between">
-        <When value={screenType === "MOBILE"}>
+        <When value={["MOBILE","TABLET"].includes(screenType)}>
           <Bars onClick={handleSidebar} className="rotate-180" />
         </When>
         <div>

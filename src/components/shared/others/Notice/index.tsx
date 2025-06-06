@@ -14,13 +14,13 @@ export function Notice({
 }: NoticeProps) {
   return (
     <Modal title={headerTitle} isShowModal={isShowModal} handleModal={onModal}>
-      <div className="w-[424px]">
+      <div className="md:w-[424px]">
         <div className="form-title mb-2 text-center">
-          <h4 className="text-lg">
+          <h4 className=" md:text-lg">
             <strong>{title}</strong>
           </h4>
         </div>
-        <div className="text-center mb-4">
+        <div className="text-sm md:text-base text-justify md:text-center mb-4">
           <p>{text}</p>
         </div>
         <div className="form-btn flex justify-around pt-4 border-t-2 border-secondary">

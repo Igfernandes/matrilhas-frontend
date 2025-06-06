@@ -6,6 +6,7 @@ export function useMercadoPago() {
   useEffect(() => {
     if (!window.MercadoPago || !mpProductKey) return;
 
+    /** @ts-expect-error É porque é uma biblioteca externa */
     const mp = new window.MercadoPago(process.env.NEXT_PUBLIC_MERCADO_PAGO_PK);
     mp.checkout({
       preference: {

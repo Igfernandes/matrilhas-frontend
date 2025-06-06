@@ -26,9 +26,9 @@ export function ClientCreateModal({
   return (
     <Modal title={title} isShowModal={isShowModal} handleModal={onModal}>
       <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(submit)} className="w-[424px]">
+        <form onSubmit={handleSubmit(submit)} className="md:w-[424px]">
           <div className="form-title mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("clients.modal.create.text_select_category")}
               </strong>
@@ -49,9 +49,9 @@ export function ClientCreateModal({
               errors={errors.category}
             />
           </div>
-          <div className="my-6">
-            <div className="form-title mt-6 mb-4">
-              <h4 className="text-lg">
+          <div className="my-2 md:my-6">
+            <div className="form-title mt-4 md:mt-6 mb-2 md:mb-4">
+              <h4 className="text-sm md:text-lg">
                 <strong>
                   {i18n("clients.modal.create.text_fill_information")}
                 </strong>
@@ -60,7 +60,7 @@ export function ClientCreateModal({
             <div
               className="overflow-y-auto scrollbar"
               style={{
-                height: "24vh",
+                height: "21vh",
               }}
             >
               <div className="form-group my-4">
@@ -108,16 +108,16 @@ export function ClientCreateModal({
               </div>
             </div>
           </div>
-          <div className="form-btn flex justify-between pt-4 border-t-2 border-secondary">
-            <div className="flex items-center">
+          <div className="form-btn flex flex-wrap md:flex-nowrap justify-between pt-4 border-t-2 border-secondary">
+            <div className="w-full md:w-auto flex items-center">
               <Checkbox
                 {...register("hasContinueRegister")}
                 dataTestId="continue_register"
                 label={i18n(`words.continue_register`)}
               />
             </div>
-            <div className="w-1/2">
-              <div className="w-[60%] ml-auto">
+            <div className="mt-4 md:my-auto w-full md:w-1/2">
+              <div className="md:w-[60%] ml-auto">
                 <Button
                   type="submit"
                   className="bg-red text-white"

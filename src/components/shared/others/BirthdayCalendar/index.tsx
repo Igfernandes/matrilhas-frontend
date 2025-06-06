@@ -38,10 +38,7 @@ export const BirthdayCalendar: React.FC<BirthdayCalendarProps> = ({
                 start: date.toDate(),
                 end: date.toDate(),
                 allDay: true,
-                resource: {
-                  id: String(client.id),
-                  type: "s",
-                },
+                resource: String(client.id),
               };
             })}
           style={{ height: "60vh" }}

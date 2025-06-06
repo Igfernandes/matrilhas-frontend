@@ -28,7 +28,7 @@ export function Definitions() {
             errors={errors.title}
           />
         </div>
-        <div className="form-group w-full lg:w-[48%]">
+        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-0">
           <Select
             {...register("service_id")}
             dataTestId="service"
@@ -67,7 +67,7 @@ export function Definitions() {
             {i18n(`charges.about_privacy_and_services`)}
           </span>
         </div>
-        <div className="form-group w-full lg:w-[48%]">
+        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-auto">
           <Input
             {...register("amount")}
             type="number"
@@ -92,7 +92,7 @@ export function Definitions() {
             errors={errors.type}
           />
         </div>
-        <div className="form-group w-full lg:w-[48%]">
+        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-auto">
           <Input
             {...register("expired_at")}
             type="datetime-local"
@@ -115,7 +115,7 @@ export function Definitions() {
             errors={errors.price}
           />
         </div>
-        <div className="form-group w-full lg:w-[48%]">
+        <div className="form-group w-full lg:w-[48%] mt-4 lgm:mt-auto">
           <Input
             {...register("promotional_price")}
             dataTestId="promotional_price"

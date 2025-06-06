@@ -35,8 +35,8 @@ export function Definitions() {
           />
         </div>
       </div>
-      <div className="form-row flex flex-wrap mb-4 justify-between">
-        <div className="form-group w-full md:w-[48%] ">
+      <div className="form-row flex flex-wrap md:mb-4 justify-between">
+        <div className="form-group w-full md:w-[48%]">
           <Input
             {...register("started_at")}
             label={i18n(`words.started_at`)}
@@ -46,7 +46,7 @@ export function Definitions() {
             errors={errors.started_at}
           />
         </div>
-        <div className="form-group w-full md:w-[48%]">
+        <div className="form-group w-full md:w-[48%] mt-4 md:mt-0">
           <Select
             {...register("period")}
             options={[
@@ -93,7 +93,7 @@ export function Definitions() {
             </div>
           </div>
         </When>
-        <div className="form-group w-full md:w-[48%] mt-6 ">
+        <div className="form-group w-full md:w-[48%] mt-6">
           <When value={watch("period") === "MONTHLY"}>
             <div className="mb-6">
               <Input

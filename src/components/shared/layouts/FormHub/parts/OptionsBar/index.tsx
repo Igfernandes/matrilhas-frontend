@@ -16,7 +16,7 @@ export function OptionsBar({ handleShared, handleUpdateClient }: Props) {
   const { viewedField } = useFieldContext();
 
   return (
-    <div className="flex justify-center lg:justify-between flex-wrap lg:flex-none mt-2 lg:mt-0">
+    <div className="flex justify-center lg:justify-between flex-wrap lg:flex-none mt-2 lg:mt-0 relative z-0">
       <div className="flex items-center relative">
         <div
           className="flex items-center"

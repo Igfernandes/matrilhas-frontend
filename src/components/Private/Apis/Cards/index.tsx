@@ -7,7 +7,7 @@ export function Cards({ items }: CardsProps) {
   return (
     <div className="cards flex flex-wrap justify-between p-2">
       {items.map(({ id, img, status, handleModal, text }, key) => (
-        <div key={key} className="card w-[24%] bg-white shadow-md rounded-lg mx-1">
+        <div key={key} className="card w-[260px] md:min-w-[210px] md:w-[24%] bg-white shadow-md rounded-lg mx-auto md:mx-1 my-2">
           <div className="content flex flex-col justify-between h-full p-4">
             <div className="logotype pb-3">
               <Image

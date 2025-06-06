@@ -19,13 +19,13 @@ export function FooterForms({
 }: Props) {
   const { reset } = useFormContext();
   return (
-    <div className="bg-white flex items-center justify-between px-6 rounded-xl py-4 mt-6">
+    <div className="bg-white flex flex-wrap md:flex-auto items-center justify-between px-6 rounded-xl py-4 mt-6">
       <div>
         <span onClick={() => reset()} className="font-semibold cursor-pointer">
           {i18n(`words.clean`)}
         </span>
       </div>
-      <div className="flex">
+      <div className="flex w-full md:w-auto mt-4 md:mt-auto">
         <div className="mx-2">
           <Button
             type="button"
@@ -38,7 +38,7 @@ export function FooterForms({
           <When value={isLastStep}>
             <Button
               type={"submit"}
-              className="bg-red py-2 px-3 text-white"
+              className="bg-red py-2 px-6 md:px-3 text-white"
               text={i18n("words.save")}
               rightIcon={<SquareRoundedChevronRight fill={"#fff"} />}
               onClick={onNextStep}

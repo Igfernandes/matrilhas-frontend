@@ -32,7 +32,7 @@ export function ClientUpdateModal({
       <FormProvider {...formMethods}>
         <form onSubmit={handleSubmit(submit)}>
           <div className="form-title mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("clients.modal.create.text_select_category")}
               </strong>
@@ -58,7 +58,7 @@ export function ClientUpdateModal({
           </div>
           <div className="my-6">
             <div className="form-title mt-6 mb-4">
-              <h4 className="text-lg">
+              <h4 className="text-xs md:text-lg">
                 <strong>
                   {i18n("clients.modal.create.text_fill_information")}
                 </strong>
@@ -119,8 +119,8 @@ export function ClientUpdateModal({
               </div>
             </div>
           </div>
-          <div className="form-btn flex justify-between pt-4 border-t-2 border-secondary">
-            <div className="w-1/2 mx-auto">
+          <div className="form-btn pt-4 border-t-2 border-secondary">
+            <div className="w-full md:w-1/2 mx-auto">
               <div className=" ml-auto">
                 <Button
                   type="submit"

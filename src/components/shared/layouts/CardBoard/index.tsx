@@ -9,7 +9,7 @@ export function CardBoard({ viewLimit, items }: CardBoardProps) {
         {items.map((item, index) => (
           <div
             key={`card_${index}`}
-            className="bg-white px-6 py-4 rounded-xl"
+            className="bg-white px-6 py-4 rounded-xl my-2"
             style={{
               width: screenType === "DESKTOP" ? `${90 / viewLimit}%` : "100%",
             }}

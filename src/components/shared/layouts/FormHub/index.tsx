@@ -17,24 +17,28 @@ export function FormHub({
   handleUpdateClient,
 }: FormBuildProps) {
   return (
-    <TabsProvider>
-      <ModalProvider>
-        <FieldsGroupsProvider groups={groups}>
-          <FieldProvider
-            entity={entity}
-            entityType={entityType}
-            fieldsRelation={fields}
-            handleSubmitFields={handleSubmitFields}
-          >
-            <OptionsBar
-              handleShared={handleShared}
-              handleUpdateClient={handleUpdateClient}
-            />
-            <FieldsTabs />
-            <Form />
-          </FieldProvider>
-        </FieldsGroupsProvider>
-      </ModalProvider>
-    </TabsProvider>
+    <div className="relative z-0">
+      <TabsProvider>
+        <ModalProvider>
+          <FieldsGroupsProvider groups={groups}>
+            <FieldProvider
+              entity={entity}
+              entityType={entityType}
+              fieldsRelation={fields}
+              handleSubmitFields={handleSubmitFields}
+            >
+              <OptionsBar
+                handleShared={handleShared}
+                handleUpdateClient={handleUpdateClient}
+              />
+              <FieldsTabs />
+              <div className="relative z-10">
+                <Form />
+              </div>
+            </FieldProvider>
+          </FieldsGroupsProvider>
+        </ModalProvider>
+      </TabsProvider>
+    </div>
   );
 }

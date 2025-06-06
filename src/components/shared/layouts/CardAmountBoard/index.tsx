@@ -9,9 +9,9 @@ export function CardAmountBoard({ viewLimit, items }: CardAmountBoardProps) {
         {items.map((item, index) => (
           <div
             key={`card_${index}`}
-            className="bg-white px-6 py-4 rounded-xl"
+            className="bg-white px-6 py-4 rounded-xl min-w-48 my-2"
             style={{
-              width: screenType === "DESKTOP" ? `${90 / viewLimit}%` : "100%",
+              width: screenType !== "MOBILE" ? `${90 / viewLimit}%` : "100%",
             }}
           >
             <div className="flex items-center mb-2">

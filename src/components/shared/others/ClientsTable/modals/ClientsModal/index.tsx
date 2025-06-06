@@ -80,7 +80,7 @@ export function ClientsModal({
           </div>
           <div>
             <div className="form-title mt-6 mb-4">
-              <h4 className="text-lg w-[400px]">
+              <h4 className="text-sm md:text-lg md:w-[400px]">
                 <strong className="mr-2">
                   {i18n("clients.modal.add_clients_text")}:
                 </strong>

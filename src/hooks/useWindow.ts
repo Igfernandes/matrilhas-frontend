@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-export type ScreenTypes = "MOBILE" | "DESKTOP";
+export type ScreenTypes = "MOBILE" | "TABLET" | "DESKTOP";
 
 export default function useWindow() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const [screenType, setScreenType] = useState<ScreenTypes>();
+  const [screenType, setScreenType] = useState<ScreenTypes | "">("");
   const [baseUrl, setBaseUrl] = useState<string>("");
 
   const handlePopup = (uri: string, title: string) => {
@@ -29,7 +29,15 @@ export default function useWindow() {
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-      setScreenType(windowSize.width >= 1024 ? "DESKTOP" : "MOBILE");
+      if (window.innerWidth < 500) {
+        setScreenType("MOBILE");
+      } else if (window.innerWidth < 1024) {
+        setScreenType("TABLET");
+      } else {
+        setScreenType("DESKTOP");
+      }
+
+      return;
     };
 
     // Atualiza na montagem

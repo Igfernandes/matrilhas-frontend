@@ -30,7 +30,6 @@ export default function Update({ targetForm }: FormsPageProps) {
     });
   const { submit, form, handleChangeFormFields, isLoading } = useForms();
 
-  console.log(formMethods.formState.errors);
   useEffect(() => {
     const fields = JSON.parse(targetForm.components ?? "{}");
     handleChangeFormFields(fields);

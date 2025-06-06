@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useGet from ".";
-import { GetChargesRequest } from "./types";
+import { GetExtractRequest } from "./types";
 
-export default function useGetCharges(request: GetChargesRequest = {}) {
+export default function useGetCharges(request: GetExtractRequest = {}) {
   const { getCharges } = useGet();
 
   async function handle() {

@@ -71,12 +71,12 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             </When>
           </label>
           <textarea className="hidden" {...rest} ref={ref} />
-          <div className="mt-1 mb-16 p-1">
+          <div className="mt-1 mb-36 md:mb-16 p-1">
             <ReactQuill
               theme="snow"
               modules={modules}
               formats={formats}
-              className="h-60"
+              className="h-[30vh] md:h-60 "
               defaultValue={String(defaultValue ?? "")}
               onChange={(value) => {
                 if (!rest.name) return;

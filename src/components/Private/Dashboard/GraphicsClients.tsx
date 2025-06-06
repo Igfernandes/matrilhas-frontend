@@ -30,8 +30,8 @@ export function GraphicsClients({
 
   return (
     <div className="my-4">
-      <div className="content flex flex-wrap">
-        <div className="w-[320px]">
+      <div className="content flex flex-wrap justify-around">
+        <div className="w-full md:w-[320px] my-4 md:my-0">
           <CircleGraphic
             title={i18n("words.clients_categories")}
             data={{
@@ -46,7 +46,7 @@ export function GraphicsClients({
             options={sampleOptions}
           />
         </div>
-        <div className="w-[320px] ml-2">
+        <div className="w-full md:w-[320px] my-4 md:my-0 ml-2">
           <PolarGraphic
             title={i18n("words.clients_by_ddd")}
             data={{
@@ -74,7 +74,7 @@ export function GraphicsClients({
             }}
           />
         </div>
-        <div className="ml-4 w-2/6">
+        <div className="w-full md:w-auto xl:ml-4">
           <Feeds
             title={i18n("words.dependencies_historic")}
             data={[

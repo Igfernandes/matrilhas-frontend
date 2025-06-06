@@ -38,8 +38,8 @@ export function Send({ clients, clientsSelected, handleUpdateClients }: Props) {
               ]}
             />
           </div>
-          <div className="col  w-full md:w-[48%]">
-            <div className="mb-8">
+          <div className="col w-full md:w-[48%]">
+            <div className="md:mb-8">
               <div className="form-title mb-2">
                 <h4 className="font-semibold">Selecione uma cobrança:</h4>
               </div>
@@ -62,7 +62,7 @@ export function Send({ clients, clientsSelected, handleUpdateClients }: Props) {
           </div>
         </div>
       </div>
-      <div className="mb-4">
+      <div className="mb-6 md:mb-4">
         <TextEdit
           name="content"
           defaultValue={getValues("content") ?? ""}

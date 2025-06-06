@@ -23,7 +23,7 @@ const SnackbarMessage = ({ deleteSnackbar, snackbar }: Props) => {
               show ? "opacity-1" : "opacity-0"
             }
             flex pointer-events-auto overflow-hidden 
-            p-4 w-[400px] rounded-2xl text-primary-white bg-no-repeat ml-auto mt-8 mr-4`}
+            p-4 md:w-[400px] rounded-2xl text-primary-white bg-no-repeat ml-auto mt-8 mr-4`}
       style={{
         boxShadow: "0 0 10px #00000084",
         borderLeftColor: statusColors[typeSnackbar ?? "notice"],
@@ -34,10 +34,10 @@ const SnackbarMessage = ({ deleteSnackbar, snackbar }: Props) => {
         <CircleClose className="w-5" />
       </div>
       <div className="mr-5 ml-2">
-        <h5 className={"w-full"}>
+        <h5 className={"w-full text-sm md:text-base"}>
           <strong>{snackbar.title}</strong>
         </h5>
-        <p className="text-sm">{snackbar.message}</p>
+        <p className="text-xs md:text-sm">{snackbar.message}</p>
       </div>
       <div style={{ marginLeft: "auto" }}>
         <span

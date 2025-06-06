@@ -52,13 +52,13 @@ export function StepItem({ title, status, id, width }: StepItemProps) {
           <span className="text-xs text-zinc-700 font-medium">{`STEP ${id}`}</span>
         </div>
         <div>
-          <p className="text-lg">
+          <p className="text-base md:text-lg">
             <strong>{title}</strong>
           </p>
         </div>
         <div>
           <span
-            className="font-medium"
+            className="text-xs font-medium"
             style={{
               color: STATUS_STYLED[status].color as string,
             }}

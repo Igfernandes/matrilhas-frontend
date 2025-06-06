@@ -37,7 +37,7 @@ export function CreateCharge({
               "flex items-center flex-wrap lg:flex-nowrap w-full lg:w-auto mt-6 bg-white rounded-lg py-4 px-6"
             }
           >
-            <div className="ml-auto lg:w-[70%] absolute lg:static top-0 right-0">
+            <div className="md:ml-auto mb-2 md:md-auto lg:w-[70%] md:absolute lg:static top-0 right-0">
               <span
                 onClick={() => {
                   formMethods.reset();
@@ -47,7 +47,6 @@ export function CreateCharge({
                 {i18n(`words.clean`)}
               </span>
             </div>
-
             <div className="flex justify-end w-full">
               <div className="lg:ml-8 w-[47%] lg:w-auto">
                 <Button

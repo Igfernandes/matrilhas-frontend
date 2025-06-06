@@ -23,7 +23,7 @@ export function PolarGraphic({ title, data, options }: PolarGraphicProps) {
     <div className="w-full max-w-md mx-auto p-4 bg-white rounded-2xl shadow">
       <h2 className="text-xl font-semibold text-center mb-4">{title}</h2>
       <div className="h-[40vh]">
-        <PolarArea data={data} options={options} />
+        <PolarArea data={data} className="mx-auto" options={options} />
       </div>
     </div>
   );

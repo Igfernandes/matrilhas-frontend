@@ -44,7 +44,7 @@ export function ModalFormCategories({
                 onClick={() => onModal(false)}
               />
             </div>
-            <div className="w-[30%] ml-5">
+            <div className="w-1/2 md:w-[30%] ml-2 md:ml-5">
               <Button
                 className="bg-red text-white"
                 text={i18n("words.save")}

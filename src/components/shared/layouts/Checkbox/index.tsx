@@ -10,7 +10,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const IdCurrent = id ?? dataTestId;
 
     return (
-      <div className="inline-block">
+      <div className="inline-block min-w-48">
         <div className="flex">
           <div className="border-2 border-secondary w-6 h-6 relative rounded-[.25rem] cursor-pointer mr-2">
             <input

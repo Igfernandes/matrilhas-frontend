@@ -1,6 +1,6 @@
 import { CreateCharge } from "@components/Private/Finance/Create";
 import { useFinance } from "@components/Private/Finance/Create/hooks/useFinance";
-import { ClientsPayedModal } from "@components/shared/others/ClientsTable/modals/ClientsModal";
+import { ClientsModal } from "@components/shared/others/ClientsTable/modals/ClientsModal";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 
 export default function FinanceCreate() {
@@ -13,7 +13,7 @@ export default function FinanceCreate() {
         clientsSelected={clientsSelected}
         handleUpdateClients={updateClientsSelected}
       />
-      <ClientsPayedModal
+      <ClientsModal
         clientsSelected={clientsSelected}
         clients={clients}
         handleAddClients={updateClientsSelected}

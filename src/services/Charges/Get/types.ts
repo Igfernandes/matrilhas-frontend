@@ -3,7 +3,7 @@ import { Status } from "@type/status";
 
 export type GetChargesRequest = Omit<
   ChargeShape,
-  "id" | "status" | "amount" | "privacy" | "type" | "price" | "reference"
+  "id" | "title" | "status" | "amount" | "privacy" | "type" | "price" | "reference"
 > & {
   id?: number;
   title_contains?: string;

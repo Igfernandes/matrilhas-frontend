@@ -47,7 +47,7 @@ export function Builder({
         <div className="flex">
           <When value={!!createdAt}>
             <div className="mr-2">
-              <span className="text-secondary text-base text-[11px] md:text-base">
+              <span className="text-secondary text-xs  md:text-base">
                 {`Atualizado em: ${new Date(createdAt).toLocaleString()}`}
               </span>
             </div>

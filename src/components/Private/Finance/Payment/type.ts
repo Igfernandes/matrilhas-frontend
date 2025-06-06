@@ -1,8 +1,7 @@
-import { MercadoPagoFeeDetail } from "@type/Extracts/MercadoPago/FeeDetail";
 import { MercadoPagoPaymentShape } from "@type/Extracts/MercadoPago/MercadoPago";
 
 export type PaymentPageProps = {
-  targetPayment: MercadoPagoFeeDetail;
+  targetPayment: MercadoPagoPaymentShape;
 };
 
 export type PaymentPreviewProps = {

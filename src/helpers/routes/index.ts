@@ -33,7 +33,7 @@ export function setParams({ url, data }: SetParamsProps) {
   return urlWithParam;
 }
 
-export function isErrorRequest(response: unknown) {
+export function isErrorRequest(response: Record<string, unknown>) {
   return (
     Object.hasOwn(response, "errors") ||
     response.code === STATUS_SERVICE.NOT_FOUND

@@ -31,10 +31,10 @@ export function StoreFieldsModal({
       handleModal={onModal}
     >
       <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(submit)} className="w-[424px]">
+        <form onSubmit={handleSubmit(submit)} className="md:w-[424px]">
           <div className="my-6">
             <div className="form-title mt-6 mb-4">
-              <h4 className="text-lg">
+              <h4 className="text-xs md:text-lg">
                 <strong>
                   {i18n("users.modal.create.text_field_fill_information")}
                 </strong>
@@ -120,7 +120,7 @@ export function StoreFieldsModal({
               />
             </div>
             <div className="w-1/2">
-              <div className="w-[60%] ml-auto">
+              <div className="md:w-[60%] ml-auto">
                 <Button
                   type="submit"
                   className="bg-red text-white"

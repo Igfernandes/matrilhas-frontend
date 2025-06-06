@@ -6,10 +6,8 @@ import { MercadoPagoFeeDetail } from "./FeeDetail";
 import { MercadoPagoOrder } from "./Order";
 import { MercadoPagoPaymentMethod } from "./PaymentMethod";
 import { MercadoPagoPointOfInteraction } from "./PointOfInteraction";
-import {
-  MercadoPagoPaymentPayer,
-  MercadoPagoTransactionDetails,
-} from "./transactionDetails";
+import { MercadoPagoPaymentPayer, MercadoPagoTransactionDetails } from "./TransactionDetails";
+
 
 export type MercadoPagoPaymentShape = {
   _last: {

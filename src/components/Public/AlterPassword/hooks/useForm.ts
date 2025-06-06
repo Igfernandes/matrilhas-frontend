@@ -2,7 +2,7 @@ import { alterPasswordFormSchema } from "../schemas";
 import { PostRecoverPasswordAlterPayload } from "../../../../services/Recovers/Password/Alter/type";
 import usePostRecoverPasswordAlter from "../../../../services/Recovers/Password/Alter/usePostRecoverPasswordAlter";
 import { useFormRules } from "@hooks/Forms/useFormRules";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 
 type Payload = PostRecoverPasswordAlterPayload;
@@ -18,13 +18,15 @@ export function useForm() {
   } = formMethods;
   const { mutateAsync: postRecoverPassword } = usePostRecoverPasswordAlter();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const onSubmit = async (payload: PostRecoverPasswordAlterPayload) => {
-    if (!router.query?.recover_token) return router.push(publicRoutes.login);
+    const recoverToken = searchParams.get("recover_token");
+    if (!recoverToken) return router.push(publicRoutes.login);
 
     postRecoverPassword({
       ...payload,
-      recover_token: router.query.recover_token as string,
+      recover_token: recoverToken as string,
     });
   };
 

@@ -8,7 +8,7 @@ export function GroupCards<Payload extends FieldValues>({
   register,
 }: GroupCardsProps<Payload>) {
   return (
-    <div className="relative ">
+    <div className="relative">
       <div className="flex flex-wrap justify-between">
         {items.map((item, index) => (
           <Card

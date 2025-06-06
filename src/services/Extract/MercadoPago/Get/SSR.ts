@@ -2,7 +2,7 @@ import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setParams, setQueries } from "@helpers/routes";
 import { GetExtractRequest } from "./types";
-import { MercadoPagoPaymentShape } from "@type/Extracts/MercadoPago/FeeDetail";
+import { MercadoPagoPaymentShape } from "@type/Extracts/MercadoPago/MercadoPago";
 
 export async function getExtract(
   tokenNavigation: string,

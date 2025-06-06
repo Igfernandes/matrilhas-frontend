@@ -17,14 +17,14 @@ export function FooterForms({
   isLastStep,
 }: Props) {
   return (
-    <div className="bg-white flex items-center justify-between px-6 rounded-xl py-4 mt-6">
-      <div>
+    <div className="bg-white flex flex-wrap md:flex-nowrap items-center justify-between px-6 rounded-xl py-4 mt-6">
+      <div className="w-full">
         <span className="font-semibold cursor-pointer">
           {i18n(`words.clean`)}
         </span>
       </div>
-      <div className="flex">
-        <div className="mx-2">
+      <div className="flex w-full md:w-auto">
+        <div className="w-1/2 mx-2">
           <Button
           type="button"
             className="font-semibold border-2 border-zinc-300 px-2"
@@ -32,11 +32,11 @@ export function FooterForms({
             onClick={onPrevStep}
           />
         </div>
-        <div className="mx-2">
+        <div className="w-1/2 mx-2">
           <When value={isLastStep}>
             <Button
               type={"submit"}
-              className="bg-red py-2 px-3 text-white"
+              className="bg-red py-2 md:px-3 text-white"
               text={i18n("words.save")}
               rightIcon={<SquareRoundedChevronRight fill={"#fff"} />}
               onClick={onNextStep}

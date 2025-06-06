@@ -9,7 +9,7 @@ export function GroupChecks<Payload extends FieldValues>({
 }: GroupChecksProps<Payload>) {
   return (
     <div className="relative ">
-      <div className="h-[32vh] overflow-x-hidden overflow-y-auto pb-[12%]">
+      <div className="max-h-[20vh] md:max-h-[32vh] overflow-x-hidden overflow-y-auto pb-[12%]">
         {items.map((item, index) => (
           <div key={`key_group_checks_${index}`} className="mb-4">
             <Checkbox
@@ -23,7 +23,7 @@ export function GroupChecks<Payload extends FieldValues>({
         ))}
       </div>
       <div
-        className="absolute bottom-[1%] left-0 w-[95%] h-10"
+        className="absolute bottom-[0%] left-0 w-[95%] h-6"
         style={{
           background: "linear-gradient(357deg, #ffffff, transparent)",
         }}

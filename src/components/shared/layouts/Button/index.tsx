@@ -11,7 +11,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const classNameBtn = `${className} flex items-center 
-  justify-center active:scale-[95%] 
+  justify-center active:scale-[95%]  min-w-20
   duration-75 w-full min-h-[48px] rounded-md mx-auto 
   disabled:bg-disable disabled:text-disabled cursor-pointer`;
 

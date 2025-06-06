@@ -50,7 +50,7 @@ export function ModalFormUsers({
       <FormProvider {...formMethods}>
         <form onSubmit={handleSubmit(submit)} className="w-full md:w-[424px]">
           <div className="form-title mb-2 lg:mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("manager_user.modal.user.text_select_group")}
               </strong>
@@ -73,7 +73,7 @@ export function ModalFormUsers({
           </div>
           <div className="my-4 lg:my-6">
             <div className="form-title mt-4 xl:mt-6 pb-2">
-              <h4 className="text-lg">
+              <h4 className="text-sm md:text-lg">
                 <strong>
                   {i18n("manager_user.modal.user.text_fill_information")}
                 </strong>

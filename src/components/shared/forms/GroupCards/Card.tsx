@@ -28,7 +28,7 @@ export const Card = React.forwardRef<HTMLInputElement, GroupCardItemShape>(
             : "border-cross-black-secondary"
         }  ${
           disabled ? "bg-disabled opacity-60" : ""
-        } p-4 rounded-2xl mb-4 cursor-pointer`}
+        } p-4 rounded-2xl mx-auto mb-4 cursor-pointer`}
         onClick={(ev) => {
           const div = ev.currentTarget;
           const input = div.querySelector("input");
@@ -39,7 +39,7 @@ export const Card = React.forwardRef<HTMLInputElement, GroupCardItemShape>(
         }}
       >
         <div className="header flex justify-between items-center mb-2">
-          <div className="bg-white px-[8px] py-[7px] rounded-2xl">{icon}</div>
+          <div className=" bg-white p-[5px] md:px-[8px] md:py-[7px] rounded-2xl">{icon}</div>
           <div className="relative">
             <input
               {...props}
@@ -53,9 +53,7 @@ export const Card = React.forwardRef<HTMLInputElement, GroupCardItemShape>(
               id={`key_group_checks_${value}_${index}`}
             />
             <Accept
-              className="absolute top-[5px] left-[5px]"
-              width={10}
-              height={10}
+              className="absolute top-[4px] left-1 md:top-[5px] md:left-[5px] w-3 h-3 md:w-[10px] md:h-[10px]"
               fill={isChecked ? "#fff" : textDefaultColors.disabled}
             />
           </div>

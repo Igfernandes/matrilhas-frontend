@@ -32,7 +32,7 @@ export function ModalFormUsersGroup({
       <FormProvider {...formMethods}>
         <form onSubmit={handleSubmit(submit)} className="w-full md:w-[424px]">
           <div className="form-title mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("manager_user.modal.group.text_insert_name")}
               </strong>
@@ -48,7 +48,7 @@ export function ModalFormUsersGroup({
             />
           </div>
           <div className="form-title mt-6 mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("manager_user.modal.group.text_select_permissions")}
               </strong>
