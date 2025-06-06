@@ -9,6 +9,7 @@ type Props = {
 
 export function OptionsBar({ handleSearch }: Props) {
   return (
+    
     <div className="flex justify-between flex-wrap md:flex-nowrap mb-6">
       <Search
         label={i18n("words.research")}
