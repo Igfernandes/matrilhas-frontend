@@ -14,7 +14,10 @@ export function useFieldsAnimation() {
       top: ".95rem",
     },
   });
-  const [labelStyledState, setLabelStateClass] = useState<CSSProperties>();
+  const [labelStyledState, setLabelStateClass] = useState<CSSProperties>({
+    left: ".75rem",
+    top: ".95rem",
+  });
 
   /**
    * @function changeLabelClass

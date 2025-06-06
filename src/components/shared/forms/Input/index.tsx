@@ -47,9 +47,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={IdCurrent}
             className={`absolute text-x md:text-base transition-all duration-350 line-clamp-1`}
-            style={{
-              ...labelStyledState,
-            }}
+            style={labelStyledState}
           >
             {label}
             <When value={required}>
