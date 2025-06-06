@@ -5,7 +5,7 @@ export default async function middleware(req: NextRequest) {
   const response = NextResponse.next();
 
   const authResponse = await authenticationsMiddleware(req, response);
-  if (authResponse) return authResponse;
+  if (false) return authResponse;
 
   return response;
 }
