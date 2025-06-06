@@ -27,7 +27,7 @@ export const MAIN_MENU = [
   {
     title: i18n("words.sending_management"),
     Icon: Spreadsheet,
-    link: privateRoutes.sendingManagement,
+    link: privateRoutes.dispatcher,
   },
   {
     title: i18n("words.forms"),

@@ -16,8 +16,8 @@ export function StepBar({ steps = [] }: StepBarProps) {
   }, [steps]);
 
   return (
-    <div className="bg-white p-6 rounded-xl">
-      <div className="flex justify-between">
+    <div className="bg-white p-6 rounded-xl overflow-x-auto none-scroll">
+      <div className="flex justify-between min-w-[450px]">
         {steps.map(({ title }, index) => (
           <StepItem
             title={title}

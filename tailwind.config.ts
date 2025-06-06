@@ -2,6 +2,7 @@ import { bgColors, othersColors, textColors } from "./src/assets/colors/colors";
 import {
   bgDefaultColor,
   borderColors,
+  statusColors,
   textDefaultColors,
 } from "./src/assets/colors/default";
 import type { Config } from "tailwindcss";
@@ -26,6 +27,7 @@ export default {
         ...textDefaultColors,
         ...textColors,
         ...othersColors,
+        ...statusColors,
         background: "var(--background)",
         foreground: "var(--foreground)",
       },

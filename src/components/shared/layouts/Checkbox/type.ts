@@ -8,6 +8,5 @@ export type CheckboxProps = DetailedHTMLProps<
   label?: string;
   dataTestId: string;
   onChecked?: (isChecked: boolean) => void;
-  onChange?: () => void;
   checked?: boolean;
 };

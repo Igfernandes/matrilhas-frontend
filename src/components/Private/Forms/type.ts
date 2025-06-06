@@ -1,6 +1,7 @@
 import { JSX } from "react";
 import { ServicesShape } from "../../../types/Services";
 import { FormsShape } from "../../../types/Forms";
+import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 
 export type HookFormsProps<FormType> = {
   filter: string;
@@ -21,8 +22,13 @@ export type FormsCardProps = {
   search: string;
 };
 
-export type ModalFormsOperationType = "DESATIVE" | boolean;
+export type ModalFormsOperationType = "EXCLUDE" | boolean;
 
 export type FormsPageProps = {
-  targetForm?: FormsShape;
+  targetForm: FormsShape;
+};
+
+export type ComponentsProps = {
+  form: FieldShape[];
+  handleChangeFormFields: (fieldsForm: Array<FieldShape>) => void;
 };

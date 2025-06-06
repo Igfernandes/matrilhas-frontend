@@ -1,7 +1,7 @@
 import { Search } from "@components/shared/forms/Search";
 import i18n from "@configs/i18n";
 import { Button } from "@components/shared/layouts/Button";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 
 type Props = {

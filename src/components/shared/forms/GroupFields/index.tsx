@@ -29,7 +29,7 @@ export function GroupFields<Payload extends FieldValues>({
           <strong>{i18n(`words.add`)}</strong>
         </span>
       </div>
-      <div className="overflow-y-auto max-h-[40vh] hidden-scroll">
+      <div className="overflow-y-auto max-h-[160px] md:max-h-[40vh] hidden-scroll">
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
@@ -54,7 +54,7 @@ export function GroupFields<Payload extends FieldValues>({
         </DndContext>
       </div>
       <div>
-        <span className="text-xs">{handleErrors()}</span>
+        <span className="text-xs text-warning">{handleErrors()}</span>
       </div>
     </div>
   );

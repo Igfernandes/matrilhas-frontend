@@ -2,16 +2,19 @@ export const publicRoutes = {
   login: "/",
   forgotPassword: "/forgot-password",
   successful: "/successful",
+  forms: "/forms"
 };
 
 export const privateRoutes = {
   dashboard: "/dashboard",
   clients: "/dashboard/clients",
-  sendingManagement: "/dashboard/sending-management",
+  dispatcher: "/dashboard/dispatcher",
   forms: "/dashboard/forms",
   schedule: "/dashboard/schedule",
   services: "/dashboard/services",
   finance: "/dashboard/finance",
+  financesCreate: "/dashboard/finance/create",
+  financePayments: "/dashboard/finance/{id}/payment/{payment_id}",
   usersManager: "/dashboard/users",
   userGroups: "/dashboard/users/group",
   apisManager: "/dashboard/apis",

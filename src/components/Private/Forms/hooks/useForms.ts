@@ -1,18 +1,30 @@
 import { useState } from "react";
 import { FormsPayload } from "../schema";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
-import usePostCreateForm from "../../../../services/Forms/Post/usePostCreateForm";
+import usePostCreateForm from "../../../../services/CustomForms/Post/usePostCreateForm";
+import usePutForm from "@services/CustomForms/Put/usePutForm";
 
 export function useForms() {
   const [form, setForm] = useState<Array<FieldShape>>([]);
-  const { mutateAsync: postForm, isPending: isLoading } = usePostCreateForm();
+  const { mutateAsync: postForm, isPending: isLoadingPost } =
+    usePostCreateForm();
+  const { mutateAsync: putForm, isPending: isLoadingPut } = usePutForm();
 
   const submit = (FormsPayload: FormsPayload) => {
-    postForm({
+    const payload = {
       ...FormsPayload,
       components: JSON.stringify(form),
-      status: "PUBLISHED",
-    });
+      status: "PUBLISHED" as "PUBLISHED" | "DRAFT",
+    };
+
+    if (FormsPayload.id)
+      putForm({
+        ...payload,
+        id: FormsPayload.id,
+      });
+    else {
+      postForm(payload);
+    }
   };
 
   const handleChangeFormFields = (fieldsForm: Array<FieldShape>) => {
@@ -23,6 +35,6 @@ export function useForms() {
     submit,
     handleChangeFormFields,
     form,
-    isLoading,
+    isLoading: isLoadingPost || isLoadingPut,
   };
 }

@@ -10,14 +10,18 @@ import i18n from "@configs/i18n";
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { GetServerSideProps } from "next";
 import { FormProvider } from "react-hook-form";
-import { getForms } from "../../../services/Forms/Get/SSR";
+import { getForms } from "../../../services/CustomForms/Get/SSR";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useEffect } from "react";
 
-export default function Update() {
+export default function Update({ targetForm }: FormsPageProps) {
   const { formMethods } = useFormRules<FormsPayload>({
     schema: formsSchema,
     defaultValues: {
-      type: "PEOPLE",
+      id: targetForm.id,
+      name: targetForm.name,
+      description: targetForm.description,
+      template: String(targetForm.id),
     },
   });
   const { handleNextStep, handlePrevStep, stepActive, isLastStep } =
@@ -25,6 +29,11 @@ export default function Update() {
       formMethods,
     });
   const { submit, form, handleChangeFormFields, isLoading } = useForms();
+
+  useEffect(() => {
+    const fields = JSON.parse(targetForm.components ?? "{}");
+    handleChangeFormFields(fields);
+  }, [targetForm]);
 
   return (
     <DashboardContainer>

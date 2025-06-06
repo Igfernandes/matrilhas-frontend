@@ -3,17 +3,8 @@ import { useForm } from "./hooks/useForm";
 import { When } from "@components/utilities/When";
 
 export function Form() {
-  const {
-    fieldByGroup,
-    targetTab,
-    fieldsGroupEditing,
-    handleToggleFieldsGroupToEditing,
-    fieldsGroups,
-    handleToggleModal,
-    isShowModal,
-  } = useForm();
+  const { fieldByGroup, targetTab, fieldsGroupEditing } = useForm();
 
-  console.log(fieldByGroup)
   return (
     <>
       {/** Formulário Básico */}
@@ -24,10 +15,6 @@ export function Form() {
             title={groupName}
             fields={fields}
             isEditing={fieldsGroupEditing == groupName}
-            handleEdit={handleToggleFieldsGroupToEditing}
-            fieldGroups={fieldsGroups}
-            onModal={handleToggleModal}
-            isShowModal={isShowModal}
           />
         </When>
       ))}

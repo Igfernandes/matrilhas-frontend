@@ -4,5 +4,5 @@ export type PutServicesPayload = Omit<
   ServicesShape,
   "photo" | "created_at" | "updated_at"
 > & {
-  photo?: FileList;
+  photo?: FileList | string;
 };

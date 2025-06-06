@@ -2,7 +2,7 @@ import { authenticationRoutes } from "@configs/routes/Api/authentications";
 import { PostRememberMePayload } from "./type";
 import { axios } from "@configs/axios";
 import { getPayloadJSON } from "@helpers/payload";
-import { STATUS_SERVICE } from "@constants/services";
+import { STATUS_SERVICE } from "@constants/http";
 
 export async function postRememberMe({
   referenceToken,

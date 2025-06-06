@@ -43,10 +43,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <div className="relative">
+        <div className={`relative ${errors?.message ? "border-yellow" : ""}`}>
           <label
             htmlFor={IdCurrent}
-            className={`absolute transition-all duration-350 line-clamp-1`}
+            className={`absolute text-x md:text-base transition-all duration-350 line-clamp-1`}
             style={{
               ...labelStyledState,
             }}
@@ -77,7 +77,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             }}
             onFocus={handleTransitionLabel}
             onBlur={handleTransitionLabel}
-            placeholder={placeholder}
+            placeholder={rest.type == "date" ? " " : placeholder}
             className={`${className} ${
               !!errors ? "border-amber-500 outline-amber-500" : ""
             } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}

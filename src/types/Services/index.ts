@@ -1,3 +1,5 @@
+import { ChargeShape } from "@type/Charges";
+
 export type ServicesShape = {
   id: number;
   name: string;
@@ -8,6 +10,25 @@ export type ServicesShape = {
   type: "APPELLANT" | "PUNCTUAL";
   status: "ACTIVE" | "INACTIVE";
   privacy: "PUBLIC" | "PRIVATE";
+  address?: string;
+  realized_at?: string;
+  expired_at?: string;
   created_at: string;
   updated_at: string;
+};
+export type ServicePreviewShape = Pick<
+  ServicesShape,
+  "name" | "description" | "photo" | "stock" | "address" | "expired_at" | "realized_at"
+> & {
+  title: string;
+  form: {
+    title: string;
+    id: string;
+  };
+  charge: Pick<
+    ChargeShape,
+    "title" | "price" | "promotional_price" | "amount" | "reference"
+  > & {
+    sold_out: boolean;
+  };
 };

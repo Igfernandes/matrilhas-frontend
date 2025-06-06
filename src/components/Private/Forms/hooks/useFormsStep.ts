@@ -12,7 +12,7 @@ export function useFormStep({ formMethods }: Props) {
   const [isLastStep, setIsLastStep] = useState<boolean>(false);
 
   const handleNextStep = async () => {
-    const resp = await trigger(["name", "type"]);
+    const resp = await trigger(["name"]);
 
     if (resp !== true) return;
 
@@ -30,7 +30,6 @@ export function useFormStep({ formMethods }: Props) {
     setIsLastStep(stepUpdated === 3);
   };
 
-  console.log(isLastStep);
   return {
     handleNextStep,
     stepActive,

@@ -1,27 +1,21 @@
-import { useState } from "react";
 import { useFieldsByGroup } from "@hooks/useFields/useFieldsByGroup";
-import { useFieldContext } from "../../../context";
+import { useFieldContext } from "../../../context/Fields";
+import { useFieldsGroupsContext } from "../../../context/FieldsGroups";
+import { useTabsContext } from "../../../context/Tabs";
 
 export function useForm() {
-  const { fields, targetTab, fieldsGroups, handleToggleModal, isShowModal } =
-    useFieldContext();
+  const { fields } = useFieldContext();
+  const { fieldsGroups, fieldsGroupEditing } = useFieldsGroupsContext();
+  const { targetTab } = useTabsContext();
+
   const { fieldByGroup } = useFieldsByGroup({
     fieldGroups: fieldsGroups,
     fields: fields,
   });
-  const [fieldsGroupEditing, setFieldsGroupEditing] = useState<string>();
-
-  const handleToggleFieldsGroupToEditing = (fieldGroupName: string) => {
-    setFieldsGroupEditing(fieldGroupName);
-  };
 
   return {
     fieldByGroup,
     targetTab,
-    handleToggleFieldsGroupToEditing,
     fieldsGroupEditing,
-    fieldsGroups,
-    handleToggleModal,
-    isShowModal,
   };
 }

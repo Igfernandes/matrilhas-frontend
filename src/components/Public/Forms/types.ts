@@ -1,5 +1,5 @@
-import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
+import { FormsShape } from "@type/Forms";
 
-export type FieldsPageProps = {
-  fields: Array<FieldShape>;
+export type FormPageProps = {
+  form: FormsShape;
 };

@@ -30,9 +30,9 @@ export function ModalFormUsersGroup({
       handleModal={onModal}
     >
       <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(submit)} className="w-[424px]">
+        <form onSubmit={handleSubmit(submit)} className="w-full md:w-[424px]">
           <div className="form-title mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("manager_user.modal.group.text_insert_name")}
               </strong>
@@ -48,7 +48,7 @@ export function ModalFormUsersGroup({
             />
           </div>
           <div className="form-title mt-6 mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>
                 {i18n("manager_user.modal.group.text_select_permissions")}
               </strong>
@@ -67,12 +67,12 @@ export function ModalFormUsersGroup({
           <div className="form-btn flex justify-end pt-4 border-t-2 border-secondary">
             <div>
               <Button
-                className="border-secondary border-2 px-4"
+                className="border-secondary border-2 px-4 w-1/2 md:w-auto"
                 text={i18n("words.cancel")}
                 onClick={() => onModal(false)}
               />
             </div>
-            <div className="w-[25%] ml-5">
+            <div className="w-1/2 md:w-[25%] ml-5">
               <Button
                 type="submit"
                 isLoading={isLoading}

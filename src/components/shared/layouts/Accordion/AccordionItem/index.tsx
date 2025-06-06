@@ -10,5 +10,5 @@ export function AccordionItem({ children }: Props) {
 
   hasChildrenRequired(children);
 
-  return <li className="accordion-item">{children}</li>;
+  return <li className="accordion-item relative z-0">{children}</li>;
 }

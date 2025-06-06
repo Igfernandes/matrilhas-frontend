@@ -1,4 +1,4 @@
-import { ServicesForm } from "@components/Private/ServicesForm";
+import { ServicesForm } from "@components/Private/Services/Forms";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 
 export default function ServicesCreate() {

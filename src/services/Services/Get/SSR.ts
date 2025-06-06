@@ -10,11 +10,12 @@ export async function getServices(
 ): Promise<ServicesShape[] | ServicesShape> {
   const { id, ...query } = request ?? {};
 
-  const { services } = API_ROUTES;
+  const { serviceById } = API_ROUTES;
+
   const { data } = await axios.get<string>(
     setQueries({
       url: setParams({
-        url: services,
+        url: serviceById,
         data: {
           id,
         },

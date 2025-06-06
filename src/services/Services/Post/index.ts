@@ -8,11 +8,16 @@ export function usePostServicesService() {
   const { services } = API_ROUTES;
 
   async function postCreateServices(payload: PostCreateServicesPayload) {
-    if (Array.isArray(payload.photo) && payload.photo.length > 0)
-      payload["photo"] = payload.photo[0];
+    let photo = null;
+
+    if (
+      payload.photo instanceof FileList &&
+      Array.from(payload.photo).length > 0
+    )
+      photo = payload.photo[0];
     else delete payload["photo"];
 
-    return axios.post(services, getPayloadFormData(payload));
+    return axios.post(services, getPayloadFormData({ ...payload, photo }));
   }
 
   return {

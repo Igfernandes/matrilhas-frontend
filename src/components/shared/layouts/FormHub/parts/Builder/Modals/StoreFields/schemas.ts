@@ -14,6 +14,7 @@ export const StoreFieldsSchema = z.object({
   type: z
     .enum(["TEXT", "COLOR", "NUMBER", "DATE", "DATETIME-LOCAL", "FILE"])
     .default("TEXT"),
+  hasContinueRegister: z.boolean(),
   value: z
     .string({ required_error: i18n("errors.fields.required") })
     .optional(),

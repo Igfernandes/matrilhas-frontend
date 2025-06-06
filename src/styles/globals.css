@@ -31,7 +31,18 @@ body {
   padding-right: 0.3rem;
 }
 
+*::-webkit-scrollbar-button {
+  display: none;
+}
+
 /* Largura da barra de rolagem */
 .only-arrows {
   scrollbar-color: #fff transparent;
+}
+
+.timeCalendar .rbc-event {
+  padding: 0 !important;
+}
+.timeCalendar .rbc-time-content .rbc-event-label {
+  display: none !important;
 }

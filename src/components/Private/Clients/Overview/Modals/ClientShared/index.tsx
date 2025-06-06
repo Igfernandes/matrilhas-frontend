@@ -19,9 +19,9 @@ export function ClientSharedModal({
   return (
     <Modal title={title} isShowModal={isShowModal} handleModal={onModal}>
       <FormProvider {...formMethods}>
-        <form className="w-[424px]">
+        <form className="md:w-[424px]">
           <div className="form-title mb-4">
-            <h4 className="text-lg">
+            <h4 className="text-sm md:text-lg">
               <strong>{i18n("clients.modal.shared.text_insert_email")}</strong>
             </h4>
           </div>
@@ -36,7 +36,7 @@ export function ClientSharedModal({
           </div>
           <div className="my-6">
             <div className="form-title mt-6 mb-4">
-              <h4 className="text-lg">
+              <h4 className="text-sm md:text-lg">
                 <strong>
                   {i18n("clients.modal.shared.text_select_information")}
                 </strong>

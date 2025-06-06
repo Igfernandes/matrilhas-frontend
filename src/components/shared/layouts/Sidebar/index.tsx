@@ -16,7 +16,9 @@ export function Sidebar({ handleToggleSidebar, showSidebar }: Props) {
   const [indentValue, setIndentValue] = useState<string>();
 
   useEffect(() => {
-    setIndentValue(screenType === "MOBILE" ? "-100vw" : "-15rem");
+    setIndentValue(
+      ["TABLET", "MOBILE"].includes(screenType ?? "") ? "-100vw" : "-15rem"
+    );
   }, [screenType]);
 
   return (

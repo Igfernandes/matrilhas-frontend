@@ -1,4 +1,4 @@
-import { OptionsFieldTabTarget } from "../../../context/types";
+import { OptionsFieldTabTarget } from "../../../context/Tabs/types";
 
 type Props = {
   targetTab: OptionsFieldTabTarget;

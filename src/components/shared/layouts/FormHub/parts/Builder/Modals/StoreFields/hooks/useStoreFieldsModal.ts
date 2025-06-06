@@ -1,7 +1,7 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { StoreFieldsPayload, StoreFieldsSchema } from "../schemas";
 import usePostCreateFields from "@services/Fields/Post/usePostCreateFields";
-import { useFieldContext } from "@components/shared/layouts/FormHub/context";
+import { useFieldContext } from "@components/shared/layouts/FormHub/context/Fields";
 
 type Props = {
   handleModal: (isShow: boolean) => void;
@@ -33,8 +33,11 @@ export function useStoreFieldsModal({ handleModal }: Props) {
       is_sensitive: is_sensitive == "YES",
       group_id: parseInt(group),
     }).then(() => {
-      handleModal(false);
+      const hasContinueRegister = formMethods.watch("hasContinueRegister");
       formMethods.reset();
+      formMethods.setValue("hasContinueRegister", hasContinueRegister);
+
+      if (hasContinueRegister === false) handleModal(false);
     });
   };
 

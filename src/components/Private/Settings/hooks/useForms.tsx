@@ -1,7 +1,7 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { SettingsPayload, SettingsSchema } from "../schemas";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
-import usePutUsers from "@services/Users/Put/usePostCreateUsers";
+import usePutUsers from "@services/Users/Put/usePutUsers";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { getCPFFormatted, getNumberFormatted } from "@helpers/string";
@@ -14,7 +14,7 @@ export function useForms() {
   const { formMethods, handleSubmit, errors } = useFormRules<SettingsPayload>({
     schema: SettingsSchema,
   });
-  const { mutateAsync: putUsers } = usePutUsers();
+  const { mutateAsync: putUsers, isPending } = usePutUsers();
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
   const submit = ({ birthdate, ...payload }: SettingsPayload) => {
@@ -51,5 +51,6 @@ export function useForms() {
     userAuth,
     isShowModal,
     handleToggleModel,
+    isPending
   };
 }

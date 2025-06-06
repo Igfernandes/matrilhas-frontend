@@ -1,6 +1,6 @@
 import { bgColors } from "@assets/colors/colors";
 import { useForms } from "./hooks/useForms";
-import { InfoBoard } from "@components/shared/forms/InfoBoard";
+import { InfoBoard } from "@components/shared/forms/InfoBoard/form";
 import { TInput } from "@components/shared/forms/InfoBoard/fields/Input";
 import i18n from "@configs/i18n";
 import dayjs from "dayjs";
@@ -24,21 +24,16 @@ export function SettingsForms() {
     errors,
     handleToggleModel,
     isShowModal,
+    isPending,
   } = useForms();
 
   return (
     <div>
-      <InfoBoard formMethods={formMethods} submit={submit}>
-        <TInput
-          label={"ID"}
-          name={"id"}
-          dataTestId="id"
-          disabled
-          style={{
-            background: bgColors.white,
-          }}
-          defaultValue={userAuth?.id}
-        />
+      <InfoBoard
+        formMethods={formMethods}
+        submit={submit}
+        isLoading={isPending}
+      >
         <TInput
           label={i18n("words.name")}
           name={"name"}

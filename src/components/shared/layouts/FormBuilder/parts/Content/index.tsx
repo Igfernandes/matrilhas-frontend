@@ -24,7 +24,7 @@ export function FormBuilderContent() {
     >
       <div
         ref={setNodeRef}
-        className="canvas w-[70%] ml-2"
+        className="canvas w-full md:w-[70%] min-h-[50vh] mt-6 md:ml-2"
         style={{
           border: "2px dashed #ccc",
           display: "flex",

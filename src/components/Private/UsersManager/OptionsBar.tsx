@@ -13,15 +13,15 @@ export function OptionsBar({ handleSearch }: Props) {
 
   return (
     <div>
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between mb-6 flex-wrap md:flex-nowrap">
         <Search
           label={i18n("words.research")}
           dataTestId="users"
           handleSearch={handleSearch}
-          className="w-[25%]"
+          className="w-full md:w-[25%]"
         />
-        <div className="w-[75%] flex justify-end">
-          <div className="mx-2">
+        <div className="w-full mt-4 md:mt-0 md:w-[75%] flex justify-end flex-wrap md:flex-nowrap">
+          <div className="mx-2 w-full md:w-auto mb-3 md:mb-0">
             <Button
               className="border border-zinc-300 px-3 font-bold rounded-xl"
               text={i18n("words.create_user_groups")}
@@ -29,7 +29,7 @@ export function OptionsBar({ handleSearch }: Props) {
               onClick={() => handleToggleModal("DEFAULT_GROUP")}
             />
           </div>
-          <div className="mx-2">
+          <div className="mx-2 w-full md:w-auto">
             <Button
               className="border border-zinc-300 px-3 font-bold rounded-xl"
               text={i18n("words.invite_users")}

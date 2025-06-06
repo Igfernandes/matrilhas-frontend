@@ -1,7 +1,7 @@
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import { handleLogout } from "@helpers/handlers";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Logout() {

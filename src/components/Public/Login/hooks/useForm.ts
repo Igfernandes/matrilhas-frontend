@@ -10,7 +10,7 @@ const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY;
 
 export function useForm() {
   const { mutateAsync: postAuth } = usePostAuth();
-  const { token } = useRecaptcha(RECAPTCHA_KEY ?? "", "login");
+  const { token, handleLoaded } = useRecaptcha(RECAPTCHA_KEY ?? "", "login");
   const { formMethods, hasAllFilledFields } = useFormRules<Payload>({
     schema: loginFormSchema,
     exclude: ["rememberMe"],
@@ -23,6 +23,7 @@ export function useForm() {
   } = formMethods;
 
   const onSubmit = async ({ login, password, rememberMe }: PostAuthPayload) => {
+    await handleLoaded();
     postAuth({
       login,
       password,
@@ -30,7 +31,6 @@ export function useForm() {
       "g-recaptcha-response": token,
     });
   };
-
   /**
    * @function updateValueRememberMe
    * - A função é responsável por atualizar o valor no campo "rememberMe" com base na alteração de valores referentes ao
@@ -50,6 +50,6 @@ export function useForm() {
     hasAllFilledFields,
     isLoading: isSubmitting,
     updateValueRememberMe,
-    recaptchaToken: token
+    recaptchaToken: token,
   };
 }

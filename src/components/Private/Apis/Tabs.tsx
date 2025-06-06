@@ -12,8 +12,8 @@ export function TabsApis({ items, isActiveTab, handleToggleTab }: Props) {
           <li
             key={key}
             className={`${
-              item === isActiveTab ? "bg-white text-black" : "bg-red text-white"
-            } py-3 px-5 rounded-t-xl mx-2 hover:bg-white  hover:text-black cursor-pointer`}
+              item === isActiveTab ? "bg-red text-white" : "bg-white text-black"
+            } py-3 px-5 rounded-t-xl mx-2 hover:bg-red  hover:text-white cursor-pointer`}
             onClick={() => handleToggleTab(item)}
           >
             <span>{item}</span>

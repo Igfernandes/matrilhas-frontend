@@ -1,7 +1,7 @@
 import { MenuShape } from "@constants/menu/type";
 import { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from "react";
 import { Item } from "./Item";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { When } from "@components/utilities/When";
 
 type Props = DetailedHTMLProps<
@@ -21,11 +21,11 @@ export function Navbar({
   defaultActiveItem = "",
   ...rest
 }: Props) {
-  const { route } = useRouter();
+  const pathname = usePathname();
   const [isActiveItem, setIsActiveItem] = useState("");
 
   useEffect(() => {
-    const foundCurrentNavbarItem = menu.find((item) => item.link == route);
+    const foundCurrentNavbarItem = menu.find((item) => item.link == pathname);
 
     if (!foundCurrentNavbarItem && !defaultActiveItem) return;
     setIsActiveItem(foundCurrentNavbarItem?.title ?? defaultActiveItem);

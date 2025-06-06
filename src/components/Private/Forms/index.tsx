@@ -14,7 +14,7 @@ export function Forms({ step, form, onChangeFormFields }: Props) {
   return (
     <div className="mt-6 p-6 bg-white">
       <When value={step === 1}>
-        <Definitions />
+        <Definitions handleChangeFormFields={onChangeFormFields} />
       </When>
       <When value={step === 2}>
         <Customizations

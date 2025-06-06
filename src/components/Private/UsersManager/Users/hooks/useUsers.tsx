@@ -13,7 +13,8 @@ export function useUsers({ handleFilter, filter }: HookProps<UsersShape>) {
   const [tDataUsers, setTDataUsers] = useState<Array<Record<string, unknown>>>(
     []
   );
-  const { data } = useGetUsers();
+  const { data: usersData } = useGetUsers();
+  const [users, setUsers] = useState<Array<UsersShape>>([]);
 
   const tHeadsUser = useRef<Array<string>>([
     "ID",
@@ -67,18 +68,22 @@ export function useUsers({ handleFilter, filter }: HookProps<UsersShape>) {
 
   /** Adding news keys of table and the lasted column to table data users */
   useEffect(() => {
-    if (!data) return setTDataUsers([]);
+    if (!usersData) return setTDataUsers([]);
 
-    const usersFiltered = data.filter((tDataUser) => handleFilter(tDataUser));
+    const usersFiltered = usersData.filter((tDataUser) =>
+      handleFilter(tDataUser)
+    );
     const tDataUser = usersFiltered.map(updateUserForTable);
 
+    setUsers(usersData);
     setTDataUsers(tDataUser);
-  }, [data, filter]);
+  }, [usersData, filter]);
 
   return {
     tDataUsers,
     tHeadsUser,
     handleToggleModal,
     modal,
+    users,
   };
 }

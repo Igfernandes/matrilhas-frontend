@@ -17,13 +17,18 @@ export function TInput({
   className,
   action,
   errors,
+  type,
   ...props
 }: Props) {
   const { register } = useFormContext();
 
   return (
-    <tr className="border-t-2 border-t-zinc-200">
-      <td className="py-2 pl-4">
+    <tr
+      className={`border-t-2 border-t-zinc-200 ${
+        type == "hidden" ? "hidden" : ""
+      }`}
+    >
+      <td className="py-2 pl-4 w-2/6">
         <strong>{label}</strong>
       </td>
       <td className="py-2">
@@ -33,6 +38,7 @@ export function TInput({
             data-testid={dataTestId}
             {...register(name)}
             {...props}
+            type={type}
           />
 
           <When value={!!action}>{action}</When>

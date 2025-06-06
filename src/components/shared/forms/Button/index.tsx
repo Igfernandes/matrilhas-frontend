@@ -20,7 +20,7 @@ export function Button({
   const { isBtnSubmit } = useButton();
   const classNameBtn = `${className} flex items-center 
   justify-center text-white bg-red active:scale-[95%] 
-  duration-75 w-full sm:w-[82.98%] px-3 min-h-[48px] rounded-md mx-auto 
+  duration-75 w-full px-3 min-h-[48px] rounded-md mx-auto 
   disabled:bg-disable disabled:text-disabled cursor-pointer`;
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function Button({
         <When value={isLoadingForm}>
           <RotateClockwise
             fill="gray"
-            className="absolute top-3 left-28 animate-spin"
+            className="absolute top-3 right-5 animate-spin"
           />
         </When>
         <input

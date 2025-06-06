@@ -15,11 +15,12 @@ export function useModalAlterPassword({ handleModal }: Props) {
   const { userAuth } = useUserNavigationContext();
   const { mutateAsync: patchPassword } = usePatchPasswordUsers();
 
-  console.log(errors)
   const submit = (payload: AlterPasswordPayload) => {
-    patchPassword({ ...payload, id: userAuth?.id as number }).then(() =>
-      handleModal(false)
-    );
+    patchPassword({ ...payload, id: userAuth?.id as number })
+      .then(() => handleModal(false))
+      .then(() => {
+        formMethods.reset();
+      });
   };
 
   return {

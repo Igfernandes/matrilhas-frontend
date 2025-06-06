@@ -1,4 +1,7 @@
-import FieldsProvider from "./context";
+import FieldProvider from "./context/Fields";
+import FieldsGroupsProvider from "./context/FieldsGroups";
+import ModalProvider from "./context/Modal";
+import TabsProvider from "./context/Tabs";
 import { FieldsTabs } from "./parts/FieldsTabs";
 import { Form } from "./parts/Form";
 import { OptionsBar } from "./parts/OptionsBar";
@@ -11,18 +14,31 @@ export function FormHub({
   handleShared,
   entityType,
   handleSubmitFields,
+  handleUpdateClient,
 }: FormBuildProps) {
   return (
-    <FieldsProvider
-      handleSubmitFields={handleSubmitFields}
-      entityType={entityType}
-      entity={entity}
-      fieldsRelation={fields}
-      Groups={groups}
-    >
-      <OptionsBar handleShared={handleShared} />
-      <FieldsTabs />
-      <Form />
-    </FieldsProvider>
+    <div className="relative z-0">
+      <TabsProvider>
+        <ModalProvider>
+          <FieldsGroupsProvider groups={groups}>
+            <FieldProvider
+              entity={entity}
+              entityType={entityType}
+              fieldsRelation={fields}
+              handleSubmitFields={handleSubmitFields}
+            >
+              <OptionsBar
+                handleShared={handleShared}
+                handleUpdateClient={handleUpdateClient}
+              />
+              <FieldsTabs />
+              <div className="relative z-10">
+                <Form />
+              </div>
+            </FieldProvider>
+          </FieldsGroupsProvider>
+        </ModalProvider>
+      </TabsProvider>
+    </div>
   );
 }

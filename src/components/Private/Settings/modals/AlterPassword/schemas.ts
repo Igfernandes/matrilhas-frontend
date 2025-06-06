@@ -11,14 +11,14 @@ export const alterPasswordFormSchema = z
   .object({
     current_password: z
       .string({ required_error: i18n("errors.fields.required") })
-      .min(8)
+      .min(8, i18n("errors.fields.has_min_eight_letters"))
       .refine(hasSomeLetterUppercase)
       .refine(hasSomeLetterLowercase)
       .refine(hasSomeNumber)
       .refine(hasSomeSpecialCharacter),
     password: z
       .string({ required_error: i18n("errors.fields.required") })
-      .min(8)
+      .min(8, i18n("errors.fields.has_min_eight_letters"))
       .refine(hasSomeLetterUppercase)
       .refine(hasSomeLetterLowercase)
       .refine(hasSomeNumber)

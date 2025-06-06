@@ -1,6 +1,6 @@
 import { FieldsGroupsShape } from "@type/Fields/fieldsGroups";
 import { FieldsShape, ScopeFields } from "../../../../types/Fields";
-import { PayloadFieldValues, ViewedEntityShape } from "./context/types";
+import { PayloadFieldValues, ViewedEntityShape } from "./context/Fields/types";
 
 export type FormBuildProps = {
   handleShared: (entityId: number) => void;
@@ -9,4 +9,5 @@ export type FormBuildProps = {
   groups: Array<FieldsGroupsShape>;
   entityType: ScopeFields;
   handleSubmitFields: (viewedId: number, payload: PayloadFieldValues) => void;
+  handleUpdateClient: (isShow: boolean) => void;
 };

@@ -11,6 +11,16 @@ export const handleMaskDate = (event: React.ChangeEvent<HTMLInputElement>) => {
   event.target.value = value;
 };
 
+export const handleMaskTime = (event: React.ChangeEvent<HTMLInputElement>) => {
+  let value = event.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+
+  if (value.length > 2) {
+    value = value.slice(0, 2) + ":" + value.slice(2.4);
+  }
+
+  event.target.value = value;
+};
+
 export function isMonthValid(month: number) {
   return month > 0 && month <= 12;
 }

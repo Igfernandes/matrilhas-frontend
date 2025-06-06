@@ -1,3 +1,4 @@
+import { STATUS_SERVICE } from "@constants/http";
 import { SetParamsProps, SetQueriesProps } from "./types";
 
 export function setQueries({ url, query }: SetQueriesProps) {
@@ -30,4 +31,11 @@ export function setParams({ url, data }: SetParamsProps) {
   urlWithParam = urlWithParam.replace(/ *\{[^)]*\} */g, "");
 
   return urlWithParam;
+}
+
+export function isErrorRequest(response: Record<string, unknown>) {
+  return (
+    Object.hasOwn(response, "errors") ||
+    response.code === STATUS_SERVICE.NOT_FOUND
+  );
 }

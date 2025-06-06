@@ -23,7 +23,7 @@ export function useModalForm({ onModal, groups }: Props) {
     },
   });
   const { modal } = useModalContext();
-  const { data: dataGroupPermissions } = useGetGroupsPermissions({
+  const { data: dataGroupPermissions, isFetched } = useGetGroupsPermissions({
     id: modal.id as number,
   });
   const {
@@ -63,7 +63,7 @@ export function useModalForm({ onModal, groups }: Props) {
 
   useEffect(() => {
     setPermissions(data ?? []);
-  }, [data]);
+  }, [data, modal]);
 
   useEffect(() => {
     const currentGroup = groups.find((group) => group.id === modal.id);
@@ -72,14 +72,15 @@ export function useModalForm({ onModal, groups }: Props) {
     const group = dataGroupPermissions?.find(
       (groupPermissions) => groupPermissions.id === modal.id
     );
-    if (!group) return;
+    
+    if (!group) return setValue("permissions", []);;
 
     const permissionsId = group.permissions.map((permission) =>
       String(permission.id)
     );
 
     setValue("permissions", permissionsId);
-  }, [modal, groups]);
+  }, [modal, groups, isFetched]);
 
   return {
     formMethods,

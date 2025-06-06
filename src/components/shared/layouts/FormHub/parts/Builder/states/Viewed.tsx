@@ -24,7 +24,7 @@ export function FormBuilderViewed({ isEditing, fields }: Props) {
                   <input
                     id={`field_${field.id}`}
                     type={field.type ?? "text"}
-                    value={field.value}
+                    value={field.value ?? ""}
                     disabled={true}
                     required={!!field.is_required}
                     className="w-full border-none text-secondary"

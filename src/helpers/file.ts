@@ -13,3 +13,26 @@ export const formatFileSize = (file?: File) => {
 export function isFileList(value: unknown): value is FileList {
   return typeof value === "object" && value instanceof FileList;
 }
+
+export function fileToBase64(file: File) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result); // Inclui o "data:image/jpeg;base64,..."
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+export function getFileName(file?: string) {
+  if (!file) return;
+  const fileParts = file.split("\\");
+
+  return fileParts[fileParts.length - 1] || "";
+}
+
+export function getFileUrl(files: FileList) {
+  const file = files?.[0];
+  if (file) return URL.createObjectURL(file);
+
+  return "";
+}

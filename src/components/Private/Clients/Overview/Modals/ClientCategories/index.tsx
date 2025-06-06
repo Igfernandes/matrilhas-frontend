@@ -20,9 +20,9 @@ export function ClientCategoriesModal({
   return (
     <Modal title={title} isShowModal={isShowModal} handleModal={onModal}>
       <FormProvider {...formMethods}>
-        <form onSubmit={formMethods.handleSubmit(submit)} className="w-[424px]">
+        <form onSubmit={formMethods.handleSubmit(submit)} className=" md:w-[424px]">
           <div className="form-title mb-4">
-            <h4 className="text-lg">
+            <h4 className="md:text-lg">
               <strong>
                 {i18n("clients.modal.category.text_select_category")}
               </strong>
@@ -44,14 +44,14 @@ export function ClientCategoriesModal({
           </div>
 
           <div className="form-btn flex justify-end pt-4 border-t-2 border-secondary">
-            <div>
+            <div className="w-1/2 mr-1 md:mr-0">
               <Button
                 className="border-secondary border-2 px-4"
                 text={i18n("words.cancel")}
                 onClick={() => onModal(false)}
               />
             </div>
-            <div className="w-[25%] ml-5">
+            <div className="w-1/2 md:w-[25%] md:ml-5">
               <Button
                 type="submit"
                 className="bg-red text-white"

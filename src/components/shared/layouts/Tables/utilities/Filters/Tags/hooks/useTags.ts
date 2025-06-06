@@ -22,6 +22,7 @@ export function useTags<TableData extends Array<Record<string, unknown>>>({
   data,
 }: Props<TableData>) {
   const [tags, setTags] = useState<TagsShape[]>([]);
+  const [targetTag, setTargetTag] = useState<string>();
   const { handleChangeFilters, handleChangeEvent } = useTableContext();
   const totalTags = useRef<number>(0);
 
@@ -67,6 +68,7 @@ export function useTags<TableData extends Array<Record<string, unknown>>>({
     handleChangeFilters({
       tags: (data: TableDataShape) => handleFilterByTag(data, tag),
     });
+    setTargetTag(tag)
     handleChangeEvent(true);
   };
 
@@ -83,5 +85,6 @@ export function useTags<TableData extends Array<Record<string, unknown>>>({
     totalTags,
     handleFilterByTag,
     handleChangeTargetTag,
+    targetTag
   };
 }

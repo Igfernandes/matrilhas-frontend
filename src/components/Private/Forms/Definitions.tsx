@@ -1,48 +1,26 @@
 import { Input } from "@components/shared/forms/Input";
-import { Select } from "@components/shared/forms/Select";
 import { TextArea } from "@components/shared/forms/TextArea";
 import i18n from "@configs/i18n";
 import { useFormContext } from "react-hook-form";
 import { FormsPayload } from "./schema";
-import useGetUsers from "@services/Users/Get/useGetUsers";
-import { useEffect, useState } from "react";
-import { UsersShape } from "@type/Users/Users";
+import { Select } from "@components/shared/forms/Select";
+import { useFormsData } from "./hooks/useFormsData";
+import { When } from "@components/utilities/When";
+import { ComponentsProps } from "./type";
 
-export function Definitions() {
+type Props = Pick<ComponentsProps, "handleChangeFormFields">;
+
+export function Definitions({ handleChangeFormFields }: Props) {
+  const { forms } = useFormsData();
   const {
     register,
     formState: { errors },
   } = useFormContext<FormsPayload>();
-  const { data: dataUsers } = useGetUsers();
-  const [users, setUsers] = useState<UsersShape[]>([]);
-
-  useEffect(() => {
-    setUsers(dataUsers ?? []);
-  }, [dataUsers]);
 
   return (
     <div className="form-definitions">
       <div className="form-row flex flex-wrap mb-4 justify-between">
-        <div className="form-group w-full lg:w-[49%]">
-          <Select
-            {...register("type")}
-            options={[
-              {
-                text: i18n("words.people_physical"),
-                value: "PEOPLE",
-              },
-              {
-                text: i18n("words.people_legal"),
-                value: "COMPANY",
-              },
-            ]}
-            label={i18n(`words.type_people`)}
-            dataTestId="type_people"
-            required={true}
-            errors={errors.type}
-          />
-        </div>
-        <div className="form-group w-full lg:w-[49%]">
+        <div className="form-group w-full">
           <Input
             {...register("name")}
             label={i18n(`words.form_name`)}
@@ -52,20 +30,39 @@ export function Definitions() {
           />
         </div>
       </div>
-      <div className="mb-5">
-        <div className="mb-1">
-          <h4>{`Escolha abaixo os clientes impedidos de preenchimento desse formulário:`}</h4>
-        </div>
-        <Select
-          {...register("users")}
-          options={users.map((user) => ({
-            text: user.name,
-            value: user.id,
-          }))}
-          label={i18n(`words.exclude_people`)}
-          dataTestId="exclude_people"
-          multiple={true}
-        />
+      <div className="form-group mb-4">
+        <When value={forms.length > 0}>
+          <Select
+            {...register("template")}
+            options={[
+              {
+                text: "--",
+                value: "",
+              },
+              ...forms.map((form) => ({
+                text: form.name,
+                value: form.id,
+              })),
+            ]}
+            onChange={(ev) => {
+              const formId = ev.currentTarget.value;
+              if (!formId) handleChangeFormFields([]);
+
+              const targetForm = forms.find((form) => form.id === +formId);
+
+              if (!targetForm?.components) return;
+
+              handleChangeFormFields(JSON.parse(targetForm?.components));
+            }}
+            dataTestId="templates-forms"
+            label={i18n("words.templates")}
+          />
+        </When>
+        <When value={forms.length == 0}>
+          <span className="bg-disabled border-2 border-tertiary block p-4">
+            {i18n("words.not_found_templates")}
+          </span>
+        </When>
       </div>
       <div className="form-group">
         <TextArea

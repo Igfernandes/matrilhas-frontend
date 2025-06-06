@@ -13,7 +13,7 @@ export function FormBuilder({ form, onChangeForm }: FormBuilderProps) {
   return (
     <div className="form-builder relative z-50">
       <FormBuilderProvider onChangeForm={onChangeForm} form={form}>
-        <div className="builder-content flex relative z-0">
+        <div className="builder-content flex flex-wrap md:flex-nowrap relative z-0">
           <FormBuilderSidebar />
           <FormBuilderContent />
         </div>

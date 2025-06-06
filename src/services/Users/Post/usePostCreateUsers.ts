@@ -5,7 +5,7 @@ import i18n from "@configs/i18n";
 import { AxiosError } from "axios";
 import { usePostUsersService } from ".";
 import { PostCreateUsersPayload } from "./type";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 
 export default function usePostCreateUsers() {
@@ -26,8 +26,8 @@ export default function usePostCreateUsers() {
     mutationFn: handleMutate,
     onSuccess: () => {
       dispatchSnackbar({
-        message: i18n("services.create.success_text"),
-        title: i18n("services.create.success_title"),
+        message: i18n("users.create.success_text"),
+        title: i18n("users.create.success_title"),
         type: "success",
       });
       queryClient.invalidateQueries({
