@@ -1,0 +1,90 @@
+import { Button } from "../../fields/Button";
+import { Input } from "../../fields/Input";
+import { FieldShape } from "../../type";
+
+export const classNameDefault = "h-7 py-1 px-2 ";
+
+export const fieldsSimple = {
+  text: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="text"
+      className={`${classNameDefault} w-full ${className}`}
+      {...props}
+    />
+  ),
+  radio: ({ className, ...props }: FieldShape) => (
+    <input
+      type="radio"
+      className={`${classNameDefault} ml-2 ${className}`}
+      {...props}
+    />
+  ),
+  checkbox: ({ className, ...props }: FieldShape) => (
+    <input
+      type="checkbox"
+      className={`${classNameDefault} ml-2 ${className}`}
+      {...props}
+    />
+  ),
+  select: ({ className, ...props }: FieldShape) => (
+    <select
+      className={`${classNameDefault} w-full m-2 ${className}`}
+      {...props}
+    />
+  ),
+  date: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="date"
+      className={`${classNameDefault} w-full ${className}`}
+      {...props}
+    />
+  ),
+  "datetime-local": ({ className, ...props }: FieldShape) => (
+    <Input
+      type="datetime-local"
+      className={`${classNameDefault} w-full ${className}`}
+      {...props}
+    />
+  ),
+  color: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="color"
+      className={`${classNameDefault} w-full ${className}`}
+      {...props}
+    />
+  ),
+  file: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="file"
+      className={`${classNameDefault} w-full h-auto ${className}`}
+      {...props}
+    />
+  ),
+  hidden: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="hidden"
+      className={`${classNameDefault} w-full ${className}`}
+      {...props}
+    />
+  ),
+  number: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="number"
+      className={`${classNameDefault} w-full ${className}`}
+      {...props}
+    />
+  ),
+  url: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="url"
+      className={`${classNameDefault} ${className}`}
+      {...props}
+    />
+  ),
+  button: ({ className, ...props }: FieldShape) => (
+    <Button
+      className={`${classNameDefault} ${className}`}
+      {...props}
+    />
+  ),
+};

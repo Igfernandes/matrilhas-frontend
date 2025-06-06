@@ -1,0 +1,103 @@
+import { useFormContext } from "react-hook-form";
+import i18n from "@configs/i18n";
+import { Select } from "@components/shared/forms/Select";
+import { Input } from "@components/shared/forms/Input";
+import { TextEdit } from "@components/shared/forms/TextEdit";
+import { ServicesPayload } from "./Schemas";
+import { File } from "@components/shared/forms/File";
+import { getFileName } from "@helpers/file";
+import { ServicesShape } from "@type/Services";
+
+type Props = {
+  service?: ServicesShape;
+};
+
+export function DefinitionsForm({ service }: Props) {
+  const {
+    register,
+    getValues,
+    formState: { errors },
+  } = useFormContext<ServicesPayload>();
+  return (
+    <>
+      <div className="form-group w-full mb-4 lg:mb-6">
+        <Input
+          {...register("name")}
+          dataTestId="name"
+          label={i18n("words.service_name")}
+          required={true}
+          errors={errors.name}
+        />
+      </div>
+      <div className="form-row flex flex-wrap lg:flex-none justify-between">
+        <div className="form-select w-full lg:w-[48%]">
+          <Select
+            {...register("type")}
+            dataTestId="type"
+            label={i18n(`words.service_type`)}
+            options={[
+              {
+                text: i18n("words.appellant"),
+                value: "APPELLANT",
+              },
+              {
+                text: i18n("words.punctual"),
+                value: "PUNCTUAL",
+              },
+            ]}
+            required={true}
+            errors={errors.type}
+          />
+        </div>
+        <div className="form-select w-full lg:w-[48%]">
+          <Input
+            {...register("expired_at")}
+            dataTestId="expired_at"
+            type="datetime-local"
+            label={i18n(`words.expired_at`)}
+            errors={errors.expired_at}
+          />
+        </div>
+      </div>
+      <div className="form-row flex flex-wrap lg:flex-none justify-between mt-6">
+        <div className="form-select w-full lg:w-[48%]">
+          <Input
+            {...register("realized_at")}
+            dataTestId="realized_at"
+            type="datetime-local"
+            label={i18n(`words.realized_at`)}
+            errors={errors.realized_at}
+          />
+        </div>
+        <div className="form-select w-full lg:w-[48%]">
+          <File
+            {...register("photo")}
+            dataTestId="service_image"
+            label={i18n(`words.service_image`)}
+            accept=".jpg,.jpge,.png"
+            defaultValue={getFileName(service?.photo)}
+            errors={errors.photo}
+          />
+        </div>
+      </div>
+      <div className="mt-6">
+        <Input
+          {...register("address")}
+          dataTestId="address"
+          label={i18n(`words.address`)}
+          errors={errors.address}
+        />
+      </div>
+      <div className="form-row mt-6">
+        <TextEdit
+          {...register("description")}
+          dataTestId="describe"
+          label={i18n(`words.describe`)}
+          defaultValue={getValues("description")}
+          placeholder="Escreva detalhes sobre o passeio"
+          errors={errors.description}
+        />
+      </div>
+    </>
+  );
+}
