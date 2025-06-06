@@ -4,7 +4,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ScheduleSchema, ScheduleUpdatePayload } from "../schemas";
 import { useEffect, useState } from "react";
 import useGetUsers from "@services/Users/Get/useGetUsers";
-import { UsersShape } from "@type/Users/Users";
+import { UsersShape } from "@type/Users";
 import usePostCreateSchedule from "@services/Schedule/Post/usePostCreateService";
 import { useModalContext } from "@contexts/Modal";
 

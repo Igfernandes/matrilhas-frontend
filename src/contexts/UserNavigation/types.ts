@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { UsersShape } from "../../types/Users/Users";
+import { UsersShape } from "../../types/Users";
 
 export type UserNavigationContextData = {
   userAuth?: UsersShape;

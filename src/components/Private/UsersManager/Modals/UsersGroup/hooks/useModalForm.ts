@@ -3,7 +3,7 @@ import { GroupModalSchema, UsersGroupPayload } from "../schemas";
 import useGetPermissions from "../../../../../../services/Permissions/Get/useGetClients";
 import { useEffect, useState } from "react";
 import usePostCreateGroup from "../../../../../../services/Users/Groups/Post/usePostCreateGroup";
-import { PermissionsShape } from "../../../../../../types/Permissions/Permissions";
+import { PermissionsShape } from "../../../../../../types/Permissions";
 import { UsersGroupShape } from "../../../../../../types/Users/UsersGroup";
 import { useModalContext } from "@contexts/Modal";
 import useGetGroupsPermissions from "../../../../../../services/Permissions/Groups/Get/useGetClients";

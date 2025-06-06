@@ -1,5 +1,5 @@
 import useGetClients from "@services/Clients/Get/useGetClients";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { useEffect, useState } from "react";
 
 export function useMessagesDispatcher() {

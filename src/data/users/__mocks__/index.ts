@@ -1,4 +1,4 @@
-import { UsersShape } from "../../../types/Users/Users";
+import { UsersShape } from "../../../types/Users";
 
 export const MOCK_USERS: Array<UsersShape> = [
   {

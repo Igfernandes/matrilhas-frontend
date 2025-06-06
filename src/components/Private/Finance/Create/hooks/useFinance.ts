@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import useGetClients from "@services/Clients/Get/useGetClients";
 
 export function useFinance() {

@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { ClientShape } from "../../../types/Clients/client";
+import { ClientShape } from "../../../types/Clients";
 
 export type HookClientsProps<ClientType> = {
   filter: string;

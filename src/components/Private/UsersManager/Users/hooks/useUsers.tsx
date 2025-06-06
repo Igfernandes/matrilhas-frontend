@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import { StatusText } from "@components/shared/others/StatusText";
 import { ButtonConfig } from "@components/shared/others/ButtonConfig";
-import { UsersShape } from "../../../../../types/Users/Users";
+import { UsersShape } from "../../../../../types/Users";
 import { HookProps, ModalUserOperationType, TDataUser } from "../../type";
 import { useModalContext } from "@contexts/Modal";
 import useGetUsers from "../../../../../services/Users/Get/useGetUsers";

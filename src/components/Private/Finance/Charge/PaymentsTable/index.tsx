@@ -3,7 +3,7 @@ import i18n from "@configs/i18n";
 import { usePaymentsTable } from "./hooks/usePaymentsTable";
 import { PaymentShape } from "@type/Payments";
 import { PaymentActions } from "./PaymentActions";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { getMoneyBrFormatted } from "@helpers/string";
 
 type Props = {

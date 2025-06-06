@@ -1,6 +1,6 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useAxios } from "@hooks/useAxios";
-import { UsersShape } from "../../../types/Users/Users";
+import { UsersShape } from "../../../types/Users";
 
 export default function useGetAuth() {
   const { users } = API_ROUTES;

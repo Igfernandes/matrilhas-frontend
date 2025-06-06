@@ -3,11 +3,11 @@ import i18n from "@configs/i18n";
 import { ChartOptions } from "chart.js";
 import { CategoryStaticData, ClientsByDDDStaticData } from "./type";
 import { getRandomColor } from "@helpers/colors";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { Feeds } from "@components/shared/layouts/Feeds";
 import { PolarGraphic } from "@components/shared/others/Graphics/PolarGraphic";
-import { InvitesShape } from "@type/Invites/invites";
+import { InvitesShape } from "@type/Invites";
 
 const sampleOptions: ChartOptions<"doughnut"> = {
   responsive: true,

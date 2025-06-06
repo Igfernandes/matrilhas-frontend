@@ -12,7 +12,7 @@ import { ClientActions } from "../ClientActions";
 import {
   ClientShape,
   UserCategoryData,
-} from "../../../../../types/Clients/client";
+} from "../../../../../types/Clients";
 import { useClientsData } from "./useClientsData";
 import useDeleteClient from "../../../../../services/Clients/Delete/useDeleteClient";
 import { DeleteClientPayload } from "../../../../../services/Clients/Delete/type";

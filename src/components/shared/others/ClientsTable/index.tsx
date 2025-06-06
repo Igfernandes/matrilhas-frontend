@@ -4,7 +4,7 @@ import { useClientsTable } from "../../../Private/Finance/Create/hooks/useClient
 import { ClientActions } from "./ClientActions";
 import { UserPlus } from "@assets/Icons/red/UserPlus";
 import { useModalContext } from "@contexts/Modal";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { Notice } from "@components/shared/others/Notice";
 import { getNumberFormatted } from "@helpers/string";
 

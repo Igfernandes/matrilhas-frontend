@@ -6,7 +6,7 @@ import { DispatcherUpdatePayload, DispatcherUpdateSchema } from "../schemas";
 import useGetClients from "@services/Clients/Get/useGetClients";
 import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
 import usePutMessagesDispatcher from "@services/MessagesDispatcher/Put/usePutMessagesDispatcher";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import useGetClientsDispatchers from "@services/Clients/Disptachers/Get/useGetClients";
 import { ClientsMessagesDispatcherShape } from "@type/MessagesDispatcherShape/ClientsMessagesDispatcher";
 

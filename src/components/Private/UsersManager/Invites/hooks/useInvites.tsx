@@ -3,7 +3,7 @@ import i18n from "@configs/i18n";
 import { HookProps, ModalUserOperationType, TDataInvite } from "../../type";
 import { ButtonConfig } from "@components/shared/others/ButtonConfig";
 import { useModalContext } from "@contexts/Modal";
-import { InvitesShape } from "../../../../../types/Invites/invites";
+import { InvitesShape } from "../../../../../types/Invites";
 import useGetUsersInvite from "../../../../../services/Invites/Get/Users/useGetUsersInvite";
 import dayjs from "dayjs";
 

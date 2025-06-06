@@ -1,4 +1,4 @@
-import { ClientShape } from "../../../types/Clients/client";
+import { ClientShape } from "../../../types/Clients";
 
 export type PostCreateClientPayload = Pick<
   ClientShape,

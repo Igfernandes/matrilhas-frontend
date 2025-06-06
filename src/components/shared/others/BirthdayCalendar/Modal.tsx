@@ -1,7 +1,7 @@
 import { Modal } from "@components/shared/layouts/Modal";
 import i18n from "@configs/i18n";
 import { useModalContext } from "@contexts/Modal";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 
 type Props = {
   clients: Array<ClientShape>;

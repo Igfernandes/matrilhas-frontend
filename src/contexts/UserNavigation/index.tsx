@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { UserNavigationContextData, UserNavigationProps } from "./types";
-import { UsersShape } from "../../types/Users/Users";
+import { UsersShape } from "../../types/Users";
 import useGetUserAuth from "../../services/Users/GetAuth/useGetUser";
 import { useRouter } from "next/navigation";
 import { publicRoutes } from "@configs/routes/Web/navigation";

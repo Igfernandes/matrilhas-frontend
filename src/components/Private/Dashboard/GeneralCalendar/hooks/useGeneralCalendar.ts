@@ -1,6 +1,6 @@
 import i18n from "@configs/i18n";
 import { ChargeShape } from "@type/Charges";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { ServicesShape } from "@type/Services";
 import moment from "moment";
 

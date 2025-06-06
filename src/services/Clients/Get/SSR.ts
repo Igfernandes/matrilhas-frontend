@@ -2,7 +2,7 @@ import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setQueries } from "@helpers/routes";
 import { GetClientsRequest } from "./types";
-import { ClientShape } from "../../../types/Clients/client";
+import { ClientShape } from "../../../types/Clients";
 
 export async function getClients(
   tokenNavigation: string,

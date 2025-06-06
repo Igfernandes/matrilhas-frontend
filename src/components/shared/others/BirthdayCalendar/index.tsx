@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import i18n from "@configs/i18n";
 import { Calendar } from "../Calendar";
 import { helperRemoveDuplicatesInArrayOfObjects } from "@helpers/array";

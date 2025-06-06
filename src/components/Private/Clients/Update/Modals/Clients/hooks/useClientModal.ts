@@ -6,7 +6,7 @@ import { ClientCategoriesShape } from "@type/Clients/ClientCategories";
 import { useEffect, useState } from "react";
 import useGetCategories from "@services/Clients/Categories/Get/useGetCategories";
 import usePutClient from "@services/Clients/Put/usePostCreateClient";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { useRouter } from "next/router";
 
 dayjs.extend(customParseFormat);

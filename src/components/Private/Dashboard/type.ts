@@ -1,9 +1,9 @@
 import { CategoryData } from "@services/Clients/Get/types";
 import { ChargeShape } from "@type/Charges";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { FormsShape } from "@type/Forms";
 import { ServicesShape } from "@type/Services";
-import { UsersShape } from "@type/Users/Users";
+import { UsersShape } from "@type/Users";
 
 export type CategoryStaticData = {
   clients?: number;

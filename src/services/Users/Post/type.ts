@@ -1,4 +1,4 @@
-import { UsersShape } from "@type/Users/Users";
+import { UsersShape } from "@type/Users";
 
 export type PostCreateUsersPayload = Pick<UsersShape, "cpf" | "birthdate"> & {
   password: string;

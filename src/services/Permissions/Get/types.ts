@@ -1,4 +1,4 @@
-import { PermissionsTypes } from "../../../types/Permissions/Permissions";
+import { PermissionsTypes } from "../../../types/Permissions";
 
 export type GetPermissionsRequest = {
   name?: string;

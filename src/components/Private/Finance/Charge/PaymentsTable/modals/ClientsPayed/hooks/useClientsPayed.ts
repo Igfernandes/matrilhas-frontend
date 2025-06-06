@@ -1,4 +1,4 @@
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { ClientsPayedPayload } from "../type";
 import { useModalContext } from "@contexts/Modal";
 import { useFormRules } from "@hooks/Forms/useFormRules";

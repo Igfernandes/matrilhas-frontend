@@ -5,7 +5,7 @@ import { ClientsTable } from "@components/shared/others/ClientsTable";
 import { Definitions } from "@components/Private/Finance/Create/Definitions";
 import { Button } from "@components/shared/layouts/Button";
 import { useCharge } from "./hooks/useCharge";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { useRouter } from "next/router";
 
 type Props = {

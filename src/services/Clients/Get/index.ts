@@ -2,7 +2,7 @@ import { API_ROUTES } from "@configs/routes/Api/api";
 import { GetClientsRequest } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { ClientShape } from "../../../types/Clients/client";
+import { ClientShape } from "../../../types/Clients";
 
 export default function useGet() {
   const { clients } = API_ROUTES;

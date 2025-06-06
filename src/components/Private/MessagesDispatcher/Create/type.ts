@@ -1,4 +1,4 @@
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 
 export type ClientsProps = {
   clients: ClientShape[];

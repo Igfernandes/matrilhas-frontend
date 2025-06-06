@@ -6,7 +6,7 @@ import { useModalContext } from "@contexts/Modal";
 import { FormProvider } from "react-hook-form";
 import i18n from "@configs/i18n";
 import { Button } from "@components/shared/layouts/Button";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import { useEffect } from "react";
 import { Search } from "@components/shared/forms/Search";
 import { Select } from "@components/shared/forms/Select";

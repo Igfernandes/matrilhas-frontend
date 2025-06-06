@@ -2,7 +2,7 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import { FormsPayload, formsSchema } from "../schema";
 import { useMessagesDispatcherStep } from "./useMessagesDispatcherStep";
 import usePostMessagesDispatcher from "@services/MessagesDispatcher/Post/usePostMessagesDispatcher";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import {
   TypesPeriodsMessagesDispatcher,
   TypesPlatformsMessagesDispatchers,

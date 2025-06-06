@@ -1,4 +1,4 @@
-import { UsersShape } from "@type/Users/Users";
+import { UsersShape } from "@type/Users";
 import { UsersGroupShape } from "../../../../../types/Users/UsersGroup";
 
 export type ModalFormProps = {

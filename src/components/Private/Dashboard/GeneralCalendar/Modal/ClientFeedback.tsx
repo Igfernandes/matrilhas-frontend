@@ -1,6 +1,6 @@
 import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
-import { ClientShape } from "@type/Clients/client";
+import { ClientShape } from "@type/Clients";
 import Link from "next/link";
 
 type Props = {

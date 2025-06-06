@@ -1,7 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { PermissionsShape } from "../../../types/Permissions/Permissions";
+import { PermissionsShape } from "../../../types/Permissions";
 import { GetPermissionsRequest } from "./types";
 
 export default function useGet() {
