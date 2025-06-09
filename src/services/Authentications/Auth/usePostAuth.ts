@@ -26,7 +26,7 @@ export default function usePostAuth() {
   return useMutation({
     mutationFn: handleMutate,
     onSuccess: (res) => {
-      const data = res;
+      const data = JSON.parse(res);
 
       dispatchSnackbar({
         message: i18n("success.login.will_redirect"),
@@ -44,13 +44,13 @@ export default function usePostAuth() {
         token_navigation: data.token_navigation,
       });
 
-      console.log(data)
+      console.log(data.token_navigation);
       setTimeout(() => {
-        router.push(privateRoutes.dashboard)
+        router.push(privateRoutes.dashboard);
       }, 500);
     },
     onError: (err) => {
-      handleAxiosError(err, i18n('login.invalid.not_access_account'));
+      handleAxiosError(err, i18n("login.invalid.not_access_account"));
     },
   });
 }
