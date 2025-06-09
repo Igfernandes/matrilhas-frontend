@@ -2,7 +2,8 @@ import { HTMLInputTypeAttribute } from "react";
 
 export type FieldsShape = {
   id: number;
-  name: string;
+  label: string;
+  name:string;
   component: "INPUT" | "SELECT" | "TEXTAREA";
   type: HTMLInputTypeAttribute;
   scope: ScopeFields;

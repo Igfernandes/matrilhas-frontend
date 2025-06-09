@@ -16,14 +16,21 @@ export function useCharge({ clientsSelected }: Props) {
   const { mutateAsync: postCharge, isPending } = usePostCreateCharge();
   const router = useRouter();
 
-  const submit = (payload: ChargesPayload) => {
+  const submit = ({
+    amount,
+    period,
+    expired_days,
+    ...payload
+  }: ChargesPayload) => {
     postCharge({
       ...payload,
       service_id: +payload.service_id,
       price: +payload.price,
-      amount: +payload.amount,
+      amount: amount ? +amount : undefined,
+      period: period ? +period : undefined,
       promotional_price: +payload.promotional_price,
       clients: clientsSelected.map((client) => client.id),
+      expired_days: expired_days ? +expired_days : undefined,
     }).then(() => {
       setTimeout(() => {
         router.push(privateRoutes.finance);
@@ -35,6 +42,6 @@ export function useCharge({ clientsSelected }: Props) {
     formMethods,
     errors,
     submit,
-    isPending
+    isPending,
   };
 }

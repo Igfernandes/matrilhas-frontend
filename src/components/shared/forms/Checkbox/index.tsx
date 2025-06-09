@@ -13,6 +13,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       dataTestId,
       errors,
       defaultValue,
+      defaultChecked,
       ...props
     }: CheckboxProps,
     ref
@@ -25,7 +26,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       const value = watch(props.name ?? "");
 
       setIsChecked(!!value);
-    }, []);
+    }, [props.name, watch]);
 
     return (
       <div>
@@ -45,7 +46,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               {...props}
               ref={ref}
               type={type}
-              defaultChecked={isChecked}
+              defaultChecked={isChecked ?? defaultChecked}
               defaultValue={defaultValue}
               data-testid={IdCurrent}
               id={IdCurrent}

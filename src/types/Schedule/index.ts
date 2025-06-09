@@ -1,5 +1,5 @@
 export type ScheduleShape = {
-  id: string;
+  id: number;
   title: string;
   date: string;
   end_date?: string|null;

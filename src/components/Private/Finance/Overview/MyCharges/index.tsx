@@ -51,15 +51,17 @@ export function MyCharges({
           />
         </SelectorProvider>
       </div>
-      <Notice
-        headerTitle={i18n("words.attention")}
-        title={i18n("charges.modal.title_already_exclude")}
-        text={i18n("charges.modal.text_already_exclude")}
-        onSubmit={handleDeleteCharge}
-        isShowModal={modal.type === "DELETE"}
-        isLoading={isLoading}
-        onModal={handleToggleModal}
-      />
+      <div className="relative z-10">
+        <Notice
+          headerTitle={i18n("words.attention")}
+          title={i18n("charges.modal.title_already_exclude")}
+          text={i18n("charges.modal.text_already_exclude")}
+          onSubmit={handleDeleteCharge}
+          isShowModal={modal.type === "DELETE"}
+          isLoading={isLoading}
+          onModal={handleToggleModal}
+        />
+      </div>
     </>
   );
 }

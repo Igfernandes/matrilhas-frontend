@@ -7,7 +7,7 @@ export type PaymentPageProps = {
 
 export type ChargePreviewShape = Pick<
   ChargeShape,
-  "description" | "price" | "promotional_price" | "amount"
+  "description" | "price" | "promotional_price" | "amount" | "type"
 > & {
   title: string;
   product_id: string;

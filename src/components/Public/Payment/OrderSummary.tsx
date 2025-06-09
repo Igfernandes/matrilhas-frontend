@@ -1,9 +1,12 @@
 import { Button } from "@components/shared/forms/Button";
+import { When } from "@components/utilities/When";
 import i18n from "@configs/i18n";
+import { ChargeType } from "@type/Charges";
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 
 type Props = {
+  type: ChargeType;
   products: Array<Product>;
   isLoading: boolean;
   hasAllFilledFields: () => boolean;
@@ -16,6 +19,7 @@ type Product = {
 };
 
 export function OrderSummary({
+  type,
   products,
   isLoading,
   hasAllFilledFields,
@@ -40,6 +44,7 @@ export function OrderSummary({
         </span>{" "}
         <hr className="w-[80%] text-stone-300 ml-2" />
       </div>
+
       <div className="product-text my-2 pb-2 border-b-2 border-b-stone-200">
         {products.map(({ title, price, amount, max }: Product, index) => (
           <div className="product-item" key={`${index}_${title}`}>
@@ -56,31 +61,34 @@ export function OrderSummary({
                 </span>
               </div>
             </div>
-            <div className="amount flex justify-between">
-              <div className="w-1/2">
-                <label htmlFor={`amounts.${index}`} className="text-xs">
-                  {i18n("words.amount")}
-                </label>
+            <When value={type !== "APPELLANT"}>
+              <div className="amount flex justify-between">
+                <div className="w-1/2">
+                  <label htmlFor={`amounts.${index}`} className="text-xs">
+                    {i18n("words.amount")}
+                  </label>
+                </div>
+                <div className="w-1/2 text-end">
+                  <span>x</span>
+                  <input
+                    className="w-14 text-center border-none outline-none"
+                    type="number"
+                    {...register(`amounts.${index}`)}
+                    id={`amounts.${index}`}
+                    required={true}
+                    defaultValue={amount}
+                    min="1"
+                    max={max}
+                  />
+                </div>
               </div>
-              <div className="w-1/2 text-end">
-                <span>x</span>
-                <input
-                  className="w-14 text-center border-none outline-none"
-                  type="number"
-                  {...register(`amounts.${index}`)}
-                  id={`amounts.${index}`}
-                  required={true}
-                  defaultValue={amount}
-                  min="1"
-                  max={max}
-                />
+              <div>
+                <span className="text-xs text-red">
+                  {max == 1 ? "Resta" : "Restam"} apenas {max}{" "}
+                  {max == 1 ? "disponível" : "disponíveis"}*
+                </span>
               </div>
-            </div>
-            <div>
-              <span className="text-xs text-red">
-                {max == 1 ? "Resta" : "Restam"} apenas {max} {max == 1 ? "disponível" : "disponíveis"}*
-              </span>
-            </div>
+            </When>
           </div>
         ))}
       </div>

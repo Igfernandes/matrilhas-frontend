@@ -38,6 +38,7 @@ export function useAxios() {
     };
     const typedError = error as CustomAxiosError;
 
+    const status = typedError.response?.status ?? STATUS_SERVICE.INTERNAL_ERROR;
     const jsonResponseData = typedError.response?.data ?? "";
     const responseData = isValidJSON(jsonResponseData)
       ? JSON.parse(jsonResponseData)
@@ -52,7 +53,12 @@ export function useAxios() {
       shapeError["title"] = title;
     }
 
-    dispatchSnackbar({ ...shapeError, type: "error" });
+    if (status === 401) shapeError["title"] = i18n("words.feedback_auth");
+
+    dispatchSnackbar({
+      ...shapeError,
+      type: status === 401 ? "notice" : "error",
+    });
 
     return shapeError;
   }

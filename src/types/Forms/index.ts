@@ -3,7 +3,7 @@ export type FormsShape = {
   name: string;
   slug: string;
   components: string;
-  description: string;
+  description?: string;
   status: "PUBLISHED" | "DRAFT";
   inscribes: number;
   created_at: string;

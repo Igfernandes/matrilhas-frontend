@@ -2,7 +2,7 @@ import { When } from "@components/utilities/When";
 import { FieldShape } from "../type";
 import { getRenderer } from "../utils/render";
 
-export function Field({ element, group, ...rest }: FieldShape) {
+export function Field({ element, group, required, ...rest }: FieldShape) {
   const Component = getRenderer(element);
   const className = "canvas-field";
 
@@ -13,6 +13,7 @@ export function Field({ element, group, ...rest }: FieldShape) {
           type={element}
           name={`input_${rest.id}`}
           {...rest}
+          required={required}
           defaultValue={
             ["button"].includes(element)
               ? rest.label ?? rest.defaultValue

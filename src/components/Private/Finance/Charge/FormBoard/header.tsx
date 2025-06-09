@@ -1,10 +1,11 @@
 import { Select } from "@components/shared/forms/Select";
 import i18n from "@configs/i18n";
-import { PRIVACY, STATUS } from "@constants/options";
+import { PRIVACY } from "@constants/options";
 import { ChargeShape } from "@type/Charges";
 import dayjs from "dayjs";
 import { UseFormSetValue } from "react-hook-form";
 import { ChargeUpdatePayload } from "../schemas";
+import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
 
 type Props = {
   setValue: UseFormSetValue<ChargeUpdatePayload>;
@@ -19,6 +20,24 @@ export function FormBoardHeader({ charge, setValue }: Props) {
           <h1 className="font-bold text-xl">{i18n(`words.definitions`)}</h1>
         </div>
         <div className="dates flex">
+          <div className="status mr-5">
+            <ToggleSwitch
+              setValue={setValue}
+              name="status"
+              label={i18n("words.status")}
+              dataTestId="status"
+              options={{
+                left: {
+                  text: i18n(`words.active`),
+                  value: "ACTIVE",
+                },
+                right: {
+                  text: i18n(`words.inactive`),
+                  value: "INACTIVE",
+                },
+              }}
+            />
+          </div>
           <div className="created_at text-center text-xs mr-2">
             <div>
               <span className="font-semibold">{i18n("words.created")}</span>
@@ -40,23 +59,6 @@ export function FormBoardHeader({ charge, setValue }: Props) {
         </div>
       </div>
       <div className="box flex justify-between my-4">
-        <div className="status w-[20%]">
-          <Select
-            label={i18n("words.status")}
-            dataTestId="status"
-            options={STATUS.map((status) => ({
-              text: i18n(`words.${status.toLowerCase()}`),
-              value: status,
-            }))}
-            defaultValue={charge.status}
-            onChange={(ev) =>
-              setValue(
-                "status",
-                ev.currentTarget.value as "ACTIVE" | "INACTIVE"
-              )
-            }
-          />
-        </div>
         <div className="status w-[20%]">
           <Select
             label={i18n("words.privacy")}

@@ -16,13 +16,9 @@ export async function getCharge(
     setQueries({
       url: chargesPreview,
       query,
-    }),
-    {
-      headers: {
-        Authorization: `Bearer ${tokenNavigation}`,
-      },
-    }
+    })
   );
 
+  console.log(data);
   return JSON.parse(data);
 }

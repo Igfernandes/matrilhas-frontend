@@ -1,7 +1,7 @@
 import { FooterForms } from "@components/Private/Forms/FooterForms";
-import { MessagesDispatcherForm } from "@components/Private/MessagesDispatcher/Create";
-import { useMessagesDispatcher } from "@components/Private/MessagesDispatcher/Create/hooks/useMessagesDispatcher";
-import { useMessagesDispatcherForms } from "@components/Private/MessagesDispatcher/Create/hooks/useMessagesDispatcherForm";
+import { MessagesDispatcherForm } from "@components/Private/Dispatcher/Create";
+import { useMessagesDispatcher } from "@components/Private/Dispatcher/Create/hooks/useMessagesDispatcher";
+import { useMessagesDispatcherForms } from "@components/Private/Dispatcher/Create/hooks/useMessagesDispatcherForm";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 import { StepBar } from "@components/shared/layouts/StepBar";
 import { ClientsModal } from "@components/shared/others/ClientsTable/modals/ClientsModal";
@@ -23,7 +23,7 @@ export default function Create() {
   } = useMessagesDispatcherForms({ clientsSelected });
 
   return (
-    <DashboardContainer>
+    <DashboardContainer title={i18n('words.new_dispatcher')}>
       <FormProvider {...formMethods}>
         <StepBar
           steps={[

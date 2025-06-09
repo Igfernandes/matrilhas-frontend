@@ -76,6 +76,7 @@ export function PaymentForm({ charge }: Props) {
           </div>
           <div className="w-2/6">
             <OrderSummary
+              type={charge.type}
               products={[
                 {
                   title: charge.title,
@@ -83,7 +84,7 @@ export function PaymentForm({ charge }: Props) {
                     ? charge.promotional_price
                     : charge.price,
                   amount: 1,
-                  max: charge.amount,
+                  max: charge.amount ?? 1,
                 },
               ]}
               isLoading={isLoading || !recaptchaToken}

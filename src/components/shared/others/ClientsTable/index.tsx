@@ -9,12 +9,17 @@ import { Notice } from "@components/shared/others/Notice";
 import { getNumberFormatted } from "@helpers/string";
 
 type Props = {
+  title?: string;
   clients: ClientShape[];
   clientsSelected: Array<ClientShape>;
   handleUpdateClients: (clients: Array<ClientShape>) => void;
 };
 
-export function ClientsTable({ clientsSelected, handleUpdateClients }: Props) {
+export function ClientsTable({
+  title,
+  clientsSelected,
+  handleUpdateClients,
+}: Props) {
   const { tHeadsClient } = useClientsTable();
   const { handleToggleModal, modal } = useModalContext();
 
@@ -48,7 +53,7 @@ export function ClientsTable({ clientsSelected, handleUpdateClients }: Props) {
             </a>
           ),
         }}
-        title={i18n("words.link_clients")}
+        title={title ?? i18n("words.link_clients")}
       />
       <Notice
         headerTitle={i18n("words.attention")}

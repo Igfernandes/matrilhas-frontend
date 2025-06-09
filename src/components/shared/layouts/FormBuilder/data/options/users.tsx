@@ -12,6 +12,21 @@ export const optionsUser = [
     field: "password",
     icon: <Pen width={12} height={12} />,
   },
+  {
+    id: "phone",
+    field: "phone",
+    icon: <Pen width={12} height={12} />,
+  },
+  {
+    id: "cpf",
+    field: "cpf",
+    icon: <Pen width={12} height={12} />,
+  },
+  {
+    id: "cep",
+    field: "cep",
+    icon: <Pen width={12} height={12} />,
+  },
 ].map((option) => ({
   ...option,
   element: "INPUT",

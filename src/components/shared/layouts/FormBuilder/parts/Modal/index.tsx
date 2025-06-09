@@ -3,21 +3,31 @@ import { When } from "@components/utilities/When";
 import { useFormBuilderContext } from "../../context";
 import i18n from "@configs/i18n";
 import { useModal } from "./hooks/useModal";
-import { SettingsTab } from "./tabs/SettingsTab";
+import { SettingsLayoutTab } from "./tabs/SettingsLayoutTab";
 import { HeaderTab } from "./tabs/HeaderTab";
 import { useTabs } from "./hooks/useTabs";
 import { StructsTab } from "./tabs/StructsTab";
 import { SizesTab } from "./tabs/SizesTab";
 import { ColorsTab } from "./tabs/ColorsTab";
+import { SettingsFieldsTab } from "./tabs/SettingsFieldsTab";
+import { useEffect, useState } from "react";
 
 export function Modal() {
   const { handleToggleModal, isShowModal, currentField, handleRemoveField } =
     useFormBuilderContext();
-
   const { activeTab, handleChangeTab } = useTabs();
   const { handleSubmit, handleChangeField, payload } = useModal({
     currentField: currentField,
   });
+  const [tabs, setTabs] = useState<Array<string>>([
+    "settings",
+    "colors",
+    "structs",
+  ]);
+
+  useEffect(() => {
+    if (payload?.group === "layout") setTabs([...tabs, "sizes"]);
+  }, [payload]);
 
   return (
     <When value={isShowModal}>
@@ -39,20 +49,29 @@ export function Modal() {
               </div>
             </div>
             <HeaderTab
-              menus={["settings", "sizes", "colors", "structs"]}
+              menus={tabs}
               activeMenu={activeTab}
               onChangeTab={handleChangeTab}
             />
-            <SettingsTab
-              tabActive={activeTab}
-              field={payload}
-              oChangeField={handleChangeField}
-            />
-            <SizesTab
-              tabActive={activeTab}
-              field={payload}
-              oChangeField={handleChangeField}
-            />
+            <When value={payload?.group !== "layout"}>
+              <SettingsFieldsTab
+                tabActive={activeTab}
+                field={payload}
+                oChangeField={handleChangeField}
+              />
+            </When>
+            <When value={payload?.group === "layout"}>
+              <SettingsLayoutTab
+                tabActive={activeTab}
+                field={payload}
+                oChangeField={handleChangeField}
+              />
+              <SizesTab
+                tabActive={activeTab}
+                field={payload}
+                oChangeField={handleChangeField}
+              />
+            </When>
             <ColorsTab
               tabActive={activeTab}
               field={payload}

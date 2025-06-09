@@ -2,5 +2,5 @@ import { FormsShape } from "../../../types/Forms";
 
 export type PostCreateFormPayload = Pick<
   FormsShape,
-  "name" | "status" | "components" | "description"
+  "name" | "status" | "components"
 >;

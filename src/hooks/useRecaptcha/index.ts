@@ -9,7 +9,7 @@ export function useRecaptcha(siteKey: string, action: string) {
    * pelo arquivo ".env" para recuperar o token de referência do recaptcha. O evento irá ocorrer toda vez que for
    * renderizado a tela pelo evento "load".
    */
-  const handleLoaded = useCallback(() => {
+  const handleLoaded = useCallback(async () => {
     window.grecaptcha.ready(() => {
       window.grecaptcha
         .execute(siteKey, { action: action })

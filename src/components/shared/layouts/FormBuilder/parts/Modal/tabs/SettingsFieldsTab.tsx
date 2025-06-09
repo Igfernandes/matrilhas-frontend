@@ -2,14 +2,17 @@ import { ChangeEvent } from "react";
 import { FieldShape } from "../../../type";
 import { FormGroup } from "../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
+import { FormSelect } from "../fieldsGroup/FormSelect";
+import i18n from "@configs/i18n";
 
 type Props = {
   field?: FieldShape;
-  oChangeField: (ev: ChangeEvent<HTMLInputElement>) => void;
+  oChangeField: (ev: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   tabActive: string;
 };
 
-export function SettingsTab({ field, oChangeField, tabActive }: Props) {
+export function SettingsFieldsTab({ field, oChangeField, tabActive }: Props) {
+
   return (
     <When value={tabActive === "settings"}>
       <div
@@ -21,30 +24,42 @@ export function SettingsTab({ field, oChangeField, tabActive }: Props) {
       >
         <FormGroup
           defaultValue={field?.label}
-          label="label"
+          label="title"
           name="label"
           key={"label"}
           onChange={oChangeField}
         />
         <FormGroup
           defaultValue={field?.defaultValue}
-          label="default_value"
+          label="filled_value"
           name="defaultValue"
           key={"defaultValue"}
           onChange={oChangeField}
         />
         <FormGroup
           defaultValue={field?.placeholder}
-          label="placeholder"
+          label="value_example"
           name="placeholder"
           key={"placeholder"}
           onChange={oChangeField}
         />
-        {/* <FormTable
-        label="attributes"
-        name="attributes"
-        key={"attributes"}
-      /> */}
+        <FormSelect
+          options={[
+            {
+              text: i18n("words.not"),
+              value: "",
+            },
+            {
+              text: i18n("words.yes"),
+              value: "true",
+            }
+          ]}
+          label="is_required"
+          name="required"
+          key={"required"}
+          defaultValue={field?.required}
+          onChange={oChangeField}
+        />
       </div>
     </When>
   );

@@ -31,7 +31,6 @@ export function DispatcherPreview({ dispatcher }: Props) {
     dispatcher,
   });
 
-  console.log(formMethods.formState.errors);
   return (
     <>
       <div className="Logs mb-4">
@@ -57,7 +56,9 @@ export function DispatcherPreview({ dispatcher }: Props) {
             message: client.message_title,
             status: i18n(`words.${client.status.toLocaleLowerCase()}`),
             platform: client.platform,
-            send_at: client?.send_at,
+            send_at: client?.send_at
+              ? dayjs(client?.send_at).format("DD/MM/YYYY HH:MM")
+              : "--",
           }))}
           title={i18n("words.dispatchers_historic")}
         />
@@ -99,6 +100,7 @@ export function DispatcherPreview({ dispatcher }: Props) {
           </div>
           <div className="mt-4">
             <ClientsTable
+              title={i18n("words.new_dispatchers")}
               clients={clients ?? []}
               handleUpdateClients={setClientsSelected}
               clientsSelected={clientsSelected}

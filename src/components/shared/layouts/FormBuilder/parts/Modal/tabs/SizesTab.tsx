@@ -21,19 +21,10 @@ export function SizesTab({ field, oChangeField, tabActive }: Props) {
       >
         <FormGroup
           defaultValue={field?.style?.fontSize as string}
-          label="text_size"
+          label="size"
           type="number"
           name="style.fontSize"
           key={"fontSize"}
-          measure="px"
-          onChange={oChangeField}
-        />
-        <FormGroup
-          defaultValue={field?.labelSize}
-          label="label_size"
-          type="number"
-          name="labelSize"
-          key={"labelSize"}
           measure="px"
           onChange={oChangeField}
         />
@@ -48,22 +39,6 @@ export function SizesTab({ field, oChangeField, tabActive }: Props) {
           key={"weight"}
           onChange={oChangeField}
         />
-        <FormGroup
-          defaultValue={field?.labelWeight}
-          label="label_weight"
-          type="number"
-          min={100}
-          max={900}
-          step={50}
-          name="labelWeight"
-          key={"labelWeight"}
-          onChange={oChangeField}
-        />
-        {/* <FormTable
-        label="attributes"
-        name="attributes"
-        key={"attributes"}
-      /> */}
       </div>
     </When>
   );

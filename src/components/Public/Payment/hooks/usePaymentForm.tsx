@@ -13,6 +13,9 @@ export function usePaymentForm() {
   const { token, handleLoaded } = useRecaptcha(RECAPTCHA_KEY ?? "", "login");
   const { formMethods, hasAllFilledFields } = useFormRules<PaymentPayload>({
     schema: paymentFormSchema,
+    defaultValues: {
+      amounts: ["1"],
+    },
   });
   const [phone, setPhone] = useState<string>();
   const { refetch } = useGetClientPreview({
@@ -30,17 +33,18 @@ export function usePaymentForm() {
   const router = useRouter();
 
   const onSubmit = async (payload: PaymentPayload) => {
-    await handleLoaded();
-    const { product_id, product_url } = await postCheckout({
-      ...payload,
-      product: query.charge as string,
-      amounts: payload.amounts.map((amount) => +amount),
-      "g-recaptcha-response": token,
+    handleLoaded().then(async () => {
+      const { product_id, product_url } = await postCheckout({
+        ...payload,
+        product: query.charge as string,
+        amounts: payload.amounts.map((amount) => +amount),
+        "g-recaptcha-response": token,
+      });
+
+      if (product_url) return router.push(product_url);
+
+      handleUpdateMpProductKey(product_id);
     });
-
-    if (product_url) return router.push(product_url);
-
-    handleUpdateMpProductKey(product_id);
   };
 
   useEffect(() => {

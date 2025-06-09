@@ -6,9 +6,19 @@ export const ChargeSchema = z.object({
   service_id: z.string({ required_error: i18n("errors.fields.required") }),
   type: z.enum(["APPELLANT", "PUNCTUAL"]),
   privacy: z.enum(["PUBLIC", "PRIVATE"]),
-  amount: z.string({ required_error: i18n("errors.fields.required") }),
+  period: z
+    .string({ required_error: i18n("errors.fields.required") })
+    .optional(),
+  amount: z
+    .string({ required_error: i18n("errors.fields.required") })
+    .optional(),
   price: z.string({ required_error: i18n("errors.fields.required") }),
-  expired_at: z.string({ required_error: i18n("errors.fields.required") }),
+  started_at: z
+    .string({ required_error: i18n("errors.fields.required") })
+    .optional(),
+  expired_days: z
+    .string({ required_error: i18n("errors.fields.required") })
+    .optional(),
   promotional_price: z.string({
     required_error: i18n("errors.fields.required"),
   }),

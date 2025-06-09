@@ -15,7 +15,9 @@ export function AccordionItemHeader({
         className="absolute top-0 left-0 w-full h-full z-[0] cursor-pointer"
         onClick={() => handleCollapse(accordionId)}
       ></div>
-      <div >{title}</div>
+      <div className="line-clamp-1">
+        <span>{title}</span>
+      </div>
       <div className="flex items-center">
         {buttons}
         <ArrowDownSimple

@@ -27,14 +27,16 @@ export function ColorsTab({ field, oChangeField, tabActive }: Props) {
           key={"fontSize"}
           onChange={oChangeField}
         />
-        <FormGroup
-          defaultValue={field?.labelColor}
-          label="label_color"
-          type="color"
-          name="labelColor"
-          key={"labelColor"}
-          onChange={oChangeField}
-        />
+        <When value={!["layout"].includes(field?.group ?? "")}>
+          <FormGroup
+            defaultValue={field?.labelColor}
+            label="title_color"
+            type="color"
+            name="labelColor"
+            key={"labelColor"}
+            onChange={oChangeField}
+          />
+        </When>
         <FormGroup
           defaultValue={field?.style?.backgroundColor}
           label="background_color"
@@ -43,19 +45,16 @@ export function ColorsTab({ field, oChangeField, tabActive }: Props) {
           key={"backgroundColor"}
           onChange={oChangeField}
         />
-        <FormGroup
-          defaultValue={field?.style?.borderColor}
-          label="border_color"
-          type="color"
-          name="style.borderColor"
-          key={"borderColor"}
-          onChange={oChangeField}
-        />
-        {/* <FormTable
-        label="attributes"
-        name="attributes"
-        key={"attributes"}
-      /> */}
+        <When value={!["layout"].includes(field?.group ?? "")}>
+          <FormGroup
+            defaultValue={field?.style?.borderColor}
+            label="border_color"
+            type="color"
+            name="style.borderColor"
+            key={"borderColor"}
+            onChange={oChangeField}
+          />
+        </When>
       </div>
     </When>
   );

@@ -9,7 +9,12 @@ export type UsersShape = {
   birthdate: string;
   email: string;
   phone: string;
-  groups: string;
+  groups: Array<GroupData>;
   created_at: string;
   updated_at: string;
+};
+
+type GroupData = {
+  id: number;
+  name: string;
 };

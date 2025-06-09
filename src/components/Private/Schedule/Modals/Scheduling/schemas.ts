@@ -13,7 +13,7 @@ export const ScheduleSchema = z.object({
     .optional().nullable(),
   describe: z.string({ required_error: i18n("errors.fields.required") }),
   color: z.string({ required_error: i18n("errors.fields.required") }),
-  linked: z.array(z.string()),
+  linked: z.array(z.string().or(z.boolean())),
 });
 
 export type ScheduleUpdatePayload = z.infer<typeof ScheduleSchema>;

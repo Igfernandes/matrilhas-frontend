@@ -7,7 +7,7 @@ import useGetClients from "@services/Clients/Get/useGetClients";
 import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
 import usePutMessagesDispatcher from "@services/MessagesDispatcher/Put/usePutMessagesDispatcher";
 import { ClientShape } from "@type/Clients";
-import useGetClientsDispatchers from "@services/Clients/Disptachers/Get/useGetClients";
+import useGetClientsDispatchers from "@services/Clients/Dispatchers/Get/useGetClients";
 import { ClientsMessagesDispatcherShape } from "@type/MessagesDispatcherShape/ClientsMessagesDispatcher";
 
 dayjs.extend(customParseFormat);
@@ -40,7 +40,6 @@ export function useForms({ dispatcher }: Props) {
     usePutMessagesDispatcher();
 
   const submit = (payload: DispatcherUpdatePayload) => {
-    console.log(submit)
     putDispatcher({
       ...payload,
       id: dispatcher.id,
@@ -62,18 +61,6 @@ export function useForms({ dispatcher }: Props) {
     if (!clientsDispatchersData) return;
 
     setClientsDispatchers(clientsDispatchersData);
-
-    if (!clients) return;
-
-    const clientsId = clientsDispatchersData.map(
-      (clientsDispatchers: ClientsMessagesDispatcherShape) =>
-        clientsDispatchers.client_id
-    );
-    const clientsSelected = clients.filter((client: ClientShape) =>
-      clientsId.includes(client.id)
-    );
-
-    setClientsSelected(clientsSelected);
   }, [clients, clientsDispatchersData]);
 
   return {

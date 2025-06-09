@@ -30,6 +30,10 @@ export default function usePutUsers() {
         queryKey: ["userAuth"],
         refetchType: "active",
       });
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+        refetchType: "active",
+      });
     },
     onError: (err: AxiosError) => {
       handleAxiosError(err);

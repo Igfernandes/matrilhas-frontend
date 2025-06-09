@@ -9,7 +9,7 @@ import { Input } from "@components/shared/forms/Input";
 import { TextArea } from "@components/shared/forms/TextArea";
 import { Color } from "@components/shared/forms/Color";
 import { ScheduleShape } from "@type/Schedule";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ScheduleUpdatePayload } from "./schemas";
 
 type Props = {
@@ -18,7 +18,15 @@ type Props = {
 
 export function SchedulingModal({ schedules }: Props) {
   const { modal, handleToggleModal } = useModalContext();
-  const { formMethods, handleSubmit, submit, isLoading, users } = useModal();
+  const [schedule, setSchedule] = useState<Array<string>>([]);
+  const {
+    formMethods,
+    handleSubmit,
+    submit,
+    isLoading,
+    users,
+    handleDeleteSchedule,
+  } = useModal();
   const {
     register,
     setValue,
@@ -34,8 +42,9 @@ export function SchedulingModal({ schedules }: Props) {
     Object.entries(current).forEach(([key, value]) => {
       setValue(key as keyof ScheduleUpdatePayload, value as string);
     });
-
-    setValue("linked", current.linked?.map((user) => String(user.id)) ?? []);
+    const targetSchedule = current.linked?.map((user) => String(user.id)) ?? [];
+    setValue("linked", targetSchedule);
+    setSchedule(targetSchedule);
   }, [schedules, modal]);
 
   return (
@@ -104,12 +113,23 @@ export function SchedulingModal({ schedules }: Props) {
                 items={users.map((user) => ({
                   label: user.name,
                   value: user.id,
+                  isChecked: schedule.includes(String(user.id)),
                 }))}
               />
             </div>
           </div>
           <div className="form-btn flex justify-between pt-4 border-t-2 border-secondary">
-            <div className="w-1/2 mx-auto">
+            <div className="w-1/2 mx-2">
+              <div className="ml-auto">
+                <Button
+                  type="button"
+                  className="bg-primary border-tertiary  font-semibold border-2"
+                  text={i18n("words.exclude")}
+                  onClick={handleDeleteSchedule}
+                />
+              </div>
+            </div>
+            <div className="w-1/2 mx-2">
               <div className=" ml-auto">
                 <Button
                   type="submit"

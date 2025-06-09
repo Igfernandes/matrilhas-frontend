@@ -1,4 +1,5 @@
 import {
+  CriteriaMode,
   DefaultValues,
   FieldValues,
   useForm as useFormReactHook,
@@ -12,6 +13,7 @@ type Props<Payload> = {
   exclude?: Array<keyof Payload>;
   defaultValues?: DefaultValues<Payload>;
   shouldUseNativeValidation?: boolean;
+  criteriaMode?: CriteriaMode;
 };
 
 export function useFormRules<Payload extends FieldValues>({
@@ -19,12 +21,14 @@ export function useFormRules<Payload extends FieldValues>({
   exclude = [],
   defaultValues,
   shouldUseNativeValidation,
+  criteriaMode,
 }: Props<Payload>) {
   const formMethods = useFormReactHook<Payload>({
     resolver: zodResolver(schema),
     mode: "onChange",
     defaultValues,
     shouldUseNativeValidation,
+    criteriaMode,
   });
   const {
     register,

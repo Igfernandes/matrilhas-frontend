@@ -33,16 +33,10 @@ export function ModalFormUsers({
     setValue("name", user.name);
     setValue("email", user.email);
     setValue("phone", getNumberFormatted(user?.phone));
-    const groupsName = user?.groups?.split(",");
 
-    if (groupsName.length === 0) return;
+    if (!user?.groups || user?.groups.length === 0) return;
 
-    setValue(
-      "group",
-      groups
-        .filter((group) => groupsName.includes(group.name))
-        .map((group) => String(group.id)) ?? []
-    );
+    setValue("group", user?.groups.map((group) => String(group.id)) ?? []);
   }, [users, modal]);
 
   return (

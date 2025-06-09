@@ -68,6 +68,20 @@ export function getCPFFormatted(cpf: string = ""): string {
     .replace(/(-\d{2})\d+?$/, "$1"); // Limita em 11 dígitos formatados
 }
 
+export function handleMaskCEP(e: React.ChangeEvent<HTMLInputElement>) {
+  e.target.value = getCEPFormatted(e.target.value);
+}
+
+export function getCEPFormatted(cep: string = "") {
+  let digits = cep.replace(/\D/g, ""); // Remove tudo que não for dígito
+
+  if (digits.length > 5) {
+    digits = digits.slice(0, 5) + "-" + digits.slice(5, 8);
+  }
+
+  return digits;
+}
+
 export function getMoneyBrFormatted(money: number) {
   return new Intl.NumberFormat("pt-BR", {
     style: "currency",

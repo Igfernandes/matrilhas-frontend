@@ -21,7 +21,8 @@ export function useForms({ charge }: Props) {
         status: charge.status,
         privacy: charge.privacy,
         type: charge.type,
-        expired_at: charge.expired_at,
+        amount: String(charge.amount) ?? "1",
+        expired_days: String(charge.expired_days),
       },
     });
   const { data: services } = useGetServices();
@@ -29,14 +30,22 @@ export function useForms({ charge }: Props) {
   const { mutateAsync: putCharges, isPending: isLoadingPutCharge } =
     usePutCharge();
 
-  const submit = (payload: ChargeUpdatePayload) => {
+    console.log(errors)
+  const submit = ({
+    period,
+    amount,
+    expired_days,
+    ...payload
+  }: ChargeUpdatePayload) => {
     putCharges({
       ...payload,
       id: charge.id,
       service_id: parseInt(payload?.service_id ?? ""),
-      amount: +payload.amount,
+      amount: amount ? +amount : undefined,
+      period: period ? +period : undefined,
       price: +payload.price,
       promotional_price: +payload.promotional_price,
+      expired_days: expired_days ? +expired_days : undefined,
     });
   };
 

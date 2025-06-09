@@ -22,7 +22,7 @@ export function ScheduleCalendar({ schedules }: Props) {
                 moment(schedule.date).toDate().getTime() + 60 * 60 * 1000
               ),
           allDay: false,
-          resource: schedule.id,
+          resource: String(schedule.id),
         }))}
         style={{ height: "63vh" }}
         views={["week"]}
@@ -30,13 +30,14 @@ export function ScheduleCalendar({ schedules }: Props) {
         components={{
           event: ({ event }) => {
             const schedule = schedules.find(
-              (schedule) => schedule.id === event.resource
+              (schedule) => String(schedule.id) === event.resource
             );
 
             return (
               <div
-                className="line-clamp-1 px-1"
+                className="line-clamp-1 pl-[2px]"
                 style={{
+                  width: "100%",
                   display: "flex",
                   alignItems: "center",
                   fontSize: ".8rem",
@@ -44,7 +45,7 @@ export function ScheduleCalendar({ schedules }: Props) {
                   backgroundColor: schedule?.color ?? "#fff",
                 }}
               >
-                {event.title}
+                📅
               </div>
             );
           },

@@ -4,10 +4,12 @@ import i18n from "@configs/i18n";
 import { useDefinitions } from "./hooks/useDefinitions";
 import { useFormContext } from "react-hook-form";
 import { ChargesPayload } from "./schemas";
+import { When } from "@components/utilities/When";
 
 export function Definitions() {
   const { services } = useDefinitions();
   const {
+    watch,
     register,
     formState: { errors },
   } = useFormContext<ChargesPayload>();
@@ -67,19 +69,6 @@ export function Definitions() {
             {i18n(`charges.about_privacy_and_services`)}
           </span>
         </div>
-        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-auto">
-          <Input
-            {...register("amount")}
-            type="number"
-            dataTestId="amount"
-            label={`${i18n("words.charge_amount")}`}
-            min={1}
-            required={true}
-            errors={errors.amount}
-          />
-        </div>
-      </div>
-      <div className="form-row flex flex-wrap mb-6 justify-between">
         <div className="form-group w-full lg:w-[48%]">
           <Select
             {...register("type")}
@@ -92,18 +81,63 @@ export function Definitions() {
             errors={errors.type}
           />
         </div>
-        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-auto">
+      </div>
+      <div className="form-row flex flex-wrap mb-6 justify-between">
+        <When value={watch("type") === "APPELLANT"}>
+          <div className="w-full md:w-[48%] ">
+            <Input
+              {...register("period")}
+              dataTestId="period"
+              type="number"
+              min={1}
+              label={`${i18n("words.period")} (${i18n("words.months")})`}
+              errors={errors.type}
+              required={true}
+            />
+            <span className="text-xs text-red ml-2 block mt-1">
+              {i18n(`charges.about_period`)}
+            </span>
+          </div>
+        </When>
+        <When value={watch("type") !== "APPELLANT"}>
+          <div className="form-group w-full lg:w-[48%] lg:mt-0">
+            <Input
+              {...register("amount")}
+              type="number"
+              dataTestId="amount"
+              label={`${i18n("words.charge_amount")}`}
+              min={1}
+              required={true}
+              errors={errors.amount}
+            />
+          </div>
+        </When>
+        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-0">
           <Input
-            {...register("expired_at")}
-            type="datetime-local"
+            {...register("expired_days")}
+            type="number"
             placeholder=" "
-            dataTestId="expired_at"
-            label={`${i18n("words.charge_expired_at")} (${i18n(
-              "words.optional"
-            )})`}
-            errors={errors.expired_at}
+            min="0"
+            dataTestId="expired_days"
+            label={`${i18n("words.expired_days")} (${i18n("words.optional")})`}
+            errors={errors.expired_days}
           />
         </div>
+      </div>
+      <div>
+        <When value={watch("type") === "APPELLANT"}>
+          <div className="w-full md:w-[48%] my-6">
+            <Input
+              {...register("started_at")}
+              dataTestId="started_at"
+              type="datetime-local"
+              placeholder=" "
+              label={`${i18n("words.started_at")}`}
+              errors={errors.type}
+              required={true}
+            />
+          </div>
+        </When>
       </div>
       <div className="form-row flex flex-wrap mb-6 justify-between">
         <div className="form-group w-full lg:w-[48%]">
@@ -115,7 +149,7 @@ export function Definitions() {
             errors={errors.price}
           />
         </div>
-        <div className="form-group w-full lg:w-[48%] mt-4 lgm:mt-auto">
+        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-0">
           <Input
             {...register("promotional_price")}
             dataTestId="promotional_price"

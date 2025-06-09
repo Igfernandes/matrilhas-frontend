@@ -20,8 +20,7 @@ export function handleDragEndSidebar(
     width: "100%",
     style: {
       fontSize: "16px",
-    },
-    labelSize: "16px",
+    }
   };
   callback(fieldData);
 

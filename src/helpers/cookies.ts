@@ -9,7 +9,7 @@ export function destroyCookie(cookieKey: string) {
     serialize(cookieKey, "", {
       maxAge: -1, // Expira o cookie imediatamente
       httpOnly: true, // Para segurança, se necessário
-      secure: process.env.NODE_ENV === "production",
+      secure: process.env.NEXT_PUBLIC_ENVIRONMENT === "PROD",
       sameSite: "strict",
     })
   );

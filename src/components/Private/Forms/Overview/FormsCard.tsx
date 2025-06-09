@@ -26,7 +26,7 @@ export function FormsCard({ search, filterObjects }: FormsCardProps) {
       <div>
         <Cards
           items={forms.map((form) => ({
-            description: form.description,
+            description: form.description ?? "",
             alert: form.name,
             link: `${formsRoute}/${form.id}`,
             createdAt: form.created_at,

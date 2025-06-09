@@ -34,12 +34,15 @@ export function useUsers({ handleFilter, filter }: HookProps<UsersShape>) {
     status,
     groups,
   }: UsersShape): TDataUser => {
+    const groupsName = Array.isArray(groups)
+      ? groups.map((group) => group.name).join(",")
+      : "";
     return {
       id,
       name,
       email,
       phone,
-      group: groups == "" ? "--" : groups,
+      group: groupsName == "" ? "--" : groupsName,
       status: <StatusText status={status} />,
       actions: (
         <ButtonConfig

@@ -16,10 +16,10 @@ import { useEffect } from "react";
 import { useStateFields } from "./hooks/useStateFields";
 import { getFileUrl } from "@helpers/file";
 import Image from "next/image";
-import { Select } from "@components/shared/forms/Select";
 import { FloppyDisk } from "@assets/Icons/black/FloppyDisck";
 import { useNavigator } from "@hooks/useNavigator";
 import useWindow from "@hooks/useWindow";
+import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
 
 type Props = {
   service?: ServicesShape;
@@ -30,7 +30,7 @@ export function ServicesForm({ service }: Props) {
     useServicesForm({ service });
   const router = useRouter();
   const { handleCleanForm, handleUpdateForm } = useStateFields({ formMethods });
-  const { watch } = formMethods;
+  const { watch, setValue } = formMethods;
   const { handleCopy } = useNavigator();
   const { baseUrl } = useWindow();
 
@@ -63,21 +63,21 @@ export function ServicesForm({ service }: Props) {
           </div>
           <div className="flex ">
             <div className="form-select w-full lg:w-[15%] min-w-[130px] mt-4 lg:mt-auto">
-              <Select
-                {...register("status")}
+              <ToggleSwitch
+                setValue={setValue}
+                name="status"
                 dataTestId="status"
                 label={i18n(`words.service_status`)}
-                options={[
-                  {
+                options={{
+                  left: {
                     text: i18n("words.active"),
                     value: "ACTIVE",
                   },
-                  {
+                  right: {
                     text: i18n("words.inactive"),
                     value: "INACTIVE",
                   },
-                ]}
-                required={true}
+                }}
                 errors={errors.status}
               />
             </div>

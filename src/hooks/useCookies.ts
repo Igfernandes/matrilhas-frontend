@@ -43,7 +43,9 @@ export function useCookies<ShapeFields extends Record<string, unknown>>() {
     const cookieFields = {} as Record<string, unknown>;
 
     keys.forEach((key) => {
-      const cookieValue = getCookie(key);
+      const cookieValue = getCookie(key, {
+        secure: process.env.NEXT_AMBIENT == "PROD",
+      });
 
       if (cookieValue) {
         cookieFields[key] = cookieValue;

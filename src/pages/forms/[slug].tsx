@@ -13,7 +13,7 @@ import i18n from "@configs/i18n";
 export default function Form({ form }: FormPageProps) {
   const { handleSubmit, isLoading } = useForm({ form });
 
-  console.log(JSON.parse(form.components));
+  console.log(form)
   return (
     <>
       <Header />

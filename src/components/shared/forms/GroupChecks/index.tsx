@@ -7,6 +7,7 @@ export function GroupChecks<Payload extends FieldValues>({
   name,
   register,
 }: GroupChecksProps<Payload>) {
+
   return (
     <div className="relative ">
       <div className="max-h-[20vh] md:max-h-[32vh] overflow-x-hidden overflow-y-auto pb-[12%]">
@@ -16,6 +17,7 @@ export function GroupChecks<Payload extends FieldValues>({
               {...register(`${name}.${index}` as Path<Payload>)}
               label={item.label}
               defaultValue={item.value}
+              defaultChecked={item.isChecked}
               groupName={name}
               dataTestId={`key_group_checks_${index}`}
             />

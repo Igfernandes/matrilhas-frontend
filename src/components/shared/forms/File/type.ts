@@ -5,10 +5,9 @@ export type InputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
-  dataTestId: string;
+  dataTestId?: string;
   isLoading?: boolean;
-  type?: "file";
-  label: string;
+  label?: string;
   errors?: FieldError;
   handledChange?: (ev: React.ChangeEvent<HTMLInputElement> | undefined) => void;
 };

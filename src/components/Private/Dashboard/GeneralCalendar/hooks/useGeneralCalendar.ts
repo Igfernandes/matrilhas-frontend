@@ -43,9 +43,12 @@ export function useGeneralCalendar() {
 
   const getCharges = (charges: Array<ChargeShape>) => {
     return charges
-      .filter((charge) => charge.expired_at)
+      .filter((charge) => charge.expired_days)
       .map((charge) => {
-        const chargeDate = moment(charge.expired_at);
+        const chargeDate = moment(charge.created_at).add(
+          charge.expired_days,
+          "days"
+        );
         const thisYear = moment().year();
         const date = chargeDate.year(thisYear);
 
@@ -54,7 +57,7 @@ export function useGeneralCalendar() {
           start: date.toDate(),
           end: date.toDate(),
           allDay: true,
-          resource: charge.expired_at ?? "",
+          resource: String(charge.expired_days) ?? "",
         };
       });
   };

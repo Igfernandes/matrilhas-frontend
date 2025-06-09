@@ -26,8 +26,8 @@ export default function useDeleteMessageDispatcher() {
     mutationFn: handleMutate,
     onSuccess: () => {
       dispatchSnackbar({
-        title: i18n("message_dispatcher.delete.success_title"),
-        message: i18n("message_dispatcher.delete.success_text"),
+        title: i18n("messages_dispatcher.delete.success_title"),
+        message: i18n("messages_dispatcher.delete.success_text"),
         type: "success",
       });
 

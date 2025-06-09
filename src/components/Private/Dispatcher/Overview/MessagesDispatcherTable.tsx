@@ -49,8 +49,8 @@ export function MessagesDispatcherTable({
       </div>
       <Notice
         headerTitle={i18n("words.attention")}
-        title={i18n("message_dispatcher.modal.title_already_exclude")}
-        text={i18n("message_dispatcher.modal.text_already_exclude")}
+        title={i18n("messages_dispatcher.modal.title_already_exclude")}
+        text={i18n("messages_dispatcher.modal.text_already_exclude")}
         onSubmit={handleDeleteMessageDispatcher}
         isShowModal={modal.type === "DELETE"}
         isLoading={isLoadingDeleteDispatcher}

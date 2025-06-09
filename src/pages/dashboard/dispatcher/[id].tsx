@@ -1,5 +1,5 @@
-import { DispatcherPreview } from "@components/Private/MessagesDispatcher/Update";
-import { MessagesDispatcherSinglePageProps } from "@components/Private/MessagesDispatcher/Update/type";
+import { DispatcherPreview } from "@components/Private/Dispatcher/Update";
+import { MessagesDispatcherSinglePageProps } from "@components/Private/Dispatcher/Update/type";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 import { getMessagesDispatcherRequest } from "@services/MessagesDispatcher/Get/SSR";
 import { GetServerSideProps } from "next";

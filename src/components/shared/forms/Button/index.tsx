@@ -19,7 +19,9 @@ export function Button({
   );
   const { isBtnSubmit } = useButton();
   const classNameBtn = `${className} flex items-center 
-  justify-center text-white bg-red active:scale-[95%] 
+  justify-center ${
+    props.type === "submit" ? "text-white" : ""
+  } bg-red active:scale-[95%] 
   duration-75 w-full px-3 min-h-[48px] rounded-md mx-auto 
   disabled:bg-disable disabled:text-disabled cursor-pointer`;
 
@@ -60,7 +62,7 @@ export function Button({
             <RotateClockwise className="mr-2 animate-spin" />
           </When>
           <When value={!!LeftIcon}>{LeftIcon}</When>
-          <span>{isLoading ? "Carregando" : text}</span>
+          {isLoading ? "Carregando" : text}
           <When value={!!rightIcon}>{rightIcon}</When>
         </button>
       </When>

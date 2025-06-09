@@ -46,3 +46,7 @@ body {
 .timeCalendar .rbc-time-content .rbc-event-label {
   display: none !important;
 }
+.timeCalendar .rbc-events-container .rbc-event {
+  width: 24px !important;
+  height: 23px !important;
+}

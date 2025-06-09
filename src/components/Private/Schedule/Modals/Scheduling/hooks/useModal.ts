@@ -5,8 +5,10 @@ import { ScheduleSchema, ScheduleUpdatePayload } from "../schemas";
 import { useEffect, useState } from "react";
 import useGetUsers from "@services/Users/Get/useGetUsers";
 import { UsersShape } from "@type/Users";
-import usePostCreateSchedule from "@services/Schedule/Post/usePostCreateService";
+import usePostCreateSchedule from "@services/Schedule/Post/usePostService";
 import { useModalContext } from "@contexts/Modal";
+import usePutCreateSchedule from "@services/Schedule/Put/usePutService";
+import useDeleteSchedule from "@services/Schedule/Delete/useDeleteService";
 
 dayjs.extend(customParseFormat);
 
@@ -14,10 +16,18 @@ export function useModal() {
   const { formMethods, handleSubmit } = useFormRules<ScheduleUpdatePayload>({
     schema: ScheduleSchema,
   });
-  const { handleToggleModal } = useModalContext();
+  const { handleToggleModal, modal } = useModalContext();
   const [users, setUsers] = useState<UsersShape[]>([]);
   const { data: usersData, isFetched: isFetchedUsers } = useGetUsers();
   const { mutateAsync: postSchedule } = usePostCreateSchedule();
+  const { mutateAsync: putSchedule } = usePutCreateSchedule();
+  const { mutateAsync: deleteSchedule } = useDeleteSchedule();
+
+  const handleDeleteSchedule = () => {
+    deleteSchedule({
+      id: parseInt(modal.id as string),
+    }).then(() => handleToggleModal(false));
+  };
 
   useEffect(() => {
     if (!usersData) return;
@@ -25,11 +35,20 @@ export function useModal() {
     setUsers(usersData);
   }, [usersData, isFetchedUsers]);
 
-  const submit = async ({ linked, ...payload }: ScheduleUpdatePayload) => {
-    await postSchedule({
-      ...payload,
+  const submit = async ({ linked, ...rest }: ScheduleUpdatePayload) => {
+    const payload = {
+      ...rest,
       linked: linked.map((user) => +user),
-    });
+    };
+
+    if (modal.id) {
+      putSchedule({
+        id: parseInt(modal.id as string),
+        ...payload,
+      });
+    } else {
+      await postSchedule(payload);
+    }
 
     handleToggleModal(false);
   };
@@ -40,5 +59,6 @@ export function useModal() {
     submit,
     isLoading: false,
     users,
+    handleDeleteSchedule,
   };
 }

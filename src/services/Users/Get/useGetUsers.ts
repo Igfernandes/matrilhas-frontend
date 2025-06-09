@@ -7,6 +7,7 @@ export default function useGetUsers(payload?: GetUsersRequest) {
 
   return useQuery({
     queryKey: ["users", payload],
+    enabled: true,
     queryFn: async () => {
       const { data } = await getUsers(payload);
       return data ?? false;

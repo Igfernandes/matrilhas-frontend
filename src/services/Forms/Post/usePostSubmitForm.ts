@@ -30,7 +30,7 @@ export default function usePostSubmitForm() {
         type: "success",
       });
 
-      router.push(`${forms}/success`);
+      router.push(`${forms}/successful`);
     },
     onError: (err: AxiosError) => {
       handleAxiosError(err);

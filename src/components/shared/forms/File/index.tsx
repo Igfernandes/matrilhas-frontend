@@ -16,7 +16,6 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
       id,
       label,
       errors,
-      type = "file",
       name,
       required,
       value,
@@ -26,7 +25,7 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
     }: InputProps,
     ref
   ) {
-    const IdCurrent = id ?? dataTestId;
+    const IdCurrent = id ?? dataTestId ?? `${name}_${new Date().getTime()}`;
     const {
       currentValue,
       isShowModal,
@@ -53,7 +52,7 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <div className="relative ">
+        <div className="relative w-full">
           <label
             className={`${
               !!errors ? "border-amber-500 outline-amber-500" : ""
@@ -62,7 +61,10 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
             }  w-full pl-3 pr-7 pb-3 pt-5 h-14  line-clamp-1 bg-white  border-secondary  cursor-pointer border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
             onClick={() => setIsShowModal(true)}
           >
-            <span className="font-medium line-clamp-1"> {currentValue?.name as string}</span>
+            <span className="font-medium line-clamp-1">
+              {" "}
+              {currentValue?.name as string}
+            </span>
             <span
               className={`absolute transition-all duration-350`}
               style={{
@@ -94,7 +96,7 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
             {...rest}
             ref={ref}
             name={name}
-            type={type}
+            type={"file"}
             onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
               if (rest.onChange) rest.onChange(ev);
               if (handledChange) handledChange(ev);

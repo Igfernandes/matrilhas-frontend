@@ -1,3 +1,4 @@
+import { File } from "@components/shared/forms/File";
 import { Button } from "../../fields/Button";
 import { Input } from "../../fields/Input";
 import { FieldShape } from "../../type";
@@ -13,21 +14,22 @@ export const fieldsSimple = {
     />
   ),
   radio: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="radio"
       className={`${classNameDefault} ml-2 ${className}`}
       {...props}
     />
   ),
   checkbox: ({ className, ...props }: FieldShape) => (
-    <input
+    <Input
       type="checkbox"
       className={`${classNameDefault} ml-2 ${className}`}
       {...props}
     />
   ),
-  select: ({ className, ...props }: FieldShape) => (
+  select: ({ className, required, ...props }: FieldShape) => (
     <select
+      required={required === "true"}
       className={`${classNameDefault} w-full m-2 ${className}`}
       {...props}
     />
@@ -53,10 +55,10 @@ export const fieldsSimple = {
       {...props}
     />
   ),
-  file: ({ className, ...props }: FieldShape) => (
-    <Input
-      type="file"
-      className={`${classNameDefault} w-full h-auto ${className}`}
+  file: ({ required, ...props }: FieldShape) => (
+    <File
+      required={required === "true"}
+      className={`${classNameDefault} w-full h-[3.5rem]`}
       {...props}
     />
   ),
@@ -67,7 +69,7 @@ export const fieldsSimple = {
       {...props}
     />
   ),
-  number: ({ className, ...props }: FieldShape) => (
+  number: ({ className,...props }: FieldShape) => (
     <Input
       type="number"
       className={`${classNameDefault} w-full ${className}`}
@@ -82,9 +84,6 @@ export const fieldsSimple = {
     />
   ),
   button: ({ className, ...props }: FieldShape) => (
-    <Button
-      className={`${classNameDefault} ${className}`}
-      {...props}
-    />
+    <Button className={`${classNameDefault} ${className}`} {...props} />
   ),
 };

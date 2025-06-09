@@ -38,13 +38,14 @@ export function Input({
           }}
         >
           {label}
-          <When value={required}>
+          <When value={!!required}>
             <span className="text-red">*</span>
           </When>
         </label>
         <input
           {...rest}
           name={name}
+          required={required === "true"}
           onFocus={handleTransitionLabel}
           onBlur={handleTransitionLabel}
           placeholder={rest.type == "date" ? " " : placeholder}

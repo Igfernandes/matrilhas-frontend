@@ -35,7 +35,7 @@ export function useModal({ currentField }: Props) {
     return payloadUpdated;
   };
 
-  const handleChangeField = (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeField = (ev: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
     const field = ev.target;
     const fieldName = field.getAttribute("name");
     if (!fieldName || !payload) return;
@@ -66,11 +66,11 @@ export function useModal({ currentField }: Props) {
       ...payload,
     };
 
-    const filteredFields = fields.filter(
-      (fieldItem) => fieldItem.id != currentField.id
-    );
+    const filteredFields = fields.map((fieldItem) => {
+      return fieldItem.id === currentField.id ? fieldUpdated : fieldItem;
+    });
 
-    handleChangeFields([...filteredFields, fieldUpdated]);
+    handleChangeFields(filteredFields);
     handleToggleModal(false);
   };
   useEffect(() => {

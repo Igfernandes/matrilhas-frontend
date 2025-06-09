@@ -20,8 +20,8 @@ export type FieldShape = {
   className?: string;
   width?: string;
   height?: string;
-  labelSize?: string;
   margin?: string;
   labelColor?: string;
   labelWeight?: string;
+  required?: string;
 };

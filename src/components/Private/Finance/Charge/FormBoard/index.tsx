@@ -7,6 +7,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ChargeShape } from "@type/Charges";
 import { FormBoardHeader } from "./header";
 import { TSelect } from "@components/shared/forms/InfoBoard/fields/Select";
+import { When } from "@components/utilities/When";
 
 dayjs.extend(customParseFormat);
 
@@ -48,14 +49,34 @@ export function FormBoard({ charge }: Props) {
           errors={errors.service_id}
           defaultValue={charge.service?.id}
         />
-        <TInput
-          label={i18n("words.amount")}
-          name={"amount"}
-          dataTestId="amount"
-          errors={errors.amount}
-          defaultValue={charge.amount}
-          type="number"
-        />
+        <When value={charge.type === "APPELLANT"}>
+          <TInput
+            label={i18n("words.period")}
+            name={"period"}
+            dataTestId="period"
+            errors={errors.period}
+            defaultValue={charge.period}
+            type="number"
+          />
+          <TInput
+            label={i18n("words.started_at")}
+            name={"started_at"}
+            dataTestId="started_at"
+            errors={errors.started_at}
+            defaultValue={charge.started_at}
+            type="number"
+          />
+        </When>
+        <When value={charge.type !== "APPELLANT"}>
+          <TInput
+            label={i18n("words.amount")}
+            name={"amount"}
+            dataTestId="amount"
+            errors={errors.amount}
+            defaultValue={charge.amount}
+            type="number"
+          />
+        </When>
         <TInput
           label={i18n("words.price")}
           name={"price"}
@@ -73,12 +94,13 @@ export function FormBoard({ charge }: Props) {
           type="number"
         />
         <TInput
-          label={i18n("words.expired_at")}
-          name={"expired_at"}
-          dataTestId="expired_at"
+          label={i18n("words.expired_days")}
+          name={"expired_days"}
+          dataTestId="expired_days"
           className="bg-white"
-          type="date"
-          defaultValue={dayjs(charge.expired_at).format("YYYY-MM-DD")}
+          type="number"
+          min={1}
+          defaultValue={charge.expired_days}
         />
       </InfoBoard>
     </div>

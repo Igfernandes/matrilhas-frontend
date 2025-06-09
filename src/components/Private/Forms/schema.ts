@@ -13,7 +13,7 @@ export const formsSchema = z.object({
     .nullable()
     .optional()
     .or(z.number()),
-  description: z.string({ required_error: i18n("errors.fields.required") }),
+  description: z.string({ required_error: i18n("errors.fields.required") }).nullable().optional(),
   isLoading: z.boolean().optional(),
 });
 

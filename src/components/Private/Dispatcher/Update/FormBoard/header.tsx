@@ -1,9 +1,9 @@
 import i18n from "@configs/i18n";
 import dayjs from "dayjs";
 import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
-import { Select } from "@components/shared/forms/Select";
 import { useFormContext } from "react-hook-form";
 import { DispatcherUpdatePayload } from "../schemas";
+import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
 
 type Props = {
   dispatcher: MessagesDispatcherShape;
@@ -11,39 +11,39 @@ type Props = {
 
 export function FormBoardHeader({ dispatcher }: Props) {
   const {
-    register,
+    setValue,
     formState: { errors },
   } = useFormContext<DispatcherUpdatePayload>();
 
   return (
     <div className="header mb-4">
-      <div className="content flex justify-between">
+      <div className="content flex flex-wrap  justify-between">
         <div className="title mb-4">
           <h1 className="font-bold text-xl">{i18n(`words.notification`)}</h1>
         </div>
-        <div className="status w-15 ml-auto  mr-2">
+        <div className="status w-15 ml-auto mr-2">
           <div>
-            <Select
-              {...register("status")}
+            <ToggleSwitch
               dataTestId="status"
-              label={i18n(`words.status`)}
-              options={[
-                {
+              label={i18n("words.status")}
+              name="status"
+              setValue={setValue}
+              options={{
+                left: {
                   text: i18n("words.active"),
                   value: "ACTIVE",
                 },
-                {
+                right: {
                   text: i18n("words.inactive"),
                   value: "INACTIVE",
                 },
-              ]}
-              required={true}
+              }}
               errors={errors.status}
             />
           </div>
         </div>
-        <div className="dates flex">
-          <span className="block border-[1px] border-tertiary mb-4 mx-2"></span>
+        <div className="dates flex w-full md:w-auto justify-center md:justify-start mt-3 md:mt-0">
+          <span className="block md:border-[1px] border-tertiary mb-4 md:mx-2"></span>
           <div className="linked text-center text-xs mr-2">
             <div>
               <span className="font-semibold">{i18n("words.linked")}</span>

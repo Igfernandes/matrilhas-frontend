@@ -4,6 +4,7 @@ import { getUserAuth } from "../services/Users/GetAuth/SSR";
 import { STATUS_SERVICE } from "@constants/http";
 import { deleteCookie } from "cookies-next";
 import { jsonWebToken } from "@helpers/JsonWebToken";
+import { AUTH_RULES } from "@configs/auth";
 
 export async function authenticationsMiddleware(
   req: NextRequest,
@@ -15,7 +16,7 @@ export async function authenticationsMiddleware(
     return NextResponse.redirect(new URL(publicRoutes.login, req.url));
 
   const userAuth = req.cookies.get("userAuth");
-
+  
   if (typeof userAuth != "undefined") return null;
 
   try {
@@ -25,20 +26,10 @@ export async function authenticationsMiddleware(
       deleteCookie("token_navigation");
       return NextResponse.redirect(new URL(publicRoutes.login, req.url));
     }
-
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 2);
-
     const { createJwt } = jsonWebToken();
     const jwt = await createJwt(JSON.parse(data));
 
-    response.cookies.set("userAuth", jwt, {
-      httpOnly: process.env.NODE_ENV === "production", // Para segurança, se necessário
-      secure: process.env.NODE_ENV === "production",
-      expires: expirationDate,
-      sameSite: "lax",
-    });
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    response.cookies.set("userAuth", jwt, AUTH_RULES.cookies);
 
     return null;
   } catch (error) {

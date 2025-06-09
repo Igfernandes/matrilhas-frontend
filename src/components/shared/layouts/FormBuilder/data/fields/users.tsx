@@ -1,3 +1,4 @@
+import { handleMaskCEP, handleMaskCPF, handleMaskPhone } from "@helpers/string";
 import { Input } from "../../fields/Input";
 import { FieldShape } from "../../type";
 
@@ -14,6 +15,30 @@ export const fieldsUser = {
     <Input
       type="password"
       className={`${classNameDefault} py-1 px-2 ${className}`}
+      {...props}
+    />
+  ),
+  phone: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="tel"
+      onChange={handleMaskPhone}
+      className={`${classNameDefault} ${className}`}
+      {...props}
+    />
+  ),
+  cpf: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="text"
+      onChange={handleMaskCPF}
+      className={`${classNameDefault} ${className}`}
+      {...props}
+    />
+  ),
+  cep: ({ className, ...props }: FieldShape) => (
+    <Input
+      type="text"
+      onChange={handleMaskCEP}
+      className={`${classNameDefault} ${className}`}
       {...props}
     />
   ),
