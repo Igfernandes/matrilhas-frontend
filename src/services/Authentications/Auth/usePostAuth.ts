@@ -44,7 +44,7 @@ export default function usePostAuth() {
         token_navigation: data.token_navigation,
       });
 
-      console.log(data.token_navigation)
+      console.log(data)
       setTimeout(() => {
         router.push(privateRoutes.dashboard)
       }, 500);
