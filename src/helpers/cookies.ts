@@ -8,7 +8,7 @@ export function destroyCookie(cookieKey: string) {
     "Set-Cookie",
     serialize(cookieKey, "", {
       maxAge: -1, // Expira o cookie imediatamente
-      httpOnly: true, // Para segurança, se necessário
+      httpOnly: false, // Para segurança, se necessário
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
     })

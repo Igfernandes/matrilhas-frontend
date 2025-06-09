@@ -3,6 +3,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { UserNavigationContextData, UserNavigationProps } from "./types";
@@ -21,8 +22,9 @@ export const UserNavigationContext = createContext(
 
 const UserNavigationProvider = ({ children }: UserNavigationProps) => {
   const [userAuth, setUserAuth] = useState<UsersShape>();
+  const tokenNavigation = useRef("");
   const { data, isFetched, error } = useGetUserAuth({
-    tokenNavigation: getCookie("token_navigation") as string,
+    tokenNavigation: tokenNavigation.current as string,
   });
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -36,6 +38,10 @@ const UserNavigationProvider = ({ children }: UserNavigationProps) => {
 
     router.push(publicRoutes.login);
   };
+
+  useEffect(() => {
+    tokenNavigation.current = getCookie("token_navigation") as string;
+  }, []);
 
   useEffect(() => {
     const userAuthCookie = getCookie("userAuth") as string;

@@ -1,6 +1,7 @@
-import { publicRoutes } from "@configs/routes/Web/navigation";
+// import { publicRoutes } from "@configs/routes/Web/navigation";
+import { privateRoutes } from "@configs/routes/Web/navigation";
 import { STATUS_SERVICE } from "@constants/http";
-import { handleLogout } from "@helpers/handlers";
+// import { handleLogout } from "@helpers/handlers";
 import { isValidJSON } from "@helpers/json";
 import { AxiosError } from "axios";
 
@@ -10,12 +11,16 @@ export function hasErrorAuthentication(error: AxiosError) {
   );
   if (process.env.NEXT_PUBLIC_ENVIRONMENT == "DEV") return response;
 
-  if (
+  const isStatusValid =
     !error.response?.status ||
-    error.response?.status === STATUS_SERVICE.NOT_FOUND
-  ) {
-    handleLogout();
-    return (window.location.href = publicRoutes.login);
+    error.response?.status === STATUS_SERVICE.NOT_FOUND;
+  const url = error?.config?.url;
+
+  if (url?.includes(privateRoutes.usersManager) && isStatusValid) {
+    console.log("Oi")
+    // handleLogout();
+    return;
+    // return (window.location.href = publicRoutes.login);
   }
 
   return response;

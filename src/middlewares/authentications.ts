@@ -2,7 +2,6 @@ import { publicRoutes } from "@configs/routes/Web/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserAuth } from "../services/Users/GetAuth/SSR";
 import { STATUS_SERVICE } from "@constants/http";
-import { deleteCookie } from "cookies-next";
 import { jsonWebToken } from "@helpers/JsonWebToken";
 import { AUTH_RULES } from "@configs/auth";
 
@@ -16,14 +15,14 @@ export async function authenticationsMiddleware(
     return NextResponse.redirect(new URL(publicRoutes.login, req.url));
 
   const userAuth = req.cookies.get("userAuth");
-  
+
   if (typeof userAuth != "undefined") return null;
 
   try {
     const { data, status } = await getUserAuth(token_navigation.value);
 
     if (status === STATUS_SERVICE.NOT_FOUND) {
-      deleteCookie("token_navigation");
+      response.cookies.delete("token_navigation");
       return NextResponse.redirect(new URL(publicRoutes.login, req.url));
     }
     const { createJwt } = jsonWebToken();
