@@ -10,7 +10,6 @@ export async function authenticationsMiddleware(
   response: NextResponse
 ) {
   const token_navigation = req.cookies.get("token_navigation");
-  console.log("token_navigation_middleware", token_navigation);
   if (typeof token_navigation == "undefined")
     return NextResponse.redirect(new URL(publicRoutes.login, req.url));
 
@@ -22,10 +21,10 @@ export async function authenticationsMiddleware(
     const { data, status } = await getUserAuth(token_navigation.value);
 
     if (status === STATUS_SERVICE.NOT_FOUND) {
-      console.log("status_middleware", status);
       response.cookies.delete("token_navigation");
       return NextResponse.redirect(new URL(publicRoutes.login, req.url));
     }
+
     const { createJwt } = jsonWebToken();
     const jwt = await createJwt(JSON.parse(data));
 

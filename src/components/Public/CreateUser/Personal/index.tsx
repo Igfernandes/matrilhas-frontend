@@ -28,6 +28,7 @@ export function Personal({ register, handleToggleStageForm, errors }: Props) {
           label={i18n("words.birthdate")}
           dataTestId="name"
           required={true}
+          type={"date"}
           errors={errors.birthdate}
         />
       </div>

@@ -46,7 +46,6 @@ const UserNavigationProvider = ({ children }: UserNavigationProps) => {
     }
 
     if (error instanceof Error) {
-      console.log("error", error);
       handleDisconnect();
       return;
     }
@@ -56,11 +55,8 @@ const UserNavigationProvider = ({ children }: UserNavigationProps) => {
         .then((user) => {
           setUserAuth(user);
         })
-        .catch((error) => {
-          console.log("verify", error);
-          handleDisconnect();
-        });
-  }, [isFetched, data]);
+        .catch(() => handleDisconnect());
+  }, [isFetched, data, error]);
 
   const userProps = useMemo(
     () => ({
