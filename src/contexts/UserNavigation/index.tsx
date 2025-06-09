@@ -56,7 +56,7 @@ const UserNavigationProvider = ({ children }: UserNavigationProps) => {
           setUserAuth(user);
         })
         .catch(() => handleDisconnect());
-  }, [isFetched, data, error]);
+  }, [isFetched, data]);
 
   const userProps = useMemo(
     () => ({
