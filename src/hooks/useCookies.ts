@@ -13,9 +13,7 @@ export function useCookies<ShapeFields extends Record<string, unknown>>() {
    */
   const saveCookies = (props: ShapeFields) => {
     Object.entries(props).forEach(([key, value]) => {
-      setCookie(key, value, {
-        secure: process.env.NEXT_AMBIENT == "PROD",
-      });
+      setCookie(key, value);
     });
 
     setFields(props);
@@ -43,9 +41,7 @@ export function useCookies<ShapeFields extends Record<string, unknown>>() {
     const cookieFields = {} as Record<string, unknown>;
 
     keys.forEach((key) => {
-      const cookieValue = getCookie(key, {
-        secure: process.env.NEXT_AMBIENT == "PROD",
-      });
+      const cookieValue = getCookie(key);
 
       if (cookieValue) {
         cookieFields[key] = cookieValue;
