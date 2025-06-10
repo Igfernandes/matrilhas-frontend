@@ -51,10 +51,10 @@ export function Header({ handleSidebar, handleNotification, title, notifications
         </div>
         <div>
           <div
-            className="relative bg-tertiary rounded-sm"
+            className="relative bg-tertiary rounded-sm cursor-pointer"
             onClick={() => handleNotification(true)}
           >
-            <span className="bg-red px-1 w-4 text-center rounded-xl text-[10px] text-white absolute right-[-4px] top-[-10px]">
+            <span className="bg-red px-1 pt-[3px] w-5 h-[19px] text-center rounded-xl text-[10px] text-white absolute right-[-4px] top-[-13px]">
               {notificationsAmount}
             </span>
             <Bell className="w-5" />

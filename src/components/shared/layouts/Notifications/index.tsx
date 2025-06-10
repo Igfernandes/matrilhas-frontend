@@ -40,7 +40,7 @@ export function Notifications({
             </div>
           </div>
           <hr className="mt-4 border-secondary border-[1px]" />
-          <div className="body overflow-y-auto">
+          <div className="body h-[90vh] overflow-y-auto">
             {notifications.map((notification, key) => (
               <NotificationItem
                 key={`notification_${notification.id}_${key}`}

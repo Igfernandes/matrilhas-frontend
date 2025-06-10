@@ -34,6 +34,12 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
     const IdCurrent = id ?? dataTestId;
 
     useEffect(() => {
+      const defaultSelected = options.filter((options) => options.selected);
+
+      if (defaultSelected[0]) handleChangeValue(name ?? "", defaultSelected[0]);
+    }, [options]);
+
+    useEffect(() => {
       changeLabelClass(!!selected ? "UP" : "DOWN");
     }, [selected]);
 

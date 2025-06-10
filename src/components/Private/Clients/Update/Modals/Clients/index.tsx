@@ -9,6 +9,7 @@ import { ModalFormProps } from "./type";
 import { useClientModal } from "./hooks/useClientModal";
 import dayjs from "dayjs";
 import { SelectSearch } from "@components/shared/forms/SelectSearch";
+import { useEffect } from "react";
 
 export function ClientUpdateModal({
   isShowModal,
@@ -22,6 +23,11 @@ export function ClientUpdateModal({
     register,
     formState: { errors },
   } = formMethods;
+
+  useEffect(() => {
+    if (client.categories.length > 0)
+      setValue("category", String(client.categories[0].id));
+  }, [client]);
 
   return (
     <Modal

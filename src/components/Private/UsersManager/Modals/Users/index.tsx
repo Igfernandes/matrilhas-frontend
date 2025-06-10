@@ -26,7 +26,7 @@ export function ModalFormUsers({
   useEffect(() => {
     const user = users?.find((user) => user.id === modal.id);
 
-    if (!user) return;
+    if (!user) return formMethods.reset();
 
     const { setValue } = formMethods;
     setValue("id", user.id);
