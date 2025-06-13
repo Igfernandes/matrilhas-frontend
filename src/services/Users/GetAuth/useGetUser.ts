@@ -1,17 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import useGetAuth from ".";
 
-type Props = {
-  tokenNavigation: string;
-}
-
-export default function useGetUserAuth({
-  tokenNavigation
-}: Props) {
+export default function useGetUserAuth() {
   const { getUser } = useGetAuth();
 
   async function handle() {
-    const { data } = await getUser(tokenNavigation);
+    const { data } = await getUser();
     return data ?? null;
   }
 
