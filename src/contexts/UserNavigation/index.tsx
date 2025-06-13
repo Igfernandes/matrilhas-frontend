@@ -21,9 +21,7 @@ export const UserNavigationContext = createContext(
 
 const UserNavigationProvider = ({ children }: UserNavigationProps) => {
   const [userAuth, setUserAuth] = useState<UsersShape>();
-  const { data, isFetched, error } = useGetUserAuth({
-    tokenNavigation: getCookie("token_navigation") as string,
-  });
+  const { data, isFetched, error } = useGetUserAuth();
   const router = useRouter();
   const queryClient = useQueryClient();
   const { verifyJwt } = jsonWebToken();
