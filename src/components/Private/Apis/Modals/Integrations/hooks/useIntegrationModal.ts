@@ -26,6 +26,8 @@ export function useIntegrationModal({ integrations }: Props) {
 
     await postIntegrations({
       ...payload,
+      public_token: payload.public_token ?? '',
+      private_token: payload.private_token ?? '',
       provider: integration.provider,
       type: integration?.type,
     });
