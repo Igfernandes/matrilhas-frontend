@@ -7,10 +7,8 @@ import useGetClientPreview from "@services/Clients/GetPreview/useGet";
 import usePostCheckout from "@services/Checkout/Post/usePost";
 import { useRouter } from "next/router";
 
-const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY;
-
 export function usePaymentForm() {
-  const { token, handleLoaded } = useRecaptcha(RECAPTCHA_KEY ?? "", "login");
+  const { token, Recaptcha, loadReCaptcha } = useRecaptcha();
   const { formMethods, hasAllFilledFields } = useFormRules<PaymentPayload>({
     schema: paymentFormSchema,
     defaultValues: {
@@ -33,18 +31,17 @@ export function usePaymentForm() {
   const router = useRouter();
 
   const onSubmit = async (payload: PaymentPayload) => {
-    handleLoaded().then(async () => {
-      const { product_id, product_url } = await postCheckout({
-        ...payload,
-        product: query.charge as string,
-        amounts: payload.amounts.map((amount) => +amount),
-        "g-recaptcha-response": token,
-      });
-
-      if (product_url) return router.push(product_url);
-
-      handleUpdateMpProductKey(product_id);
+    const { product_id, product_url } = await postCheckout({
+      ...payload,
+      product: query.charge as string,
+      amounts: payload.amounts.map((amount) => +amount),
+      recaptcha: token,
     });
+
+    if (product_url) return router.push(product_url);
+
+    handleUpdateMpProductKey(product_id);
+    loadReCaptcha();
   };
 
   useEffect(() => {
@@ -73,9 +70,10 @@ export function usePaymentForm() {
     errors,
     formMethods,
     hasAllFilledFields,
-    isLoading: isSubmitting,
+    isLoading: isSubmitting || !token,
     recaptchaToken: token,
     hasFillPhone,
+    Recaptcha,
     handleCaptureClientByPhone,
   };
 }
