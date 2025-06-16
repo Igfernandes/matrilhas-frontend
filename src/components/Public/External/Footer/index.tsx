@@ -1,9 +1,15 @@
 import { BrandInstagram } from "@assets/Icons/black/BrandInstagram";
 import { BrandTikTok } from "@assets/Icons/black/BrandTiktok";
 import { BrandYoutube } from "@assets/Icons/black/BrandYoutube";
+import { PrivacyAndCookies } from "@components/shared/layouts/PrivacyAndCookies";
+import { When } from "@components/utilities/When";
 import Link from "next/link";
 
-export function Footer() {
+type Props = {
+  hasPoliticsCookies?: boolean;
+};
+
+export function Footer({ hasPoliticsCookies = true }: Props) {
   return (
     <footer>
       <div className="text-center border-t-2 border-secondary">
@@ -16,7 +22,7 @@ export function Footer() {
                 </Link>
               </li>
               <li className="mx-2">
-                <Link href="">
+                <Link href="https://www.instagram.com/guiasdemarica/" target="_blank">
                   <BrandInstagram />
                 </Link>
               </li>
@@ -32,6 +38,10 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      <When value={hasPoliticsCookies}>
+        <PrivacyAndCookies />
+      </When>
     </footer>
   );
 }

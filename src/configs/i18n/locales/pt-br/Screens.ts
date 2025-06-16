@@ -63,6 +63,11 @@ export const Screens = {
       text_already_exclude:
         "Ao continuar, os dados vinculados a esse registro serão excluído do sistema.",
       title_already_exclude: "Você deseja excluir este registro?",
+      fills: {
+        text_already_exclude:
+          "Ao continuar, os dados vinculados a esse registro serão excluído do sistema.",
+        title_already_exclude: "Você deseja excluir este registro?",
+      },
     },
     services: {
       settings_privacy: "Configure a privacidade do serviço:",
@@ -123,8 +128,7 @@ export const Screens = {
       },
     },
     apis: {
-      text_fill_information:
-        "Preencha as informações da integração:",
+      text_fill_information: "Preencha as informações da integração:",
     },
   },
 };

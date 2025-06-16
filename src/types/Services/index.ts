@@ -6,10 +6,7 @@ export type ServicesShape = {
   photo: string;
   description?: string;
   stock: number;
-  reservations: number;
-  type: "APPELLANT" | "PUNCTUAL";
   status: "ACTIVE" | "INACTIVE";
-  privacy: "PUBLIC" | "PRIVATE";
   address?: string;
   realized_at?: string;
   expired_at?: string;

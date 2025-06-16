@@ -69,7 +69,7 @@ export function SchedulingModal({ schedules }: Props) {
                 {...register("date")}
                 label={i18n("Words.date")}
                 dataTestId="date"
-                placeholder={i18n(`configs.formats.date`)}
+                placeholder={i18n(`Configs.format.date`)}
                 type="datetime-local"
                 errors={errors.date}
               />

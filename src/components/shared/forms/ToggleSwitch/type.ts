@@ -10,6 +10,7 @@ export type ToggleSwitchProps<Payload extends FieldValues> = {
   dataTestId: string;
   label: string;
   name: Path<Payload>;
+  defaultValue?: string;
   errors?: FieldError;
   tooltip?: string;
   handledChange?: (ev: React.ChangeEvent<HTMLInputElement> | undefined) => void;

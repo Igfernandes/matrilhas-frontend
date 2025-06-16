@@ -1,11 +1,18 @@
 export const Api = {
+  unauthorized:
+    "O usuário foi desconectado ou não contém permissão para continuar a ação",
   default: {
+    not_auth:
+      "O usuário foi desconectado ou não contém permissão para continuar a ação",
+    internal_error:
+      "Ocorreu um erro severo na aplicação. Entre em contato com o suporte.",
     error: "Estamos analisando o problema. Tente novamente mais tarde.",
   },
   invalid: {
     email: "O e-mail encontra-se inexiste ou inválido",
     recaptcha:
       "A página está com recursos desatualizados. Recarregue e tente novamente.",
+    csrf: "A página está com recursos desatualizados ou inexistentes. Recarregue e tente novamente.",
   },
   auth: {
     success: {
@@ -111,6 +118,7 @@ export const Api = {
   custom_forms: {
     fills: {
       success: {
+        delete: "O registro foi excluído com sucesso!",
         post: "O formulário preenchido foi excluído com sucesso!",
       },
     },

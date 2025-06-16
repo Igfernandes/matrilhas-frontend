@@ -5,9 +5,10 @@ import i18n from "@configs/i18n";
 import { GetServerSideProps } from "next";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { handleRememberMe } from "../server/handleRememberMe";
+import { getCSRF } from "@services/Authentications/CSRF/SSR";
+import { LoginPageProps } from "@components/Public/Login/types";
 
-export default function Home() {
-
+export default function Home({ csrf }: LoginPageProps) {
   return (
     <ExternalContainer>
       <div className="row">
@@ -23,14 +24,17 @@ export default function Home() {
           <div className="mb-6">
             <p className="text-sm">{i18n("Screens.login.text")}</p>
           </div>
-          <LoginForm />
+          <LoginForm csrf={csrf} />
         </div>
       </div>
     </ExternalContainer>
   );
 }
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps<LoginPageProps> = async ({
+  req,
+}) => {
   const tokenNavigation = req.cookies["token_navigation"] ?? "";
+  const csrf = await getCSRF();
 
   if (tokenNavigation)
     return {
@@ -42,9 +46,11 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
   const referenceToken = req.cookies["remember_referenceToken"] ?? "";
 
-  if (referenceToken) return handleRememberMe({ referenceToken });
+  if (referenceToken) return handleRememberMe({ referenceToken, csrf });
 
   return {
-    props: {},
+    props: {
+      csrf: csrf,
+    },
   };
 };

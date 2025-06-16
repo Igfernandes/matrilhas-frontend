@@ -46,7 +46,8 @@ export function useAxios() {
     const responseError = !!responseData && responseData.errors;
     if (responseError) {
       shapeError["message"] = i18n(responseError) as string;
-    }
+    } else if (status === STATUS_SERVICE.NOT_FOUND)
+      shapeError["message"] = i18n("Api.default.not_auth") as string;
 
     dispatchSnackbar({
       ...shapeError,

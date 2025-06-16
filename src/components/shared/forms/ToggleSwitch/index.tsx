@@ -8,6 +8,7 @@ export function ToggleSwitch<Payload extends FieldValues>({
   options: { left, right },
   setValue,
   name,
+  defaultValue,
   errors,
 }: ToggleSwitchProps<Payload>) {
   const [switched, setSwitched] = useState<string>(String(left.value));
@@ -16,6 +17,12 @@ export function ToggleSwitch<Payload extends FieldValues>({
   useEffect(() => {
     setValue(name, switched as PathValue<Payload, Path<Payload>>);
   }, [setValue, switched, name]);
+
+  useEffect(() => {
+    if (!defaultValue) return;
+
+    setSwitched(String(defaultValue));
+  }, [defaultValue]);
 
   return (
     <>

@@ -39,6 +39,12 @@ export default function usePostAuth() {
         });
       }
 
+      if (!data.token_navigation)
+        return dispatchSnackbar({
+          message: i18n("Api.default.internal_error"),
+          type: "error",
+        });
+
       saveCookies({
         token_navigation: data.token_navigation,
       });

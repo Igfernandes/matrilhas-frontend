@@ -14,6 +14,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       errors,
       defaultValue,
       defaultChecked,
+      onChecked,
       ...props
     }: CheckboxProps,
     ref
@@ -38,6 +39,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               const input = div.querySelector("input");
 
               if (!input) return;
+
+              if (onChecked) onChecked(input.checked);
 
               setIsChecked(input.checked);
             }}

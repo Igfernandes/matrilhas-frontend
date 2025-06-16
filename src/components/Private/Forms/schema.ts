@@ -8,12 +8,18 @@ export const formsSchema = z.object({
       .replace("${field}", i18n("Words.name"))
       .replace("${length}", "3"),
   }),
+  status: z.enum(["PUBLISHED", "DRAFT"]),
   template: z
     .string({ required_error: i18n("Validations.required") })
     .nullable()
     .optional()
     .or(z.number()),
-  description: z.string({ required_error: i18n("Validations.required") }).nullable().optional(),
+  started_at: z.string({ required_error: i18n("Validations.required") }),
+  expired_at: z.string({ required_error: i18n("Validations.required") }),
+  description: z
+    .string({ required_error: i18n("Validations.required") })
+    .nullable()
+    .optional(),
   isLoading: z.boolean().optional(),
 });
 

@@ -39,7 +39,7 @@ export function NotificationItem({
             <When value={!!key && !!ROUTES[scope]}>
               <Link href={`${ROUTES[scope]}/${key}`}>
                 <span className="text-cross-black-secondary text-sm cursor-pointer">
-                  {i18n("Words.see_more")}
+                  {i18n("Texts.see_more")}
                 </span>
               </Link>
             </When>

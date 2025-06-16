@@ -16,10 +16,6 @@ export function useServicesForm({ service }: Props) {
     useFormRules<ServicesPayload>({
       schema: ServicesModalSchema,
       defaultValues: {
-        type: "APPELLANT",
-        privacy: "PRIVATE",
-        disabledReservationVacancies:
-          (service?.reservations ?? 0) > 0 ? "Sim" : "Não",
         disabledLimitVacancies: (service?.stock ?? 0) > 0 ? "Sim" : "Não",
       },
     });
@@ -32,10 +28,6 @@ export function useServicesForm({ service }: Props) {
   const submit = (formData: ServicesPayload) => {
     const payload = {
       ...formData,
-      reservations:
-        formData.disabledReservationVacancies == "Não"
-          ? 0
-          : parseInt(formData.reservations),
       stock:
         formData.disabledLimitVacancies == "Não" ? 0 : parseInt(formData.stock),
       address: formData.address ?? "",
@@ -52,7 +44,6 @@ export function useServicesForm({ service }: Props) {
       });
     } else {
       formMethods.setValue("stock", String(payload.stock));
-      formMethods.setValue("reservations", String(payload.reservations));
       putService({
         ...payload,
         photo:

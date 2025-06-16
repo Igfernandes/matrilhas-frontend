@@ -1,6 +1,8 @@
 import { Button } from "../../fields/Button";
+import { Checkbox } from "../../fields/Checkbox";
 import { File } from "../../fields/File";
 import { Input } from "../../fields/Input";
+import { Radio } from "../../fields/Radio";
 import { FieldShape } from "../../type";
 
 export const classNameDefault = "h-7 py-1 px-2 ";
@@ -14,15 +16,13 @@ export const fieldsSimple = {
     />
   ),
   radio: ({ className, ...props }: FieldShape) => (
-    <Input
-      type="radio"
+    <Radio
       className={`${classNameDefault} ml-2 ${className}`}
       {...props}
     />
   ),
   checkbox: ({ className, ...props }: FieldShape) => (
-    <Input
-      type="checkbox"
+    <Checkbox
       className={`${classNameDefault} ml-2 ${className}`}
       {...props}
     />

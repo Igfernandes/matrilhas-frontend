@@ -26,8 +26,7 @@ export function useServices({
   const tHeadsServices = useRef<Array<string>>([
     "ID",
     i18n("Words.name"),
-    i18n("Words.type"),
-    i18n("Words.stock"),
+    i18n("Words.inscribes"),
     i18n("Words.status"),
     i18n("Words.data_initial"),
     i18n("Words.actions"),
@@ -36,7 +35,6 @@ export function useServices({
   const updateUserForTable = ({
     id,
     name,
-    type,
     status,
     stock,
     created_at,
@@ -44,10 +42,9 @@ export function useServices({
     return {
       id,
       name,
-      type: i18n(`Words.${type.toLowerCase()}`),
       stock,
       status: i18n(`Words.${status.toLowerCase()}`),
-      created_at: dayjs(created_at).format(i18n("configs.formats.date")),
+      created_at: dayjs(created_at).format(i18n("Configs.format.date")),
       actions: (
         <ServicesActions handleToggleModal={handleToggleModal} id={id} />
       ),

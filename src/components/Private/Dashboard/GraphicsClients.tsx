@@ -50,7 +50,7 @@ export function GraphicsClients({
           <PolarGraphic
             title={i18n("Words.clients_by_ddd")}
             data={{
-              labels: clientsByDDD.slice(0.3).map((client) => client.ddd),
+              labels: clientsByDDD.slice(0, 3).map((client) => client.ddd),
               datasets: [
                 {
                   data: clientsByDDD.map((client) => client.amount ?? 0),
@@ -84,10 +84,14 @@ export function GraphicsClients({
                   scape: `${clientsRoute}/${client.id}`,
                   message: `${i18n("Words.not_fill_email")}:  ${client.name}`,
                 })),
-              ...invites?.map((invite) => ({
-                message: `${i18n("Words.invite_pending")}: ${invite.email}`,
-                scape: usersManager,
-              })),
+              ...invites
+                .filter((invite) => !!invite.is_valid)
+                ?.map((invite) => ({
+                  message: `${i18n(
+                    "Words.invite_pending"
+                  )}: ${invite.email.slice(0, 14)}...`,
+                  scape: usersManager,
+                })),
             ]}
           />
         </div>

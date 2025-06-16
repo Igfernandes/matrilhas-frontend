@@ -11,20 +11,26 @@ export function usePostAuthService() {
     login,
     password,
     rememberMe,
-    ...restPayload
+    recaptcha,
+    csrf: { csrf_hash, csrf_token },
   }: PostAuthPayload) {
     const payload = {
       login,
       password,
       rememberMe: rememberMe,
-      ...restPayload,
+      recaptcha,
     };
 
     if (!rememberMe) {
       delete payload["rememberMe"];
     }
 
-    return axios.post(auth, getPayloadJSON(payload));
+    return axios.post(auth, getPayloadJSON(payload), {
+      headers: {
+        "Content-Type": "application/json",
+        [csrf_token as string]: csrf_hash,
+      },
+    });
   }
 
   return {

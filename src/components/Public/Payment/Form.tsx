@@ -21,6 +21,7 @@ export function PaymentForm({ charge }: Props) {
     recaptchaToken,
     hasAllFilledFields,
     hasFillPhone,
+    Recaptcha,
     handleCaptureClientByPhone,
   } = usePaymentForm();
 
@@ -74,6 +75,7 @@ export function PaymentForm({ charge }: Props) {
               />
             </div>
           </div>
+          <Recaptcha/>
           <div className="w-2/6">
             <OrderSummary
               type={charge.type}

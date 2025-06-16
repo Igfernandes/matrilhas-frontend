@@ -5,5 +5,5 @@ export type PostCheckoutPayload = {
   cpf: string;
   amounts: Array<number>;
   product: string;
-  "g-recaptcha-response": string;
+  recaptcha: string;
 };

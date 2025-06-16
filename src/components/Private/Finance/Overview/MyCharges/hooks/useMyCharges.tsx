@@ -61,7 +61,7 @@ export function useMyCharges({
         </span>
       ),
       clients: clients?.length ?? 0,
-      created_at: dayjs(created_at).format(i18n("configs.formats.date")),
+      created_at: dayjs(created_at).format(i18n("Configs.format.date")),
       actions: <ChargesActions handleToggleModal={handleToggleModal} id={id} />,
     };
   };

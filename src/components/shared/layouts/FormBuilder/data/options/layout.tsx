@@ -25,6 +25,7 @@ export const optionsLayout = [
   {
     id: "hr",
     field: "hr",
+    hiddenSettings: true,
     icon: <Pen width={12} height={12} />,
   },
 ].map((option) => ({

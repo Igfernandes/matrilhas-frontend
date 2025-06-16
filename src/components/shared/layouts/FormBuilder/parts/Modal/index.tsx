@@ -10,7 +10,7 @@ import { StructsTab } from "./tabs/StructsTab";
 import { SizesTab } from "./tabs/SizesTab";
 import { ColorsTab } from "./tabs/ColorsTab";
 import { SettingsFieldsTab } from "./tabs/SettingsFieldsTab";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Modal() {
   const { handleToggleModal, isShowModal, currentField, handleRemoveField } =
@@ -19,14 +19,19 @@ export function Modal() {
   const { handleSubmit, handleChangeField, payload } = useModal({
     currentField: currentField,
   });
-  const [tabs, setTabs] = useState<Array<string>>([
-    "settings",
-    "colors",
-    "structs",
-  ]);
+  const defaultTabs = useRef<Array<string>>(["settings", "colors", "structs"]);
+  const [tabs, setTabs] = useState<Array<string>>(defaultTabs.current);
 
   useEffect(() => {
-    if (payload?.group === "layout") setTabs([...tabs, "sizes"]);
+    let tabsCurrent = defaultTabs.current;
+    if (payload?.group === "layout" && !tabs.includes("sizes"))
+      tabsCurrent = [...tabsCurrent, "sizes"];
+
+    if (["hr"].includes(payload?.element ?? ""))
+      tabsCurrent = tabsCurrent.filter((tab) => tab !== "settings");
+
+    handleChangeTab(tabsCurrent[0])
+    setTabs(tabsCurrent);
   }, [payload]);
 
   return (

@@ -34,10 +34,10 @@ export function Definitions() {
           <Select
             {...register("service_id")}
             dataTestId="service"
-            label={`${i18n("Words.service")} (${i18n("Words.optional")})`}
+            label={`${i18n("Words.event")} (${i18n("Words.optional")})`}
             options={[
               {
-                text: i18n("Words.select_service"),
+                text: i18n("Texts.select_event"),
                 value: 0,
               },
               ...services.map((service) => ({

@@ -10,6 +10,7 @@ export const Texts = {
   clients_add: "Adicionar clientes",
   users_group: "Grupo de Usuários",
   user_group: "Grupo de Usuário",
+  select_event: "Selecione o evento", 
   promotional_price: "Preço promocional",
   not_found_register: "No momento, nenhum registro foi encontrado.",
   sending_management: "Gestão de envios",

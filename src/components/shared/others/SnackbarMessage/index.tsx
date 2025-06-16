@@ -4,6 +4,9 @@ import useSnackbarMessage from "./hooks/useSnackbarMessage";
 import { CircleClose } from "@assets/Icons/black/CircleClose";
 import { Close } from "@assets/Icons/black/CloseClean";
 import { statusColors } from "@assets/colors/default";
+import { CircleCheck } from "@assets/Icons/black/CircleCheck";
+import { When } from "@components/utilities/When";
+import { AlertTriangle } from "@assets/Icons/black/AlertTriangle";
 
 interface Props {
   snackbar: SnackbarProps;
@@ -31,7 +34,15 @@ const SnackbarMessage = ({ deleteSnackbar, snackbar }: Props) => {
       data-testid={"snackbarMessage-" + typeSnackbar}
     >
       <div>
-        <CircleClose className="w-5" />
+        <When value={typeSnackbar === "error"}>
+          <CircleClose className="w-5" />
+        </When>
+        <When value={typeSnackbar === "notice"}>
+          <AlertTriangle className="w-5 h-5" />
+        </When>
+        <When value={typeSnackbar === "success"}>
+          <CircleCheck className="w-5" />
+        </When>
       </div>
       <div className="mr-5 ml-2">
         <h5 className={"w-full text-sm md:text-base"}>

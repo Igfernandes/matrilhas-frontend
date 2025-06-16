@@ -39,10 +39,9 @@ export function FormBuilderContent() {
         <When value={!!active}>
           <DragOverlay>
             <div
-              className=" w-full"
+              className="w-full"
               style={{
                 cursor: "pointer",
-                opacity: 0, // Mantém a opacidade do item enquanto arrasta
               }}
             >
               {fields

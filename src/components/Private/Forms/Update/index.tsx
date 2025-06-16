@@ -83,8 +83,8 @@ export function FillFieldsUpdate({ targetForm }: Props) {
       </FormProvider>
       <Notice
         headerTitle={i18n("Words.attention")}
-        title={i18n("custom_forms.fills.modal.title_already_exclude")}
-        text={i18n("custom_forms.fills.modal.text_already_exclude")}
+        title={i18n("Screens.dashboard.forms.fills.title_already_exclude")}
+        text={i18n("Screens.dashboard.forms.fills.text_already_exclude")}
         onSubmit={handleDeleteFillField}
         isShowModal={modal.type === "DELETE"}
         onModal={handleToggleModal}

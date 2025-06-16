@@ -18,7 +18,7 @@ export function FormBuilderSidebar() {
   return (
     <div className="bg-white builder-sidebar w-full md:w-[30%] md:sticky top-0 h-full z-[10]">
       <div>
-        <Options options={optionsSimples} id="simple" title="simple" />
+        <Options options={optionsSimples} id="simple" title="fill" />
         <Options options={optionsUser} id="user" title="user" />
         <Options options={optionsLayout} id="layout" title="layout" />
       </div>

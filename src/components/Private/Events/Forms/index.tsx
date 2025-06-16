@@ -2,12 +2,7 @@ import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { useServicesForm } from "./hooks/useServicesForm";
 import { Button } from "@components/shared/layouts/Button";
-import { LimitAndReservationForm } from "./LimitAndReservationForm";
 import { DefinitionsForm } from "./DefinitionsForm";
-import { RadioBox } from "@components/shared/forms/RadioBox";
-import { UserGroup } from "@assets/Icons/black/UserGroup";
-import { Lock } from "@assets/Icons/black/Lock";
-import { Checkbox } from "@components/shared/layouts/Checkbox";
 import { ServicesShape } from "../../../../types/Services";
 import { When } from "@components/utilities/When";
 import { useRouter } from "next/navigation";
@@ -20,6 +15,8 @@ import { FloppyDisk } from "@assets/Icons/black/FloppyDisck";
 import { useNavigator } from "@hooks/useNavigator";
 import useWindow from "@hooks/useWindow";
 import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
+import { Input } from "@components/shared/forms/Input";
+import { Radio } from "@components/shared/forms/Radio";
 
 type Props = {
   service?: ServicesShape;
@@ -48,7 +45,7 @@ export function ServicesForm({ service }: Props) {
               src={service?.photo ?? getFileUrl(watch("photo"))}
               width={200}
               height={100}
-              className="w-full object-contain h-[30vh]"
+              className="w-full object-cover h-[35vh]"
               alt=""
             />
           </div>
@@ -99,36 +96,50 @@ export function ServicesForm({ service }: Props) {
               <DefinitionsForm service={service} />
               <div className="form-subtitle my-6">
                 <h2>
-                  <strong>{i18n(`Screens.dashboard.services.settings_privacy`)}</strong>
+                  <strong>
+                    {i18n(`Screens.dashboard.services.settings_privacy`)}
+                  </strong>
                 </h2>
               </div>
-              <div className="flex flex-wrap lg:flex-none justify-between">
-                <div className="w-full lg:w-[48%]">
-                  <RadioBox
-                    {...register("privacy")}
-                    icon={<UserGroup />}
-                    defaultValue={"PUBLIC"}
-                    dataTestId="privacy_public"
-                    label={i18n(`Words.public`)}
-                  />
+              <div className="my-3 lg:my-6 flex flex-wrap lg:flex-none">
+                <div>
+                  <p>
+                    {i18n(`Screens.dashboard.services.has_limit_vacancies`)}
+                  </p>
                 </div>
-                <div className="w-full lg:w-[48%]">
-                  <RadioBox
-                    {...register("privacy")}
-                    icon={<Lock />}
-                    defaultValue={"PRIVATE"}
-                    dataTestId="privacy_private"
-                    defaultChecked={true}
-                    label={i18n(`Words.private`)}
-                  />
+                <div className="flex mt-2 lg:mt-auto">
+                  <div className="mx-0 lg:mx-1">
+                    <Radio
+                      {...register("disabledLimitVacancies")}
+                      dataTestId="disabled_limit_vacancies_yes"
+                      label={i18n(`Words.yes`)}
+                      value={i18n(`Words.yes`)}
+                    />
+                  </div>
+                  <div className="mx-1">
+                    <Radio
+                      {...register("disabledLimitVacancies")}
+                      dataTestId="disabled_limit_vacancies_no"
+                      label={i18n(`Words.not`)}
+                      value={i18n(`Words.not`)}
+                    />
+                  </div>
                 </div>
               </div>
-              <LimitAndReservationForm
-                register={register}
-                watch={watch}
-                errors={errors}
-              />
-
+              <div className="my-6">
+                <Input
+                  {...register("stock")}
+                  type="number"
+                  dataTestId="limit_vacancies"
+                  label={i18n(
+                    "Screens.dashboard.services.inform_limit_vacancies"
+                  )}
+                  disabled={watch("disabledLimitVacancies") === "Não"}
+                  max={99999}
+                  className="line-clamp-1"
+                  errors={errors.stock}
+                />
+              </div>
               <div className="flex flex-wrap lg:flex-none justify-between mt-12 items-center relative">
                 <When value={!service}>
                   <div className="w-full lg:w-auto mb-4 lg:mb-auto">
@@ -144,17 +155,6 @@ export function ServicesForm({ service }: Props) {
                       : "ml-auto"
                   }
                 >
-                  <When value={!service}>
-                    <div className="ml-auto lg:w-[70%] absolute lg:static top-0 right-0">
-                      <Checkbox
-                        {...register("hasContinueRegister")}
-                        dataTestId="continue_create"
-                        label={i18n(`Words.keep_creating`)}
-                        value={"true"}
-                      />
-                    </div>
-                  </When>
-
                   <div className="flex justify-between w-full">
                     <div className="lg:ml-8 w-[47%] lg:w-auto">
                       <Button

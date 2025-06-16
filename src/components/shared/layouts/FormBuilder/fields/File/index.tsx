@@ -24,7 +24,7 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <div className="relative w-full">
+        <div className="relative w-full my-4">
           <label
             className={`${
               !!errors ? "border-amber-500 outline-amber-500" : ""
