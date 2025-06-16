@@ -16,7 +16,7 @@ export function useClientsData() {
 
     clients.forEach((client) => {
       const phoneDDD = parseInt(
-        getOnlyNumbers(client.phone).slice(0, 2)
+        getOnlyNumbers(client.phone).slice(2, 4)
       ) as number;
       clientsByDDD[phoneDDD] = {
         ddd: String(phoneDDD),

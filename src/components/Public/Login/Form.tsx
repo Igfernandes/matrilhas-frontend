@@ -7,8 +7,13 @@ import { useForm } from "./hooks/useForm";
 import { Input } from "@components/shared/forms/Input";
 import { FormProvider } from "react-hook-form";
 import i18n from "@configs/i18n";
+import { CSRFShape } from "@services/Authentications/CSRF/types";
 
-export function LoginForm() {
+type Props = {
+  csrf: CSRFShape;
+};
+
+export function LoginForm({ csrf }: Props) {
   const {
     handleSubmit,
     register,
@@ -17,10 +22,9 @@ export function LoginForm() {
     isLoading,
     errors,
     updateValueRememberMe,
-    recaptchaToken,
-  } = useForm();
+    Recaptcha,
+  } = useForm({ csrf });
   const { forgotPassword } = publicRoutes;
-
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit}>
@@ -59,11 +63,12 @@ export function LoginForm() {
             </Link>
           </div>
         </div>
-        <div className="form-submit mt-6">
+        <Recaptcha />
+        <div className="form-submit mt-2">
           <Button
             text={i18n("Words.send")}
             type="submit"
-            isLoading={isLoading || !recaptchaToken}
+            isLoading={isLoading}
             disabled={!hasAllFilledFields()}
           />
         </div>

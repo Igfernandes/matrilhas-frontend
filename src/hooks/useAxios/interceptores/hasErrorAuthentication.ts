@@ -10,16 +10,17 @@ export function hasErrorAuthentication(error: AxiosError) {
     typeof error === "string" && isValidJSON(error) ? JSON.parse(error) : error
   );
   if (process.env.NEXT_PUBLIC_ENVIRONMENT == "DEV") return response;
-
+  const { BAD_AUTH, NOT_FOUND } = STATUS_SERVICE;
   const isStatusValid =
     !error.response?.status ||
-    error.response?.status === STATUS_SERVICE.NOT_FOUND;
+    [BAD_AUTH, NOT_FOUND].includes(error.response?.status);
   const url = error?.config?.url;
 
   if (url?.includes(privateRoutes.usersManager) && isStatusValid) {
     handleLogout();
     return (window.location.href = publicRoutes.login);
   }
+  
 
   return response;
 }

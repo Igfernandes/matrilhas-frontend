@@ -31,10 +31,10 @@ export function SortableField({ id, index, width, margin, ...rest }: Props) {
 
   return (
     <div
-      className={`relative z-0 inline-block mr-1  ${
+      className={`relative z-0 inline-block mr-1 ${
         rest.className?.includes("w")
           ? rest.className
-          : `${rest.className} w-full`
+          : `${rest.className ?? ""} w-full`
       }`}
       style={{
         width,

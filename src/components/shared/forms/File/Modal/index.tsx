@@ -29,7 +29,7 @@ export function FileModal({
 
   return (
     <Modal title={"Upload"} isShowModal={isShowModal} handleModal={handleModal}>
-      <div>
+      <div className="max-w-[400px]">
         <When value={!!files}>
           <UploadPreview
             file={files && files.length > 0 ? files[0] : undefined}
@@ -43,11 +43,11 @@ export function FileModal({
         <div className="flex justify-between mt-4">
           <div>
             <p className="text-[.63rem]">
-              {i18n(`Words.allowed_formats_image`)}
+              {i18n(`Texts.allowed_formats_image`)}
             </p>
           </div>
           <div>
-            <p className="text-[.63rem]">{i18n(`Words.allowed_size_image`)}</p>
+            <p className="text-[.63rem]">{i18n(`Texts.allowed_size_image`)}</p>
           </div>
         </div>
         <div>

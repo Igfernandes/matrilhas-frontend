@@ -41,6 +41,7 @@ export const Date = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             {...rest}
             ref={ref}
+            type={"datetime-local"}
             name={name}
             onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
               if (rest.onChange) rest.onChange(ev);

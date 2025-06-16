@@ -9,9 +9,12 @@ import { FormBuilderPreview } from "@components/shared/layouts/FormBuilder/Previ
 import { useForm } from "@components/Public/Forms/hooks/useForm";
 import { Button } from "@components/shared/forms/Button";
 import i18n from "@configs/i18n";
+import { When } from "@components/utilities/When";
 
 export default function Form({ form }: FormPageProps) {
-  const { handleSubmit, isLoading } = useForm({ form });
+  const { handleSubmit, isLoading, Recaptcha } = useForm({
+    form,
+  });
 
   return (
     <>
@@ -26,17 +29,25 @@ export default function Form({ form }: FormPageProps) {
               <p>{form.description}</p>
             </div>
           </div>
-          <div className="w-[60%] mx-auto">
-            <form onSubmit={handleSubmit}>
+          <div className="w-full lg:w-[60%] px-4 lg:px-0 mx-auto">
+            <form onSubmit={handleSubmit} className="flex flex-col min-h-[60vh] justify-between">
               <FormBuilderPreview
                 fields={JSON.parse(form.components) as Array<FieldShape>}
               />
-              <div className="max-w-40 ml-auto">
-                <Button
-                  className="text-white font-semibold"
-                  text={i18n("Words.send")}
-                  isLoading={isLoading}
-                />
+
+              <div className="flex justify-end items-center">
+                <When value={true}>
+                  <div className="inline-block text-center mt-4">
+                    <Recaptcha />
+                  </div>
+                </When>
+                <div className="mt-4 ml-4 mb-6">
+                  <Button
+                    className="text-white font-semibold w-[16vw]"
+                    text={i18n("Words.send")}
+                    isLoading={isLoading}
+                  />
+                </div>
               </div>
             </form>
           </div>

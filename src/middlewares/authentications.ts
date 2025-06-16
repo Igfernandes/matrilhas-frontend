@@ -2,16 +2,29 @@ import { publicRoutes } from "@configs/routes/Web/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserAuth } from "../services/Users/GetAuth/SSR";
 import { STATUS_SERVICE } from "@constants/http";
-import { jsonWebToken } from "@helpers/JsonWebToken";
 import { AUTH_RULES } from "@configs/auth";
+import { jsonWebToken } from "@helpers/jsonWebToken";
 
 export async function authenticationsMiddleware(
   req: NextRequest,
   response: NextResponse
 ) {
+  const handleDelete = () => {
+    ["token_navigation", "userAuth"].map((cookie) =>
+      response.cookies.set(cookie, "", {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production",
+        expires: new Date(0), // Expira imediatamente
+        sameSite: "lax",
+      })
+    );
+  };
+
   const token_navigation = req.cookies.get("token_navigation");
-  if (typeof token_navigation == "undefined")
+  if (typeof token_navigation == "undefined") {
+    handleDelete();
     return NextResponse.redirect(new URL(publicRoutes.login, req.url));
+  }
 
   const userAuth = req.cookies.get("userAuth");
 
@@ -21,12 +34,7 @@ export async function authenticationsMiddleware(
     const { data, status } = await getUserAuth(token_navigation.value);
 
     if (status === STATUS_SERVICE.NOT_FOUND) {
-      response.cookies.set("token_navigation", "", {
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production",
-        expires: new Date(0), // Expira imediatamente
-        sameSite: "lax",
-      });
+      handleDelete();
       return NextResponse.redirect(new URL(publicRoutes.login, req.url));
     }
 

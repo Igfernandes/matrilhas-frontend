@@ -9,10 +9,10 @@ export function UploadPrompt({ fileId }: Props) {
     <div>
       <label
         htmlFor={fileId}
-        className="max-h-[104px] w-[376px] block border rounded-lg border-dashed border-secondary px-0 pb-5 pt-4 text-center cursor-pointer"
+        className="max-h-[104px] w-[376px]  mx-auto block border rounded-lg border-dashed border-secondary px-0 pb-5 pt-4 text-center cursor-pointer"
       >
         <CloudUpload className="mx-auto mb-2" />
-        <span className="text-sm">{i18n("Words.text_upload")}</span>
+        <span className="text-sm">{i18n("Texts.text_upload")}</span>
       </label>
     </div>
   );

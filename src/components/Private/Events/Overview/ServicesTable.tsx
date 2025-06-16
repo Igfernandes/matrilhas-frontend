@@ -32,7 +32,7 @@ export function ServicesTable({ search, filterObjects }: ServicesProps) {
           excludes={["updated_at"]}
           tHeads={{
             data: tHeadsServices.current,
-            widths: [60, 250, 90, 70, 70, 100, 48],
+            widths: [60, 300, 70, 70, 100, 48],
           }}
         />
       </div>

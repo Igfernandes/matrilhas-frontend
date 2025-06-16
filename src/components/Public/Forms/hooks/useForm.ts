@@ -3,14 +3,12 @@ import usePostSubmitForm from "@services/Forms/Post/usePost";
 import { FormsShape } from "@type/Forms";
 import { FormEvent, useCallback } from "react";
 
-const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY;
-
 type Props = {
   form: FormsShape;
 };
 
 export function useForm({ form }: Props) {
-  const { token, handleLoaded } = useRecaptcha(RECAPTCHA_KEY ?? "", "login");
+  const { Recaptcha, loadReCaptcha, token } = useRecaptcha();
   const { mutateAsync: postSubmitForm, isPending: isLoading } =
     usePostSubmitForm();
 
@@ -19,6 +17,7 @@ export function useForm({ form }: Props) {
       (el): el is HTMLInputElement | HTMLSelectElement =>
         el instanceof HTMLInputElement || el instanceof HTMLSelectElement
     );
+
     let isValidForm = true;
 
     fields.forEach((field) => {
@@ -40,12 +39,14 @@ export function useForm({ form }: Props) {
 
     const formData = new FormData(formElement);
 
-    formData.append("g-recaptcha-response", token);
     formData.append("form_id", String(form.id));
-    await handleLoaded().then(() => postSubmitForm(formData));
+    formData.append("recaptcha", String(token));
+    postSubmitForm(formData);
+    loadReCaptcha();
   };
   return {
     handleSubmit,
-    isLoading,
+    isLoading: isLoading || !token,
+    Recaptcha,
   };
 }

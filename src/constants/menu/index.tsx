@@ -40,7 +40,7 @@ export const MAIN_MENU = [
     link: privateRoutes.schedule,
   },
   {
-    title: i18n("Words.services"),
+    title: i18n("Words.events"),
     Icon: Box,
     link: privateRoutes.services,
   },

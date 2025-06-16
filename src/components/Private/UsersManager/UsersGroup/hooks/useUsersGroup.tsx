@@ -34,7 +34,7 @@ export function useUsersGroup({ filter, handleFilter, data }: HookGroupsProps) {
     ...userGroup
   }: UsersGroupShape): TDataUserGroup => {
     const convertDate = dayjs(created_at).format(
-      i18n("configs.formats.datetime")
+      i18n("Configs.format.datetime")
     );
 
     const userGroupDataUpdated = {

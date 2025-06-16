@@ -9,6 +9,11 @@ export const optionsSimples = [
     icon: <Pen width={12} height={12} />,
   },
   {
+    id: "number",
+    field: "number",
+    icon: <Pen width={12} height={12} />,
+  },
+  {
     id: "radio",
     field: "radio",
     icon: <Pen width={12} height={12} />,

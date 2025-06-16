@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form";
 import i18n from "@configs/i18n";
-import { Select } from "@components/shared/forms/Select";
 import { Input } from "@components/shared/forms/Input";
 import { TextEdit } from "@components/shared/forms/TextEdit";
 import { ServicesPayload } from "./Schemas";
 import { File } from "@components/shared/forms/File";
 import { getFileName } from "@helpers/file";
 import { ServicesShape } from "@type/Services";
+import { Date } from "@components/shared/forms/Date";
 
 type Props = {
   service?: ServicesShape;
@@ -31,26 +31,16 @@ export function DefinitionsForm({ service }: Props) {
       </div>
       <div className="form-row flex flex-wrap lg:flex-none justify-between">
         <div className="form-select w-full lg:w-[48%]">
-          <Select
-            {...register("type")}
-            dataTestId="type"
-            label={i18n(`Words.service_type`)}
-            options={[
-              {
-                text: i18n("Words.appellant"),
-                value: "APPELLANT",
-              },
-              {
-                text: i18n("Words.punctual"),
-                value: "PUNCTUAL",
-              },
-            ]}
-            required={true}
-            errors={errors.type}
+          <Date
+            {...register("realized_at")}
+            dataTestId="realized_at"
+            type="datetime-local"
+            label={i18n(`Words.realized_at`)}
+            errors={errors.realized_at}
           />
         </div>
         <div className="form-select w-full lg:w-[48%]">
-          <Input
+          <Date
             {...register("expired_at")}
             dataTestId="expired_at"
             type="datetime-local"
@@ -60,16 +50,7 @@ export function DefinitionsForm({ service }: Props) {
         </div>
       </div>
       <div className="form-row flex flex-wrap lg:flex-none justify-between mt-6">
-        <div className="form-select w-full lg:w-[48%]">
-          <Input
-            {...register("realized_at")}
-            dataTestId="realized_at"
-            type="datetime-local"
-            label={i18n(`Words.realized_at`)}
-            errors={errors.realized_at}
-          />
-        </div>
-        <div className="form-select w-full lg:w-[48%]">
+        <div className="form-select w-full">
           <File
             {...register("photo")}
             dataTestId="service_image"

@@ -31,10 +31,10 @@ export function useInvites({ handleFilter, filter }: HookProps<InvitesShape>) {
     created_at,
   }: InvitesShape): TDataInvite => {
     const expiredAtDate = dayjs(expired_at).format(
-      i18n("configs.formats.datetime")
+      i18n("Configs.format.datetime")
     );
     const createdAtDate = dayjs(created_at).format(
-      i18n("configs.formats.datetime")
+      i18n("Configs.format.datetime")
     );
 
     return {

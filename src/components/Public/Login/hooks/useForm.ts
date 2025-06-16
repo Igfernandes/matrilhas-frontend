@@ -1,16 +1,19 @@
 import { loginFormSchema } from "../schemas";
 import { PostAuthPayload } from "../../../../services/Authentications/Auth/type";
 import usePostAuth from "../../../../services/Authentications/Auth/usePostAuth";
-import { useRecaptcha } from "@hooks/useRecaptcha";
 import { useFormRules } from "@hooks/Forms/useFormRules";
+import { CSRFShape } from "@services/Authentications/CSRF/types";
+import { useRecaptcha } from "@hooks/useRecaptcha";
 
 type Payload = PostAuthPayload;
 
-const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY;
+type Props = {
+  csrf: CSRFShape;
+};
 
-export function useForm() {
+export function useForm({ csrf }: Props) {
+  const { Recaptcha, loadReCaptcha, token } = useRecaptcha();
   const { mutateAsync: postAuth } = usePostAuth();
-  const { token, handleLoaded } = useRecaptcha(RECAPTCHA_KEY ?? "", "login");
   const { formMethods, hasAllFilledFields } = useFormRules<Payload>({
     schema: loginFormSchema,
     exclude: ["rememberMe"],
@@ -23,13 +26,15 @@ export function useForm() {
   } = formMethods;
 
   const onSubmit = async ({ login, password, rememberMe }: PostAuthPayload) => {
-    await handleLoaded();
     postAuth({
       login,
       password,
       rememberMe,
-      "g-recaptcha-response": token,
+      csrf,
+      recaptcha: token,
     });
+
+    loadReCaptcha();
   };
   /**
    * @function updateValueRememberMe
@@ -48,8 +53,8 @@ export function useForm() {
     errors,
     formMethods,
     hasAllFilledFields,
-    isLoading: isSubmitting,
+    isLoading: isSubmitting || !token,
     updateValueRememberMe,
-    recaptchaToken: token,
+    Recaptcha,
   };
 }

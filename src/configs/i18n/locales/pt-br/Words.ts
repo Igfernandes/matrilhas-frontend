@@ -10,7 +10,7 @@ export const Words = {
   name: "Nome",
   main: "Principal",
   my_users: "Meus usuários",
-
+  fill: "Preenchimento",
   go_out: "Sair",
   schedule: "Agenda",
   services: "Serviços",
@@ -23,6 +23,8 @@ export const Words = {
   list_from_a_to_z: "Listar de A a Z",
   research: "Pesquisar",
   status: "Status",
+  published: "Publicado",
+  draft: "Rascunho",
   total: "Total",
   created_date: "Data de Criação",
   actions: "Ações",
@@ -49,7 +51,7 @@ export const Words = {
   all: "Todos",
   select_all: "Selecionar todos",
   add: "Adicionar",
- 
+
   shared: "Compartilhar",
   new_register: "Novo registro",
   notifications: "Notificações",
@@ -334,4 +336,8 @@ export const Words = {
   months: "Meses",
   expired_days: "Expira após (Dias):",
   resolved: "Resolvida",
+  cookies: "Cookies",
+  politics_privacy: "Políticas de Privacidade",
+  inscribes: "Inscritos",
+  reservations: "Reservas",
 };

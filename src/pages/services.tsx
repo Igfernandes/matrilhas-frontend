@@ -10,9 +10,13 @@ import { getServicePreview } from "@services/Services/GetPreview/SSR";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
 import Script from "next/script";
+import { useRef } from "react";
 
 export default function Services({ service }: ServicesPageProps) {
   const { charge, photo, form } = service;
+  const address = useRef<string>(process.env.NEXT_PUBLIC_COMPANY_ADDRESS);
+  const email = useRef<string>(process.env.NEXT_PUBLIC_COMPANY_EMAIL);
+  const phone = useRef<string>(process.env.NEXT_PUBLIC_COMPANY_PHONE);
 
   return (
     <div className="min-h-[100vh] flex flex-col justify-between">
@@ -61,13 +65,10 @@ export default function Services({ service }: ServicesPageProps) {
                 <div>
                   <ul className="flex flex-wrap justify-between text-white">
                     <li className="my-1">
-                      <a href="tel:+55 (21) 9 8181-8787">(21) 9 8181-8787</a>
+                      <a href={`tel:+55 ${phone.current}`}>{phone.current}</a>
                     </li>
                     <li className="my-1">
-                      <a href="tel:+55 (21) 3232-3232">(21) 3232-3232</a>
-                    </li>
-                    <li className="my-1">
-                      <a href="mailto:contato@agm.com.br">contato@agm.com.br</a>
+                      <a href={`mailto:${email.current}`}>{email.current}</a>
                     </li>
                   </ul>
                 </div>
@@ -79,9 +80,7 @@ export default function Services({ service }: ServicesPageProps) {
                   </h4>
                 </div>
                 <div className="my-2">
-                  <p className="text-white ">
-                    R. Antônio Marques Mathias, 338 Itaipuaçu, Maricá/RJ
-                  </p>
+                  <p className="text-white ">{address.current}</p>
                 </div>
               </div>
             </div>

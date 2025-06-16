@@ -9,6 +9,7 @@ export default async function middleware(req: NextRequest) {
 
   return response;
 }
+
 export const config = {
   matcher: ["/dashboard/:path*"],
 };

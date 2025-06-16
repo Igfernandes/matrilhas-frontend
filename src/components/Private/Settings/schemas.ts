@@ -14,7 +14,7 @@ export const SettingsSchema = z.object({
     .string({ required_error: i18n("Validations.required") })
     .or(z.literal("")) // Permite string vazia ("")
     .refine((date) => date === "" || REGEXES.DATE_BR.test(`${date}`), {
-      message: `Formato inválido (${i18n("configs.formats.date")})`,
+      message: `Formato inválido (${i18n("Configs.format.date")})`,
     })
     .refine((date) => {
       if (!date) return true;
