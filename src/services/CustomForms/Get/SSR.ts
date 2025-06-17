@@ -41,7 +41,7 @@ export async function getForm({
       url: setParams({
         url: formPreview,
         data: {
-          id,
+          id: id ?? "",
         },
       }),
       query,

@@ -26,6 +26,8 @@ export function FillFieldsUpdate({ targetForm }: Props) {
       id: targetForm.id,
       name: targetForm.name,
       description: targetForm.description,
+      started_at: targetForm.started_at,
+      expired_at: targetForm.expired_at,
       template: String(targetForm.id),
     },
   });

@@ -6,6 +6,8 @@ export type FormsShape = {
   description?: string;
   status: "PUBLISHED" | "DRAFT";
   inscribes: number;
+  started_at: string;
+  expired_at: string;
   created_at: string;
   updated_at: string;
 };
