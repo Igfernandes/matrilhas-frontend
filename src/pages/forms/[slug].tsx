@@ -10,7 +10,6 @@ import { useForm } from "@components/Public/Forms/hooks/useForm";
 import { Button } from "@components/shared/forms/Button";
 import i18n from "@configs/i18n";
 import { When } from "@components/utilities/When";
-import { Subscribe } from "@components/shared/layouts/Subscribe";
 
 export default function Form({ form }: FormPageProps) {
   const { handleSubmit, isLoading, Recaptcha } = useForm({
@@ -19,7 +18,6 @@ export default function Form({ form }: FormPageProps) {
 
   return (
     <>
-      <Subscribe />
       <Header />
       <div className="flex flex-col justify-between min-h-[85vh] mx-w-[1440px]">
         <main>

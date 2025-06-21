@@ -47,6 +47,9 @@
 - **Copiar link está vindo com o link errado.**
 - **Testar o save das informações**
 - Adicionar campo de publico e privado nos formulários.
+- Verificar o reload causado pelo recaptcha.
+- Remover a exibição de elementos que não sejam campos de entrada.
+
 
 # Serviços:
 
