@@ -15,8 +15,12 @@ export const formsSchema = z.object({
     .nullable()
     .optional()
     .or(z.number()),
-  started_at: z.string({ required_error: i18n("Validations.required") }),
-  expired_at: z.string({ required_error: i18n("Validations.required") }),
+  started_at: z
+    .string({ required_error: i18n("Validations.required") })
+    .optional(),
+  expired_at: z
+    .string({ required_error: i18n("Validations.required") })
+    .optional(),
   description: z
     .string({ required_error: i18n("Validations.required") })
     .nullable()

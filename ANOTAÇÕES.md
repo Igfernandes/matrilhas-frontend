@@ -49,6 +49,7 @@
 - Adicionar campo de publico e privado nos formulários.
 - Verificar o reload causado pelo recaptcha.
 - Remover a exibição de elementos que não sejam campos de entrada.
+- Corrigir notificações no telefone. Está dando algum erro, pq ele não sai do "carregar".
 
 
 # Serviços:

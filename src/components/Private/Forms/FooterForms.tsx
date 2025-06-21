@@ -21,9 +21,8 @@ export function FooterForms({
   isFirstStep,
   handleSubmit,
 }: Props) {
-  const { reset, formState } = useFormContext();
+  const { reset } = useFormContext();
 
-  console.log(formState.errors);
   return (
     <div className="bg-white flex flex-wrap md:flex-auto items-center justify-between px-6 rounded-xl py-4 mt-6">
       <div>
