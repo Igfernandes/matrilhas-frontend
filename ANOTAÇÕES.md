@@ -9,15 +9,16 @@
 - Corrigir todos os logs do console. (DEPOIS)
 - Otimizar nomenclatura de tudo no projeto (DEPOIS)
 - Refatorar código. (DEPOIS)
-- Melhorar a proposta pros envios. Eles devem acontecer de background, de forma que não seja necessário esperar para enviar
+- Melhorar a proposta pros envios. Eles devem acontecer de background, de forma que não seja necessário esperar para enviar 
 - **Criar sistema de envio para atualizar notificações visualizadas**
-- Criar uma API para o websocket.
+- **Criar uma API para o websocket.**
 - **Lógica de Notificações não funciona**
 - Lógica de Permissões não funciona.
-- Otimizar todas as mensagens de resposta.
+- **Otimizar todas as mensagens de resposta.**
 - Tabela calculando o valor de exibição errado
-- O snackbars estão sem icones corretos do lado
+- **O snackbars estão sem icones corretos do lado**
 - **Fazer com que a ordem de exibição dos arquivos sejam contrária (DESC)**
+- Apartir da página 10, some os 3 pontos.
 
 # Clientes:
 

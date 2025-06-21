@@ -29,7 +29,9 @@ export function FillFieldsUpdate({ targetForm }: Props) {
       started_at: targetForm.started_at,
       expired_at: targetForm.expired_at,
       template: String(targetForm.id),
-      service_id: String(targetForm.service_id),
+      service_id: targetForm.service_id
+        ? String(targetForm.service_id)
+        : undefined,
     },
   });
   const { modal, handleToggleModal } = useModalContext();
