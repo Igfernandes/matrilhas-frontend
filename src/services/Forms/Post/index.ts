@@ -6,8 +6,12 @@ export function usePostFormService() {
   const { axios } = useAxios();
   const { formFills } = API_ROUTES;
 
-  async function postForm(payload: PostCreateFormPayload) {
-    return axios.post(formFills, payload);
+  async function postForm({ payload, csrf }: PostCreateFormPayload) {
+    return axios.post(formFills, payload, {
+      headers: {
+        "X-CSRF-TOKEN": csrf.csrf_hash,
+      },
+    });
   }
   return {
     postForm,

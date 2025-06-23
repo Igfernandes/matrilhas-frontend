@@ -52,12 +52,23 @@ export function Dependents({ id, label, name, errors }: InputProps) {
             </button>
           </div>
         </div>
+        <div className="dependents">
+          <div className="header flex">
+            <div>
+              <span>{i18n("Words.name")}</span>
+            </div>
+            <div>
+              <span>{i18n("Words.cpf")}</span>
+            </div>
+            <div>
+              <span>{i18n("Words.birthdate")}</span>
+            </div>
+          </div>
+        </div>
         <table className="w-full">
           <thead>
             <tr>
-              <th className="border-2 border-cross-white-primary">
-                {i18n("Words.name")}
-              </th>
+              <th className="border-2 border-cross-white-primary"></th>
               <th className="border-2 border-cross-white-primary w-[180px]">
                 {i18n("Words.cpf")}
               </th>

@@ -21,7 +21,7 @@ export function useRecaptcha() {
 
   const loadReCaptcha = useCallback(() => {
     turnstile.reset();
-  }, [turnstile]);
+  }, []);
 
   return { token, loadReCaptcha, Recaptcha };
 }

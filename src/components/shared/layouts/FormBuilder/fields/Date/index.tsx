@@ -1,9 +1,13 @@
 import { When } from "@components/utilities/When";
 
 import { RotateClockwise } from "@assets/Icons/white/RotateClockwise";
-import React from "react";
+import React, { useRef } from "react";
 
 import { InputProps } from "./type";
+import { handleMaskDate } from "@helpers/date";
+import { Calendar } from "@assets/Icons/black/Calendar";
+import dayjs from "dayjs";
+import i18n from "@configs/i18n";
 
 export function Date({
   isLoading = false,
@@ -16,6 +20,7 @@ export function Date({
   ...rest
 }: InputProps) {
   const IdCurrent = id;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -35,14 +40,33 @@ export function Date({
         </label>
         <input
           {...rest}
+          ref={inputRef}
           name={name}
           required={required === "true"}
-          type={"date"}
+          type={"text"}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleMaskDate(e)
+          }
+          placeholder="Dia/Mes/Ano"
           className={`${className ?? ""} ${
             !!errors ? "border-amber-500 outline-amber-500" : ""
           } w-full px-3 pt-8 pb-4 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
           id={IdCurrent}
         />
+        <div className="absolute right-4 top-4">
+          <label htmlFor={`calendar_${name}`}>
+            <Calendar />
+          </label>
+          <input
+            id={`calendar_${name}`}
+            type="date"
+            onChange={(ev) => {
+              inputRef.current?.setAttribute("value", dayjs(ev.currentTarget.value).format(i18n("Configs.format.date")));
+              
+            }}
+            className="opacity-0 absolute w-4 h-full top-0"
+          />
+        </div>
         <When value={isLoading}>
           <RotateClockwise
             className="absolute right-3 top-4 animate-spin"

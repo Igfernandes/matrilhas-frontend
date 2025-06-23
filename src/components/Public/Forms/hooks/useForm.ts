@@ -1,14 +1,14 @@
-import { useRecaptcha } from "@hooks/useRecaptcha";
+import { CSRFShape } from "@services/Authentications/CSRF/types";
 import usePostSubmitForm from "@services/Forms/Post/usePost";
 import { FormsShape } from "@type/Forms";
 import { FormEvent, useCallback } from "react";
 
 type Props = {
   form: FormsShape;
+  csrf: CSRFShape;
 };
 
-export function useForm({ form }: Props) {
-  const { Recaptcha, loadReCaptcha, token } = useRecaptcha();
+export function useForm({ form, csrf }: Props) {
   const { mutateAsync: postSubmitForm, isPending: isLoading } =
     usePostSubmitForm();
 
@@ -40,14 +40,11 @@ export function useForm({ form }: Props) {
     const formData = new FormData(formElement);
 
     formData.append("form_id", String(form.id));
-    formData.append("recaptcha", String(token));
-    
-    postSubmitForm(formData);
-    loadReCaptcha();
+
+    postSubmitForm({ payload: formData, csrf });
   };
   return {
     handleSubmit,
-    isLoading: isLoading || !token,
-    Recaptcha,
+    isLoading: isLoading,
   };
 }

@@ -50,7 +50,11 @@
 - Verificar o reload causado pelo recaptcha.
 - Remover a exibição de elementos que não sejam campos de entrada.
 - Corrigir notificações no telefone. Está dando algum erro, pq ele não sai do "carregar".
-
+- Campo de date fica um lixo no celular. Refazer.
+- Os clientes não estão aparecendo na tabela de inscritos, mas estão sendo retornados pela API
+- O campo de dependentes não está legal na versão mobile.
+- A tradução não está funcionando corretamente nas páginas de sucesso.
+- Remover o recaptcha e colocar o sistema de CRSF no formulário de preenchimento.
 
 # Serviços:
 

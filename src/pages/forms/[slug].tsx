@@ -9,11 +9,12 @@ import { FormBuilderPreview } from "@components/shared/layouts/FormBuilder/Previ
 import { useForm } from "@components/Public/Forms/hooks/useForm";
 import { Button } from "@components/shared/forms/Button";
 import i18n from "@configs/i18n";
-import { When } from "@components/utilities/When";
+import { getCSRF } from "@services/Authentications/CSRF/SSR";
 
-export default function Form({ form }: FormPageProps) {
-  const { handleSubmit, isLoading, Recaptcha } = useForm({
+export default function Form({ form, csrf }: FormPageProps) {
+  const { handleSubmit, isLoading } = useForm({
     form,
+    csrf,
   });
 
   return (
@@ -37,16 +38,10 @@ export default function Form({ form }: FormPageProps) {
               <FormBuilderPreview
                 fields={JSON.parse(form.components) as Array<FieldShape>}
               />
-
               <div className="flex justify-end items-center">
-                <When value={true}>
-                  <div className="inline-block text-center mt-4">
-                    <Recaptcha />
-                  </div>
-                </When>
                 <div className="mt-4 ml-4 mb-6">
                   <Button
-                    className="text-white font-semibold w-44"
+                    className="text-white font-semibold w-[190px]"
                     text={i18n("Words.send")}
                     isLoading={isLoading}
                   />
@@ -67,6 +62,7 @@ export const getServerSideProps: GetServerSideProps<FormPageProps> = async ({
 }) => {
   const { slug } = params as { slug: string }; // Tipando o params
   const form = await getForm({ slug });
+  const csrf = await getCSRF();
 
   if (!form || isErrorRequest(form)) {
     return {
@@ -80,6 +76,7 @@ export const getServerSideProps: GetServerSideProps<FormPageProps> = async ({
   return {
     props: {
       form, // Passa o ID para o componente
+      csrf,
     },
   };
 };
