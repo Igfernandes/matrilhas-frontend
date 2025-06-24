@@ -63,7 +63,7 @@ export function FillFieldsActions({
     });
 
     setActions(data);
-  }, [serviceId, formId]);
+  }, [serviceId, formId, refPackage, forms]);
 
   return (
     <div className="flex">
