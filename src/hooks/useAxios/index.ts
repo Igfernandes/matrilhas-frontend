@@ -43,7 +43,7 @@ export function useAxios() {
       ? JSON.parse(jsonResponseData)
       : null;
 
-    const responseError = !!responseData && responseData.errors;
+    const responseError = !!responseData && responseData.errors[0];
     if (responseError) {
       shapeError["message"] = i18n(responseError) as string;
     } else if (status === STATUS_SERVICE.NOT_FOUND)

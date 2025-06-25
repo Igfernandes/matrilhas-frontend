@@ -48,7 +48,7 @@ export const File = React.forwardRef<HTMLInputElement, InputProps>(
       if (!files) return;
 
       setCurrentValue(files[0]);
-    }, [watch(`${name}`), name]);
+    }, [watch(`${name}`), name, defaultValue, value]);
 
     return (
       <>

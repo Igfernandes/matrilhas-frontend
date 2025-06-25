@@ -1,4 +1,18 @@
 export const Api = {
+  exports: {
+    invalid: {
+      in_ids:
+        "The selected data is corrupted or the system is having trouble processing it.",
+      type: "The export type is required but was not provided correctly.",
+      entity:
+        "The type of data to be exported is incorrect or has issues in its records.",
+    },
+    success: {
+      post: "The export was completed successfully",
+    },
+    service_problem:
+      "There was a problem while trying to create or retrieve the file. Check if the file has already been created in the file history or try again.",
+  },
   mailer: {
     invalid: {
       email:

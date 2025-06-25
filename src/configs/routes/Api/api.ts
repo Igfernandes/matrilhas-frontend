@@ -28,4 +28,5 @@ export const API_ROUTES = {
   ...notificationsRoutes,
   ...scheduleRoutes,
   ...messagesDispatcherRoutes,
+  exports: "/exports",
 };

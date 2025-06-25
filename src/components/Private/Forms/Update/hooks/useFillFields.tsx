@@ -50,7 +50,7 @@ export function useFillFields({ formId, serviceId }: Props) {
         id,
         value,
         inscribe_at: serviceName,
-        created_at: dayjs(created_at).format("DD/MM/YYYY HH:MM"),
+        created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm:ss"),
         actions: (
           <FillFieldsActions
             handleToggleModal={handleToggleModal}

@@ -1,4 +1,18 @@
 export const Api = {
+  exports: {
+    invalid: {
+      in_ids:
+        "Los datos seleccionados están dañados o el sistema tiene problemas para procesarlos.",
+      type: "El tipo de exportación es obligatorio, pero no fue enviado correctamente.",
+      entity:
+        "El tipo de dato a exportar es incorrecto o tiene problemas en sus registros.",
+    },
+    success: {
+      post: "La exportación se completó con éxito",
+    },
+    service_problem:
+      "Hubo un problema al intentar crear o recuperar el archivo. Verifica si el archivo ya fue creado en el historial de archivos o inténtalo de nuevo.",
+  },
   mailer: {
     invalid: {
       email:
