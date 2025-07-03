@@ -81,7 +81,7 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
               onChange={(value) => {
                 if (!rest.name) return;
 
-                updateValue(rest.name, String(value));
+                updateValue(rest.name, String(value ?? ""));
               }}
               placeholder={placeholder}
             />
