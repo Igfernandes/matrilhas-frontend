@@ -34,6 +34,7 @@ export function useServicesForm({ service }: Props) {
       address: formData.address ?? "",
       realized_at: formData.realized_at ?? "",
       expired_at: formData.expired_at ?? "",
+      description: formData.description ?? ""
     };
 
     if (!service) {

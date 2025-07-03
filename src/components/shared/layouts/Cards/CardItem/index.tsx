@@ -32,7 +32,7 @@ export function CardItem({
             <p className="font-bold line-clamp-3">{description}</p>
           </div>
           <div className="mt-1">
-            <span className="text-xs line-clamp-1">{alert}</span>
+            <span className="text-xs line-clamp-3">{alert}</span>
           </div>
         </div>
       </div>
