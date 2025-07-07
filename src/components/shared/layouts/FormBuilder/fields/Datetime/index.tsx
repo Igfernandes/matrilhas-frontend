@@ -1,10 +1,10 @@
 import { When } from "@components/utilities/When";
 
 import { RotateClockwise } from "@assets/Icons/white/RotateClockwise";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { InputProps } from "./type";
-import { handleMaskDate } from "@helpers/date";
+import { getFormattedDatetime } from "@helpers/date";
 import { Calendar } from "@assets/Icons/black/Calendar";
 import dayjs from "dayjs";
 import i18n from "@configs/i18n";
@@ -23,6 +23,7 @@ export function Datetime({
   ...rest
 }: InputProps & FieldShape) {
   const IdCurrent = id;
+  const [value, setValue] = useState<string>();
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -51,10 +52,10 @@ export function Datetime({
           name={name}
           required={required === "true"}
           type={"text"}
+          value={value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleMaskDate(e)
+            setValue(getFormattedDatetime(e))
           }
-          placeholder="Dia/Mes/Ano"
           className={`${className ?? ""} ${
             !!errors ? "border-amber-500 outline-amber-500" : ""
           } w-full px-3 pt-8 pb-4 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
@@ -62,16 +63,15 @@ export function Datetime({
         />
         <div className="absolute right-4 top-4">
           <label htmlFor={`calendar_${name}`}>
-            <Calendar fill={labelColor}  />
+            <Calendar fill={labelColor} />
           </label>
           <input
             id={`calendar_${name}`}
-            type="date"
+            type="datetime-local"
             onChange={(ev) => {
-              inputRef.current?.setAttribute(
-                "value",
+              setValue(
                 dayjs(ev.currentTarget.value).format(
-                  i18n("Configs.format.date")
+                  i18n("Configs.format.datetime")
                 )
               );
             }}

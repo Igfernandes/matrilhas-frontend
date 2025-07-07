@@ -40,7 +40,6 @@ export const fieldsSimple = {
   ),
   "datetime-local": ({ className, ...props }: FieldShape) => (
     <Datetime
-      type="datetime-local"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
