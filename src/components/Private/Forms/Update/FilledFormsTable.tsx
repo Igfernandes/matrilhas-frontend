@@ -30,7 +30,7 @@ export function FilledFormsTable(props: Props) {
         title={i18n("Words.registers")}
         tHeads={{
           data: tHeadsFields.current,
-          widths: [60, 300, 200, 100, 48],
+          widths: [60, 300, 150, 180, 48],
         }}
       />
     </>

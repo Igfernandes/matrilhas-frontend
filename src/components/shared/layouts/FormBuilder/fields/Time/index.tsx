@@ -4,8 +4,6 @@ import { RotateClockwise } from "@assets/Icons/white/RotateClockwise";
 import React, { useRef } from "react";
 
 import { InputProps } from "./type";
-import dayjs from "dayjs";
-import i18n from "@configs/i18n";
 import { FieldShape } from "../../type";
 
 export function Time({
@@ -57,15 +55,7 @@ export function Time({
         <div className="absolute right-4 top-4">
           <input
             id={`calendar_${name}`}
-            type="date"
-            onChange={(ev) => {
-              inputRef.current?.setAttribute(
-                "value",
-                dayjs(ev.currentTarget.value).format(
-                  i18n("Configs.format.date")
-                )
-              );
-            }}
+            type="time"
             className="opacity-0 absolute w-4 h-full top-0"
           />
         </div>

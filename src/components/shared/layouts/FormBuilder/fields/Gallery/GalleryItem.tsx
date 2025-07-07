@@ -8,7 +8,7 @@ type Props = GalleryFileShape;
 
 export function GalleryItem({ name, type, url, handleDelete }: Props) {
   return (
-    <li className="relative w-[19%] h-40 bg-slate-100 m-1">
+    <li className="relative w-[23%] md:w-[19%] h-40 bg-slate-100 m-1">
       <When value={type.includes("image")}>
         <Image
           src={url}
