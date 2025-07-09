@@ -35,7 +35,9 @@ export function useModal({ currentField }: Props) {
     return payloadUpdated;
   };
 
-  const handleChangeField = (ev: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
+  const handleChangeField = (
+    ev: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const field = ev.target;
     const fieldName = field.getAttribute("name");
     if (!fieldName || !payload) return;
@@ -48,6 +50,20 @@ export function useModal({ currentField }: Props) {
     const payloadUpdated: Record<string, unknown> = getPayloadStyled(
       fieldName,
       fieldValue
+    );
+
+    setPayload({
+      ...payload,
+      ...payloadUpdated,
+    });
+  };
+
+  const handleUpdateField = (name: string, value: string) => {
+    if (!name || !payload) return;
+
+    const payloadUpdated: Record<string, unknown> = getPayloadStyled(
+      name,
+      value
     );
 
     setPayload({
@@ -84,5 +100,6 @@ export function useModal({ currentField }: Props) {
     handleSubmit,
     handleChangeField,
     setPayload,
+    handleUpdateField,
   };
 }

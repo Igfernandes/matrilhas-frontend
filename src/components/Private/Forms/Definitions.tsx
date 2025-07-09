@@ -12,7 +12,6 @@ import { ServicesShape } from "@type/Services";
 import useWindow from "@hooks/useWindow";
 import { useNavigator } from "@hooks/useNavigator";
 import { FloppyDisk } from "@assets/Icons/black/FloppyDisck";
-import { Shared } from "@components/shared/others/Shared";
 import { Datetime } from "@components/shared/forms/DateTime";
 
 type Props = Pick<ComponentsProps, "handleChangeFormFields"> & {
@@ -61,9 +60,6 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
             >
               <FloppyDisk className="hover:fill-red" />
             </div>
-          </div>
-          <div className="relative">
-            <Shared entity={"FORMS"} in_ids={[formId ?? 0]} />
           </div>
         </When>
       </div>

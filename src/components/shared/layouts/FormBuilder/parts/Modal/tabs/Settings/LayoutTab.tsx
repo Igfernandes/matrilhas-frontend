@@ -1,15 +1,9 @@
-import { ChangeEvent } from "react";
-import { FieldShape } from "../../../type";
-import { FormGroup } from "../fieldsGroup/FormGroup";
+import { FormGroup } from "../../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
+import { TabProps } from "../type";
 
-type Props = {
-  field?: FieldShape;
-  oChangeField: (ev: ChangeEvent<HTMLInputElement>) => void;
-  tabActive: string;
-};
 
-export function SettingsLayoutTab({ field, oChangeField, tabActive }: Props) {
+export function SettingsLayoutTab({ field, oChangeField, tabActive }: TabProps) {
   return (
     <When value={tabActive === "settings"}>
       <div

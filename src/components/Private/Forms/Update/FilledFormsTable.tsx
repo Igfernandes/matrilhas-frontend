@@ -1,7 +1,7 @@
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import i18n from "@configs/i18n";
-import { useModalContext } from "@contexts/Modal";
 import { useFillFields } from "./hooks/useFillFields";
+import { FilledFormsActions } from "./FilledFormsActions";
 
 type Props = {
   formId: number;
@@ -9,7 +9,6 @@ type Props = {
 };
 
 export function FilledFormsTable(props: Props) {
-  const { handleToggleModal } = useModalContext();
   const { tDataFields, tHeadsFields } = useFillFields(props);
 
   return (
@@ -19,12 +18,7 @@ export function FilledFormsTable(props: Props) {
           pagination: {
             max: 6,
           },
-          actions: [
-            {
-              handle: () => handleToggleModal("SHARED"),
-              text: i18n("Texts.data_shared"),
-            },
-          ],
+          buttons: <FilledFormsActions formId={props.formId} />,
         }}
         data={tDataFields}
         title={i18n("Words.registers")}

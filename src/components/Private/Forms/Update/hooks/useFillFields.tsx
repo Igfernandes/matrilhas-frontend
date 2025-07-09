@@ -48,7 +48,7 @@ export function useFillFields({ formId, serviceId }: Props) {
 
       return {
         id,
-        value:  value.length > 40 ?  value.slice(0, 40)+"..." : "",
+        value:  value.length > 40 ?  value.slice(0, 40)+"..." : value,
         inscribe_at: serviceName,
         created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm:ss"),
         actions: (
