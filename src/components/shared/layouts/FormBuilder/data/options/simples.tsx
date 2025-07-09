@@ -1,6 +1,7 @@
 import { Pen } from "@assets/Icons/black/Pen";
 import { RectangleAd } from "@assets/Icons/black/RectangleAd";
 import { OptionData } from "../../type";
+import { SettingsFieldsTab } from "../../parts/Modal/tabs/Settings/FieldsTab";
 
 export const optionsSimples = [
   {
@@ -71,4 +72,10 @@ export const optionsSimples = [
 ].map((option) => ({
   ...option,
   element: "INPUT",
+  editTabs: [
+    {
+      name: "settings",
+      component: SettingsFieldsTab,
+    },
+  ],
 })) as Array<OptionData>;

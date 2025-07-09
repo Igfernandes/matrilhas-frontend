@@ -1,5 +1,7 @@
 import { Pen } from "@assets/Icons/black/Pen";
 import { OptionData } from "../../type";
+import { SettingsLayoutTab } from "../../parts/Modal/tabs/Settings/LayoutTab";
+import { SizesTab } from "../../parts/Modal/tabs/SizesTab";
 
 export const optionsLayout = [
   {
@@ -31,4 +33,14 @@ export const optionsLayout = [
 ].map((option) => ({
   ...option,
   element: "TEXT",
+  editTabs: [
+    {
+      name: "settings",
+      component: SettingsLayoutTab,
+    },
+    {
+      name: "sizes",
+      component: SizesTab,
+    },
+  ],
 })) as Array<OptionData>;

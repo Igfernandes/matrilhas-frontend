@@ -1,17 +1,11 @@
-import { ChangeEvent } from "react";
-import { FieldShape } from "../../../type";
-import { FormGroup } from "../fieldsGroup/FormGroup";
+import { FormGroup } from "../../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
-import { FormSelect } from "../fieldsGroup/FormSelect";
+import { FormSelect } from "../../fieldsGroup/FormSelect";
 import i18n from "@configs/i18n";
+import { TabProps } from "../type";
 
-type Props = {
-  field?: FieldShape;
-  oChangeField: (ev: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-  tabActive: string;
-};
 
-export function SettingsFieldsTab({ field, oChangeField, tabActive }: Props) {
+export function SettingsFieldsTab({ field, oChangeField, tabActive }: TabProps) {
 
   return (
     <When value={tabActive === "settings"}>
