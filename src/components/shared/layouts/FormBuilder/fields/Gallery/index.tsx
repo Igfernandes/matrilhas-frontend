@@ -10,7 +10,6 @@ export function Gallery({
   dataTestId,
   id,
   label,
-  errors,
   name,
   required,
   setValue,
@@ -68,6 +67,11 @@ export function Gallery({
               {...rest}
               name={name}
               type={"hidden"}
+              value={
+                filesUploaded.length > 0
+                  ? JSON.stringify(filesUploaded)
+                  : undefined
+              }
               required={!!required}
               data-testid={dataTestId}
               id={IdCurrent}
@@ -75,7 +79,13 @@ export function Gallery({
           </div>
         </div>
       </div>
-      <ErrorMessage errors={errors?.message} />
+      <ErrorMessage
+        errors={
+          !!required && filesUploaded.length == 0
+            ? i18n(`Texts.field_required`)
+            : undefined
+        }
+      />
     </>
   );
 }
