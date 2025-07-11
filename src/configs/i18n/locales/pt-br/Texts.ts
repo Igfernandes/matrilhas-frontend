@@ -38,4 +38,5 @@ export const Texts = {
   first_column: "Primeira coluna",
   viewer_file: "Visualizar o anexo",
   file_invalid: "Arquivo inválido",
+  field_required: "O campo é obrigatório",
 };
