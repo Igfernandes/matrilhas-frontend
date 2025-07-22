@@ -34,11 +34,12 @@ export function InscribesTable({ title, service, stock }: Props) {
     if (!inscribesData) return;
 
     const clientIds = inscribesData.map((inscribe) => inscribe.id);
+  
     setInscribesId(inscribesId);
     handleUpdateClientsSelected(
       clients.filter((client) => clientIds.includes(client.id))
     );
-  }, [inscribesData, handleUpdateClientsSelected]);
+  }, [inscribesData, clients]);
 
   return (
     <div>
