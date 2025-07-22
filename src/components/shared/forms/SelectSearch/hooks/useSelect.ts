@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { OptionsShape } from "../type";
 
-export function useSelect() {
-  const { setValue } = useFormContext();
-  const [selected, setSelected] = useState<string>();
+type Props = {
+  name: string;
+};
+
+export function useSelect({ name }: Props) {
+  const { setValue, watch } = useFormContext();
+  const [selected, setSelected] = useState<string>(watch(name));
   const [isShowList, setIsShowList] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
 
   const handleChangeValue = (name: string, option: OptionsShape) => {
     setValue(name, String(option.value));
-    setSelected(option.value ? option.text: "");
+    setSelected(option.value ? option.text : "");
   };
 
   const handleToggleList = (isShowList: boolean) => {
@@ -19,6 +23,10 @@ export function useSelect() {
   const handleSearch = (search: string) => {
     setSearch(search);
   };
+
+  useEffect(() => {
+    setSelected(watch(name));
+  }, [watch(name)]);
 
   return {
     handleChangeValue,
