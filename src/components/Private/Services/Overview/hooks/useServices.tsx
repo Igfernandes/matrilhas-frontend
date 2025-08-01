@@ -60,7 +60,7 @@ export function useServices({
 
   /** Adding news keys of table and the lasted column to table data services */
   useEffect(() => {
-    if (!servicesData) return;
+    if (!servicesData || !Array.isArray(servicesData)) return;
 
     const servicesFiltered = servicesData.filter((tDataService) =>
       handleFilter(tDataService)
