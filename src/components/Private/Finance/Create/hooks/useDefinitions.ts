@@ -8,7 +8,7 @@ export function useDefinitions() {
   const [services, setServices] = useState<Array<ServicesShape>>([]);
 
   useEffect(() => {
-    if (!servicesData) return;
+    if (!servicesData || !Array.isArray(servicesData)) return;
 
     setServices(servicesData);
   }, [servicesData]);
