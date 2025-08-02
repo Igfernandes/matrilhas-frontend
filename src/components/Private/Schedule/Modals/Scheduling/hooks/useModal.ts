@@ -9,13 +9,19 @@ import usePostCreateSchedule from "@services/Schedule/Post/usePost";
 import { useModalContext } from "@contexts/Modal";
 import usePutCreateSchedule from "@services/Schedule/Put/usePut";
 import useDeleteSchedule from "@services/Schedule/Delete/useDelete";
+import { hasInvalidDateRange } from "@helpers/date";
+import i18n from "@configs/i18n";
 
 dayjs.extend(customParseFormat);
 
 export function useModal() {
-  const { formMethods, handleSubmit } = useFormRules<ScheduleUpdatePayload>({
-    schema: ScheduleSchema,
-  });
+  const [step, setStep] = useState<"INFORMATION" | "USERS">("INFORMATION");
+  const { formMethods, handleSubmit, errors } =
+    useFormRules<ScheduleUpdatePayload>({
+      schema: ScheduleSchema,
+    });
+
+  const { watch, trigger, reset } = formMethods;
   const { handleToggleModal, modal } = useModalContext();
   const [users, setUsers] = useState<UsersShape[]>([]);
   const { data: usersData, isFetched: isFetchedUsers } = useGetUsers();
@@ -26,19 +32,57 @@ export function useModal() {
   const { mutateAsync: deleteSchedule, isPending: isLoadingDelete } =
     useDeleteSchedule();
 
-  const handleDeleteSchedule = () => {
-    deleteSchedule({
-      id: parseInt(modal.id as string),
-    }).then(() => {
-      handleToggleModal(false);
-      formMethods.reset();
+  /**
+   * Sempre que "date" ou "end_date" mudarem, dispara a validação
+   * Isso garante que o refine de comparação de datas seja reavaliado na hora
+   */
+  const watchDate = watch("date");
+  const watchEndDate = watch("end_date");
+
+  console.log(errors);
+  const handleSteps = async (action: "PREV" | "NEXT") => {
+    let isValid = await trigger(["title", "date", "end_date"], {
+      shouldFocus: true,
     });
+
+    if (watchEndDate && !!isValid) {
+      isValid = !!hasInvalidDateRange(watchDate, watchEndDate ?? "");
+
+      if (!isValid)
+        formMethods.setError("end_date", {
+          message: i18n("Validations.invalid_end_date"),
+        });
+    }
+
+    switch (action) {
+      case "PREV":
+        if (step === "USERS") setStep("INFORMATION");
+        break;
+      case "NEXT":
+        if (step === "INFORMATION" && isValid) {
+          setStep("USERS");
+        }
+        break;
+    }
+  };
+
+  const handleDeleteSchedule = async () => {
+    await deleteSchedule({
+      id: parseInt(modal.id as string),
+    });
+    setStep("INFORMATION");
+    handleToggleModal(false);
+    reset();
   };
 
   useEffect(() => {
-    if (!usersData) return;
+    setStep("INFORMATION");
+  }, [modal]);
 
-    setUsers(usersData);
+  useEffect(() => {
+    if (usersData) {
+      setUsers(usersData);
+    }
   }, [usersData, isFetchedUsers]);
 
   const submit = async ({ linked, ...rest }: ScheduleUpdatePayload) => {
@@ -48,12 +92,16 @@ export function useModal() {
     };
 
     if (modal.id) {
-      putSchedule({
+      await putSchedule({
         id: parseInt(modal.id as string),
         ...payload,
+        describe: payload.describe ?? "",
       });
     } else {
-      await postSchedule(payload);
+      await postSchedule({
+        ...payload,
+        describe: payload.describe ?? "",
+      });
     }
 
     handleToggleModal(false);
@@ -66,5 +114,8 @@ export function useModal() {
     isLoading: isLoadingPost || isLoadingPut || isLoadingDelete,
     users,
     handleDeleteSchedule,
+    step,
+    setStep,
+    handleSteps,
   };
 }

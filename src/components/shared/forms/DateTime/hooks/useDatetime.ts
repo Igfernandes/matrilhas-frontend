@@ -5,14 +5,16 @@ import { useState } from "react";
 export function useDatetime() {
   const [datetime, setDatetime] = useState<string>("");
 
-  const handleUpdateDatetimePreview = (datetime: string) => {
-    const date = dayjs(datetime, "YYYY-MM-DDTHH:mm", true);
+  const handleUpdateDatetimePreview = (value: string) => {
+    const normalized = value.replace("T", " ");
+    const date = dayjs(normalized, "YYYY-MM-DD HH:mm", true);
 
     if (!date.isValid()) {
-      return setDatetime(getDatetime(datetime));
+      return setDatetime(getDatetime(normalized));
     }
-    setDatetime(dayjs(datetime, "YYYY-MM-DDTHH:mm").format("DD/MM/YYYY HH:mm"));
+    setDatetime(date.format("DD/MM/YYYY HH:mm"));
   };
+
   return {
     handleUpdateDatetimePreview,
     setDatetime,
