@@ -204,7 +204,7 @@ export const getDatetime = (datetime: string) => {
       datetime.slice(10, 12);
   }
 
-  console.log(datetimeUpdated)
+  console.log(datetimeUpdated);
   return datetimeUpdated;
 };
 export function getYearsOld(birthdate: string) {
@@ -230,4 +230,12 @@ export function formatToYMD(date?: string) {
   const partsDate = date.split("/").reverse();
 
   return partsDate.join("-");
+}
+
+export function hasInvalidDateRange(startDate: string, endDate: string) {
+  // Remove caracteres não numéricos
+  const startNum = startDate.replaceAll(/\D/g, "");
+  const endNum = endDate.replaceAll(/\D/g, "");
+
+  if (startNum < endNum) return true;
 }

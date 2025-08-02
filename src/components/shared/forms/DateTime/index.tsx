@@ -28,14 +28,20 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
     const { handleUpdateDatetimePreview, datetime, setDatetime } =
       useDatetime();
     const IdCurrent = id ?? dataTestId;
-    const { setValue } = useFormContext();
+    const { setValue, getValues } = useFormContext();
 
     useEffect(() => {
-      if (!defaultValue) return;
+      if (defaultValue) {
+        const normalized = (defaultValue as string).replace("T", " ");
+        setDatetime(dayjs(normalized).format("DD/MM/YYYY HH:mm"));
+      }
 
-      setDatetime(dayjs(defaultValue as string).format("DD/MM/YYYY HH:mm"));
+      const currentValue = getValues(name);
+      if (currentValue) {
+        const normalized = currentValue.replace("T", " ");
+        setDatetime(dayjs(normalized).format("DD/MM/YYYY HH:mm"));
+      }
     }, [defaultValue]);
-
     return (
       <>
         <div className={`relative ${errors?.message ? "border-yellow" : ""}`}>
@@ -57,6 +63,8 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
 
               if (datetimeUpdated.isValid()) {
                 setValue(name, datetimeUpdated.format("YYYY-MM-DD HH:mm"));
+              } else if (!value) {
+                setValue(name, "");
               }
               handleUpdateDatetimePreview(value);
             }}
@@ -68,17 +76,15 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
             data-testid={dataTestId}
             id={IdCurrent}
           />
+          <input {...rest} ref={ref} type="hidden" name={name} />
           <div className="absolute right-3 bottom-4">
             <input
-              {...rest}
-              ref={ref}
-              name={name}
-              defaultValue={defaultValue}
               type="datetime-local"
               onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                if (rest.onChange) rest.onChange(ev);
+                const formatted = ev.currentTarget.value.replace("T", " ");
+                setValue(name, formatted);
                 if (handledChange) handledChange(ev);
-                handleUpdateDatetimePreview(ev.currentTarget.value);
+                handleUpdateDatetimePreview(formatted);
               }}
               className="absolute w-full h-full top-0 opacity-0 z-20"
             />

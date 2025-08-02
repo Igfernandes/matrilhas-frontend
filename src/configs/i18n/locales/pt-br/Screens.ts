@@ -108,6 +108,9 @@ export const Screens = {
       awaiting_inscribe:
         "Aguarde enquanto o cliente estará sendo inscrito e enviado a confirmação",
     },
+    schedules: {
+      required_users: "É obrigatório escolher um usuário",
+    },
     users: {
       create_user_groups: "Criar grupos de usuários",
       invite_users: "Convidar usuários",

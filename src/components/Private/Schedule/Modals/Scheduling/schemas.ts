@@ -1,5 +1,4 @@
 import i18n from "@configs/i18n";
-import dayjs from "dayjs";
 import { z } from "zod";
 
 export const ScheduleSchema = z
@@ -18,43 +17,34 @@ export const ScheduleSchema = z
       }),
     date: z
       .string({ required_error: i18n("Validations.required") })
-      .nonempty({ message: i18n("Validations.required") })
-      .refine(
-        (value) => {
-          const inputDate = dayjs(value, "YYYY-MM-DDTHH:mm", true); // true = parsing estrito
-          const today = dayjs().startOf("day");
-          return (
-            (inputDate.isValid() && inputDate.isSame(today)) ||
-            inputDate.isAfter(today)
-          );
-        },
-        {
-          message: i18n("Validations.invalid_date"),
-        }
-      ),
+      .nonempty({ message: i18n("Validations.required") }),
     end_date: z
       .string({ required_error: i18n("Validations.required") })
-      .optional()
-      .nullable(),
-    describe: z.string({ required_error: i18n("Validations.required") }),
+      .optional(),
+    describe: z
+      .string({ required_error: i18n("Validations.required") })
+      .optional().nullable(),
     color: z.string({ required_error: i18n("Validations.required") }),
     linked: z
       .array(z.string().or(z.boolean()))
       .refine((arr) => arr.some((item) => typeof item === "string"), {
-        message: i18n("Validations.invalid_schedule_linked") ,
+        message: i18n("Validations.invalid_schedule_linked"),
       }),
   })
-  .refine(
-    (data) => {
-      if (!data.end_date) return true; // se end_date for null ou undefined, ignora
-      const start = dayjs(data.date, "YYYY-MM-DDTHH:mm", true);
-      const end = dayjs(data.end_date, "YYYY-MM-DDTHH:mm", true);
-      return start.isValid() && end.isValid() && end.isAfter(start);
-    },
-    {
-      message: i18n("Validations.invalid_end_date"),
-      path: ["end_date"], // atribui o erro ao campo específico
+  .superRefine((data, ctx) => {
+    if (!data.end_date) return;
+
+    // Remove caracteres não numéricos
+    const startNum = data.date.replaceAll(/\D/g, "");
+    const endNum = data.end_date.replaceAll(/\D/g, "");
+
+    if (startNum >= endNum) {
+      ctx.addIssue({
+        path: ["end_date"],
+        code: z.ZodIssueCode.custom,
+        message: i18n("Validations.invalid_end_date"),
+      });
     }
-  );
+  });
 
 export type ScheduleUpdatePayload = z.infer<typeof ScheduleSchema>;
