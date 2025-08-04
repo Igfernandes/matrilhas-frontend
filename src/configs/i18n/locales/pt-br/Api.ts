@@ -390,8 +390,10 @@ export const Api = {
       put: "O serviço foi atualizado com sucesso!",
       delete: "O serviço foi excluído com sucesso!",
       inscribe: "O cliente foi inscrito com sucesso!",
+      unsubscribe: "A inscrição do cliente foi excluída com sucesso!",
     },
     invalid: {
+      already_inscribe: "O cliente selecionado já está inscrito.",
       name: "O nome do serviço informado está inválido",
       type: "O tipo do serviço está inválido",
       description: "A descrição do serviço informado está inválido",

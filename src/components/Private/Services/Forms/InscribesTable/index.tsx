@@ -19,9 +19,13 @@ type Props = {
 };
 
 export function InscribesTable({ title, service, stock }: Props) {
-  const { clients, clientsSelected, handleInscribes, isLoadingInscribes } =
-    useInscribeService({ service, stock });
-
+  const {
+    clients,
+    clientsSelected,
+    handleInscribes,
+    handleUnsubscribe,
+    isLoadingInscribes,
+  } = useInscribeService({ service, stock });
   const { baseUrl } = useWindow();
   const { handleToggleModal, modal } = useModalContext();
 
@@ -64,6 +68,9 @@ export function InscribesTable({ title, service, stock }: Props) {
           widths: [50, 200, 180, 100, 150, 30],
         }}
         options={{
+          pagination: {
+            max: 10,
+          },
           buttons: (
             <a
               className="flex items-center cursor-pointer"
@@ -84,10 +91,8 @@ export function InscribesTable({ title, service, stock }: Props) {
         text={i18n("Components.clients_table.text_already_exclude")}
         onSubmit={() => {
           handleToggleModal(false);
-          const inscribes = clientsSelected.filter(
-            (client) => client.id !== modal.id
-          );
-          handleInscribes(inscribes.map((inscribe) => inscribe.id));
+
+          handleUnsubscribe(modal.id as number);
         }}
         isShowModal={modal.type === "EXCLUDE"}
         onModal={handleToggleModal}

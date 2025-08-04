@@ -1,37 +1,33 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
-import { PostPayload } from "./type";
 import i18n from "@configs/i18n";
-import { usePostService } from ".";
 import { AxiosError } from "axios";
+import { DeleteClientServicePayload } from "./type";
+import { useDeleteClientServiceService } from ".";
 
-export default function usePostInscribesServices() {
+export function useDeleteClientService() {
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
-  const { post } = usePostService();
+  const { deleteClient } = useDeleteClientServiceService();
   const queryClient = useQueryClient();
 
-  const handleMutate = async (payload: PostPayload) => {
-    const { data } = await post(payload);
+  const handleMutate = async (payload: DeleteClientServicePayload) => {
+    const { data } = await deleteClient(payload);
 
     return data;
   };
 
   return useMutation({
     mutationFn: handleMutate,
-    onSuccess: ({ success, errors }) => {
+    onSuccess: ({ success }) => {
       dispatchSnackbar({
-        message: i18n(success ? success : errors),
-        type: success ? "success" : "notice",
+        message: i18n(success),
+        type: "success",
       });
       queryClient.invalidateQueries({
         queryKey: ["clients/services"],
         refetchType: "active",
-      });
-
-      queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === "clients/services",
       });
     },
     onError: (err: AxiosError) => {
