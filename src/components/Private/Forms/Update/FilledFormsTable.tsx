@@ -18,7 +18,7 @@ export function FilledFormsTable(props: Props) {
       <SmartTable
         options={{
           pagination: {
-            max: 6,
+            max: 10,
           },
           buttons: (
             <FilledFormsActions

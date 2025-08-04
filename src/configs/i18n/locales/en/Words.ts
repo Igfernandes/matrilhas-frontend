@@ -13,6 +13,7 @@ export const Words = {
   fill: "Fill",
   time: "Time",
   go_out: "Logout",
+  more: "More",
   schedule: "Schedule",
   services: "Services",
   finance: "Finance",

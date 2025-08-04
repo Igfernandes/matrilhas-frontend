@@ -8,8 +8,9 @@ export type HookServicesProps<ServiceType> = {
 
 export type TDataServices = Omit<
   ServicesShape,
-  "updated_at" | "description"  | "privacy" | "photo"
+  "updated_at" | "description" | "privacy" | "photo" | "inscribes" | "stock"
 > & {
+  inscribes: number;
   actions: JSX.Element;
 };
 

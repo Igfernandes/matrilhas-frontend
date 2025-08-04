@@ -12,6 +12,7 @@ export const Words = {
   my_users: "Mis usuarios",
   fill: "Llenado",
   time: "Hora",
+  more: "Mais",
   go_out: "Salir",
   schedule: "Agenda",
   services: "Servicios",
