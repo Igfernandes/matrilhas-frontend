@@ -94,7 +94,12 @@ export function useFillFields({ formId, serviceId, components }: Props) {
   useEffect(() => {
     if (!fieldsData) return;
 
-    if (firstColumnId) {
+    const nameColumnId = components.find(
+      (field) => field.element === "name" || field.label?.includes("nome")
+    );
+
+    if (nameColumnId) tHeadsFields.current[1] = i18n("Words.name");
+    else if (firstColumnId) {
       const field = components.find((field) => field.id == firstColumnId);
       tHeadsFields.current[1] = field?.label ?? "";
     } else tHeadsFields.current[1] = i18n("Texts.first_column");
@@ -107,7 +112,7 @@ export function useFillFields({ formId, serviceId, components }: Props) {
       return updateFieldForTable(fieldProps ?? FieldsProps[0]);
     });
     setTDataFields(tDataFields);
-  }, [fieldsData, updateFieldForTable, firstColumnId, components]);
+  }, [fieldsData, updateFieldForTable, firstColumnId, components, clientsService]);
 
   return {
     tDataFields,

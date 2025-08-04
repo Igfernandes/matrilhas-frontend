@@ -37,13 +37,13 @@ export function useServices({
     id,
     name,
     status,
-    stock,
+    inscribes,
     created_at,
   }: ServicesShape): TDataServices => {
     return {
       id,
       name,
-      stock,
+      inscribes: inscribes?.length ?? 0,
       status: i18n(`Words.${status.toLowerCase()}`) as Status,
       created_at: dayjs(created_at).format(i18n("Configs.format.date")),
       actions: (

@@ -9,6 +9,7 @@ export const Words = {
   start: "Começa",
   password_confirmation: "Confirmação de senha",
   name: "Nome",
+  more: "Mais",
   main: "Principal",
   time: "Hora",
   my_users: "Meus usuários",

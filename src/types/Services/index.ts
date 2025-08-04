@@ -11,10 +11,19 @@ export type ServicesShape = {
   address?: string;
   realized_at?: string;
   gratuity?: number;
+  inscribes?: Array<InscribeData>;
   expired_at?: string;
   created_at: string;
   updated_at: string;
 };
+
+type InscribeData = {
+  service_id: number;
+  client_id: number;
+  is_confirm: boolean;
+  created_at: string;
+};
+
 export type ServicePreviewShape = Pick<
   ServicesShape,
   | "name"
