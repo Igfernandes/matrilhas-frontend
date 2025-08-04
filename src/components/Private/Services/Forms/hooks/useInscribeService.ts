@@ -1,6 +1,7 @@
 import { useClients } from "@components/shared/others/ClientsTable/hooks/useClients";
 import i18n from "@configs/i18n";
 import { useSnackbar } from "@hooks/useSnackbar";
+import { useDeleteClientService } from "@services/Clients/Services/Delete/useDeleteClientService";
 import useGetClientsServices from "@services/Clients/Services/Get/useGet";
 import usePostClientsService from "@services/Clients/Services/Post/usePost";
 import { ClientShape } from "@type/Clients";
@@ -18,12 +19,13 @@ export function useInscribeService({ service, stock }: Props) {
   const { clients } = useClients();
   const { dispatchSnackbar } = useSnackbar();
 
-  const { data: inscribesData } = useGetClientsServices({
+  const { data: inscribesData = [] } = useGetClientsServices({
     serviceId: service?.id ?? 0,
   });
 
   const { mutateAsync: postClientsService, isPending: isLoadingInscribes } =
     usePostClientsService();
+  const { mutateAsync: unsubscribe } = useDeleteClientService();
 
   const [clientsSelected, setClientsSelected] = useState<ClientServiceShape[]>(
     []
@@ -47,6 +49,20 @@ export function useInscribeService({ service, stock }: Props) {
     [service?.gratuity]
   );
 
+  const handleUnsubscribe = useCallback(
+    async (inscribeId: number) => {
+      if (!service) return;
+
+      await unsubscribe({
+        client_id: inscribeId,
+        serviceId: service.id,
+      });
+
+      handleUpdateClientsSelected(inscribesData ?? []);
+    },
+    [service, inscribesData]
+  );
+
   const handleInscribes = useCallback(
     async (inscribeIds: number[]) => {
       if (!service) return;
@@ -56,8 +72,9 @@ export function useInscribeService({ service, stock }: Props) {
       );
 
       const validInscribes = filterByGratuity(clientsSelected);
+      const hasLimitInStock = stock && +stock < validInscribes.length;
 
-      if (stock && +stock < validInscribes.length) {
+      if (!hasLimitInStock && validInscribes.length > inscribesData?.length) {
         return dispatchSnackbar({
           type: "notice",
           message: i18n(`Texts.not_stocks`),
@@ -86,5 +103,6 @@ export function useInscribeService({ service, stock }: Props) {
     handleInscribes,
     handleUpdateClientsSelected,
     isLoadingInscribes,
+    handleUnsubscribe,
   };
 }

@@ -7,7 +7,6 @@ import useWindow from "@hooks/useWindow";
 
 export function Pagination() {
   const {
-    amountGroups,
     arrowStyled,
     displayedGroupPage,
     displayedPages,
@@ -71,7 +70,7 @@ export function Pagination() {
                   <span>{value}</span>
                 </li>
               ))}
-              <When value={displayedGroupPage + 1 < amountGroups}>
+              <When value={displayedPages[displayedPages.length - 1] < (pagination.amount ?? 0)}>
                 <li
                   key={`pagination_key_more`}
                   className={`px-2 hover:bg-rose-800 text-black hover:text-white cursor-pointer`}

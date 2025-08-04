@@ -76,7 +76,7 @@ export function useFillFields({ formId, serviceId, components }: Props) {
         ),
       };
     },
-    [handleToggleModal, firstColumnId, clientsService]
+    [handleToggleModal, clientsService, fieldsData, serviceId]
   );
 
   const handleDeleteFillField = () => {
@@ -104,6 +104,7 @@ export function useFillFields({ formId, serviceId, components }: Props) {
       tHeadsFields.current[1] = field?.label ?? "";
     } else tHeadsFields.current[1] = i18n("Texts.first_column");
 
+    console.log("UPDATE", clientsService)
     const tDataFields = fieldsData.map((FieldsProps) => {
       const fieldProps = FieldsProps.find(
         (field) => field.field_id == +(firstColumnId ?? 0)
@@ -112,7 +113,13 @@ export function useFillFields({ formId, serviceId, components }: Props) {
       return updateFieldForTable(fieldProps ?? FieldsProps[0]);
     });
     setTDataFields(tDataFields);
-  }, [fieldsData, updateFieldForTable, firstColumnId, components, clientsService]);
+  }, [
+    fieldsData,
+    updateFieldForTable,
+    firstColumnId,
+    components,
+    clientsService,
+  ]);
 
   return {
     tDataFields,
