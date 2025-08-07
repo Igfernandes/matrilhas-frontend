@@ -4,11 +4,11 @@ import i18n from "@configs/i18n";
 import { ClientServiceShape } from "@type/Clients/ClientService";
 
 type Props = {
-  inscribes: Array<ClientServiceShape>;
+  serviceId: number;
   handleToggleModal: (type: unknown, id?: string | number) => void;
 };
 
-export function ActionsTable({ handleToggleModal, inscribes }: Props) {
+export function ActionsTable({ handleToggleModal, serviceId }: Props) {
   return (
     <div className="flex items-center">
       <div className="mr-2">
@@ -22,10 +22,7 @@ export function ActionsTable({ handleToggleModal, inscribes }: Props) {
           </span>
         </a>
       </div>
-      <Shared
-        entity="INSCRIBES"
-        in_ids={inscribes.map((inscribe) => inscribe.id)}
-      />
+      <Shared entity="INSCRIBES" in_ids={[serviceId]} />
     </div>
   );
 }
