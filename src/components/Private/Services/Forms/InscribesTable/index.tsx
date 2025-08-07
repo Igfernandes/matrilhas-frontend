@@ -78,7 +78,7 @@ export function InscribesTable({ title, service, stock }: Props) {
           },
           buttons: (
             <ActionsTable
-              inscribes={clientsSelected}
+              serviceId={service.id}
               handleToggleModal={handleToggleModal}
             />
           ),
