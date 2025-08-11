@@ -21,3 +21,6 @@ export type ManagerEntitiesProps = {
   forms?: Array<FormsShape>;
   charges?: Array<ChargeShape>;
 };
+export type DashboardPageProps = {
+  user: UsersShape;
+};
