@@ -6,6 +6,7 @@ export default function useGetUser(request: GetUserRequest) {
   const { getUser } = useGet();
 
   async function handle() {
+    console.log(request)
     const { data } = await getUser(request);
     return data ?? null;
   }

@@ -10,12 +10,11 @@ import { UserNavigationContextData, UserNavigationProps } from "./types";
 import { UsersShape } from "../../types/Users";
 import { useRouter } from "next/router";
 import { publicRoutes } from "@configs/routes/Web/navigation";
-import { getCookie } from "cookies-next";
 import { handleLogout } from "@helpers/handlers";
 import { useQueryClient } from "@tanstack/react-query";
-import { useJsonWebToken } from "@hooks/useJsonWebToken";
 import useGetGroupsPermissions from "@services/Permissions/Groups/Get/useGet";
 import { usePermissions } from "@hooks/usePermissions";
+import useGetUser from "@services/Users/Get/useGetUser";
 
 export const UserNavigationContext = createContext(
   {} as UserNavigationContextData
@@ -23,13 +22,15 @@ export const UserNavigationContext = createContext(
 
 const UserNavigationProvider = ({ children }: UserNavigationProps) => {
   const [userAuth, setUserAuth] = useState<UsersShape>({} as UsersShape);
-  const { data: groups } = useGetGroupsPermissions({
+  const { data } = useGetUser({
+    current: true,
+  });
+  const { data: groups, isFetched } = useGetGroupsPermissions({
     id: userAuth?.groups ? userAuth?.groups[0].id : 0,
   });
   const { permissions, setPermissions, hasPermission } = usePermissions();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { verifyJwt } = useJsonWebToken();
 
   const handleDisconnect = useCallback(() => {
     handleLogout();
@@ -41,16 +42,11 @@ const UserNavigationProvider = ({ children }: UserNavigationProps) => {
   }, [queryClient, router]);
 
   useEffect(() => {
-    const userAuthCookie = getCookie("userAuth") as string;
+    if (!isFetched) return;
 
-    if (userAuthCookie)
-      verifyJwt<UsersShape>(userAuthCookie)
-        .then((user) => {
-          setUserAuth(user);
-        })
-        .catch(() => handleDisconnect());
+    if (data) setUserAuth(data);
     else handleDisconnect();
-  }, [verifyJwt, handleDisconnect]);
+  }, [data, isFetched]);
 
   useEffect(() => {
     if (!Array.isArray(groups) || groups.length == 0) return;

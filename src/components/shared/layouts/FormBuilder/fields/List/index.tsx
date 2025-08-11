@@ -30,7 +30,7 @@ export function List({
         </h4>
       </div>
       <div
-        className={`flex flex-wrap  ${
+        className={`flex flex-wrap  box-border ${
           errors?.message ? "border-yellow" : ""
         } my-4`}
       >
@@ -39,7 +39,7 @@ export function List({
             className="w-full md:w-auto flex flex-row-reverse md:block my-2 cursor-pointer"
             key={`list_option_key`}
           >
-            <label htmlFor={`option_${key}`} className="w-[90%] md:w-auto ml-2">
+            <label htmlFor={`option_${key}`} className="w-[80%] md:w-auto ml-2">
               {option.text}
             </label>
             <input
@@ -53,7 +53,7 @@ export function List({
               value={option.value}
               className={`${className ?? ""} ${
                 !!errors ? "border-amber-500 outline-amber-500" : ""
-              } w-[10%] md:w-full px-3 pt-8 pb-4  bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+              } w-[10%] min-w-4 md:w-full px-3 pt-8 pb-4  bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
               id={`option_${key}`}
             />
           </div>

@@ -6,9 +6,10 @@ import { useClientsData } from "@components/Private/Dashboard/hooks/useClientsDa
 import { useFormsData } from "@components/Private/Dashboard/hooks/useFormsData";
 import { useServicesData } from "@components/Private/Dashboard/hooks/useServicesData";
 import { useUsersData } from "@components/Private/Dashboard/hooks/useUsersData";
+import { DashboardPageProps } from "@components/Private/Dashboard/type";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 
-export default function Dashboard() {
+export default function Dashboard({ user }: DashboardPageProps) {
   const { clients, categories, clientsByDDD } = useClientsData();
   const { services } = useServicesData();
   const { users, invitesValid } = useUsersData();
@@ -16,7 +17,7 @@ export default function Dashboard() {
   const { charges } = useChargesData();
 
   return (
-    <DashboardContainer>
+    <DashboardContainer user={user}>
       <DashboardHeader
         clients={clients}
         forms={forms}
