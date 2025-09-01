@@ -1,6 +1,14 @@
 export const SLIDES = [
   {
-    src: "/imgs/backgrounds/marica-background.jpg",
+    src: "/imgs/banners/banner-1.jpg",
+    alt: "Praia",
+  },
+  {
+    src: "/imgs/banners/banner-2.jpg",
+    alt: "Praia",
+  },
+  {
+    src: "/imgs/banners/banner-3.jpg",
     alt: "Praia",
   },
 ];
