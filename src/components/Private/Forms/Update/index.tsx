@@ -1,7 +1,5 @@
 import { Notice } from "@components/shared/others/Notice";
 import { useFormStep } from "../hooks/useFormsStep";
-import { useFormRules } from "@hooks/Forms/useFormRules";
-import { FormsPayload, formsSchema } from "../schema";
 import { FormsShape } from "@type/Forms";
 import { FormProvider } from "react-hook-form";
 import { StepBar } from "@components/shared/layouts/StepBar";
@@ -9,31 +7,18 @@ import i18n from "@configs/i18n";
 import { useForms } from "../hooks/useForms";
 import { useEffect } from "react";
 import { Forms } from "..";
-import { FilledFormsTable } from "./FilledFormsTable";
 import { FooterForms } from "../FooterForms";
 import { useModalContext } from "@contexts/Modal";
 import { useFillFieldsModal } from "./hooks/useFillFieldsModal";
+import { useFormData } from "./hooks/useFormData";
 
 type Props = {
   targetForm: FormsShape;
 };
 
 export function FillFieldsUpdate({ targetForm }: Props) {
-  const { submit, form, handleChangeFormFields, isLoading } = useForms();
-  const { formMethods } = useFormRules<FormsPayload>({
-    schema: formsSchema,
-    defaultValues: {
-      id: targetForm.id,
-      name: targetForm.name,
-      description: targetForm.description,
-      started_at: targetForm.started_at,
-      expired_at: targetForm.expired_at,
-      template: String(targetForm.id),
-      service_id: targetForm.service_id
-        ? String(targetForm.service_id)
-        : undefined,
-    },
-  });
+  const { submit, components, handleChangeFormFields, isLoading } = useForms();
+  const { formMethods } = useFormData({ targetForm });
   const { modal, handleToggleModal } = useModalContext();
   const { handleNextStep, handlePrevStep, stepActive, isLastStep } =
     useFormStep({
@@ -74,17 +59,14 @@ export function FillFieldsUpdate({ targetForm }: Props) {
         <form>
           <Forms
             step={stepActive}
-            form={form}
+            form={targetForm}
+            components={components}
             slug={targetForm.slug}
             onChangeFormFields={handleChangeFormFields}
           />
-          <div className="mt-4">
-            <FilledFormsTable
-              formId={targetForm.id}
-              serviceId={targetForm.service_id}
-            />
-          </div>
+
           <FooterForms
+            formId={targetForm.id}
             isFirstStep={stepActive == 1}
             onNextStep={handleNextStep}
             onPrevStep={handlePrevStep}

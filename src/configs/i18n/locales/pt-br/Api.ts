@@ -11,7 +11,7 @@ export const Api = {
       post: "A exportação foi concluída com sucesso",
     },
     service_problem:
-      "Ao tentar criar ou retornar o arquivo, ocorreu um problema. Verifique se o arquivo já foi criado no histórico de arquivos ou tente novamente.",
+      "Ao tentar criar ou retornar o arquivo, ocorreu um problema. Verifique se o arquivo já foi criado no histórico de arquivos, há dados disponíveis ou tente novamente.",
   },
   mailer: {
     invalid: {
@@ -65,6 +65,7 @@ export const Api = {
     categories: {
       success: {
         post: "As categorias foram atualizadas com sucesso!",
+        patch: "A categoria do(s) cliente(s) foi alterada com sucesso",
       },
       invalid: {
         id: "A categoria informado não existe ou está inválido",
@@ -79,6 +80,15 @@ export const Api = {
           "Desvincule as categorias aos clientes antes de excluir-las",
       },
     },
+    subscribes: {
+      success: {
+        post: "A AGM agradece a sua inscrição e manterá você informado sobre todas as novidades",
+      },
+      invalid: {
+        name: "É obrigatório preencher o seu nome",
+        phone: "É obrigatório preencher o seu telefone",
+      },
+    },
     dispatchers: {
       invalid: {
         client_id:
@@ -88,13 +98,18 @@ export const Api = {
         message_id: "O conteúdo do envio encontra-se inválido",
       },
     },
-    services: {
+    events: {
       success: {
         post: "O(s) cliente(s) foi(ram) inscrito(s) com sucesso!",
         inscribe: "O usuário foi inscrito com sucesso!",
       },
       isConfirm: {
         success: "Confirmado com sucesso!",
+      },
+      invalid: {
+        already_inscribe:
+          "O seu cpf já está vinculado a um preenchimento deste formulário. Uso outro e tente novamente",
+        status: "O evento está inativado e não poderá receber novas inscrições",
       },
     },
     fields: {
@@ -118,6 +133,7 @@ export const Api = {
       },
     },
     success: {
+      imports: "Os clientes foram importados com sucesso",
       post: "O cliente foi criado com sucesso!",
       put: "O cliente foi atualizado com sucesso!",
       delete: "O cliente foi excluído com sucesso!",
@@ -130,12 +146,14 @@ export const Api = {
       in_ids: "Os clientes informados encontram-se com alguma irregularidade",
       client: "O cliente informado encontra-se inexistente ou inválido",
       clients: "Os clientes informados encontram-se inexistentes ou inválidos",
-      category: "A categoria do cliente informada encontra-se inválida",
+      category:
+        "A categoria do cliente informada encontra-se vazia ou inválida",
       name: "O nome informado do cliente encontra-se inválido",
       name_max_length_100:
         "O cliente contém nome com o limite acima do máximo de 100 caracteres.",
       avatar: "O avatar do cliente contém uma url inválida",
-      phone: "O telefone informado do cliente encontra-se inválido",
+      phone:
+        "O telefone informado do cliente encontra-se utilizado ou inválido",
       phone_max_length_35:
         "O cliente contém telefone com o limite acima do máximo de 35 caracteres.",
       birthdate:
@@ -147,6 +165,18 @@ export const Api = {
       updated_at:
         "A data de atualização informada do cliente encontra-se inválido",
       not_found_category: "A categoria escondida está inválida ou indisponível",
+    },
+  },
+  files: {
+    invalid: {
+      files:
+        "Algum arquivo foi mal inserido ou cancelado e por isso não pode ser finalizado.",
+    },
+  },
+  forms: {
+    invalid: {
+      fields:
+        "Os campos encontram-se sem alteração ou mal formulados e impossível de sofrer alteração",
     },
   },
   custom_forms: {
@@ -178,6 +208,10 @@ export const Api = {
       updated_at: "A data de atualização do formulário está inválida",
       not_found: "O formulário não foi encontrada",
       client: "Operação inválida. O registro não contém um cliente vinculado.",
+      color_mark:
+        "A cor escolhida não atende o padrão hexadecimal permitido pelo sistema",
+      thanks_message:
+        "As informações inseridas no campo de mensagem de agradecimento encontram-se inválidas",
     },
     services: {
       success: {
@@ -313,6 +347,7 @@ export const Api = {
     },
     invalid: {
       not_found: "A integração não foi encontrada",
+      not_found_bank: "Não há banco válido configurado no sistema",
     },
   },
   invites: {
@@ -367,8 +402,10 @@ export const Api = {
       put: "O serviço foi atualizado com sucesso!",
       delete: "O serviço foi excluído com sucesso!",
       inscribe: "O cliente foi inscrito com sucesso!",
+      unsubscribe: "A inscrição do cliente foi excluída com sucesso!",
     },
     invalid: {
+      already_inscribe: "O cliente selecionado já está inscrito.",
       name: "O nome do serviço informado está inválido",
       type: "O tipo do serviço está inválido",
       description: "A descrição do serviço informado está inválido",
@@ -384,6 +421,33 @@ export const Api = {
       realized_at: "A data de realização está com formato inválido",
       expired_at: "A data de expiração está com o formato inválido",
       not_found: "O serviço não foi encontrado",
+    },
+  },
+  events: {
+    success: {
+      post: "O evento foi criado com sucesso!",
+      put: "O evento foi atualizado com sucesso!",
+      delete: "O evento foi excluído com sucesso!",
+      inscribe: "O cliente foi inscrito com sucesso!",
+      unsubscribe: "A inscrição do cliente foi excluída com sucesso!",
+    },
+    invalid: {
+      already_inscribe: "O cliente selecionado já está inscrito.",
+      name: "O nome do evento informado está inválido",
+      type: "O tipo do evento está inválido",
+      description: "A descrição do evento informado está inválido",
+      privacy: "A privacidade só poderá ser 'Publica' e 'Privado'",
+      stock: "O valor referente a quantidade disponíveis está inválido",
+      reservations: "O valor referente as reservas está inválido",
+      address: "O endereço informado está com o formato inválido",
+      photo: "A imagem do evento fornecida está inválida",
+      photo_max_size_1024:
+        "A imagem do evento ultrapassa o tamanho permitido 1 mega",
+      photo_mime_type:
+        "A imagem do evento contém uma extensão diferente de .png,.jpeg,.jpg",
+      realized_at: "A data de realização está com formato inválido",
+      expired_at: "A data de expiração está com o formato inválido",
+      not_found: "O evento não foi encontrado",
     },
   },
   users: {

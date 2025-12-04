@@ -1,15 +1,19 @@
 import { useClients } from "./hooks/useClients";
 import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
-import { Selector } from "@components/shared/layouts/Seletor";
+import { Selector } from "@components/shared/layouts/Selector";
 import { ModalFormCategories } from "./Modals/Categories";
 import { useModalContext } from "@contexts/Modal";
 import { ModalClientsOperationType, ClientsStructProps } from "../type";
-import { ClientSharedModal } from "./Modals/ClientShared";
 import { ClientCreateModal } from "./Modals/Clients";
-import SelectorProvider from "@components/shared/layouts/Seletor/contexts";
+import SelectorProvider from "@components/shared/layouts/Selector/contexts";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { ClientCategoriesModal } from "./Modals/ClientCategories";
+import { Shared } from "@components/shared/others/Shared";
+import { PERMISSIONS } from "@constants/permissions";
+import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { ImportModal } from "./Modals/Import";
+
 export function Clients({ search, filterObjects }: ClientsStructProps) {
   const {
     tDataClients,
@@ -26,6 +30,7 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
   });
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();
+  const { hasPermission } = useUserNavigationContext();
 
   return (
     <>
@@ -38,12 +43,9 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
               },
               actions: [
                 {
-                  handle: () => handleToggleModal("SHARED"),
-                  text: i18n("Texts.data_shared"),
-                },
-                {
                   handle: () => handleToggleModal("CHANGE_CATEGORY"),
                   text: i18n("Texts.category_alter"),
+                  permissions: [PERMISSIONS.clients.update],
                 },
                 {
                   handle: () =>
@@ -52,14 +54,23 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
                       getSelectedClientsName(selectors)
                     ),
                   text: i18n("Words.exclude"),
+                  permissions: [PERMISSIONS.clients.delete],
                 },
-              ],
+              ].filter((action) => hasPermission(action.permissions)),
               buttons: (
-                <Selector
-                  value={"all"}
-                  label={i18n(`Words.select_all`)}
-                  textSize="text-[0px] md:text-lg"
-                />
+                <>
+                  <Selector
+                    value={"all"}
+                    label={i18n(`Words.select_all`)}
+                    textSize="text-[0px] md:text-base"
+                  />
+                  <Shared
+                    entity="CLIENTS"
+                    in_ids={selectors
+                      .filter((selector) => !!selector.isChecked)
+                      .map((selector) => +selector.value)}
+                  />
+                </>
               ),
               filters: {
                 tag: {
@@ -94,15 +105,10 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
           onModal={handleToggleModal}
           isLoading={isLoadingClientDelete}
         />
-        <ClientSharedModal
-          isShowModal={modal.type === "SHARED"}
-          onModal={handleToggleModal}
-          title={i18n("Texts.data_shared")}
-        />
         <ClientCategoriesModal
           isShowModal={modal.type === "CHANGE_CATEGORY"}
           onModal={handleToggleModal}
-          title={i18n("Words.category_alter")}
+          title={i18n("Texts.category_alter")}
           categories={categories}
           selectors={selectors}
         />
@@ -111,6 +117,10 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
           onModal={handleToggleModal}
           title={i18n("Words.new_client")}
           categories={categories ?? []}
+        />
+        <ImportModal
+          isShowModal={modal.type === "IMPORT"}
+          onModal={handleToggleModal}
         />
       </div>
     </>

@@ -6,6 +6,7 @@ import { ChargeUpdatePayload, ChargeUpdateSchema } from "../schemas";
 import useGetServices from "@services/Services/Get/useGetServices";
 import usePutCharge from "@services/Charges/Put/usePut";
 import { ChargeShape } from "@type/Charges";
+import { ServicesShape } from "@type/Services";
 
 dayjs.extend(customParseFormat);
 
@@ -60,6 +61,6 @@ export function useForms({ charge }: Props) {
     isShowModal,
     handleToggleModel,
     isLoadingPutCharge,
-    services,
+    services: services as Array<ServicesShape>,
   };
 }

@@ -8,20 +8,10 @@ export function usePostAuthService() {
   const { auth } = authenticationRoutes;
 
   async function postAuth({
-    login,
-    password,
-    rememberMe,
-    recaptcha,
     csrf: { csrf_hash, csrf_token },
+    ...payload
   }: PostAuthPayload) {
-    const payload = {
-      login,
-      password,
-      rememberMe: rememberMe,
-      recaptcha,
-    };
-
-    if (!rememberMe) {
+    if (!payload.rememberMe) {
       delete payload["rememberMe"];
     }
 

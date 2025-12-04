@@ -17,6 +17,8 @@ export function Input({
   placeholder,
   required,
   type,
+  setValue,
+  onChange,
   ...rest
 }: InputProps) {
   const { labelStyledState, handleTransitionLabel, changeLabelClass } =
@@ -33,7 +35,7 @@ export function Input({
       <div
         className={`relative ${
           errors?.message ? "border-yellow" : ""
-        } w-full my-4`}
+        } w-full my-2`}
       >
         <label
           htmlFor={IdCurrent}
@@ -53,6 +55,10 @@ export function Input({
           required={required === "true"}
           onFocus={handleTransitionLabel}
           onBlur={handleTransitionLabel}
+          onChange={(ev) => {
+            if (setValue) setValue(name ?? "", ev.currentTarget.value);
+            if (onChange) onChange(ev);
+          }}
           type={type}
           placeholder={type == "date" ? " " : placeholder}
           className={`${className ?? ""} ${

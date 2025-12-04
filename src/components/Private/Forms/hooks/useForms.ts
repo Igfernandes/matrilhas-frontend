@@ -3,9 +3,10 @@ import { FormsPayload } from "../schema";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import usePostCreateForm from "../../../../services/CustomForms/Post/usePost";
 import usePutForm from "@services/CustomForms/Put/usePut";
+import { getOnlyNumbers } from "@helpers/numbers";
 
 export function useForms() {
-  const [form, setForm] = useState<Array<FieldShape>>([]);
+  const [components, setComponents] = useState<Array<FieldShape>>([]);
   const { mutateAsync: postForm, isPending: isLoadingPost } =
     usePostCreateForm();
   const { mutateAsync: putForm, isPending: isLoadingPut } = usePutForm();
@@ -13,8 +14,9 @@ export function useForms() {
   const submit = (FormsPayload: FormsPayload) => {
     const payload = {
       ...FormsPayload,
-      components: JSON.stringify(form),
-      status: "PUBLISHED" as "PUBLISHED" | "DRAFT",
+      components: JSON.stringify(components),
+      category: getOnlyNumbers(FormsPayload.category),
+      status: FormsPayload.status as "PUBLISHED" | "DRAFT",
     };
 
     if (FormsPayload.id)
@@ -28,13 +30,13 @@ export function useForms() {
   };
 
   const handleChangeFormFields = (fieldsForm: Array<FieldShape>) => {
-    setForm(fieldsForm);
+    setComponents(fieldsForm);
   };
 
   return {
     submit,
     handleChangeFormFields,
-    form,
+    components,
     isLoading: isLoadingPost || isLoadingPut,
   };
 }

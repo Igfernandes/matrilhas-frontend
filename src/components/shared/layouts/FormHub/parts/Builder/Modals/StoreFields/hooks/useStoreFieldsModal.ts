@@ -17,12 +17,14 @@ export function useStoreFieldsModal({ handleModal }: Props) {
         is_sensitive: "NOT",
       },
     });
-  const { mutateAsync: postFields } = usePostCreateFields();
+  const { mutateAsync: postFields, isPending: isLoading } =
+    usePostCreateFields();
 
   const submit = ({
     is_required,
     is_sensitive,
     group,
+    component,
     ...payload
   }: StoreFieldsPayload) => {
     postFields({
@@ -32,6 +34,8 @@ export function useStoreFieldsModal({ handleModal }: Props) {
       is_required: is_required == "YES",
       is_sensitive: is_sensitive == "YES",
       group_id: parseInt(group),
+      element: component,
+      component,
     }).then(() => {
       const hasContinueRegister = formMethods.watch("hasContinueRegister");
       formMethods.reset();
@@ -47,5 +51,6 @@ export function useStoreFieldsModal({ handleModal }: Props) {
     errors,
     handleSubmit,
     register,
+    isLoading,
   };
 }

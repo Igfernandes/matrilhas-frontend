@@ -11,6 +11,7 @@ export default function useGet() {
 
   async function getUsers(request?: GetUsersRequest) {
     const { ...query } = request ?? {};
+
     return await axios.get<UsersShape[]>(
       setQueries({
         url: setParams({ url: users, data: { id: "" } }),
@@ -19,12 +20,11 @@ export default function useGet() {
     );
   }
 
-  async function getUser(request?: GetUserRequest) {
+  async function getUser({ id, ...request }: GetUserRequest = {}) {
     return axios.get<UsersShape>(
-      setParams({
-        url: setQueries({
-          url: setParams({ url: users, data: { id: request?.id } }),
-        }),
+      setQueries({
+        url: setParams({ url: users, data: { id: id ?? "" } }),
+        query: request,
       })
     );
   }

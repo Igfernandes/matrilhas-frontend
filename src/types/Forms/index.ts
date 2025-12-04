@@ -1,10 +1,16 @@
+import { CategoryData } from "@services/Clients/Get/types";
+
 export type FormsShape = {
   id: number;
   name: string;
   slug: string;
   components: string;
   description?: string;
-  status: "PUBLISHED" | "DRAFT";
+  status: FormStatus;
+  color_mark?: string;
+  stock?: number;
+  category?: CategoryData;
+  thanks_message?: string;
   inscribes: number;
   service_id: number;
   started_at: string;
@@ -12,3 +18,5 @@ export type FormsShape = {
   created_at: string;
   updated_at: string;
 };
+
+export type FormStatus = "PUBLISHED" | "DRAFT"

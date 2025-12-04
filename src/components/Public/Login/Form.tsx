@@ -8,23 +8,26 @@ import { Input } from "@components/shared/forms/Input";
 import { FormProvider } from "react-hook-form";
 import i18n from "@configs/i18n";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
+import { useRecaptcha } from "@hooks/useRecaptcha";
 
 type Props = {
   csrf: CSRFShape;
 };
 
 export function LoginForm({ csrf }: Props) {
+  const { Recaptcha, recaptchaInstance, isRecaptchaLoaded } = useRecaptcha()
   const {
     handleSubmit,
     register,
     formMethods,
-    hasAllFilledFields,
+    allFilled,
     isLoading,
     errors,
     updateValueRememberMe,
-    Recaptcha,
-  } = useForm({ csrf });
+  } = useForm({ csrf, recaptchaInstance });
   const { forgotPassword } = publicRoutes;
+
+
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit}>
@@ -44,6 +47,7 @@ export function LoginForm({ csrf }: Props) {
             {...register("password")}
           />
         </div>
+        <Recaptcha />
         <div className="sm:flex justify-between items-center">
           <div>
             <Checkbox
@@ -63,13 +67,12 @@ export function LoginForm({ csrf }: Props) {
             </Link>
           </div>
         </div>
-        <Recaptcha />
         <div className="form-submit mt-2">
           <Button
             text={i18n("Words.send")}
             type="submit"
-            isLoading={isLoading}
-            disabled={!hasAllFilledFields()}
+            isLoading={isLoading || isRecaptchaLoaded}
+            disabled={!allFilled}
           />
         </div>
       </form>

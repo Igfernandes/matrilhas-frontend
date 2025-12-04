@@ -9,6 +9,10 @@ export const Screens = {
     title: "Informe o seu e-mail cadastrado",
     text: "Se você tiver cadastro na plataforma, enviaremos um link para o e-mail cadastrado para que você possa recuperar a conta.",
   },
+  "confirmations": {
+    title: "Confira sua inscrição",
+    text: "Insira seu CPF para saber se você já está cadastrado em algum evento."
+  },
   "alter-password": {
     title: "Nova senha",
     text: "Crie uma nova senha para acessar a plataforma.",
@@ -22,11 +26,43 @@ export const Screens = {
     text: "Para acessar a plataforma, informe como gostaria de ser chamado e crie uma senha.",
   },
   services: {
+    modal: {
+      title_already_exclude: "Você tem certeza que deseja excluir?",
+      text_already_exclude:
+        "Ao confirmar, o serviço será excluído e os demais registros relacionados.",
+    },
+    switch_event: "Escolha um evento",
+    selected_form: "Selecione um formulário",
+  },
+  events: {
     confirmation: {
       title: "Confirmação de Presença",
-      text: "Ao clicar no botão abaixo, você estará confirmando a sua presença no evento",
-      invalid_url: "A página encontra-se com recursos desatualizados ou inválidos. Copie o link completo e tente novamente, ou entre em contato com o central"
+      text: "Ao clicar no botão abaixo, você estará confirmando oficialmente a sua presença e garantindo a sua reserva no evento. Você confirma sua presença?",
+      invalid_url:
+        "A página encontra-se com recursos desatualizados ou inválidos. Copie o link completo e tente novamente, ou entre em contato com o central",
+      expired:
+        "O convite encontra-se expirado ou inválido. Entre em contato com a AGM para mais detalhes.",
     },
+    modal: {
+      title_already_exclude: "Você tem certeza que deseja excluir?",
+      text_already_exclude:
+        "Ao confirmar, o evento será excluído junto com todas as suas inscrições e demais registros relacionados.",
+    },
+    switch_event: "Escolha um evento",
+  },
+  forms: {
+    not_found:
+      "Formulário indisponível. Entre em contato com a central pelo número",
+    not_stock:
+      "Não há vagas para essa atividade. Acesse a página do evento e veja outras atividades disponíveis para inscrição",
+    successful: {
+      form_received: "A AGM recebeu seu Formulário com Sucesso!",
+      form_message:
+        " Sua resposta é super importante para podermos entender e melhorar cada vez mais.",
+    },
+  },
+  logout: {
+    text: "Você saiu com segurança. A AGM te espera na próxima! 🐾",
   },
   dashboard: {
     clients: {
@@ -71,6 +107,8 @@ export const Screens = {
       title_already_exclude: "Você deseja excluir este envio?",
     },
     forms: {
+      about_thanks_message:
+        "Escreva aqui instruções ou informações para serem exibidas após o preenchimento dos formulários",
       text_already_exclude:
         "Ao continuar, os dados vinculados a esse registro serão excluído do sistema.",
       title_already_exclude: "Você deseja excluir este registro?",
@@ -90,7 +128,21 @@ export const Screens = {
       text_alert_about_alerts_inscribes:
         "Escreva detalhes avisos para os inscritos",
       inscribes_alert: "Avisos para os inscritos",
-      "awaiting_inscribe": "Aguarde enquanto o cliente estará sendo inscrito e enviado a confirmação"
+      awaiting_inscribe:
+        "Aguarde enquanto o cliente estará sendo inscrito e enviado a confirmação",
+    },
+    events: {
+      has_limit_vacancies: "Haverá um limite de vagas?",
+      inform_limit_vacancies: "Informe o limite máximo de vagas",
+      event_image: "Adicione uma imagem ao evento:",
+      text_alert_about_alerts_inscribes:
+        "Escreva detalhes avisos para os inscritos",
+      inscribes_alert: "Avisos para os inscritos",
+      awaiting_inscribe:
+        "Aguarde enquanto o cliente estará sendo inscrito e enviado a confirmação",
+    },
+    schedules: {
+      required_users: "É obrigatório escolher um usuário",
     },
     users: {
       create_user_groups: "Criar grupos de usuários",
@@ -145,5 +197,133 @@ export const Screens = {
     apis: {
       text_fill_information: "Preencha as informações da integração:",
     },
+  },
+  home: {
+    contact: {
+      address_title: "Nosso Endereço",
+      address: "São José do Imbassai, Maricá - RJ",
+      phone_title: "Fale conosco",
+      phone: "(21) 97129-2030",
+      email_title: "Nos envie um e-mail",
+      email: "contato@agmturismomarica.com.br",
+    },
+    menu: {
+      logo: "logotype AGM",
+      about_us: "Sobre Nós",
+      partners: "Nossos Parceiros",
+    },
+    status: {
+      tours: "+100 Passeios",
+      guides: "+40 Guias",
+      modalities: "+6 Modalidades",
+      travelers: "+1000 Viajantes",
+    },
+    about: {
+      title: "Um pouco sobre nós",
+      subtitle: "Associação dos Guias de Turismo de Maricá",
+      description_1:
+        "A Associação de Guias de Turismo de Maricá (AGM) é uma entidade sem fins lucrativos que reúne profissionais qualificados e comprometidos em promover o turismo responsável, sustentável e de qualidade em Maricá e região.",
+      description_2:
+        "Fundada com o objetivo de valorizar e fortalecer a profissão de guia de turismo, a AGM atua como ponto de referência para visitantes, agências, operadoras e parceiros do trade turístico, sempre priorizando a excelência no atendimento, a segurança e a preservação do patrimônio natural, cultural e histórico.",
+    },
+    events: {
+      title: "Cronograma e serviços",
+      subtitle: "Nossas atrações e atividades",
+      not_available: {
+        title: "Não há eventos disponíveis",
+        text: "No momento não há eventos disponíveis, mas em breve teremos novidades. Fique ligado!",
+      },
+    },
+    gallery: {
+      title: "AGM & VOCÊ",
+      subtitle: "Nossas lembranças",
+      description:
+        "Cada foto aqui guarda um pedacinho da nossa história. Para a AGM, é uma alegria imensa compartilhar momentos únicos com nossos clientes e amigos que participam das atividades turísticas. Cada sorriso e cada experiência vivida juntos reforçam o nosso propósito: transformar passeios em memórias inesquecíveis",
+    },
+    support_network: {
+      title: "Rede de apoio",
+      subtitle: "Instituições que fortalecem nosso trabalho",
+    },
+    faq: {
+      title: "Duvidas & Respostas",
+      description: "Encontre as respostas no nosso FAQ",
+      questions: [
+        {
+          question: "Quais são as funções da Associação?",
+          answer:
+            "A AGM atua como agente impulsionador do turismo local, promovendo um turismo sustentável e de qualidade. Oferecemos treinamentos, atualizações de mercado e oportunidades de networking para guias de turismo. Também trabalhamos em parceria com autoridades locais para regulamentar e valorizar a profissão.",
+        },
+        {
+          question: "Quando a Associação foi fundada?",
+          answer: "A AGM foi fundada em 13 de julho de 2021.",
+        },
+        {
+          question: "Quem está na presidência da AGM?",
+          answer:
+            "Atualmente, o presidente é Alberto Matrilhas e a vice-presidente é Thaís Bellotti.",
+        },
+        {
+          question: "Onde fica a sede da AGM?",
+          answer:
+            "Nossa sede, também chamada de Central de Passeios, está localizada na Rua Abreu Sodré, 43 - Centro, Maricá - RJ, 24913-775.",
+        },
+        {
+          question: "Quais são os dias e horários de atendimento?",
+          answer:
+            "Funcionamos todos os dias da semana, de segunda a domingo, das 9h às 17h.",
+        },
+        {
+          question: "Por que se associar à AGM?",
+          answer:
+            "Ao se tornar associado, você integra uma comunidade que valoriza a história, a cultura e os atrativos turísticos da região. Além de ampliar conhecimentos e oportunidades, contribui para oferecer aos turistas experiências autênticas e seguras, fortalecendo ainda mais o turismo em Maricá.",
+        },
+        {
+          question: "Quem pode se associar?",
+          answer:
+            "Podem se associar tanto pessoas físicas quanto jurídicas, incluindo: guias de turismo, condutores, monitores, profissionais e empresas do trade turístico, estabelecimentos de hotelaria e gastronomia, gráficas, colaboradores e cooperadores.",
+        },
+        {
+          question: "Qual é a contribuição da AGM para o turismo em Maricá?",
+          answer:
+            "A AGM participa ativamente de eventos e iniciativas locais, como Caravana Celebrar Maricá, Expo Valley, Expo Maricá, Vem Viver Maricá, Vem Viver Espraiado, Recantando, Curta Itaocaia, Espraiado de Portas Abertas, Conheça Maricá, Maricá Games, FLIN, Congresso de Hidrogênio, Feira das Profissões, BRICS+, além de visitas técnicas e capacitações. Nosso compromisso é o fortalecimento contínuo do turismo em Maricá, por meio de parcerias e ações que valorizam profissionais e elevam a qualidade do setor.",
+        },
+      ],
+    },
+    newsletter: {
+      title: "Viaje conosco",
+      subtitle: "Seja mais um viajante conectado conosco",
+      description: "Inscreva-se para receber notícias e novidades",
+      form: {
+        name: "Nome",
+        phone: "Telefone",
+        button: "Inscrever-se",
+      },
+    },
+    testimonials: [
+      {
+        title: "Comentário do viajante",
+        text: "Adorei participar do passeio por Maricá com a AGM nos jeeps! Foi uma experiência maravilhosa, cheia de belas paisagens e momentos inesquecíveis.",
+        author: "Igor Fernandes",
+        info: "Morador de Maricá - RJ",
+      },
+      {
+        title: "Comentário do viajante",
+        text: "Foi incrível viver essa experiência com a AGM! As atividades foram muito bem organizadas, com momentos divertidos e especiais do início ao fim. Já quero participar novamente!",
+        author: "Joyce Pedro",
+        info: "Morador de Ouro Preto - MG",
+      },
+      {
+        title: "Comentário do viajante",
+        text: "A AGM está de parabéns! Participar das atividades foi maravilhoso, tudo muito bem planejado e cheio de momentos únicos. Recomendo a todos!",
+        author: "Jofre Martins",
+        info: "Morador de São Gonçalo - RJ",
+      },
+      {
+        title: "Comentário do viajante",
+        text: "Uma experiência inesquecível com a AGM! Cada detalhe das atividades foi pensado com carinho, proporcionando diversão, aprendizado e muita energia positiva.",
+        author: "Henrique José",
+        info: "Morador de Maricá - RJ",
+      },
+    ],
   },
 };

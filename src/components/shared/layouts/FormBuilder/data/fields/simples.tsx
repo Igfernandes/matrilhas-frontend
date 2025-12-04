@@ -1,8 +1,12 @@
-import { Button } from "../../fields/Button";
 import { Checkbox } from "../../fields/Checkbox";
+import { Color } from "../../fields/Color";
+import { Date } from "../../fields/Date";
+import { Datetime } from "../../fields/Datetime";
 import { File } from "../../fields/File";
+import { Hidden } from "../../fields/Hidden";
 import { Input } from "../../fields/Input";
-import { Radio } from "../../fields/Radio";
+import { Textarea } from "../../fields/Textarea";
+import { Time } from "../../fields/Time";
 import { FieldShape } from "../../type";
 
 export const classNameDefault = "h-7 py-1 px-2 ";
@@ -15,18 +19,6 @@ export const fieldsSimple = {
       {...props}
     />
   ),
-  radio: ({ className, ...props }: FieldShape) => (
-    <Radio
-      className={`${classNameDefault} ml-2 ${className}`}
-      {...props}
-    />
-  ),
-  checkbox: ({ className, ...props }: FieldShape) => (
-    <Checkbox
-      className={`${classNameDefault} ml-2 ${className}`}
-      {...props}
-    />
-  ),
   select: ({ className, required, ...props }: FieldShape) => (
     <select
       required={required === "true"}
@@ -35,40 +27,32 @@ export const fieldsSimple = {
     />
   ),
   date: ({ className, ...props }: FieldShape) => (
-    <Input
+    <Date
       type="date"
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
   "datetime-local": ({ className, ...props }: FieldShape) => (
-    <Input
-      type="datetime-local"
+    <Datetime
       className={`${classNameDefault} w-full ${className}`}
       {...props}
     />
   ),
+  time: ({ className, ...props }: FieldShape) => (
+    <Time className={`${classNameDefault} w-full ${className}`} {...props} />
+  ),
   color: ({ className, ...props }: FieldShape) => (
-    <Input
-      type="color"
-      className={`${classNameDefault} w-full ${className}`}
-      {...props}
-    />
+    <Color className={` w-full ${className}`} {...props} />
   ),
   file: ({ required, ...props }: FieldShape) => (
     <File
-      required={required === "true"}
+      required={required}
       className={`${classNameDefault} w-full h-[3.5rem]`}
       {...props}
     />
   ),
-  hidden: ({ className, ...props }: FieldShape) => (
-    <Input
-      type="hidden"
-      className={`${classNameDefault} w-full ${className}`}
-      {...props}
-    />
-  ),
+  hidden: (props: FieldShape) => <Hidden {...props} />,
   number: ({ className, ...props }: FieldShape) => (
     <Input
       type="number"
@@ -83,7 +67,10 @@ export const fieldsSimple = {
       {...props}
     />
   ),
-  button: ({ className, ...props }: FieldShape) => (
-    <Button className={`${classNameDefault} ${className}`} {...props} />
+  checkbox: ({ className, ...props }: FieldShape) => (
+    <Checkbox className={`${className}`} {...props} />
+  ),
+  textarea: ({ className, ...props }: FieldShape) => (
+    <Textarea className={`${classNameDefault} ${className}`} {...props} />
   ),
 };

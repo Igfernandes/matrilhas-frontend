@@ -1,4 +1,4 @@
-import { Axios } from "axios";
+import { Axios, AxiosError } from "axios";
 import { useSnackbar } from "../useSnackbar";
 import { CustomAxiosError, ShapeError } from "./type";
 import i18n from "@configs/i18n";
@@ -8,17 +8,42 @@ import { AuthenticationsInterceptor } from "./interceptores/Authentication";
 import { DataInterceptor } from "./interceptores/Data";
 import { axiosConfig } from "@configs/axios";
 import { hasErrorAuthentication } from "./interceptores/hasErrorAuthentication";
+import {
+  DefaultError,
+  QueryClient,
+  QueryKey,
+  useQuery,
+  UseQueryOptions,
+  UseQueryResult,
+} from "@tanstack/react-query";
+
+const axios = new Axios({
+  ...axiosConfig,
+  validateStatus: (status: number) =>
+    status >= STATUS_SERVICE.OK && status < STATUS_SERVICE.REDIRECT,
+});
+
+export function useQueryGuard<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey
+>(
+  options: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+  queryClient?: QueryClient
+): UseQueryResult<TData, TError> {
+  try {
+    return useQuery(options, queryClient);
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) hasErrorAuthentication(error, false);
+    return error as UseQueryResult<TData, TError>;
+  }
+}
 
 export function useAxios() {
   const { dispatchSnackbar } = useSnackbar();
-  const axios = new Axios({
-    ...axiosConfig,
-    validateStatus: (status: number) =>
-      status >= STATUS_SERVICE.OK && status < STATUS_SERVICE.REDIRECT,
-  });
 
   axios.interceptors.request.use(AuthenticationsInterceptor, (error) => {
-    // Trata erros na requisição
     return Promise.reject(error);
   });
   axios.interceptors.response.use(DataInterceptor, hasErrorAuthentication);
@@ -36,14 +61,17 @@ export function useAxios() {
       message: i18n("Api.default.error") as string,
     };
     const typedError = error as CustomAxiosError;
-
     const status = typedError.response?.status ?? STATUS_SERVICE.INTERNAL_ERROR;
     const jsonResponseData = typedError.response?.data ?? "";
     const responseData = isValidJSON(jsonResponseData)
       ? JSON.parse(jsonResponseData)
       : null;
 
-    const responseError = !!responseData && responseData.errors[0];
+    let responseError = "";
+    if (responseData && Array.isArray(responseData.errors))
+      responseError = !!responseData && responseData.errors[0];
+    else responseError = !!responseData && responseData.errors;
+
     if (responseError) {
       shapeError["message"] = i18n(responseError) as string;
     } else if (status === STATUS_SERVICE.NOT_FOUND)
@@ -51,7 +79,7 @@ export function useAxios() {
 
     dispatchSnackbar({
       ...shapeError,
-      type: status === 401 ? "notice" : "error",
+      type: status === 403 ? "notice" : "error",
     });
 
     return shapeError;

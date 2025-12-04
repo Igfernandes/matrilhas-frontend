@@ -34,6 +34,7 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
     const IdCurrent = id ?? dataTestId;
 
     useEffect(() => {
+      if (!!selected) return;
       const defaultSelected = options.filter((options) => options.selected);
 
       if (defaultSelected[0]) handleChangeValue(name ?? "", defaultSelected[0]);

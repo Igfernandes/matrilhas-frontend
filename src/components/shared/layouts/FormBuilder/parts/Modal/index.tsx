@@ -3,36 +3,40 @@ import { When } from "@components/utilities/When";
 import { useFormBuilderContext } from "../../context";
 import i18n from "@configs/i18n";
 import { useModal } from "./hooks/useModal";
-import { SettingsLayoutTab } from "./tabs/SettingsLayoutTab";
 import { HeaderTab } from "./tabs/HeaderTab";
 import { useTabs } from "./hooks/useTabs";
 import { StructsTab } from "./tabs/StructsTab";
-import { SizesTab } from "./tabs/SizesTab";
 import { ColorsTab } from "./tabs/ColorsTab";
-import { SettingsFieldsTab } from "./tabs/SettingsFieldsTab";
 import { useEffect, useRef, useState } from "react";
+import { OptionData } from "../../type";
+import { options } from "../../data/options";
 
 export function Modal() {
   const { handleToggleModal, isShowModal, currentField, handleRemoveField } =
     useFormBuilderContext();
   const { activeTab, handleChangeTab } = useTabs();
-  const { handleSubmit, handleChangeField, payload } = useModal({
-    currentField: currentField,
-  });
+  const { handleSubmit, handleChangeField, handleUpdateField, payload } =
+    useModal({
+      currentField: currentField,
+    });
+  const [fieldSettings, setFieldSettings] = useState<OptionData>();
   const defaultTabs = useRef<Array<string>>(["settings", "colors", "structs"]);
   const [tabs, setTabs] = useState<Array<string>>(defaultTabs.current);
 
   useEffect(() => {
-    let tabsCurrent = defaultTabs.current;
-    if (payload?.group === "layout" && !tabs.includes("sizes"))
-      tabsCurrent = [...tabsCurrent, "sizes"];
+    setFieldSettings(
+      options.find((option) => option.field === currentField?.element)
+    );
+    const fieldTabs = fieldSettings?.editTabs ?? [];
+    const tabsCurrent = [
+      ...fieldTabs.map((tab) => tab.name),
+      "colors",
+      "structs",
+    ];
 
-    if (["hr"].includes(payload?.element ?? ""))
-      tabsCurrent = tabsCurrent.filter((tab) => tab !== "settings");
-
-    handleChangeTab(tabsCurrent[0])
+    handleChangeTab(tabsCurrent[0]);
     setTabs(tabsCurrent);
-  }, [payload]);
+  }, [payload?.group, fieldSettings?.editTabs]);
 
   return (
     <When value={isShowModal}>
@@ -58,25 +62,15 @@ export function Modal() {
               activeMenu={activeTab}
               onChangeTab={handleChangeTab}
             />
-            <When value={payload?.group !== "layout"}>
-              <SettingsFieldsTab
+            {fieldSettings?.editTabs?.map(({ component: Component }, key) => (
+              <Component
+                key={`form_builder_tabe_${key}`}
                 tabActive={activeTab}
                 field={payload}
                 oChangeField={handleChangeField}
+                handleUpdateField={handleUpdateField}
               />
-            </When>
-            <When value={payload?.group === "layout"}>
-              <SettingsLayoutTab
-                tabActive={activeTab}
-                field={payload}
-                oChangeField={handleChangeField}
-              />
-              <SizesTab
-                tabActive={activeTab}
-                field={payload}
-                oChangeField={handleChangeField}
-              />
-            </When>
+            ))}
             <ColorsTab
               tabActive={activeTab}
               field={payload}

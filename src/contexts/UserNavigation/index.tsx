@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -8,53 +7,37 @@ import React, {
 } from "react";
 import { UserNavigationContextData, UserNavigationProps } from "./types";
 import { UsersShape } from "../../types/Users";
-import { useRouter } from "next/router";
-import { publicRoutes } from "@configs/routes/Web/navigation";
-import { getCookie } from "cookies-next";
-import { handleLogout } from "@helpers/handlers";
-import { useQueryClient } from "@tanstack/react-query";
-import { useJsonWebToken } from "@hooks/useJsonWebToken";
+import { usePermissions } from "@hooks/usePermissions";
+import useGetUser from "@services/Users/Get/useGetUser";
 
 export const UserNavigationContext = createContext(
   {} as UserNavigationContextData
 );
 
-const UserNavigationProvider = ({ children }: UserNavigationProps) => {
-  const [userAuth, setUserAuth] = useState<UsersShape>();
+const UserNavigationProvider = ({ children, user }: UserNavigationProps) => {
+  const [userAuth, setUserAuth] = useState<UsersShape>(user as UsersShape);
+  const { data: currentUser } = useGetUser({ current: true });
+  const { permissions, setPermissions, hasPermission } = usePermissions();
 
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  const { verifyJwt } = useJsonWebToken();
-
-  const handleDisconnect = useCallback(() => {
-    handleLogout();
-    queryClient.resetQueries({
-      queryKey: ["userAuth"],
-    });
-
-    router.push(publicRoutes.login);
-  }, [queryClient, router]);
-
+  // Atualiza usuário quando data chega
   useEffect(() => {
-    const userAuthCookie = getCookie("userAuth") as string;
+    if (currentUser) {
+      setUserAuth(currentUser);
+      setPermissions(currentUser.permissions || []);
+    }
+  }, [currentUser, setPermissions]);
 
-    if (userAuthCookie)
-      verifyJwt<UsersShape>(userAuthCookie)
-        .then((user) => {
-          setUserAuth(user);
-        })
-        .catch(() => handleDisconnect());
-  }, [verifyJwt, handleDisconnect]);
-
-  const userProps = useMemo(
+  const value = useMemo(
     () => ({
       userAuth,
+      permissions,
+      hasPermission,
     }),
-    [userAuth]
+    [userAuth, permissions, hasPermission]
   );
 
   return (
-    <UserNavigationContext.Provider value={userProps}>
+    <UserNavigationContext.Provider value={value}>
       {children}
     </UserNavigationContext.Provider>
   );
@@ -63,5 +46,5 @@ const UserNavigationProvider = ({ children }: UserNavigationProps) => {
 export default UserNavigationProvider;
 
 export function useUserNavigationContext() {
-  return useContext(UserNavigationContext) as UserNavigationContextData;
+  return useContext(UserNavigationContext);
 }

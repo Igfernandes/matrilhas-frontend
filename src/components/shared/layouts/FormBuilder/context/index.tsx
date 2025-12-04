@@ -49,6 +49,32 @@ const FormBuilderProvider = ({
     if (data.fromForm) handleDragEndForm(ev, handleChangeFields, fields);
   };
 
+  const handleChangePositionField = (
+    currentPosition: number,
+    newPosition: number | "DOWN" | "UP"
+  ) => {
+    if (String(currentPosition) === "NaN") return;
+
+    switch (newPosition) {
+      case "DOWN":
+        newPosition = +currentPosition + 1;
+        break;
+      case "UP":
+        newPosition = +currentPosition - 1;
+        break;
+    }
+
+    if (currentPosition >= fields.length || newPosition >= fields.length) {
+      return;
+    }
+
+    setFields((prevFields) => {
+      const newFields = [...prevFields]; // cópia segura
+      const [item] = newFields.splice(currentPosition, 1);
+      newFields.splice(newPosition, 0, item);
+      return newFields;
+    });
+  };
   const handleToggleField = (field: FieldShape) => setCurrentField(field);
 
   const handleToggleModal = (isModal: boolean, fieldId?: string) => {
@@ -82,6 +108,7 @@ const FormBuilderProvider = ({
       handleToggleField,
       handleChangeFields,
       handleRemoveField,
+      handleChangePositionField,
     }),
     [
       optionDrag,
@@ -90,6 +117,7 @@ const FormBuilderProvider = ({
       activeFieldId,
       isShowModal,
       currentField,
+      handleChangePositionField,
     ]
   );
 

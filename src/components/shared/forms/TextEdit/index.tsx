@@ -1,5 +1,4 @@
 import { When } from "@components/utilities/When";
-import { RotateClockwise } from "@assets/Icons/white/RotateClockwise";
 import React from "react";
 import ErrorMessage from "@components/shared/others/ErrorMessage";
 import { TextAreaProps } from "../TextArea/type";
@@ -47,7 +46,6 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   function TextEdit(
     {
       dataTestId,
-      isLoading = false,
       id,
       label,
       errors,
@@ -59,7 +57,7 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
     ref
   ) {
     const IdCurrent = id ?? dataTestId;
-    const { setValue: updateValue } = useFormContext();
+    const { setValue: updateValue, getValues } = useFormContext();
 
     return (
       <>
@@ -76,22 +74,17 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
               theme="snow"
               modules={modules}
               formats={formats}
+              value={getValues(rest.name)}
               className="h-[30vh] md:h-60 "
               defaultValue={String(defaultValue ?? "")}
               onChange={(value) => {
                 if (!rest.name) return;
 
-                updateValue(rest.name, String(value));
+                updateValue(rest.name, String(value ?? ""));
               }}
               placeholder={placeholder}
             />
           </div>
-          <When value={isLoading}>
-            <RotateClockwise
-              className="absolute right-3 top-4 animate-spin"
-              fill="black"
-            />
-          </When>
         </div>
         <ErrorMessage errors={errors?.message} />
       </>

@@ -9,43 +9,80 @@ import { AmountInscribes } from "./AmountInscribes";
 import { useNavigator } from "@hooks/useNavigator";
 import useWindow from "@hooks/useWindow";
 import dayjs from "dayjs";
+import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useState } from "react";
+import { FormStatus } from "@type/Forms";
 
 export function FormsCard({ search, filterObjects }: FormsCardProps) {
-  const { forms, handleToggleStatusForm, isLoadingDeleteForm } = useFormsOverview({
-    filter: search,
-    handleFilter: filterObjects,
-  });
+  const { forms, handleToggleStatusForm, isLoadingDeleteForm } =
+    useFormsOverview({
+      filter: search,
+      handleFilter: filterObjects,
+    });
+  const [formStatus, setFormStatus] = useState<FormStatus>("PUBLISHED");
   const { forms: formsRoutePublic } = publicRoutes;
   const { handleCopy } = useNavigator();
   const { forms: formsRoute } = privateRoutes;
   const { handleToggleModal, modal } =
     useModalContext<ModalFormsOperationType>();
   const { baseUrl } = useWindow();
-
+  const { hasPermission } = useUserNavigationContext();
   return (
     <>
       <div>
+        <div className="tabs">
+          <ul className="flex">
+            <li
+              onClick={() => setFormStatus("PUBLISHED")}
+              className={` px-10 py-3 shadow-sm border-r-2 border-t-2 border-l-2 border-stone-400 
+            rounded-md rounded-b-none mr-2 cursor-pointer ${formStatus == "PUBLISHED" ? "bg-red text-white" : "bg-white"
+                }  `}
+            >
+              <span>
+                <strong>{i18n("Words.active")}s</strong>
+              </span>
+            </li>
+            <li
+              onClick={() => setFormStatus("DRAFT")}
+              className={` px-10 py-3 shadow-sm border-r-2 border-t-2 border-l-2 border-stone-400 
+            rounded-md rounded-b-none mr-2 cursor-pointer ${formStatus == "DRAFT" ? "bg-red text-white" : "bg-white"
+                } `}
+            >
+              <span>
+                <strong>{i18n("Words.inactive")}s</strong>
+              </span>
+            </li>
+          </ul>
+        </div>
         <Cards
-          items={forms.map((form) => ({
-            description: form.description ?? "",
-            alert: form.name,
-            link: `${formsRoute}/${form.id}`,
-            createdAt: dayjs(form.created_at).format("DD/MM/YYYY HH:mm"),
-            dotsActions: [
-              {
-                handle: () =>
-                  handleCopy(`${baseUrl}${formsRoutePublic}/${form.slug}`),
-                text: i18n(`Words.link_copy`),
+          items={forms
+            .filter((form) => form.status == formStatus)
+            .map((form) => ({
+              description: form.name ?? "",
+              alert: form.description ?? "",
+              link: `${formsRoute}/${form.id}`,
+              color: form.color_mark,
+              createdAt: dayjs(form.created_at).format("DD/MM/YYYY HH:mm"),
+              dotsActions: [
+                {
+                  handle: () =>
+                    handleCopy(`${baseUrl}${formsRoutePublic}/${form.slug}`),
+                  text: i18n(`Words.link_copy`) as string,
+                },
+                {
+                  handle: () => handleToggleModal("EXCLUDE", form.id),
+                  text: i18n(`Words.exclude`) as string,
+                  permissions: ["forms_delete"],
+                },
+              ].filter(
+                (dotAction) =>
+                  !dotAction.permissions ||
+                  hasPermission(dotAction.permissions)
+              ),
+              foot: {
+                items: [<AmountInscribes key={"amountInscribes"} />],
               },
-              {
-                handle: () => handleToggleModal("EXCLUDE", form.id),
-                text: i18n(`Words.exclude`),
-              },
-            ],
-            foot: {
-              items: [<AmountInscribes key={"amountInscribes"} />],
-            },
-          }))}
+            }))}
         />
       </div>
       <Notice

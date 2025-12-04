@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { InputProps } from "./type";
 import i18n from "@configs/i18n";
-import { handleMaskCPF } from "@helpers/string";
-import { Close } from "@assets/Icons/black/CloseClean";
 import { useDependent } from "./hooks/useDependent";
+import { DesktopDependentsViewer } from "./Desktop";
+import { When } from "@components/utilities/When";
+import useWindow from "@hooks/useWindow";
+import { MobileDependentsViewer } from "./Mobile";
 
-export function Dependents({ id, label, name, errors }: InputProps) {
+export function Dependents({ id, label, name, errors, setValue }: InputProps) {
   const IdCurrent = id;
-  const { rows, setRows } = useDependent();
-  const [value, setValue] = useState<string>();
-
-  useEffect(() => {
-    if (!rows) return;
-
-    setValue(JSON.stringify(rows));
-  }, [rows, setRows]);
+  const { rows, handleChanges, setRows } = useDependent({ setValue, name });
+  const { screenType } = useWindow();
 
   return (
     <>
-      <input type="hidden" name={name} value={value} />
       <div
         className={`relative ${
           errors?.message ? "border-yellow" : ""
@@ -52,99 +47,12 @@ export function Dependents({ id, label, name, errors }: InputProps) {
             </button>
           </div>
         </div>
-        <div className="dependents">
-          <div className="header flex">
-            <div>
-              <span>{i18n("Words.name")}</span>
-            </div>
-            <div>
-              <span>{i18n("Words.cpf")}</span>
-            </div>
-            <div>
-              <span>{i18n("Words.birthdate")}</span>
-            </div>
-          </div>
-        </div>
-        <table className="w-full">
-          <thead>
-            <tr>
-              <th className="border-2 border-cross-white-primary"></th>
-              <th className="border-2 border-cross-white-primary w-[180px]">
-                {i18n("Words.cpf")}
-              </th>
-              <th className="border-2 border-cross-white-primary w-[180px]">
-                {i18n("Words.birthdate")}
-              </th>
-              <th className="px-2 border-2 border-cross-white-primary"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, key) => (
-              <tr key={`row_${key}`}>
-                <td className="border-2 border-cross-white-primary">
-                  <input
-                    name={`field_name_${key}`}
-                    onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                      const refRows = rows;
-
-                      refRows[key].name = ev.currentTarget.value;
-                      setRows(refRows);
-                      setValue(JSON.stringify(refRows));
-                    }}
-                    className="w-full"
-                    type="text"
-                  />
-                </td>
-                <td className="px-2 border-2 border-cross-white-primary">
-                  <input
-                    className="w-full"
-                    type="text"
-                    name={`field_cpf_${key}`}
-                    onChange={(ev) => {
-                      const refRows = rows;
-
-                      refRows[key].cpf = ev.currentTarget.value;
-                      handleMaskCPF(ev);
-                      setRows(refRows);
-
-                      setValue(JSON.stringify(refRows));
-                    }}
-                  />
-                </td>
-                <td className="px-2 border-2 border-cross-white-primary">
-                  <input
-                    name={`field_birthdate_${key}`}
-                    onChange={(ev) => {
-                      const refRows = rows;
-
-                      refRows[key].birthdate = ev.currentTarget.value;
-                      setRows(refRows);
-                      setValue(JSON.stringify(refRows));
-                    }}
-                    className="w-full"
-                    type="Date"
-                  />
-                </td>
-                <td className="px-2 border-2 border-cross-white-primary w-10">
-                  <button
-                    onClick={() => {
-                      const rowsUpdated = rows.filter(
-                        (refValue, refKey) => refKey !== key
-                      );
-                      setRows(rowsUpdated);
-
-                      setValue(JSON.stringify(rowsUpdated));
-                    }}
-                    type="button"
-                    className="bg-white shadow-2xl"
-                  >
-                    <Close fill={"red"} />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <When value={["DESKTOP", "TABLET"].includes(screenType)}>
+          <DesktopDependentsViewer rows={rows} setRows={handleChanges} />
+        </When>
+        <When value={screenType === "MOBILE"}>
+          <MobileDependentsViewer rows={rows} setRows={handleChanges} />
+        </When>
       </div>
     </>
   );

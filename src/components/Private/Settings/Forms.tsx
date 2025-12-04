@@ -13,6 +13,7 @@ import {
 } from "@helpers/string";
 import { handleMaskDate } from "@helpers/date";
 import { ModalAlterPassword } from "./modals/AlterPassword";
+import { TSpan } from "@components/shared/forms/InfoBoard/fields/Span";
 
 dayjs.extend(customParseFormat);
 
@@ -38,26 +39,26 @@ export function SettingsForms() {
           label={i18n("Words.name")}
           name={"name"}
           dataTestId="name"
-          errors={errors.name}
-          defaultValue={userAuth?.name}
+          errors={errors.name?.message}
+          defaultValue={userAuth.name}
         />
         <TInput
           label={i18n("Words.cpf")}
           name={"cpf"}
           dataTestId="cpf"
-          errors={errors.cpf}
+          errors={errors.cpf?.message}
           onChange={(ev) => {
             handleMaskCPF(ev);
             formMethods.setValue("cpf", ev.currentTarget.value);
           }}
-          defaultValue={getCPFFormatted(userAuth?.cpf)}
+          defaultValue={getCPFFormatted(userAuth.cpf)}
         />
         <TInput
           label={i18n("Words.birthdate")}
           name={"birthdate"}
           dataTestId="birthdate"
-          errors={errors.birthdate}
-          defaultValue={dayjs(userAuth?.birthdate, "YYYY-MM-DD").format(
+          errors={errors.birthdate?.message}
+          defaultValue={dayjs(userAuth.birthdate, "YYYY-MM-DD").format(
             "DD/MM/YYYY"
           )}
           onChange={(ev) => {
@@ -69,19 +70,17 @@ export function SettingsForms() {
           label={i18n("Words.phone")}
           name={"phone"}
           dataTestId="phone"
-          errors={errors.phone}
+          errors={errors.phone?.message}
           onChange={(ev) => {
             handleMaskPhone(ev);
             formMethods.setValue("phone", ev.currentTarget.value);
           }}
-          defaultValue={getNumberFormatted(userAuth?.phone)}
+          defaultValue={getNumberFormatted(userAuth.phone)}
         />
-        <TInput
-          label={i18n("Words.email")}
-          name={"email"}
+        <TSpan
+          text={i18n("Words.email")}
           dataTestId="email"
-          disabled
-          defaultValue={userAuth?.email}
+          value={userAuth.email}
           style={{
             background: bgColors.white,
           }}
@@ -95,15 +94,15 @@ export function SettingsForms() {
             background: bgColors.white,
           }}
           placeholder="************"
-          action={
-            <button
-              onClick={() => handleToggleModel(true)}
-              type="button"
-              className="font-semibold text-red mr-1"
-            >
-              {i18n("Words.alter")}
-            </button>
-          }
+          // action={
+          //   <button
+          //     onClick={() => handleToggleModel(true)}
+          //     type="button"
+          //     className="font-semibold text-red mr-1"
+          //   >
+          //     {i18n("Words.alter")}
+          //   </button>
+          // }
           disabled
         />
       </InfoBoard>

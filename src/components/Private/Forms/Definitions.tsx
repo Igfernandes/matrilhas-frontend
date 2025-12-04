@@ -7,66 +7,28 @@ import { Select } from "@components/shared/forms/Select";
 import { useFormsData } from "./hooks/useFormsData";
 import { When } from "@components/utilities/When";
 import { ComponentsProps } from "./type";
-import { Date } from "@components/shared/forms/Date";
-import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
 import { ServicesShape } from "@type/Services";
-import useWindow from "@hooks/useWindow";
-import { useNavigator } from "@hooks/useNavigator";
-import { FloppyDisk } from "@assets/Icons/black/FloppyDisck";
-import { Shared } from "@components/shared/others/Shared";
+import { Datetime } from "@components/shared/forms/DateTime";
+import { TopBar } from "./TopBar";
+import { TextEdit } from "@components/shared/forms/TextEdit";
+import { ClientCategoriesShape } from "@type/Clients/ClientCategories";
+import Link from "next/link";
 
 type Props = Pick<ComponentsProps, "handleChangeFormFields"> & {
   slug?: string;
 };
 
 export function Definitions({ handleChangeFormFields, slug }: Props) {
-  const { forms, services } = useFormsData();
+  const { forms, services, categories, events } = useFormsData();
   const {
     register,
-    setValue,
     getValues,
     formState: { errors },
   } = useFormContext<FormsPayload>();
-  const { baseUrl } = useWindow();
-  const { handleCopy } = useNavigator();
-  const formId = getValues("id");
 
   return (
     <div className="form-definitions">
-      <div className="flex justify-end">
-        <div className="mb-6">
-          <ToggleSwitch
-            setValue={setValue}
-            label={i18n("Words.status")}
-            dataTestId="status"
-            name="status"
-            defaultValue={getValues("status")}
-            options={{
-              left: {
-                text: i18n("Words.active"),
-                value: "PUBLISHED",
-              },
-              right: {
-                text: i18n("Words.inactive"),
-                value: "DRAFT",
-              },
-            }}
-          />
-        </div>
-        <When value={!!formId}>
-          <div>
-            <div
-              className="px-3 py-2 shadow-md rounded-md cursor-pointer ml-2"
-              onClick={() => handleCopy(`${baseUrl}/forms/${slug}`)}
-            >
-              <FloppyDisk className="hover:fill-red" />
-            </div>
-          </div>
-          <div className="relative">
-            <Shared entity={"FORMS"} in_ids={[formId ?? 0]} />
-          </div>
-        </When>
-      </div>
+      <TopBar slug={slug} />
       <div className="form-row flex flex-wrap mb-4 justify-between">
         <div className="form-group w-full">
           <Input
@@ -112,39 +74,101 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
           </span>
         </When>
       </div>
-      <div className="my-4">
-        <Select
-          {...register("service_id")}
-          label={i18n("Words.service")}
-          dataTestId="services"
-          options={[
-            {
-              text: "--",
-              value: "",
-            },
-            ...(services ?? [])?.map((service: ServicesShape) => ({
-              text: service.name,
-              value: service.id,
-              selected: getValues("service_id") === String(service.id),
-            })),
-          ]}
+      <div className="form-group w-full">
+        <Input
+          {...register("stock")}
+          label={i18n(`Words.vacancies_total`)}
+          dataTestId="form_stock"
+          type="number"
+          errors={errors.stock}
         />
       </div>
-      <div className="flex my-4">
-        <div className="form-group w-full md:w-1/2 mr-2">
-          <Date
+      <div className="flex flex-wrap justify-between my-4">
+        <div className="w-100 md:w-[49%]">
+          <Select
+            {...register("has_event")}
+            label={i18n("Texts.has_event")}
+            dataTestId="services"
+            defaultValue={events && events.length > 0 ? 1 : 0}
+            options={[
+              {
+                text: i18n("Words.not"),
+                value: 0,
+                selected: !events || events.length === 0
+              },
+              {
+                text: i18n("Words.yes"),
+                value: 1,
+                selected: events && events.length > 0
+              },
+            ]}
+          />
+          <When value={events && events.length > 0}>
+            <div className="mt-2">
+              <Link className="text-red text-sm" href={events ? `/dashboard/events/${events[0].id}` : "#"} >
+                <u>{i18n("Texts.view_event")}</u>
+              </Link>
+            </div>
+          </When>
+        </div>
+        <div className="w-100 md:w-[49%]">
+          <Select
+            {...register("service_id")}
+            label={i18n("Words.service")}
+            dataTestId="services"
+            options={[
+              {
+                text: "--",
+                value: "",
+              },
+              ...(services ?? [])?.map((service: ServicesShape) => ({
+                text: service.name,
+                value: service.id,
+              })),
+            ]}
+          />
+        </div>
+      </div>
+      <div className="my-4">
+
+      </div>
+      <div className="flex flex-wrap md:flex-nowrap my-4">
+        <div className="form-group w-full md:w-1/2 md:mr-2">
+          <Datetime
             {...register("started_at")}
             label={i18n("Words.started_at")}
             dataTestId="started_at"
           />
         </div>
-        <div className="form-group w-full md:w-1/2 ml-2">
-          <Date
+        <div className="form-group w-full my-4 md:my-auto md:w-1/2 md:ml-2">
+          <Datetime
             {...register("expired_at")}
             label={i18n("Words.expired_at")}
             dataTestId="expired_at"
           />
         </div>
+      </div>
+      <div className="form-group my-6">
+        <Select
+          {...register("category")}
+          label={i18n("Words.category")}
+          dataTestId="category"
+          options={[
+            {
+              text: "--",
+              value: "",
+            },
+            ...(categories ?? [])?.map((category: ClientCategoriesShape) => ({
+              text: category.name,
+              value: String(category.id),
+              selected: getValues("category") === String(category.id),
+            })),
+          ]}
+        />
+        <span className="text-red text-sm">
+          <strong>AVISO:</strong> A categoria acima selecionada será atrelada aos clientes gerados por
+          esse formulário.
+        </span>
       </div>
       <div className="form-group">
         <TextArea
@@ -153,6 +177,16 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
           dataTestId="description"
           maxLength={800}
           errors={errors.description}
+        />
+      </div>
+      <div className="form-row mt-6">
+        <TextEdit
+          {...register("thanks_message")}
+          dataTestId="alerts"
+          label={i18n(`Texts.thanks_message`)}
+          defaultValue={getValues("thanks_message") ?? ""}
+          placeholder={i18n("Screens.dashboard.forms.about_thanks_message")}
+          errors={errors.thanks_message}
         />
       </div>
     </div>

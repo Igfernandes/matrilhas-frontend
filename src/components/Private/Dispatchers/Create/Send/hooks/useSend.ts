@@ -11,12 +11,12 @@ export function useSend() {
   const [charges, setCharges] = useState<Array<ChargeShape>>([]);
 
   useEffect(() => {
-    setServices(serviceData ?? []);
+    if (Array.isArray(serviceData)) setServices(serviceData ?? []);
   }, [serviceData]);
   useEffect(() => {
     setCharges(chargesData ?? []);
   }, [chargesData]);
-  
+
   return {
     services,
     charges,

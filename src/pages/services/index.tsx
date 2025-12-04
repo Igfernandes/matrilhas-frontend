@@ -2,18 +2,17 @@ import { Footer } from "@components/Public/External/Footer";
 import { Header } from "@components/Public/External/Header";
 import { BoardCharge } from "@components/Public/Services/boards/Charge";
 import { BoardDefault } from "@components/Public/Services/boards/Default";
+import { BoardForm } from "@components/Public/Services/boards/Form";
 import { ServicesPageProps } from "@components/Public/Services/types";
-import { Subscribe } from "@components/shared/layouts/Subscribe";
 import { When } from "@components/utilities/When";
 import i18n from "@configs/i18n";
 import { getServicePreview } from "@services/Services/GetPreview/SSR";
 import { GetServerSideProps } from "next";
 import Image from "next/image";
-import Script from "next/script";
 import { useRef } from "react";
 
 export default function Services({ service }: ServicesPageProps) {
-  const { charge, photo, form } = service;
+  const { charge, photo, forms } = service;
   const address = useRef<string>(process.env.NEXT_PUBLIC_COMPANY_ADDRESS);
   const email = useRef<string>(process.env.NEXT_PUBLIC_COMPANY_EMAIL);
   const phone = useRef<string>(process.env.NEXT_PUBLIC_COMPANY_PHONE);
@@ -21,11 +20,6 @@ export default function Services({ service }: ServicesPageProps) {
   return (
     <div className="min-h-[100vh] flex flex-col justify-between">
       <div>
-        <Subscribe />
-        <Script
-          src="https://sdk.mercadopago.com/js/v2"
-          strategy="afterInteractive"
-        ></Script>
         <Header />
         <div className="container max-w-[1100px] mx-auto my-12">
           <div className="image shadow-md rounded-xl mb-6">
@@ -89,7 +83,10 @@ export default function Services({ service }: ServicesPageProps) {
             <When value={!!charge}>
               <BoardCharge charge={charge} />
             </When>
-            <When value={!charge && !form}>
+            <When value={!!forms}>
+              <BoardForm {...service} forms={forms} />
+            </When>
+            <When value={!charge && !forms}>
               <BoardDefault {...service} />
             </When>
           </div>
@@ -108,10 +105,17 @@ export const getServerSideProps: GetServerSideProps<
     charge: string;
     form: string;
     key: string;
-  }; // Tipando o params
-  const service = await getServicePreview({ id: +key, form, charge });
+  };
 
-  if (!service || Object.hasOwn(service, "errors")) {
+  const payload = {
+    id: key ? +key : undefined,
+    form: form,
+    charge: charge,
+  };
+
+  const service = await getServicePreview(payload);
+
+  if (!service['name'] || Object.hasOwn(service, "errors")) {
     return {
       redirect: {
         destination: `/404`, // Redireciona para a página principal

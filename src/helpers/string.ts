@@ -51,7 +51,7 @@ export function getNumberFormatted(number?: string) {
     value = value.replace(/^(\d{2})(\d{1})(\d{1,4})(\d{1,4})/, "($1) $2 $3-$4");
   }
 
-  return `+55 ${value.slice(0, 16)}`;
+  return `${value.slice(0, 16)}`;
 }
 
 export function handleMaskCPF(e: React.ChangeEvent<HTMLInputElement>) {
@@ -87,4 +87,41 @@ export function getMoneyBrFormatted(money: number) {
     style: "currency",
     currency: "BRL",
   }).format(+money);
+}
+
+export const WppTextFormatter = {
+  bold: (text: string) => `*${text}*`,
+  italic: (text: string) => `_${text}_`,
+  strikethrough: (text: string) => `~${text}~`,
+  monospace: (text: string) => `\`\`\`${text}\`\`\``,
+
+  // Combinando múltiplas formatações
+  boldItalic: (text: string) => `_*${text}*_`,
+  boldStrikethrough: (text: string) => `*~${text}~*`,
+};
+
+export function formatAllString(
+  text: string,
+  rules: Record<string, (text: string) => string>
+) {
+  let formattedText = text;
+  Object.entries(rules).forEach(([index, callback]) => {
+    if (!index) return;
+    formattedText = callback(text);
+  });
+
+  return formattedText;
+}
+export function formatTemplate(
+  template: string,
+  replacements: Record<string, (text: string) => string>
+) {
+  // replacements: { chave: funçãoFormatacao }
+  // exemplo: { nome: WppTextFormatter.bold }
+  return template.replace(/\{(\w+)\}/g, (match, key) => {
+    if (replacements[key]) {
+      return replacements[key](key);
+    }
+    return match;
+  });
 }

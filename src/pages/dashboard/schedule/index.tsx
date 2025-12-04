@@ -7,7 +7,6 @@ import useGetSchedules from "@services/Schedule/Get/useGet";
 export default function Schedule() {
   const { data: schedules } = useGetSchedules();
  
-
   return (
     <DashboardContainer>
       <OptionsBar />

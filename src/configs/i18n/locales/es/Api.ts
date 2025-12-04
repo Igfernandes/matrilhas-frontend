@@ -61,6 +61,15 @@ export const Api = {
     },
   },
   clients: {
+    subscribes: {
+      success: {
+        post: "AGM le agradece su inscripción y le mantendrá informado sobre todas las novedades",
+      },
+      invalid: {
+        name: "Es obligatorio completar su nombre",
+        phone: "Es obligatorio completar su teléfono",
+      },
+    },
     categories: {
       success: {
         post: "¡Las categorías se actualizaron con éxito!",
@@ -181,6 +190,10 @@ export const Api = {
       not_found: "El formulario no fue encontrado",
       client:
         "Operación inválida. El registro no contiene un cliente vinculado.",
+      color_mark:
+        "El color seleccionado no cumple con el formato hexadecimal permitido por el sistema",
+      thanks_message:
+        "La información ingresada en el campo del mensaje de agradecimiento no es válida",
     },
   },
   dispatchers: {
@@ -279,6 +292,7 @@ export const Api = {
       not_found: {
         es: "La integración no fue encontrada",
         en: "Integration not found",
+        not_found_bank: "NNo hay un banco válido configurado en el sistema",
       },
     },
   },

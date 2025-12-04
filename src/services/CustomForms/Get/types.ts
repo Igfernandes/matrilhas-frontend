@@ -1,8 +1,13 @@
+import { FormsShape } from "@type/Forms";
+
 export type GetFormsRequest = {
   id?: number;
   name?: string;
   slug?: string;
-  type?: "PEOPLE" | "COMPANY";
   description_contains?: string;
-  status?: "ACTIVE" | "INACTIVE";
+  service_id?: number;
+  status?: "PUBLISHED" | "DRAFT";
 };
+export type FormsResponse<T extends GetFormsRequest> = T["id"] extends number
+  ? FormsShape
+  : FormsShape[];

@@ -4,7 +4,6 @@ import { Header } from "@components/Public/External/Header";
 import { Footer } from "@components/Public/Footer";
 import { isErrorRequest } from "@helpers/routes";
 import { getForm } from "@services/CustomForms/Get/SSR";
-import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import { FormBuilderPreview } from "@components/shared/layouts/FormBuilder/Preview";
 import { useForm } from "@components/Public/Forms/hooks/useForm";
 import { Button } from "@components/shared/forms/Button";
@@ -12,7 +11,7 @@ import i18n from "@configs/i18n";
 import { getCSRF } from "@services/Authentications/CSRF/SSR";
 
 export default function Form({ form, csrf }: FormPageProps) {
-  const { handleSubmit, isLoading } = useForm({
+  const { handleSubmit, isLoading, handleChange, components } = useForm({
     form,
     csrf,
   });
@@ -36,7 +35,8 @@ export default function Form({ form, csrf }: FormPageProps) {
               className="flex flex-col min-h-[60vh] justify-between"
             >
               <FormBuilderPreview
-                fields={JSON.parse(form.components) as Array<FieldShape>}
+                handleValue={handleChange}
+                fields={components ?? "{}"}
               />
               <div className="flex justify-end items-center">
                 <div className="mt-4 ml-4 mb-6">
@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<FormPageProps> = async ({
   if (!form || isErrorRequest(form)) {
     return {
       redirect: {
-        destination: `/404`, // Redireciona para a página principal
+        destination: `/forms/404?form=${slug}`, // Redireciona para a página principal
         permanent: false, // Define como redirecionamento temporário (status 307)
       },
     };

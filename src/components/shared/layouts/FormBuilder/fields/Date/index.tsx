@@ -1,13 +1,17 @@
 import { When } from "@components/utilities/When";
 
 import { RotateClockwise } from "@assets/Icons/white/RotateClockwise";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 
 import { InputProps } from "./type";
-import { handleMaskDate } from "@helpers/date";
+import { getMaskDate } from "@helpers/date";
 import { Calendar } from "@assets/Icons/black/Calendar";
 import dayjs from "dayjs";
 import i18n from "@configs/i18n";
+import { FieldShape } from "../../type";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
 
 export function Date({
   isLoading = false,
@@ -17,10 +21,14 @@ export function Date({
   errors,
   name,
   required,
+  labelColor,
+  defaultValue,
+  labelWeight,
+  setValue,
   ...rest
-}: InputProps) {
+}: InputProps & FieldShape) {
   const IdCurrent = id;
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [date, setDate] = useState<string | undefined>(defaultValue);
 
   return (
     <>
@@ -32,6 +40,10 @@ export function Date({
         <label
           htmlFor={IdCurrent}
           className={`absolute transition-all duration-350 line-clamp-1 left-4 top-2 text-[.75rem]`}
+          style={{
+            color: labelColor,
+            fontWeight: labelWeight,
+          }}
         >
           {label}
           <When value={!!required}>
@@ -40,13 +52,15 @@ export function Date({
         </label>
         <input
           {...rest}
-          ref={inputRef}
           name={name}
           required={required === "true"}
           type={"text"}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleMaskDate(e)
-          }
+          value={date}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            const dateFormatted = getMaskDate(e);
+            if (setValue) setValue(name, dateFormatted);
+            setDate(dateFormatted);
+          }}
           placeholder="Dia/Mes/Ano"
           className={`${className ?? ""} ${
             !!errors ? "border-amber-500 outline-amber-500" : ""
@@ -55,14 +69,20 @@ export function Date({
         />
         <div className="absolute right-4 top-4">
           <label htmlFor={`calendar_${name}`}>
-            <Calendar />
+            <Calendar fill={labelColor} />
           </label>
           <input
             id={`calendar_${name}`}
             type="date"
+            value={dayjs(date, "DD/MM/YYYY").format("YYYY-MM-DD")}
             onChange={(ev) => {
-              inputRef.current?.setAttribute("value", dayjs(ev.currentTarget.value).format(i18n("Configs.format.date")));
-              
+              const rawValue = ev.currentTarget.value;
+
+              if (!rawValue) return; // <-- evita setar vazio
+
+              const value = dayjs(rawValue).format(i18n("Configs.format.date"));
+              setDate(value);
+              if (setValue) setValue(name, value);
             }}
             className="opacity-0 absolute w-4 h-full top-0"
           />

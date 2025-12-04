@@ -1,6 +1,7 @@
 import { Pen } from "@assets/Icons/black/Pen";
 import { RectangleAd } from "@assets/Icons/black/RectangleAd";
 import { OptionData } from "../../type";
+import { SettingsFieldsTab } from "../../parts/Modal/tabs/Settings/FieldsTab";
 
 export const optionsSimples = [
   {
@@ -11,11 +12,6 @@ export const optionsSimples = [
   {
     id: "number",
     field: "number",
-    icon: <Pen width={12} height={12} />,
-  },
-  {
-    id: "radio",
-    field: "radio",
     icon: <Pen width={12} height={12} />,
   },
   {
@@ -39,6 +35,11 @@ export const optionsSimples = [
     icon: <Pen width={12} height={12} />,
   },
   {
+    id: "time",
+    field: "time",
+    icon: <Pen width={12} height={12} />,
+  },
+  {
     id: "file",
     field: "file",
     icon: <Pen width={12} height={12} />,
@@ -59,11 +60,17 @@ export const optionsSimples = [
     icon: <Pen width={12} height={12} />,
   },
   {
-    id: "button",
-    field: "button",
+    id: "textarea",
+    field: "textarea",
     icon: <RectangleAd width={12} height={12} />,
   },
 ].map((option) => ({
   ...option,
   element: "INPUT",
+  editTabs: [
+    {
+      name: "settings",
+      component: SettingsFieldsTab,
+    },
+  ],
 })) as Array<OptionData>;

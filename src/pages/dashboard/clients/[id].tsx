@@ -19,6 +19,7 @@ export default function ClientPerfil({ targetClient }: ClientPageProps) {
     client: targetClient,
   });
 
+
   return (
     <DashboardContainer>
       <FormHub
@@ -27,7 +28,6 @@ export default function ClientPerfil({ targetClient }: ClientPageProps) {
         entity={targetClient}
         groups={fieldsGroups}
         fields={fields ?? []}
-        handleShared={() => ""}
         handleUpdateClient={handleToggleModal}
       />
       <ClientUpdateModal

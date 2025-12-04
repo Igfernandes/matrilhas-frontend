@@ -15,12 +15,14 @@ type Props = {
   clients: ClientShape[];
   handleAddClients: (clients: Array<ClientShape>) => void;
   clientsSelected: Array<ClientShape>;
+  isLoading?: boolean;
 };
 
 export function ClientsModal({
   clients,
   handleAddClients,
   clientsSelected,
+  isLoading,
 }: Props) {
   const {
     formMethods,
@@ -39,9 +41,14 @@ export function ClientsModal({
   useEffect(() => {
     if (!clientsSelected) return;
 
+    const clientsSelectedId = clientsSelected.map(
+      (clientSelect) => clientSelect.id
+    );
     formMethods.setValue(
       "clients",
-      clientsSelected.map((clientSelect) => String(clientSelect.id))
+      clients.map((client) =>
+        clientsSelectedId.includes(client.id) ? String(client.id) : ""
+      )
     );
   }, [clientsSelected, clients]);
 
@@ -98,6 +105,7 @@ export function ClientsModal({
           <div>
             <Button
               type="submit"
+              isLoading={isLoading}
               text={i18n("Words.save")}
               className="bg-red text-white"
             />

@@ -5,12 +5,16 @@ export type FieldsShape = {
   label: string;
   name: string;
   group?: string;
+  element: string;
   component: "INPUT" | "SELECT" | "TEXTAREA";
   type: HTMLInputTypeAttribute;
   scope: ScopeFields;
   is_sensitive: boolean;
   is_required: boolean;
+  className?: string;
+  required?: string;
   value?: string;
+  defaultValue?: string;
   group_id: number;
   created_at: string;
   updated_at: string;

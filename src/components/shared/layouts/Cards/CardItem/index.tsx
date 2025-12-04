@@ -12,13 +12,19 @@ export function CardItem({
   link,
   description,
   alert,
+  color,
 }: CardItemProps) {
   return (
-    <div className="card-item flex flex-col justify-between w-full md:w-[32%] bg-white p-6 mr-2 my-2">
+    <div className="card-item flex flex-col justify-between w-full md:w-[32%] bg-white p-6 mr-2 my-1">
       <div className="w-full">
         <div className="card-header flex justify-between">
           <div>
-            <span className="py-1 px-8 bg-green rounded-md inline-block"></span>
+            <span
+              style={{
+                background: color,
+              }}
+              className="py-1 px-8  rounded-md inline-block"
+            ></span>
           </div>
           <div>
             <DotsOptions actions={dotsActions} />
@@ -32,7 +38,7 @@ export function CardItem({
             <p className="font-bold line-clamp-3">{description}</p>
           </div>
           <div className="mt-1">
-            <span className="text-xs line-clamp-1">{alert}</span>
+            <span className="text-xs line-clamp-3">{alert}</span>
           </div>
         </div>
       </div>

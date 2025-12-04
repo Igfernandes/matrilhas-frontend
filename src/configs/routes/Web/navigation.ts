@@ -1,5 +1,5 @@
 export const publicRoutes = {
-  login: "/",
+  login: "/login",
   forgotPassword: "/forgot-password",
   successful: "/successful",
   forms: "/forms"
@@ -12,6 +12,7 @@ export const privateRoutes = {
   forms: "/dashboard/forms",
   schedule: "/dashboard/schedule",
   services: "/dashboard/services",
+  events: "/dashboard/events",
   finance: "/dashboard/finance",
   financesCreate: "/dashboard/finance/create",
   financePayments: "/dashboard/finance/{id}/payment/{payment_id}",

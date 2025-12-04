@@ -1,6 +1,6 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { ClientCategoryModalSchema, ClientCategoryPayload } from "../schemas";
-import { SelectorShape } from "@components/shared/layouts/Seletor/type";
+import { SelectorShape } from "@components/shared/layouts/Selector/type";
 import { PatchClientsCategoryPayload } from "../../../../../../../services/Clients/PatchCategory/type";
 import usePatchClientCategory from "../../../../../../../services/Clients/PatchCategory/usePatch";
 import { useModalContext } from "@contexts/Modal";
@@ -18,7 +18,9 @@ export function useClientCategoriesModal({ selectors }: Props) {
   const { mutateAsync: patchClientsCategory } = usePatchClientCategory();
 
   const submit = (payload: Pick<PatchClientsCategoryPayload, "category">) => {
-    const selectorsChecked = selectors.filter((selector) => selector.isChecked);
+    const selectorsChecked = selectors.filter(
+      (selector) => selector.isChecked && !!selector.value
+    );
 
     patchClientsCategory({
       ...payload,

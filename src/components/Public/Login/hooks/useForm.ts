@@ -3,18 +3,19 @@ import { PostAuthPayload } from "../../../../services/Authentications/Auth/type"
 import usePostAuth from "../../../../services/Authentications/Auth/usePostAuth";
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
-import { useRecaptcha } from "@hooks/useRecaptcha";
-
 type Payload = PostAuthPayload;
 
 type Props = {
   csrf: CSRFShape;
+  recaptchaInstance: {
+    execute: (callback: (token: string) => void) => void;
+    reset: () => void | undefined;
+  };
 };
 
-export function useForm({ csrf }: Props) {
-  const { Recaptcha, loadReCaptcha, token } = useRecaptcha();
+export function useForm({ csrf, recaptchaInstance }: Props) {
   const { mutateAsync: postAuth } = usePostAuth();
-  const { formMethods, hasAllFilledFields } = useFormRules<Payload>({
+  const { formMethods, allFilled } = useFormRules<Payload>({
     schema: loginFormSchema,
     exclude: ["rememberMe"],
   });
@@ -26,15 +27,15 @@ export function useForm({ csrf }: Props) {
   } = formMethods;
 
   const onSubmit = async ({ login, password, rememberMe }: PostAuthPayload) => {
-    postAuth({
-      login,
-      password,
-      rememberMe,
-      csrf,
-      recaptcha: token,
+    recaptchaInstance.execute((token) => {
+      postAuth({
+        login,
+        password,
+        rememberMe,
+        recaptcha: token,
+        csrf,
+      });
     });
-
-    loadReCaptcha();
   };
   /**
    * @function updateValueRememberMe
@@ -52,9 +53,8 @@ export function useForm({ csrf }: Props) {
     handleSubmit: handleSubmit(onSubmit),
     errors,
     formMethods,
-    hasAllFilledFields,
-    isLoading: isSubmitting || !token,
+    allFilled,
+    isLoading: isSubmitting,
     updateValueRememberMe,
-    Recaptcha,
   };
 }

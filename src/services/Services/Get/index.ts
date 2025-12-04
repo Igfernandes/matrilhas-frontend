@@ -1,27 +1,29 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetServicesRequest } from "./types";
+import { GetServicesRequest, ServicesResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { ServicesShape } from "../../../types/Services";
 
 export default function useGet() {
-  const { services } = API_ROUTES;
+  const { serviceById } = API_ROUTES;
   const { axios } = useAxios();
   const { setParams, setQueries } = useRoutes();
 
-  async function getServices(request?: GetServicesRequest) {
+  async function getServices<T extends GetServicesRequest>(
+    request?: T
+  ): Promise<ServicesResponse<T>> {
     const { id, ...query } = request ?? {};
-    return await axios.get<ServicesShape[]>(
+
+    const { data } = await axios.get<ServicesResponse<T>>(
       setQueries({
         url: setParams({
-          url: services,
-          data: {
-            id: id ?? "",
-          },
+          url: serviceById,
+          data: { id },
         }),
         query,
       })
     );
+
+    return data;
   }
 
   return {

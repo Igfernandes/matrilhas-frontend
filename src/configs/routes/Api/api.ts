@@ -12,6 +12,8 @@ import { usersRoutes } from "./users";
 import { notificationsRoutes } from "./notifications";
 import { messagesDispatcherRoutes } from "./MessagesDispatcher";
 import { scheduleRoutes } from "./schedule";
+import { filesRoutes } from "./files";
+import { eventsRoutes } from "./events";
 
 export const API_ROUTES = {
   ...authenticationRoutes,
@@ -28,5 +30,8 @@ export const API_ROUTES = {
   ...notificationsRoutes,
   ...scheduleRoutes,
   ...messagesDispatcherRoutes,
+  ...filesRoutes,
+  ...eventsRoutes,
   exports: "/exports",
+  confirmations: "/confirmations",
 };

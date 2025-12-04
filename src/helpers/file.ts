@@ -30,9 +30,14 @@ export function getFileName(file?: string) {
   return fileParts[fileParts.length - 1] || "";
 }
 
-export function getFileUrl(files: FileList) {
-  const file = files?.[0];
+export function getFileUrl(file: File | null, alternative?: string) {
   if (file) return URL.createObjectURL(file);
 
-  return "";
+  return alternative ?? "";
+}
+
+export function bytesToMB(bytes: number, decimalPlaces: number = 4): string {
+  if (bytes === 0) return "0 MB";
+  const mb = bytes / (1024 * 1024);
+  return `${mb.toFixed(decimalPlaces)} MB`;
 }

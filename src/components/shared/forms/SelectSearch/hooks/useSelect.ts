@@ -10,7 +10,7 @@ export function useSelect() {
 
   const handleChangeValue = (name: string, option: OptionsShape) => {
     setValue(name, String(option.value));
-    setSelected(option.value ? option.text: "");
+    setSelected(option.value ? option.text : "");
   };
 
   const handleToggleList = (isShowList: boolean) => {
@@ -19,7 +19,6 @@ export function useSelect() {
   const handleSearch = (search: string) => {
     setSearch(search);
   };
-
   return {
     handleChangeValue,
     handleToggleList,

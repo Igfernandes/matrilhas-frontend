@@ -8,7 +8,8 @@ export type InputProps = DetailedHTMLProps<
   dataTestId: string;
   isLoading?: boolean;
   label: string;
+  name: string;
   errors?: FieldError;
   tooltip?: string;
-  handledChange?: (ev: React.ChangeEvent<HTMLInputElement> | undefined) => void;
+  handleChange?: (ev: React.ChangeEvent<HTMLInputElement> | undefined) => void;
 };

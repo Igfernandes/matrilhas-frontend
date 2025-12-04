@@ -1,8 +1,7 @@
 import { SymbolChecked } from "@assets/Icons/white/SymbolChecked";
 import { CheckboxProps } from "./type";
 import { When } from "@components/utilities/When";
-import React, { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import React from "react";
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
@@ -13,53 +12,28 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       dataTestId,
       errors,
       defaultValue,
-      defaultChecked,
-      onChecked,
       ...props
     }: CheckboxProps,
     ref
   ) {
     const IdCurrent = id ?? dataTestId;
-    const { watch } = useFormContext();
-    const [isChecked, setIsChecked] = useState<boolean>();
-
-    useEffect(() => {
-      const value = watch(props.name ?? "");
-
-      setIsChecked(!!value);
-    }, [props.name, watch]);
 
     return (
       <div>
-        <div className="flex">
-          <div
-            className="border-2 border-secondary w-6 h-6 relative rounded-[.25rem] cursor-pointer"
-            onClick={(ev) => {
-              const div = ev.currentTarget;
-              const input = div.querySelector("input");
-
-              if (!input) return;
-
-              if (onChecked) onChecked(input.checked);
-
-              setIsChecked(input.checked);
-            }}
-          >
+        <div className="flex relative">
+          <div className="border-2 border-secondary w-6 h-6  rounded-[.25rem] cursor-pointer">
             <input
               {...props}
               ref={ref}
               type={type}
-              defaultChecked={isChecked ?? defaultChecked}
               defaultValue={defaultValue}
               data-testid={IdCurrent}
               id={IdCurrent}
-              className={`${
-                isChecked ? "bg-red" : "bg-textDisabled"
-              } w-[90%] h-[90%] m-[1px] appearance-none rounded-[.2rem] cursor-pointer`}
+              className={` w-[90%] h-[90%] m-[1px] checked:bg-red bg-textDisabled  appearance-none rounded-[.2rem] cursor-pointer`}
             />
-            <SymbolChecked className="absolute left-1 top-[25%]" />
           </div>
           <label htmlFor={IdCurrent} className="text-sm ml-2 cursor-pointer">
+            <SymbolChecked className="absolute left-[.35rem] top-[32%]" />
             {label}
           </label>
         </div>

@@ -7,24 +7,42 @@ import { FormBuildProps } from "../../type";
 import { useModalContext } from "../../context/Modal";
 import { useFieldContext } from "../../context/Fields";
 import { Pencil } from "@assets/Icons/black/Pencil";
+import { AccessControl } from "@components/shared/settings/AccessControl";
+import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { Avatar } from "@assets/Icons/black/Avatar";
+import { useEffect, useState } from "react";
 
-type Props = Pick<FormBuildProps, "handleShared" | "handleUpdateClient">;
+type Props = Pick<FormBuildProps, "handleUpdateClient">;
 
-export function OptionsBar({ handleShared, handleUpdateClient }: Props) {
+export function OptionsBar({ handleUpdateClient }: Props) {
   const { handleToggleModal } = useModalContext();
   const { viewedField } = useFieldContext();
+  const { hasPermission, permissions } = useUserNavigationContext();
+  const [isAvailableUpdateClients, setIsAvailableUpdateClients] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    setIsAvailableUpdateClients(hasPermission(["clients_update"]));
+  }, [permissions]);
 
   return (
     <div className="flex justify-center lg:justify-between flex-wrap lg:flex-none mt-2 lg:mt-0 relative z-0">
       <div className="flex items-center relative">
         <div
           className="flex items-center"
-          onClick={() => handleUpdateClient(true)}
+          onClick={() =>
+            isAvailableUpdateClients ? handleUpdateClient(true) : null
+          }
         >
           <div className="mr-2">
             <When value={!viewedField.avatar}>
               <div className="bg-white p-2 rounded-full cursor-pointer">
-                <Pencil />
+                <When value={isAvailableUpdateClients}>
+                  <Pencil />
+                </When>
+                <When value={!isAvailableUpdateClients}>
+                  <Avatar />
+                </When>
               </div>
             </When>
           </div>
@@ -40,24 +58,18 @@ export function OptionsBar({ handleShared, handleUpdateClient }: Props) {
           </span>
         </div>
       </div>
-      <div className="flex flex-wrap my-1 lg:my-0 lg:flex-none justify-center">
-        <div className="mx-2 my-2 lg:my-0 w-full lg:w-auto">
-          <Button
-            className="border border-zinc-300 px-3 font-bold rounded-xl bg-secondary text-primary"
-            text={i18n("Words.shared")}
-            type="button"
-            onClick={() => handleShared(viewedField.id)}
-          />
+      <AccessControl targetPermissions={["fields_create"]}>
+        <div className="flex flex-wrap my-1 lg:my-0 lg:flex-none justify-center">
+          <div className="mx-2 w-full lg:w-auto">
+            <Button
+              className="border border-zinc-300 px-3 font-bold rounded-xl"
+              text={i18n("Texts.new_field")}
+              type="button"
+              onClick={() => handleToggleModal(true)}
+            />
+          </div>
         </div>
-        <div className="mx-2 w-full lg:w-auto">
-          <Button
-            className="border border-zinc-300 px-3 font-bold rounded-xl"
-            text={i18n("Words.new_register")}
-            type="button"
-            onClick={() => handleToggleModal(true)}
-          />
-        </div>
-      </div>
+      </AccessControl>
     </div>
   );
 }

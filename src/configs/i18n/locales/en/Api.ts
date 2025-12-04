@@ -59,6 +59,15 @@ export const Api = {
     },
   },
   clients: {
+    subscribes: {
+      success: {
+        post: "AGM thanks you for your subscription and will keep you informed about all news",
+      },
+      invalid: {
+        name: "Name is required",
+        phone: "Phone is required",
+      },
+    },
     categories: {
       success: {
         post: "Categories updated successfully!",
@@ -173,6 +182,10 @@ export const Api = {
       updated_at: "The form update date is invalid",
       not_found: "Form not found",
       client: "Invalid operation. Record is not linked to a client.",
+      color_mark:
+        "The selected color does not match the hexadecimal format allowed by the system",
+      thanks_message:
+        "The information entered in the thank-you message field is invalid",
     },
   },
   dispatchers: {
@@ -298,6 +311,7 @@ export const Api = {
     },
     invalid: {
       not_found: "Integration not found",
+      not_found_bank: "NNo valid bank is configured in the system",
     },
   },
   invites: {

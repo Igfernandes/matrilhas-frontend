@@ -30,16 +30,18 @@ export function useClientModal({ client }: Props) {
 
     setCategories(categoryData);
   }, [categoryData, isFetchedCategory]);
-  const { mutateAsync: postCreateClient, isPending } = usePutClient();
+  const { mutateAsync: putClient, isPending } = usePutClient();
 
   const submit = ({ birthdate, ...payload }: ClientUpdatePayload) => {
-    postCreateClient({
+    putClient({
       ...payload,
       id: client.id,
+      cpf: client.cpf,
       birthdate: birthdate
         ? dayjs(birthdate, i18n("Configs.format.date")).format("YYYY-MM-DD")
         : undefined,
-    }).then(() => router.reload());
+    })
+    .then(() => router.reload());
   };
 
   return {

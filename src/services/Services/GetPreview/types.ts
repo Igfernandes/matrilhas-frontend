@@ -1,5 +1,5 @@
 export type GetServicePreviewRequest = {
   id?: number;
-  charge?: string;
+  charge?: string
   form?: string;
 };

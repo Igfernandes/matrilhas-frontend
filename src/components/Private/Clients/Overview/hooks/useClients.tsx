@@ -5,8 +5,8 @@ import {
   ModalClientsOperationType,
   TDataClient,
 } from "../../type";
-import { SelectorShape } from "@components/shared/layouts/Seletor/type";
-import { Selector } from "@components/shared/layouts/Seletor";
+import { SelectorShape } from "@components/shared/layouts/Selector/type";
+import { Selector } from "@components/shared/layouts/Selector";
 import { useModalContext } from "@contexts/Modal";
 import { ClientActions } from "../ClientActions";
 import { ClientShape, UserCategoryData } from "../../../../../types/Clients";
@@ -58,8 +58,8 @@ export function useClients({
       return {
         id: <Selector label={clientId} value={clientId} />,
         name,
-        status: i18n(`Words.${status.toLocaleLowerCase()}`),
-        phone: getNumberFormatted(phone.replace("55", "")),
+        status: i18n(`Words.${status.toLocaleLowerCase()}`) as "ACTIVE" | "INACTIVE",
+        phone: getNumberFormatted(phone),
         category: categories
           .map((category: UserCategoryData) => category.name)
           .join(", "),

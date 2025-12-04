@@ -1,26 +1,19 @@
-// import { publicRoutes } from "@configs/routes/Web/navigation";
-import { privateRoutes, publicRoutes } from "@configs/routes/Web/navigation";
+import { publicRoutes } from "@configs/routes/Web/navigation";
 import { STATUS_SERVICE } from "@constants/http";
 import { handleLogout } from "@helpers/handlers";
-import { isValidJSON } from "@helpers/json";
 import { AxiosError } from "axios";
 
-export function hasErrorAuthentication(error: AxiosError) {
-  const response = Promise.reject(
-    typeof error === "string" && isValidJSON(error) ? JSON.parse(error) : error
-  );
-  if (process.env.NEXT_PUBLIC_ENVIRONMENT == "DEV") return response;
-  const { BAD_AUTH, NOT_FOUND } = STATUS_SERVICE;
-  const isStatusValid =
-    !error.response?.status ||
-    [BAD_AUTH, NOT_FOUND].includes(error.response?.status);
-  const url = error?.config?.url;
+export function hasErrorAuthentication(error: AxiosError, hasEvent: boolean = true) {
+  const { BAD_AUTH } = STATUS_SERVICE;
 
-  if (url?.includes(privateRoutes.usersManager) && isStatusValid) {
+  const isNotAuth =
+    error.response?.status && [BAD_AUTH].includes(error.response.status);
+
+  if (isNotAuth) {
     handleLogout();
-    return (window.location.href = publicRoutes.login);
+    window.location.href = publicRoutes.login; // redireciona, sem retornar nada
+    return hasEvent ? Promise.reject(error) : error; // mantém a Promise rejeitada
   }
-  
 
-  return response;
+  return hasEvent ? Promise.reject(error) : error; // erro normal, não altera
 }

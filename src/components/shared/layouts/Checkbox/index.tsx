@@ -5,7 +5,7 @@ import React from "react";
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   function Checkbox(
     { type = "checkbox", label, id, dataTestId, ...props }: CheckboxProps,
-    ref
+    ref: React.ForwardedRef<HTMLInputElement>
   ) {
     const IdCurrent = id ?? dataTestId;
 
@@ -23,7 +23,10 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             />
             <SymbolChecked className="absolute left-1 top-[25%]" />
           </div>
-          <label className="flex text-sm ml-2 cursor-pointer">
+          <label
+            htmlFor={IdCurrent}
+            className="flex text-sm ml-2 cursor-pointer"
+          >
             <span> {label}</span>
           </label>
         </div>
