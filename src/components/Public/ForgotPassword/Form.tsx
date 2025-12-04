@@ -9,7 +9,7 @@ export function RecoverPasswordForm() {
     handleSubmit,
     register,
     formMethods,
-    hasAllFilledFields,
+    isAllFilled,
     isLoading,
     errors,
   } = useForm();
@@ -31,7 +31,7 @@ export function RecoverPasswordForm() {
             text={i18n("Words.send")}
             type="submit"
             isLoading={isLoading}
-            disabled={!hasAllFilledFields()}
+            disabled={!isAllFilled}
           />
         </div>
       </form>

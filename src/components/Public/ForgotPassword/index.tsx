@@ -12,8 +12,8 @@ export function ForgotPasswordContent() {
 
   useEffect(() => {
     setTexts({
-      title: "Screens.forgot-password.title",
-      text: "Screens.forgot-password.text",
+      title: "Screens.forgot_password.title",
+      text: "Screens.forgot_password.text",
       back_page: "Texts.back_page",
     });
   }, []);
