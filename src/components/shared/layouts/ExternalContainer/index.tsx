@@ -19,7 +19,7 @@ export function ExternalContainer({ title , children, className = "", footer = "
   return (
     <>
       <Head>
-        <title> ${title ? `${title} - `: null} {company.current.name} Plataforma Digital</title>
+        <title> {title ? `${title} - `: null} {company.current.name} Plataforma Digital</title>
       </Head>
       <main
         className={`${className} bg-[url(/imgs/backgrounds/3d-wave.png)] bg-cover bg-no-repeat min-h-[87vh] md:min-h-[100vh] flex items-center flex-col justify-center font-poppins`}
