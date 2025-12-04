@@ -8,15 +8,12 @@ import { publicRoutes } from "@configs/routes/Web/navigation";
 type Payload = PostRecoverPasswordAlterPayload;
 
 export function useForm() {
-  const { formMethods, hasAllFilledFields } = useFormRules<Payload>({
+  const { formMethods, isAllFilled } = useFormRules<Payload>({
     schema: alterPasswordFormSchema,
   });
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = formMethods;
-  const { mutateAsync: postRecoverPassword } = usePostRecoverPasswordAlter();
+  const { register, handleSubmit } = formMethods;
+  const { mutateAsync: postRecoverPassword, isPending: isLoading } =
+    usePostRecoverPasswordAlter();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -34,7 +31,7 @@ export function useForm() {
     register,
     handleSubmit: handleSubmit(onSubmit),
     formMethods,
-    hasAllFilledFields,
-    isLoading: isSubmitting,
+    isAllFilled,
+    isLoading,
   };
 }
