@@ -36,6 +36,7 @@ export function useQueryGuard<
     return useQuery(options, queryClient);
   } catch (error: unknown) {
     if (error instanceof AxiosError) hasErrorAuthentication(error, false);
+    console.log(error)
     return error as UseQueryResult<TData, TError>;
   }
 }
@@ -48,6 +49,7 @@ export function useAxios() {
   });
   axios.interceptors.response.use(DataInterceptor, hasErrorAuthentication);
 
+  
   /**
    * @function handleAxiosError
    * - Irá analisar o erro e tratar baseado no modelo de resposta do axios.
