@@ -3,16 +3,19 @@ import { PostAuthPayload } from "../../../../services/Authentications/Auth/type"
 import usePostAuth from "../../../../services/Authentications/Auth/usePostAuth";
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
-
 type Payload = PostAuthPayload;
 
 type Props = {
   csrf: CSRFShape;
+  recaptchaInstance: {
+    execute: (callback: (token: string) => void) => void;
+    reset: () => void | undefined;
+  };
 };
 
-export function useForm({ csrf }: Props) {
+export function useForm({ csrf, recaptchaInstance }: Props) {
   const { mutateAsync: postAuth } = usePostAuth();
-  const { formMethods, hasAllFilledFields } = useFormRules<Payload>({
+  const { formMethods, allFilled } = useFormRules<Payload>({
     schema: loginFormSchema,
     exclude: ["rememberMe"],
   });
@@ -24,11 +27,14 @@ export function useForm({ csrf }: Props) {
   } = formMethods;
 
   const onSubmit = async ({ login, password, rememberMe }: PostAuthPayload) => {
-    postAuth({
-      login,
-      password,
-      rememberMe,
-      csrf,
+    recaptchaInstance.execute((token) => {
+      postAuth({
+        login,
+        password,
+        rememberMe,
+        recaptcha: token,
+        csrf,
+      });
     });
   };
   /**
@@ -47,7 +53,7 @@ export function useForm({ csrf }: Props) {
     handleSubmit: handleSubmit(onSubmit),
     errors,
     formMethods,
-    hasAllFilledFields,
+    allFilled,
     isLoading: isSubmitting,
     updateValueRememberMe,
   };

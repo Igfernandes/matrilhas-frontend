@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType } from "zod";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Props<Payload> = {
   schema: ZodType;
@@ -31,34 +31,32 @@ export function useFormRules<Payload extends FieldValues>({
     criteriaMode,
     shouldFocusError: true, // já vem true por padrão
   });
+
+  const [allFilled, setAllFilled] = useState(false);
   const {
     register,
     handleSubmit,
-    getValues,
+    watch,
     formState: { errors, isSubmitting },
   } = formMethods;
 
-  /**
-   * @function hasAllFilledFields
-   * - A função irá retornar o status em boolean sobre o preenchimento de todos os campos obrigatórios.
-   *
-   * @returns {boolean}
-   */
-  const hasAllFilledFields = (): boolean => {
-    const payload = getValues();
+  const watchedValues = watch();
 
-    exclude.forEach((field) => {
-      delete payload[field];
-    });
-    const fieldsValue = Object.values(payload);
+  useEffect(() => {
+    const payload = { ...watchedValues };
 
-    const isAllPositiveValues = fieldsValue.every((value) => !!value);
-    if (!isAllPositiveValues || fieldsValue.length == 0) return false;
+    // remover campos excluídos
+    exclude.forEach((field) => delete payload[field]);
 
-    if (Object.values(errors).length > 0) return false;
+    const values = Object.values(payload);
 
-    return true;
-  };
+    const filled =
+      values.length > 0 &&
+      values.every((v) => !!v) &&
+      Object.keys(errors).length === 0;
+
+    setAllFilled(filled);
+  }, [watchedValues, errors]);
 
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
@@ -77,7 +75,7 @@ export function useFormRules<Payload extends FieldValues>({
       handleSubmit,
       errors,
       formMethods,
-      hasAllFilledFields,
+      allFilled,
       isLoading: isSubmitting,
     }),
     [schema, exclude, errors, isSubmitting, formMethods, defaultValues]

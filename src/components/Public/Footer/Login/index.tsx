@@ -4,15 +4,10 @@ export function FooterLogin() {
   return (
     <div>
       <div className="text-center">
-        <p>
-          <strong>
-            Powered by <span className="text-xl sm:text-md">CoderT2</span>{" "}
-            <br />{" "}
-            <span className="text-xs font-normal">
-              Developed by Company Market
-            </span>
-          </strong>
-        </p>
+        <span className="text-xs font-normal">
+          Developed by <a href="https://companymarket.com.br"><strong>Company Market</strong></a>
+        </span>
+        <br />
         <Link href="/politics-privacy">
           <span className="text-xs">Politicas de Privacidade</span>
         </Link>

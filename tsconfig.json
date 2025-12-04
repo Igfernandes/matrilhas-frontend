@@ -6,6 +6,9 @@
       "dom.iterable",
       "esnext"
     ],
+     "typeRoots": [
+      "node_modules/@hcaptcha"
+    ],
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
