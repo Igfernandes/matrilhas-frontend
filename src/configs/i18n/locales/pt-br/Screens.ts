@@ -1,17 +1,12 @@
+import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
+import { loginTranslations } from "./screens/public/login";
+
 export const Screens = {
-  login: {
-    title: "Seja bem-vindo!",
-    text: "Entre com sua conta de e-mail cadastrada",
-    remember_me: "Lembre de mim",
-    forgot_password: "Esqueci a minha senha",
-  },
-  "forgot-password": {
-    title: "Informe o seu e-mail cadastrado",
-    text: "Se você tiver cadastro na plataforma, enviaremos um link para o e-mail cadastrado para que você possa recuperar a conta.",
-  },
-  "confirmations": {
+  forgot_password: forgotPasswordTranslations,
+  login: loginTranslations,
+  confirmations: {
     title: "Confira sua inscrição",
-    text: "Insira seu CPF para saber se você já está cadastrado em algum evento."
+    text: "Insira seu CPF para saber se você já está cadastrado em algum evento.",
   },
   "alter-password": {
     title: "Nova senha",

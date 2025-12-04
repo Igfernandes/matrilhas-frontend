@@ -32,7 +32,7 @@ export function useFormRules<Payload extends FieldValues>({
     shouldFocusError: true, // já vem true por padrão
   });
 
-  const [allFilled, setAllFilled] = useState(false);
+  const [isAllFilled, setIsAllFilled] = useState(false);
   const {
     register,
     handleSubmit,
@@ -55,7 +55,7 @@ export function useFormRules<Payload extends FieldValues>({
       values.every((v) => !!v) &&
       Object.keys(errors).length === 0;
 
-    setAllFilled(filled);
+    setIsAllFilled(filled);
   }, [watchedValues, errors]);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export function useFormRules<Payload extends FieldValues>({
       handleSubmit,
       errors,
       formMethods,
-      allFilled,
+      isAllFilled,
       isLoading: isSubmitting,
     }),
     [schema, exclude, errors, isSubmitting, formMethods, defaultValues]

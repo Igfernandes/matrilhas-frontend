@@ -4,19 +4,15 @@ import { EmailForward } from "@assets/Icons/colorful/EmailForward";
 import { SquareRoundedChevronLeft } from "@assets/Icons/black/SquareRoundedChevronLeft";
 import Link from "next/link";
 import { publicRoutes } from "@configs/routes/Web/navigation";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 export function ForgotPasswordContent() {
   const { login } = publicRoutes;
-  const [texts, setTexts] = useState<Record<string, string>>({});
-
-  useEffect(() => {
-    setTexts({
-      title: "Screens.forgot-password.title",
-      text: "Screens.forgot-password.text",
-      back_page: "Texts.back_page",
-    });
-  }, []);
+  const texts = useRef<Record<string, string>>({
+    title: "Screens.forgot_password.title",
+    text: "Screens.forgot_password.text",
+    back_page: "Texts.back_page",
+  });
 
   return (
     <>
@@ -25,11 +21,11 @@ export function ForgotPasswordContent() {
       </div>
       <div className="mb-1">
         <h2 className="text-2xl">
-          <strong>{i18n(texts?.title)}</strong>
+          <strong>{i18n(texts.current.title)}</strong>
         </h2>
       </div>
       <div className="mb-6">
-        <p className="text-sm">{i18n(texts?.text)}</p>
+        <p className="text-sm">{i18n(texts.current.text)}</p>
       </div>
       <RecoverPasswordForm />
       <div className="sm:px-8 mt-4">
@@ -38,7 +34,7 @@ export function ForgotPasswordContent() {
           href={login}
         >
           <SquareRoundedChevronLeft className="mr-2" />
-          <strong>{i18n(texts?.back_page)}</strong>
+          <strong>{i18n(texts.current.back_page)}</strong>
         </Link>
       </div>
     </>

@@ -20,7 +20,7 @@ export function LoginForm({ csrf }: Props) {
     handleSubmit,
     register,
     formMethods,
-    allFilled,
+    isAllFilled,
     isLoading,
     errors,
     updateValueRememberMe,
@@ -73,7 +73,7 @@ export function LoginForm({ csrf }: Props) {
             text={isSuccess ? i18n("Texts.redirect") : i18n("Words.send")}
             type="submit"
             isLoading={isLoading || isRecaptchaLoaded}
-            disabled={!allFilled || isSuccess}
+            disabled={!isAllFilled || isSuccess}
           />
         </div>
       </form>
