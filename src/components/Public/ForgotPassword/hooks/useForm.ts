@@ -7,7 +7,7 @@ type Payload = PostRecoverPasswordPayload;
 
 export function useForm() {
   const { schema } = useRecoverPasswordRequestSchema();
-  const { formMethods, hasAllFilledFields } = useFormRules<Payload>({
+  const { formMethods, isAllFilled } = useFormRules<Payload>({
     schema,
   });
   const {
@@ -29,7 +29,7 @@ export function useForm() {
     handleSubmit: handleSubmit(onSubmit),
     errors,
     formMethods,
-    hasAllFilledFields,
+    isAllFilled,
     isLoading,
   };
 }
