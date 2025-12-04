@@ -1,4 +1,7 @@
+import { feedbackTexts } from "./texts/feedback";
+
 export const Texts = {
+  ...feedbackTexts,
   back_page: "Voltar pra página anterior",
   created_new_password: "Criar nova senha",
   new_password: "Nova senha",
