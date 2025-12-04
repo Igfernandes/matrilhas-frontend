@@ -19,3 +19,4 @@ export interface ReCaptchaRenderOptions {
   sitekey: string;
   size: "invisible";
 }
+export type ExecuteRecaptcha = (token: string) => void;

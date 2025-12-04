@@ -1,27 +1,40 @@
-import { useEffect, useRef, useState } from "react";
-import { Recaptcha } from "./recaptcha";
+import { useRef, useState } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { ExecuteRecaptcha } from "./type";
 
 export function useRecaptcha() {
-  const [token, setToken] = useState<string>("");
-  const [isLoadingRecaptcha, SetIsLoadingRecaptcha] = useState<boolean>(false);
-  const SITE_KEY = useRef<string>(process.env.NEXT_PUBLIC_RECAPTCHA_PUBLIC_KEY);
+  const recaptchaRef = useRef<HCaptcha>(null);
+  const SITE_KEY = useRef<string>(String(process.env.NEXT_PUBLIC_RECAPTCHA_KEY));
+  const [isRecaptchaLoaded, setIsRecaptchaLoaded] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (typeof window == "undefined") return;
+  const [callbackFn, setCallbackFn] = useState<ExecuteRecaptcha>();
+  const recaptchaInstance = {
+    execute: (callback: (token: string) => void) => {
+      setCallbackFn(() => callback);
+      setTimeout(() => {
+        recaptchaRef.current?.execute();
+      }, 100)
+      setIsRecaptchaLoaded(true)
+    },
+    reset: () => recaptchaRef.current?.resetCaptcha(),
+  }
 
-    if (window.turnstile) {
-      window.turnstile.render("[data-recaptcha]", {
-        sitekey: SITE_KEY.current,
-        callback: (token: string) => {
-          setToken(token);
-        },
-      });
-    }
-  }, [SITE_KEY, isLoadingRecaptcha]);
+  const Recaptcha = () => {
+    return (
+      <div >
+        <HCaptcha
+          size="invisible"
+          sitekey={SITE_KEY.current}
+          ref={recaptchaRef}
+          onVerify={async (token) => {
+            await callbackFn?.(token)
+            setIsRecaptchaLoaded(false)
+            recaptchaInstance.reset();
+          }}
+        />
+      </div>
+    )
+  }
 
-  const loadReCaptcha = () => {
-    SetIsLoadingRecaptcha(!isLoadingRecaptcha);
-  };
-
-  return { token, loadReCaptcha, Recaptcha };
+  return { recaptchaInstance, isRecaptchaLoaded, Recaptcha };
 }
