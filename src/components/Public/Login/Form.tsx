@@ -23,7 +23,6 @@ export function LoginForm({ csrf }: Props) {
     isAllFilled,
     isLoading,
     errors,
-    updateValueRememberMe,
     isSuccess
   } = useForm({ csrf, recaptchaInstance });
   const { forgotPassword } = publicRoutes;
@@ -56,7 +55,6 @@ export function LoginForm({ csrf }: Props) {
               dataTestId="remember-me"
               {...register("rememberMe")}
               label={i18n("Screens.login.remember_me")}
-              onChecked={updateValueRememberMe}
             />
           </div>
           <div className="mt-4 sm:mt-0">
