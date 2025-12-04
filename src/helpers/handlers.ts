@@ -6,3 +6,4 @@ export function handleLogout() {
   deleteCookie("token_navigation");
   deleteCookie("remember_referenceToken");
 }
+

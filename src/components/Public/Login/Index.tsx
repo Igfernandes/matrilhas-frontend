@@ -23,7 +23,7 @@ export function LoginContent({ csrf }: Props) {
 
   return (
     <>
-      <div className="my-6">
+      <div className="my-3 md:my-6">
         <UserShare className="mx-auto" />
       </div>
       <div className="mb-1">

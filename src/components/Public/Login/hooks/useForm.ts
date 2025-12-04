@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function useForm({ csrf, recaptchaInstance }: Props) {
-  const { mutateAsync: postAuth } = usePostAuth();
+  const { mutateAsync: postAuth, isPending: isLoading, isSuccess } = usePostAuth();
   const { formMethods, allFilled } = useFormRules<Payload>({
     schema: loginFormSchema,
     exclude: ["rememberMe"],
@@ -54,7 +54,8 @@ export function useForm({ csrf, recaptchaInstance }: Props) {
     errors,
     formMethods,
     allFilled,
-    isLoading: isSubmitting,
+    isLoading: isSubmitting || isLoading,
+    isSuccess,
     updateValueRememberMe,
   };
 }

@@ -36,6 +36,7 @@ export function useQueryGuard<
     return useQuery(options, queryClient);
   } catch (error: unknown) {
     if (error instanceof AxiosError) hasErrorAuthentication(error, false);
+    console.log(error)
     return error as UseQueryResult<TData, TError>;
   }
 }
@@ -48,6 +49,7 @@ export function useAxios() {
   });
   axios.interceptors.response.use(DataInterceptor, hasErrorAuthentication);
 
+  
   /**
    * @function handleAxiosError
    * - Irá analisar o erro e tratar baseado no modelo de resposta do axios.
@@ -73,10 +75,11 @@ export function useAxios() {
     else responseError = !!responseData && responseData.errors;
 
     if (responseError) {
-      shapeError["message"] = i18n(responseError) as string;
+      shapeError["message"] = JSON.stringify(typedError) as string;
     } else if (status === STATUS_SERVICE.NOT_FOUND)
       shapeError["message"] = i18n("Api.default.not_auth") as string;
 
+    shapeError["message"] = JSON.stringify(typedError) as string;
     dispatchSnackbar({
       ...shapeError,
       type: status === 403 ? "notice" : "error",

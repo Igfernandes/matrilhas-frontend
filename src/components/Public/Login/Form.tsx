@@ -24,6 +24,7 @@ export function LoginForm({ csrf }: Props) {
     isLoading,
     errors,
     updateValueRememberMe,
+    isSuccess
   } = useForm({ csrf, recaptchaInstance });
   const { forgotPassword } = publicRoutes;
 
@@ -69,10 +70,10 @@ export function LoginForm({ csrf }: Props) {
         </div>
         <div className="form-submit mt-2">
           <Button
-            text={i18n("Words.send")}
+            text={isSuccess ? i18n("Texts.redirect") : i18n("Words.send")}
             type="submit"
             isLoading={isLoading || isRecaptchaLoaded}
-            disabled={!allFilled}
+            disabled={!allFilled || isSuccess}
           />
         </div>
       </form>
