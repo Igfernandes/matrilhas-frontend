@@ -59,6 +59,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...rest}
             ref={ref}
             name={name}
+
             onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
               if (rest.onChange) rest.onChange(ev);
               if (handleChange) handleChange(ev);
@@ -67,9 +68,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onFocus={handleTransitionLabel}
             onBlur={handleTransitionLabel}
             placeholder={rest.type == "date" ? " " : placeholder}
-            className={`${className} ${
-              !!errors ? "border-amber-500 outline-amber-500" : ""
-            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+            className={`${className ?? ""} ${!!errors ? "border-amber-500 outline-amber-500" : ""
+              } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
             data-testid={dataTestId}
             id={IdCurrent}
           />

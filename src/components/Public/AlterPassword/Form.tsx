@@ -5,7 +5,7 @@ import { PasswordValidation } from "@components/shared/forms/PasswordValidation"
 import i18n from "@configs/i18n";
 
 export function AlterPasswordForm() {
-  const { formMethods, hasAllFilledFields, isLoading, handleSubmit } =
+  const { formMethods, isLoading, isAllFilled, handleSubmit } =
     useForm();
 
   return (
@@ -20,10 +20,10 @@ export function AlterPasswordForm() {
         </div>
         <div className="form-submit mt-6">
           <Button
-            text={i18n("Texts.created_new_password")}
+            text={i18n("Screens.alter_password.submit")}
             type="submit"
             isLoading={isLoading}
-            disabled={!hasAllFilledFields()}
+            disabled={!isAllFilled}
           />
         </div>
       </form>

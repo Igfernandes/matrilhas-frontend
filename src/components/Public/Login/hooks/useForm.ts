@@ -14,13 +14,16 @@ type Props = {
 };
 
 export function useForm({ csrf, recaptchaInstance }: Props) {
-  const { mutateAsync: postAuth, isPending: isLoading, isSuccess } = usePostAuth();
+  const {
+    mutateAsync: postAuth,
+    isPending: isLoading,
+    isSuccess,
+  } = usePostAuth();
   const { formMethods, isAllFilled } = useFormRules<Payload>({
     schema: loginFormSchema,
     exclude: ["rememberMe"],
   });
   const {
-    setValue,
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
@@ -37,16 +40,6 @@ export function useForm({ csrf, recaptchaInstance }: Props) {
       });
     });
   };
-  /**
-   * @function updateValueRememberMe
-   * - A função é responsável por atualizar o valor no campo "rememberMe" com base na alteração de valores referentes ao
-   * botão do tipo checkbox.
-   *
-   * @param {boolean} isChecked
-   */
-  const updateValueRememberMe = (isChecked: boolean) => {
-    setValue("rememberMe", isChecked);
-  };
 
   return {
     register,
@@ -56,6 +49,5 @@ export function useForm({ csrf, recaptchaInstance }: Props) {
     isAllFilled,
     isLoading: isSubmitting || isLoading,
     isSuccess,
-    updateValueRememberMe,
   };
 }

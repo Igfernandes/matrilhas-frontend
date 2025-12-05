@@ -1,18 +1,16 @@
+import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
 import { loginTranslations } from "./screens/public/login";
 
 export const Screens = {
   forgot_password: forgotPasswordTranslations,
   login: loginTranslations,
+  alter_password: alterPasswordTranslations,
   confirmations: {
     title: "Confira sua inscrição",
     text: "Insira seu CPF para saber se você já está cadastrado em algum evento.",
   },
-  "alter-password": {
-    title: "Nova senha",
-    text: "Crie uma nova senha para acessar a plataforma.",
-    submit: "Criar nova senha",
-  },
+
   successful: {
     need_go_back_login: "Agora, vá para o login para acessar a plataforma.",
   },
