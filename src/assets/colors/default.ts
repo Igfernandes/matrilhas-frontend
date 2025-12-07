@@ -1,8 +1,6 @@
 export const textDefaultColors = {
-  primary: "#101010",
   secondary: "#646464",
   disabled: "#a3a3a3",
-  active: "#ffffff",
   "cross-whit-primary": "#ffffff",
   "cross-white-secondary": "#c1c1c1",
   "cross-black-primary": "#101010",
@@ -10,11 +8,8 @@ export const textDefaultColors = {
 };
 
 export const bgDefaultColor = {
-  primary: "#ffffff",
-  secondary: "#f5f5f5",
-  tertiary: "#ebebeb",
   disable: " #dcdcdc",
-  active: "#101010",
+  secondary: "#f5f5f5",
   "hover-primary": "#f5f5f5",
   "hover-secondary": "#ebebeb",
   "hover-tertiary": "#dcdcdc",
@@ -29,9 +24,7 @@ export const bgDefaultColor = {
 };
 
 export const borderColors = {
-  primary: "#c1c1c1",
-  secondary: "#dcdcdc",
-  tertiary: "#ebebeb",
+ secondary: "#dcdcdc",
   "cross-white-primary": "#a3a3a3",
   "cross-white-secondary": "#464646",
   "cross-black-primary": "#464646",
