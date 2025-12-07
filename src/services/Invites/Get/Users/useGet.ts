@@ -10,9 +10,15 @@ export default function useGetUsersInvite(request: GetInvitesRequest = {}) {
     return data ?? null;
   }
 
-  return useQueryGuard({
+  const { data, ...rest } = useQueryGuard({
     queryKey: ["invites/users", request],
     queryFn: handle,
     enabled: true,
   });
+
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }
