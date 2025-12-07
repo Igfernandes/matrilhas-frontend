@@ -1,13 +1,11 @@
 import { When } from "@components/utilities/When";
 import { SkeletonShapes } from "./shapes";
+import { SkeletonSettings } from "./type";
 
 type Props = {
   isLoading: boolean;
   children: React.ReactNode;
-  settings?: {
-    type: keyof typeof SkeletonShapes;
-    amount?: number;
-  };
+  settings?: SkeletonSettings;
 };
 
 export function Skeleton({
