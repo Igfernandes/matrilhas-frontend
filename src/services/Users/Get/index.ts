@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetUsersRequest, GetUserRequest } from "./types";
+import { GetUsersRequest, GetUsersResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { UsersShape } from "../../../types/Users";
 
 export default function useGet() {
   const { users } = API_ROUTES;
@@ -10,27 +9,16 @@ export default function useGet() {
   const { setParams, setQueries } = useRoutes();
 
   async function getUsers(request?: GetUsersRequest) {
-    const { ...query } = request ?? {};
+    const { id, ...query } = request ?? {};
 
-    return await axios.get<UsersShape[]>(
+    return await axios.get<GetUsersResponse>(
       setQueries({
-        url: setParams({ url: users, data: { id: "" } }),
+        url: setParams({ url: users, data: { id: id ?? "" } }),
         query,
       })
     );
   }
-
-  async function getUser({ id, ...request }: GetUserRequest = {}) {
-    return axios.get<UsersShape>(
-      setQueries({
-        url: setParams({ url: users, data: { id: id ?? "" } }),
-        query: request,
-      })
-    );
-  }
-
   return {
     getUsers,
-    getUser,
   };
 }

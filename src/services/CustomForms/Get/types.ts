@@ -1,13 +1,17 @@
-import { FormsShape } from "@type/Forms";
+import { FormShape } from "@type/Forms";
+import { GetRequestShape } from "@type/service";
 
-export type GetFormsRequest = {
+export type GetFormsRequest = GetRequestShape & {
   id?: number;
   name?: string;
   slug?: string;
   description_contains?: string;
   service_id?: number;
+  started_at?: string;
   status?: "PUBLISHED" | "DRAFT";
 };
-export type FormsResponse<T extends GetFormsRequest> = T["id"] extends number
-  ? FormsShape
-  : FormsShape[];
+
+export type GetFormsResponse = {
+  rows: FormShape[];
+  count: number;
+};

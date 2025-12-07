@@ -1,15 +1,20 @@
-import { UsersShape } from "@type/Users";
+import { GetRequestShape } from "@type/service";
+import { UserShape } from "@type/Users";
 
-export type GetUserRequest = {
+export type GetUserRequest = GetRequestShape & {
   id?: number;
   current?: boolean;
 };
 
-export type GetUsersRequest = {
+export type GetUsersRequest = GetRequestShape & {
   name?: string;
   name_contains?: string;
+  id?: number;
+  current?: boolean;
+  birthdate?: string;
 };
 
-export type UsersResponse<T extends GetUserRequest> = T["id"] extends number
-  ? UsersShape
-  : UsersShape[];
+export type GetUsersResponse = {
+  rows: UserShape[];
+  count: number;
+};

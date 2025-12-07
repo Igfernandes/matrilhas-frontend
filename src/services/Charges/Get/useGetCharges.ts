@@ -1,10 +1,8 @@
 import useGet from ".";
-import { ChargesResponse, GetChargesRequest } from "./types";
+import { GetChargesResponse, GetChargesRequest } from "./types";
 import { useQueryGuard } from "@hooks/useAxios";
 
-export default function useGetCharges<T extends GetChargesRequest>(
-  request: T = {} as T
-) {
+export default function useGetCharges(request: GetChargesRequest = {}) {
   const { getCharges } = useGet();
 
   async function handle() {
@@ -12,9 +10,11 @@ export default function useGetCharges<T extends GetChargesRequest>(
     return data ?? null;
   }
 
-  return useQueryGuard<ChargesResponse<T>>({
+  const { data, ...rest } = useQueryGuard<GetChargesResponse>({
     queryKey: ["charges", request],
     queryFn: handle,
     enabled: true,
   });
+
+  return { rows: data?.rows ?? [], count: data?.count ?? 0, ...rest };
 }

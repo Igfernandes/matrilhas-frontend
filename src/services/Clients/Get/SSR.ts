@@ -1,17 +1,16 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setParams, setQueries } from "@helpers/routes";
-import { GetClientsRequest } from "./types";
-import { ClientShape } from "../../../types/Clients";
+import { GetClientsRequest, GetClientsResponse } from "./types";
 
 export async function getClients(
   tokenNavigation: string,
   { id, ...request }: GetClientsRequest = {}
-): Promise<ClientShape[] | ClientShape> {
+): Promise<GetClientsResponse> {
   const query = request ?? {};
 
   const { clientsById } = API_ROUTES;
-  const { data } = await axios.get<ClientShape[] | ClientShape>(
+  const { data } = await axios.get<GetClientsResponse>(
     setQueries({
       url: setParams({
         url: clientsById,
