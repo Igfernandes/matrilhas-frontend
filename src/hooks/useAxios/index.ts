@@ -36,7 +36,6 @@ export function useQueryGuard<
     return useQuery(options, queryClient);
   } catch (error: unknown) {
     if (error instanceof AxiosError) hasErrorAuthentication(error, false);
-    console.log(error)
     return error as UseQueryResult<TData, TError>;
   }
 }

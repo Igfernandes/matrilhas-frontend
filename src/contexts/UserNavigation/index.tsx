@@ -6,24 +6,24 @@ import React, {
   useState,
 } from "react";
 import { UserNavigationContextData, UserNavigationProps } from "./types";
-import { UsersShape } from "../../types/Users";
+import { UserShape } from "../../types/Users";
 import { usePermissions } from "@hooks/usePermissions";
-import useGetUser from "@services/Users/Get/useGetUser";
+import useGetUsers from "@services/Users/Get/useGetUsers";
 
 export const UserNavigationContext = createContext(
   {} as UserNavigationContextData
 );
 
 const UserNavigationProvider = ({ children, user }: UserNavigationProps) => {
-  const [userAuth, setUserAuth] = useState<UsersShape>(user as UsersShape);
-  const { data: currentUser } = useGetUser({ current: true });
+  const [userAuth, setUserAuth] = useState<UserShape>(user as UserShape);
+  const { rows: currentUser } = useGetUsers({ current: true });
   const { permissions, setPermissions, hasPermission } = usePermissions();
 
   // Atualiza usuário quando data chega
   useEffect(() => {
-    if (currentUser) {
-      setUserAuth(currentUser);
-      setPermissions(currentUser.permissions || []);
+    if (currentUser && currentUser.length > 0) {
+      setUserAuth(currentUser[0]);
+      setPermissions(currentUser[0].permissions || []);
     }
   }, [currentUser, setPermissions]);
 
