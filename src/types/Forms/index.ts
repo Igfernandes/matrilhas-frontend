@@ -1,6 +1,6 @@
 import { CategoryData } from "@services/Clients/Get/types";
 
-export type FormsShape = {
+export type FormShape = {
   id: number;
   name: string;
   slug: string;

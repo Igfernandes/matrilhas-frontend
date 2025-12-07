@@ -1,6 +1,6 @@
 import { PermissionData } from "@type/Permissions/GroupsPermissions";
 
-export type UsersShape = {
+export type UserShape = {
   id: number;
   name: string;
   avatar: string | null;
