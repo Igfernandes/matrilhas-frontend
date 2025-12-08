@@ -9,11 +9,9 @@ import { LoginContent } from "@components/Public/Login/Index";
 export default function Login({ csrf }: LoginPageProps) {
   return (
     <ExternalContainer>
-      <div className="row">
         <div className="column text-center">
           <LoginContent csrf={csrf} />
         </div>
-      </div>
     </ExternalContainer>
   );
 }

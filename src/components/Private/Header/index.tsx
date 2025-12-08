@@ -31,11 +31,11 @@ export function Header({
 
   return (
     <header className="w-full border-b-2 border-zinc-200 p-4">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <When value={["MOBILE", "TABLET"].includes(screenType)}>
           <Bars onClick={handleSidebar} className="rotate-180" />
         </When>
-        <div className="min-w-[20rem]">
+        <div className="md:min-w-[20rem]">
           <Skeleton settings={{
             type: "text",
             lines: 1
@@ -62,10 +62,8 @@ export function Header({
           </Skeleton>
         </div>
         <div className="flex relative z-1">
-          <div>
-            <Flags />
-          </div>
-          <div className="pt-1">
+          <Flags />
+          <div className="pt-2 md:pt-1 mr-2 md:mr-0">
             <div
               className="relative bg-tertiary rounded-sm cursor-pointer"
               onClick={() => handleNotification(true)}

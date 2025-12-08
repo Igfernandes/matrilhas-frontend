@@ -21,7 +21,7 @@ export function Button({
   const classNameBtn = `${className} flex items-center 
   justify-center ${
     props.type === "submit" ? "text-white" : ""
-  } bg-red active:scale-[95%] 
+  } bg-primary active:scale-[95%] 
   duration-75 w-full px-3 min-h-[48px] rounded-md mx-auto 
   disabled:bg-disable disabled:text-disabled cursor-pointer`;
 
