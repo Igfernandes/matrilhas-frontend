@@ -60,7 +60,7 @@ export function LoginForm({ csrf }: Props) {
           <div className="mt-4 sm:mt-0">
             <Link
               href={forgotPassword}
-              className="text-sm text-red relative top-[-3.5px]"
+              className="text-sm text-primary relative top-[-3.5px]"
             >
               <strong>{i18n("Screens.login.forgot_password")}</strong>
             </Link>

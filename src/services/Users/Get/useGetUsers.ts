@@ -7,7 +7,7 @@ export default function useGetUsers(payload?: GetUsersRequest) {
 
   async function handle() {
     const { data } = await getUsers(payload);
-    return data ?? false;
+    return data ?? {};
   }
 
   const { data, ...rest } = useQueryGuard({

@@ -17,5 +17,11 @@ export default function useGetNotifications(
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    viewedCount: data?.viewedCount ?? 0,
+    ...rest,
+  };
 }

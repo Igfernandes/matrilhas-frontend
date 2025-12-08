@@ -27,7 +27,7 @@ export function LoginContent({ csrf }: Props) {
         <UserShare className="mx-auto" />
       </div>
       <div className="mb-1">
-        <h2 className="text-2xl">
+        <h2 className="text-2xl text-primary">
           <strong>{i18n(texts?.title)}</strong>
         </h2>
       </div>

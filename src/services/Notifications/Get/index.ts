@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { GetNotificationsRequest } from "./types";
-import { NotificationShape } from "@type/Notifications/Notifications";
+import { GetNotificationsRequest, GetResponse } from "./types";
 
 export default function useGet() {
   const { notifications } = API_ROUTES;
@@ -11,7 +10,7 @@ export default function useGet() {
 
   async function getNotifications(request?: GetNotificationsRequest) {
     const { id, ...query } = request ?? {};
-    return await axios.get<NotificationShape[]>(
+    return await axios.get<GetResponse>(
       setQueries({
         url: setParams({
           url: notifications,

@@ -36,12 +36,12 @@ export function GeneralCalendar() {
       isLoading={isLoadingBirthday || isLoadingCharge || isLoadingForm}
     >
       <div className="relative z-0 h-[75vh] p-4 bg-white rounded-xl shadow mt-4">
-        <div className="absolute right-4">
+        <div className="md:absolute md:right-4">
           <h2 className="text-2xl font-bold text-theme mb-4">{i18n("Words.calendar")}</h2>
         </div>
         <Calendar
           events={events}
-          style={{ height: "60vh" }}
+          style={{ height: "60vh", width: "100%" }}
           views={["month"]}
 
           onSelectEvent={(event) => {
