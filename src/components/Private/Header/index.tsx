@@ -8,6 +8,7 @@ import useWindow from "@hooks/useWindow";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import { Flags } from "../../shared/layouts/Flags";
+import { Skeleton } from "@components/utilities/Skeleton";
 
 type Props = {
   title?: string;
@@ -29,37 +30,42 @@ export function Header({
   const isShowBackRoute = useRef(route.asPath.split("/").length > 3);
 
   return (
-    <header className="w-full border-b-2 border-zinc-200 p-6">
+    <header className="w-full border-b-2 border-zinc-200 p-4">
       <div className="flex justify-between">
         <When value={["MOBILE", "TABLET"].includes(screenType)}>
           <Bars onClick={handleSidebar} className="rotate-180" />
         </When>
-        <div>
-          <h3>
-            <When value={!!userAuth && !isShowBackRoute.current}>
-              <strong>
-                {welcomeMessage.replace(
-                  ", {name}",
-                  screenType == "DESKTOP" ? `, ${userAuth?.name}` : ""
-                )}
-              </strong>
-            </When>
-            <When value={isShowBackRoute.current && screenType !== "MOBILE"}>
-              <strong className="flex w-full">
-                <ArrowNarrowLeft
-                  className="mr-2 cursor-pointer"
-                  onClick={() => route.back()}
-                />
-                <span> {title ?? i18n("Words.back_before_page")}</span>
-              </strong>
-            </When>
-          </h3>
+        <div className="min-w-[20rem]">
+          <Skeleton settings={{
+            type: "text",
+            lines: 1
+          }} isLoading={!userAuth || !userAuth?.name}>
+            <h3>
+              <When value={!!userAuth && !isShowBackRoute.current}>
+                <strong>
+                  {welcomeMessage.replace(
+                    ", {name}",
+                    screenType == "DESKTOP" ? `, ${userAuth?.name}` : ""
+                  )}
+                </strong>
+              </When>
+              <When value={isShowBackRoute.current && screenType !== "MOBILE"}>
+                <strong className="flex w-full">
+                  <ArrowNarrowLeft
+                    className="mr-2 cursor-pointer"
+                    onClick={() => route.back()}
+                  />
+                  <span> {title ?? i18n("Words.back_before_page")}</span>
+                </strong>
+              </When>
+            </h3>
+          </Skeleton>
         </div>
         <div className="flex relative z-1">
           <div>
             <Flags />
           </div>
-          <div>
+          <div className="pt-1">
             <div
               className="relative bg-tertiary rounded-sm cursor-pointer"
               onClick={() => handleNotification(true)}

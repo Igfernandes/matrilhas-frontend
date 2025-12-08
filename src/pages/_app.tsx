@@ -20,7 +20,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <I18nProvider>
         <Head />
-
         <QueryClientProvider client={queryClient}>
           <SnackbarProvider>
             <div className={poppins.className}>

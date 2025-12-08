@@ -1,4 +1,7 @@
-export type GetClientsRequest = {
+import { ClientShape } from "@type/Clients";
+import { GetRequestShape } from "@type/service";
+
+export type GetClientsRequest = GetRequestShape & {
   id?: number;
   name?: string;
   name_contains?: string;
@@ -11,6 +14,10 @@ export type GetClientsRequest = {
   description_contains?: string;
 };
 
+export type GetClientsResponse = {
+  rows: ClientShape[];
+  count: number;
+};
 export type CategoryData = {
   id: number;
   name: string;

@@ -1,10 +1,10 @@
 import { Bars } from "@assets/Icons/black/Bars";
-import { COMPANY_PROFILE } from "@configs/envs";
 import { Navbar } from "./Navbar";
 import i18n from "@configs/i18n";
 import useWindow from "@hooks/useWindow";
 import { useEffect, useState } from "react";
-import { useMenu } from "./Navbar/menu";
+import { SIDEBAR_MENU } from "./Navbar/menu";
+import Image from "next/image";
 
 type Props = {
   showSidebar: boolean;
@@ -13,7 +13,6 @@ type Props = {
 
 export function Sidebar({ handleToggleSidebar, showSidebar }: Props) {
   const { screenType } = useWindow();
-  const { ADMINISTRATIVE_MENU, MAIN_MENU, SYSTEM_MENU } = useMenu();
   const [indentValue, setIndentValue] = useState<string>();
 
   useEffect(() => {
@@ -29,35 +28,24 @@ export function Sidebar({ handleToggleSidebar, showSidebar }: Props) {
         marginLeft: !showSidebar ? indentValue : "0",
       }}
     >
-      <div className="px-6 pt-6 h-[90vh]">
-        <div className="flex justify-between mb-8">
-          <div>
-            <h3 className="text-2xl">
-              <strong>{COMPANY_PROFILE.name}</strong>
-            </h3>
+      <div className=" pt-4 h-[90vh]">
+        <div className="flex justify-between border-b-2 border-secondary pb-4 mb-3 px-4">
+          <div className="w-full text-center">
+            <Image src={"/imgs/logotype-vertical-green.png"} alt="Logo" className="w-[8rem] mx-auto" width={300} height={300} />
           </div>
           <div className="cursor-pointer">
             <Bars onClick={handleToggleSidebar} />
           </div>
         </div>
-        <div className="h-[82vh] lg:h-full flex flex-col   overflow-x-hidden overflow-y-auto hidden-scroll transition-all duration-500">
-          <Navbar
-            sidebarState={showSidebar}
-            menu={MAIN_MENU}
-            title={i18n("Words.main")}
-            className="mb-6 lg:mb-0 xl:mb-8"
-          />
-          <Navbar
-            sidebarState={showSidebar}
-            menu={ADMINISTRATIVE_MENU}
-            title={i18n("Words.administrative")}
-            className="mb-6 xl:mb-8"
-          />
-          <Navbar
-            sidebarState={showSidebar}
-            menu={SYSTEM_MENU}
-            title={i18n("Words.system")}
-          />
+        <div className="h-[82vh] lg:h-full flex flex-col px-6 pb-10  overflow-x-hidden overflow-y-auto hidden-scroll transition-all duration-500">
+          {Object.entries(SIDEBAR_MENU).map(([key, MENU]) => (
+            <Navbar
+              key={key}
+              sidebarState={showSidebar}
+              menu={MENU}
+              title={i18n(`Words.${key.toLowerCase()}`)}
+              className="mb-6 lg:mb-0 xl:mb-6"
+            />))}
         </div>
       </div>
     </aside>

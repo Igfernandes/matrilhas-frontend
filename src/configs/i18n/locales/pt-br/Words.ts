@@ -24,6 +24,8 @@ export const Words = {
   view_client: "Visualizar Cliente",
   time: "Hora",
   my_users: "Meus usuários",
+  management: "Gerenciamento",
+  communication: "Comunicação",
   fill: "Preenchimento",
   go_out: "Sair",
   schedule: "Agenda",
@@ -368,4 +370,5 @@ export const Words = {
   custom: "Customizado",
   gallery: "Galeria",
   fill_register: "Formulário Preenchido",
+  search: "Buscar",
 };

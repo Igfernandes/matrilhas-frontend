@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetClientsRequest } from "./types";
+import { GetClientsRequest, GetClientsResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { ClientShape } from "../../../types/Clients";
 
 export default function useGet() {
   const { clients } = API_ROUTES;
@@ -11,7 +10,7 @@ export default function useGet() {
 
   async function getClients(request?: GetClientsRequest) {
     const { ...query } = request ?? {};
-    return await axios.get<ClientShape[]>(
+    return await axios.get<GetClientsResponse>(
       setQueries({
         url: setParams({ url: clients }),
         query,

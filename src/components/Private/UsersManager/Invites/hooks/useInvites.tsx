@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 export function useInvites({ handleFilter, filter }: HookProps<InvitesShape>) {
   const { handleToggleModal, modal } =
     useModalContext<ModalUserOperationType>();
-  const { data } = useGetUsersInvite();
+  const { rows } = useGetUsersInvite();
   const [tDataInvites, setTDataInvites] = useState<
     Array<Record<string, unknown>>
   >([]);
@@ -62,13 +62,13 @@ export function useInvites({ handleFilter, filter }: HookProps<InvitesShape>) {
 
   /** Adding news keys of table and the lasted column to table data invites */
   useEffect(() => {
-    if (!data) return setTDataInvites([]);
+    if (!rows) return setTDataInvites([]);
 
-    const invite = data.filter((invite: InvitesShape) => handleFilter(invite));
+    const invite = rows.filter((invite: InvitesShape) => handleFilter(invite));
     const tDataInvite = invite.map(updateInviteForTable);
 
     setTDataInvites(tDataInvite);
-  }, [data, filter]);
+  }, [rows, filter]);
 
   return {
     tDataInvites,

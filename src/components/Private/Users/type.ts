@@ -1,5 +1,5 @@
-import { UsersShape } from "../../../types/Users";
+import { UserShape } from "../../../types/Users";
 
 export type UserPageProps = {
-  targetUser?: UsersShape;
+  targetUser?: UserShape;
 };

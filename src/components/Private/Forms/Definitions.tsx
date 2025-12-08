@@ -7,19 +7,17 @@ import { Select } from "@components/shared/forms/Select";
 import { useFormsData } from "./hooks/useFormsData";
 import { When } from "@components/utilities/When";
 import { ComponentsProps } from "./type";
-import { ServicesShape } from "@type/Services";
 import { Datetime } from "@components/shared/forms/DateTime";
 import { TopBar } from "./TopBar";
 import { TextEdit } from "@components/shared/forms/TextEdit";
 import { ClientCategoriesShape } from "@type/Clients/ClientCategories";
-import Link from "next/link";
 
 type Props = Pick<ComponentsProps, "handleChangeFormFields"> & {
   slug?: string;
 };
 
 export function Definitions({ handleChangeFormFields, slug }: Props) {
-  const { forms, services, categories, events } = useFormsData();
+  const { forms, categories } = useFormsData();
   const {
     register,
     getValues,
@@ -82,52 +80,6 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
           type="number"
           errors={errors.stock}
         />
-      </div>
-      <div className="flex flex-wrap justify-between my-4">
-        <div className="w-100 md:w-[49%]">
-          <Select
-            {...register("has_event")}
-            label={i18n("Texts.has_event")}
-            dataTestId="services"
-            defaultValue={events && events.length > 0 ? 1 : 0}
-            options={[
-              {
-                text: i18n("Words.not"),
-                value: 0,
-                selected: !events || events.length === 0
-              },
-              {
-                text: i18n("Words.yes"),
-                value: 1,
-                selected: events && events.length > 0
-              },
-            ]}
-          />
-          <When value={events && events.length > 0}>
-            <div className="mt-2">
-              <Link className="text-red text-sm" href={events ? `/dashboard/events/${events[0].id}` : "#"} >
-                <u>{i18n("Texts.view_event")}</u>
-              </Link>
-            </div>
-          </When>
-        </div>
-        <div className="w-100 md:w-[49%]">
-          <Select
-            {...register("service_id")}
-            label={i18n("Words.service")}
-            dataTestId="services"
-            options={[
-              {
-                text: "--",
-                value: "",
-              },
-              ...(services ?? [])?.map((service: ServicesShape) => ({
-                text: service.name,
-                value: service.id,
-              })),
-            ]}
-          />
-        </div>
       </div>
       <div className="my-4">
 

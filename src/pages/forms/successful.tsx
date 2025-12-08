@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps<
   FormSuccessfulPageProps
 > = async (request) => {
   const { form } = (request?.query as { form: string }) ?? {}; // Tipando o params
-  const foundForm = await getForm({ slug: form });
+  const foundForm = await getForm("", { slug: form });
 
   return {
     props: {

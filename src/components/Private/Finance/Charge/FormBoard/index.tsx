@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ChargeShape } from "@type/Charges";
 import { FormBoardHeader } from "./header";
-import { TSelect } from "@components/shared/forms/InfoBoard/fields/Select";
 import { When } from "@components/utilities/When";
 
 dayjs.extend(customParseFormat);
@@ -16,7 +15,7 @@ type Props = {
 };
 
 export function FormBoard({ charge }: Props) {
-  const { formMethods, submit, errors, isLoadingPutCharge, services } =
+  const { formMethods, submit, errors, isLoadingPutCharge } =
     useForms({ charge });
 
   return (
@@ -36,19 +35,7 @@ export function FormBoard({ charge }: Props) {
           errors={errors.title?.message}
           defaultValue={charge.title}
         />
-        <TSelect
-          label={i18n("Words.service")}
-          name={"service"}
-          dataTestId="service"
-          options={
-            services?.map((service) => ({
-              id: service.id,
-              name: service.name,
-            })) ?? []
-          }
-          errors={errors.service_id}
-          defaultValue={charge.service?.id}
-        />
+
         <When value={charge.type === "APPELLANT"}>
           <TInput
             label={i18n("Words.period")}

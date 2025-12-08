@@ -1,10 +1,8 @@
 import { useQueryGuard } from "@hooks/useAxios";
 import useGet from ".";
-import { FormsResponse, GetFormsRequest } from "./types";
+import { GetFormsResponse, GetFormsRequest } from "./types";
 
-export default function useGetForms<T extends GetFormsRequest>(
-  request: T = {} as T
-) {
+export default function useGetForms(request: GetFormsRequest = {}) {
   const { getForms } = useGet();
 
   async function handle() {
@@ -12,9 +10,15 @@ export default function useGetForms<T extends GetFormsRequest>(
     return data ?? null;
   }
 
-  return useQueryGuard<FormsResponse<T>>({
+  const { data, ...rest } = useQueryGuard<GetFormsResponse>({
     queryKey: ["forms", request],
     queryFn: handle,
     enabled: true,
   });
+
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }

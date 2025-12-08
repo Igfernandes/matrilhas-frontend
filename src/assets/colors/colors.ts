@@ -1,5 +1,9 @@
 export const othersColors = {
-  "red-strong": "#BC2224",
+  primary: "#125520",
+  dark: "#000000",
+  secondary: "#f5f5f5",
+  disabled: "#a3a3a3",
+  active: "#14a230",
   white: "#fff",
   indigo: "#6984ed",
   blue: "#4da1f7",

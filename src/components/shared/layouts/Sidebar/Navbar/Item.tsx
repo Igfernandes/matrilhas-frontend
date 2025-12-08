@@ -1,5 +1,4 @@
-import { textColors } from "@assets/colors/colors";
-import { textDefaultColors } from "@assets/colors/default";
+import { othersColors } from "@assets/colors/colors";
 import { When } from "@components/utilities/When";
 import Link from "next/link";
 import { ItemProps } from "./type";
@@ -14,17 +13,17 @@ export function Item({
   Icon,
   title,
 }: ItemProps) {
-  const [itemStyle, setItemStyle] = useState(textDefaultColors.primary);
+  const [itemStyle, setItemStyle] = useState("#3a3a3a");
 
   useEffect(() => {
-    if (isActive) setItemStyle(textColors.red);
+    if (isActive) setItemStyle(othersColors.active);
   }, [isActive]);
 
   return (
     <li
-      onMouseEnter={() => setItemStyle(textColors.red)}
+      onMouseEnter={() => setItemStyle(othersColors.active)}
       onMouseLeave={() =>
-        setItemStyle(isActive ? textColors.red : textDefaultColors.primary)
+        setItemStyle(isActive ? othersColors.active : "#3a3a3a")
       }
       className={`hover:text-red text-xs ${
         index != menu.length - 1 && sidebarState
@@ -32,12 +31,12 @@ export function Item({
           : ""
       } py-1 xl:py-2  ${sidebarState ? "px-1" : ""}`}
       style={{
-        color: isActive ? textColors.red : textDefaultColors.primary,
+        color: isActive ? othersColors.active : "#3a3a3a",
       }}
     >
       <Link
         href={link}
-        className="flex items-center hover:text-red duration-300"
+        className="flex items-center hover:text-active duration-300"
         style={{
           justifyContent: sidebarState ? "initial" : "end",
         }}

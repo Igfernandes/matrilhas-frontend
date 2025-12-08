@@ -1,6 +1,5 @@
 import { Header } from "@components/Public/Header";
 import { AboutUs } from "@components/Public/Home/AboutUs";
-import { Events } from "@components/Public/Home/Events";
 import { FAQ } from "@components/Public/Home/FAQ";
 import { Gallery } from "@components/Public/Home/Gallery";
 import { Partners } from "@components/Public/Home/Partners";
@@ -14,7 +13,6 @@ export default function Home() {
       <Header />
       <Main />
       <AboutUs />
-      <Events />
       <Gallery />
       <Partners />
       <FAQ />

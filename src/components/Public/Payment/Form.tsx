@@ -18,10 +18,7 @@ export function PaymentForm({ charge }: Props) {
     onSubmit,
     register,
     isLoading,
-    recaptchaToken,
-    hasAllFilledFields,
     hasFillPhone,
-    Recaptcha,
     handleCaptureClientByPhone,
   } = usePaymentForm();
 
@@ -75,7 +72,6 @@ export function PaymentForm({ charge }: Props) {
               />
             </div>
           </div>
-          <Recaptcha/>
           <div className="w-2/6">
             <OrderSummary
               type={charge.type}
@@ -89,8 +85,8 @@ export function PaymentForm({ charge }: Props) {
                   max: charge.amount ?? 1,
                 },
               ]}
-              isLoading={isLoading || !recaptchaToken}
-              hasAllFilledFields={hasAllFilledFields}
+              isLoading={isLoading}
+              hasAllFilledFields={() => false}
             />
           </div>
         </div>

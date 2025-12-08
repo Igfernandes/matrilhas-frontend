@@ -1,13 +1,11 @@
 import { Input } from "@components/shared/forms/Input";
 import { Select } from "@components/shared/forms/Select";
 import i18n from "@configs/i18n";
-import { useDefinitions } from "./hooks/useDefinitions";
 import { useFormContext } from "react-hook-form";
 import { ChargesPayload } from "./schemas";
 import { When } from "@components/utilities/When";
 
 export function Definitions() {
-  const { services } = useDefinitions();
   const {
     watch,
     register,
@@ -30,27 +28,7 @@ export function Definitions() {
             errors={errors.title}
           />
         </div>
-        <div className="form-group w-full lg:w-[48%] mt-4 lg:mt-0">
-          <Select
-            {...register("service_id")}
-            dataTestId="service"
-            label={`${i18n("Words.event")} (${i18n("Words.optional")})`}
-            options={[
-              {
-                text: i18n("Texts.select_event"),
-                value: 0,
-              },
-              ...services.map((service) => ({
-                text: service.name,
-                value: service.id,
-              })),
-            ]}
-            errors={errors.service_id}
-          />
-          <span className="text-xs text-red ml-2 block mt-1">
-            {i18n(`Screens.dashboard.finances.about_name_and_service`)}
-          </span>
-        </div>
+
       </div>
       <div className="form-row flex flex-wrap mb-6 justify-between">
         <div className="form-group w-full lg:w-[48%]">

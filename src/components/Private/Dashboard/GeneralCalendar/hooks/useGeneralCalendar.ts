@@ -1,70 +1,42 @@
-import i18n from "@configs/i18n";
-import { ChargeShape } from "@type/Charges";
-import { ClientShape } from "@type/Clients";
-import { ServicesShape } from "@type/Services";
-import moment from "moment";
+import { HandleChangeRangeProps } from "@components/shared/others/Calendar";
+import { SkeletonSettings } from "@components/utilities/Skeleton/type";
+import dayjs from "dayjs";
+import { useCallback, useMemo, useRef, useState } from "react";
+type Props = {
+  dateRef?: string;
+};
 
-export function useGeneralCalendar() {
-  const getClientsBirthday = (clients: Array<ClientShape>) => {
-    return clients
-      .filter((client) => client.birthdate)
-      .map((client) => {
-        const birth = moment(client.birthdate);
-        const thisYear = moment().year();
-        const date = birth.year(thisYear);
+export function useGeneralCalendar({ dateRef }: Props = {}) {
+  const [date, setDate] = useState<string>(
+    dateRef ?? dayjs().format("0000-MM-00")
+  );
+  const skeletonSettings = useRef<SkeletonSettings>({
+    type: "board",
+    amount: 1,
+  });
+  const lastRange = useRef<string>("");
+  const handleUpdateDate = useCallback((newDate: string) => {
+    setDate(newDate);
+  }, []);
 
-        return {
-          title: i18n("Words.see_list") + " 🎉🎂",
-          start: date.toDate(),
-          end: date.toDate(),
-          allDay: true,
-          resource: client.birthdate ?? "",
-        };
-      });
-  };
+  const handleChangeRange = useCallback((date: HandleChangeRangeProps) => {
+    const newDate = Array.isArray(date)
+      ? dayjs(date[0]).format("0000-MM-00")
+      : dayjs(date.end).format("0000-MM-00");
 
-  const getServices = (services: Array<ServicesShape>) => {
-    return services
-      .filter((service) => service.realized_at)
-      .map((service) => {
-        const serviceDate = moment(service.realized_at);
-        const thisYear = moment().year();
-        const date = serviceDate.year(thisYear);
+    if (newDate === lastRange.current) return;
 
-        return {
-          title: i18n("Words.event") + "🎉",
-          start: date.toDate(),
-          end: date.toDate(),
-          allDay: true,
-          resource: service.realized_at ?? "",
-        };
-      });
-  };
+    lastRange.current = newDate;
+    setDate(newDate);
+  }, []);
 
-  const getCharges = (charges: Array<ChargeShape>) => {
-    return charges
-      .filter((charge) => charge.expired_days)
-      .map((charge) => {
-        const chargeDate = moment(charge.created_at).add(
-          charge.expired_days,
-          "days"
-        );
-        const thisYear = moment().year();
-        const date = chargeDate.year(thisYear);
-
-        return {
-          title: i18n("Words.charge") + "🎉",
-          start: date.toDate(),
-          end: date.toDate(),
-          allDay: true,
-          resource: String(charge.expired_days) ?? "",
-        };
-      });
-  };
-
-  return {
-    getClientsBirthday,
-    getServices,
-    getCharges,
-  };
+  return useMemo(
+    () => ({
+      date,
+      handleUpdateDate,
+      handleChangeRange,
+      skeletonSettings,
+    }),
+    [date, handleUpdateDate, handleChangeRange]
+  );
 }

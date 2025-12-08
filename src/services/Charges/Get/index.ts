@@ -1,18 +1,18 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { ChargesResponse, GetChargesRequest } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
+import { GetChargesRequest, GetChargesResponse } from "./types";
 
 export default function useGet() {
   const { charges } = API_ROUTES;
   const { axios } = useAxios();
   const { setParams, setQueries } = useRoutes();
 
-  async function getCharges<T extends GetChargesRequest>(
-    request?: T
-  ): Promise<ChargesResponse<T>> {
+  async function getCharges(
+    request?: GetChargesRequest
+  ): Promise<GetChargesResponse> {
     const { ...query } = request ?? {};
-    const { data } = await axios.get<ChargesResponse<T>>(
+    const { data } = await axios.get<GetChargesResponse>(
       setQueries({
         url: setParams({ url: charges }),
         query,

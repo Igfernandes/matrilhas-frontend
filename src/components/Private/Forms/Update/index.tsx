@@ -1,6 +1,6 @@
 import { Notice } from "@components/shared/others/Notice";
 import { useFormStep } from "../hooks/useFormsStep";
-import { FormsShape } from "@type/Forms";
+import { FormShape } from "@type/Forms";
 import { FormProvider } from "react-hook-form";
 import { StepBar } from "@components/shared/layouts/StepBar";
 import i18n from "@configs/i18n";
@@ -13,7 +13,7 @@ import { useFillFieldsModal } from "./hooks/useFillFieldsModal";
 import { useFormData } from "./hooks/useFormData";
 
 type Props = {
-  targetForm: FormsShape;
+  targetForm: FormShape;
 };
 
 export function FillFieldsUpdate({ targetForm }: Props) {

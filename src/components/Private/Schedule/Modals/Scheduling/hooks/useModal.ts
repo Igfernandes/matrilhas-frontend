@@ -4,7 +4,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ScheduleSchema, ScheduleUpdatePayload } from "../schemas";
 import { useEffect, useState } from "react";
 import useGetUsers from "@services/Users/Get/useGetUsers";
-import { UsersShape } from "@type/Users";
+import { UserShape } from "@type/Users";
 import usePostCreateSchedule from "@services/Schedule/Post/usePost";
 import { useModalContext } from "@contexts/Modal";
 import usePutCreateSchedule from "@services/Schedule/Put/usePut";
@@ -23,8 +23,8 @@ export function useModal() {
 
   const { watch, trigger, reset } = formMethods;
   const { handleToggleModal, modal } = useModalContext();
-  const [users, setUsers] = useState<UsersShape[]>([]);
-  const { data: usersData, isFetched: isFetchedUsers } = useGetUsers();
+  const [users, setUsers] = useState<UserShape[]>([]);
+  const { rows: usersData, isFetched: isFetchedUsers } = useGetUsers();
   const { mutateAsync: postSchedule, isPending: isLoadingPost } =
     usePostCreateSchedule();
   const { mutateAsync: putSchedule, isPending: isLoadingPut } =

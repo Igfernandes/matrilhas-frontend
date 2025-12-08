@@ -15,5 +15,10 @@ export default function useGetClients(request: GetClientsRequest = {}) {
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }

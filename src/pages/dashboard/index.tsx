@@ -1,46 +1,27 @@
 import { GeneralCalendar } from "@components/Private/Dashboard/GeneralCalendar";
-import { GraphicsClients } from "@components/Private/Dashboard/GraphicsClients";
+import { Graphics } from "@components/Private/Dashboard/Graphics";
 import { DashboardHeader } from "@components/Private/Dashboard/Header";
-import { useClientsData } from "@components/Private/Dashboard/hooks/useClientsData";
-import { useUsersData } from "@components/Private/Dashboard/hooks/useUsersData";
+import { useOverviewData } from "@components/Private/Dashboard/hooks/useData";
 import { DashboardPageProps } from "@components/Private/Dashboard/type";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 import { publicRoutes } from "@configs/routes/Web/navigation";
-import useGetCharges from "@services/Charges/Get/useGetCharges";
-import useGetForms from "@services/CustomForms/Get/useGetForms";
-import useGetServices from "@services/Services/Get/useGetServices";
 import { getUserAuth } from "@services/Users/GetAuth/SSR";
 import { GetServerSideProps } from "next";
 
 export default function Dashboard({ user }: DashboardPageProps) {
-  const { clients, categories, clientsByDDD } = useClientsData();
-  const { data: services  } = useGetServices();
-  const { users, invitesValid } = useUsersData();
-  const { data: forms } = useGetForms();
-  const { data: charges } = useGetCharges();
+  const { chargesCount, clientsCount, formsCount, usersCount, isLoading } = useOverviewData()
 
   return (
     <DashboardContainer user={user}>
       <DashboardHeader
-        clients={clients}
-        forms={forms}
-        users={users}
-        services={services}
-        charges={charges}
+        clients={clientsCount}
+        forms={formsCount}
+        users={usersCount}
+        charges={chargesCount}
+        isLoading={isLoading}
       />
-      <GeneralCalendar
-        clients={clients}
-        forms={forms}
-        users={users}
-        services={services}
-        charges={charges}
-      />
-      <GraphicsClients
-        invites={invitesValid}
-        clients={clients ?? []}
-        categories={categories.slice(0, 4)}
-        clientsByDDD={clientsByDDD}
-      />
+      <GeneralCalendar />
+      <Graphics />
     </DashboardContainer>
   );
 }

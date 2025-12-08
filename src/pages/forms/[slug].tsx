@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps<FormPageProps> = async ({
   params,
 }) => {
   const { slug } = params as { slug: string }; // Tipando o params
-  const form = await getForm({ slug });
+  const form = await getForm("", { slug });
   const csrf = await getCSRF();
 
   if (!form || isErrorRequest(form)) {

@@ -35,8 +35,8 @@ export function Navbar({
   return (
     <div {...rest}>
       <When value={sidebarState}>
-        <div className="text-[10px]">
-          <h4>{title.toUpperCase()}</h4>
+        <div className="text-[12px]">
+          <h4 className="text-primary">{title.toUpperCase()}</h4>
         </div>
       </When>
       <div>

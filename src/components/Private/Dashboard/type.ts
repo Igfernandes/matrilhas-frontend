@@ -1,9 +1,8 @@
 import { CategoryData } from "@services/Clients/Get/types";
 import { ChargeShape } from "@type/Charges";
 import { ClientShape } from "@type/Clients";
-import { FormsShape } from "@type/Forms";
-import { ServicesShape } from "@type/Services";
-import { UsersShape } from "@type/Users";
+import { FormShape } from "@type/Forms";
+import { UserShape } from "@type/Users";
 
 export type CategoryStaticData = {
   clients?: number;
@@ -14,13 +13,20 @@ export type ClientsByDDDStaticData = {
   amount: number;
 };
 
+export type ManagerProps = {
+  clients: number;
+  users: number;
+  forms: number;
+  charges: number;
+  isLoading?: boolean;
+};
+
 export type ManagerEntitiesProps = {
-  clients?: Array<ClientShape>;
-  services?: Array<ServicesShape>;
-  users?: Array<UsersShape>;
-  forms?: Array<FormsShape>;
-  charges?: Array<ChargeShape>;
+  clients: Array<ClientShape>;
+  users: Array<UserShape>;
+  forms: Array<FormShape>;
+  charges: Array<ChargeShape>;
 };
 export type DashboardPageProps = {
-  user: UsersShape;
+  user: UserShape;
 };

@@ -10,9 +10,11 @@ export default function useGetUsers(payload?: GetUsersRequest) {
     return data ?? false;
   }
 
-  return useQueryGuard({
+  const { data, ...rest } = useQueryGuard({
     queryKey: ["users", payload],
     enabled: true,
     queryFn: handle,
   });
+
+  return { rows: data?.rows ?? [], count: data?.count ?? 0, ...rest };
 }

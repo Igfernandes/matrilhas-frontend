@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetInvitesRequest } from "./types";
+import { GetInvitesRequest, GetInvitesResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { InvitesShape } from "../../../../types/Invites";
 
 export default function useGet() {
   const { inviteUser } = API_ROUTES;
@@ -11,7 +10,7 @@ export default function useGet() {
 
   async function getInvites(request?: GetInvitesRequest) {
     const { ...query } = request ?? {};
-    return await axios.get<InvitesShape[]>(
+    return await axios.get<GetInvitesResponse>(
       setQueries({
         url: setParams({ url: inviteUser }),
         query,

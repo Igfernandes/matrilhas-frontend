@@ -3,11 +3,11 @@ import { DotsOptions } from "@components/shared/others/DotsOptions";
 import i18n from "@configs/i18n";
 import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
-import { ModalServicesOperationType } from "@components/Private/Services/type";
+import { ModalChargesOperationType } from "./type";
 
 type Props = {
   handleToggleModal: (
-    type: ModalServicesOperationType,
+    type: ModalChargesOperationType,
     id?: string | number
   ) => void;
   id: number;

@@ -1,9 +1,9 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { FormsPayload, formsSchema } from "../../schema";
-import { FormsShape } from "@type/Forms";
+import { FormShape } from "@type/Forms";
 
 type Props = {
-  targetForm: FormsShape;
+  targetForm: FormShape;
 }
 
 export function useFormData({ targetForm }: Props) {

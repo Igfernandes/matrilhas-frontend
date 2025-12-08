@@ -4,13 +4,13 @@ import { Definitions } from "./Definitions";
 import { Visualization } from "./Visualization";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import { FilledFormsTable } from "./Update/FilledFormsTable";
-import { FormsShape } from "@type/Forms";
+import { FormShape } from "@type/Forms";
 
 type Props = {
   step: number;
   components: FieldShape[];
   slug?: string;
-  form?: FormsShape;
+  form?: FormShape;
   onChangeFormFields: (fieldsForm: Array<FieldShape>) => void;
 };
 

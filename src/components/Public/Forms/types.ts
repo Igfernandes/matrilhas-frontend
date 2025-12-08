@@ -1,17 +1,15 @@
 import { CSRFShape } from "@services/Authentications/CSRF/types";
-import { FormsShape } from "@type/Forms";
-import { ServicePreviewShape } from "@type/Services";
+import { FormShape } from "@type/Forms";
 
 export type FormPageProps = {
-  form: FormsShape;
+  form: FormShape;
   csrf: CSRFShape;
 };
 
 export type FormSuccessfulPageProps = {
-  form: FormsShape;
+  form: FormShape;
 };
 
 export type Form404PageProps = {
-  service: ServicePreviewShape | null;
   formSlug: string;
 };

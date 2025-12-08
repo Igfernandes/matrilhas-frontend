@@ -12,18 +12,18 @@ import i18n from "@configs/i18n";
 
 type CalendarProps = {
   components?:
-    | Components<
-        {
-          title: string;
-          start: Date;
-          end: Date;
-          allDay: boolean;
-          resource: string;
-          color?: string;
-        },
-        object
-      >
-    | undefined;
+  | Components<
+    {
+      title: string;
+      start: Date;
+      end: Date;
+      allDay: boolean;
+      resource: string;
+      color?: string;
+    },
+    object
+  >
+  | undefined;
   events: {
     title: string;
     start: Date;
@@ -34,32 +34,35 @@ type CalendarProps = {
   }[];
   defaultView?: View;
   views?:
-    | ViewsProps<
-        {
-          title: string;
-          start: Date;
-          end: Date;
-          allDay: boolean;
-          resource: string;
-        },
-        object
-      >
-    | undefined;
+  | ViewsProps<
+    {
+      title: string;
+      start: Date;
+      end: Date;
+      allDay: boolean;
+      resource: string;
+    },
+    object
+  >
+  | undefined;
   onSelectEvent?:
-    | ((
-        event: {
-          title: string;
-          start: Date;
-          end: Date;
-          allDay: boolean;
-          resource: string;
-        },
-        e: React.SyntheticEvent<HTMLElement>
-      ) => void)
-    | undefined;
+  | ((
+    event: {
+      title: string;
+      start: Date;
+      end: Date;
+      allDay: boolean;
+      resource: string;
+    },
+    e: React.SyntheticEvent<HTMLElement>
+  ) => void)
+  | undefined;
   style?: React.CSSProperties | undefined;
   defaultDate?: string;
+  onChangeRange?: (date: HandleChangeRangeProps) => void;
 };
+
+export type HandleChangeRangeProps = Date[] | { start: Date; end: Date };
 
 const localizer = momentLocalizer(moment);
 moment.locale("pt-br");
@@ -71,15 +74,23 @@ export const Calendar: React.FC<CalendarProps> = ({
   defaultDate,
   defaultView,
   components,
+  onChangeRange,
   style,
 }) => {
   return (
     <CalendarLibrary
       localizer={localizer}
+      onRangeChange={onChangeRange}
       events={events}
       startAccessor="start"
       endAccessor="end"
       components={components}
+      eventPropGetter={(event) => ({
+        style: {
+          backgroundColor: event ? "#125520" : "#ff9900",
+          color: "#fff",
+        },
+      })}
       style={style}
       views={views}
       defaultView={defaultView}

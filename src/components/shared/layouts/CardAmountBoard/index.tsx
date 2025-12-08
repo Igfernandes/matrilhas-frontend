@@ -7,7 +7,8 @@ export function CardAmountBoard({
   items,
   isLoading,
 }: CardAmountBoardProps) {
-  const { screenType } = useWindow();
+  const { screenType } = useWindow()
+
   return (
     <Skeleton
       isLoading={!items || !!isLoading}
@@ -21,7 +22,7 @@ export function CardAmountBoard({
           {items.map((item, index) => (
             <div
               key={`card_${index}`}
-              className="bg-white px-6 py-4 rounded-xl min-w-48 my-2"
+              className="bg-white px-6 pt-2 pb-1 rounded-md  shadow-md my-2"
               style={{
                 width: screenType !== "MOBILE" ? `${90 / viewLimit}%` : "100%",
               }}
@@ -39,9 +40,8 @@ export function CardAmountBoard({
                     <p className="text-md">{item.title}</p>
                   </div>
                   <div className="text-center">
-                    <p className="font-semibold text-lg">{`${
-                      item?.prefix ?? ""
-                    }${item?.value ?? 0}${item?.suffix ?? ""}`}</p>
+                    <p className="font-semibold text-lg">{`${item?.prefix ?? ""
+                      }${item?.value ?? 0}${item?.suffix ?? ""}`}</p>
                   </div>
                 </div>
               </div>
