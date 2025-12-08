@@ -14,8 +14,10 @@ export function DashboardContent({ children, title }: Props) {
     isShowNotifications,
     handleToggleNotification,
     notifications,
-    userNotifications,
-    amountNotifications,
+    count,
+    viewedCount,
+    isLoadingNotifications,
+handleScroll
   } = useNotificationData();
 
   return (
@@ -31,7 +33,7 @@ export function DashboardContent({ children, title }: Props) {
             handleSidebar={handleToggleSidebar}
             handleNotification={handleToggleNotification}
             notificationsAmount={
-              amountNotifications() > 9 ? "+9" : `${amountNotifications()}`
+              count > 9 ? "+9" : `${count}`
             }
           />
           <div className="h-full pb-[15vh] overflow-y-scroll">
@@ -40,10 +42,12 @@ export function DashboardContent({ children, title }: Props) {
         </div>
       </div>
       <Notifications
+        count={count}
+        viewedCount={viewedCount}
         notifications={notifications}
-        userNotifications={userNotifications}
         handleNotification={handleToggleNotification}
-        isShow={isShowNotifications}
+        isShow={isShowNotifications} handleScroll={handleScroll}
+        isLoading={isLoadingNotifications}
       />
     </>
   );

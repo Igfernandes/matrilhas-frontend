@@ -3,21 +3,17 @@ import i18n from "@configs/i18n";
 import { NotificationItem } from "./Items";
 import { useNotifications } from "./hooks/useNotifications";
 import { When } from "@components/utilities/When";
-import { NotificationShape } from "@type/Notifications/Notifications";
-import { UsersNotificationsShape } from "@type/Notifications/UsersNotifications";
+import { NotificationsProps } from "./type";
 
-type Props = {
-  userNotifications: Array<UsersNotificationsShape>;
-  notifications: Array<NotificationShape>;
-  isShow: boolean;
-  handleNotification: (isShow: boolean) => void;
-};
+
 export function Notifications({
   isShow,
   handleNotification,
   notifications,
-  userNotifications,
-}: Props) {
+  count,
+  isLoading,
+  handleScroll
+}: NotificationsProps) {
   const { notificationBarStyled } = useNotifications({ isShow });
 
   return (
@@ -36,17 +32,24 @@ export function Notifications({
               </div>
             </div>
             <div>
-              <span className="text-sm text-secondary">{`${userNotifications.length}/${notifications.length}`}</span>
+              <span className="text-sm text-secondary">{`${notifications.length}/${count}`}</span>
             </div>
           </div>
           <hr className="mt-4 border-secondary border-[1px]" />
-          <div className="body h-[90vh] overflow-y-auto">
+          <div className="body h-[76vh] md:h-[90vh] overflow-y-auto" onScroll={handleScroll} >
+
             {notifications.map((notification, key) => (
               <NotificationItem
                 props={notification}
                 key={`notification_${notification.id}_${key}`}
               />
             ))}
+            <When value={isLoading}>
+              <p className="text-center text-primary bg-zinc-100 shadow font-bold p-4 border-1 mb-10">
+
+                {i18n("Words.loading")}...
+              </p>
+            </When>
           </div>
         </div>
       </div>

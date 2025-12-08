@@ -68,9 +68,11 @@ export function Header({
               className="relative bg-tertiary rounded-sm cursor-pointer"
               onClick={() => handleNotification(true)}
             >
-              <span className="bg-red px-1 pt-[3px] w-5 h-[19px] text-center rounded-xl text-[10px] text-white absolute right-[-4px] top-[-13px]">
-                {notificationsAmount}
-              </span>
+              <When value={notificationsAmount > "0"}>
+                <span className="bg-primary px-1 pt-[3px] w-5 h-[19px] text-center rounded-xl text-[10px] text-white absolute right-[-4px] top-[-13px]">
+                  {notificationsAmount}
+                </span>
+              </When>
               <Bell className="w-6" />
             </div>
           </div>

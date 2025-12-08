@@ -1,52 +1,88 @@
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { isEquals } from "@helpers/json";
 import useGetNotifications from "@services/Notifications/Get/useGet";
-import useGetUserNotifications from "@services/Users/Notifications/Get/useGetUserNotifications";
 import usePostUserNotifications from "@services/Users/Notifications/Post/usePost";
 import { NotificationShape } from "@type/Notifications/Notifications";
-import { UsersNotificationsShape } from "@type/Notifications/UsersNotifications";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export function useNotificationData() {
-  const { userAuth } = useUserNavigationContext();
-  const [isShowNotifications, setIsShowNotifications] =
-    useState<boolean>(false);
-  const { data: notificationsData, isFetched: isFetchedNotifications } =
-    useGetNotifications();
-  const { data: userNotificationsData, isFetched: isFetchedUserNotifications } =
-    useGetUserNotifications({
-      id: userAuth?.id,
-    });
-  const [notifications, setNotifications] = useState<Array<NotificationShape>>(
-    []
-  );
-  const [userNotifications, setUserNotifications] = useState<
-    Array<UsersNotificationsShape>
-  >([]);
+  const [isShowNotifications, setIsShowNotifications] = useState(false);
+
+  // PAGINAÇÃO
+  const [start, setStart] = useState(0);
+  const limit = 50;
+
+  const {
+    rows,
+    count,
+    viewedCount,
+    isPending: isLoading,
+  } = useGetNotifications({
+    entity: "USER",
+    start,
+    limit,
+  });
+  const [notifications, setNotifications] = useState<NotificationShape[]>([]);
   const { mutateAsync: postUserNotifications } = usePostUserNotifications();
 
   const handleToggleNotification = (isShow: boolean) => {
     setIsShowNotifications(isShow);
-    if (isShow && userNotifications?.length < notifications.length) {
+    if (isShow && viewedCount < count) {
       postUserNotifications();
     }
   };
 
-  const amountNotifications = () => {
-    return isFetchedNotifications && isFetchedUserNotifications && userAuth
-      ? notifications.length - userNotifications.length
-      : 0;
-  };
-
+  // ACUMULA NOTIFICAÇÕES (lazy load)
   useEffect(() => {
-    setNotifications(notificationsData ?? []);
-    setUserNotifications(userNotificationsData ?? []);
-  }, [notificationsData, userNotificationsData]);
+    if (!rows || rows.length === 0) return;
+
+    setNotifications((prev) => {
+      // 1. Se já temos a quantidade correspondente → não faz nada
+      if (prev.length >= count) return prev;
+
+      // 2. Se as novas rows já estão dentro do prev, não atualiza
+      const lastChunk = prev.slice(-rows.length);
+
+      if (isEquals(lastChunk, rows)) {
+        return prev;
+      }
+
+      // 3. Caso contrário, adiciona
+      const merged = [...prev, ...rows];
+      // remove duplicatas
+      const unique = merged.filter(
+        (item, index, self) => index === self.findIndex((n) => n.id === item.id)
+      );
+
+      return unique;
+    });
+  }, [rows, count]);
+
+  const handleScroll = useCallback(
+    (ev: React.UIEvent<HTMLDivElement>) => {
+      const div = ev.currentTarget;
+
+      if (!div || notifications.length >= count) return;
+
+      const { scrollTop, clientHeight, scrollHeight } = div;
+
+      const isEnd = scrollTop + clientHeight >= scrollHeight - 20; // margem de 20px
+
+      const hasMore = notifications.length < count;
+
+      if (isEnd && hasMore) {
+        setStart((prev) => prev + limit);
+      }
+    },
+    [notifications, count]
+  );
 
   return {
     isShowNotifications,
     handleToggleNotification,
     notifications,
-    userNotifications,
-    amountNotifications,
+    count,
+    viewedCount,
+    isLoadingNotifications: isLoading,
+    handleScroll,
   };
 }
