@@ -2,19 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import { StatusText } from "@components/shared/others/StatusText";
 import { ButtonConfig } from "@components/shared/others/ButtonConfig";
-import { UsersShape } from "../../../../../types/Users";
+import { UserShape } from "../../../../../types/Users";
 import { HookProps, ModalUserOperationType, TDataUser } from "../../type";
 import { useModalContext } from "@contexts/Modal";
 import useGetUsers from "../../../../../services/Users/Get/useGetUsers";
 
-export function useUsers({ handleFilter, filter }: HookProps<UsersShape>) {
+export function useUsers({ handleFilter, filter }: HookProps<UserShape>) {
   const { handleToggleModal, modal } =
     useModalContext<ModalUserOperationType>();
   const [tDataUsers, setTDataUsers] = useState<Array<Record<string, unknown>>>(
     []
   );
-  const { data: usersData } = useGetUsers();
-  const [users, setUsers] = useState<Array<UsersShape>>([]);
+  const { rows: usersData } = useGetUsers();
+  const [users, setUsers] = useState<Array<UserShape>>([]);
 
   const tHeadsUser = useRef<Array<string>>([
     "ID",
@@ -33,7 +33,7 @@ export function useUsers({ handleFilter, filter }: HookProps<UsersShape>) {
     phone,
     status,
     groups,
-  }: UsersShape): TDataUser => {
+  }: UserShape): TDataUser => {
     const groupsName = Array.isArray(groups)
       ? groups.map((group) => group.name).join(",")
       : "";

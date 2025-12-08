@@ -1,16 +1,17 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setParams, setQueries } from "@helpers/routes";
-import { GetFormsRequest, GetFormsResponse } from "./types";
+import { GetFormsRequest } from "./types";
+import { FormShape } from "@type/Forms";
 
-export async function getForms(
+export async function getForm(
   tokenNavigation: string,
   request?: GetFormsRequest
-): Promise<GetFormsResponse> {
+): Promise<FormShape> {
   const { id, ...query } = request ?? {};
 
   const { forms } = API_ROUTES;
-  const { data } = await axios.get<GetFormsResponse>(
+  const { data } = await axios.get<FormShape>(
     setQueries({
       url: setParams({
         url: forms,
@@ -27,8 +28,5 @@ export async function getForms(
     }
   );
 
-  return {
-    rows: data.rows ?? [],
-    count: data.count ?? 0,
-  };
+  return data;
 }

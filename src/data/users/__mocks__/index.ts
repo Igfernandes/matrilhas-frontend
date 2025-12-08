@@ -1,6 +1,6 @@
-import { UsersShape } from "../../../types/Users";
+import { UserShape } from "../../../types/Users";
 
-export const MOCK_USERS: Array<UsersShape> = [
+export const MOCK_USERS: Array<UserShape> = [
   {
     id: 1,
     name: "João Silva",

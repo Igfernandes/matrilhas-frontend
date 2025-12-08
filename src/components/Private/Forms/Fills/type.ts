@@ -1,4 +1,4 @@
-import { FormsShape } from "@type/Forms";
+import { FormShape } from "@type/Forms";
 import { FormFillField } from "@type/Forms/FormsFill";
 
 export type FillFieldData = {
@@ -8,7 +8,7 @@ export type FillFieldData = {
 };
 
 type Props = {
-  form: FormsShape;
+  form: FormShape;
   fields: Array<FormFillField>;
 };
 export type FieldsPageProps = Props;

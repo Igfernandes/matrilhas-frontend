@@ -8,7 +8,7 @@ import { PaymentShape } from "@type/Payments";
 import dayjs from "dayjs";
 
 export function useOverviewCharge() {
-  const { data: chargesData } = useGetCharges();
+  const { rows: chargesData } = useGetCharges();
   const [charges, setCharges] = useState<Array<ChargeShape>>([]);
   const [payments, setPayments] = useState<Array<PaymentShape>>([]);
   const [cardsBoard, setCardsBoard] = useState<Array<CardItemShape>>([]);

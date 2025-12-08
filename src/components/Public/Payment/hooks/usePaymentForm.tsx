@@ -1,5 +1,4 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
-import { useRecaptcha } from "@hooks/useRecaptcha";
 import { paymentFormSchema, PaymentPayload } from "../schemas";
 import { useEffect, useState } from "react";
 import { useMercadoPago } from "@hooks/useMercadoPago";
@@ -8,8 +7,7 @@ import usePostCheckout from "@services/Checkout/Post/usePost";
 import { useRouter } from "next/router";
 
 export function usePaymentForm() {
-  const { token, Recaptcha, loadReCaptcha } = useRecaptcha();
-  const { formMethods, hasAllFilledFields } = useFormRules<PaymentPayload>({
+  const { formMethods } = useFormRules<PaymentPayload>({
     schema: paymentFormSchema,
     defaultValues: {
       amounts: ["1"],
@@ -35,13 +33,12 @@ export function usePaymentForm() {
       ...payload,
       product: query.charge as string,
       amounts: payload.amounts.map((amount) => +amount),
-      recaptcha: token,
+
     });
 
     if (product_url) return router.push(product_url);
 
     handleUpdateMpProductKey(product_id);
-    loadReCaptcha();
   };
 
   useEffect(() => {
@@ -69,11 +66,8 @@ export function usePaymentForm() {
     onSubmit,
     errors,
     formMethods,
-    hasAllFilledFields,
     isLoading: isSubmitting,
-    recaptchaToken: true,
     hasFillPhone,
-    Recaptcha,
     handleCaptureClientByPhone,
   };
 }

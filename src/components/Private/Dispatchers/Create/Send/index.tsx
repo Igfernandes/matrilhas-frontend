@@ -11,7 +11,7 @@ import { FormsPayload } from "../schema";
 type Props = ClientsProps;
 
 export function Send({ clients, clientsSelected, handleUpdateClients }: Props) {
-  const { services, charges } = useSend();
+  const { charges } = useSend();
   const { register, getValues } = useFormContext<FormsPayload>();
 
   return (
@@ -31,10 +31,6 @@ export function Send({ clients, clientsSelected, handleUpdateClients }: Props) {
                   text: "--",
                   value: "",
                 },
-                ...services.map((service) => ({
-                  text: service.name,
-                  value: service.id,
-                })),
               ]}
             />
           </div>

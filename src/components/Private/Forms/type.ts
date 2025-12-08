@@ -1,6 +1,6 @@
 import { JSX } from "react";
 import { ServicesShape } from "../../../types/Services";
-import { FormsShape } from "../../../types/Forms";
+import { FormShape } from "../../../types/Forms";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 
 export type HookFormsProps<FormType> = {
@@ -25,7 +25,7 @@ export type FormsCardProps = {
 export type ModalFormsOperationType = "EXCLUDE" | boolean;
 
 export type FormsPageProps = {
-  targetForm: FormsShape;
+  targetForm: FormShape;
 };
 
 export type ComponentsProps = {

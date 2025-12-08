@@ -2,11 +2,11 @@ import { useFormDynamicFields } from "@components/shared/layouts/FormBuilder/hoo
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
 import usePostSubmitForm from "@services/Forms/Post/usePost";
-import { FormsShape } from "@type/Forms";
+import { FormShape } from "@type/Forms";
 import { FormEvent, useCallback, useState } from "react";
 
 type Props = {
-  form: FormsShape;
+  form: FormShape;
   csrf: CSRFShape;
 };
 

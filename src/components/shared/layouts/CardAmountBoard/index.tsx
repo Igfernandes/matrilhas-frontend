@@ -22,7 +22,7 @@ export function CardAmountBoard({
           {items.map((item, index) => (
             <div
               key={`card_${index}`}
-              className="bg-white px-6 py-4 rounded-md  shadow-md my-2"
+              className="bg-white px-6 pt-2 pb-1 rounded-md  shadow-md my-2"
               style={{
                 width: screenType !== "MOBILE" ? `${90 / viewLimit}%` : "100%",
               }}

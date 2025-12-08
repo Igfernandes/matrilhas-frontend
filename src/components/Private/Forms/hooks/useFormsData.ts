@@ -1,23 +1,13 @@
 import useGetCategories from "@services/Clients/Categories/Get/useGetCategories";
 import useGetForms from "@services/CustomForms/Get/useGetForms";
-import useGetEvents from "@services/Events/Get/useGetServices";
-import useGetServices from "@services/Services/Get/useGetServices";
-import { FormsShape } from "@type/Forms";
-import { ServicesShape } from "@type/Services";
+import { FormShape } from "@type/Forms";
 import { useEffect, useState } from "react";
 
-type Props = {
-  formId?: number;
-};
-
-export function useFormsData({ formId }: Props = {}) {
-  const { data: services } = useGetServices();
-  const { data: formsData } = useGetForms();
+export function useFormsData() {
+  const { rows: formsData } = useGetForms();
   const { data: categories } = useGetCategories();
-  const { data: events } = useGetEvents({
-    form_id: formId,
-  });
-  const [forms, setForms] = useState<Array<FormsShape>>([]);
+
+  const [forms, setForms] = useState<Array<FormShape>>([]);
 
   useEffect(() => {
     if (!formsData) return;
@@ -27,8 +17,6 @@ export function useFormsData({ formId }: Props = {}) {
 
   return {
     forms,
-    services: services as Array<ServicesShape>,
     categories,
-    events,
   };
 }

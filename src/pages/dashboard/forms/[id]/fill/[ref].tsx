@@ -3,7 +3,7 @@ import i18n from "@configs/i18n";
 import { GetServerSideProps } from "next";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { getFillFields } from "@services/Forms/Fills/Get/SSR";
-import { getForms } from "@services/CustomForms/Get/SSR";
+import { getForm } from "@services/CustomForms/Get/SSR";
 import { FormFillField } from "@type/Forms/FormsFill";
 import { useFillFields } from "@components/Private/Forms/Fills/hooks/useFillFields";
 import { FieldsPageProps } from "@components/Private/Forms/Fills/type";
@@ -73,18 +73,16 @@ export const getServerSideProps: GetServerSideProps<FieldsPageProps> = async ({
 }) => {
   const tokenNavigation = req.cookies["token_navigation"] ?? "";
   const { id, ref } = params as { id: string; ref: string }; // Tipando o params
-  const forms = await getForms(tokenNavigation, { id: parseInt(id) });
+  const form = await getForm(tokenNavigation, { id: parseInt(id) });
   const fields = await getFillFields(tokenNavigation, {
     formId: parseInt(id),
     ref,
   });
 
-  const form = Array.isArray(forms) ? forms[0] : forms;
-
-  if (!forms || !fields) {
+  if (!form || !fields) {
     return settings404;
   }
-  if (Object.hasOwn(forms, "errors") || Object.hasOwn(fields, "errors")) {
+  if (Object.hasOwn(form, "errors") || Object.hasOwn(fields, "errors")) {
     return settings404;
   }
 

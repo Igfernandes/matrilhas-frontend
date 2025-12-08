@@ -9,7 +9,7 @@ export function useClientsData() {
   const [clients, setClients] = useState<ClientShape[]>();
   const { data: categoryData, isFetched: isFetchedCategory } =
     useGetCategories();
-  const { data: clientsData } = useGetClients();
+  const { rows: clientsData } = useGetClients();
 
   useEffect(() => {
     setCategories(categoryData);

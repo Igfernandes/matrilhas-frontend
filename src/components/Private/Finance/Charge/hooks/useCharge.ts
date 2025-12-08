@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function useCharge({ charge }: Props) {
-  const { data: ClientsData } = useGetClients({ status: "ACTIVE" });
+  const { rows: ClientsData } = useGetClients({ status: "ACTIVE" });
   const [clients, setClients] = useState<Array<ClientShape>>([]);
   const [clientsSelected, setClientsSelected] = useState<Array<ClientShape>>(
     []

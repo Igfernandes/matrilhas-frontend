@@ -1,7 +1,7 @@
-import { FormsShape } from "../../../types/Forms";
+import { FormShape } from "../../../types/Forms";
 
 export type PutFormPayload = Pick<
-  FormsShape,
+  FormShape,
   "id" | "name" | "status" | "components"
 > & {
   description?: string | null;

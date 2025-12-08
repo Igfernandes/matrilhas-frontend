@@ -1,3 +1,3 @@
-import { FormsShape } from "../../../types/Forms";
+import { FormShape } from "../../../types/Forms";
 
-export type DeleteFormPayload = Pick<FormsShape, "id">;
+export type DeleteFormPayload = Pick<FormShape, "id">;

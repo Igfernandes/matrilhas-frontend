@@ -1,6 +1,6 @@
-import { FormsShape } from "../../../types/Forms";
+import { FormShape } from "../../../types/Forms";
 
 export type PostCreateFormPayload = Pick<
-  FormsShape,
+  FormShape,
   "name" | "status" | "components"
 >;

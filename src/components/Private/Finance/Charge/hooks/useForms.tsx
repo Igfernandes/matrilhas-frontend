@@ -3,10 +3,8 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useState } from "react";
 import { ChargeUpdatePayload, ChargeUpdateSchema } from "../schemas";
-import useGetServices from "@services/Services/Get/useGetServices";
 import usePutCharge from "@services/Charges/Put/usePut";
 import { ChargeShape } from "@type/Charges";
-import { ServicesShape } from "@type/Services";
 
 dayjs.extend(customParseFormat);
 
@@ -26,7 +24,6 @@ export function useForms({ charge }: Props) {
         expired_days: String(charge.expired_days),
       },
     });
-  const { data: services } = useGetServices();
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const { mutateAsync: putCharges, isPending: isLoadingPutCharge } =
     usePutCharge();
@@ -61,6 +58,5 @@ export function useForms({ charge }: Props) {
     isShowModal,
     handleToggleModel,
     isLoadingPutCharge,
-    services: services as Array<ServicesShape>,
   };
 }

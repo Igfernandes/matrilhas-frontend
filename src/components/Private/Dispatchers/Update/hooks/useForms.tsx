@@ -30,7 +30,7 @@ export function useForms({ dispatcher }: Props) {
   const { data: clientsDispatchersData } = useGetClientsDispatchers({
     message_id: dispatcher.id,
   });
-  const { data: clientsData } = useGetClients();
+  const { rows: clientsData } = useGetClients();
   const [clients, setClients] = useState<Array<ClientShape>>([]);
   const [clientsDispatchers, setClientsDispatchers] = useState<
     Array<ClientsMessagesDispatcherShape>
