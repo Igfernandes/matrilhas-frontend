@@ -1,8 +1,9 @@
 import { arrayMove } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EventDragProps, GroupFieldsDataShape, ItemShape } from "../type";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { FieldValues, Path, PathValue, useFormContext } from "react-hook-form";
+import { isEquals } from "@helpers/json";
 
 type Props<Payload> = {
   data: Array<GroupFieldsDataShape>;
@@ -35,7 +36,6 @@ export function useGroupFields<Payload extends FieldValues>({
       );
       const updatedItems = arrayMove(updatedItemsValue, oldIndex, newIndex);
       setItems(updatedItems);
-      handleUpdateValues(updatedItems);
     }
   };
 
@@ -47,26 +47,14 @@ export function useGroupFields<Payload extends FieldValues>({
     }));
   };
 
-  const handleUpdateValues = (items: ItemShape[]) => {
-    setValue(name as Path<Payload>, items as PathValue<Payload, Path<Payload>>);
-  };
-
-  const handleUpdateItems = () => {
-    const itemsValue = getValues(name);
-
-    setItems((items) => {
-      return items.map((item, key) => ({
-        ...item,
-        value: itemsValue[key]?.value ?? "",
-      })) as PathValue<Payload, Path<Payload>>;
-    });
-  };
-
   const handleAddingItem = () => {
-    const itemId = items.length;
+    const itemId = items.reduce(
+      (acc, item) =>
+        typeof item.id === "number" && item.id >= acc ? item.id + 1 : acc,
+      0
+    );
     const newItem = { id: itemId, value: "" };
     const itemsUpdated = [...items, newItem];
-    handleUpdateValues(itemsUpdated);
     setItems(itemsUpdated);
     setTargetItem(itemId);
   };
@@ -78,11 +66,9 @@ export function useGroupFields<Payload extends FieldValues>({
     if (action === "DELETE") {
       const itemsFiltered = items.filter((item) => item.id != id);
 
-      handleUpdateValues(itemsFiltered);
       return setItems(itemsFiltered);
     }
 
-    handleUpdateItems();
     setTargetItem(id !== targetItem ? id : -1);
   };
 
@@ -98,17 +84,25 @@ export function useGroupFields<Payload extends FieldValues>({
     /** @ts-expect-error só ignora pf  */
     return currentError.message as string;
   };
+  const stableData = useRef(data);
 
   useEffect(() => {
-    const itemsOrganized = data.sort((a, b) => a.position - b.position);
+    const itemsOrganized = stableData.current.sort(
+      (a, b) => a.position - b.position
+    );
     const initialItems = itemsOrganized.map(({ id, value }) => ({
       id,
       value,
     }));
 
     setItems(initialItems);
-    setValue(name, initialItems as PathValue<Payload, Path<Payload>>);
-  }, []);
+  }, [stableData]);
+
+  useEffect(() => {
+    if (isEquals(items, getValues(name))) return;
+
+    setValue(name, items as PathValue<Payload, Path<Payload>>);
+  }, [items, setValue, getValues, name]);
 
   return {
     handleDragEnd,

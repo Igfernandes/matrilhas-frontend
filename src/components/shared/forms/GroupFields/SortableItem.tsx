@@ -50,7 +50,7 @@ export function SortableItem<Payload extends FieldValues>({
           dataTestId={`group_fields_${name}`}
           defaultValue={value}
           disabled={!isTargetElement}
-          errors={errors[`${name}.${position}`] as FieldError}
+          errors={errors?.[name]?.[position]?.value as FieldError}
           className={
             isTargetElement ? "" : "disabled:bg-secondary disabled:border-none"
           }
