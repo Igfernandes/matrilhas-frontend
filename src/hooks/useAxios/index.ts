@@ -17,12 +17,6 @@ import {
   UseQueryResult,
 } from "@tanstack/react-query";
 
-const axios = new Axios({
-  ...axiosConfig,
-  validateStatus: (status: number) =>
-    status >= STATUS_SERVICE.OK && status < STATUS_SERVICE.REDIRECT,
-});
-
 export function useQueryGuard<
   TQueryFnData = unknown,
   TError = DefaultError,
@@ -41,6 +35,12 @@ export function useQueryGuard<
 }
 
 export function useAxios() {
+  const axios = new Axios({
+    ...axiosConfig,
+    validateStatus: (status: number) =>
+      status >= STATUS_SERVICE.OK && status < STATUS_SERVICE.REDIRECT,
+  });
+
   const { dispatchSnackbar } = useSnackbar();
 
   axios.interceptors.request.use(AuthenticationsInterceptor, (error) => {
@@ -48,7 +48,6 @@ export function useAxios() {
   });
   axios.interceptors.response.use(DataInterceptor, hasErrorAuthentication);
 
-  
   /**
    * @function handleAxiosError
    * - Irá analisar o erro e tratar baseado no modelo de resposta do axios.

@@ -19,7 +19,6 @@ const UserNavigationProvider = ({ children, user }: UserNavigationProps) => {
   const { rows: currentUser } = useGetUsers({ current: true });
   const { permissions, setPermissions, hasPermission } = usePermissions();
 
-  // Atualiza usuário quando data chega
   useEffect(() => {
     if (currentUser && currentUser.length > 0) {
       setUserAuth(currentUser[0]);
