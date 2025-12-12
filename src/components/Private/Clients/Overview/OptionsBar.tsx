@@ -12,6 +12,7 @@ type Props = {
 
 export function OptionsBar({ handleSearch }: Props) {
   const { handleToggleModal } = useModalContext<ModalClientsOperationType>();
+  
   return (
     <div className="flex justify-between flex-wrap md:flex-nowrap mb-6">
       <Search
