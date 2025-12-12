@@ -1,7 +1,7 @@
 export const othersColors = {
   primary: "#125520",
   dark: "#000000",
-  secondary: "#f5f5f5",
+  secondary: "#eeeeee",
   disabled: "#a3a3a3",
   active: "#14a230",
   white: "#fff",
