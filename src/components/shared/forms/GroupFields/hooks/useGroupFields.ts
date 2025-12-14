@@ -54,7 +54,7 @@ export function useGroupFields<Payload extends FieldValues>({
       0
     );
     const newItem = { id: itemId, value: "" };
-    const itemsUpdated = [...items, newItem];
+    const itemsUpdated = [newItem, ...items];
     setItems(itemsUpdated);
     setTargetItem(itemId);
   };
