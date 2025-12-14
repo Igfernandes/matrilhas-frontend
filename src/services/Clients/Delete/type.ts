@@ -1,4 +1,5 @@
 export type DeleteClientPayload = {
   client_id?: number;
-  in_clients?: Array<number>
+  all?: boolean;
+  in_clients?: Array<number>;
 };

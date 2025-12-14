@@ -26,11 +26,6 @@ export function OperationsFailures({
             pagination: {
               max: 4,
             },
-            filters: {
-              tag: {
-                key: "status",
-              },
-            },
           }}
           data={tDataOperationsFailures}
           title={i18n("Words.operations_failures")}

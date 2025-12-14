@@ -1,4 +1,4 @@
-import { DateShape } from "../datas";
+import { DateShape } from "../data";
 
 export type GroupsPermissionsShape = {
   id: number;

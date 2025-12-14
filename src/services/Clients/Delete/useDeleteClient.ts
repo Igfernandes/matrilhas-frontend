@@ -25,10 +25,7 @@ export default function useDeleteClient() {
         message: i18n(success),
         type: "success",
       });
-      queryClient.invalidateQueries({
-        queryKey: ["clients"],
-        refetchType: "active",
-      });
+      queryClient.removeQueries({ queryKey: ["clients"] });
     },
     onError: (err: AxiosError) => {
       handleAxiosError(err);

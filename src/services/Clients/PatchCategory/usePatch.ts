@@ -25,10 +25,9 @@ export default function usePatchClientCategory() {
         message: i18n(success),
         type: "success",
       });
-      queryClient.invalidateQueries({
-        queryKey: ["clients"],
-        refetchType: "active",
-      });
+
+      queryClient.invalidateQueries({ queryKey: ["clients"] });
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: (err) => {
       handleAxiosError(err);

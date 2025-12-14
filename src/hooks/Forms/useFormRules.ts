@@ -3,10 +3,11 @@ import {
   DefaultValues,
   FieldValues,
   useForm as useFormReactHook,
+  useWatch,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType } from "zod";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 type Props<Payload> = {
   schema: ZodType;
@@ -29,47 +30,56 @@ export function useFormRules<Payload extends FieldValues>({
     defaultValues,
     shouldUseNativeValidation,
     criteriaMode,
-    shouldFocusError: true, // já vem true por padrão
+    shouldFocusError: true,
   });
 
-  const [isAllFilled, setIsAllFilled] = useState(false);
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors, isSubmitting },
   } = formMethods;
 
-  const watchedValues = watch();
+  /** 🔥 useWatch só atualiza quando o campo realmente muda */
+  const watchedValues = useWatch({ control });
 
-  useEffect(() => {
-    const payload = { ...watchedValues };
+  /**
+   * 🧠 Cálculo 100% estável
+   * sem state, sem useEffect, sem re-render desnecessário.
+   */
+  const isAllFilled = useMemo(() => {
+    if (!watchedValues) return false;
 
-    // remover campos excluídos
-    exclude.forEach((field) => delete payload[field]);
+    // remove excluídos
+    const payload = Object.fromEntries(
+      Object.entries(watchedValues).filter(
+        ([key]) => !exclude.includes(key as keyof Payload)
+      )
+    );
 
     const values = Object.values(payload);
 
-    const filled =
+    return (
       values.length > 0 &&
-      values.every((v) => !!v) &&
-      Object.keys(errors).length === 0;
+      values.every((v) => v !== "" && v !== null && v !== undefined) &&
+      Object.keys(errors).length === 0
+    );
+  }, [watchedValues, errors, exclude]);
 
-    setIsAllFilled(filled);
-  }, [watchedValues, errors]);
-
+  /** ✔️ Scroll suave apenas quando houver erro */
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      const firstErrorField = Object.keys(errors)[0];
-      const el = document.querySelector(`[name="${firstErrorField}"]`);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "center" });
-        (el as HTMLElement).focus();
-      }
+    const first = Object.keys(errors)[0];
+    if (!first) return;
+
+    const el = document.querySelector(`[name="${first}"]`);
+    if (el instanceof HTMLElement) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.focus();
     }
   }, [errors]);
 
-  return useMemo(
+  /** Memo estável do resultado */
+  const result = useMemo(
     () => ({
       register,
       handleSubmit,
@@ -78,6 +88,8 @@ export function useFormRules<Payload extends FieldValues>({
       isAllFilled,
       isLoading: isSubmitting,
     }),
-    [schema, exclude, errors, isSubmitting, formMethods, defaultValues]
+    [errors, isSubmitting, isAllFilled, formMethods, register, handleSubmit]
   );
+
+  return result;
 }
