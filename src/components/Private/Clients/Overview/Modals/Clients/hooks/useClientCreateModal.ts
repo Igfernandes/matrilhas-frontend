@@ -4,6 +4,8 @@ import usePostCreateClient from "../../../../../../../services/Clients/Post/useP
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useModalContext } from "@contexts/Modal";
+import { Validations } from "@helpers/validations";
+import i18n from "@configs/i18n";
 
 dayjs.extend(customParseFormat);
 
@@ -13,9 +15,11 @@ export function useModalForm() {
   });
   const { handleToggleModal } = useModalContext();
   const { mutateAsync: postCreateClient, isPending } = usePostCreateClient();
-  const { watch } = formMethods;
+  const { watch, setError } = formMethods;
 
   const submit = ({ birthdate, ...payload }: ClientCreatePayload) => {
+    if (Validations.cpf(payload.cpf))
+      setError("cpf", { type: "manual", message: i18n("Validations.cpf") });
     postCreateClient({
       ...payload,
       birthdate: birthdate
@@ -23,14 +27,7 @@ export function useModalForm() {
         : undefined,
     }).then(() => {
       const isContinueRegister = watch("hasContinueRegister");
-      formMethods.reset({
-        category: "",
-        name: "",
-        birthdate: "",
-        email: "",
-        phone: "",
-        hasContinueRegister: isContinueRegister,
-      });
+      formMethods.reset();
 
       if (isContinueRegister == false) handleToggleModal(false);
     });

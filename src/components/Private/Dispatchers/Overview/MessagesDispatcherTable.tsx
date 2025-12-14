@@ -32,11 +32,6 @@ export function MessagesDispatcherTable({
             pagination: {
               max: 10,
             },
-            filters: {
-              tag: {
-                key: "status",
-              },
-            },
           }}
           data={tDatMessagesDispatcher}
           title={i18n("Words.my_shipments")}

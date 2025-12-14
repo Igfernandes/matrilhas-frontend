@@ -9,16 +9,15 @@ import { useClientCategoriesModal } from "./hooks/useClientCategoriesModal";
 export function ClientCategoriesModal({
   isShowModal,
   onModal,
-  title,
-  categories,
-  selectors,
+  categories = [],
+  selectors = [],
 }: ModalFormProps) {
-  const { formMethods, register, errors, submit } = useClientCategoriesModal({
+  const { formMethods, register, errors, submit, modal, isLoading } = useClientCategoriesModal({
     selectors,
   });
 
   return (
-    <Modal title={title} isShowModal={isShowModal} handleModal={onModal}>
+    <Modal title={i18n(modal.type === "CHANGE_ALL_CATEGORY" ? "Texts.all_alter_category" : "Texts.alter_category")} isShowModal={isShowModal} handleModal={onModal}>
       <FormProvider {...formMethods}>
         <form
           onSubmit={formMethods.handleSubmit(submit)}
@@ -38,10 +37,16 @@ export function ClientCategoriesModal({
               id="category"
               dataTestId="category"
               required={true}
-              options={(categories ?? []).map((category) => ({
-                text: category.name,
-                value: category.id,
-              }))}
+              options={[
+                {
+                  text: i18n("Texts.select_category"),
+                  value: "",
+                },
+                ...categories.map((category) => ({
+                  text: category.name,
+                  value: category.id,
+                }))
+              ]}
               errors={errors.category}
             />
           </div>
@@ -54,10 +59,11 @@ export function ClientCategoriesModal({
                 onClick={() => onModal(false)}
               />
             </div>
-            <div className="w-1/2 md:w-[25%] md:ml-5">
+            <div className="w-1/2 md:ml-5">
               <Button
+                isLoading={isLoading}
                 type="submit"
-                className="bg-red text-white"
+                className="bg-primary text-white px-2"
                 text={i18n("Words.save")}
               />
             </div>

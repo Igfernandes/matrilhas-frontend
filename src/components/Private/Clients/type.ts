@@ -28,6 +28,7 @@ export type ModalClientsOperationType =
   | "DELETE"
   | "SHARED"
   | "CHANGE_CATEGORY"
+  | "CHANGE_ALL_CATEGORY"
   | "IMPORT"
   | boolean;
 

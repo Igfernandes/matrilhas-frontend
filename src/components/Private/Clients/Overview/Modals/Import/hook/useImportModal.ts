@@ -24,6 +24,7 @@ export function useImportModal({ onModal }: ImportModalsProps) {
       setFileName(i18n("Texts.text_upload"));
     }
   }, [fileList]);
+  
   const onSubmit = async (payload: ImportPayload) => {
     await postImport(payload);
     setFileName(i18n("Texts.text_upload"));

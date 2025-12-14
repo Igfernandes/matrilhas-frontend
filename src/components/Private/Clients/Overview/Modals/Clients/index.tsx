@@ -135,7 +135,7 @@ export function ClientCreateModal({
               <div className="md:w-[60%] ml-auto">
                 <Button
                   type="submit"
-                  className="bg-red text-white"
+                  className="bg-primary font-semibold text-white"
                   text={i18n("Words.save")}
                   isLoading={isLoading}
                 />

@@ -1,34 +1,30 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import i18n from "@configs/i18n";
 import {
-  HookClientsProps,
   ModalClientsOperationType,
-  TDataClient,
 } from "../../type";
 import { SelectorShape } from "@components/shared/layouts/Selector/type";
-import { Selector } from "@components/shared/layouts/Selector";
 import { useModalContext } from "@contexts/Modal";
 import { ClientActions } from "../ClientActions";
-import { ClientShape, UserCategoryData } from "../../../../../types/Clients";
-import { useClientsData } from "./useClientsData";
+import { ClientShape } from "../../../../../types/Clients"
 import useDeleteClient from "../../../../../services/Clients/Delete/useDeleteClient";
 import { DeleteClientPayload } from "../../../../../services/Clients/Delete/type";
 import { getNumberFormatted } from "@helpers/string";
+import useGetCategories from "@services/Clients/Categories/Get/useGetCategories";
 
-export function useClients({
-  handleFilter,
-  filter,
-}: HookClientsProps<ClientShape>) {
-  const { categories, clients } = useClientsData();
-  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
-  const [tDataClients, setTDataClients] = useState<
-    Array<Record<string, unknown>>
-  >([]);
+export function useClients() {
+  const { data: categoryData } = useGetCategories();
+
+  const categories = useMemo(() => categoryData, [categoryData]);
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();
+  /** Esse sim precisa ser state */
+  const selectors = useRef<SelectorShape[]>([]);
+
   const { mutateAsync: deleteClient, isPending: isLoadingClientDelete } =
     useDeleteClient();
 
+  /** tHeads NÃO depende de estado → useRef é perfeito aqui */
   const tHeadsClient = useRef<Array<string>>([
     "ID",
     i18n("Words.name"),
@@ -38,88 +34,55 @@ export function useClients({
     i18n("Words.actions"),
   ]);
 
-  const getSelectedClientsName = (selectors: Array<SelectorShape>) => {
-    return selectors
-      .filter((selector) => selector.value != "all" && selector.isChecked)
-      .map((selector) => selector.value)
-      .join(",");
-  };
-
+  /** 🔥 useCallback para estável */
   const updateClientForTable = useCallback(
-    ({
-      id,
-      name,
-      status,
-      phone,
-      categories = [],
-    }: ClientShape): TDataClient => {
-      const clientId = id.toString();
+    (data: unknown) => {
+      const { id, name, status, phone, categories = [] } = data as ClientShape;
+      const clientId = String(id);
 
       return {
-        id: <Selector label={clientId} value={clientId} />,
+        id: clientId,
         name,
-        status: i18n(`Words.${status.toLocaleLowerCase()}`) as "ACTIVE" | "INACTIVE",
+        status: i18n(`Words.${status.toLowerCase()}`) as "ACTIVE" | "INACTIVE",
         phone: getNumberFormatted(phone),
-        category: categories
-          .map((category: UserCategoryData) => category.name)
-          .join(", "),
-        actions: (
-          <ClientActions handleToggleModal={handleToggleModal} id={id} />
-        ),
+        category: categories.map((c) => c.name).join(", "),
+        actions: <ClientActions handleToggleModal={handleToggleModal} id={id} />,
       };
     },
     [handleToggleModal]
   );
 
-  const handleDeleteClient = () => {
+  /** Criar nomes selecionados */
+  const getSelectedClients = useCallback((selectors: SelectorShape[]) => {
+    return selectors
+      .filter((s) => s.value !== "all" && s.isChecked)
+      .map((s) => s.value)
+      .join(",");
+  }, []);
+
+  /** DELETE otimizado */
+  const handleDeleteClient = useCallback(() => {
     const payload = {} as DeleteClientPayload;
-    const IdString = modal.id.toLocaleString();
+    const idString = String(modal.id);
 
-    if (IdString.indexOf(","))
-      payload["in_clients"] = IdString.split(",").map((clientId) =>
-        parseInt(clientId)
-      );
-    else payload["client_id"] = modal.id as number;
+    if (idString.includes(",")) {
+      payload.in_clients = idString.split(",").map(Number);
+    } else if (idString === "-1") {
+      payload.all = true;
+    } else {
+      payload.client_id = Number(modal.id);
+    }
 
-    deleteClient(payload).then(() => {
-      handleToggleModal(false);
-    });
-  };
-
-  /** Adding news keys of table and the lasted column to table data users */
-  useEffect(() => {
-    if (!clients) return;
-
-    const clientsFiltered = clients.filter((tDataClient) =>
-      handleFilter(tDataClient)
-    );
-
-    setSelectors([
-      ...clientsFiltered.map((client) => ({
-        value: client.id.toString(),
-        isChecked: false,
-      })),
-      {
-        value: "all",
-        isChecked: false,
-      },
-    ] as Array<SelectorShape>);
-
-    const tDataClient = clientsFiltered.map((ClientProps) =>
-      updateClientForTable(ClientProps)
-    );
-
-    setTDataClients(tDataClient);
-  }, [clients, filter, updateClientForTable, handleFilter]);
+    deleteClient(payload).then(() => handleToggleModal(false));
+  }, [deleteClient, modal.id, handleToggleModal])
 
   return {
-    tDataClients,
     tHeadsClient,
-    setSelectors,
     selectors,
     categories,
+    getSelectedClients,
     handleDeleteClient,
-    getSelectedClientsName,
     isLoadingClientDelete,
+    updateClientForTable
   };
 }
