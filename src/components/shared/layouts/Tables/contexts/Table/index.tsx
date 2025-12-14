@@ -1,7 +1,7 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -9,7 +9,6 @@ import {
   FilterCallback,
   TableContextData,
   TableData,
-  TableDataShape,
 } from "./types";
 import { useTableRules } from "../../hooks/useTableRules";
 import { usePaginationRules } from "../../utilities/Pagination/hooks/usePaginationRules";
@@ -24,63 +23,53 @@ const TableProvider = ({
   data,
   excludes,
   amountHiddenCols,
+  selectors,
+  setOffset,
+  filters: optionsFilters,
 }: TableData) => {
-  const [tRows, setTRows] = useState<Array<unknown[]>>([]);
-  const [paginatedTRows, setPaginatedTRows] = useState<Array<unknown[]>>([]);
 
   // Hooks para manipulação dos dados da tabela
   const { sortTableData, getTRows, getPaginatedData } = useTableRules({ data });
   const { sort, handleChangeSort } = useSortRules({ sortInstance });
-  const { pagination, handleChangePagination } = usePaginationRules({
-    paginationInstance,
-    tRows,
-  });
 
-  // Estados locais
-  const [hasEvent, setHasEvent] = useState<boolean>(false);
   const [filters, setFilters] = useState<Record<string, FilterCallback>>({});
-  const [amountRegisters, setAmountRegisters] = useState<number>(0);
+  const amountRegisters = useMemo(() => data.length, [data]);
 
   // Atualiza os filtros
-  const handleChangeFilters = (callback: Record<string, FilterCallback>) => {
+  const handleChangeFilters = useCallback((callback: Record<string, FilterCallback>) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       ...callback,
     }));
-  };
+  }, []);
 
-  // Aplica os filtros aos dados
-  const handleFilteredData = (data: TableDataShape) => {
-    return Object.values(filters).reduce((filteredData, filter) => {
-      return filter(filteredData);
+  const filteredData = useMemo(() => {
+    let data = sortTableData(sort);
+    if (optionsFilters?.search)
+      data = data.filter((item) =>
+        Object.values(item)
+          .some(value =>
+            String(value).toLowerCase()
+              .indexOf(optionsFilters?.search.toLowerCase()) !== -1));
+
+    return Object.values(filters).reduce((acc, filterFn) => {
+      return filterFn(acc);
     }, data);
-  };
+  }, [sort, filters, sortTableData, optionsFilters?.search]);
 
-  // Atualiza as linhas da tabela
-  const handleChangePaginedTRows = (rows: Array<unknown[]>) => {
-    setPaginatedTRows(rows);
-  };
+  const tRows = useMemo(() => {
+    return getTRows(filteredData, excludes);
+  }, [filteredData, excludes, getTRows]);
 
-  // Atualiza o estado de evento
-  const handleChangeEvent = (isEvent: boolean) => {
-    setHasEvent(isEvent);
-  };
+  const { pagination, handleChangePagination } = usePaginationRules({
+    paginationInstance,
+    tRows,
+    setOffset,
+  });
 
-  /**
-   * Atualiza os dados sempre que houver mudanças nos filtros, ordenação ou paginação
-   */
-  useEffect(() => {
-    setAmountRegisters(data.length);
-    const sortedData = sortTableData(sort);
-    const filteredData = handleFilteredData(sortedData);
-    const newRows = getTRows(filteredData, excludes);
-
-    setTRows(newRows);
-    const paginatedRows = getPaginatedData(newRows, pagination);
-
-    handleChangePaginedTRows(paginatedRows);
-    setHasEvent(false);
-  }, [sort?.type, pagination.current, data, hasEvent]);
+  const paginatedTRows = useMemo(() => {
+    return getPaginatedData(tRows, pagination);
+  }, [tRows, pagination, getPaginatedData]);
 
   // Memoização das propriedades do contexto
   const contextValue = useMemo(
@@ -93,11 +82,11 @@ const TableProvider = ({
       tRows,
       filters,
       handleChangeFilters,
-      handleChangeEvent,
       amountHiddenCols,
       amountRegisters,
+      selectors
     }),
-    [sort, pagination, paginatedTRows, tRows, filters, amountHiddenCols, data]
+    [sort, pagination, paginatedTRows, tRows, filters, amountHiddenCols, amountRegisters, selectors, handleChangeSort, handleChangePagination, handleChangeFilters]
   );
 
   return (

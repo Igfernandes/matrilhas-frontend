@@ -1,4 +1,4 @@
-import { useTableContext } from "../../../contexts/Table";
+import { useTableContext } from "../../../contexts/table";
 
 export function useSort() {
   const { handleChangeSort, sort } = useTableContext();

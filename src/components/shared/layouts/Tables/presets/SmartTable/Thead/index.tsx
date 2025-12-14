@@ -1,5 +1,5 @@
 import { When } from "@components/utilities/When";
-import { useTableContext } from "../../../contexts/Table";
+import { useTableContext } from "../../../contexts/table";
 
 type Props = {
   tHeads: Array<string>;
@@ -11,7 +11,7 @@ export function THead({ tHeads, widths = [] }: Props) {
 
   return (
     <thead>
-      <tr className="border-y-2 border-x-8 border-tertiary bg-tertiary ">
+      <tr className=" bg-tertiary bor">
         {tHeads.map((tHead, key) => (
           <When
             key={`thead_${tHead}`}
@@ -25,7 +25,7 @@ export function THead({ tHeads, widths = [] }: Props) {
               style={{
                 width: widths ? widths[key] : "auto",
               }}
-              className="font-normal text-left"
+              className="font-normal px-2 py-1 bg-secondary text-left"
             >
               {tHead}
             </th>

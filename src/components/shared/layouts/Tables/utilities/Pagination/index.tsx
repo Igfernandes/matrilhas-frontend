@@ -1,48 +1,30 @@
 import { ArrowLeft } from "@assets/Icons/black/ArrowLeft";
 import { ArrowRight } from "@assets/Icons/black/ArrowRight";
-import { useEffect } from "react";
+import { useRef } from "react";
 import { When } from "@components/utilities/When";
 import { usePagination } from "./hooks/usePagination";
-import useWindow from "@hooks/useWindow";
+import { useTableContext } from "../../contexts/table";
 
-export function Pagination() {
-  const {
-    arrowStyled,
-    displayedGroupPage,
-    displayedPages,
-    pagination,
-    tRows,
-    handleChangeDisplayedGroupPage,
-    handleChangeDisplayedPages,
-    handleChangePagination,
-    amountRegisters,
-  } = usePagination();
-  const { windowSize } = useWindow();
-
-  useEffect(() => {
-    const nextGroupPage = Math.ceil(pagination.current / 3);
-
-    handleChangeDisplayedPages(nextGroupPage);
-    handleChangeDisplayedGroupPage(nextGroupPage);
-  }, [pagination]);
+type Props = {
+  counterRegisters?: number;
+}
+export function Pagination({ counterRegisters }: Props) {
+  const arrowStyled =
+    useRef<string>("bg-secondary border-dark border px-2 text-center py-1 hover:bg-black-400");
+  const { pagination, handleChangePagination, tRows} = useTableContext();
+  const { displayedPages, displayedGroupPage, amountGroups } = usePagination();
 
   return (
     <div className="flex justify-between mt-3">
       <div>
         <p className="text-sm">
-          <When value={windowSize.width > 500}>
-            {`Exibindo ${tRows.length} de ${amountRegisters} resultados`}
-          </When>
-          <When value={windowSize.width <= 500}>
-            {" "}
-            {`Exibindo ${tRows.length} de ${amountRegisters} `}
-          </When>
+          {`Exibido ${tRows.slice(0, pagination.current * pagination.max).length} de ${counterRegisters} `}
         </p>
       </div>
       <div>
         <div className="flex justify-end items-center">
           <div
-            className={`${arrowStyled} rounded-l-md rounded-bl-md cursor-pointer`}
+            className={`${arrowStyled.current} rounded-l-md rounded-bl-md cursor-pointer`}
             onClick={() => handleChangePagination(pagination.current - 1)}
           >
             <ArrowLeft />
@@ -52,32 +34,30 @@ export function Pagination() {
               <When value={displayedPages.length == 0}>
                 <li
                   key={`pagination_key_${1}`}
-                  className={`bg-primary text-white px-2 hover:bg-rose-800 hover:text-white cursor-pointer`}
+                  className={`bg-primary text-white px-2 hover:bg-secondary hover:text-white cursor-pointer`}
                 >
                   <span>{1}</span>
                 </li>
               </When>
+
               {displayedPages.map((value, index) => (
                 <li
                   key={`pagination_key_${index}`}
-                  className={`${
-                    pagination.current == value
-                      ? "bg-red text-white"
-                      : "bg-tertiary text-black"
-                  } px-2 hover:bg-rose-800 hover:text-white cursor-pointer`}
+                  className={`${pagination.current == value
+                    ? "bg-primary text-white"
+                    : "bg-tertiary text-black"
+                    } px-2 hover:bg-emerald-600 hover:text-white cursor-pointer`}
                   onClick={() => handleChangePagination(value)}
                 >
                   <span>{value}</span>
                 </li>
               ))}
-              <When value={displayedPages[displayedPages.length - 1] < (pagination.amount ?? 0)}>
+              <When value={displayedGroupPage < amountGroups}>
                 <li
                   key={`pagination_key_more`}
-                  className={`px-2 hover:bg-rose-800 text-black hover:text-white cursor-pointer`}
+                  className={`px-2 hover:bg-secondary text-black hover:text-white cursor-pointer`}
                   onClick={() =>
-                    handleChangePagination(
-                      displayedGroupPage * pagination.max + 1
-                    )
+                    handleChangePagination(displayedPages[displayedPages.length - 1] + 1)
                   }
                 >
                   <span>...</span>
@@ -86,10 +66,10 @@ export function Pagination() {
             </ul>
           </div>
           <div
-            className={`${arrowStyled} rounded-r-md rounded-br-md cursor-pointer`}
+            className={`${arrowStyled.current} rounded-r-md rounded-br-md cursor-pointer`}
             onClick={() => handleChangePagination(pagination.current + 1)}
           >
-            <ArrowRight  />
+            <ArrowRight />
           </div>
         </div>
       </div>
