@@ -59,5 +59,6 @@ export const Texts = {
   selected_delete: "Excluir selecionados",
   alter_category: "Alterar categoria",
   select_category: "Selecionar categoria",
+  select_status: "Selecionar status",
   selected_alter_category: "Alterar categorias selecionadas",
 };

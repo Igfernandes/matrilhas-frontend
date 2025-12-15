@@ -40,10 +40,11 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
   const { handleTruncateColumn, amountHiddenCols } = useColumnRules({
     tHeadsWidth: currentTHeads?.widths ?? [],
   });
-  const { tHeads, setOffset, tRows, count, isLoading } = useTableData({
+  const { tHeads, setOffset, tRows, count, isLoading, offset } = useTableData({
     data,
     excludes,
     ajax,
+    filters: options.filters ? options.filters : {},
     tHeads: currentTHeads as THeadRequiredProps,
   });
 
@@ -64,6 +65,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
         data={tRows}
         setOffset={setOffset}
         tHeads={currentTHeads}
+        offset={offset}
         amountHiddenCols={amountHiddenCols}
         table={ref}
         {...options}

@@ -3,7 +3,7 @@ import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
 import { ModalFormCategories } from "./Modals/Categories";
 import { useModalContext } from "@contexts/Modal";
-import { ModalClientsOperationType, ClientsStructProps } from "../type";
+import { ModalClientsOperationType } from "../type";
 import { ClientCreateModal } from "./Modals/Clients";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { ClientCategoriesModal } from "./Modals/ClientCategories";
@@ -12,8 +12,9 @@ import { PERMISSIONS } from "@constants/permissions";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { ImportModal } from "./Modals/Import";
 import { API_ROUTES } from "@configs/routes/Api/api";
+import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 
-export function Clients({ search }: ClientsStructProps) {
+export function Clients() {
   const {
     tHeadsClient,
     selectors,
@@ -21,11 +22,13 @@ export function Clients({ search }: ClientsStructProps) {
     getSelectedClients,
     handleDeleteClient,
     isLoadingClientDelete,
+
     updateClientForTable,
   } = useClients();
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();
   const { hasPermission } = useUserNavigationContext();
+  const { filters } = useFiltersContext();
 
   return (
     <>
@@ -84,9 +87,7 @@ export function Clients({ search }: ClientsStructProps) {
                   .map((selector) => +selector.value)}
               />
             ),
-            filters: {
-              search,
-            },
+            filters: filters["CLIENTS"] ?? {},
           }}
           title={i18n("Words.clients")}
           excludes={["created_at", "updated_at"]}

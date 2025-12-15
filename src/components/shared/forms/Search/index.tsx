@@ -17,7 +17,7 @@ export function Search({
 
   useEffect(() => {
     changeLabelClass(placeholder ? "UP" : "DOWN");
-  }, [placeholder]);
+  }, [placeholder, changeLabelClass]);
 
   return (
     <div className={`${className} shadow-sm border-zinc-600`}>

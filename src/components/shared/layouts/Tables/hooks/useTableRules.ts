@@ -52,7 +52,8 @@ export function useTableRules({ data }: Props) {
   const getPaginatedData = useCallback(
     (data: Array<unknown[]>, pagination: PaginationShape): Array<unknown[]> => {
       const showMaxElement = pagination.max ?? 5;
-      const lastElementPage = pagination.current * showMaxElement;
+      const currentIndex = data.length > 0 ? pagination.current : 1;
+      const lastElementPage = currentIndex * showMaxElement;
       const firstElementPage = lastElementPage - showMaxElement;
 
       return data.slice(firstElementPage, lastElementPage);

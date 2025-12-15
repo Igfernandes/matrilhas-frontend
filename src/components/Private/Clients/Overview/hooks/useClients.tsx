@@ -14,7 +14,6 @@ import useGetCategories from "@services/Clients/Categories/Get/useGetCategories"
 
 export function useClients() {
   const { data: categoryData } = useGetCategories();
-
   const categories = useMemo(() => categoryData, [categoryData]);
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();

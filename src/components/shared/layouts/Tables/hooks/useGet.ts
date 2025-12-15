@@ -34,6 +34,6 @@ export default function useGetTable(
       count: (data?.count ?? 0) as number,
       ...rest,
     }),
-    [data, rest, request]
+    [data, rest]
   );
 }

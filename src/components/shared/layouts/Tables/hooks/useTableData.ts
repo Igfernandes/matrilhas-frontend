@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useState, useEffect } from "react";
+import { useMemo, useCallback, useState, useEffect, useRef } from "react";
 import { HookTableDataProps } from "../type";
 import { TDataOptions } from "../presets/SmartTable/Tbody/TData/type";
 import { useColumnMetrics } from "./useColumnMetrics";
@@ -9,30 +9,51 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
   data,
   excludes,
   tHeads: tHeadProps,
+  filters,
   ajax,
 }: HookTableDataProps<TableData>) {
+  const resetDataRef = useMemo(() => {
+    const map = new Map<unknown, unknown>();
+    return Array.from(map.values()) as TableData;
+  }, []);
+  const refRows = useRef<TableData>(resetDataRef);
+  const filtersRef = useRef<Record<string, unknown>>(null);
   const [offset, setOffset] = useState<number>(0);
   const { rows, count, isPending, refetch } = useGetTable(
     {
-      limit: 50,
+      ...filters,
+      limit: 100,
       start: offset,
     },
     ajax?.url,
     ajax?.key
   );
-  const [tRows, setTRows] = useState<TableData>((data ?? []) as TableData);
-
   const updateOffset = (newOffset: number) => {
     setOffset(newOffset);
-    if (newOffset !== offset) refetch();
+    if (newOffset !== offset) {
+      refetch();
+    }
   };
 
-  const currentData = useMemo(() => {
+  const appendRows = useCallback((prev: TableData, rows: TableData) => {
+    const map = new Map<unknown, unknown>();
+
+    prev.forEach((item) => map.set(item.id, item));
+    rows.forEach((item: TableData[number]) => map.set(item.id, item)); // sobrescreve
+
+    return Array.from(map.values()) as TableData;
+  }, []);
+
+  const tRows = useMemo(() => {
+    let rowData = data as TableData;
     if (ajax?.url) {
-      return rows.map((row) => ajax.builder(row)) as TableData;
+      rowData = rows.map((row) => ajax.builder(row)) as TableData;
     }
-    return (data ?? []) as TableData;
-  }, [ajax, data, rows]);
+
+    const rowNew = appendRows(refRows.current, rowData) as TableData;
+    refRows.current = rowNew;
+    return rowNew;
+  }, [ajax, data, rows, appendRows]);
   const { data: tHeadsData = [], widths = [] } = tHeadProps ?? {};
 
   const { getCurrentWidthColumn, adjustCellContent } = useColumnMetrics({
@@ -82,27 +103,21 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
     ]
   );
 
-  const appendRows = useCallback((rows: TableData) => {
-    setTRows((prev) => {
-      const map = new Map<unknown, unknown>();
-      prev.forEach((item) => map.set(item.id, item));
-      rows.forEach((item: TableData[number]) => map.set(item.id, item)); // sobrescreve
-
-      return Array.from(map.values()) as TableData;
-    });
-  }, []);
-
   useEffect(() => {
-    if (isPending || currentData.length == 0) return;
+    if (filtersRef.current === filters || !filters) return;
 
-    appendRows(currentData);
-  }, [currentData, isPending, appendRows]);
+    refRows.current = resetDataRef;
+    filtersRef.current = filters;
+    setOffset(0);
+    refetch();
+  }, [filters, resetDataRef, refetch]);
 
   return {
     tHeads,
     tRows,
     setOffset: updateOffset,
     count,
+    offset,
     isLoading: isPending,
     handleManagerColumn,
   };

@@ -1,6 +1,5 @@
 import {
   TableAjaxProps,
-  TableFiltersOptions,
   TableSelectorProps,
   THeadProps,
 } from "../../type";
@@ -34,13 +33,13 @@ export type TableProps = {
   excludes: Array<string>;
   table: React.RefObject<HTMLTableElement | null>;
   amountHiddenCols: Array<boolean>;
-  filters?: TableFiltersOptions;
   children: React.ReactNode;
   selectors?: TableSelectorProps;
 };
 
 export type TableData = TableProps & {
   data: TableDataShape;
+  offset?: number;
   setOffset?: (newOffset: number) => void;
 };
 
