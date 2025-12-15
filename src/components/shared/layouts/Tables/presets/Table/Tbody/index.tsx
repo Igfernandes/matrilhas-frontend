@@ -1,4 +1,4 @@
-import { useTableContext } from "../../../contexts/Table";
+import { useTableContext } from "../../../contexts/table";
 import { TData } from "./TData";
 
 export function TBody() {

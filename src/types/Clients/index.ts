@@ -1,4 +1,6 @@
-export type ClientShape = {
+import { BaseShape } from "@type/data";
+
+export type ClientShape = BaseShape & {
   id: number;
   name: string;
   avatar?: string;

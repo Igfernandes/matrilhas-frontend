@@ -54,4 +54,10 @@ export const Texts = {
   has_event: "Possui evento?",
   view_event: "Visualizar Evento",
   uploading_file_please_wait: "Enviando arquivo, por favor aguarde...",
+  all_delete: "Excluir tudo",
+  all_alter_category: "Alterar todas categorias",
+  selected_delete: "Excluir selecionados",
+  alter_category: "Alterar categoria",
+  select_category: "Selecionar categoria",
+  selected_alter_category: "Alterar categorias selecionadas",
 };

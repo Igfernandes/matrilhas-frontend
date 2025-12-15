@@ -1,4 +1,5 @@
-import { TableDataShape } from "../contexts/Table/types";
+import { useCallback } from "react";
+import { TableDataShape } from "../contexts/table/types";
 import { PaginationShape } from "../utilities/Pagination/type";
 import { SortShape } from "../utilities/Sort/type";
 
@@ -18,21 +19,24 @@ export function useTableRules({ data }: Props) {
    * @param {Array<string>} [excludes=[]] - O array de chaves que serão removidas de cada objeto.
    * @returns {Array<Array<unknown>>} - Uma matriz de linhas, onde cada linha é uma matriz de valores de objeto.
    */
-  const getTRows = (
-    data: Array<Record<string, unknown>>,
-    excludes: Array<string> = []
-  ): Array<Array<unknown>> => {
-    const matrizValue = [] as Array<unknown[]>;
+  const getTRows = useCallback(
+    (
+      data: Array<Record<string, unknown>>,
+      excludes: Array<string> = []
+    ): Array<Array<unknown>> => {
+      const rows = [] as Array<unknown[]>;
 
-    data.forEach((item: Record<string, unknown>) => {
-      for (const key of excludes) {
-        delete item[key];
-      }
-      matrizValue.push(Object.values(item));
-    });
+      data.forEach((item: Record<string, unknown>) => {
+        for (const key of excludes) {
+          delete item[key];
+        }
+        rows.push(Object.values(item));
+      });
 
-    return matrizValue;
-  };
+      return rows;
+    },
+    []
+  );
 
   /**
    * Obtém os dados da página atual com base na paginação fornecida.
@@ -45,16 +49,16 @@ export function useTableRules({ data }: Props) {
    * e o número máximo de elementos por página.
    * @returns {Array<unknown[]>} - Um array com os dados da página atual.
    */
-  const getPaginatedData = (
-    data: Array<unknown[]>,
-    pagination: PaginationShape
-  ): Array<unknown[]> => {
-    const showMaxElement = pagination.max ?? 5;
-    const lastElementPage = pagination.current * showMaxElement;
-    const firstElementPage = lastElementPage - showMaxElement;
+  const getPaginatedData = useCallback(
+    (data: Array<unknown[]>, pagination: PaginationShape): Array<unknown[]> => {
+      const showMaxElement = pagination.max ?? 5;
+      const lastElementPage = pagination.current * showMaxElement;
+      const firstElementPage = lastElementPage - showMaxElement;
 
-    return data.slice(firstElementPage, lastElementPage);
-  };
+      return data.slice(firstElementPage, lastElementPage);
+    },
+    []
+  );
 
   /**
    * Ordena os dados da tabela com base em uma chave específica e em uma direção de ordenação.
@@ -65,18 +69,21 @@ export function useTableRules({ data }: Props) {
    * @param {SortShape} sort - O objeto que define a referência para a chave de ordenação e a direção (ASC ou DESC).
    * @returns {TableDataShape} - Os dados ordenados conforme a chave e a direção fornecidas.
    */
-  const sortTableData = (sort: SortShape): TableDataShape => {
-    data.sort((a, b) => {
-      const valueA = String(a[sort.reference]);
-      const valueB = String(b[sort.reference]);
+  const sortTableData = useCallback(
+    (sort: SortShape): TableDataShape => {
+      data.sort((a, b) => {
+        const valueA = String(a[sort.reference]);
+        const valueB = String(b[sort.reference]);
 
-      return sort.type === "ASC"
-        ? valueA.localeCompare(valueB)
-        : valueB.localeCompare(valueA);
-    });
+        return sort.type === "ASC"
+          ? valueA.localeCompare(valueB)
+          : valueB.localeCompare(valueA);
+      });
 
-    return data;
-  };
+      return data;
+    },
+    [data]
+  );
 
   return {
     getPaginatedData,

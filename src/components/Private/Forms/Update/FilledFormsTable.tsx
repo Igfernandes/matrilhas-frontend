@@ -20,11 +20,6 @@ export function FilledFormsTable(props: Props) {
           pagination: {
             max: 10,
           },
-          filters: {
-            tag: {
-              key: "inscribe_at"
-            }
-          },
           buttons: (
             <FilledFormsActions
               formId={props.formId}

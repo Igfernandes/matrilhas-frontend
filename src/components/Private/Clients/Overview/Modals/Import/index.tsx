@@ -13,13 +13,13 @@ export function ImportModal({ onModal, isShowModal }: ImportModalsProps) {
     });
 
   return (
-    <Modal title={"Upload"} isShowModal={isShowModal} handleModal={onModal}>
+    <Modal title={"Importador de clientes"} isShowModal={isShowModal} handleModal={onModal}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="max-w-[400px]">
           <div>
             <label
               htmlFor={"#import"}
-              className="max-h-[104px] w-[376px] relative mx-auto block border rounded-lg border-dashed border-secondary px-0 pb-5 pt-4 text-center cursor-pointer"
+              className="max-h-[104px] md:w-[376px] relative mx-auto block border rounded-lg border-dashed border-secondary px-0 pb-5 pt-4 text-center cursor-pointer"
             >
               <input
                 {...register("excel")}
@@ -61,7 +61,7 @@ export function ImportModal({ onModal, isShowModal }: ImportModalsProps) {
               type="submit"
               isLoading={isLoading}
               text={i18n(`Words.save`)}
-              className="bg-red  text-white font-semibold disabled:bg-disable"
+              className="bg-primary  text-white font-semibold disabled:bg-disable"
             />
           </div>
         </div>

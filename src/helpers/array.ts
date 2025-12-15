@@ -16,3 +16,16 @@ export function convertToBooleanArray(values: Array<number>) {
 
   return result;
 }
+
+export function mergeById<T extends { id: unknown }>(
+  prev: T[],
+  next: T[]
+): T[] {
+  const map = new Map<unknown, T>();
+
+  prev.forEach(item => map.set(item.id, item));
+  next.forEach(item => map.set(item.id, item)); // sobrescreve
+
+  return Array.from(map.values());
+}
+

@@ -6,8 +6,6 @@ export type PresetsFieldsTabsProps = {
   tailwindClass: string;
   fieldsGroups: FieldsGroupsShape[];
   fields: FieldsShape[];
-  handleToggleTab: (
-    tabRef: OptionsFieldTabTarget
-  ) => "bg-red text-white" | "bg-white";
+  handleToggleTab: (tabRef: OptionsFieldTabTarget) => string;
   handleChangeTab: (tabId: OptionsFieldTabTarget) => void;
 };

@@ -7,8 +7,10 @@ import { FormHub } from "@components/shared/layouts/FormHub";
 import { useClientsUpdate } from "@components/Private/Clients/Update/hooks/useClientsUpdate";
 import { getClients } from "../../../services/Clients/Get/SSR";
 import { ClientUpdateModal } from "@components/Private/Clients/Update/Modals/Clients";
+import { ClientShape } from "@type/Clients";
+import { useRef } from "react";
 
-export default function ClientPerfil({ targetClient }: ClientPageProps) {
+export default function ClientProfile({ targetClient }: ClientPageProps) {
   const {
     fields,
     fieldsGroups,
@@ -18,7 +20,7 @@ export default function ClientPerfil({ targetClient }: ClientPageProps) {
   } = useClientsUpdate({
     client: targetClient,
   });
-
+  const clientRef = useRef<ClientShape>(targetClient);
 
   return (
     <DashboardContainer>
@@ -31,7 +33,7 @@ export default function ClientPerfil({ targetClient }: ClientPageProps) {
         handleUpdateClient={handleToggleModal}
       />
       <ClientUpdateModal
-        client={targetClient}
+        client={clientRef}
         isShowModal={isShowModalUpdateUser}
         onModal={handleToggleModal}
       />
@@ -46,14 +48,12 @@ export const getServerSideProps: GetServerSideProps<ClientPageProps> = async ({
 }) => {
   const tokenNavigation = req.cookies["token_navigation"] ?? "";
   const { id } = params as { id: string }; // Tipando o params
+  const { rows } = await getClients(tokenNavigation, { id: +id });
 
-  const clients = await getClients(tokenNavigation, { id: +id });
-  const currentClient = Array.isArray(clients) ? clients[0] : clients;
-
-  if (!currentClient || Object.hasOwn(currentClient, "errors")) {
+  if (!Array.isArray(rows) || rows.length == 0) {
     return {
       redirect: {
-        destination: `${privateRoutes.dashboard}?alert=${i18n(
+        destination: `${privateRoutes.clients}?alert=${i18n(
           "errors.system.not_found_user"
         )}`, // Redireciona para a página principal
         permanent: true, // Define como redirecionamento temporário (status 307)
@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<ClientPageProps> = async ({
 
   return {
     props: {
-      targetClient: currentClient, // Passa o ID para o componente
+      targetClient: rows[0], // Passa o ID para o componente
     },
   };
 };

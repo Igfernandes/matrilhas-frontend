@@ -1,5 +1,5 @@
 import { TData } from "./TData";
-import { useTableContext } from "../../../contexts/Table";
+import { useTableContext } from "../../../contexts/table";
 import { When } from "@components/utilities/When";
 import i18n from "@configs/i18n";
 

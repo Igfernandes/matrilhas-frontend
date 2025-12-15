@@ -1,87 +1,109 @@
-import { useEffect, useState } from "react";
+import { useMemo, useCallback, useState, useEffect } from "react";
 import { HookTableDataProps } from "../type";
-import { REGEXES } from "@constants/regexes";
 import { TDataOptions } from "../presets/SmartTable/Tbody/TData/type";
 import { useColumnMetrics } from "./useColumnMetrics";
 import { useTableMetrics } from "./useTableMetrics";
+import useGetTable from "./useGet";
 
 export function useTableData<TableData extends Array<Record<string, unknown>>>({
   data,
   excludes,
   tHeads: tHeadProps,
+  ajax,
 }: HookTableDataProps<TableData>) {
-  const { data: tHeadsData = [], widths } = tHeadProps ?? {};
-  const [tHeads, setTHeads] = useState<string[]>([]);
-  const { getCurrentWidthColumn, getTextSize, truncateTextToFit } =
-    useColumnMetrics({ widths });
+  const [offset, setOffset] = useState<number>(0);
+  const { rows, count, isPending, refetch } = useGetTable(
+    {
+      limit: 50,
+      start: offset,
+    },
+    ajax?.url,
+    ajax?.key
+  );
+  const [tRows, setTRows] = useState<TableData>((data ?? []) as TableData);
+
+  const updateOffset = (newOffset: number) => {
+    setOffset(newOffset);
+    if (newOffset !== offset) refetch();
+  };
+
+  const currentData = useMemo(() => {
+    if (ajax?.url) {
+      return rows.map((row) => ajax.builder(row)) as TableData;
+    }
+    return (data ?? []) as TableData;
+  }, [ajax, data, rows]);
+  const { data: tHeadsData = [], widths = [] } = tHeadProps ?? {};
+
+  const { getCurrentWidthColumn, adjustCellContent } = useColumnMetrics({
+    widths,
+  });
+
   const { getColumnContent, getTableElement } = useTableMetrics();
 
   /**
-   * Ajusta o conteúdo da célula com base na largura da coluna e no tamanho do texto.
-   * Se o conteúdo for maior que a largura da célula, ele será truncado e "..." será adicionado.
-   *
-   * @param {HTMLTableCellElement} el - A célula da tabela onde o conteúdo será ajustado.
-   * @param {string} content - O conteúdo da célula a ser exibido.
-   * @param {number} columnWidth - A largura da coluna, usada para determinar se o texto precisa ser truncado.
+   * Cabeçalhos da tabela, derivados e memoizados
    */
-  const adjustCellContent = (
-    el: HTMLTableCellElement,
-    content: string,
-    columnWidth: number
-  ) => {
-    const contentLength = getTextSize(content, el);
+  const tHeads = useMemo(() => {
+    if (tHeadsData.length > 0) return tHeadsData;
 
-    if (
-      columnWidth >= contentLength ||
-      REGEXES.HAS_HTML_ELEMENT.test(content)
-    ) {
-      el.innerHTML = content;
-    } else {
-      el.innerHTML = truncateTextToFit(content, el, columnWidth);
+    if (data && data.length > 0) {
+      return Object.keys(data[0]).filter((k) => !excludes.includes(k));
     }
-  };
+
+    return [];
+  }, [tHeadsData, data, excludes]);
 
   /**
-   * Função principal para gerenciar o conteúdo das células da tabela. Ajusta o conteúdo da célula
-   * de acordo com a largura da coluna, truncando o texto se necessário.
-   *
-   * @param {HTMLTableCellElement} el - A célula da tabela a ser ajustada.
-   * @param {TDataOptions} options - As opções que incluem o valor da célula e o índice da coluna.
+   * Gerenciador de conteúdo das células
+   * Memoizado para não recriar em toda renderização
    */
-  const handleManagerColumn = (
-    el: HTMLTableCellElement,
-    { value, index }: TDataOptions
-  ) => {
-    if (!el || widths.length === 0 || !value) return;
+  const handleManagerColumn = useCallback(
+    (el: HTMLTableCellElement, { value, index }: TDataOptions) => {
+      if (!el || widths.length === 0 || !value) return;
 
-    const table = getTableElement(el);
-    if (!table) return;
+      const table = getTableElement(el);
+      if (!table) return;
 
-    const columnContent = getColumnContent(value);
-    if (!columnContent) return;
+      const columnContent = getColumnContent(value);
+      if (!columnContent) return;
 
-    const currentWidthColumn = getCurrentWidthColumn(table, index);
-    el.setAttribute("width", currentWidthColumn.toString());
+      const width = getCurrentWidthColumn(table, index);
+      el.setAttribute("width", width.toString());
 
-    adjustCellContent(el, columnContent, currentWidthColumn);
-  };
+      adjustCellContent(el, columnContent, width);
+    },
+    [
+      widths,
+      getTableElement,
+      getColumnContent,
+      getCurrentWidthColumn,
+      adjustCellContent,
+    ]
+  );
 
-  // Gerenciamento das cabeçalhos da tabela
+  const appendRows = useCallback((rows: TableData) => {
+    setTRows((prev) => {
+      const map = new Map<unknown, unknown>();
+      prev.forEach((item) => map.set(item.id, item));
+      rows.forEach((item: TableData[number]) => map.set(item.id, item)); // sobrescreve
+
+      return Array.from(map.values()) as TableData;
+    });
+  }, []);
+
   useEffect(() => {
-    // Se já temos dados em 'tHeadsData', vamos usá-los diretamente
-    if (tHeadsData.length > 0) {
-      return setTHeads(tHeadsData);
-    }
+    if (isPending || currentData.length == 0) return;
 
-    // Se não, criamos 'tHeads' com as chaves dos dados, excluindo as que estão em 'excludes'
-    if (Array.isArray(data) && data[0]) {
-      const keys = Object.keys(data[0]);
-      setTHeads(keys.filter((key) => !excludes.includes(key)));
-    }
-  }, [data, excludes]);
+    appendRows(currentData);
+  }, [currentData, isPending, appendRows]);
 
   return {
     tHeads,
+    tRows,
+    setOffset: updateOffset,
+    count,
+    isLoading: isPending,
     handleManagerColumn,
   };
 }

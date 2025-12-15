@@ -21,7 +21,7 @@ export type ItemProps<Payload extends FieldValues> = {
   id: UniqueIdentifier;
   value: string;
   name: string;
-  errors: FieldErrors<Payload>;
+  errors: Record<string, FieldErrors[] | undefined>;
   register: UseFormRegister<Payload>;
   onChange: (id: UniqueIdentifier, action: "EDIT" | "DELETE") => void;
   target: UniqueIdentifier | undefined;

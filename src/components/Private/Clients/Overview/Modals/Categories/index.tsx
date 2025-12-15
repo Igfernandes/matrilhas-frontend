@@ -19,7 +19,7 @@ export function ModalFormCategories({
       <FormProvider {...formMethods}>
         <form className="lg:w-[424px]" onSubmit={handleSubmit(submit)}>
           <div className="form-title mb-4">
-            <h4 className="text-base text-justify lg:text-left xl:text-lg leading-6">
+            <h4 className="text-base text-justify lg:text-left xl:text-lg line-clamp-2 ">
               <strong>
                 {i18n(
                   "Screens.dashboard.clients.category.text_create_category"
@@ -44,14 +44,14 @@ export function ModalFormCategories({
           <div className="form-btn flex justify-end pt-4 border-t-2 border-secondary">
             <div>
               <Button
-                className="border-secondary border-2 px-4"
+                className="border-secondary border-2 hover:border-primary hover:text-primary px-4"
                 text={i18n("Words.cancel")}
                 onClick={() => onModal(false)}
               />
             </div>
             <div className="w-1/2 md:w-[30%] ml-2 md:ml-5">
               <Button
-                className="bg-red text-white"
+                className="bg-primary font-semibold  text-white"
                 text={i18n("Words.save")}
                 type="submit"
                 isLoading={isLoading}

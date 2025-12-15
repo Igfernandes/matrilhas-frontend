@@ -35,13 +35,7 @@ export function DispatcherPreview({ dispatcher }: Props) {
     <>
       <div className="Logs mb-4">
         <SmartTable
-          options={{
-            filters: {
-              tag: {
-                key: "status",
-              },
-            },
-          }}
+          options={{}}
           tHeads={{
             data: [
               i18n("Words.name"),

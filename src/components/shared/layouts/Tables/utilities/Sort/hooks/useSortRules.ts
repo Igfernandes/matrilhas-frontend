@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SortShape } from "../type";
 
 type Props = {
@@ -12,12 +12,12 @@ export function useSortRules({ sortInstance }: Props) {
       type: "ASC",
     }
   );
-  const handleChangeSort = () => {
+  const handleChangeSort = useCallback(() => {
     setSort({
       ...sort,
       type: sort.type == "ASC" ? "DESC" : "ASC",
     });
-  };
+  }, [sort]);
 
   return {
     handleChangeSort,

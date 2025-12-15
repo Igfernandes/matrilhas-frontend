@@ -10,22 +10,27 @@ type Props = {
 };
 
 export function useClientCategoriesModal({ selectors }: Props) {
-  const { formMethods, isLoading, register, errors } =
-    useFormRules<ClientCategoryPayload>({
+  const { formMethods, register, errors } = useFormRules<ClientCategoryPayload>(
+    {
       schema: ClientCategoryModalSchema,
-    });
-  const { handleToggleModal } = useModalContext();
-  const { mutateAsync: patchClientsCategory } = usePatchClientCategory();
+    }
+  );
+  const { handleToggleModal, modal } = useModalContext();
+  const { mutateAsync: patchClientsCategory, isPending: isLoading } =
+    usePatchClientCategory();
 
-  const submit = (payload: Pick<PatchClientsCategoryPayload, "category">) => {
+  const submit = (data: Pick<PatchClientsCategoryPayload, "category">) => {
     const selectorsChecked = selectors.filter(
       (selector) => selector.isChecked && !!selector.value
     );
 
-    patchClientsCategory({
-      ...payload,
+    const payload = {
+      ...data,
+      all: modal.id === "-1" ? true : false,
       clients: selectorsChecked.map((client) => parseInt(client.value)),
-    }).then(() => handleToggleModal(false));
+    };
+
+    patchClientsCategory(payload).then(() => handleToggleModal(false));
   };
 
   return {
@@ -34,5 +39,6 @@ export function useClientCategoriesModal({ selectors }: Props) {
     register,
     errors,
     submit,
+    modal,
   };
 }

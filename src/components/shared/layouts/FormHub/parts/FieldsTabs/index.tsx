@@ -13,7 +13,7 @@ export function FieldsTabs() {
   const { fieldsGroups } = useFieldsGroupsContext();
   const { screenType } = useWindow();
   const TAILWIND_CLASS =
-    "hover:bg-red hover:text-white inline-block font-medium text-xs px-4 py-1 uppercase rounded-xl shadow-sm border-secondary border-2 cursor-pointer";
+    "hover:bg-primary hover:text-white inline-block font-medium text-xs px-4 py-1 uppercase rounded-xl shadow-sm border-secondary border-2 cursor-pointer";
   const { handleToggleTab } = useFieldsTabs({ targetTab });
 
   return (

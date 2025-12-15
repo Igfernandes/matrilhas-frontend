@@ -1,3 +1,5 @@
+import { REGEXES } from "@constants/regexes";
+
 type Props = {
   widths: Array<number>;
 };
@@ -82,9 +84,35 @@ export function useColumnMetrics({ widths }: Props) {
     return ctx.measureText(text).width;
   }
 
+  /**
+   * Ajusta o conteúdo da célula com base na largura da coluna e no tamanho do texto.
+   * Se o conteúdo for maior que a largura da célula, ele será truncado e "..." será adicionado.
+   *
+   * @param {HTMLTableCellElement} el - A célula da tabela onde o conteúdo será ajustado.
+   * @param {string} content - O conteúdo da célula a ser exibido.
+   * @param {number} columnWidth - A largura da coluna, usada para determinar se o texto precisa ser truncado.
+   */
+  const adjustCellContent = (
+    el: HTMLTableCellElement,
+    content: string,
+    columnWidth: number
+  ) => {
+    const contentLength = getTextSize(content, el);
+
+    if (
+      columnWidth >= contentLength ||
+      REGEXES.HAS_HTML_ELEMENT.test(content)
+    ) {
+      el.innerHTML = content;
+    } else {
+      el.innerHTML = truncateTextToFit(content, el, columnWidth);
+    }
+  };
+
   return {
     truncateTextToFit,
     getCurrentWidthColumn,
     getTextSize,
+    adjustCellContent,
   };
 }

@@ -7,14 +7,15 @@ import { THead } from "./Thead";
 import { TFoot } from "./TFoot";
 import { TBody } from "./Tbody";
 import { When } from "@components/utilities/When";
-import TableProvider from "../../contexts/Table";
+import TableProvider from "../../contexts/table";
 import { Sort } from "../../utilities/Sort";
 import { Options } from "../../utilities/Options";
-import { Tags } from "../../utilities/Filters/Tags";
 import { useColumnRules } from "../../hooks/useColumnRules";
 import useWindow from "@hooks/useWindow";
 import { MobileView } from "./MobileView";
 import { Skeleton } from "@components/utilities/Skeleton";
+import SelectorProvider from "../../contexts/selectors";
+import { ActionsBar } from "@components/shared/others/ActionsBar";
 
 export function SmartTable<TableData extends Array<Record<string, unknown>>>({
   title,
@@ -22,6 +23,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
   excludes = [],
   tHeads: currentTHeads,
   hasTFoot,
+  ajax,
   options = {
     pagination: {
       max: 3,
@@ -38,15 +40,16 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
   const { handleTruncateColumn, amountHiddenCols } = useColumnRules({
     tHeadsWidth: currentTHeads?.widths ?? [],
   });
-  const { tHeads } = useTableData({
+  const { tHeads, setOffset, tRows, count, isLoading } = useTableData({
     data,
     excludes,
+    ajax,
     tHeads: currentTHeads as THeadRequiredProps,
   });
 
   useEffect(() => {
     handleTruncateColumn(ref.current as HTMLTableElement);
-  }, [width]);
+  }, [width, ref, handleTruncateColumn]);
 
   return (
     <Skeleton
@@ -54,75 +57,65 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
         type: "table",
         amount: 1,
       }}
-      isLoading={!data}
+      isLoading={!tRows || isLoading}
     >
       <TableProvider
         excludes={excludes}
-        data={data}
+        data={tRows}
+        setOffset={setOffset}
         tHeads={currentTHeads}
         amountHiddenCols={amountHiddenCols}
         table={ref}
         {...options}
       >
-        <div className="bg-white p-4 md:p-6 rounded-2xl">
-          <div className="mb-2 md:mb-6">
-            <div className="flex justify-between flex-wrap md:flex-nowrap">
-              <div className="flex items-center md:w-[60%]">
-                <div className="mr-4">
-                  <h2 className="text-xl md:text-xl">
-                    <strong> {title}</strong>
-                  </h2>
+        <SelectorProvider data={tRows ?? []}  {...options.selector} >
+          <div className="bg-white p-4 md:p-6 rounded-2xl">
+            <div className="mb-2 md:mb-4">
+              <div className="flex justify-between flex-wrap md:flex-nowrap">
+                <div className="flex items-center md:w-[60%]">
+                  <div className="mr-4">
+                    <h2 className="text-xl md:text-xl">
+                      <strong> {title}</strong>
+                    </h2>
+                  </div>
                 </div>
-                <When
-                  value={!!options.filters?.tag?.key && windowSize.width > 800}
-                >
-                  <Tags<TableData>
-                    data={data}
-                    column={options.filters?.tag.key ?? ""}
-                  />
-                </When>
-              </div>
-              <div className="flex lg:w-[30%] justify-end">
-                {options.buttons}
-                <When value={!!options.sort}>
-                  <Sort />
-                </When>
-                <When value={!!options.actions}>
-                  <Options actions={options.actions ?? []} />
-                </When>
+                <div className="flex lg:w-[30%] justify-end">
+                  {options.buttons}
+                  <When value={!!options.sort}>
+                    <Sort />
+                  </When>
+                  <When value={!!options.actions}>
+                    <Options actions={options.actions ?? []} />
+                  </When>
+                </div>
               </div>
             </div>
-            <div className="mt-2 md:mt-auto">
-              <When
-                value={!!options.filters?.tag?.key && windowSize.width <= 800}
-              >
-                <Tags<TableData>
-                  data={data}
-                  column={options.filters?.tag.key ?? ""}
-                />
+
+            <div className="min-w-[30vw] ">
+              <When value={windowSize.width > 650}>
+                <table className="sm:table w-full border-collapse" ref={ref}>
+                  <THead tHeads={tHeads} widths={currentTHeads?.widths} />
+                  <TBody tHeads={tHeads} />
+                  <TFoot
+                    hasTFoot={hasTFoot}
+                    tHeads={tHeads}
+                    widths={currentTHeads?.widths}
+                  />
+                </table>
+              </When>
+              <When value={windowSize.width <= 650}>
+                <MobileView tHeaders={tHeads} />
               </When>
             </div>
+            <Pagination counterRegisters={count} />
           </div>
-
-          <div className="min-w-[30vw] ">
-            <When value={windowSize.width > 650}>
-              <table className="sm:table w-full border-collapse" ref={ref}>
-                <THead tHeads={tHeads} widths={currentTHeads?.widths} />
-                <TBody tHeads={tHeads} />
-                <TFoot
-                  hasTFoot={hasTFoot}
-                  tHeads={tHeads}
-                  widths={currentTHeads?.widths}
-                />
-              </table>
-            </When>
-            <When value={windowSize.width <= 650}>
-              <MobileView tHeaders={tHeads} />
-            </When>
-          </div>
-          <Pagination />
-        </div>
+          <ActionsBar
+            actions={options.actionsBar ?? []}
+          />
+        </SelectorProvider>
       </TableProvider>
+
     </Skeleton>
+
   );
 }

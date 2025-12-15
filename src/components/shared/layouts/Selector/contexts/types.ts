@@ -6,8 +6,8 @@ export type TableDataShape = Array<Record<string, unknown>>;
 export type SelectorContextData = {
   selectors: SelectorShape[];
   setSelectors: React.Dispatch<React.SetStateAction<SelectorShape[]>>;
-  handleCheckedAll: () => void;
-  handleChangeSelector: (value: string) => void;
+  handleCheckedAll: (selectors: SelectorShape[]) => SelectorShape[];
+  handleChangeSelector: (value: string) => SelectorShape[];
 };
 
 export type SelectorProps = {

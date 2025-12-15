@@ -20,7 +20,7 @@ export function Search({
   }, [placeholder]);
 
   return (
-    <div className={className}>
+    <div className={`${className} shadow-sm border-zinc-600`}>
       <div className="form-group">
         <div className="relative">
           <label

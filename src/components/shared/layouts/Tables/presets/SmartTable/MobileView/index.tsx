@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { Accordion } from "../../../../Accordion";
 import { AccordionItemHeader } from "../../../../Accordion/AccordionItemHeader";
 import { AccordionItem } from "../../../../Accordion/AccordionItem";
-import { useTableContext } from "../../../contexts/Table";
+import { useTableContext } from "../../../contexts/table";
 import { AccordionItemContent } from "../../../../Accordion/AccordionItemContent";
 
 type Props = {
@@ -26,20 +26,24 @@ export function MobileView({ tHeaders }: Props) {
             <AccordionItemHeader
               accordionId={filteredId}
               title={`${filteredId} - ${data[0] as ReactNode}`}
-              buttons={actions as ReactNode}
             />
             <AccordionItemContent accordionId={filteredId as number}>
-              <ul className="p-2">
-                {data.map((cell, cellIndex) => (
-                  <li
-                    key={`accordion_item__${filteredId}_${cellIndex}`}
-                    className="text-sm"
-                  >
-                    <strong>{`${tHeaders[cellIndex + 1]}:`}</strong>
-                    <span className="ml-2">{cell as ReactNode}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="relative">
+                <ul className="bg-secondary p-2 pr-4">
+                  {data.map((cell, cellIndex) => (
+                    <li
+                      key={`accordion_item__${filteredId}_${cellIndex}`}
+                      className="text-sm"
+                    >
+                      <strong>{`${tHeaders[cellIndex + 1]}:`}</strong>
+                      <span className="ml-2">{cell as ReactNode}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="absolute top-2 right-0 z-10 scale-[110%]">
+                  {actions as ReactNode}
+                </div>
+              </div>
             </AccordionItemContent>
           </AccordionItem>
         );

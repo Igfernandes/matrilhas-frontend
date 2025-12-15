@@ -1,33 +1,28 @@
 import { useClients } from "./hooks/useClients";
 import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
-import { Selector } from "@components/shared/layouts/Selector";
 import { ModalFormCategories } from "./Modals/Categories";
 import { useModalContext } from "@contexts/Modal";
 import { ModalClientsOperationType, ClientsStructProps } from "../type";
 import { ClientCreateModal } from "./Modals/Clients";
-import SelectorProvider from "@components/shared/layouts/Selector/contexts";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { ClientCategoriesModal } from "./Modals/ClientCategories";
 import { Shared } from "@components/shared/others/Shared";
 import { PERMISSIONS } from "@constants/permissions";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { ImportModal } from "./Modals/Import";
+import { API_ROUTES } from "@configs/routes/Api/api";
 
-export function Clients({ search, filterObjects }: ClientsStructProps) {
+export function Clients({ search }: ClientsStructProps) {
   const {
-    tDataClients,
     tHeadsClient,
     selectors,
-    setSelectors,
     categories,
+    getSelectedClients,
     handleDeleteClient,
-    getSelectedClientsName,
     isLoadingClientDelete,
-  } = useClients({
-    filter: search,
-    handleFilter: filterObjects,
-  });
+    updateClientForTable,
+  } = useClients();
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();
   const { hasPermission } = useUserNavigationContext();
@@ -35,58 +30,71 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
   return (
     <>
       <div>
-        <SelectorProvider selectors={selectors} setSelectors={setSelectors}>
-          <SmartTable
-            options={{
-              pagination: {
-                max: 6,
+        <SmartTable
+          ajax={{
+            key: "clients",
+            url: API_ROUTES.clients,
+            builder: updateClientForTable
+          }}
+          options={{
+            selector: {
+              selectorRef: selectors,
+            },
+            pagination: {
+              max: 6,
+            },
+            actionsBar: [
+              {
+                handle: () => handleToggleModal("CHANGE_CATEGORY"),
+                text: i18n("Texts.selected_alter_category"),
+                permissions: [PERMISSIONS.clients.update],
               },
-              actions: [
-                {
-                  handle: () => handleToggleModal("CHANGE_CATEGORY"),
-                  text: i18n("Texts.category_alter"),
-                  permissions: [PERMISSIONS.clients.update],
-                },
-                {
-                  handle: () =>
-                    handleToggleModal(
-                      "DELETE",
-                      getSelectedClientsName(selectors)
-                    ),
-                  text: i18n("Words.exclude"),
-                  permissions: [PERMISSIONS.clients.delete],
-                },
-              ].filter((action) => hasPermission(action.permissions)),
-              buttons: (
-                <>
-                  <Selector
-                    value={"all"}
-                    label={i18n(`Words.select_all`)}
-                    textSize="text-[0px] md:text-base"
-                  />
-                  <Shared
-                    entity="CLIENTS"
-                    in_ids={selectors
-                      .filter((selector) => !!selector.isChecked)
-                      .map((selector) => +selector.value)}
-                  />
-                </>
-              ),
-              filters: {
-                tag: {
-                  key: "category",
-                },
+              {
+                handle: () =>
+                  handleToggleModal(
+                    "DELETE",
+                    getSelectedClients(selectors.current)
+                  ),
+                text: i18n("Texts.selected_delete"),
+                permissions: [PERMISSIONS.clients.delete],
               },
-            }}
-            data={tDataClients}
-            title={i18n("Words.clients")}
-            excludes={["created_at", "updated_at"]}
-            tHeads={{
-              data: tHeadsClient.current,
-              widths: [60, 250, 70, 200, 100, 48],
-            }}
-          />
-        </SelectorProvider>
+            ].filter((action) => hasPermission(action.permissions)),
+            actions: [
+              {
+                handle: () => handleToggleModal("CHANGE_CATEGORY", "-1"),
+                text: i18n("Texts.all_alter_category"),
+                permissions: [PERMISSIONS.clients.update],
+              },
+              {
+                handle: () =>
+                  handleToggleModal(
+                    "DELETE",
+                    "-1"
+                  ),
+                text: i18n("Texts.all_delete"),
+                permissions: [PERMISSIONS.clients.delete],
+              },
+
+            ].filter((action) => hasPermission(action.permissions)),
+            buttons: (
+              <Shared
+                entity="CLIENTS"
+                in_ids={selectors.current
+                  .filter((selector) => !!selector.isChecked)
+                  .map((selector) => +selector.value)}
+              />
+            ),
+            filters: {
+              search,
+            },
+          }}
+          title={i18n("Words.clients")}
+          excludes={["created_at", "updated_at"]}
+          tHeads={{
+            data: tHeadsClient.current,
+            widths: [60, 250, 70, 200, 100, 48],
+          }}
+        />
       </div>
 
       <div>
@@ -108,9 +116,8 @@ export function Clients({ search, filterObjects }: ClientsStructProps) {
         <ClientCategoriesModal
           isShowModal={modal.type === "CHANGE_CATEGORY"}
           onModal={handleToggleModal}
-          title={i18n("Texts.category_alter")}
           categories={categories}
-          selectors={selectors}
+          selectors={selectors.current}
         />
         <ClientCreateModal
           isShowModal={modal.type === "CLIENT"}

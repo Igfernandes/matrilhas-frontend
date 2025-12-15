@@ -1,4 +1,9 @@
-import { THeadProps } from "../../type";
+import {
+  TableAjaxProps,
+  TableFiltersOptions,
+  TableSelectorProps,
+  THeadProps,
+} from "../../type";
 import {
   PaginationOptionShape,
   PaginationShape,
@@ -16,22 +21,27 @@ export type TableContextData = {
   paginatedTRows: Array<unknown[]>;
   filters: Record<string, FilterCallback>;
   handleChangeFilters: (callback: Record<string, FilterCallback>) => void;
-  handleChangeEvent: (isEvent: boolean) => void;
   amountHiddenCols: Array<boolean>;
-  amountRegisters: number
+  amountRegisters: number;
 };
 
 export type TableProps = {
   sort?: SortShape;
   pagination?: PaginationOptionShape;
-  data: TableDataShape;
+  data?: TableDataShape;
   tHeads?: THeadProps;
+  ajax?: TableAjaxProps;
   excludes: Array<string>;
   table: React.RefObject<HTMLTableElement | null>;
   amountHiddenCols: Array<boolean>;
+  filters?: TableFiltersOptions;
   children: React.ReactNode;
+  selectors?: TableSelectorProps;
 };
 
-export type TableData = TableProps;
+export type TableData = TableProps & {
+  data: TableDataShape;
+  setOffset?: (newOffset: number) => void;
+};
 
 export type FilterCallback = (data: TableDataShape) => TableDataShape;

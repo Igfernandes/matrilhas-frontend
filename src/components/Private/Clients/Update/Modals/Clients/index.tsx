@@ -4,12 +4,10 @@ import { Modal } from "../../../../../shared/layouts/Modal";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { handleMaskDate } from "@helpers/date";
-import { getCPFFormatted, getNumberFormatted, handleMaskCPF, handleMaskPhone } from "@helpers/string";
+import { handleMaskCPF, handleMaskPhone } from "@helpers/string";
 import { ModalFormProps } from "./type";
 import { useClientModal } from "./hooks/useClientModal";
-import dayjs from "dayjs";
 import { SelectSearch } from "@components/shared/forms/SelectSearch";
-import { useEffect } from "react";
 
 export function ClientUpdateModal({
   isShowModal,
@@ -23,11 +21,6 @@ export function ClientUpdateModal({
     register,
     formState: { errors },
   } = formMethods;
-
-  useEffect(() => {
-    if (client.categories.length > 0)
-      setValue("category", String(client.categories[0].id));
-  }, [client]);
 
   return (
     <Modal
@@ -51,9 +44,6 @@ export function ClientUpdateModal({
                 return {
                   text: category.name,
                   value: category.id,
-                  selected: !!client.categories.find(
-                    (clientCategory) => clientCategory.id === category.id
-                  ),
                 };
               })}
               label={i18n("Words.category")}
@@ -84,7 +74,6 @@ export function ClientUpdateModal({
                   label={i18n("Words.name")}
                   dataTestId="name"
                   required={true}
-                  defaultValue={client.name}
                   errors={errors.name}
                 />
               </div>
@@ -93,7 +82,6 @@ export function ClientUpdateModal({
                   {...register("cpf")}
                   label={i18n("Words.cpf")}
                   dataTestId="cpf"
-                  defaultValue={getCPFFormatted(client.cpf)}
                   onChange={(ev) => {
                     handleMaskCPF(ev);
                     setValue("cpf", ev.currentTarget.value);
@@ -108,11 +96,6 @@ export function ClientUpdateModal({
                   label={i18n("Words.birthdate")}
                   dataTestId="birthdate"
                   placeholder={i18n(`Configs.format.date`)}
-                  defaultValue={
-                    client.birthdate
-                      ? dayjs(client.birthdate).format("DD/MM/YYYY")
-                      : ""
-                  }
                   onChange={(ev) => {
                     handleMaskDate(ev);
                     setValue("birthdate", ev.currentTarget.value);
@@ -126,7 +109,6 @@ export function ClientUpdateModal({
                   label={i18n("Words.email")}
                   dataTestId="email"
                   errors={errors.email}
-                  defaultValue={client.email}
                 />
               </div>
               <div className="form-group my-4">
@@ -134,7 +116,6 @@ export function ClientUpdateModal({
                   {...register("phone")}
                   label={i18n("Words.phone")}
                   dataTestId="phone"
-                  defaultValue={getNumberFormatted(client?.phone ?? "")}
                   onChange={(ev) => {
                     handleMaskPhone(ev);
                     setValue("phone", ev.currentTarget.value);
@@ -150,7 +131,7 @@ export function ClientUpdateModal({
               <div className=" ml-auto">
                 <Button
                   type="submit"
-                  className="bg-red text-white"
+                  className="bg-primary text-white"
                   text={i18n("Words.save")}
                   isLoading={isLoading}
                 />

@@ -17,13 +17,16 @@ export function Options({ actions }: TableOptionsProps) {
         />
       </div>
       <When value={showOptions}>
-        <div className="absolute right-0 bg-white shadow-xl z-[1] min-w-[32vh] px-3 py-2 rounded-xl">
+        <div className="absolute top-[50%] right-0 bg-white border-2 border-b-0 border-primary z-[1] min-w-[65vw] md:min-w-[17vw]  rounded-md shadow-sm">
           <ul>
             {actions.map((action, index) => (
               <li
-                className="my-2 cursor-pointer"
+                className="px-3 py-2 cursor-pointer border-b border-b-gray-200 last:border-b-0 pb-2 hover:bg-primary hover:text-white"
                 key={`btn_config_item_${index}`}
-                onClick={action.handle}
+                onClick={() => {
+                  handleToggleOptions(false)
+                  action.handle()
+                }}
               >
                 <span>{action.text}</span>
               </li>

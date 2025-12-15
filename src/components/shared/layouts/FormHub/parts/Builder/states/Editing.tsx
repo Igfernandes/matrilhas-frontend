@@ -96,7 +96,7 @@ export function FormBuilderEditing({
                     onClick={() => onModal(true)}
                     type="button"
                     text={i18n("Words.new_data")}
-                    className="text-red font-bold"
+                    className="text-primary font-bold"
                   />
                 </div>
               </When>
@@ -113,7 +113,7 @@ export function FormBuilderEditing({
                   <Button
                     type="submit"
                     text={i18n("Words.save")}
-                    className="bg-red text-white px-4"
+                    className="bg-primary font-semibold text-white px-4"
                   />
                 </div>
               </div>

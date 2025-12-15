@@ -35,11 +35,6 @@ export function MyCharges({
               pagination: {
                 max: 10,
               },
-              filters: {
-                tag: {
-                  key: "type",
-                },
-              },
             }}
             data={tDataCharges}
             title={i18n("Words.my_charges")}

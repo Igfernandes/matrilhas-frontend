@@ -1,7 +1,7 @@
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 
-import { FieldValues } from "react-hook-form";
+import { FieldErrors, FieldValues } from "react-hook-form";
 import { GroupFieldsProps } from "./type";
 import { SortableItem } from "./SortableItem";
 import { useGroupFields } from "./hooks/useGroupFields";
@@ -25,7 +25,7 @@ export function GroupFields<Payload extends FieldValues>({
   return (
     <div>
       <div className="btn-add mb-4">
-        <span className="text-red cursor-pointer" onClick={handleAddingItem}>
+        <span className="text-primary cursor-pointer" onClick={handleAddingItem}>
           <strong>{i18n(`Words.add`)}</strong>
         </span>
       </div>
@@ -43,7 +43,7 @@ export function GroupFields<Payload extends FieldValues>({
                   position={key}
                   value={item.value as string}
                   name={name}
-                  errors={errors}
+                  errors={errors as Record<string, FieldErrors[] | undefined>}
                   target={targetItem}
                   register={register}
                   onChange={handleChangeItem}

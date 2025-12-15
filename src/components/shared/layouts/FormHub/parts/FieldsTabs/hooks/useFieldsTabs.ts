@@ -5,7 +5,7 @@ type Props = {
 };
 
 export function useFieldsTabs({ targetTab }: Props) {
-  const TAILWIND_CLASS_TAB_ACTIVE = "bg-red text-white";
+  const TAILWIND_CLASS_TAB_ACTIVE = "bg-primary text-white";
 
   const handleToggleTab = (tabRef: OptionsFieldTabTarget) => {
     return targetTab === tabRef ? TAILWIND_CLASS_TAB_ACTIVE : "bg-white";

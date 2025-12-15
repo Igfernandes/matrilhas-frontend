@@ -28,21 +28,14 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
       isShowList,
       handleChangeValue,
       selected,
-      handleSearch,
       search,
-    } = useSelect();
+      handleSearch,
+    } = useSelect({ name: name ?? "", options });
     const IdCurrent = id ?? dataTestId;
 
     useEffect(() => {
-      if (!!selected) return;
-      const defaultSelected = options.filter((options) => options.selected);
-
-      if (defaultSelected[0]) handleChangeValue(name ?? "", defaultSelected[0]);
-    }, [options]);
-
-    useEffect(() => {
       changeLabelClass(!!selected ? "UP" : "DOWN");
-    }, [selected]);
+    }, [selected, changeLabelClass]);
 
     return (
       <>
@@ -56,7 +49,7 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
             >
               {label}
               <When value={required}>
-                <span className="text-red">*</span>
+                <span className="text-primary">*</span>
               </When>
             </span>
             <input
@@ -72,17 +65,15 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
             />
             <p
               onClick={() => handleToggleList(!isShowList)}
-              className={`${className} ${
-                !!errors ? "border-amber-500 outline-amber-500" : ""
-              } 
+              className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
+                } 
               h-[3.5rem] w-full px-3 pt-6 pb-2 select-ref cursor-pointer bg-scroll-transparent bg-white border-secondary border-2 rounded-xl text-primary text-md font-medium`}
             >
               {selected} <ArrowDownSimple className="absolute right-4 top-6" />
             </p>
             <div
-              className={`content ${
-                isShowList ? "block" : "hidden"
-              } absolute bg-white w-full p-2 shadow-lg rounded-sm z-50`}
+              className={`content ${isShowList ? "block" : "hidden"
+                } absolute bg-white w-full p-2 shadow-lg rounded-sm z-50`}
             >
               <div className="search-bar mb-2">
                 <input
@@ -108,7 +99,7 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
                       }}
                       key={index}
                       value={value ?? ""}
-                      className={`px-2 py-1 cursor-pointer hover:bg-red hover:text-white rounded-sm`}
+                      className={`px-2 py-1 cursor-pointer hover:bg-primary hover:text-white rounded-sm`}
                     >
                       {text}
                     </li>

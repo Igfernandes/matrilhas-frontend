@@ -12,6 +12,7 @@ export default function usePostCategories() {
   const queryClient = useQueryClient();
 
   const handleMutate = async (payload: PostCreateCategoryPayload) => {
+    
     const { data } = await postCreateCategory(payload);
 
     return data;
@@ -30,6 +31,7 @@ export default function usePostCategories() {
       });
     },
     onError: (err) => {
+      console.log(err);
       handleAxiosError(err);
     },
   });

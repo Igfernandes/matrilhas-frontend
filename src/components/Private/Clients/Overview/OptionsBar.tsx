@@ -12,6 +12,7 @@ type Props = {
 
 export function OptionsBar({ handleSearch }: Props) {
   const { handleToggleModal } = useModalContext<ModalClientsOperationType>();
+  
   return (
     <div className="flex justify-between flex-wrap md:flex-nowrap mb-6">
       <Search
@@ -24,7 +25,7 @@ export function OptionsBar({ handleSearch }: Props) {
         <div className="w-full md:w-auto mx-0 md:mx-2 mb-3 lg:my-0">
           <AccessControl targetPermissions={[PERMISSIONS.clients.create]}>
             <Button
-              className="border border-zinc-300 px-3 font-bold rounded-xl bg-secondary text-primary"
+              className="border border-zinc-300 px-3 font-bold rounded-xl bg-white text-primary"
               text={i18n("Words.register")}
               type="button"
               onClick={() => handleToggleModal("CLIENT")}
@@ -34,17 +35,17 @@ export function OptionsBar({ handleSearch }: Props) {
         <div className="w-full md:w-auto mx-0 lg:mx-2">
           <AccessControl targetPermissions={[PERMISSIONS.categories.create]}>
             <Button
-              className="border border-zinc-300 px-3 font-bold rounded-xl"
+              className="border bg-white border-zinc-300 px-3 font-bold rounded-xl text-primary"
               text={i18n("Words.category_manager")}
               type="button"
               onClick={() => handleToggleModal("CATEGORY")}
             />
           </AccessControl>
         </div>
-        <div>
+        <div className="w-full md:w-auto mx-0 lg:mx-2 mt-3 lg:mt-0">
           <AccessControl targetPermissions={[PERMISSIONS.clients.create]}>
             <Button
-              className="border border-zinc-300 px-3 font-bold rounded-xl"
+              className="bg-white border border-zinc-300 px-3 font-bold rounded-xl text-primary"
               text={i18n("Words.import_clients")}
               type="button"
               onClick={() => handleToggleModal("IMPORT")}

@@ -3,3 +3,7 @@ export type DateShape = {
   timezone_type: number;
   timezone: string;
 };
+
+export type BaseShape = {
+  id: number;
+};

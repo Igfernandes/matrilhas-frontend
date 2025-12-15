@@ -1,5 +1,5 @@
 import { When } from "@components/utilities/When";
-import { useTableContext } from "../../../contexts/Table";
+import { useTableContext } from "../../../contexts/table";
 
 type Props = {
   tHeads: Array<string>;

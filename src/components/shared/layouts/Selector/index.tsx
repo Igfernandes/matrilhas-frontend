@@ -3,20 +3,23 @@ import { SymbolChecked } from "@assets/Icons/white/SymbolChecked";
 import { bgColors } from "@assets/colors/colors";
 import { bgDefaultColor } from "@assets/colors/default";
 import { useSelectorContext } from "./contexts";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Selector({ label, value, textSize, ...props }: SelectorProps) {
   const IdCurrent = `selector_${label}`;
-  const { selectors, handleChangeSelector } = useSelectorContext();
+  const { selectors, handleChangeSelector, handleCheckedAll } = useSelectorContext();
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const valueRef = useRef<string>(value);
 
   useEffect(() => {
     const currentSelector = selectors.find(
-      (selector) => selector.value == value
+      (selector) => selector.value == valueRef.current
     );
 
-    setIsChecked(!!currentSelector?.isChecked);
-  }, [selectors, value]);
+    if (currentSelector?.isChecked !== isChecked) {
+      setIsChecked(!!currentSelector?.isChecked);
+    }
+  }, [selectors, isChecked, valueRef]);
 
   return (
     <div className="flex">
@@ -27,10 +30,17 @@ export function Selector({ label, value, textSize, ...props }: SelectorProps) {
           value={value}
           id={IdCurrent}
           defaultChecked={isChecked}
-          onChange={() => handleChangeSelector(value)}
+          onChange={() => {
+            if (value == "all") {
+              handleCheckedAll(selectors);
+            } else {
+              handleChangeSelector(value)
+            }
+
+          }}
           className={`w-[90%] h-[90%] m-[1px] appearance-none rounded-[.2rem] bg-disable cursor-pointer`}
           style={{
-            background: isChecked ? bgColors.red : bgDefaultColor.disable,
+            background: isChecked ? bgColors.primary : bgDefaultColor.disable,
           }}
         />
         <label htmlFor={IdCurrent} className="cursor-pointer">

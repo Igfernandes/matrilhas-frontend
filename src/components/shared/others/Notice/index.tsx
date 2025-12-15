@@ -27,13 +27,13 @@ export function Notice({
           <div className="w-[45%]">
             <Button
               onClick={() => onModal(false)}
-              className="border-secondary border-2 px-4"
+              className="border-secondary font-semibold border-2 px-4"
               text={i18n("Words.cancel")}
             />
           </div>
           <div className="w-[45%] ml-5">
             <Button
-              className="bg-red text-white"
+              className="bg-primary font-semibold text-white"
               text={i18n("Words.continue")}
               onClick={onSubmit}
               isLoading={isLoading}
