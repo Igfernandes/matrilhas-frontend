@@ -6,12 +6,14 @@ type Props = {
   paginationInstance?: PaginationOptionShape;
   tRows: Array<unknown[]>;
   setOffset?: (newOffset: number) => void;
+  offset?: number;
 };
 
 export function usePaginationRules({
   paginationInstance,
   tRows,
   setOffset,
+  offset,
 }: Props) {
   const INITIAL_PAGE = useRef(1);
   const MAX_PAGINATION = useRef(paginationInstance?.max ?? 10);
@@ -27,14 +29,20 @@ export function usePaginationRules({
 
   const handleChangePagination = useCallback(
     (pageNumber: number) => {
-      if (pageNumber >= pageAmount - 3 && setOffset)
-        setOffset((pageNumber - 1) * MAX_PAGINATION.current);
+      const pageAmountRef = pageAmount - 30;
+
+      if (pageNumber >= pageAmountRef && setOffset) {
+        const offsetNew = (pageNumber - 1) * MAX_PAGINATION.current;
+        setOffset(offsetNew > 0 ? offsetNew : 0);
+      }
+
       setPagination((prev) => ({
         ...prev,
-        current: getOnlyNumberRange(pageNumber, 1, pageAmount),
+        current:
+          offset === 0 ? 1 : getOnlyNumberRange(pageNumber, 1, pageAmount),
       }));
     },
-    [pageAmount, setOffset]
+    [pageAmount, setOffset, offset]
   );
 
   return {

@@ -19,7 +19,7 @@ export type TableProps<TableData> = {
     actions?: Array<TableActions>;
     actionsBar?: Array<TableActions>;
     buttons?: React.ReactNode;
-    filters?: TableFiltersOptions;
+    filters?: Record<string, unknown>;
   };
 };
 
@@ -31,6 +31,7 @@ export type HookTableDataProps<TableData> = {
   data?: TableData;
   excludes: Array<string>;
   ajax?: TableAjaxProps;
+  filters?: Record<string, unknown> | undefined;
   tHeads: THeadRequiredProps;
 };
 
@@ -57,7 +58,3 @@ export type TableAjaxProps = {
 };
 
 export type TableShape = Array<Record<string, unknown>>;
-
-export type TableFiltersOptions = {
-  search: string;
-};

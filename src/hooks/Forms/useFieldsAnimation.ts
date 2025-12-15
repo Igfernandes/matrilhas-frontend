@@ -1,4 +1,4 @@
-import { CSSProperties, FormEvent, useRef, useState } from "react";
+import { CSSProperties, FormEvent, useCallback, useRef, useState } from "react";
 
 type StatusLabelStyled = "UP" | "DOWN";
 
@@ -25,9 +25,9 @@ export function useFieldsAnimation() {
    *
    * @param {"UP"|"DOWN"} state O estado que defini a posição do label.
    */
-  const changeLabelClass = (state: StatusLabelStyled) => {
+  const changeLabelClass = useCallback((state: StatusLabelStyled) => {
     setLabelStateClass(labelStyled.current[state]);
-  };
+  }, []);
 
   /**
    * @function handleTransitionLabel

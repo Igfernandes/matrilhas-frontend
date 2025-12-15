@@ -25,7 +25,7 @@ const TableProvider = ({
   amountHiddenCols,
   selectors,
   setOffset,
-  filters: optionsFilters,
+  offset
 }: TableData) => {
 
   // Hooks para manipulação dos dados da tabela
@@ -44,18 +44,12 @@ const TableProvider = ({
   }, []);
 
   const filteredData = useMemo(() => {
-    let data = sortTableData(sort);
-    if (optionsFilters?.search)
-      data = data.filter((item) =>
-        Object.values(item)
-          .some(value =>
-            String(value).toLowerCase()
-              .indexOf(optionsFilters?.search.toLowerCase()) !== -1));
-
+    const data = sortTableData(sort);
+    
     return Object.values(filters).reduce((acc, filterFn) => {
       return filterFn(acc);
     }, data);
-  }, [sort, filters, sortTableData, optionsFilters?.search]);
+  }, [sort, filters, sortTableData]);
 
   const tRows = useMemo(() => {
     return getTRows(filteredData, excludes);
@@ -65,6 +59,7 @@ const TableProvider = ({
     paginationInstance,
     tRows,
     setOffset,
+    offset
   });
 
   const paginatedTRows = useMemo(() => {
