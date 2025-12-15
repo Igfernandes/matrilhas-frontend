@@ -124,7 +124,7 @@ export function StoreFieldsModal({
               <div className="md:w-[60%] ml-auto">
                 <Button
                   type="submit"
-                  className="bg-red text-white"
+                  className="bg-primary text-white"
                   text={i18n("Words.save")}
                   isLoading={isLoading}
                 />

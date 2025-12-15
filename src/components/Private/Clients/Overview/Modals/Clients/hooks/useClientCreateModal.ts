@@ -19,7 +19,11 @@ export function useModalForm() {
 
   const submit = ({ birthdate, ...payload }: ClientCreatePayload) => {
     if (Validations.cpf(payload.cpf))
-      setError("cpf", { type: "manual", message: i18n("Validations.cpf") });
+      return setError("cpf", {
+        type: "manual",
+        message: i18n("Validations.cpf"),
+      });
+      
     postCreateClient({
       ...payload,
       birthdate: birthdate

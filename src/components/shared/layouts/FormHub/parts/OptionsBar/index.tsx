@@ -23,7 +23,7 @@ export function OptionsBar({ handleUpdateClient }: Props) {
 
   useEffect(() => {
     setIsAvailableUpdateClients(hasPermission(["clients_update"]));
-  }, [permissions]);
+  }, [permissions, hasPermission]);
 
   return (
     <div className="flex justify-center lg:justify-between flex-wrap lg:flex-none mt-2 lg:mt-0 relative z-0">
