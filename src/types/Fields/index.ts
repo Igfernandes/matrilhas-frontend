@@ -20,4 +20,4 @@ export type FieldsShape = {
   updated_at: string;
 };
 
-export type ScopeFields = "USER" | "CLIENT" | "COMPANY";
+export type ScopeFields = "USER" | "CLIENT" | "AGENCY";

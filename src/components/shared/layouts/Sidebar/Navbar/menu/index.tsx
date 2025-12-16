@@ -8,8 +8,8 @@ import { SYSTEM_MENU } from "./system";
 export const SIDEBAR_MENU = {
   main: MAIN_MENU,
   management: MANAGEMENT_MENU,
-  administrative: ADMINISTRATIVE_MENU,
   communication: COMMUNICATION_MENU,
   finance: FINANCE_MENU,
+  administrative: ADMINISTRATIVE_MENU,
   system: SYSTEM_MENU
 }

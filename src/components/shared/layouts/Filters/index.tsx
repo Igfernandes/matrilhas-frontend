@@ -19,7 +19,7 @@ export function Filters({ children, id }: Props) {
     const KEY_FILTER = useRef<string>(`FILTER_MODAL_${id}`);
     const { handleToggleModal, modal } = useModalContext()
     const { handleAlterFilters, handleSubmit, methods, filters } = useFiltersContext();
-    const bgBtnCleanFilters = Object.values(filters[id] ?? {}).length > 0 ? othersColors.primary : othersColors.white;
+    const hasFilter = Object.values(filters[id] ?? {}).length > 0;
 
     return (
         <div className="z-10 relative">
@@ -27,7 +27,13 @@ export function Filters({ children, id }: Props) {
                 <div onClick={() => handleToggleModal(KEY_FILTER.current)} className=" bg-white hover:bg-zinc-200 shadow-md border-primary border-2 p-2 cursor-pointer rounded-md ml-2">
                     <Filter width={25} height={25} fill={othersColors.primary} />
                 </div>
-                <div onClick={() => handleAlterFilters({})} style={{ backgroundColor: bgBtnCleanFilters }} className="p-2 border-2 border-primary rounded-md ml-2 font-semibold text-primary cursor-pointer hover:bg-zinc-200">
+                <div onClick={() => handleAlterFilters({})} style={{
+                    backgroundColor: hasFilter ? othersColors.primary : othersColors.white,
+                    color: hasFilter ? othersColors.white : othersColors.primary,
+                    cursor: hasFilter ? "pointer" : "not-allowed",
+
+                }
+                } className="p-2 border-2 border-primary rounded-md ml-2 font-semibold text-primary cursor-pointer hover:bg-zinc-200">
                     <span>Limpar Filtros</span>
                 </div>
             </div>

@@ -10,5 +10,6 @@ export type EntitiesShape =
   | "SERVICES"
   | "FORMS"
   | "CHARGES"
+  | "AGENCIES"
   | "FORMS_FILLS"
   | "INSCRIBES";

@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 import ErrorMessage from "@components/shared/others/ErrorMessage";
 import { useFieldsAnimation } from "@hooks/Forms/useFieldsAnimation";
 import { TextAreaProps } from "./type";
+import { useTextarea } from "./hooks/useInput";
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   function TextArea(
@@ -26,17 +27,15 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       useFieldsAnimation();
     const IdCurrent = id ?? dataTestId;
     const { watch } = useFormContext();
+
+    const { isUpLabel } = useTextarea();
     const value = watch(name); // obtém o valor atual
 
     useEffect(() => {
-      if (value || defaultValue) {
+      if (isUpLabel({ ...rest, placeholder, value })) {
         changeLabelClass("UP");
       }
-    }, [value, changeLabelClass]);
-
-    useEffect(() => {
-      changeLabelClass(placeholder ? "UP" : "DOWN");
-    }, [placeholder]);
+    }, [value, placeholder, rest, isUpLabel, changeLabelClass]);
 
     return (
       <>
@@ -65,9 +64,8 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             onBlur={handleTransitionLabel}
             defaultValue={defaultValue}
             placeholder={placeholder}
-            className={`${className} ${
-              !!errors ? "border-amber-500 outline-amber-500" : ""
-            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm`}
+            className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
+              } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm`}
             data-testid={dataTestId}
             id={IdCurrent}
           />

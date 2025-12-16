@@ -27,7 +27,7 @@ export function ToggleSwitch<Payload extends FieldValues>({
   return (
     <>
       <div className="text-right">
-        <div className="relative bg-red px-3 py-[9px] rounded-full inline-block">
+        <div className="relative bg-primary px-3 py-[9px] rounded-full inline-block">
           <div className="flex text-sm">
             <div
               className={`switch-left relative ${

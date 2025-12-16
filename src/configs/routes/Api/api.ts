@@ -14,6 +14,7 @@ import { messagesDispatcherRoutes } from "./MessagesDispatcher";
 import { scheduleRoutes } from "./schedule";
 import { filesRoutes } from "./files";
 import { eventsRoutes } from "./events";
+import { agenciesRoutes } from "./agencies";
 
 export const API_ROUTES = {
   ...authenticationRoutes,
@@ -21,6 +22,7 @@ export const API_ROUTES = {
   ...usersRoutes,
   ...clientsRoutes,
   ...invitesRoutes,
+  ...agenciesRoutes,
   ...permissionsRoutes,
   ...servicesRoutes,
   ...formsRoutes,

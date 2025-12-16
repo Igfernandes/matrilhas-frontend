@@ -36,7 +36,7 @@ handleScroll
               count > 9 ? "+9" : `${count}`
             }
           />
-          <div className="relative h-full pb-[vh] overflow-y-scroll">
+          <div className="relative h-full pb-[12vh] overflow-y-scroll">
             <div className="p-6">{children}</div>
           </div>
         </div>
