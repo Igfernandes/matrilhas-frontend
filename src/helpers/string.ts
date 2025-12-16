@@ -68,6 +68,21 @@ export function getCPFFormatted(cpf: string = ""): string {
     .replace(/(-\d{2})\d+?$/, "$1"); // Limita em 11 dígitos formatados
 }
 
+export function handleMaskCNPJ(e: React.ChangeEvent<HTMLInputElement>) {
+  e.target.value = getCNPJFormatted(e.target.value);
+}
+
+export function getCNPJFormatted(cnpj: string = ""): string {
+  const digits = cnpj.replace(/\D/g, ""); // remove tudo que não é número
+
+  return digits
+    .replace(/^(\d{2})(\d)/, "$1.$2")
+    .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+    .replace(/\.(\d{3})(\d)/, ".$1/$2")
+    .replace(/(\d{4})(\d)/, "$1-$2")
+    .replace(/(-\d{2})\d+?$/, "$1"); // limita em 14 dígitos
+}
+
 export function handleMaskCEP(e: React.ChangeEvent<HTMLInputElement>) {
   e.target.value = getCEPFormatted(e.target.value);
 }

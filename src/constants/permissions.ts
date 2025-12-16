@@ -8,4 +8,9 @@ export const PERMISSIONS = {
     create: "categories_create",
     update: "categories_update",
   },
+  agencies: {
+    create: "agencies_create",
+    update: "agencies_update",
+    delete: "agencies_delete",
+  },
 };

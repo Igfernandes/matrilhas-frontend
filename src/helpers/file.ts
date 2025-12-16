@@ -30,8 +30,9 @@ export function getFileName(file?: string) {
   return fileParts[fileParts.length - 1] || "";
 }
 
-export function getFileUrl(file: File | null, alternative?: string) {
-  if (file) return URL.createObjectURL(file);
+export function getFileUrl(file: string | File | null, alternative?: string) {
+  if (typeof file !== "string" && file) return URL.createObjectURL(file);
+  else if (typeof file === "string") return file;
 
   return alternative ?? "";
 }

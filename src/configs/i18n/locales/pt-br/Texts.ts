@@ -58,6 +58,7 @@ export const Texts = {
   all_alter_category: "Alterar todas categorias",
   selected_delete: "Excluir selecionados",
   alter_category: "Alterar categoria",
+  import_agencies: "Importar agências",
   select_category: "Selecionar categoria",
   select_status: "Selecionar status",
   selected_alter_category: "Alterar categorias selecionadas",
