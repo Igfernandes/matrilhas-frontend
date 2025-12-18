@@ -15,7 +15,6 @@ export function ActionsBar({ actions, }: ActionsBarProps) {
 
     return (
         <>
-            <div className="py-[10vh]"></div>
             <div style={{
                 bottom: selectorsSelected > 0 ? '0%' : '-100%',
             }} className="fixed w-[79%] left-[19.5%] bottom-[0%] transition-all px-2 py-4 bg-white shadow-md border-t-2 border-zinc-300  ml-1">

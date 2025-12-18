@@ -6,6 +6,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { ArrowRight } from "@assets/Icons/black/ArrowRight";
 import { Section } from "@components/shared/layouts/Section";
 import { useI18n } from "@contexts/I18n";
+
 export function Gallery() {
   const { t } = useI18n();
   return (

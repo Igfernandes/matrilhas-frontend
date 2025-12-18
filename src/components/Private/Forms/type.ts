@@ -1,5 +1,3 @@
-import { JSX } from "react";
-import { ServicesShape } from "../../../types/Services";
 import { FormShape } from "../../../types/Forms";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 
@@ -8,12 +6,6 @@ export type HookFormsProps<FormType> = {
   handleFilter: (data: FormType) => boolean;
 };
 
-export type TDataServices = Omit<
-  ServicesShape,
-  "updated_at" | "description" | "reservations" | "privacy" | "photo"
-> & {
-  actions: JSX.Element;
-};
 
 export type FormsCardProps = {
   filterObjects: <ObjectShape extends Record<string, unknown>>(

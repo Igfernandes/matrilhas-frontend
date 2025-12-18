@@ -28,20 +28,20 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
     const { handleUpdateDatetimePreview, datetime, setDatetime } =
       useDatetime();
     const IdCurrent = id ?? dataTestId;
-    const { setValue, getValues } = useFormContext();
+    const { setValue, watch } = useFormContext();
+    const datetimeValue = watch(name);
 
     useEffect(() => {
-      if (defaultValue) {
-        const normalized = (defaultValue as string).replace("T", " ");
-        setDatetime(dayjs(normalized).format("DD/MM/YYYY HH:mm"));
-      }
+      const source = datetimeValue || defaultValue;
 
-      const currentValue = getValues(name);
-      if (currentValue) {
-        const normalized = currentValue.replace("T", " ");
+      if (source) {
+        const normalized = source.replace("T", " ");
         setDatetime(dayjs(normalized).format("DD/MM/YYYY HH:mm"));
+      } else {
+        setDatetime("");
       }
-    }, [defaultValue]);
+    }, [defaultValue, datetimeValue, setDatetime]);
+
     return (
       <>
         <div className={`relative ${errors?.message ? "border-yellow" : ""}`}>
@@ -68,16 +68,15 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
               }
               handleUpdateDatetimePreview(value);
             }}
-            value={datetime}
+            value={datetime ?? ""}
             placeholder={"DD/MM/YYYY HH:mm"}
-            className={`${className} ${
-              !!errors ? "border-amber-500 outline-amber-500" : ""
-            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+            className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
+              } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
             data-testid={dataTestId}
             id={IdCurrent}
           />
           <input {...rest} ref={ref} type="hidden" name={name} />
-          <div className="absolute right-3 bottom-4">
+          <div className="absolute right-1 bottom-4 md:right-3 md:bottom-4">
             <input
               type="datetime-local"
               onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +85,7 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
                 if (handledChange) handledChange(ev);
                 handleUpdateDatetimePreview(formatted);
               }}
-              className="absolute w-full h-full top-0 opacity-0 z-20"
+              className="absolute w-full h-full top-0 right-0 opacity-0 z-20"
             />
             <Schedule className="w-5" />
           </div>

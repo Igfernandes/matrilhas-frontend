@@ -17,7 +17,7 @@ export function AgencyProfile({ agency }: Props) {
         <FormProvider {...formMethods}>
             <form className=" w-full  shadow-sm" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-wrap">
-                    <div className="bg-white p-4 w-full md:w-[70%] pr-0 md:pr-4 mb-4 md:mb-0">
+                    <div className="bg-white p-4 pt-10 md:pt-4 w-full md:w-[70%] md:pr-4 mb-4 md:mb-0">
                         <Information {...formMethods} agency={agency} errors={errors} />
                         <hr className="border-secondary my-4" />
                         <Address {...formMethods} agency={agency} errors={errors} />

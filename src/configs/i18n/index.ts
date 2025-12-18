@@ -1,5 +1,5 @@
 // i18n.ts
-import { I18n } from "i18n-js";
+import { I18n, TranslateOptions } from "i18n-js";
 import { LANGUAGE_I18N } from "@configs/envs";
 import dayjs from "dayjs";
 import { translatePT_BR } from "./locales/pt-br";
@@ -30,6 +30,6 @@ export const configureI18n = (lang: string = "pt-br") => {
 configureI18n("pt-br");
 
 export type I18nProps<T> = { [key: string]: T };
-const i18n = (key: string) => i18nConfig.t(key) as string;
+const i18n = (key: string, options?: TranslateOptions) => i18nConfig.t(key, options) as string;
 
 export default i18n;

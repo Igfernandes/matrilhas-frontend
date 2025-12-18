@@ -4,6 +4,7 @@ import i18n from "@configs/i18n";
 import { Peoples } from "@assets/Icons/black/Peoples";
 import { Form } from "@assets/Icons/black/Form";
 import { Company } from "@assets/Icons/black/Company";
+import { Bag } from "@assets/Icons/black/Bag";
 
 export const MANAGEMENT_MENU = [
   {
@@ -17,6 +18,12 @@ export const MANAGEMENT_MENU = [
     Icon: Company,
     link: privateRoutes.agencies,
     permissions: ["agencies_view"],
+  },
+  {
+    title: i18n("Words.tours"),
+    Icon: Bag,
+    link: privateRoutes.tours,
+    permissions: ["tours_view"],
   },
   {
     title: i18n("Words.forms"),

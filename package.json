@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 192.168.1.4 --turbopack",
+    "dev": "next dev -H 192.168.1.5 --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint --dir .",
@@ -20,6 +20,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node-jose": "^1.1.13",
     "axios": "^1.7.9",
+    "browser-image-compression": "^2.0.2",
     "chart.js": "^4.4.9",
     "chartjs-adapter-date-fns": "^3.0.0",
     "cookie": "^1.0.2",

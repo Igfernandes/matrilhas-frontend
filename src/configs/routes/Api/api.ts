@@ -15,10 +15,12 @@ import { scheduleRoutes } from "./schedule";
 import { filesRoutes } from "./files";
 import { eventsRoutes } from "./events";
 import { agenciesRoutes } from "./agencies";
+import { toursRoutes } from "./tours";
 
 export const API_ROUTES = {
   ...authenticationRoutes,
   ...recoverRoutes,
+  ...toursRoutes,
   ...usersRoutes,
   ...clientsRoutes,
   ...invitesRoutes,

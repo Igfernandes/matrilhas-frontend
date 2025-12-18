@@ -1,6 +1,7 @@
 import { FieldValues, Path } from "react-hook-form";
 import { Checkbox } from "../Checkbox";
 import { GroupChecksProps } from "./type";
+import { When } from "@components/utilities/When";
 
 export function GroupChecks<Payload extends FieldValues>({
   items = [],
@@ -10,24 +11,24 @@ export function GroupChecks<Payload extends FieldValues>({
 
   return (
     <div className="relative ">
-      <div className="max-h-[20vh] md:max-h-[32vh] overflow-x-hidden overflow-y-auto pb-[12%]">
+      <div className="bg-secondary h-[45vh] overflow-x-hidden overflow-y-auto py-2 px-1 shadow-md">
         {items.map((item, index) => (
-          <div key={`key_group_checks_${index}`} className="mb-4">
+          <div key={`key_group_checks_${index}`} className="bg-white shadow-sm border border-secondary p-1 mb-4">
             <Checkbox
               {...register(`${name}.${index}` as Path<Payload>)}
               label={item.label}
+              defaultChecked={item.isChecked}
               defaultValue={item.value}
               dataTestId={`key_group_checks_${index}`}
             />
           </div>
         ))}
+        <When value={items.length === 0}>
+          <div key={`key_group_checks_empty`} className="text-sm border-secondary border shadow px-2 py-2 mb-4">
+            <span>Ainda não há registro disponíveis para escolha</span>
+          </div>
+        </When>
       </div>
-      <div
-        className="absolute bottom-[0%] left-0 w-[95%] h-6"
-        style={{
-          background: "linear-gradient(357deg, #ffffff, transparent)",
-        }}
-      ></div>
     </div>
   );
 }

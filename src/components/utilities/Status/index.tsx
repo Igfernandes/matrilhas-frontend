@@ -2,13 +2,16 @@ import i18n from "@configs/i18n";
 import { useRef } from "react";
 
 type Props = {
-    is: "ACTIVE" | "INACTIVE";
+    is: "ACTIVE" | "INACTIVE" | "PUBLISHED" | "DRAFT" | "ARCHIVED";
 }
 
 export function Status({ is }: Props) {
     const status = useRef({
         ACTIVE: "bg-success",
         INACTIVE: "bg-danger",
+        PUBLISHED: "bg-success",
+        DRAFT: "bg-warning",
+        ARCHIVED: "bg-danger",
     });
 
     return (
