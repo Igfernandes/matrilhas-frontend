@@ -1,0 +1,89 @@
+import { Input } from "@components/shared/forms/Input";
+import i18n from "@configs/i18n";
+import { useAddresses } from "./hooks/useAddresses";
+import { TourShape } from "@type/Tours";
+import { FormProvider } from "react-hook-form";
+import { Button } from "@components/shared/layouts/Button";
+import { Select } from "@components/shared/forms/Select";
+import { useRef } from "react";
+import { COUNTRIES } from "../../../../data/address/countries";
+import { BRAZILIAN_STATES } from "../../../../data/address/states";
+import { When } from "@components/utilities/When";
+
+type Props = {
+    tour: TourShape;
+}
+
+export function TourAddresses({ tour }: Props) {
+    const countriesRef = useRef<{ code: string, name: string }[]>(COUNTRIES ?? [])
+    const statesRef = useRef<{ code: string, name: string }[]>(BRAZILIAN_STATES ?? [])
+    const { register, errors, formMethods, handleSubmit, onSubmit, isLoading } = useAddresses({ tour })
+
+    return (
+        <FormProvider {...formMethods}>
+            <form className="bg-white w-full px-4 py-1 shadow-sm" onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex flex-wrap justify-between pb-5">
+                    <div className=" md:w-[48%] mt-4">
+                        <div className="mb-4">
+                            <h2 className="text-2xl font-semibold text-primary ">{i18n("Texts.address_destiny")}</h2>
+                            <p className="text-sm">Informações de endereço e localização da agência.</p>
+                        </div>
+                        <Input type="hidden" dataTestId="destiny_type" {...register('address.0.type')} defaultValue={"DESTINY"} />
+                        <div className="flex flex-wrap justify-between">
+                            <div className="w-full md:w-[48%] my-2">
+                                <Select defaultValue={"Brasil"} dataTestId="countries" options={countriesRef.current.map(country => ({ value: country.name, text: country.name }))} {...register("address.0.country")} label={i18n("Words.country")} errors={errors?.address?.[0]?.country} />
+                            </div>
+                            <When value={formMethods.getValues("address.0.country") === "Brasil"}>
+                                <div className="w-full md:w-[48%] my-2">
+                                    <Select defaultValue={"Rio de Janeiro"} dataTestId="state" options={statesRef.current.map(state => ({ value: state.name, text: state.name }))} {...register("address.0.state")} label={i18n("Words.state")} errors={errors?.address?.[0]?.state} />
+                                </div>
+                            </When>
+                            <When value={formMethods.getValues("address.0.country") !== "Brasil"}>
+                                <div className="w-full md:w-[48%] my-2">
+                                    <Input defaultValue={"Rio de Janeiro"} dataTestId="state" {...register("address.0.state")} label={i18n("Words.state")} errors={errors?.address?.[0]?.state} />
+                                </div>
+                            </When>
+                            <div className="w-full my-2">
+                                <Input dataTestId="city" {...register("address.0.city")} label={i18n("Words.city")} errors={errors?.address?.[0]?.city} />
+                            </div>
+                            <div className="w-full md:w-[100%] my-2">
+                                <Input dataTestId="complement" {...register("address.0.complement")} label={i18n("Words.complement")} errors={errors?.address?.[0]?.complement} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className=" md:w-[48%]  mt-6">
+                        <div className="mb-4">
+                            <h2 className="text-2xl font-semibold text-primary ">{i18n("Texts.address_origin")}</h2>
+                            <p className="text-sm">Informações de endereço e localização da agência.</p>
+                            <Input type="hidden" dataTestId="origin_type"  {...register('address.1.type')} defaultValue={"ORIGIN"} />
+                        </div>
+                        <div className="flex flex-wrap justify-between">
+                            <div className="w-full md:w-[48%] my-2">
+                                <Select defaultValue={"Brasil"} dataTestId="countries" options={countriesRef.current.map(country => ({ value: country.name, text: country.name }))} {...register("address.1.country")} label={i18n("Words.country")} errors={errors?.address?.[1]?.country} />
+                            </div>
+                            <When value={formMethods.getValues("address.1.country") === "Brasil"}>
+                                <div className="w-full md:w-[48%] my-2">
+                                    <Select defaultValue={"Rio de Janeiro"} dataTestId="state" options={statesRef.current.map(state => ({ value: state.name, text: state.name }))} {...register("address.1.state")} label={i18n("Words.state")} errors={errors?.address?.[1]?.state} />
+                                </div>
+                            </When>
+                            <When value={formMethods.getValues("address.1.country") !== "Brasil"}>
+                                <div className="w-full md:w-[48%] my-2">
+                                    <Input defaultValue={"Rio de Janeiro"} dataTestId="state" {...register("address.1.state")} label={i18n("Words.state")} errors={errors?.address?.[1]?.state} />
+                                </div>
+                            </When>
+                            <div className="w-full my-2">
+                                <Input dataTestId="city" {...register("address.1.city")} label={i18n("Words.city")} errors={errors?.address?.[1]?.city} />
+                            </div>
+                            <div className="w-full md:w-[100%] my-2">
+                                <Input dataTestId="complement" {...register("address.1.complement")} label={i18n("Words.complement")} errors={errors?.address?.[1]?.complement} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-full ml-auto my-10">
+                        <Button className="bg-primary text-white font-semibold ml-auto w-full md:w-[30%]" isLoading={isLoading} text={i18n("Words.update")} />
+                    </div>
+                </div>
+            </form>
+        </FormProvider>
+    )
+}

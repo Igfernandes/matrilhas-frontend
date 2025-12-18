@@ -4,14 +4,25 @@ import { z } from "zod";
 
 export const AgencyProfileSchema = z.object({
   id: z.number({ required_error: i18n("Validations.required") }).optional(),
-  name: z.string({ required_error: i18n("Validations.required") }).min(3, {
-    message: (i18n("Validations.min_length") as string)
-      .replace("${field}", i18n("Words.name"))
-      .replace("${length}", "3"),
-  }),
-  status: z.enum(["ACTIVE", "INACTIVE"], {
-    required_error: i18n("Validations.required"),
-  }).default("ACTIVE"),
+  name: z
+    .string({ required_error: i18n("Validations.required") })
+    .min(3, {
+      message: i18n("Validations.min_length", {
+        field: i18n("Words.name"),
+        length: "3",
+      }),
+    })
+    .max(150, {
+      message: i18n("Validations.max_length", {
+        field: i18n("Words.name"),
+        length: "150",
+      }),
+    }),
+  status: z
+    .enum(["ACTIVE", "INACTIVE"], {
+      required_error: i18n("Validations.required"),
+    })
+    .default("ACTIVE"),
   email: z
     .string({ required_error: i18n("Validations.required") })
     .optional() // Permite que o campo seja omitido ou vazio
@@ -23,9 +34,28 @@ export const AgencyProfileSchema = z.object({
   cnpj: z
     .string({ required_error: i18n("Validations.required") })
     .nonempty(i18n("Validations.required")),
-  describe: z.string({ required_error: i18n("Validations.required") }).optional().nullable(),
-  website: z.string({ required_error: i18n("Validations.required") }).optional(),
-  logotype: z.string({ required_error: i18n("Validations.required") }).optional(),
+  describe: z
+    .string({ required_error: i18n("Validations.required") })
+    .max(1000, {
+      message: i18n("Validations.max_length", {
+        field: i18n("Words.description"),
+        length: "1000",
+      }),
+    })
+    .optional()
+    .nullable(),
+  website: z
+    .string({ required_error: i18n("Validations.required") })
+    .max(250, {
+      message: i18n("Validations.max_length", {
+        field: i18n("Words.website"),
+        length: "250",
+      }),
+    })
+    .optional(),
+  logotype: z
+    .string({ required_error: i18n("Validations.required") })
+    .optional(),
   address: z.object({
     country: z.string({ required_error: i18n("Validations.required") }),
     state: z.string({ required_error: i18n("Validations.required") }),
@@ -37,7 +67,10 @@ export const AgencyProfileSchema = z.object({
   social_media: z
     .array(
       z.object({
-        platform: z.enum(["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP"], { required_error: i18n("Validations.required") }),
+        platform: z.enum(
+          ["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP"],
+          { required_error: i18n("Validations.required") }
+        ),
         link: z.string({ required_error: i18n("Validations.required") }),
       })
     )

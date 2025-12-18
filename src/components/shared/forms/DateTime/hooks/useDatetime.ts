@@ -1,11 +1,11 @@
 import { getDatetime } from "@helpers/date";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export function useDatetime() {
   const [datetime, setDatetime] = useState<string>("");
 
-  const handleUpdateDatetimePreview = (value: string) => {
+  const handleUpdateDatetimePreview = useCallback((value: string) => {
     const normalized = value.replace("T", " ");
     const date = dayjs(normalized, "YYYY-MM-DD HH:mm", true);
 
@@ -13,7 +13,7 @@ export function useDatetime() {
       return setDatetime(getDatetime(normalized));
     }
     setDatetime(date.format("DD/MM/YYYY HH:mm"));
-  };
+  }, []);
 
   return {
     handleUpdateDatetimePreview,

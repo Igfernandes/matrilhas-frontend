@@ -1,24 +1,24 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetClientsRequest, GetClientsResponse } from "./types";
+import { GetAgenciesRequest, GetAgenciesResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
 
 export default function useGet() {
-  const { clients } = API_ROUTES;
+  const { agencies } = API_ROUTES;
   const { axios } = useAxios();
   const { setParams, setQueries } = useRoutes();
 
-  async function getClients(request?: GetClientsRequest) {
+  async function getAgencies(request?: GetAgenciesRequest) {
     const { ...query } = request ?? {};
-    return await axios.get<GetClientsResponse>(
+    return await axios.get<GetAgenciesResponse>(
       setQueries({
-        url: setParams({ url: clients }),
+        url: setParams({ url: agencies }),
         query,
       })
     );
   }
 
   return {
-    getClients,
+    getAgencies,
   };
 }

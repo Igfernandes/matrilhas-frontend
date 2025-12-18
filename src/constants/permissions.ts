@@ -13,4 +13,9 @@ export const PERMISSIONS = {
     update: "agencies_update",
     delete: "agencies_delete",
   },
+  tours: {
+    create: "tours_create",
+    update: "tours_update",
+    delete: "tours_delete",
+  },
 };

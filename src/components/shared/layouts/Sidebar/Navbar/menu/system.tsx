@@ -3,6 +3,7 @@ import { MenuShape } from "./type";
 import i18n from "@configs/i18n";
 import { GoOut } from "@assets/Icons/black/GoOut";
 import { Config } from "@assets/Icons/black/Config";
+import { Gear } from "@assets/Icons/black/Gear";
 
 export const SYSTEM_MENU = [
   {
@@ -10,6 +11,11 @@ export const SYSTEM_MENU = [
     Icon: Config,
     link: privateRoutes.apisManager,
     permissions: ["integrations_view"],
+  },
+  {
+    title: i18n("Words.settings"),
+    Icon: Gear,
+    link: privateRoutes.settings,
   },
   {
     title: i18n("Words.go_out"),

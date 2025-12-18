@@ -7,7 +7,7 @@ export type InputProps = DetailedHTMLProps<
 > & {
   dataTestId: string;
   isLoading?: boolean;
-  label: string;
+  label?: string;
   name: string;
   errors?: FieldError;
   tooltip?: string;

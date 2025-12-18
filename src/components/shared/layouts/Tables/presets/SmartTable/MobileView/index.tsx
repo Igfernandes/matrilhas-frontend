@@ -33,7 +33,7 @@ export function MobileView({ tHeaders }: Props) {
                   {data.map((cell, cellIndex) => (
                     <li
                       key={`accordion_item__${filteredId}_${cellIndex}`}
-                      className="text-sm"
+                      className="text-sm my-3"
                     >
                       <strong>{`${tHeaders[cellIndex + 1]}:`}</strong>
                       <span className="ml-2">{cell as ReactNode}</span>

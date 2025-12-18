@@ -1,17 +1,16 @@
 import useGet from ".";
-import { GetClientsRequest } from "./types";
+import { GetAgenciesRequest } from "./types";
 import { useQueryGuard } from "@hooks/useAxios";
 
-export default function useGetClients(request: GetClientsRequest = {}) {
-  const { getClients } = useGet();
-
+export default function useGetAgencies(request: GetAgenciesRequest = {}) {
+  const { getAgencies } = useGet(); 
   async function handle() {
-    const { data } = await getClients(request);
+    const { data } = await getAgencies(request);
     return data ?? null;
   }
 
   const { data, ...rest } = useQueryGuard({
-    queryKey: ["clients", request],
+    queryKey: ["agencies", request],
     queryFn: handle,
     enabled: true,
   });

@@ -75,7 +75,7 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
               modules={modules}
               formats={formats}
               value={getValues(rest.name)}
-              className="h-[30vh] md:h-60 "
+              className="h-[50vh] md:h-80 "
               defaultValue={String(defaultValue ?? "")}
               onChange={(value) => {
                 if (!rest.name) return;
