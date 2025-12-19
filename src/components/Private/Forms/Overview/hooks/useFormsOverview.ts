@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
-import { FormShape } from "../../../../../types/Forms";
-import { HookFormsProps } from "../../type";
-import useGetForms from "../../../../../services/CustomForms/Get/useGetForms";
+import { useMemo, useRef } from "react";
+import useGetForms from "../../../../../services/Forms/Get/useGetForms";
 import { useModalContext } from "@contexts/Modal";
-import useDeleteForm from "@services/CustomForms/Delete/useDelete";
+import useDeleteForm from "@services/Forms/Delete/useDelete";
+import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 
-export function useFormsOverview({ handleFilter, filter }: HookFormsProps<FormShape>) {
-  const [forms, setForms] = useState<FormShape[]>([]);
-  const { rows: formsData } = useGetForms();
+export function useFormsOverview() {
+  const { filters } = useFiltersContext();
+  const offset = useRef<number>(0);
+  const { rows: formsData } = useGetForms({
+    ...(filters["FORMS"] ?? {}),
+    limit: 500,
+    start: offset.current,
+  });
   const { mutateAsync: deleteForm, isPending: isLoadingDeleteForm } =
     useDeleteForm();
+
   const { modal, handleToggleModal } = useModalContext();
 
   const handleToggleStatusForm = () => {
@@ -18,11 +23,7 @@ export function useFormsOverview({ handleFilter, filter }: HookFormsProps<FormSh
     }).then(() => handleToggleModal(false));
   };
 
-  useEffect(() => {
-    if (!formsData) return;
-
-    setForms(formsData.filter((form) => handleFilter(form)));
-  }, [formsData,filter]);
+  const forms = useMemo(() => formsData, [formsData]);
 
   return {
     forms,

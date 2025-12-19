@@ -84,7 +84,7 @@ export function Modal() {
             <div className="mt-8 text-right">
               <button
                 type="button"
-                className="border-2 border-red py-2 px-8 text-black font-semibold rounded-md mr-4"
+                className="border-2 border-primary py-2 px-8 text-black font-semibold rounded-md mr-4"
                 onClick={() => {
                   handleRemoveField(currentField?.id ?? "");
                   handleChangeTab("settings");
@@ -98,7 +98,7 @@ export function Modal() {
                   handleChangeTab("settings");
                 }}
                 type="button"
-                className="bg-red border-2 border-red py-2 px-10 text-white rounded-md font-semibold"
+                className="bg-primary border-2 border-primary py-2 px-10 text-white rounded-md font-semibold"
               >
                 {i18n(`Words.save`)}
               </button>

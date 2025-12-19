@@ -1,6 +1,6 @@
 import useGetCharges from "@services/Charges/Get/useGetCharges";
 import useGetClients from "@services/Clients/Get/useGet";
-import useGetForms from "@services/CustomForms/Get/useGetForms";
+import useGetForms from "@services/Forms/Get/useGetForms";
 import useGetUsers from "@services/Users/Get/useGetUsers";
 export function useOverviewData() {
   const { count: clientsCount, isPending: isLoadingClients } = useGetClients({

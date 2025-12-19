@@ -1,5 +1,8 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type StepBarProps = {
   steps: Array<StepData>;
+  setStepActive: Dispatch<SetStateAction<number>>;
 };
 
 export type HookStepBarProps = {
@@ -16,6 +19,7 @@ export type StepStatus = "COMPLETE" | "PENDENT" | "PROGRESS";
 export type StepItemProps = {
   title: string;
   id: number;
-  status: StepStatus;
+  active?: boolean;
   width: number;
+  setStepActive: React.Dispatch<React.SetStateAction<number>>;
 };

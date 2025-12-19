@@ -1,22 +1,20 @@
-import i18n from "@configs/i18n";
 import { StepItemProps } from "./type";
 import { statusColors } from "@assets/colors/default";
-import { bgColors } from "@assets/colors/colors";
+import { othersColors } from "@assets/colors/colors";
 import { SymbolChecked } from "@assets/Icons/white/SymbolChecked";
 import { When } from "@components/utilities/When";
+import { useRef } from "react";
 
-export function StepItem({ title, status, id, width }: StepItemProps) {
-  const STATUS_STYLED = {
+export function StepItem({ title, id, width, setStepActive, active }: StepItemProps) {
+  const STATUS_STYLED = useRef({
+    SUCCESS: {
+      color: statusColors.success,
+    },
     PENDENT: {
       color: statusColors.void,
     },
-    COMPLETE: {
-      color: statusColors.success,
-    },
-    PROGRESS: {
-      color: statusColors.warning,
-    },
-  };
+  });
+
   return (
     <div className="flex-auto mr-4" style={{
       width: `${width}%`
@@ -25,19 +23,16 @@ export function StepItem({ title, status, id, width }: StepItemProps) {
         <div>
           <p
             className="border-[1px] inline-block border-zinc-300 w-6 h-6 rounded-2xl"
-            style={{
-              padding: ["PROGRESS"].includes(status) ? "5px" : "2px",
-            }}
           >
             <span
-              className="block w-full h-full rounded-2xl pt-[5px] pl-[3px]"
+              className="block w-full h-full rounded-2xl pt-[7px] pl-[5px]"
               style={{
-                background: ["PROGRESS", "COMPLETE"].includes(status)
-                  ? bgColors.red
+                background: active
+                  ? othersColors.primary
                   : "#fff",
               }}
             >
-              <When value={status === "COMPLETE"}>
+              <When value={active}>
                 <SymbolChecked />
               </When>
             </span>
@@ -49,22 +44,14 @@ export function StepItem({ title, status, id, width }: StepItemProps) {
       </div>
       <div>
         <div>
-          <span className="text-xs text-zinc-700 font-medium">{`STEP ${id}`}</span>
+          <span onClick={() => setStepActive(id)} className="text-xs text-zinc-700 hover:text-primary cursor-pointer font-medium">{`Visualizar`}</span>
         </div>
         <div>
-          <p className="text-base md:text-lg">
+          <p style={{
+            color: STATUS_STYLED.current[active ? "SUCCESS" : "PENDENT"].color as string,
+          }} className="text-base md:text-lg">
             <strong>{title}</strong>
           </p>
-        </div>
-        <div>
-          <span
-            className="text-xs font-medium"
-            style={{
-              color: STATUS_STYLED[status].color as string,
-            }}
-          >
-            {i18n(`Words.${status.toLocaleLowerCase()}`)}
-          </span>
         </div>
       </div>
     </div>

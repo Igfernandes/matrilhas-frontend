@@ -2,12 +2,16 @@ import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { clientsTranslations } from "./screens/dashboard/clients";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
+import { formsTranslations } from "./screens/public/forms";
 import { loginTranslations } from "./screens/public/login";
 
 export const Screens = {
   forgot_password: forgotPasswordTranslations,
   login: loginTranslations,
   alter_password: alterPasswordTranslations,
+  forms: {
+    ...formsTranslations
+  },
   confirmations: {
     title: "Confira sua inscrição",
     text: "Insira seu CPF para saber se você já está cadastrado em algum evento.",
@@ -29,33 +33,7 @@ export const Screens = {
     switch_event: "Escolha um evento",
     selected_form: "Selecione um formulário",
   },
-  events: {
-    confirmation: {
-      title: "Confirmação de Presença",
-      text: "Ao clicar no botão abaixo, você estará confirmando oficialmente a sua presença e garantindo a sua reserva no evento. Você confirma sua presença?",
-      invalid_url:
-        "A página encontra-se com recursos desatualizados ou inválidos. Copie o link completo e tente novamente, ou entre em contato com o central",
-      expired:
-        "O convite encontra-se expirado ou inválido. Entre em contato com a AGM para mais detalhes.",
-    },
-    modal: {
-      title_already_exclude: "Você tem certeza que deseja excluir?",
-      text_already_exclude:
-        "Ao confirmar, o evento será excluído junto com todas as suas inscrições e demais registros relacionados.",
-    },
-    switch_event: "Escolha um evento",
-  },
-  forms: {
-    not_found:
-      "Formulário indisponível. Entre em contato com a central pelo número",
-    not_stock:
-      "Não há vagas para essa atividade. Acesse a página do evento e veja outras atividades disponíveis para inscrição",
-    successful: {
-      form_received: "A AGM recebeu seu Formulário com Sucesso!",
-      form_message:
-        " Sua resposta é super importante para podermos entender e melhorar cada vez mais.",
-    },
-  },
+ 
   logout: {
     text: "Você saiu com segurança. A AGM te espera na próxima! 🐾",
   },

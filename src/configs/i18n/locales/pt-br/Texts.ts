@@ -14,6 +14,7 @@ export const Texts = {
   agencies_relations: "Agências vinculadas",
   discount_by_years: "Desconto por Idade",
   list_linked_agencies: "Lista de agências vinculadas",
+  home_page: "Página inicial",
   agencies_linked: "Agências vinculadas",
   agencies_add: "Adicionar agências",
   discount_by_address: "Desconto por Endereço",
