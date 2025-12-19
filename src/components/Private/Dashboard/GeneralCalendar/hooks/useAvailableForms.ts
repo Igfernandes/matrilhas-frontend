@@ -1,4 +1,4 @@
-import useGetForms from "@services/CustomForms/Get/useGetForms";
+import useGetForms from "@services/Forms/Get/useGetForms";
 
 import { useEffect, useState } from "react";
 import { CalendarEventShape } from "../type";

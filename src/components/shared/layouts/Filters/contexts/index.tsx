@@ -25,8 +25,9 @@ function FiltersProvider({ children, id }: FiltersContextProps) {
       filters[id] = newFilters
       return filters;
     });
+    methods.reset(newFilters);
     handleToggleModal("");
-  }, [handleToggleModal, id]);
+  }, [handleToggleModal, methods, id]);
 
 
   const data = useMemo(() => ({ filters, handleAlterFilters, handleSubmit, register, methods }), [filters, handleAlterFilters, handleSubmit, register, methods]);

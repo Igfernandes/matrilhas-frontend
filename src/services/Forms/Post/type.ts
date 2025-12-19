@@ -1,6 +1,6 @@
-import { CSRFShape } from "@services/Authentications/CSRF/types";
+import { FormShape } from "../../../types/Forms";
 
-export type PostCreateFormPayload = {
-  payload: FormData;
-  csrf: CSRFShape;
-};
+export type PostCreateFormPayload = Pick<
+  FormShape,
+  "name" | "status" | "components"
+>;

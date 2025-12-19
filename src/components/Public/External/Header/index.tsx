@@ -12,7 +12,7 @@ export function Header() {
             <div>
               <Link href={"/"}>
                 <Image
-                  src={"/imgs/agm-round-logo.png"}
+                  src={"/imgs/matrilhas-500x500.png"}
                   width={53}
                   height={56}
                   alt="logotipo AGM"

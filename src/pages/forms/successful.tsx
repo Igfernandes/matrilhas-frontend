@@ -2,7 +2,7 @@ import { Checks } from "@assets/Icons/colorful/Checks";
 import { FormSuccessfulPageProps } from "@components/Public/Forms/types";
 import { ExternalContainer } from "@components/shared/layouts/ExternalContainer";
 import i18n from "@configs/i18n";
-import { getForm } from "@services/CustomForms/Get/SSR";
+import { getFormPreview } from "@services/Forms/GetPreview/SSR";
 import { GetServerSideProps } from "next";
 
 export default function Successful({ form }: FormSuccessfulPageProps) {
@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps<
   FormSuccessfulPageProps
 > = async (request) => {
   const { form } = (request?.query as { form: string }) ?? {}; // Tipando o params
-  const foundForm = await getForm("", { slug: form });
+  const foundForm = await getFormPreview({ slug: form });
 
   return {
     props: {

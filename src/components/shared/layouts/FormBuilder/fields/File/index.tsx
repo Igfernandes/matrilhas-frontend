@@ -1,5 +1,5 @@
 import { When } from "@components/utilities/When";
-import React, { useRef } from "react";
+import React from "react";
 import { Upload } from "@assets/Icons/black/Upload";
 import { textColors } from "@assets/colors/colors";
 import { CircleRed } from "@assets/Icons/red/CircleRed";
@@ -19,8 +19,7 @@ export const File = React.forwardRef<HTMLInputElement, FieldShape>(
     required,
     setValue,
     ...rest
-  }: FieldShape) {
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
+  }: FieldShape, ref) {
     const IdCurrent = id ?? `${name}_${new Date().getTime()}`;
     const { currentValue, setCurrentValue } = useFile();
     const { dispatchSnackbar } = useSnackbar();
@@ -58,13 +57,13 @@ export const File = React.forwardRef<HTMLInputElement, FieldShape>(
               fill={textColors.red}
               onClick={() => {
                 setCurrentValue(undefined);
-                if (fileInputRef.current) fileInputRef.current.value = "";
+                if (ref && "current" in ref && ref.current) ref.current.value = "";
               }}
             />
           </When>
           <input
             {...rest}
-            ref={fileInputRef}
+            ref={ref}
             name={name}
             type={"file"}
             required={required == "true"}

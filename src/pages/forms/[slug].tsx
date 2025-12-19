@@ -3,12 +3,12 @@ import { FormPageProps } from "@components/Public/Forms/types";
 import { Header } from "@components/Public/External/Header";
 import { Footer } from "@components/Public/Footer";
 import { isErrorRequest } from "@helpers/routes";
-import { getForm } from "@services/CustomForms/Get/SSR";
 import { FormBuilderPreview } from "@components/shared/layouts/FormBuilder/Preview";
 import { useForm } from "@components/Public/Forms/hooks/useForm";
 import { Button } from "@components/shared/forms/Button";
 import i18n from "@configs/i18n";
 import { getCSRF } from "@services/Authentications/CSRF/SSR";
+import { getFormPreview } from "@services/Forms/GetPreview/SSR";
 
 export default function Form({ form, csrf }: FormPageProps) {
   const { handleSubmit, isLoading, handleChange, components } = useForm({
@@ -61,9 +61,9 @@ export const getServerSideProps: GetServerSideProps<FormPageProps> = async ({
   params,
 }) => {
   const { slug } = params as { slug: string }; // Tipando o params
-  const form = await getForm("", { slug });
+  const form = await getFormPreview({ slug });
   const csrf = await getCSRF();
-
+  
   if (!form || isErrorRequest(form)) {
     return {
       redirect: {

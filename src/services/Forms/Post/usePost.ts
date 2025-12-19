@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { PostCreateFormPayload } from "./type";
@@ -6,20 +6,18 @@ import i18n from "@configs/i18n";
 import { usePostFormService } from ".";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { publicRoutes } from "@configs/routes/Web/navigation";
+import { privateRoutes } from "@configs/routes/Web/navigation";
 
-type Props = {
-  slug?: string;
-};
-export default function usePostSubmitForm({ slug }: Props) {
+export default function usePostCreateForm() {
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
-  const { postForm } = usePostFormService();
+  const { postCreateForm } = usePostFormService();
+  const queryClient = useQueryClient();
   const router = useRouter();
-  const { forms } = publicRoutes;
+  const { forms } = privateRoutes;
 
   const handleMutate = async (payload: PostCreateFormPayload) => {
-    const { data } = await postForm(payload);
+    const { data } = await postCreateForm(payload);
 
     return data;
   };
@@ -31,8 +29,12 @@ export default function usePostSubmitForm({ slug }: Props) {
         message: i18n(success),
         type: "success",
       });
+      queryClient.invalidateQueries({
+        queryKey: ["forms"],
+        refetchType: "active",
+      });
 
-      router.push(`${forms}/successful?form=${slug}`);
+      router.push(forms);
     },
     onError: (err: AxiosError) => {
       handleAxiosError(err);

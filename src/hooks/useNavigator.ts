@@ -8,8 +8,17 @@ export function useNavigator() {
 
   const handleCopy = async (link: string) => {
     try {
-      await navigator.clipboard.writeText(link);
+      const textarea = document.createElement("textarea");
+      textarea.value = link;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+
       setIsCopied(true);
+      document.execCommand("copy");
       dispatchSnackbar({
         type: "notice",
         title: `${i18n("Words.link_copied")}`,

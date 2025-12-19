@@ -1,7 +1,6 @@
 export const formsRoutes = {
-  forms: "/custom-forms/{id}",
-  formPreview: "/forms/{id}",
-  formFills: "/forms",
+  forms: "/forms/{id}",
+  formPreview: "/forms/preview/{id}",
+  formFills: "/forms/fills",
   formsFillsFields: "/forms/{id}/fills/{package}",
-  formsEvent: "/forms/{package}/events",
 };

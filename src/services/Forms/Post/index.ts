@@ -1,19 +1,27 @@
 import { useAxios } from "@hooks/useAxios";
+import { getPayloadJSON } from "@helpers/payload";
 import { PostCreateFormPayload } from "./type";
 import { API_ROUTES } from "@configs/routes/Api/api";
+import { useRoutes } from "@hooks/useRoutes";
 
 export function usePostFormService() {
   const { axios } = useAxios();
-  const { formFills } = API_ROUTES;
+  const { forms } = API_ROUTES;
+  const { setParams } = useRoutes();
 
-  async function postForm({ payload, csrf }: PostCreateFormPayload) {
-    return axios.post(formFills, payload, {
-      headers: {
-        "X-CSRF-TOKEN": csrf.csrf_hash,
-      },
-    });
+  async function postCreateForm(payload: PostCreateFormPayload) {
+    return axios.post(
+      setParams({
+        url: forms,
+        data: {
+          id: "",
+        },
+      }),
+      getPayloadJSON(payload)
+    );
   }
+
   return {
-    postForm,
+    postCreateForm,
   };
 }

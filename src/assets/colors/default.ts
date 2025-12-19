@@ -37,5 +37,5 @@ export const statusColors = {
   notice: "#6984ed",
   error: "#ffc63b",
   warning: "#E88601",
-  void: "#6b7280",
+  void: "#a9aeb7",
 };

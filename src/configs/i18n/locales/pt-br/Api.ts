@@ -76,12 +76,6 @@ export const Api = {
     },
   },
   forms: {
-    invalid: {
-      fields:
-        "Os campos encontram-se sem alteração ou mal formulados e impossível de sofrer alteração",
-    },
-  },
-  custom_forms: {
     fills: {
       success: {
         delete: "O registro foi excluído com sucesso!",
@@ -94,6 +88,7 @@ export const Api = {
       delete: "O formulário foi excluído com sucesso!",
     },
     invalid: {
+      fields: "Os campos encontram-se sem alteração ou mal formulados e impossível de sofrer alteração",
       id: "A formulário informado não existe ou está inválido",
       in_ids:
         "Os formulários informados encontram-se com alguma irregularidade",
@@ -115,12 +110,8 @@ export const Api = {
       thanks_message:
         "As informações inseridas no campo de mensagem de agradecimento encontram-se inválidas",
     },
-    services: {
-      success: {
-        inscribe: "O cliente foi inscrito no evento com sucesso!",
-      },
-    },
   },
+
   dispatchers: {
     success: {
       post: "O envio foi criado com sucesso!",
