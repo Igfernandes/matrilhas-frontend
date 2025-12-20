@@ -6,14 +6,16 @@ export const ScheduleSchema = z
     title: z
       .string({ required_error: i18n("Validations.required") })
       .min(3, {
-        message: (i18n("Validations.min_length") as string)
-          .replace("${field}", i18n("Words.name"))
-          .replace("${length}", "3"),
+        message: i18n("Validations.min_length", {
+          field: i18n("Words.title"),
+          length: "3",
+        }) as string,
       })
       .max(200, {
-        message: (i18n("Validations.min_length") as string)
-          .replace("${field}", i18n("Words.name"))
-          .replace("${length}", "3"),
+        message: i18n("Validations.max_length", {
+          field: i18n("Words.title"),
+          length: "200",
+        }) as string,
       }),
     date: z
       .string({ required_error: i18n("Validations.required") })
@@ -23,7 +25,8 @@ export const ScheduleSchema = z
       .optional(),
     describe: z
       .string({ required_error: i18n("Validations.required") })
-      .optional().nullable(),
+      .optional()
+      .nullable(),
     color: z.string({ required_error: i18n("Validations.required") }),
     linked: z
       .array(z.string().or(z.boolean()))
@@ -47,4 +50,4 @@ export const ScheduleSchema = z
     }
   });
 
-export type ScheduleUpdatePayload = z.infer<typeof ScheduleSchema>;
+export type SchedulePayload = z.infer<typeof ScheduleSchema>;

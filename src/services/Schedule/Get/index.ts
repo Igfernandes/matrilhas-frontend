@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetSchedulesRequest } from "./types";
+import { GetSchedulesRequest, GetSchedulesResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { ScheduleShape } from "@type/Schedule";
 
 export default function useGet() {
   const { schedule } = API_ROUTES;
@@ -11,7 +10,7 @@ export default function useGet() {
 
   async function getSchedules(request?: GetSchedulesRequest) {
     const { id, ...query } = request ?? {};
-    return await axios.get<ScheduleShape[]>(
+    return await axios.get<GetSchedulesResponse>(
       setQueries({
         url: setParams({
           url: schedule,
