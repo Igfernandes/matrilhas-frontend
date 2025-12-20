@@ -1,8 +1,8 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { ScheduleSchema, ScheduleUpdatePayload } from "../schemas";
-import { useEffect, useState } from "react";
+import { ScheduleSchema, SchedulePayload } from "../schemas";
+import { useCallback, useMemo, useState } from "react";
 import useGetUsers from "@services/Users/Get/useGetUsers";
 import { UserShape } from "@type/Users";
 import usePostCreateSchedule from "@services/Schedule/Post/usePost";
@@ -11,20 +11,37 @@ import usePutCreateSchedule from "@services/Schedule/Put/usePut";
 import useDeleteSchedule from "@services/Schedule/Delete/useDelete";
 import { hasInvalidDateRange } from "@helpers/date";
 import i18n from "@configs/i18n";
+import useGetSchedules from "@services/Schedule/Get/useGet";
+import { useUserNavigationContext } from "@contexts/UserNavigation";
 
 dayjs.extend(customParseFormat);
 
-export function useModal() {
+type Props = {
+  scheduleId?: number;
+};
+
+export function useModal({ scheduleId }: Props) {
+  const { rows: schedules } = useGetSchedules({
+    id: scheduleId ?? undefined,
+  });
+  const { userAuth } = useUserNavigationContext();
   const [step, setStep] = useState<"INFORMATION" | "USERS">("INFORMATION");
-  const { formMethods, handleSubmit } =
-    useFormRules<ScheduleUpdatePayload>({
-      schema: ScheduleSchema,
-    });
+  const scheduleCurrent = useMemo(() => schedules?.[0] , [schedules]);
+  const { formMethods, handleSubmit } = useFormRules<SchedulePayload>({
+    schema: ScheduleSchema,
+    defaultValues: {
+      ...scheduleCurrent,
+      linked: scheduleCurrent?.linked?.map((user) => String(user.id)) || [],
+    },
+  });
 
   const { watch, trigger, reset } = formMethods;
   const { handleToggleModal, modal } = useModalContext();
-  const [users, setUsers] = useState<UserShape[]>([]);
-  const { rows: usersData, isFetched: isFetchedUsers } = useGetUsers();
+  const { rows: usersData } = useGetUsers();
+  const users = useMemo<Array<UserShape>>(() => {
+    return usersData.filter((user) => user.id != userAuth.id);
+  }, [usersData, userAuth]);
+
   const { mutateAsync: postSchedule, isPending: isLoadingPost } =
     usePostCreateSchedule();
   const { mutateAsync: putSchedule, isPending: isLoadingPut } =
@@ -65,46 +82,39 @@ export function useModal() {
     }
   };
 
-  const handleDeleteSchedule = async () => {
+  const handleDeleteSchedule = useCallback(async () => {
     await deleteSchedule({
       id: parseInt(modal.id as string),
     });
     setStep("INFORMATION");
     handleToggleModal(false);
     reset();
-  };
+  }, [modal, deleteSchedule, handleToggleModal, reset]);
 
-  useEffect(() => {
-    setStep("INFORMATION");
-  }, [modal]);
+  const submit = useCallback(
+    async ({ linked, ...rest }: SchedulePayload) => {
+      const payload = {
+        ...rest,
+        linked: linked.filter((user) => !!user).map((user) => +user),
+      };
 
-  useEffect(() => {
-    if (usersData) {
-      setUsers(usersData);
-    }
-  }, [usersData, isFetchedUsers]);
+      if (modal.id) {
+        await putSchedule({
+          id: parseInt(modal.id as string),
+          ...payload,
+          describe: payload.describe ?? "",
+        });
+      } else {
+        await postSchedule({
+          ...payload,
+          describe: payload.describe ?? "",
+        });
+      }
 
-  const submit = async ({ linked, ...rest }: ScheduleUpdatePayload) => {
-    const payload = {
-      ...rest,
-      linked: linked.filter((user) => !!user).map((user) => +user),
-    };
-
-    if (modal.id) {
-      await putSchedule({
-        id: parseInt(modal.id as string),
-        ...payload,
-        describe: payload.describe ?? "",
-      });
-    } else {
-      await postSchedule({
-        ...payload,
-        describe: payload.describe ?? "",
-      });
-    }
-
-    handleToggleModal(false);
-  };
+      handleToggleModal(false);
+    },
+    [modal, putSchedule, postSchedule, handleToggleModal]
+  );
 
   return {
     formMethods,
@@ -112,6 +122,7 @@ export function useModal() {
     submit,
     isLoading: isLoadingPost || isLoadingPut || isLoadingDelete,
     users,
+    scheduleCurrent,
     handleDeleteSchedule,
     step,
     setStep,

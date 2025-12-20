@@ -1,14 +1,13 @@
 import { Calendar } from "@components/shared/others/Calendar";
 import { useModalContext } from "@contexts/Modal";
-import { ScheduleShape } from "@type/Schedule";
+import useGetSchedules from "@services/Schedule/Get/useGet";
 import moment from "moment";
+import { useMemo } from "react";
 
-type Props = {
-  schedules: Array<ScheduleShape>;
-};
-
-export function ScheduleCalendar({ schedules }: Props) {
+export function ScheduleCalendar() {
   const { handleToggleModal } = useModalContext();
+  const { rows } = useGetSchedules();
+  const schedules = useMemo(() => rows ?? [], [rows]);
 
   return (
     <div className="timeCalendar">
@@ -19,8 +18,8 @@ export function ScheduleCalendar({ schedules }: Props) {
           end: end_date
             ? moment(end_date).toDate()
             : new Date(
-                moment(schedule.date).toDate().getTime() + 60 * 60 * 1000
-              ),
+              moment(schedule.date).toDate().getTime() + 60 * 60 * 1000
+            ),
           allDay: false,
           resource: String(schedule.id),
         }))}

@@ -12,6 +12,7 @@ export const Words = {
   agencies: "Agências",
   start: "Começa",
   opened: "Aberto",
+  subject: "Assunto",
   terminated: "Encerrado",
   started_inscribed: "Inicio da inscrição",
   final_inscribed: "Final da inscrição",

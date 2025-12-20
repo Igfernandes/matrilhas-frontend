@@ -15,5 +15,9 @@ export default function useGetSchedules(request: GetSchedulesRequest = {}) {
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }
