@@ -35,7 +35,7 @@ export const borderColors = {
 export const statusColors = {
   success: "#018C75",
   notice: "#6984ed",
-  error: "#ffc63b",
+  error: "#ff3b3b",
   warning: "#E88601",
   void: "#a9aeb7",
 };

@@ -1,4 +1,4 @@
-import { FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path, useFormContext } from "react-hook-form";
 import { Checkbox } from "../Checkbox";
 import { GroupChecksProps } from "./type";
 import { When } from "@components/utilities/When";
@@ -6,14 +6,14 @@ import { When } from "@components/utilities/When";
 export function GroupChecks<Payload extends FieldValues>({
   items = [],
   name,
-  register,
 }: GroupChecksProps<Payload>) {
+  const { register } = useFormContext()
 
   return (
-    <div className="relative ">
-      <div className="bg-secondary h-[45vh] overflow-x-hidden overflow-y-auto py-2 px-1 shadow-md">
+    <div className="relative">
+      <div className="bg-secondary h-[39vh] overflow-x-hidden overflow-y-auto py-2 px-1 shadow-md">
         {items.map((item, index) => (
-          <div key={`key_group_checks_${index}`} className="bg-white shadow-sm border border-secondary p-1 mb-4">
+          <div key={`key_group_checks_${index}`} className="bg-white shadow-sm border border-secondary p-1 mb-2">
             <Checkbox
               {...register(`${name}.${index}` as Path<Payload>)}
               label={item.label}

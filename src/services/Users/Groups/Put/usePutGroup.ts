@@ -34,6 +34,10 @@ export default function usePutGroup() {
         queryKey: ["users_groups"],
         refetchType: "active",
       });
+     queryClient.invalidateQueries({
+        queryKey: ["permissions/groups"],
+        refetchType: "active",
+      });
     },
     onError: (err) => {
       handleAxiosError(err);

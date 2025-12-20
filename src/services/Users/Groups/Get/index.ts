@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetGroupsRequest } from "./types";
+import { GetGroupsRequest, GetGroupsResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { UsersGroupShape } from "../../../../types/Users/UsersGroup";
 
 export default function useGet() {
   const { groups } = API_ROUTES;
@@ -12,7 +11,7 @@ export default function useGet() {
   async function getGroups(request?: GetGroupsRequest) {
     const { ...query } = request ?? {};
 
-    return await axios.get<UsersGroupShape[]>(
+    return await axios.get<GetGroupsResponse>(
       setQueries({
         url: setParams({ url: groups }),
         query,

@@ -30,7 +30,7 @@ export function ClientCreateModal({
           <div className="form-title mb-4">
             <h4 className="text-sm md:text-lg">
               <strong>
-                {i18n("Screens.dashboard.clients.client.text_select_category")}
+                {i18n("Screens.dashboard.clients.text_select_category")}
               </strong>
             </h4>
           </div>
@@ -54,7 +54,7 @@ export function ClientCreateModal({
               <h4 className="text-sm md:text-lg">
                 <strong>
                   {i18n(
-                    "Screens.dashboard.clients.client.text_fill_information"
+                    "Screens.dashboard.clients.text_fill_information"
                   )}
                 </strong>
               </h4>

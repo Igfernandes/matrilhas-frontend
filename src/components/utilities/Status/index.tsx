@@ -8,7 +8,7 @@ type Props = {
 export function Status({ is }: Props) {
     const status = useRef({
         ACTIVE: "bg-success",
-        INACTIVE: "bg-danger",
+        INACTIVE: "bg-error",
         PUBLISHED: "bg-success",
         DRAFT: "bg-warning",
         ARCHIVED: "bg-danger",

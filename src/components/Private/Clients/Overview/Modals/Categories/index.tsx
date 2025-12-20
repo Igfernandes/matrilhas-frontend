@@ -22,12 +22,12 @@ export function ModalFormCategories({
             <h4 className="text-base text-justify lg:text-left xl:text-lg line-clamp-2 ">
               <strong>
                 {i18n(
-                  "Screens.dashboard.clients.category.text_create_category"
+                  "Screens.dashboard.clients.categories.text_create_category"
                 )}
               </strong>
             </h4>
             <span className="text-xs lg:text-base">
-              {i18n("Screens.dashboard.clients.category.text_organized_items")}
+              {i18n("Screens.dashboard.clients.categories.text_organized_items")}
             </span>
           </div>
           <GroupFields

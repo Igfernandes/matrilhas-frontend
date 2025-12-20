@@ -14,6 +14,7 @@ export const Words = {
   opened: "Aberto",
   subject: "Assunto",
   terminated: "Encerrado",
+  groups: "Grupos",
   started_inscribed: "Inicio da inscrição",
   final_inscribed: "Final da inscrição",
   relation_category: "Categoria de relação",
