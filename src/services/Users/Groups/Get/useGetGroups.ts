@@ -5,11 +5,19 @@ import { useQueryGuard } from "@hooks/useAxios";
 export default function useGetGroups(payload?: GetGroupsRequest) {
   const { getGroups } = useGet();
 
-  return useQueryGuard({
+  const handle = async () => {
+    const { data } = await getGroups(payload);
+    return data;
+  };
+
+  const { data, ...rest } = useQueryGuard({
     queryKey: ["users_groups", payload],
-    queryFn: async () => {
-      const { data } = await getGroups(payload);
-      return data ?? false;
-    },
+    queryFn: handle,
   });
+
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }

@@ -1,4 +1,4 @@
-import { FieldValues, Path, UseFormRegister } from "react-hook-form";
+import { FieldValues, Path } from "react-hook-form";
 
 type GroupCheckItemShape = {
   label: string;
@@ -8,6 +8,5 @@ type GroupCheckItemShape = {
 
 export type GroupChecksProps<Payload extends FieldValues> = {
   items: Array<GroupCheckItemShape>;
-  register: UseFormRegister<Payload>;
   name: Path<Payload>;
 };

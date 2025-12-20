@@ -38,8 +38,8 @@ export const Screens = {
     text: "Você saiu com segurança. A AGM te espera na próxima! 🐾",
   },
   dashboard: {
-    ...clientsTranslations,
-    ...agenciesTranslations,
+    clients: clientsTranslations,
+    agencies: agenciesTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",

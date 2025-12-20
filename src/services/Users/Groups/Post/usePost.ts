@@ -31,7 +31,11 @@ export default function usePutCreateGroup() {
       });
 
       queryClient.invalidateQueries({
-        queryKey: ["users_groups"],
+        queryKey: ["permissions/groups"],
+        refetchType: "active",
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["permissions/groups"],
         refetchType: "active",
       });
     },

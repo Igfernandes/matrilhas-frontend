@@ -19,7 +19,7 @@ export const privateRoutes = {
   financesCreate: "/dashboard/finance/create",
   financePayments: "/dashboard/finance/{id}/payment/{payment_id}",
   usersManager: "/dashboard/users",
-  userGroups: "/dashboard/users/group",
+  userGroups: "/dashboard/users/groups",
   apisManager: "/dashboard/apis",
   settings: "/dashboard/settings",
   logout: "/dashboard/logout",

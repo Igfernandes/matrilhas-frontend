@@ -1,21 +1,18 @@
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
-import { useUsersManager } from "@components/Private/Users/hooks/useUsersManager";
 import { ModalUserOperationType } from "@components/Private/Users/type";
-import { UsersManager } from "@components/Private/Users";
-import { OptionsBar } from "@components/Private/Users/OptionsBar";
+import { Groups } from "@components/Private/Users/Groups";
+import { OptionsBar } from "@components/Private/Users/Groups/OptionsBar";
 
-export default function Users() {
+export default function UsersGroups() {
   const { handleSearch, search } = useSearch();
-  const { groups } = useUsersManager();
 
   return (
     <DashboardContainer<ModalUserOperationType>>
       <div>
         <OptionsBar handleSearch={handleSearch} />
-        <UsersManager
+        <Groups
           search={search}
-          groups={groups ?? []}
         />
       </div>
     </DashboardContainer>

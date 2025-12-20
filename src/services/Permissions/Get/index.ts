@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { PermissionsShape } from "../../../types/Permissions";
-import { GetPermissionsRequest } from "./types";
+import { GetPermissionsRequest, GetPermissionsResponse } from "./types";
 
 export default function useGet() {
   const { permissions } = API_ROUTES;
@@ -11,7 +10,7 @@ export default function useGet() {
 
   async function getPermissions(request?: GetPermissionsRequest) {
     const { ...query } = request ?? {};
-    return await axios.get<PermissionsShape[]>(
+    return await axios.get<GetPermissionsResponse>(
       setQueries({
         url: setParams({ url: permissions }),
         query,

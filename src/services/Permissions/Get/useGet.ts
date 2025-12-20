@@ -15,5 +15,9 @@ export default function useGetPermissions(request: GetPermissionsRequest = {}) {
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }
