@@ -21,6 +21,7 @@ export function useSelect({ name, options }: Props) {
 
   const handleChangeValue = (name: string, option: OptionsShape) => {
     setValue(name, String(option.value));
+
   };
 
   const handleToggleList = (isShowList: boolean) => {

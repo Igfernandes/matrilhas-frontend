@@ -23,7 +23,7 @@ export function Address({ register, errors }: Props) {
                     <Input dataTestId="city" {...register("address.city")} label={i18n("Words.city")} errors={errors?.address?.city} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <Input dataTestId="zipcode" {...register("address.zipcode")} label={i18n("Words.zipcode")} errors={errors?.address?.zipcode} />
+                    <Input dataTestId="zipcode" {...register("address.zip_code")} label={i18n("Words.zipcode")} errors={errors?.address?.zip_code} />
                 </div>
                 <div className="w-full md:w-[20%] my-2">
                     <Input type="number" dataTestId="number" {...register("address.number")} label={i18n("Words.number")} errors={errors?.address?.number} />

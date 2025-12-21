@@ -14,7 +14,7 @@ export function FooterDefault() {
           >
             Company Market
           </Link>
-          &nbsp; © <strong>AGM – Associação de Guias de Maricá.</strong> <br />
+          &nbsp; © <strong>Matrilhas.</strong> <br />
           Todos os direitos reservados. &nbsp; · &nbsp;
           <Link href="/politics-privacy" className="underline">Política de Privacidade</Link>
         </p>

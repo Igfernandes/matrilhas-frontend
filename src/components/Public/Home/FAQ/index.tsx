@@ -10,10 +10,10 @@ export function FAQ() {
   const { t } = useI18n();
   return (
     <Section>
-      <div className="faq ">
+      <div className="faq mt-20">
         <div className="text-sm md:text-md text-center md:text-left title mb-4">
           <span>{t("Screens.home.faq.title")}</span>
-          <h1 className="text-lg md:text-2xl text-red">
+          <h1 className="text-lg md:text-2xl text-primary">
             <strong>{t("Screens.home.faq.description")}</strong>
           </h1>
         </div>

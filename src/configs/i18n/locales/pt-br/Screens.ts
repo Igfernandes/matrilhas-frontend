@@ -1,16 +1,23 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { clientsTranslations } from "./screens/dashboard/clients";
+import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
 import { formsTranslations } from "./screens/public/forms";
+import { HomeAboutUsTranslations } from "./screens/public/home/aboutUs";
+import { homeAgenciesTranslations } from "./screens/public/home/agencies";
+import { HomeFaqTranslations } from "./screens/public/home/faq";
+import { HomeGalleryTranslations } from "./screens/public/home/gallery";
+import { HomeNewsletterTranslations } from "./screens/public/home/newsletter";
 import { loginTranslations } from "./screens/public/login";
+import { NewsletterTranslations } from "./screens/public/newsletter";
 
 export const Screens = {
   forgot_password: forgotPasswordTranslations,
   login: loginTranslations,
   alter_password: alterPasswordTranslations,
   forms: {
-    ...formsTranslations
+    ...formsTranslations,
   },
   confirmations: {
     title: "Confira sua inscrição",
@@ -33,13 +40,14 @@ export const Screens = {
     switch_event: "Escolha um evento",
     selected_form: "Selecione um formulário",
   },
- 
+
   logout: {
     text: "Você saiu com segurança. A AGM te espera na próxima! 🐾",
   },
   dashboard: {
     clients: clientsTranslations,
     agencies: agenciesTranslations,
+    galleries: galleriesTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",
@@ -151,7 +159,9 @@ export const Screens = {
       text_fill_information: "Preencha as informações da integração:",
     },
   },
+  newsletter: NewsletterTranslations,
   home: {
+    agencies: homeAgenciesTranslations,
     contact: {
       address_title: "Nosso Endereço",
       address: "São José do Imbassai, Maricá - RJ",
@@ -171,14 +181,7 @@ export const Screens = {
       modalities: "+6 Modalidades",
       travelers: "+1000 Viajantes",
     },
-    about: {
-      title: "Um pouco sobre nós",
-      subtitle: "Associação dos Guias de Turismo de Maricá",
-      description_1:
-        "A Associação de Guias de Turismo de Maricá (AGM) é uma entidade sem fins lucrativos que reúne profissionais qualificados e comprometidos em promover o turismo responsável, sustentável e de qualidade em Maricá e região.",
-      description_2:
-        "Fundada com o objetivo de valorizar e fortalecer a profissão de guia de turismo, a AGM atua como ponto de referência para visitantes, agências, operadoras e parceiros do trade turístico, sempre priorizando a excelência no atendimento, a segurança e a preservação do patrimônio natural, cultural e histórico.",
-    },
+    about: HomeAboutUsTranslations,
     events: {
       title: "Cronograma e serviços",
       subtitle: "Nossas atrações e atividades",
@@ -187,71 +190,13 @@ export const Screens = {
         text: "No momento não há eventos disponíveis, mas em breve teremos novidades. Fique ligado!",
       },
     },
-    gallery: {
-      title: "AGM & VOCÊ",
-      subtitle: "Nossas lembranças",
-      description:
-        "Cada foto aqui guarda um pedacinho da nossa história. Para a AGM, é uma alegria imensa compartilhar momentos únicos com nossos clientes e amigos que participam das atividades turísticas. Cada sorriso e cada experiência vivida juntos reforçam o nosso propósito: transformar passeios em memórias inesquecíveis",
-    },
+    gallery: HomeGalleryTranslations,
     support_network: {
       title: "Rede de apoio",
       subtitle: "Instituições que fortalecem nosso trabalho",
     },
-    faq: {
-      title: "Duvidas & Respostas",
-      description: "Encontre as respostas no nosso FAQ",
-      questions: [
-        {
-          question: "Quais são as funções da Associação?",
-          answer:
-            "A AGM atua como agente impulsionador do turismo local, promovendo um turismo sustentável e de qualidade. Oferecemos treinamentos, atualizações de mercado e oportunidades de networking para guias de turismo. Também trabalhamos em parceria com autoridades locais para regulamentar e valorizar a profissão.",
-        },
-        {
-          question: "Quando a Associação foi fundada?",
-          answer: "A AGM foi fundada em 13 de julho de 2021.",
-        },
-        {
-          question: "Quem está na presidência da AGM?",
-          answer:
-            "Atualmente, o presidente é Alberto Matrilhas e a vice-presidente é Thaís Bellotti.",
-        },
-        {
-          question: "Onde fica a sede da AGM?",
-          answer:
-            "Nossa sede, também chamada de Central de Passeios, está localizada na Rua Abreu Sodré, 43 - Centro, Maricá - RJ, 24913-775.",
-        },
-        {
-          question: "Quais são os dias e horários de atendimento?",
-          answer:
-            "Funcionamos todos os dias da semana, de segunda a domingo, das 9h às 17h.",
-        },
-        {
-          question: "Por que se associar à AGM?",
-          answer:
-            "Ao se tornar associado, você integra uma comunidade que valoriza a história, a cultura e os atrativos turísticos da região. Além de ampliar conhecimentos e oportunidades, contribui para oferecer aos turistas experiências autênticas e seguras, fortalecendo ainda mais o turismo em Maricá.",
-        },
-        {
-          question: "Quem pode se associar?",
-          answer:
-            "Podem se associar tanto pessoas físicas quanto jurídicas, incluindo: guias de turismo, condutores, monitores, profissionais e empresas do trade turístico, estabelecimentos de hotelaria e gastronomia, gráficas, colaboradores e cooperadores.",
-        },
-        {
-          question: "Qual é a contribuição da AGM para o turismo em Maricá?",
-          answer:
-            "A AGM participa ativamente de eventos e iniciativas locais, como Caravana Celebrar Maricá, Expo Valley, Expo Maricá, Vem Viver Maricá, Vem Viver Espraiado, Recantando, Curta Itaocaia, Espraiado de Portas Abertas, Conheça Maricá, Maricá Games, FLIN, Congresso de Hidrogênio, Feira das Profissões, BRICS+, além de visitas técnicas e capacitações. Nosso compromisso é o fortalecimento contínuo do turismo em Maricá, por meio de parcerias e ações que valorizam profissionais e elevam a qualidade do setor.",
-        },
-      ],
-    },
-    newsletter: {
-      title: "Viaje conosco",
-      subtitle: "Seja mais um viajante conectado conosco",
-      description: "Inscreva-se para receber notícias e novidades",
-      form: {
-        name: "Nome",
-        phone: "Telefone",
-        button: "Inscrever-se",
-      },
-    },
+    faq: HomeFaqTranslations,
+    newsletter: HomeNewsletterTranslations,
     testimonials: [
       {
         title: "Comentário do viajante",

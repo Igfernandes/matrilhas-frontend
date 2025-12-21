@@ -2,9 +2,10 @@ import { Input } from "@components/shared/forms/Input";
 import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
 import { Select } from "@components/shared/forms/Select";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Trash } from "@assets/Icons/black/Trash";
 import { textColors } from "@assets/colors/colors";
+import { useSocialMedias } from "./hooks/useSocialMedias";
 
 type Props = ProfileFormProps;
 
@@ -13,7 +14,7 @@ export function SocialMedias({ register, agency, errors }: Props) {
         text: i18n(`Words.${media.toLowerCase()}`),
         value: media
     })), []);
-    const [lines, setLines] = useState<number>(agency?.social_media?.length || 1);
+    const { lines, setLines, handleRemoveSocialMedia } = useSocialMedias({ socialMedias: agency?.social_media || [] });
 
     return (
         <div className="mt-6">
@@ -27,8 +28,8 @@ export function SocialMedias({ register, agency, errors }: Props) {
             <div className="bg-secondary min-h-20 px-2 rounded-md">
                 {Array.from({ length: lines }).map((_, index) => (
                     <div className="form-social-media" key={index}>
-                        <div className="pt-2" onClick={(ev) => ev.currentTarget.closest(".form-social-media")?.remove()}>
-                            <Trash className="ml-auto cursor-pointer" width={15} height={15} fill={textColors.red} />
+                        <div className="pt-2" >
+                            <Trash onClick={() => handleRemoveSocialMedia(index)} className="ml-auto cursor-pointer" width={15} height={15} fill={textColors.red} />
                         </div>
                         <div className="flex flex-wrap justify-between relative" >
 

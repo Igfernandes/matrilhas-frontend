@@ -1,25 +1,24 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetClientsRequest } from "./types";
+import { GetToursPreviewRequest, GetToursPreviewResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { ClientShape } from "../../../types/Clients";
 
 export default function useGetPreview() {
-  const { clientPreview } = API_ROUTES;
+  const { toursPreview } = API_ROUTES;
   const { axios } = useAxios();
   const { setQueries } = useRoutes();
 
-  async function getClient(request?: GetClientsRequest) {
+  async function getPreview(request?: GetToursPreviewRequest) {
     const { ...query } = request ?? {};
-    return await axios.get<Pick<ClientShape, "name" | "email" | "phone">>(
+    return await axios.get<GetToursPreviewResponse>(
       setQueries({
-        url: clientPreview,
+        url: toursPreview,
         query,
       })
     );
   }
 
   return {
-    getClient,
+    getPreview,
   };
 }

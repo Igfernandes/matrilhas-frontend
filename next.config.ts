@@ -8,7 +8,16 @@ const nextConfig: NextConfig = {
       },
       {
         hostname: "192.168.1.5/**"
-      }
+      },
+      {
+        hostname: "192.168.1.2/**"
+      }, 
+      {
+        hostname: "192.168.1.3/**"
+      },
+      {
+        hostname: "192.168.1.4/**"
+      },
     ],
   },
 };

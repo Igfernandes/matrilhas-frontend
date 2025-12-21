@@ -4,6 +4,7 @@ import { TourShape } from "@type/Tours"
 import { TourProfilePayload, TourProfileSchema } from "../profileSchemas"
 import usePutTour from "@services/Tours/Put/usePut"
 import usePostTour from "@services/Tours/Post/usePost"
+import dayjs from "dayjs"
 
 type Props = {
     tour?: TourShape
@@ -20,7 +21,12 @@ export function useProfile({ tour = {} as TourShape }: Props = {} as Props) {
     const { mutateAsync: putTour, isPending: isLoadingPut } = usePutTour()
     const { mutateAsync: postTour, isPending: isLoadingPost } = usePostTour();
 
-    const onSubmit = useCallback(async (payload: TourProfilePayload) => {
+    const onSubmit = useCallback(async (data: TourProfilePayload) => {
+        const payload = {
+            ...data,
+            available_at: dayjs(data.available_at).format("YYYY-MM-DD HH:mm"),
+            unavailable_at: dayjs(data.unavailable_at).format("YYYY-MM-DD HH:mm"),
+        } as TourProfilePayload
         if (payload.id) {
             await putTour({
                 ...payload,

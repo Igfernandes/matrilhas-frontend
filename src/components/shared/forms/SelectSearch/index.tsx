@@ -17,7 +17,6 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
       name,
       required,
       options = [],
-      handledChange,
       ...rest
     }: SelectProps,
     ref
@@ -39,75 +38,75 @@ export const SelectSearch = React.forwardRef<HTMLInputElement, SelectProps>(
 
     return (
       <>
-        <div className="relative">
+        <div
+          className="relative"
+          onMouseLeave={() => handleToggleList(false)}
+        >
           <label htmlFor={IdCurrent} className="w-full">
             <span
-              className={`absolute cursor-pointer top-[2px]  pb-0 left-[2px] rounded-lg pl-2  transition-all duration-350  bg-white`}
-              style={{
-                ...labelStyledState,
-              }}
+              className="absolute cursor-pointer top-[2px] left-[2px] pl-2 rounded-lg bg-white transition-all duration-350"
+              style={labelStyledState}
             >
               {label}
               <When value={required}>
                 <span className="text-primary">*</span>
               </When>
             </span>
+
             <input
               {...rest}
               ref={ref}
               name={name}
-              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                if (rest.onChange) rest.onChange(ev);
-                if (handledChange) handledChange(ev);
-              }}
               type="hidden"
-              readOnly={true}
+              readOnly
             />
+
             <p
-              onClick={() => handleToggleList(!isShowList)}
-              className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
-                } 
-              h-[3.5rem] w-full px-3 pt-6 pb-2 select-ref cursor-pointer bg-scroll-transparent bg-white border-secondary border-2 rounded-xl text-primary text-md font-medium`}
+              onClick={() => handleToggleList(true)}
+              className={`${className} ${errors ? "border-amber-500 outline-amber-500" : ""
+                } h-[3.5rem] w-full px-3 pt-6 pb-2 cursor-pointer bg-white border-2 border-secondary rounded-xl`}
             >
-              {selected} <ArrowDownSimple className="absolute right-4 top-6" />
+              {selected}
+              <ArrowDownSimple className="absolute right-4 top-6" />
             </p>
-            <div
-              className={`content ${isShowList ? "block" : "hidden"
-                } absolute bg-white w-full p-2 shadow-lg rounded-sm z-50`}
-            >
-              <div className="search-bar mb-2">
-                <input
-                  data-testid={dataTestId}
-                  id={IdCurrent}
-                  type="search"
-                  onChange={(ev) => handleSearch(ev.currentTarget.value)}
-                  className=" w-full px-3 py-1 cursor-pointer bg-scroll-transparent bg-white border-secondary border-2 rounded-lg text-primary text-md font-medium"
-                />
+
+            {isShowList && (
+              <div className="absolute bg-white w-full p-2 shadow-lg rounded-sm z-50">
+                <div className="search-bar mb-2">
+                  <input
+                    data-testid={dataTestId}
+                    id={IdCurrent}
+                    type="search"
+                    onChange={(ev) => handleSearch(ev.currentTarget.value)}
+                    className="w-full px-3 py-1 border-2 border-secondary rounded-lg"
+                  />
+                </div>
+
+                <ul className="h-[15vh] overflow-y-auto">
+                  {options
+                    .filter(
+                      (option) =>
+                        !search ||
+                        option.text.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .map(({ text, value }, index) => (
+                      <li
+                        key={index}
+                        onClick={() => {
+                          handleChangeValue(name ?? "", { text, value });
+                          handleToggleList(false);
+                        }}
+                        className="px-2 py-1 bg-secondary cursor-pointer hover:bg-primary hover:text-white rounded-sm"
+                      >
+                        {text}
+                      </li>
+                    ))}
+                </ul>
               </div>
-              <ul className=" h-[15vh] overflow-y-auto">
-                {options
-                  .filter(
-                    (option) =>
-                      !search ||
-                      option.text.toLowerCase().includes(search.toLowerCase())
-                  )
-                  .map(({ text, value }, index) => (
-                    <li
-                      onClick={() => {
-                        handleChangeValue(name ?? "", { text, value });
-                        handleToggleList(false);
-                      }}
-                      key={index}
-                      value={value ?? ""}
-                      className={`px-2 py-1 cursor-pointer hover:bg-primary hover:text-white rounded-sm`}
-                    >
-                      {text}
-                    </li>
-                  ))}
-              </ul>
-            </div>
+            )}
           </label>
         </div>
+
         <ErrorMessage errors={errors?.message} />
       </>
     );

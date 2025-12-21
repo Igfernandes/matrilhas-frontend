@@ -42,8 +42,7 @@ export const AgencyProfileSchema = z.object({
         length: "1000",
       }),
     })
-    .optional()
-    .nullable(),
+    .optional(),
   website: z
     .string({ required_error: i18n("Validations.required") })
     .max(250, {
@@ -60,7 +59,7 @@ export const AgencyProfileSchema = z.object({
     country: z.string({ required_error: i18n("Validations.required") }),
     state: z.string({ required_error: i18n("Validations.required") }),
     city: z.string({ required_error: i18n("Validations.required") }),
-    zipcode: z.string({ required_error: i18n("Validations.required") }),
+    zip_code: z.string({ required_error: i18n("Validations.required") }),
     number: z.string({ required_error: i18n("Validations.required") }),
     complement: z.string({ required_error: i18n("Validations.required") }),
   }),

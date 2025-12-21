@@ -1,27 +1,23 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setQueries } from "@helpers/routes";
-import { GetClientsRequest } from "./types";
-import { ClientShape } from "../../../types/Clients";
+import { GetAgenciesPreviewRequest, GetAgenciesPreviewResponse } from "./types";
 
-export async function getClients(
-  tokenNavigation: string,
-  request?: GetClientsRequest
-): Promise<ClientShape[] | ClientShape> {
+export async function getAgenciesPreview(
+  request?: GetAgenciesPreviewRequest
+): Promise<GetAgenciesPreviewResponse> {
   const query = request ?? {};
 
-  const { clients } = API_ROUTES;
-  const { data } = await axios.get<ClientShape[] | ClientShape>(
+  const { agenciesPreview } = API_ROUTES;
+  const { data } = await axios.get<GetAgenciesPreviewResponse>(
     setQueries({
-      url: clients,
+      url: agenciesPreview,
       query,
-    }),
-    {
-      headers: {
-        Authorization: `Bearer ${tokenNavigation}`,
-      },
-    }
+    })
   );
 
-  return data;
+  return {
+    rows: data.rows ?? [],
+    count: data.count ?? 0,
+  };
 }

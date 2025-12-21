@@ -8,12 +8,12 @@ export function AboutUs() {
 
   return (
     <Section>
-      <div id="about_us">
+      <div id="about_us " className="about_us mt-[2rem]">
         <div className="flex flex-wrap">
           <div className="w-full lg:w-[60%] lg:pr-10">
             <div className="text-center md:text-left ">
               <span> {t("Screens.home.about.title")}</span>
-              <h1 className="text-2xl text-red">
+              <h1 className="text-2xl text-primary">
                 <strong>{t("Screens.home.about.subtitle")}</strong>
               </h1>
             </div>

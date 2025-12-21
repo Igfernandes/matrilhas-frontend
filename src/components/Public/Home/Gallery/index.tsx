@@ -1,25 +1,34 @@
 import Image from "next/image";
-import { PHOTOS } from "./photos";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Autoplay, Navigation } from "swiper/modules";
 import { ArrowRight } from "@assets/Icons/black/ArrowRight";
 import { Section } from "@components/shared/layouts/Section";
 import { useI18n } from "@contexts/I18n";
+import Link from "next/link";
+import { publicRoutes } from "@configs/routes/Web/navigation";
+import { useGallery } from "./hooks/useGallery";
 
 export function Gallery() {
+  const { photos } = useGallery()
   const { t } = useI18n();
+  
   return (
     <Section>
-      <div className="gallery flex flex-wrap">
+      <div className="gallery flex flex-wrap mt-20">
         <div className="text-sm md:text-md text-center md:text-left w-full lg:w-[30%] md:pr-5">
           <span>{t("Screens.home.gallery.title")}</span>
-          <h1 className="text-lg md:text-2xl text-red">
+          <h1 className="text-lg md:text-2xl text-primary">
             <strong>{t("Screens.home.gallery.subtitle")}</strong>
           </h1>
           <p className="text-justify mt-5">
             {t("Screens.home.gallery.description")}
           </p>
+          <div className="mt-5">
+            <Link href={publicRoutes.galleries}>
+              <span className="bg-primary inline-block px-6 py-1 rounded-md text-white font-semibold">Ver Galerias</span>
+            </Link>
+          </div>
         </div>
 
         <button className="gallery-button-next absolute hidden xl:right-[-20] top-1/2 -translate-y-1/2 z-50  p-2 ">
@@ -48,11 +57,11 @@ export function Gallery() {
               },
             }}
           >
-            {PHOTOS.map((photo, key) => (
+            {photos.map((photo, key) => (
               <SwiperSlide key={`photo_${key}`}>
                 <Image
                   src={photo.src}
-                  alt={photo.alt}
+                  alt={"Matrilha Foto Gallery"}
                   width={700}
                   height={700}
                   className="w-full md:w-[30vw] h-60 object-cover"

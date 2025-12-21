@@ -28,8 +28,7 @@ export function Information({ register, errors }: Props) {
                     <Input {...register("cnpj")} required={true} onChangeCapture={handleMaskCNPJ} dataTestId="cnpj" label={i18n("Words.cnpj")} errors={errors?.cnpj} />
                 </div>
                 <div className="w-full">
-                    <TextArea dataTestId="describe"  {...register("describe")} label={i18n("Words.describe")} className="h-40" errors={errors?.describe} >
-                    </TextArea>
+                    <TextArea dataTestId="describe"  {...register("describe")} label={i18n("Words.describe")} className="h-40" errors={errors?.describe} ></TextArea>
                 </div>
             </div>
         </div>
