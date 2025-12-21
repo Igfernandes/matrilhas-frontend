@@ -63,25 +63,34 @@ export function Header() {
         </div>
         <div className="navbar flex items-center justify-between bg-white py-2 px-4 rounded-full">
           <div className="flex items-center">
-            <div className="logo">
+            <div className="logo p-2 ml-5">
               <Image
-                src={"/imgs/logo-horizontal.png"}
-                width={100}
-                height={100}
+                src={"/imgs/logotype-vertical-black.png"}
+                width={90}
+                height={80}
                 alt="logotype AGM"
-                className="rounded-full"
               />
             </div>
             <div className="hidden md:block">
               <ul className="flex items-center mx-4">
                 <li className="mx-2">
-                  <Link className="hover:text-red" href={"#about_us"}>
+                  <Link className="font-semibold text-zinc-600 hover:text-primary" href={"#about_us"}>
                     {t("Screens.home.menu.about_us")}
                   </Link>
                 </li>
                 <li className="mx-2">
-                  <Link className="hover:text-red" href={"#partners"}>
-                    {t("Screens.home.menu.partners")}
+                  <Link className="font-semibold text-zinc-600 hover:text-primary" href={"#agencies"}>
+                    {t("Words.agencies")}
+                  </Link>
+                </li>
+                <li className="mx-2">
+                  <Link className="font-semibold text-zinc-600 hover:text-primary" href={"/galleries"}>
+                    {t("Words.galleries")}
+                  </Link>
+                </li>
+                <li className="mx-2">
+                  <Link className="font-semibold text-zinc-600 hover:text-primary" href={"#partners"}>
+                    {t("Words.tours")}
                   </Link>
                 </li>
               </ul>
@@ -91,22 +100,7 @@ export function Header() {
             <div className="languages">
               <Flags />
             </div>
-            <div className="confirmations  ml-2">
-              <Link
-                className="border-red  border-2 py-2 px-4 rounded-full font-semibold text-red"
-                href={"/confirmations"}
-              >
-                {t("Words.confirmations")}
-              </Link>
-            </div>
-            <div className="events  ml-2">
-              <Link
-                className="bg-red py-2 px-4 rounded-full font-semibold text-white"
-                href={"#events"}
-              >
-                {t("Words.events")}
-              </Link>
-            </div>
+
           </div>
         </div>
       </div>

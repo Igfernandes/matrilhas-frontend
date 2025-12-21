@@ -15,4 +15,8 @@ export const PARTNERS = [
     logo: "/imgs/partners/partner-4.png",
     name: "COMTUR - Maricá",
   },
+  {
+    logo: "/imgs/partners/partner-5.jpeg",
+    name: "Central de Passeios - Maricá",
+  },
 ];

@@ -17,10 +17,10 @@ export function Subscribe() {
   const { t } = useI18n();
   return (
     <Section>
-      <div className="content">
+      <div className="content mt-20">
         <div className="text-sm md:text-md text-center md:text-left title md:mb-4">
           <span>{t("Screens.home.newsletter.title")}</span>
-          <h1 className="text-lg md:text-2xl text-center md:text-left text-red">
+          <h1 className="text-lg md:text-2xl text-center md:text-left text-primary">
             <strong>{t("Screens.home.newsletter.subtitle")}</strong>
           </h1>
         </div>
@@ -106,7 +106,7 @@ export function Subscribe() {
                           alt={client.alt}
                           width={500}
                           height={500}
-                          className="rounded-full h-28 w-28 object-cover border-2 border-dashed border-rose-900 p-1"
+                          className="rounded-full h-28 w-28 object-cover border-2 border-dashed border-primary p-1"
                         />
                       </div>
                       <div className="ml-4">

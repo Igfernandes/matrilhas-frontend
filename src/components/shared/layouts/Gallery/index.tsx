@@ -25,8 +25,8 @@ export function Gallery({ api, id }: GalleryProps) {
                             </div>
                         ))}
                     </When>
-                    <div className="flex items-center justify-center py-14 ml-[1px] h-60 w-full md:w-[24.7%] xl:w-[19.7%] border-primary border">
-                        <span>Arraste e solte imagens aqui</span>
+                    <div className="flex items-center justify-center py-14 ml-[1px] h-50 w-full md:w-[24.7%] xl:w-[19.7%] text-center border-primary border">
+                        <span>Arraste e solte <br /> imagens aqui</span>
                     </div>
 
                 </div>

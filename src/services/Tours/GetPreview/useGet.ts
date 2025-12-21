@@ -1,19 +1,25 @@
 import useGet from ".";
-import { GetClientsRequest } from "./types";
+import { GetToursPreviewRequest } from "./types";
 import { useQueryGuard } from "@hooks/useAxios";
 
-export default function useGetClientPreview(request: GetClientsRequest = {}) {
-  const { getClient } = useGet();
+export default function useGetToursPreview(
+  request: GetToursPreviewRequest = {}
+) {
+  const { getPreview } = useGet();
 
   async function handle() {
-    const { data } = await getClient(request);
+    const { data } = await getPreview(request);
     return data ?? null;
   }
 
   const { data, ...rest } = useQueryGuard({
-    queryKey: ["clients/preview", request],
+    queryKey: ["tours/preview", request],
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }

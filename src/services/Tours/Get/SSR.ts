@@ -9,11 +9,11 @@ export async function getTours(
 ): Promise<GetToursResponse> {
   const query = request ?? {};
 
-  const { tours } = API_ROUTES;
+  const { toursById } = API_ROUTES;
   const { data } = await axios.get<GetToursResponse>(
     setQueries({
       url: setParams({
-        url: tours,
+        url: toursById,
         data: {
           id: id ?? "",
         },

@@ -18,4 +18,9 @@ export const PERMISSIONS = {
     update: "tours_update",
     delete: "tours_delete",
   },
+  galleries: {
+    create: "galleries_create",
+    update: "galleries_update",
+    delete: "galleries_delete",
+  },
 };

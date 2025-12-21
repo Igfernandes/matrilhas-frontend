@@ -2,7 +2,10 @@ export const publicRoutes = {
   login: "/login",
   forgotPassword: "/forgot-password",
   successful: "/successful",
-  forms: "/forms"
+  forms: "/forms",
+  agencies: "/agencies",
+  tours: "/tours",
+  galleries: "/galleries",
 };
 
 export const privateRoutes = {
@@ -13,8 +16,7 @@ export const privateRoutes = {
   dispatcher: "/dashboard/dispatcher",
   forms: "/dashboard/forms",
   schedule: "/dashboard/schedule",
-  services: "/dashboard/services",
-  events: "/dashboard/events",
+  galleries: "/dashboard/galleries",
   finance: "/dashboard/finance",
   financesCreate: "/dashboard/finance/create",
   financePayments: "/dashboard/finance/{id}/payment/{payment_id}",

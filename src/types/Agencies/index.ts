@@ -11,6 +11,7 @@ export type AgencyShape = BaseShape & {
   status: "ACTIVE" | "INACTIVE";
   social_media?: AgencySocialMediaShape[];
   email?: string;
+  describe?: string;
   address?: AgencyAddressShape;
   created_at: string;
   updated_at: string;

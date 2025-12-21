@@ -1,11 +1,13 @@
 import { AgenciesApiTranslations } from "./api/agencies";
 import { ClientsApiTranslations } from "./api/clients";
+import { GalleriesApiTranslations } from "./api/galleries";
 import { ToursApiTranslations } from "./api/tours";
 
 export const Api = {
   clients: ClientsApiTranslations,
   agencies: AgenciesApiTranslations,
   tours: ToursApiTranslations,
+  galleries: GalleriesApiTranslations,
   exports: {
     invalid: {
       in_ids:
@@ -88,7 +90,8 @@ export const Api = {
       delete: "O formulário foi excluído com sucesso!",
     },
     invalid: {
-      fields: "Os campos encontram-se sem alteração ou mal formulados e impossível de sofrer alteração",
+      fields:
+        "Os campos encontram-se sem alteração ou mal formulados e impossível de sofrer alteração",
       id: "A formulário informado não existe ou está inválido",
       in_ids:
         "Os formulários informados encontram-se com alguma irregularidade",

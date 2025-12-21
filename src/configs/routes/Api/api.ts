@@ -16,6 +16,7 @@ import { filesRoutes } from "./files";
 import { eventsRoutes } from "./events";
 import { agenciesRoutes } from "./agencies";
 import { toursRoutes } from "./tours";
+import { galleriesRoutes } from "./galleries";
 
 export const API_ROUTES = {
   ...authenticationRoutes,
@@ -36,6 +37,7 @@ export const API_ROUTES = {
   ...messagesDispatcherRoutes,
   ...filesRoutes,
   ...eventsRoutes,
+  ...galleriesRoutes,
   exports: "/exports",
   confirmations: "/confirmations",
 };

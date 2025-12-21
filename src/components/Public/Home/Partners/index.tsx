@@ -7,10 +7,10 @@ export function Partners() {
   const { t } = useI18n();
   return (
     <Section>
-      <div id="partners" className="partners">
+      <div id="partners" className="partners mt-20">
         <div className="text-sm md:text-md text-center md:text-left title mb-4">
           <span> {t("Screens.home.support_network.title")}</span>
-          <h1 className="text-lg md:text-2xl text-red">
+          <h1 className="text-lg md:text-2xl text-primary">
             <strong>{t("Screens.home.support_network.subtitle")}</strong>
           </h1>
         </div>
@@ -19,7 +19,7 @@ export function Partners() {
             {PARTNERS.map(({ logo, name }, key) => (
               <li
                 key={`partners_${key}`}
-                className="relative w-[80%] md:w-60 lg:w-[23%]  border-4 border-white shadow mx-1 md:mx-2 my-2 lg:my-0 lg:mx-3"
+                className="relative w-[80%] md:w-60 lg:w-[18%]  border-4 border-white shadow mx-1 md:mx-2 my-2 lg:my-0 lg:mx-3"
               >
                 <div className="profile">
                   <Image
@@ -41,7 +41,7 @@ export function Partners() {
                       />
                     </div>
                   </div>
-                  <div className="social-media  text-red font-semibold text-center pt-3 pb-3">
+                  <div className="social-media  text-primary font-semibold text-center pt-3 pb-3">
                     <h3>{name}</h3>
                   </div>
                 </div>

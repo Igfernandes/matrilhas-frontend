@@ -1,4 +1,6 @@
-import { BaseShape } from "@type/data";
+import { BaseShape, CurrenciesType } from "@type/data";
+import { TourGalleryShape } from "./Gallery";
+import { TourAddressShape } from "./Address";
 
 export type TourShape = BaseShape & {
   id: number;
@@ -13,9 +15,9 @@ export type TourShape = BaseShape & {
   price: number;
   promotional_price?: number;
 
-  currency: "REAL" | "USD" | "EURO";
+  currency: CurrenciesType;
 
-  available_at?: string;   // ISO datetime
+  available_at?: string; // ISO datetime
   unavailable_at?: string; // ISO datetime
 
   video?: string;
@@ -30,4 +32,20 @@ export type TourShape = BaseShape & {
 
   created_at: string;
   updated_at: string;
+};
+
+export type TourPreviewShape = Omit<
+  TourShape,
+  "owner_id" | "available_at" | "unavailable_at" | "status" | "updated_at"
+> & {
+  activity_period: {
+    value: number;
+    unit: "hours" | "days" | "weeks" | "months";
+    label: string;
+    start: string;
+    end: string;
+  };
+  is_available_for_sale: boolean;
+  addresses: Omit<TourAddressShape, "updated_at" | "created_at" | "tour_id">[];
+  galleries: Omit<TourGalleryShape, "created_at" | "tour_id">[];
 };
