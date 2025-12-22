@@ -13,6 +13,11 @@ export const PERMISSIONS = {
     update: "agencies_update",
     delete: "agencies_delete",
   },
+  sales: {
+    create: "sales_create",
+    update: "sales_update",
+    delete: "sales_delete",
+  },
   tours: {
     create: "tours_create",
     update: "tours_update",

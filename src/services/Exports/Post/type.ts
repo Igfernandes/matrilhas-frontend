@@ -9,6 +9,7 @@ export type EntitiesShape =
   | "USERS"
   | "SERVICES"
   | "FORMS"
+  | "SALES"
   | "CHARGES"
   | "AGENCIES"
   | "FORMS_FILLS"
