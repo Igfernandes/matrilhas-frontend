@@ -76,7 +76,6 @@ export function Definitions() {
             </div>
             <div className="border-2 border-slate-200 rounded-lg p-3">
               <GroupChecks
-                register={register}
                 items={[
                   "SUNDAY",
                   "MONDAY",

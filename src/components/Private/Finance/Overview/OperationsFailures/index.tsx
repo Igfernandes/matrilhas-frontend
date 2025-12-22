@@ -5,7 +5,6 @@ import { OperationFailuresStructProps } from "../type";
 import i18n from "@configs/i18n";
 
 export function OperationsFailures({
-  filterObjects,
   search,
 }: OperationFailuresStructProps) {
   const {
@@ -14,8 +13,7 @@ export function OperationsFailures({
     tHeadsOperationsFailures,
     tDataOperationsFailures,
   } = useOperationsFailures({
-    filter: search,
-    handleFilter: filterObjects,
+    filter: search
   });
 
   return (

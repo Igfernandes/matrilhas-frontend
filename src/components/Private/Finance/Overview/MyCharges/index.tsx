@@ -4,13 +4,11 @@ import { useMyCharges } from "./hooks/useMyCharges";
 import { HookFinancesProps } from "../type";
 import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
-import { ChargeShape } from "@type/Charges";
 
 export function MyCharges({
   filter,
-  handleFilter,
   charges,
-}: HookFinancesProps<ChargeShape>) {
+}: HookFinancesProps) {
   const {
     selectors,
     setSelectors,
@@ -22,7 +20,6 @@ export function MyCharges({
     isLoading,
   } = useMyCharges({
     filter,
-    handleFilter,
     charges,
   });
 

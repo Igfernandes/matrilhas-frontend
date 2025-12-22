@@ -13,9 +13,8 @@ import useDeleteMessageDispatcher from "@services/Dispatchers/Delete/useDelete";
 import { Status } from "@type/status";
 
 export function useMessagesDispatcher({
-  handleFilter,
   filter,
-}: HookMessagesDispatcherProps<MessagesDispatcherShape>) {
+}: HookMessagesDispatcherProps) {
   const [tDatMessagesDispatcher, settDatMessagesDispatcher] = useState<
     Array<Record<string, unknown>>
   >([]);
@@ -64,11 +63,7 @@ export function useMessagesDispatcher({
   useEffect(() => {
     if (!dispatchersData) return;
 
-    const notificationsFiltered = dispatchersData.filter((tDataDispatcher) =>
-      handleFilter(tDataDispatcher)
-    );
-
-    const tDataDispatcher = notificationsFiltered.map((notification) =>
+    const tDataDispatcher = dispatchersData.map((notification) =>
       updateUserForTable(notification)
     );
 

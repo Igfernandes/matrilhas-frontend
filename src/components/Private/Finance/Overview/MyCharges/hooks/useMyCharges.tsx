@@ -13,9 +13,8 @@ import { Period } from "@type/status";
 
 export function useMyCharges({
   filter,
-  handleFilter,
   charges,
-}: HookFinancesProps<ChargeShape>) {
+}: HookFinancesProps) {
   const [selectors, setSelectors] = useState<SelectorShape[]>([]);
   const [tDataCharges, setTDataCharges] = useState<
     Array<Record<string, unknown>>
@@ -54,9 +53,8 @@ export function useMyCharges({
       type: i18n(`Words.${type?.toLowerCase()}`) as Period,
       status: (
         <span
-          className={`font-semibold ${
-            status === "ACTIVE" ? "text-emerald-600" : "text-red"
-          }`}
+          className={`font-semibold ${status === "ACTIVE" ? "text-emerald-600" : "text-red"
+            }`}
         >
           {i18n(`Words.${status?.toLowerCase()}`)}
         </span>
@@ -70,12 +68,8 @@ export function useMyCharges({
   useEffect(() => {
     if (!charges) return;
 
-    const chargesFiltered = charges.filter((tDataClient) =>
-      handleFilter(tDataClient)
-    );
-
     setSelectors([
-      ...chargesFiltered.map((charge) => ({
+      ...charges.map((charge) => ({
         value: charge.id.toString(),
         isChecked: false,
       })),
@@ -85,7 +79,7 @@ export function useMyCharges({
       },
     ] as Array<SelectorShape>);
 
-    const tDataClient = chargesFiltered.map((ClientProps) =>
+    const tDataClient = charges.map((ClientProps) =>
       updateChargeForTable(ClientProps)
     );
 

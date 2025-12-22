@@ -17,7 +17,7 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
         clients: z.array(z.string().or(z.boolean())).optional(),
       }),
     });
-  const { handleSearch, filterObjects } = useSearch();
+  const { handleSearch } = useSearch();
   const { handleToggleModal } = useModalContext();
 
   const submit = (payload: ClientsPayedPayload) => {
@@ -31,7 +31,7 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
   };
 
   const getClientsFiltered = (clients: Array<ClientShape>) => {
-    return clients.filter((client) => filterObjects(client));
+    return clients.filter((client) => client);
   };
 
   return {
@@ -40,7 +40,6 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
     handleSubmit,
     register,
     handleSearch,
-    filterObjects,
     getClientsFiltered,
   };
 }

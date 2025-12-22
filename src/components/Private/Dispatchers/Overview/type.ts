@@ -1,9 +1,8 @@
 import { JSX } from "react";
 import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
 
-export type HookMessagesDispatcherProps<MessagesDispatcherType> = {
+export type HookMessagesDispatcherProps = {
   filter: string;
-  handleFilter: (data: MessagesDispatcherType) => boolean;
 };
 
 export type TDataMessagesDispatcher = Pick<
@@ -14,9 +13,6 @@ export type TDataMessagesDispatcher = Pick<
 };
 
 export type MessagesDispatcherProps = {
-  filterObjects: <ObjectShape extends Record<string, unknown>>(
-    object: ObjectShape
-  ) => boolean;
   search: string;
 };
 

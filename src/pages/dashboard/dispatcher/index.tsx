@@ -4,12 +4,12 @@ import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 
 export default function MessagesDispatcher() {
-  const { handleSearch, search, filterObjects } = useSearch();
+  const { handleSearch, search } = useSearch();
 
   return (
     <DashboardContainer>
       <OptionsBar handleSearch={handleSearch} />
-      <MessagesDispatcherTable filterObjects={filterObjects} search={search} />
+      <MessagesDispatcherTable search={search} />
     </DashboardContainer>
   );
 }

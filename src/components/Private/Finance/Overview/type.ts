@@ -5,9 +5,8 @@ import {
 } from "@type/OperationsFailures";
 import { JSX } from "react";
 
-export type HookFinancesProps<EntityType> = {
+export type HookFinancesProps = {
   filter: string;
-  handleFilter: (data: EntityType) => boolean;
   charges: Array<ChargeShape>;
 };
 
@@ -22,9 +21,6 @@ export type TDataFinance = {
 };
 
 export type OperationFailuresStructProps = {
-  filterObjects: <OperationFailureShape extends Record<string, unknown>>(
-    object: OperationFailureShape
-  ) => boolean;
   search: string;
   operationsFailures: Array<OperationFailureShape>;
 };

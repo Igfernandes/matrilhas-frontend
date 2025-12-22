@@ -11,11 +11,11 @@ import useGetOperationsFailures from "@services/OperationsFailures/Get/useGet";
 import { OperationsFailuresActions } from "../OperationsFailuresActions";
 
 type Props = Pick<
-  HookFinancesProps<OperationFailureShape>,
-  "filter" | "handleFilter"
+  HookFinancesProps,
+  "filter"
 >;
 
-export function useOperationsFailures({ filter, handleFilter }: Props) {
+export function useOperationsFailures({ filter }: Props) {
   const [selectors, setSelectors] = useState<SelectorShape[]>([]);
   const [tDataOperationsFailures, setTDataOperationsFailures] = useState<
     Array<Record<string, unknown>>
@@ -53,7 +53,7 @@ export function useOperationsFailures({ filter, handleFilter }: Props) {
     if (!operationsFailuresData) return;
 
     const operationsFailuresFiltered = operationsFailuresData.filter(
-      (tDataOF) => handleFilter(tDataOF)
+      (tDataOF) => tDataOF
     );
 
     setSelectors([
