@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { FiltersContextData, FiltersContextProps } from "./types";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useModalContext } from "@contexts/Modal";
 
 const FiltersContext = createContext<FiltersContextData>(
@@ -14,7 +14,7 @@ const FiltersContext = createContext<FiltersContextData>(
 );
 
 function FiltersProvider({ children, id }: FiltersContextProps) {
-  const methods = useForm();
+  const methods = useForm<FieldValues>();
   const { handleSubmit, register } = methods
   const { handleToggleModal } = useModalContext()
   const [filters, setFilters] = useState<Record<string, Record<string, unknown>>>({})

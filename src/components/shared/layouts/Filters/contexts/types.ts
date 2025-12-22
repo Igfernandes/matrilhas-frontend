@@ -15,7 +15,7 @@ export type FiltersContextData = {
   handleAlterFilters: (
     newFilters: Record<string, Record<string, unknown>>
   ) => void;
-  handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+  handleSubmit: UseFormHandleSubmit<FieldValues, FieldValues>;
   register: UseFormRegister<FieldValues>;
-  methods: UseFormReturn<FieldValues, unknown, undefined>
+  methods: UseFormReturn<FieldValues, unknown, FieldValues>;
 };
