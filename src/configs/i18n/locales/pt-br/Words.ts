@@ -62,6 +62,7 @@ export const Words = {
   import_clients: "Importar Clientes",
   view_client: "Visualizar Cliente",
   time: "Hora",
+  sales: "Vendas",
   my_users: "Meus usuários",
   management: "Gerenciamento",
   finish: "Finalizar",
