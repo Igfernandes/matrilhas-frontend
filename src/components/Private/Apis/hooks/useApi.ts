@@ -4,9 +4,7 @@ import { IntegrationShape } from "@type/Integrations";
 import { useEffect, useState } from "react";
 
 type Props = {
-  filterObjects: <ObjectShape extends Record<string, unknown>>(
-    object: ObjectShape
-  ) => boolean;
+
   search: string;
 };
 

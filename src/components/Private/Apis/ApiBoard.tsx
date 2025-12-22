@@ -6,10 +6,9 @@ import { API_SETTINGS } from "./constants/settings";
 import { IntegrationsModal } from "./Modals/Integrations";
 
 export function ApiBoard() {
-  const { handleSearch, filterObjects, search } = useSearch();
+  const { handleSearch, search } = useSearch();
   const { integrations, handleToggleModal, modal } = useApi({
     search,
-    filterObjects,
   });
 
   return (
