@@ -4,6 +4,7 @@ import { ClockBI } from "@assets/Icons/black/ClockBI"
 import { othersColors } from "@assets/colors/colors"
 import { PeopleAddBI } from "@assets/Icons/black/PeopleAddBI"
 import { formatMoney } from "@helpers/currencies"
+import { When } from "@components/utilities/When"
 
 export function Footer() {
     const { t } = useI18n()
@@ -16,12 +17,14 @@ export function Footer() {
             </div>
             <hr className="border-zinc-300 my-2" />
             <div className="flex justify-center items-center">
-                <div>
-                    <p className="flex items-center mt-1 px-1">
-                        <strong><ClockBI fill={othersColors.primary} width={15} height={15} /></strong>
-                        <span className="text-sm ml-2">{tour?.activity_period?.value} {t(`Words.${tour?.activity_period?.unit}`)}</span>
-                    </p>
-                </div>
+                <When value={!!tour?.activity_period?.value  && !!tour?.activity_period?.unit}>
+                    <div>
+                        <p className="flex items-center mt-1 px-1">
+                            <strong><ClockBI fill={othersColors.primary} width={15} height={15} /></strong>
+                            <span className="text-sm ml-2">{tour?.activity_period?.value} {t(`Words.${tour?.activity_period?.unit}`)}</span>
+                        </p>
+                    </div>
+                </When>
                 <div>
                     <span className="flex items-center mt-1 px-1 ml-4">
                         <strong><PeopleAddBI fill={othersColors.primary} width={20} height={20} /></strong>
