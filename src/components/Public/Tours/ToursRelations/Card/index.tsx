@@ -60,15 +60,16 @@ export function TourCard({ tour }: Props) {
                             </When>
 
                         </li>
-
-                        <li className="mb-2">
-                            <p className="flex items-center text-center border-primary border px-3 py-1  my-2 text-primary">
-                                <CalendarBI width={17} height={17} /> <span className="inline-block font-semibold mx-auto">{t("Words.realized_at")}</span>
-                            </p>
-                            <span className="text-sm text-primary bg-secondary block text-center">
-                                {dayjs(tour.activity_period.start).format("DD/MM/YYYY HH:mm")}
-                            </span>
-                        </li>
+                        <When value={!!tour?.activity_period?.start}>
+                            <li className="mb-2">
+                                <p className="flex items-center text-center border-primary border px-3 py-1  my-2 text-primary">
+                                    <CalendarBI width={17} height={17} /> <span className="inline-block font-semibold mx-auto">{t("Words.realized_at")}</span>
+                                </p>
+                                <span className="text-sm text-primary bg-secondary block text-center">
+                                    {dayjs(tour?.activity_period?.start).format("DD/MM/YYYY HH:mm")}
+                                </span>
+                            </li>
+                        </When>
                         <li className="flex justify-around">
                             <div>
                                 <p className="flex items-center mt-1 px-1">
