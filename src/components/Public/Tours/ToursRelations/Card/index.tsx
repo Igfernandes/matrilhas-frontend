@@ -71,12 +71,14 @@ export function TourCard({ tour }: Props) {
                             </li>
                         </When>
                         <li className="flex justify-around">
-                            <div>
-                                <p className="flex items-center mt-1 px-1">
-                                    <strong><ClockBI fill={othersColors.primary} width={15} height={15} /></strong>
-                                    <span className="text-sm ml-2">{tour.activity_period.value} {i18n(`Words.${tour.activity_period.unit}`)}</span>
-                                </p>
-                            </div>
+                            <When value={!!tour?.activity_period?.value}>
+                                <div>
+                                    <p className="flex items-center mt-1 px-1">
+                                        <strong><ClockBI fill={othersColors.primary} width={15} height={15} /></strong>
+                                        <span className="text-sm ml-2">{tour.activity_period.value} {i18n(`Words.${tour.activity_period.unit}`)}</span>
+                                    </p>
+                                </div>
+                            </When>
                             <div>
                                 <span className="flex items-center mt-1 px-1 ml-4">
                                     <strong><PeopleAddBI fill={othersColors.primary} width={20} height={20} /></strong>
