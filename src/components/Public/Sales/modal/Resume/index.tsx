@@ -17,7 +17,7 @@ export function Resume() {
         return tour ? (tour?.promotional_price ?? tour?.price ?? 0) : 0
     }, [tour])
     const amountPaid = useMemo(() => {
-        if (!resume) return 0;
+        if (!resume) return price;
         return resume.reduce((acc: number, curr: ResumeShape) => {
             if (curr.gratuities) return acc;
             return acc + (curr.discount ? (price - curr.discount) : price);

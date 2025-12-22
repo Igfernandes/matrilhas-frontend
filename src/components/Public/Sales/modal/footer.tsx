@@ -17,7 +17,7 @@ export function Footer() {
             </div>
             <hr className="border-zinc-300 my-2" />
             <div className="flex justify-center items-center">
-                <When value={!!tour?.activity_period?.value  && !!tour?.activity_period?.unit}>
+                <When value={!!tour?.activity_period?.value && !!tour?.activity_period?.unit}>
                     <div>
                         <p className="flex items-center mt-1 px-1">
                             <strong><ClockBI fill={othersColors.primary} width={15} height={15} /></strong>
