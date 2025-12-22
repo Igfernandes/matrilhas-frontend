@@ -12,12 +12,14 @@ import { othersColors } from "@assets/colors/colors"
 import { CalendarBI } from "@assets/Icons/black/CalendarBI"
 import dayjs from "dayjs"
 import { useI18n } from "@contexts/I18n"
+import { useSalesContext } from "@components/Public/Sales/context"
 
 type Props = {
     tour: TourPreviewShape
 }
 
 export function TourCard({ tour }: Props) {
+    const { handleTargetTour } = useSalesContext();
     const { destinyAddress } = useTourCard({ tour })
     const { t } = useI18n()
     return (
@@ -83,9 +85,9 @@ export function TourCard({ tour }: Props) {
                     <span className="text-warning inline-block ml-2">{tour.promotional_price ? " Por " + formatMoney(tour.promotional_price, tour.currency) : ""}</span>
                 </div>
                 <div className="flex mt-4">
-                    <Link className="border-primary mr-1 text-primary border underline font-semibold w-full block text-center py-1 rounded-md" href={`/`}>
+                    <button onClick={() => handleTargetTour(tour.id)} type="button" className="border-primary mr-1 text-primary border underline font-semibold w-full block text-center py-1 rounded-md">
                         Reservar
-                    </Link>
+                    </button>
                     <Link className="bg-primary text-white underline font-semibold w-full block text-center py-1 rounded-md" href={`/tours/${tour.slug}`}>
                         Ver mais
                     </Link>
