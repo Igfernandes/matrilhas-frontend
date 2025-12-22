@@ -40,7 +40,7 @@ export function Information({ tour }: Props) {
                             <p className="font-semibold">Data Início</p>
                         </div>
                         <div className="bg-secondary text-center shadow-sm shadow-zinc-300 py-2">
-                            <p>{dayjs(tour.activity_period.start).format("DD/MM/YYYY HH:mm")}</p>
+                            <p>{dayjs(tour?.activity_period?.start).format("DD/MM/YYYY HH:mm")}</p>
                         </div>
                     </div>
                 </When>
@@ -50,7 +50,7 @@ export function Information({ tour }: Props) {
                             <p className="font-semibold">Data Finalização </p>
                         </div>
                         <div className="bg-secondary text-center shadow-sm shadow-zinc-300 py-2">
-                            <p>{dayjs(tour.activity_period.end).format("DD/MM/YYYY HH:mm")}</p>
+                            <p>{dayjs(tour?.activity_period?.end).format("DD/MM/YYYY HH:mm")}</p>
                         </div>
                     </div>
                 </When>
