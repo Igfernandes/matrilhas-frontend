@@ -30,12 +30,12 @@ export function Profile({ tour }: Props) {
                 <div className="absolute bottom-10 w-[90%] md:w-auto left-4">
                     <div className="mb-2">
                         <h1 className="text-2xl font-bold text-white">{tour.title}</h1>
-                        <p className="text-white mt-2">{tour.short_description}</p>
+                        <p className="text-white mt-2">{tour?.short_description}</p>
                     </div>
                     <div className="md:inline-block">
                         <div className="flex items-center flex-wrap md:flex-nowrap border-secondary border pb-1 pt-2 px-4">
                             <div className="flex items-center text-white ">
-                                <ClockBI fill={othersColors.white} className="mr-2" /> <span><strong>Duração: </strong> &nbsp;{tour.activity_period.label}</span>
+                                <ClockBI fill={othersColors.white} className="mr-2" /> <span><strong>Duração: </strong> &nbsp;{tour?.activity_period?.label}</span>
                             </div>
                             <div className="mx-5">
                                 <span className="text-white">|</span>
