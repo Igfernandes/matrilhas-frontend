@@ -24,7 +24,6 @@ export function ClientsPayedModal({
   const {
     formMethods,
     handleSubmit,
-    register,
     submit,
     handleSearch,
     getClientsFiltered,
@@ -66,7 +65,7 @@ export function ClientsPayedModal({
               </h4>
             </div>
             <GroupChecks<ClientsPayedPayload>
-              register={register}
+
               name={"clients"}
               items={getClientsFiltered(clients).map((client) => ({
                 label: client.name,

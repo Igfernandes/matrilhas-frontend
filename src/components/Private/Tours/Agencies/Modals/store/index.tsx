@@ -38,7 +38,6 @@ export function ToursAgenciesModal({ tour }: Props) {
             <div className="form-group">
               <GroupChecks
                 name="agencies"
-                register={formMethods.register}
                 items={agencies}
               />
             </div>

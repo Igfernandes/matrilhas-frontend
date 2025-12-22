@@ -26,6 +26,7 @@ export default function Create() {
     <DashboardContainer title={i18n('Words.new_dispatcher')}>
       <FormProvider {...formMethods}>
         <StepBar
+          setStepActive={() => ""}
           steps={[
             {
               title: i18n(`Words.definitions`),

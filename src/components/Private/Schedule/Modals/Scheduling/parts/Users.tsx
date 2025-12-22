@@ -9,7 +9,7 @@ type Props = {
 }
 
 export function Users({ users }: Props) {
-    const { register, formState: { errors } } = useFormContext<SchedulePayload>()
+    const { formState: { errors } } = useFormContext<SchedulePayload>()
 
     return (
         <>
@@ -22,7 +22,6 @@ export function Users({ users }: Props) {
             <div className="form-group">
                 <GroupChecks
                     name="linked"
-                    register={register}
                     items={users.map((user) => ({
                         label: user.name,
                         value: String(user.id),

@@ -8,7 +8,7 @@ import { OperationsFailures } from "@components/Private/Finance/Overview/Operati
 
 export default function Finance() {
   const { charges, cardsBoard } = useOverviewCharge();
-  const { handleSearch, search, filterObjects } = useSearch();
+  const { handleSearch, search } = useSearch();
 
   return (
     <DashboardContainer>
@@ -17,14 +17,12 @@ export default function Finance() {
         <CardBoard viewLimit={5} items={cardsBoard} />
         <div className="relative z-10">
           <MyCharges
-            handleFilter={filterObjects}
             filter={search}
             charges={charges}
           />
           <OperationsFailures
             operationsFailures={[]}
             search={search}
-            filterObjects={filterObjects}
           />
         </div>
       </div>

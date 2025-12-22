@@ -20,7 +20,7 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
         clients: z.array(z.string().or(z.boolean())).optional(),
       }),
     });
-  const { handleSearch, filterObjects } = useSearch();
+  const { handleSearch } = useSearch();
   const { handleToggleModal } = useModalContext();
   const { data: categoriesData } = useGetCategories();
   const [categories, setCategories] = useState<Array<ClientCategoriesShape>>(
@@ -41,11 +41,11 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
     return clients.filter((client) => {
       const category = formMethods.watch("category");
 
-      if (!category) return filterObjects(client);
+      if (!category) return client;
 
       formMethods.setValue("clients", []);
       return (
-        filterObjects(client) &&
+        client &&
         client.categories.find(
           (clientCategory) => clientCategory.id === +category
         )
@@ -63,7 +63,6 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
     handleSubmit,
     register,
     handleSearch,
-    filterObjects,
     getClientsFiltered,
     categories,
   };

@@ -10,7 +10,6 @@ import { useMessagesDispatcher } from "./hooks/useMessagesDispatcher";
 
 export function MessagesDispatcherTable({
   search,
-  filterObjects,
 }: MessagesDispatcherProps) {
   const {
     tDatMessagesDispatcher,
@@ -19,7 +18,6 @@ export function MessagesDispatcherTable({
     isLoadingDeleteDispatcher,
   } = useMessagesDispatcher({
     filter: search,
-    handleFilter: filterObjects,
   });
   const { handleToggleModal, modal } =
     useModalContext<ModalMessagesDispatcherOperationType>();
