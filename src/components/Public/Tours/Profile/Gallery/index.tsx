@@ -46,6 +46,16 @@ export function TourGallery({ tour }: Props) {
                         delay: 4000,
                         disableOnInteraction: false,
                     }}
+                    breakpoints={{
+                        0: {
+                            // telas pequenas (celulares)
+                            slidesPerView: 1,
+                        },
+                        640: {
+                            // tablets em pé
+                            slidesPerView: 3,
+                        },
+                    }}
                 >
                     {gallery.map((gallery, key) => (
                         <SwiperSlide key={`gallery_${key}`} onClick={() => setIsOpenLightbox(true)}>

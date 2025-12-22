@@ -29,6 +29,7 @@ export function useToursSidebar({ tours }: Props) {
     } as AddressData;
 
     for (const tour of tours) {
+      if(!Array.isArray(tour.addresses)) continue;
       const destiny = tour.addresses.find(
         (address) => address.type === "DESTINY"
       );
@@ -41,6 +42,8 @@ export function useToursSidebar({ tours }: Props) {
 
     return addresses;
   }, [tours]);
+
+
   useEffect(() => {
     if (Object.keys(router.query).length === 0) return;
 

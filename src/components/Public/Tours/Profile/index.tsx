@@ -27,20 +27,20 @@ export function Profile({ tour }: Props) {
                         <span>Excursão em Destaque</span>
                     </div>
                 </When>
-                <div className="absolute bottom-10 left-4">
+                <div className="absolute bottom-10 w-[90%] md:w-auto left-4">
                     <div className="mb-2">
                         <h1 className="text-2xl font-bold text-white">{tour.title}</h1>
                         <p className="text-white mt-2">{tour.short_description}</p>
                     </div>
-                    <div className="inline-block">
-                        <div className="flex items-center border-secondary border pb-1 pt-2 px-4">
+                    <div className="md:inline-block">
+                        <div className="flex items-center flex-wrap md:flex-nowrap border-secondary border pb-1 pt-2 px-4">
                             <div className="flex items-center text-white ">
                                 <ClockBI fill={othersColors.white} className="mr-2" /> <span><strong>Duração: </strong> &nbsp;{tour.activity_period.label}</span>
                             </div>
                             <div className="mx-5">
                                 <span className="text-white">|</span>
                             </div>
-                            <div className="flex items-center">
+                            <div className="flex items-center flex-wrap md:flex-nowrap w-full">
                                 <TravelBag className="inline-block mr-4" fill={othersColors.white} />
                                 <span style={{
                                     textDecoration: tour.promotional_price ? "line-through" : "none"
@@ -62,10 +62,10 @@ export function Profile({ tour }: Props) {
                         <div className=" border-b-2 border-slate-200 mb-5">
                             <h2 className="text-2xl font-sans text-dark font-bold mb-5">Visão Geral</h2>
                         </div>
-                        <div className="px-2 mt-5" dangerouslySetInnerHTML={{ __html: tour.description as string }}>
+                        <div className="px-2 mt-5 text-justify md:text-left" dangerouslySetInnerHTML={{ __html: tour.description as string }}>
                         </div>
                     </div>
-                    <div className="w-full md:w-1/2 lg:w-2/5">
+                    <div className="w-full md:w-1/2 lg:w-2/5 mt-10 md:mt-0">
                         <Information tour={tour} />
                     </div>
                 </div>

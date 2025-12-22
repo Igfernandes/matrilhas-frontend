@@ -17,7 +17,7 @@ export function AgenciesPreviewPage({ targetAgency }: AgencyPreviewPageProps) {
     return (
         <Section>
             <div className="mx-2 md:mx-10">
-                <div>
+                <div className="mb-5">
                     <h1 className="text-primary font-bold text-2xl">{targetAgency.name}</h1>
                 </div>
                 <div className="flex flex-wrap md:flex-nowrap flex-col-reverse md:flex-row justify-between">

@@ -26,6 +26,16 @@ export function ToursRelations({ query }: ToursRelationsProps) {
                         delay: 4000,
                         disableOnInteraction: false,
                     }}
+                    breakpoints={{
+                        500: {
+                            // telas pequenas (celulares)
+                            slidesPerView: 1,
+                        },
+                        640: {
+                            // tablets em pé
+                            slidesPerView: 3,
+                        },
+                    }}
                 >
                     {tours.map((tour, key) => (
                         <SwiperSlide key={`tour_${key}`}>

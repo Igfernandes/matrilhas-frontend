@@ -3,43 +3,28 @@ export const HomeFaqTranslations = {
   description: "Encontre as respostas no nosso FAQ",
   questions: [
     {
-      question: "Quais são as funções da Associação?",
+      question: "O Papel da Matrilhas como Operadora Estratégica",
       answer:
-        "A AGM atua como agente impulsionador do turismo local, promovendo um turismo sustentável e de qualidade. Oferecemos treinamentos, atualizações de mercado e oportunidades de networking para guias de turismo. Também trabalhamos em parceria com autoridades locais para regulamentar e valorizar a profissão.",
+        "A Diferente de uma agência que apenas revende pacotes, a Matrilhas, como Operadora, é a responsável pela montagem técnica dos produtos turísticos. Ela atua no B2B (Business to Business), servindo de suporte fundamental para outras agências e guias independentes que buscam segurança e roteiros profissionais.",
     },
     {
-      question: "Quando a Associação foi fundada?",
-      answer: "A AGM foi fundada em 13 de julho de 2021.",
+      question: "Logística Integrada e Multimodal",
+      answer: "A força da Matrilhas como operadora reside na sua capacidade de coordenar todos os elos da cadeia produtiva: Gestão de Transporte: Coordena translados complexos, sejam eles terrestres, marítimos (como o acesso às Ilhas Maricás) ou aéreos. Curadoria de Hospedagem: Seleciona e negocia diretamente com fornecedores para garantir o melhor custo-benefício e qualidade para os grupos. Engenharia de Roteiro: Elabora o \"passo a passo\" da viagem, garantindo que o cronograma seja executável e seguro.",
     },
     {
-      question: "Quem está na presidência da AGM?",
+      question: "Liderança Técnica e Credibilidade",
       answer:
-        "Atualmente, o presidente é Alberto Matrilhas e a vice-presidente é Thaís Bellotti.",
+        "O selo de operadora da Matrilhas é chancelado por uma liderança com trânsito institucional no setor: Alberto Matrilhas (CEO): Além de guia com mais de 20 anos de experiência, sua atuação como Presidente da FAGTUR-RJ e Coordenador da Central de Passeios de Maricá confere à operadora um nível de governança e seriedade superior no mercado fluminense. Equipe de Especialistas: Conta com um corpo técnico feminino qualificado (Thaís Bellotti, Paula Moura, Giselle Xavier e Anielly Lemos), garantindo um atendimento personalizado e operacionalmente eficiente.",
     },
     {
-      question: "Onde fica a sede da AGM?",
+      question: "Abrangência e Parcerias",
       answer:
-        "Nossa sede, também chamada de Central de Passeios, está localizada na Rua Abreu Sodré, 43 - Centro, Maricá - RJ, 24913-775.",
+        "Embora seja o principal pilar do turismo em Maricá e na Região dos Lagos, a Matrilhas opera em escala nacional e internacional. Como operadora, ela funciona como o braço logístico para: Agências de emissivo: Que precisam de um receptivo de confiança no Rio de Janeiro. Guias Autônomos: Que possuem o público, mas precisam da estrutura jurídica e logística da Matrilhas para realizar seus eventos de forma legalizada via Cadastur.",
     },
     {
-      question: "Quais são os dias e horários de atendimento?",
+      question: "Como contratar os serviços?",
       answer:
-        "Funcionamos todos os dias da semana, de segunda a domingo, das 9h às 17h.",
-    },
-    {
-      question: "Por que se associar à AGM?",
-      answer:
-        "Ao se tornar associado, você integra uma comunidade que valoriza a história, a cultura e os atrativos turísticos da região. Além de ampliar conhecimentos e oportunidades, contribui para oferecer aos turistas experiências autênticas e seguras, fortalecendo ainda mais o turismo em Maricá.",
-    },
-    {
-      question: "Quem pode se associar?",
-      answer:
-        "Podem se associar tanto pessoas físicas quanto jurídicas, incluindo: guias de turismo, condutores, monitores, profissionais e empresas do trade turístico, estabelecimentos de hotelaria e gastronomia, gráficas, colaboradores e cooperadores.",
-    },
-    {
-      question: "Qual é a contribuição da AGM para o turismo em Maricá?",
-      answer:
-        "A AGM participa ativamente de eventos e iniciativas locais, como Caravana Celebrar Maricá, Expo Valley, Expo Maricá, Vem Viver Maricá, Vem Viver Espraiado, Recantando, Curta Itaocaia, Espraiado de Portas Abertas, Conheça Maricá, Maricá Games, FLIN, Congresso de Hidrogênio, Feira das Profissões, BRICS+, além de visitas técnicas e capacitações. Nosso compromisso é o fortalecimento contínuo do turismo em Maricá, por meio de parcerias e ações que valorizam profissionais e elevam a qualidade do setor.",
+        "Para agências que desejam formatar roteiros ou clientes que buscam a segurança de uma operação profissional, o contato oficial e o portfólio de roteiros podem ser acessados diretamente no site oficial: Matrilhas Turismo - Site Oficial Em resumo, a Matrilhas Turismo é o alicerce operacional que transforma a intenção de viajar em uma experiência viável, segura e profissionalmente organizada.",
     },
   ],
 };
