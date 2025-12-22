@@ -5,15 +5,16 @@ import { Header } from "@components/Public/External/Header";
 import { Footer } from "@components/Public/External/Footer";
 import { AgenciesPreviewPage } from "@components/Public/Agencies";
 import { Subscribe } from "@components/Public/Subscribe";
+import { SalesProvider } from "@components/Public/Sales/context";
 
 export default function AgencyUpdate({ targetAgency }: AgencyPreviewPageProps) {
     return (
-        <>
+        <SalesProvider>
             <Header />
             <AgenciesPreviewPage targetAgency={targetAgency} />
             <Subscribe />
             <Footer />
-        </>
+        </SalesProvider>
     );
 }
 

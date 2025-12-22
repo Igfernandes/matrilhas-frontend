@@ -9,12 +9,14 @@ import { ClockBI } from "@assets/Icons/black/ClockBI";
 import { othersColors } from "@assets/colors/colors";
 import { formatMoney } from "@helpers/currencies";
 import { TravelBag } from "@assets/Icons/black/TravelBag";
+import { useSalesContext } from "@components/Public/Sales/context";
 
 type Props = {
     tour: TourPreviewShape
 }
 
 export function Profile({ tour }: Props) {
+    const { handleTargetTour } = useSalesContext()
     return (
         <div className="px-2 lg:px-12 mt-5 mb-[5rem]">
             <div className="relative">
@@ -48,7 +50,7 @@ export function Profile({ tour }: Props) {
                         </div>
                     </div>
                     <div className="mb-[-3rem] mt-10">
-                        <span className={`${tour.is_available_for_sale ? "hover:bg-white border-emerald-400 border hover:text-emerald-400 bg-emerald-400" : "bg-zinc-500 cursor-not-allowed"} py-4 px-10 inline-block rounded-md text-white font-semibold cursor-pointer`}>
+                        <span onClick={() => tour.is_available_for_sale && handleTargetTour(tour.id)} className={`${tour.is_available_for_sale ? "hover:bg-white border-emerald-400 border hover:text-emerald-400 bg-emerald-400" : "bg-zinc-500 cursor-not-allowed"} py-4 px-10 inline-block rounded-md text-white font-semibold cursor-pointer`}>
                             {tour.is_available_for_sale ? "Reservar Agora" : "Indisponível para Reserva"}
                         </span>
                     </div>

@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import 'swiper/css';
 
 import { useToursRelations } from "./hooks/useToursRelations";
 import { ToursRelationsProps } from "./type";

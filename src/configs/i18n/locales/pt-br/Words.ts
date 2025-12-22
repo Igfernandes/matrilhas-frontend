@@ -64,6 +64,7 @@ export const Words = {
   time: "Hora",
   my_users: "Meus usuários",
   management: "Gerenciamento",
+  finish: "Finalizar",
   communication: "Comunicação",
   fill: "Preenchimento",
   go_out: "Sair",
