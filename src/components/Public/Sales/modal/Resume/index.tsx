@@ -18,10 +18,11 @@ export function Resume() {
     }, [tour])
     const amountPaid = useMemo(() => {
         if (!resume) return price;
-        return resume.reduce((acc: number, curr: ResumeShape) => {
+        const result = resume.reduce((acc: number, curr: ResumeShape) => {
             if (curr.gratuities) return acc;
             return acc + (curr.discount ? (price - curr.discount) : price);
         }, 0);
+        return result > 0 ? result : price;
     }, [resume, price])
     const hasResidency = useMemo(() => {
         if (!resume) return false;
