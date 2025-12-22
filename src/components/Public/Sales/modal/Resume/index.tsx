@@ -17,13 +17,14 @@ export function Resume() {
         return tour ? (tour?.promotional_price ?? tour?.price ?? 0) : 0
     }, [tour])
     const amountPaid = useMemo(() => {
+        const price = (tour?.promotional_price ?? tour?.price ?? 0)
         if (!resume) return price;
         const result = resume.reduce((acc: number, curr: ResumeShape) => {
             if (curr.gratuities) return acc;
             return acc + (curr.discount ? (price - curr.discount) : price);
         }, 0);
         return result > 0 ? result : price;
-    }, [resume, price])
+    }, [resume, tour])
     const hasResidency = useMemo(() => {
         if (!resume) return false;
         return resume.some((item: ResumeShape) => !!item.residency);
