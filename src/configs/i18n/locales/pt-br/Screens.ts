@@ -42,7 +42,7 @@ export const Screens = {
   },
 
   logout: {
-    text: "Você saiu com segurança. A AGM te espera na próxima! 🐾",
+    text: "Você saiu com segurança. A Matrilhas te espera na próxima! 🐾",
   },
   dashboard: {
     clients: clientsTranslations,

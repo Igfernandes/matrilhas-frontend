@@ -27,10 +27,10 @@ export const UsersModalSchema = z.object({
       }) as string,
     })
     .email({ message: i18n("Validations.email") }),
-  phone: z.string({ required_error: i18n("Validations.required") }).max(15, {
+  phone: z.string({ required_error: i18n("Validations.required") }).max(20, {
     message: i18n("Validations.max_length", {
       field: i18n("Words.phone"),
-      length: "15",
+      length: "20",
     }) as string,
   }),
 });
