@@ -1,11 +1,15 @@
+import { othersColors } from "@assets/colors/colors";
 import { LockSquareRoundedFilled } from "@assets/Icons/black/LockSquareRoundedFilled";
+import { MenuBI } from "@assets/Icons/black/MenuBI";
 import { Flags } from "@components/shared/layouts/Flags";
 import { useI18n } from "@contexts/I18n";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export function Header() {
   const { t } = useI18n();
+  const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <>
@@ -23,19 +27,20 @@ export function Header() {
                   />
                 </Link>
               </div>
-              <div>
-                <ul className="flex">
-                  <li className="mx-2">
+              <div  className="relative z-[999]"> 
+                <MenuBI  fill={othersColors.primary} width={50} height={50} className="md:hidden" onClick={() => setOpenMenu(!openMenu)} />
+                <ul className={`md:flex ${openMenu ? "block" : "hidden"} absolute md:relative mt-0 w-[8rem] md:w-auto md:h-auto h-[8rem] rounded-md bg-white  shadow-sm shadow-black  p-2 md:p-0 md:shadow-none`}>
+                  <li className="mx-2 my-2">
                     <Link className="font-bold text-primary hover:text-emerald-500" href={"/#about_us"}>
                       <span>{t("Words.about_us")}</span>
                     </Link>
                   </li>
-                  <li className="mx-2">
+                  <li className="mx-2 my-2">
                     <Link className="font-bold text-primary hover:text-emerald-500" href={"/#agencies"}>
                       <span>{t("Words.agencies")}</span>
                     </Link>
                   </li>
-                  <li className="mx-2">
+                  <li className="mx-2 my-2">
                     <Link className="font-bold text-primary hover:text-emerald-500" href={"/tours"}>
                       <span>{t("Words.tours")}</span>
                     </Link>
@@ -44,7 +49,7 @@ export function Header() {
               </div>
             </div>
             <div className="flex">
-              <div className="flex items-center bg-secondary p-2 rounded-lg">
+              <div className="hidden md:flex items-center bg-secondary p-2 rounded-lg">
                 <LockSquareRoundedFilled className="mr-2" />
                 <span className="text-xs">
                   <strong>Site protegido</strong>

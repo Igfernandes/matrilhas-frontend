@@ -31,6 +31,16 @@ export function MonthSlides({ handleChangeMonth }: Props) {
                         delay: 4000,
                         disableOnInteraction: false,
                     }}
+                    breakpoints={{
+                        0: {
+                            // telas pequenas (celulares)
+                            slidesPerView: 3,
+                        },
+                        640: {
+                            // tablets em pé
+                            slidesPerView: 6,
+                        },
+                    }}
                 >
                     {months.current.map((month, key) => (
                         <SwiperSlide key={`month_${key}`}>

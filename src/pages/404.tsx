@@ -7,11 +7,11 @@ export default function Page404() {
   return (
     <div className="min-h-[100vh] flex flex-col justify-between">
       <Header />
-      <div className="container max-w-[1100px] mx-auto my-12">
+      <div className="container max-w-[1100px] mx-auto my-10">
         <div className="not-found-dog mb-8">
           <Image
-            src={"/imgs/dog-image.png"}
-            width={172}
+            src={"/imgs/404.png"}
+            width={250}
             height={200}
             alt="Dog da AGM"
             className="mx-auto"

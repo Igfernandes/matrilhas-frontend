@@ -22,8 +22,9 @@ export function TourCard({ tour }: Props) {
     const { handleTargetTour } = useSalesContext();
     const { destinyAddress } = useTourCard({ tour })
     const { t } = useI18n()
+
     return (
-        <div className="w-full md:w-[250px] shadow-sm p-2 border-2 border-zinc-200 rounded-lg bg-white mx-2">
+        <div className="w-full md:w-[250px] my-5 md:my-0 shadow-sm p-2 border-2 border-zinc-200 rounded-lg bg-white mx-4 md:mx-2">
             <div className="relative">
                 <Image
                     src={tour.banner ?? "/imgs/illustration.png"}
@@ -51,8 +52,15 @@ export function TourCard({ tour }: Props) {
                             <p className="flex items-center text-center border-primary border px-3 py-1  my-2 text-primary">
                                 <Bag width={17} height={17} /> <span className="inline-block font-semibold mx-auto">Destino</span>
                             </p>
-                            <span className="text-sm bg-secondary block ">{destinyAddress?.complement ? `${destinyAddress.complement}, ` : ""}{destinyAddress?.city}, {destinyAddress?.state} - {destinyAddress?.country} </span>
+                            <When value={!destinyAddress}>
+                                <span className="text-sm text-center bg-secondary block ">Não definido</span>
+                            </When>
+                            <When value={!!destinyAddress}>
+                                <span className="text-sm bg-secondary block ">{destinyAddress?.complement ? `${destinyAddress.complement}, ` : ""}{destinyAddress?.city}, {destinyAddress?.state} - {destinyAddress?.country} </span>
+                            </When>
+
                         </li>
+
                         <li className="mb-2">
                             <p className="flex items-center text-center border-primary border px-3 py-1  my-2 text-primary">
                                 <CalendarBI width={17} height={17} /> <span className="inline-block font-semibold mx-auto">{t("Words.realized_at")}</span>
@@ -79,14 +87,16 @@ export function TourCard({ tour }: Props) {
                 </div>
                 <hr className="border-zinc-300 my-2" />
                 <div className="text-center text-sm px-1 mt-1">
-                    <span style={{
+                    Apenas  <span style={{
                         textDecoration: tour.promotional_price ? "line-through" : "none"
                     }} className="text-primary">{formatMoney(tour.price, tour.currency)}</span>
                     <span className="text-warning inline-block ml-2">{tour.promotional_price ? " Por " + formatMoney(tour.promotional_price, tour.currency) : ""}</span>
                 </div>
                 <div className="flex mt-4">
-                    <button onClick={() => handleTargetTour(tour.id)} type="button" className="border-primary mr-1 text-primary border underline font-semibold w-full block text-center py-1 rounded-md">
-                        Reservar
+                    <button
+                        onClick={() => handleTargetTour(tour.id)} type="button"
+                        className="border-primary mr-1 text-primary disabled:bg-zinc-400 disabled:cursor-not-allowed disabled:text-white border underline font-semibold w-full block text-center py-1 rounded-md">
+                        {"Reservar"}
                     </button>
                     <Link className="bg-primary text-white underline font-semibold w-full block text-center py-1 rounded-md" href={`/tours/${tour.slug}`}>
                         Ver mais

@@ -28,7 +28,7 @@ export function Header() {
               <br />
               <Link
                 className="text-xs md:text-sm hover:text-rose-300"
-                href="tel:+55 21 97129-2030"
+                href="tel:+55 21 98897-4586"
               >
                 {t("Screens.home.contact.phone")}
               </Link>
@@ -42,7 +42,7 @@ export function Header() {
               <br />
               <Link
                 className="text-sm hover:text-rose-300"
-                href="https://wa.me/5521971292030?text=Ol%C3%A1%20AGM.Eu%20vim%20ddo%20dsite%20de%20preciso%20de%20ajuda%20e%20tenho%20d%C3%BAvidas"
+                href="https://wa.me/5521988974586?text=Ol%C3%A1%20Matrilhas.Eu%20vim%20ddo%20dsite%20de%20preciso%20de%20ajuda%20e%20tenho%20d%C3%BAvidas"
               >
                 {t("Screens.home.contact.phone")}
               </Link>
@@ -54,7 +54,7 @@ export function Header() {
               <br />
               <Link
                 className="text-sm hover:text-rose-300"
-                href="mailto:contato@agmturismomarica.com.br"
+                href="mailto:contato@matrilhas.com.br"
               >
                 {t("Screens.home.contact.email")}
               </Link>
@@ -65,13 +65,14 @@ export function Header() {
           <div className="flex items-center">
             <div className="logo p-2 ml-5">
               <Image
-                src={"/imgs/logotype-vertical-black.png"}
+                src={"/imgs/logotype.png"}
                 width={90}
                 height={80}
-                alt="logotype AGM"
+                className="h-16 object-contain" 
+                alt="logotype matrilhas"
               />
             </div>
-            <div className="hidden md:block">
+            <div  className="hidden md:block">
               <ul className="flex items-center mx-4">
                 <li className="mx-2">
                   <Link className="font-semibold text-zinc-600 hover:text-primary" href={"#about_us"}>
