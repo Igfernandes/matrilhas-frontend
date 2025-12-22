@@ -28,7 +28,7 @@ export default function Successful() {
           </div>
           <div className="px-8 mt-4">
             <Link
-              className="border-2 px-3 h-[48px] bg-red text-white rounded-xl flex items-center justify-center"
+              className="border-2 px-3 h-[48px] bg-primary text-white rounded-xl flex items-center justify-center"
               href={login}
             >
               <strong>{i18n("Texts.go_back_login")}</strong>

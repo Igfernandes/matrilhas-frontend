@@ -42,7 +42,7 @@ export const Screens = {
   },
 
   logout: {
-    text: "Você saiu com segurança. A AGM te espera na próxima! 🐾",
+    text: "Você saiu com segurança. A Matrilhas te espera na próxima! 🐾",
   },
   dashboard: {
     clients: clientsTranslations,
@@ -212,7 +212,7 @@ export const Screens = {
       },
       {
         title: "Comentário do viajante",
-        text: "A AGM está de parabéns! Participar das atividades foi maravilhoso, tudo muito bem planejado e cheio de momentos únicos. Recomendo a todos!",
+        text: "A Matrilhas está de parabéns! Participar das atividades foi maravilhoso, tudo muito bem planejado e cheio de momentos únicos. Recomendo a todos!",
         author: "Jofre Martins",
         info: "Morador de São Gonçalo - RJ",
       },

@@ -34,7 +34,7 @@ export function Footer({ hasPoliticsCookies = true }: Props) {
             </ul>
           </div>
           <div className="mb-4">
-            <p>© 2024 AGM | Todos os direitos reservados.</p>
+            <p>© 2024 Matrilhas | Todos os direitos reservados.</p>
           </div>
         </div>
       </div>

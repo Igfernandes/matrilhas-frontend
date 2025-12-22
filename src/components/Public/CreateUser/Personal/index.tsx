@@ -60,7 +60,7 @@ export function Personal({ handleToggleStageForm }: Props) {
           onClick={() => handleToggleStageForm("CREDENTIALS")}
           type="button"
           text={i18n("Words.proceed")}
-          className="bg-red text-white"
+          className="bg-primary font-semibold text-white"
         />
       </div>
     </div>

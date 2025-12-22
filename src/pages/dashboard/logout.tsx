@@ -22,10 +22,10 @@ export default function Logout() {
       <div className="container max-w-[1100px] mx-auto my-12">
         <div className="not-found-dog mb-8">
           <Image
-            src={"/imgs/dog-logout.png"}
+            src={"/imgs/logotype.png"}
             width={250}
             height={200}
-            alt="Dog da AGM"
+            alt="Logotype da Matrilhas"
             className="mx-auto"
           />
         </div>
