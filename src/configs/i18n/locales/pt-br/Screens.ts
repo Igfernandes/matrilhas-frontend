@@ -166,9 +166,9 @@ export const Screens = {
       address_title: "Nosso Endereço",
       address: "São José do Imbassai, Maricá - RJ",
       phone_title: "Fale conosco",
-      phone: "(21) 97129-2030",
+      phone: "(21) 9 8897-4586",
       email_title: "Nos envie um e-mail",
-      email: "contato@agmturismomarica.com.br",
+      email: "contato@matrilhas.com.br",
     },
     menu: {
       logo: "logotype AGM",
