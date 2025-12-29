@@ -4,7 +4,7 @@ import { Sidebar } from "./sidebar";
 
 import { ProfileManagerProps } from "./type";
 import { useProfile } from "./hooks/useProfile";
-import { Address } from "./Address";
+import { Address } from "./Landing";
 import { SocialMedias } from "./SocialMedias";
 
 type Props = Pick<ProfileManagerProps, "agency"> & {

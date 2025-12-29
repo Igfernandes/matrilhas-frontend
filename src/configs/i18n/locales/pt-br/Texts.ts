@@ -1,7 +1,13 @@
 import { feedbackTexts } from "./texts/feedback";
+import { AddressTranslations } from "./texts/address";
+import { OthersTranslations } from "./words/others";
+import { PersonalTranslations } from "./texts/personal";
 
 export const Texts = {
   ...feedbackTexts,
+  ...AddressTranslations,
+  ...OthersTranslations,
+  ...PersonalTranslations,
   back_page: "Voltar pra página anterior",
   created_new_password: "Criar nova senha",
   new_password: "Nova senha",
@@ -83,4 +89,5 @@ export const Texts = {
   select_category: "Selecionar categoria",
   select_status: "Selecionar status",
   selected_alter_category: "Alterar categorias selecionadas",
+  
 };

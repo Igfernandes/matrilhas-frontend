@@ -1,7 +1,7 @@
 import i18n from "@configs/i18n";
 import { z } from "zod";
 
-export const AddressesSchemas = z.object({
+export const LandingSchemas = z.object({
   address: z.array(
     z.object({
       type: z.enum(["DESTINY", "ORIGIN"]),
@@ -14,4 +14,4 @@ export const AddressesSchemas = z.object({
   ),
 });
 
-export type AddressesPayload = z.infer<typeof AddressesSchemas>;
+export type LandingPayload = z.infer<typeof LandingSchemas>;

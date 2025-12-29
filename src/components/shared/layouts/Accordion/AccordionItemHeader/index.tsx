@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export function AccordionItemHeader({
   title,
-  accordionId,
+  accordionId, buttons
 }: TabHeaderProps) {
   const { accordionActive, handleCollapse } = useAccordionContext();
   const divRef = useRef<HTMLDivElement>(null);
@@ -20,6 +20,7 @@ export function AccordionItemHeader({
         <span>{String(title)}</span>
       </div>
       <div className="flex items-center">
+        {buttons}
         <ArrowDownSimple
           onClick={() => handleCollapse(accordionId)}
           className="ml-3 transition-all duration-300 cursor-pointer"

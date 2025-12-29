@@ -9,7 +9,6 @@ type DependentsData = {
     birthdate: string;
 }
 
-
 export function Preview() {
     const { watch, setValue } = useFormContext()
     const dependents = watch("dependents");
@@ -17,8 +16,7 @@ export function Preview() {
         const updatedDependents = (dependents ?? []).filter((_: DependentsData, i: number) => i !== index);
         setValue("dependents", updatedDependents);
 
-    }, [dependents])
-
+    }, [dependents, setValue]);
 
     return (
         <div>

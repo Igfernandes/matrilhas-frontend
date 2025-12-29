@@ -1,4 +1,5 @@
 export type TourAddressShape = {
+  id: number;
   tour_id: number;
   type: "DESTINY" | "ORIGIN";
   complement?: string;

@@ -33,11 +33,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const value = watch(name);
 
     useEffect(() => {
+      console.log("Input Rendered:", name, isUpLabel({ ...rest, placeholder, value }));
       if (isUpLabel({ ...rest, placeholder, value })) {
         changeLabelClass("UP");
       }
     }, [value, placeholder, rest, isUpLabel, changeLabelClass]);
-
 
     return (
       <>
@@ -59,10 +59,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...rest}
             ref={ref}
             name={name}
-
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-              if (rest.onChange) rest.onChange(ev);
-              if (handleChange) handleChange(ev);
+            onChangeCapture={(ev: React.ChangeEvent<HTMLInputElement>) => {
+              if (handleChange)
+                handleChange(ev);
             }}
             onFocus={handleTransitionLabel}
             onBlur={handleTransitionLabel}

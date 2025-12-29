@@ -21,6 +21,7 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
 
         return tour?.banner ?? "/imgs/previews/preview-300x300.png"
     }, [bannerWatch, tour]);
+
     return (
         <div className="flex flex-wrap justify-between h-full">
             <div className="w-full">
@@ -69,11 +70,11 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
                         options={[
                             {
                                 text: i18n("Words.not"),
-                                value: "0"
+                                value: false
                             },
                             {
                                 text: i18n("Words.yes"),
-                                value: "1"
+                                value: true
                             }
 
                         ]}

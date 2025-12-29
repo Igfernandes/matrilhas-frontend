@@ -78,8 +78,6 @@ export function Profile({ tour }: Props) {
                     <TourGallery tour={tour} />
                 </div>
             </div>
-
-
         </div >
     )
 }

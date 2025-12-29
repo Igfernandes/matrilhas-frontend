@@ -27,6 +27,7 @@ export default function usePostTourAddress() {
       queryClient.invalidateQueries({
         queryKey: ["tours/address"],
         refetchType: "active",
+        type: "all"
       });
     },
     onError: (err: AxiosError) => {

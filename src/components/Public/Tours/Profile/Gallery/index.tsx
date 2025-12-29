@@ -58,7 +58,7 @@ export function TourGallery({ tour }: Props) {
                     }}
                 >
                     {gallery.map((gallery, key) => (
-                        <SwiperSlide key={`gallery_${key}`} onClick={() => setIsOpenLightbox(true)}>
+                        <SwiperSlide className="cursor-pointer" key={`gallery_${key}`} onClick={() => setIsOpenLightbox(true)}>
                             <Image className="w-full h-[30vh] object-cover brightness-75" src={gallery.src} alt={tour.title} width={600} height={400} />
                             <div className="absolute top-4 right-4">
                                 <EyeOpenSimple fill={othersColors.white} />

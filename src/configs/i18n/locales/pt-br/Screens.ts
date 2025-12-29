@@ -1,6 +1,7 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { clientsTranslations } from "./screens/dashboard/clients";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
+import { ToursTranslations } from "./screens/dashboard/tours";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
 import { formsTranslations } from "./screens/public/forms";
@@ -11,6 +12,8 @@ import { HomeGalleryTranslations } from "./screens/public/home/gallery";
 import { HomeNewsletterTranslations } from "./screens/public/home/newsletter";
 import { loginTranslations } from "./screens/public/login";
 import { NewsletterTranslations } from "./screens/public/newsletter";
+import { SalesTranslations } from "./screens/public/sales";
+import { PublicToursTranslations } from "./screens/public/tours";
 
 export const Screens = {
   forgot_password: forgotPasswordTranslations,
@@ -19,6 +22,8 @@ export const Screens = {
   forms: {
     ...formsTranslations,
   },
+  tours: PublicToursTranslations,
+  sales: SalesTranslations,
   confirmations: {
     title: "Confira sua inscrição",
     text: "Insira seu CPF para saber se você já está cadastrado em algum evento.",
@@ -48,6 +53,7 @@ export const Screens = {
     clients: clientsTranslations,
     agencies: agenciesTranslations,
     galleries: galleriesTranslations,
+    tours: ToursTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",
