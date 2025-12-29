@@ -56,7 +56,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             {options.map(({ text, value, selected }, index) => (
               <option
                 key={index}
-                value={value ?? ""}
+                value={value as string ?? ""}
                 className=" cursor-pointer"
                 selected={selected}
               >

@@ -20,7 +20,8 @@ export function useInput() {
       )
         return true;
 
-      if (value || defaultValue) return true;
+        const currentValue = value ?? defaultValue;
+      if (currentValue !== undefined && currentValue !== null && currentValue !== "") return true;
     },
     []
   );

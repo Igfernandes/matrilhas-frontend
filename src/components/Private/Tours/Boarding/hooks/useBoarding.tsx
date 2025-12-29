@@ -1,0 +1,69 @@
+import { useFormRules } from "@hooks/Forms/useFormRules"
+import { useCallback, useEffect, useState } from "react"
+import { TourShape } from "@type/Tours"
+import { BoardingSchemas, BoardingPayload } from "../BoardingSchemas"
+import useGetTourAddresses from "@services/Tours/Address/Get/useGet"
+import usePostTourAddress from "@services/Tours/Address/Post/usePost"
+
+type Props = {
+    tour: TourShape
+}
+
+export function useBoarding({ tour }: Props = {} as Props) {
+    const { rows: addresses, count, isPending: isLoadingAddresses } = useGetTourAddresses({
+        tour_id: tour.id,
+        type: "ORIGIN"
+    })
+    const [amount, setAmount] = useState(count ?? 1);
+
+    const { formMethods, handleSubmit, register, errors } = useFormRules<BoardingPayload>({
+        schema: BoardingSchemas,
+        defaultValues: {
+            address: addresses ?? []
+        }
+    })
+    const { mutateAsync: post, isPending: isLoading } = usePostTourAddress()
+
+    const handleAddAddress = useCallback(() => {
+        setAmount((prev) => prev + 1);
+    }, [])
+
+    const handleRemoveAddress = useCallback((id: number) => {
+        const currentAddresses = formMethods.getValues("address");
+        const updatedAddresses = currentAddresses.filter((_, index: number) => index !== id);
+
+        formMethods.setValue("address", updatedAddresses);
+        setAmount((prev) => prev - 1);
+    }, [formMethods])
+
+
+    const onSubmit = useCallback(async ({ address: payload }: BoardingPayload) => {
+        await post(payload.map(address => ({
+            ...address,
+            tour_id: tour.id
+        })))
+
+    }, [post, tour])
+
+    useEffect(() => {
+        if (addresses?.length) {
+            formMethods.reset({
+                address: addresses,
+            });
+            setAmount(count ?? 1)
+        }
+    }, [addresses, formMethods, setAmount, count]);
+
+    return {
+        formMethods,
+        handleSubmit,
+        register,
+        errors,
+        onSubmit,
+        amount,
+        handleAddAddress,
+        handleRemoveAddress,
+        isLoading: isLoading,
+        isLoadingAddresses
+    }
+}

@@ -16,9 +16,9 @@ export function Dependents() {
         <div className="min-w-[30vw] py-2 mb-5">
             <div className="mb-5">
                 <div className="bg-primary text-white rounded-sm px-2 py-1 mb-2">
-                    <h3 className="font-semibold">Pessoas Adicionais</h3>
+                    <h3 className="font-semibold">{t("Texts.people_additional")}</h3>
                 </div>
-                <p className="text-sm">Preencha os dados de todos os dependentes</p>
+                <p className="text-sm">{t("Screens.sales.dependents.text")}</p>
             </div>
             <div className="flex text-sm justify-between">
                 <ul className="flex">
@@ -41,7 +41,6 @@ export function Dependents() {
             <When value={step === "PREVIEW"}>
                 <Preview />
             </When>
-
 
             <div className="flex items-center justify-between mt-5">
                 <div className="w-[48%]">

@@ -6,6 +6,7 @@ export type GetTourAddressRequest = GetRequestShape & {
   city?: string;
   state?: string;
   country?: string;
+  type?: "ORIGIN" | "DESTINY";
 };
 export type GetToursAddressResponse = {
   rows: TourAddressShape[];

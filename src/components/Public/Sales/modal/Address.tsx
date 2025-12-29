@@ -23,9 +23,9 @@ export function Address() {
         <div className="min-w-[30vw] py-2 mb-5">
             <div className="mb-5">
                 <div className="bg-primary text-white rounded-sm px-2 py-1 mb-2">
-                    <h3 className="font-semibold">Informações Pessoais</h3>
+                    <h3 className="font-semibold">{t("Screens.sales.address.title")}</h3>
                 </div>
-                <p className="text-sm">Preencha com o seu endereço residencial para continuar <br /> o pedido.</p>
+                <p className="text-sm">{t("Screens.sales.address.text")}</p>
             </div>
             <div className="w-full my-2">
                 <Select defaultValue={"Brasil"} dataTestId="countries" options={countriesRef.current.map(country => ({ value: country.name, text: country.name }))}
@@ -55,7 +55,7 @@ export function Address() {
                     </button>
                 </div>
                 <div className="w-[48%]">
-                    <button disabled={!isFilledAddressFields} type="button" onClick={() => handleStep("DEPENDENTS")} className="w-full bg-primary text-white disabled:bg-zinc-300 disabled:border-zinc-300 disabled:text-gray-500 target:scale-90 border border-primary rounded-md py-2 text-center inline-block">
+                    <button disabled={!isFilledAddressFields} type="button" onClick={() => handleStep("REFERENCES")} className="w-full bg-primary text-white disabled:bg-zinc-300 disabled:border-zinc-300 disabled:text-gray-500 target:scale-90 border border-primary rounded-md py-2 text-center inline-block">
                         {t("Words.next")}
                     </button>
                 </div>

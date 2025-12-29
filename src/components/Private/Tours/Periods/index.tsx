@@ -9,36 +9,15 @@ import { When } from "@components/utilities/When";
 import { WeeklyFields } from "./presets/Weekly";
 import { MonthlyFields } from "./presets/Monthly";
 import { DatetimeFields } from "./presets/Datetime";
-import { useEffect } from "react";
 
 type Props = {
     tour: TourShape;
 }
 
 export function TourPeriods({ tour }: Props) {
-    const { register, errors, formMethods, handleSubmit, onSubmit, isLoading } = usePeriods({ tour })
-    const saleFrequency = formMethods.watch("period.0.frequency");
-    const tourFrequency = formMethods.watch("period.1.frequency");
+    const { register, errors, formMethods, handleSubmit, onSubmit, isLoading, handleResetPeriod } = usePeriods({ tour })
 
-    useEffect(() => {
-        if (!saleFrequency) return;
-
-        formMethods.setValue("period.0.by_weekday", []);
-        formMethods.setValue("period.0.by_monthday", []);
-        formMethods.setValue("period.0.by_month", []);
-        formMethods.setValue("period.0.by_datetime", []);
-    }, [saleFrequency, formMethods]);
-
-    useEffect(() => {
-        if (!tourFrequency) return;
-
-        formMethods.setValue("period.1.by_weekday", []);
-        formMethods.setValue("period.1.by_monthday", []);
-        formMethods.setValue("period.1.by_month", []);
-        formMethods.setValue("period.1.by_datetime", []);
-    }, [tourFrequency, formMethods]);
-
-
+    console.log(formMethods.getValues("period"))
     return (
         <FormProvider {...formMethods}>
             <form className="bg-white w-full px-4 py-1 shadow-sm" onSubmit={handleSubmit(onSubmit)}>
@@ -51,7 +30,7 @@ export function TourPeriods({ tour }: Props) {
                         <Input type="hidden" dataTestId="period_sale_model" {...register('period.0.model')} value={"SALE"} />
                         <div>
                             <div className="w-full mb-4">
-                                <Select dataTestId="period_sale_frequency"
+                                <Select onChangeCapture={() => handleResetPeriod(0)} dataTestId="period_sale_frequency"
                                     options={[
                                         ...["ONE_TIME", "WEEKLY", "MONTHLY"].map(period => ({ value: period, text: i18n(`Words.${period.toLowerCase()}`) }))
                                     ]}
@@ -78,7 +57,7 @@ export function TourPeriods({ tour }: Props) {
 
                         <div>
                             <div className="w-full my-2">
-                                <Select dataTestId="period_sale_frequency"
+                                <Select onChangeCapture={() => handleResetPeriod(1)} dataTestId="period_sale_frequency"
                                     options={[
                                         ...["ONE_TIME", "WEEKLY", "MONTHLY"].map(period => ({ value: period, text: i18n(`Words.${period.toLowerCase()}`) }))
                                     ]}

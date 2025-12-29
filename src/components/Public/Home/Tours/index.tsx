@@ -21,7 +21,7 @@ export function Tours() {
                     </Link>
                 </div>
                 <MonthSlides handleChangeMonth={setTargetMonth} />
-                <ToursRelations query={{
+                <ToursRelations slidesPerView={4} query={{
                     available_at: `${dayjs().year()}-${String(targetMonth).padStart(2, "0")}-00`
                 }} />
             </div>

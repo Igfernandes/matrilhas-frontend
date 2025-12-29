@@ -5,20 +5,44 @@ import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
 import { useFormContext } from "react-hook-form";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { ResumeShape } from "../type";
 
 dayjs.extend(customParseFormat);
 
 export function useResume() {
   const { tour } = useSalesContext();
-  const { mutateAsync: postResume, data } = usePostSaleResume();
+  const { mutateAsync: postResume, data, isPending: isLoadingResume } = usePostSaleResume();
   const { getValues } = useFormContext();
 
   const resume = useMemo(() => {
     return data?.resume;
   }, [data]);
-  const isClient = useMemo(() => {
-    return data?.is_client;
-  }, [data]);
+  
+  const price = useMemo(() => {
+    if (!tour) return 0;
+
+    const pricePromotional = tour?.promotional_price ?? 0;
+
+    return pricePromotional > 0 ? pricePromotional : tour?.price ?? 0;
+  }, [tour]);
+
+  const amountPaid = useMemo(() => {
+    if (!resume) return price;
+
+    const result = resume.reduce((acc: number, curr: ResumeShape) => {
+      if (curr.gratuities) return acc;
+
+      return acc + (curr.discount ? price - curr.discount : price);
+    }, 0);
+
+    return result ?? price;
+  }, [resume, price]);
+
+  const hasResidency = useMemo(() => {
+    if (!resume) return false;
+
+    return resume.some((item: ResumeShape) => !!item.residency);
+  }, [resume]);
 
   useEffect(() => {
     if (!tour) return;
@@ -42,6 +66,9 @@ export function useResume() {
 
   return {
     resume,
-    isClient,
+    amountPaid,
+    hasResidency,
+    price,
+    isLoadingResume
   };
 }

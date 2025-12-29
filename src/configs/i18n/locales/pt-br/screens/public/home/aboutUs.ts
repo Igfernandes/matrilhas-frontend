@@ -1,6 +1,6 @@
 export const HomeAboutUsTranslations = {
   title: "Um pouco sobre nós",
-  subtitle: "Associação dos Guias de Turismo de Maricá",
+  subtitle: "Matrilhas - Ecoturismo e Aventura",
   description_1:
     "Pioneirismo em Ecoturismo e Aventura em Maricá. A Matrilhas é a primeira agência de atrativos naturais fundada em Maricá (2013), consolidando-se como uma operadora de turismo referência em montanhismo, ecoturismo e turismo de aventura. Sob a liderança de Alberto Matrilhas — guia profissional e presidente da Associação de Guias de Turismo de Maricá (AGM) — a operadora atua de forma integrada ao trade turístico local para oferecer experiências seguras e autênticas.",
   description_2:

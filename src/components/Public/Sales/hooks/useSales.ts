@@ -8,7 +8,8 @@ export function useSales() {
     schema: SalesSchema,
   });
   const { tour } = useSalesContext();
-  const { mutateAsync: postGateway } = usePostSaleGateway();
+  const { mutateAsync: postGateway, isPending: isLoadingSubmit } =
+    usePostSaleGateway();
 
   const onSubmit = (data: SalesPayload) => {
     if (!tour) return;
@@ -24,5 +25,6 @@ export function useSales() {
     formMethods,
     handleSubmit,
     onSubmit,
+    isLoadingSubmit,
   };
 }

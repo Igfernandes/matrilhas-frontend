@@ -7,11 +7,11 @@ type Props = {
 
 export function useTourAddress({ tour }: Props) {
   const destiny = useMemo(
-    () => tour.addresses.find((address) => address.type === "DESTINY"),
+    () => tour.addresses.filter((address) => address.type === "DESTINY"),
     [tour]
   );
   const origin = useMemo(
-    () => tour.addresses.find((address) => address.type === "ORIGIN"),
+    () => tour.addresses.filter((address) => address.type === "ORIGIN"),
     [tour]
   );
 

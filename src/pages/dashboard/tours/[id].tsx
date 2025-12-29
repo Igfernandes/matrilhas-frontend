@@ -6,18 +6,20 @@ import { TourPageProps } from "@components/Private/Tours/type";
 import { TourProfile } from "@components/Private/Tours/Profile";
 import { getTours } from "@services/Tours/Get/SSR";
 import { ToursTabs } from "@components/Private/Tours/Tabs";
-import { TourAddresses } from "@components/Private/Tours/Addresses";
 import { TourPeriods } from "@components/Private/Tours/Periods";
 import { TourRules } from "@components/Private/Tours/Rules";
 import { TourAgencies } from "@components/Private/Tours/Agencies";
 import { TourGallery } from "@components/Private/Tours/Gallery";
+import { TourLanding } from "@components/Private/Tours/Landing";
+import { TourBoarding } from "@components/Private/Tours/Boarding";
 
 export default function TourUpdate({ targetTour }: TourPageProps) {
   return (
     <DashboardContainer>
       <ToursTabs tabs={{
         INFORMATION: <TourProfile tour={targetTour} />,
-        ADDRESSES: <TourAddresses tour={targetTour} />,
+        LANDING: <TourLanding tour={targetTour} />,
+        BOARDING: <TourBoarding tour={targetTour} />,
         PERIODS: <TourPeriods tour={targetTour} />,
         RULES: <TourRules tour={targetTour} />,
         GALLERY: <TourGallery tour={targetTour} />,

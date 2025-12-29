@@ -1,21 +1,22 @@
 import { Input } from "@components/shared/forms/Input";
 import { TextArea } from "@components/shared/forms/TextArea";
-import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
 import { TextEdit } from "@components/shared/forms/TextEdit";
 import { Datetime } from "@components/shared/forms/DateTime";
+import { useI18n } from "@contexts/I18n";
 
 type Props = ProfileFormProps;
 
 export function Information({ register, errors }: Props) {
+    const { t } = useI18n()
     return (
         <div>
             <div className="mb-4">
                 <h2 className="text-2xl font-semibold text-primary">
-                    {i18n("Words.information")}
+                    {t("Words.information")}
                 </h2>
                 <p className="text-sm">
-                    Informações gerais e de publicação do passeio.
+                    {t("Screens.dashboard.tours.information.description")}
                 </p>
             </div>
 
@@ -26,7 +27,7 @@ export function Information({ register, errors }: Props) {
                         required
                         dataTestId="title"
                         {...register("title")}
-                        label={i18n("Words.title")}
+                        label={t("Words.title")}
                         errors={errors?.title}
                     />
                 </div>
@@ -35,7 +36,7 @@ export function Information({ register, errors }: Props) {
                     <Datetime
                         dataTestId="available_at"
                         {...register("available_at")}
-                        label={i18n("Words.viewed_at")}
+                        label={t("Words.viewed_at")}
                         errors={errors?.available_at}
                     />
                 </div>
@@ -45,7 +46,7 @@ export function Information({ register, errors }: Props) {
                     <Datetime
                         dataTestId="unavailable_at"
                         {...register("unavailable_at")}
-                        label={i18n("Words.unavailable_at")}
+                        label={t("Words.unavailable_at")}
                         errors={errors?.unavailable_at}
                     />
                 </div>
@@ -56,7 +57,7 @@ export function Information({ register, errors }: Props) {
                         required
                         dataTestId="slug"
                         {...register("slug")}
-                        label={i18n("Words.slug")}
+                        label={t("Words.slug")}
                         errors={errors?.slug}
                     />
                 </div>
@@ -69,7 +70,7 @@ export function Information({ register, errors }: Props) {
                         step="0.01"
                         dataTestId="price"
                         {...register("price", { valueAsNumber: true })}
-                        label={i18n("Words.price")}
+                        label={t("Words.price")}
                         errors={errors?.price}
                     />
                 </div>
@@ -81,7 +82,7 @@ export function Information({ register, errors }: Props) {
                         step="0.01"
                         dataTestId="promotional_price"
                         {...register("promotional_price", { valueAsNumber: true })}
-                        label={i18n("Words.promotional_price")}
+                        label={t("Words.promotional_price")}
                         errors={errors?.promotional_price}
                     />
                 </div>
@@ -92,7 +93,7 @@ export function Information({ register, errors }: Props) {
                         type="number"
                         dataTestId="slots"
                         {...register("slots", { valueAsNumber: true })}
-                        label={i18n("Words.slots")}
+                        label={t("Words.slots")}
                         errors={errors?.slots}
                     />
                 </div>
@@ -103,7 +104,7 @@ export function Information({ register, errors }: Props) {
                         type="url"
                         dataTestId="video"
                         {...register("video")}
-                        label={i18n("Words.video")}
+                        label={t("Words.video")}
                         errors={errors?.video}
                     />
                 </div>
@@ -113,7 +114,7 @@ export function Information({ register, errors }: Props) {
                     <TextArea
                         dataTestId="short_description"
                         {...register("short_description")}
-                        label={i18n("Words.short_description")}
+                        label={t("Words.short_description")}
                         className="h-24"
                         errors={errors?.short_description}
                     />
@@ -124,8 +125,8 @@ export function Information({ register, errors }: Props) {
                     <TextEdit
                         {...register("description")}
                         dataTestId="description"
-                        label={i18n("Words.description")}
-                        placeholder={i18n("Words.about_description")}
+                        label={t("Words.description")}
+                        placeholder={t("Words.about_description")}
                         errors={errors?.description}
                     />
                 </div>

@@ -11,7 +11,7 @@ export function TextSkeleton({ lines = 1 }: Props) {
       {Array.from({ length: lines }).map(() => (
         <div
           key={`skeleton_text_${dayjs().unix()}`}
-          className={`skeleton w-full h-[2rem] mx-4`}
+          className={`skeleton w-full h-[2rem]  my-2`}
         ></div>
       ))}
     </div>

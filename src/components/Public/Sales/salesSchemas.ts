@@ -19,9 +19,19 @@ export const SalesSchema = z.object({
   cpf: z.string({ message: i18n("Validations.string") }),
   birthdate: z.string({ message: i18n("Validations.string") }),
   phone: z.string({ message: i18n("Validations.string") }),
+  email: z
+    .string({ message: i18n("Validations.string") })
+    .email(i18n("Validations.email")),
   country: z.string({ required_error: i18n("Validations.required") }),
   state: z.string({ required_error: i18n("Validations.required") }),
   city: z.string({ required_error: i18n("Validations.required") }),
+  contacts: z.object({
+    name: z.string({ required_error: i18n("Validations.required") }),
+    phone: z.string({ message: i18n("Validations.string") }),
+    kinship: z.string({ required_error: i18n("Validations.required") }),
+  }),
+  boarding: z.string({ required_error: i18n("Validations.required") }),
+  landing: z.string({ required_error: i18n("Validations.required") }),
   residency: z.string().optional(),
   dependents: z
     .array(

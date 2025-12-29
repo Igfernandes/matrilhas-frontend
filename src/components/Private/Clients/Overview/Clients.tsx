@@ -98,7 +98,7 @@ export function Clients() {
         />
       </div>
 
-      <div>
+      <div className="relative z-50">
         <ModalFormCategories
           title={i18n("Words.category")}
           isShowModal={modal.type === "CATEGORY"}
@@ -107,8 +107,8 @@ export function Clients() {
         />
         <Notice
           headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.clients.client.title_already_exclude")}
-          text={i18n("Screens.dashboard.clients.client.text_already_exclude")}
+          title={i18n("Screens.dashboard.clients.title_already_exclude")}
+          text={i18n("Screens.dashboard.clients.text_already_exclude")}
           onSubmit={handleDeleteClient}
           isShowModal={modal.type === "DELETE"}
           onModal={handleToggleModal}

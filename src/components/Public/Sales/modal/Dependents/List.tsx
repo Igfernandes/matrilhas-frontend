@@ -26,7 +26,7 @@ export function List({ register, handleAddDependent, errors }: Props) {
                             <input type="text" onChangeCapture={handleMaskDate} min="0" {...register("birthdate")} name="birthdate" className="w-full p-2" placeholder={t("Texts.filled_birthdate")} />
                         </div>
                         <div className="w-full md:w-2/3 mt-4">
-                            <span className="text-red text-xs">{errors && "É obrigatório preencher todos os campos*"}</span>
+                            <span className="text-red text-xs">{errors && t("Texts.required_fields")}</span>
                         </div>
                         <div className="w-full md:w-1/3 text-right mt-4">
                             <button onClick={handleAddDependent} type="button" className="bg-primary text-sm py-2 rounded-md px-3 text-white bottom-2 right-2 font-bold">Incluir</button>

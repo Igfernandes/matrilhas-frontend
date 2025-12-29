@@ -17,7 +17,7 @@ export function usePeriods({ tour }: Props = {} as Props) {
     const { formMethods, handleSubmit, register, errors } = useFormRules<PeriodsPayload>({
         schema: PeriodsSchemas,
         defaultValues: {
-            period: periods || [],
+            period: periods,
         }
     })
     const { mutateAsync: post, isPending: isLoading } = usePostTourPeriod()
@@ -27,13 +27,19 @@ export function usePeriods({ tour }: Props = {} as Props) {
         post(payload.map(item => ({ ...item, tour_id: tour.id })))
     }, [post, tour])
 
+    const handleResetPeriod = useCallback((index: number) => {
+        formMethods.setValue(`period.${index}.by_weekday`, []);
+        formMethods.setValue(`period.${index}.by_monthday`, []);
+        formMethods.setValue(`period.${index}.by_month`, []);
+        formMethods.setValue(`period.${index}.by_datetime`, []);
+    }, [formMethods])
+
+
     useEffect(() => {
-        if (periods?.length) {
-            formMethods.reset({
-                period: periods.sort((a) => a.model == "SALE" ? 1 : -1),
-            })
-        }
-    }, [periods, formMethods])
+        if (!periods) return;
+
+        formMethods.setValue("period", periods as PeriodsPayload["period"]);
+    }, [periods, formMethods]);
 
     return {
         formMethods,
@@ -41,6 +47,7 @@ export function usePeriods({ tour }: Props = {} as Props) {
         register,
         errors,
         onSubmit,
-        isLoading: isLoading
+        isLoading: isLoading,
+        handleResetPeriod
     }
 }

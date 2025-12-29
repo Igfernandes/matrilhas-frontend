@@ -15,7 +15,7 @@ export type SelectProps = DetailedHTMLProps<
 };
 
 type OptionsShape = {
-  value: string | number | null;
+  value: string | number | boolean | null;
   text: string;
   selected?: boolean;
 };

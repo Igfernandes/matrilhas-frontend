@@ -19,19 +19,24 @@ export function Information({ tour }: Props) {
             </div>
             <div className="mt-5">
                 <div className="bg-primary text-white py-1 border-2 text-center">
-                    <p className="font-semibold"> {t("Texts.address_origin")}</p>
+                    <p className="font-semibold"> {t("Screens.tours.addresses_origin")}</p>
                 </div>
-                <div className="bg-secondary shadow-sm shadow-zinc-300 py-2">
-                    <p>{origin?.complement}, {origin?.city}, {origin?.state} - {origin?.country}</p>
-                </div>
+                {origin.map((origin, index) => (
+                    <div key={`address_origin_${index}`} className="bg-secondary text-sm mx-1 px-2 border border-b-none  shadow-sm shadow-zinc-300 py-2">
+                        <p>{origin?.complement}, {origin?.city}, {origin?.state} - {origin?.country}</p>
+                    </div>
+                ))}
             </div>
             <div className="mt-5">
                 <div className="bg-primary text-white py-1 border-2 text-center">
                     <p className="font-semibold"> {t("Texts.address_destiny")}</p>
                 </div>
-                <div className="bg-secondary shadow-sm shadow-zinc-300 py-2">
-                    <p>{destiny?.complement}, {destiny?.city}, {destiny?.state} - {destiny?.country}</p>
-                </div>
+                {destiny.map((destiny, index) => (
+                    <div key={`address_destiny_${index}`} className="bg-secondary text-sm mx-1 px-2 border border-b-none  shadow-sm shadow-zinc-300 py-2">
+                        <p>{destiny?.complement}, {destiny?.city}, {destiny?.state} - {destiny?.country}</p>
+                    </div>
+                ))}
+
             </div>
             <div className="flex">
                 <When value={!!tour?.activity_period?.start}>

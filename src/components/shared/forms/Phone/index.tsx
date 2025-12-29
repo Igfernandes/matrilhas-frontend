@@ -1,11 +1,11 @@
 import { When } from "@components/utilities/When";
 import { PhoneProps } from "./type";
 import React, { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
 import ErrorMessage from "@components/shared/others/ErrorMessage";
 import { useFieldsAnimation } from "@hooks/Forms/useFieldsAnimation";
 import { useInput } from "./hooks/useInput";
 import { handleMaskPhone } from "@helpers/string";
+import { useFormContext } from "react-hook-form";
 
 export const Phone = React.forwardRef<HTMLInputElement, PhoneProps>(
   function Phone(
@@ -17,7 +17,6 @@ export const Phone = React.forwardRef<HTMLInputElement, PhoneProps>(
       errors,
       name,
       placeholder,
-      defaultValue,
       required,
       ...rest
     }: PhoneProps,
@@ -26,19 +25,13 @@ export const Phone = React.forwardRef<HTMLInputElement, PhoneProps>(
     const { labelStyledState, handleTransitionLabel, changeLabelClass } =
       useFieldsAnimation();
     const IdCurrent = id ?? dataTestId;
-    const { watch } = useFormContext();
     const { isUpLabel } = useInput();
-    const value = watch(name); // obtém o valor atual
+    const { watch } = useFormContext();
+    const value = watch(name);
 
     useEffect(() => {
-      if (value || defaultValue) {
-        changeLabelClass("UP");
-      }
-    }, [value, changeLabelClass]);
-
-    useEffect(() => {
-      changeLabelClass(isUpLabel({ placeholder, ...rest }) ? "UP" : "DOWN");
-    }, [placeholder]);
+      changeLabelClass(isUpLabel({ placeholder,value, ...rest }) ? "UP" : "DOWN");
+    }, [placeholder, value, rest, isUpLabel, changeLabelClass]);
 
     return (
       <>
@@ -58,17 +51,14 @@ export const Phone = React.forwardRef<HTMLInputElement, PhoneProps>(
             ref={ref}
             type="tel"
             name={name}
-            onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+            onChangeCapture={(ev: React.ChangeEvent<HTMLInputElement>) => {
               if (rest.onChange) rest.onChange(ev);
-              handleMaskPhone(ev);
+              handleMaskPhone(ev)
             }}
-            defaultValue={defaultValue}
             onFocus={handleTransitionLabel}
             onBlur={handleTransitionLabel}
-            placeholder={rest.type == "date" ? " " : placeholder}
-            className={`${className} ${
-              !!errors ? "border-amber-500 outline-amber-500" : ""
-            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+            className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
+              } w-full px-3 pt-7 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
             data-testid={dataTestId}
             id={IdCurrent}
           />
