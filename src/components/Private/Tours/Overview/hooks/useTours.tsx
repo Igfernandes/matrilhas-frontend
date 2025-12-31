@@ -5,12 +5,12 @@ import {
 } from "../../type";
 import { SelectorShape } from "@components/shared/layouts/Selector/type";
 import { useModalContext } from "@contexts/Modal";
-import { DeleteAgencyPayload } from "@services/Agencies/Delete/type";
 import { TourActions } from "../ToursActions";
 import dayjs from "dayjs";
 import { Status } from "@components/utilities/Status";
 import useDeleteTours from "@services/Tours/Delete/useDeleteTours";
 import { TourShape } from "@type/Tours";
+import { DeleteTourPayload } from "@services/Tours/Delete/type";
 
 export function useTours() {
   const { handleToggleModal, modal } =
@@ -52,15 +52,15 @@ export function useTours() {
 
   /** DELETE otimizado */
   const handleDelete = useCallback(() => {
-    const payload = {} as DeleteAgencyPayload;
+    const payload = {} as DeleteTourPayload;
     const idString = String(modal.id);
 
     if (idString.includes(",")) {
-      payload.in_agencies = idString.split(",").map(Number);
+      payload.in_tours = idString.split(",").map(Number);
     } else if (idString === "-1") {
       payload.all = true;
     } else {
-      payload.agency_id = Number(modal.id);
+      payload.tour_id = Number(modal.id);
     }
 
     deleteTour(payload).then(() => handleToggleModal(false));
