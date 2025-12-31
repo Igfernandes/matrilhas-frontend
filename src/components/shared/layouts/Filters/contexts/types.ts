@@ -22,5 +22,5 @@ export type FiltersContextData = {
     callback: (value: unknown) => unknown
   ) => void;
   references: Record<string, (value: unknown) => unknown>;
-  methods: UseFormReturn<FieldValues, unknown, undefined>;
+  methods: UseFormReturn<FieldValues, unknown>;
 };
