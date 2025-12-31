@@ -70,11 +70,11 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
                         options={[
                             {
                                 text: i18n("Words.not"),
-                                value: false
+                                value: "0"
                             },
                             {
                                 text: i18n("Words.yes"),
-                                value: true
+                                value: "1"
                             }
 
                         ]}

@@ -16,6 +16,7 @@ export function useProfile({ tour = {} as TourShape }: Props = {} as Props) {
         defaultValues: {
             ...tour,
             banner: "",
+            featured: tour?.featured ? "1" : "0",
         }
     })
     const { mutateAsync: putTour, isPending: isLoadingPut } = usePutTour()
