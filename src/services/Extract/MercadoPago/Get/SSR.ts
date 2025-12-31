@@ -10,11 +10,11 @@ export async function getExtract(
 ): Promise<MercadoPagoPaymentShape> {
   const query = request ?? {};
 
-  const { extract } = API_ROUTES;
+  const { mercadoPagoExtract } = API_ROUTES;
   const { data } = await axios.get<MercadoPagoPaymentShape>(
     setQueries({
       url: setParams({
-        url: extract,
+        url: mercadoPagoExtract,
         data: query,
       }),
     }),

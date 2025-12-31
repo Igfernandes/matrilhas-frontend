@@ -31,6 +31,7 @@ export const handleMaskDate = (event: React.ChangeEvent<HTMLInputElement>) => {
     );
 
   event.target.value = value;
+  return value
 };
 
 export const getDateWithMonthValid = (
@@ -78,8 +79,8 @@ export const getDateWithDayValid = (
   return "";
 };
 
-export const getMaskDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-  let value = event.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+export const getMaskDate = (value: string) => {
+  value = value.replace(/\D/g, ""); // Remove tudo que não for número
 
   if (value.length > 2) {
     value = value.slice(0, 2) + "/" + value.slice(2);

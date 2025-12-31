@@ -1,17 +1,18 @@
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { MenuShape } from "./type";
-import { Graphic } from "@assets/Icons/black/Graphic";
-import { Photo } from "@assets/Icons/black/Photo";
+import i18n from "@configs/i18n";
+import { GalleriesBI } from "@assets/Icons/black/GalleriesBI";
+import { FullScreenBI } from "@assets/Icons/black/FullScreenBI";
 
 export const MAIN_MENU = [
   {
     title: "Dashboard",
-    Icon: Graphic,
+    Icon: FullScreenBI,
     link: privateRoutes.dashboard,
   },
   {
-    title: "Galleries",
-    Icon: Photo,
+    title: i18n("Words.galleries"),
+    Icon: GalleriesBI,
     link: privateRoutes.galleries,
   },
 ] as Array<MenuShape>;

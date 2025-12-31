@@ -17,5 +17,10 @@ export type FiltersContextData = {
   ) => void;
   handleSubmit: UseFormHandleSubmit<FieldValues, FieldValues>;
   register: UseFormRegister<FieldValues>;
-  methods: UseFormReturn<FieldValues, unknown, FieldValues>;
+  updateReferences: (
+    key: string,
+    callback: (value: unknown) => unknown
+  ) => void;
+  references: Record<string, (value: unknown) => unknown>;
+  methods: UseFormReturn<FieldValues, unknown, undefined>;
 };

@@ -23,6 +23,6 @@ export const SalesTranslations = {
   },
   filled_all_fields: "Preencha todos os campos para prosseguir",
   gratuity_by_age: "Gratuidade pela idade",
-  file_residency: "Comprovante de Residência",
+  residency_file: "Comprovante de Residência",
   residency_notice: "É necessário anexar o comprovante de residência para garantir o benefício.",
 };

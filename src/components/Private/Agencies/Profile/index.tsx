@@ -25,7 +25,7 @@ export function AgencyProfile({ agency }: Props) {
                         <hr className="border-secondary my-4" />
                         <SocialMedias {...formMethods} agency={agency} errors={errors} />
                     </div>
-                    <div className="bg-white p-4 w-full sticky h-[85vh] top-2 md:w-[28%] ml-auto">
+                    <div className="bg-white p-4 w-full sticky md:h-[85vh] top-2 md:w-[28%] ml-auto">
                         <Sidebar {...formMethods} agency={agency} errors={errors} isLoading={isLoading} />
                     </div>
                 </div>

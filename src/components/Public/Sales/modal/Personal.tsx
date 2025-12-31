@@ -1,10 +1,10 @@
 import { Date } from "@components/shared/forms/Date";
 import { Input } from "@components/shared/forms/Input";
 import { useI18n } from "@contexts/I18n";
-import { handleMaskCPF } from "@helpers/string";
 import { useFormContext } from "react-hook-form";
 import { useSalesContext } from "../context";
 import { useVerify } from "../hooks/useVerify";
+import { CPF } from "@components/shared/forms/CPF";
 
 export function Personal() {
     const { handleTargetTour, handleStep } = useSalesContext()
@@ -24,7 +24,7 @@ export function Personal() {
                 <Input {...register("name")} required={true} label={t("Words.name")} dataTestId="sale_name" />
             </div>
             <div className="my-2">
-                <Input {...register("cpf")} onChangeCapture={handleMaskCPF} required={true} label={t("Words.cpf")} dataTestId="sale_cpf" />
+                <CPF name="cpf" register={register} required={true} label={t("Words.cpf")} dataTestId="sale_cpf" />
             </div>
             <div className="my-2">
                 <Date {...register("birthdate")} required={true} label={t("Words.birthdate")} dataTestId="sale_birthdate" />

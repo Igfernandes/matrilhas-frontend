@@ -1,25 +1,26 @@
 import { BaseShape } from "@type/data";
 
-export type SalesShape = BaseShape & {
+export type SaleShape = BaseShape & {
   id: number;
-  name?: string;
-  cpf?: string;
-  phone?: string;
-  birthdate?: string;
-  tour_id: number;
-  status: "PAID" | "PENDING" | "CANCELED";
-  agency?: AgencyData;
+  status: SaleStatus;
+  amount: number;
+  price: number;
+  discount: number;
+  currency: "REAL" | "USD" | "EURO";
+  reference: string;
+  payment_id: string;
   metadata?: Record<string, unknown>;
-  client_id?: number;
-  bank: {
-    id: number;
-    name: string;
-  };
+  tour: Data;
+  bank: Data;
+  client: Data;
+  agency?: Data;
   created_at: string;
   updated_at: string;
 };
 
-type AgencyData = {
+type Data = {
   id: number;
   name: string;
 };
+
+export type SaleStatus = "PAID" | "PENDING" | "CANCELED";

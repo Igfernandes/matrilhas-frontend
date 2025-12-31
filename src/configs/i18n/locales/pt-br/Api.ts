@@ -1,6 +1,7 @@
 import { AgenciesApiTranslations } from "./api/agencies";
 import { ClientsApiTranslations } from "./api/clients";
 import { GalleriesApiTranslations } from "./api/galleries";
+import { SalesApiTranslations } from "./api/sales";
 import { ToursApiTranslations } from "./api/tours";
 
 export const Api = {
@@ -8,6 +9,7 @@ export const Api = {
   agencies: AgenciesApiTranslations,
   tours: ToursApiTranslations,
   galleries: GalleriesApiTranslations,
+  sales: SalesApiTranslations,
   exports: {
     invalid: {
       in_ids:

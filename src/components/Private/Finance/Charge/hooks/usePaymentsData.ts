@@ -9,10 +9,8 @@ type Props = {
   chargeId: number;
 };
 
-export function usePaymentsData({ chargeId }: Props) {
-  const { data } = useGetPayments({
-    charge_id: chargeId,
-  });
+export function usePaymentsData({  }: Props) {
+  const { data } = useGetPayments();
   const [payments, setPayments] = useState<Array<PaymentShape>>([]);
   const statusColors = {
     PAID: textColors.green,

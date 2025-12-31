@@ -4,20 +4,27 @@ import { TDataOptions } from "../presets/SmartTable/Tbody/TData/type";
 import { useColumnMetrics } from "./useColumnMetrics";
 import { useTableMetrics } from "./useTableMetrics";
 import useGetTable from "./useGet";
+import { PaginationOptionShape } from "../utilities/Pagination/type";
+
+type Props<TableData> = HookTableDataProps<TableData> & {
+  pagination: PaginationOptionShape | undefined;
+};
 
 export function useTableData<TableData extends Array<Record<string, unknown>>>({
   data,
   excludes,
   tHeads: tHeadProps,
   filters,
+  pagination,
   ajax,
-}: HookTableDataProps<TableData>) {
+}: Props<TableData>) {
   const resetDataRef = useMemo(() => {
     const map = new Map<unknown, unknown>();
     return Array.from(map.values()) as TableData;
   }, []);
   const refRows = useRef<TableData>(resetDataRef);
   const filtersRef = useRef<Record<string, unknown>>(null);
+  const paginationMax = useMemo(() => pagination?.max ?? 3, [pagination]);
   const [offset, setOffset] = useState<number>(0);
   const { rows, count, isPending, refetch } = useGetTable(
     {
@@ -30,19 +37,24 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
   );
   const updateOffset = (newOffset: number) => {
     setOffset(newOffset);
-    if (newOffset !== offset) {
+    const offsetMin = 100 / paginationMax;
+    const offsetTotal = rows.length / paginationMax;
+
+    if (offsetTotal > offsetMin && newOffset !== offset) {
       refetch();
     }
   };
 
-  const appendRows = useCallback((prev: TableData, rows: TableData) => {
+  const appendRows = useCallback((prev: TableData, newRows: TableData) => {
     const map = new Map<unknown, unknown>();
 
-    prev.forEach((item) => map.set(item.id, item));
-    rows.forEach((item: TableData[number]) => map.set(item.id, item)); // sobrescreve
+    prev.forEach((item, key) => map.set(item?.id ?? rows[key]?.id, item));
+    newRows.forEach((item: TableData[number], key) =>
+      map.set(item?.id ?? rows[key]?.id, item)
+    ); // sobrescreve
 
     return Array.from(map.values()) as TableData;
-  }, []);
+  }, [rows]);
 
   const tRows = useMemo(() => {
     let rowData = data as TableData;
@@ -110,7 +122,7 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
     filtersRef.current = filters;
     setOffset(0);
     refetch();
-  }, [filters, resetDataRef, refetch]);
+  }, [filters, resetDataRef, paginationMax, refetch]);
 
   return {
     tHeads,

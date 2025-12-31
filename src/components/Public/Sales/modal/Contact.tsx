@@ -4,6 +4,7 @@ import { useI18n } from "@contexts/I18n";
 import { useFormContext } from "react-hook-form";
 import { useSalesContext } from "../context";
 import { useVerify } from "../hooks/useVerify";
+import { getNumberFormatted } from "@helpers/string";
 
 export function Contact() {
     const { handleStep } = useSalesContext()
@@ -23,7 +24,9 @@ export function Contact() {
                 <Input {...register("email")} required={true} label={t("Words.email")} dataTestId="sale_email" />
             </div>
             <div className="my-2">
-                <Phone {...register("phone")} required={true} label={t("Words.phone")} dataTestId="sale_contact_phone" />
+                <Phone {...register("phone", {
+                    setValueAs: (value) => getNumberFormatted(value),
+                })}  required={true} label={t("Words.phone")} dataTestId="sale_contact_phone" />
             </div>
             <div className="text-center mt-2 mb-2">
                 <span className="text-xs text-red">{t("Screens.sales.filled_all_fields")}</span>

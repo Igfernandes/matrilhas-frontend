@@ -6,7 +6,7 @@ const currencyMap: Record<CurrencyModel, { locale: string; code: string }> = {
   EURO: { locale: "de-DE", code: "EUR" }, // ou fr-FR
 };
 
-export function formatMoney(value: number, currency: CurrencyModel): string {
+export function formatMoney(value: number, currency: CurrencyModel = "REAL"): string {
   const config = currencyMap[currency] ?? currencyMap.USD;
 
   return new Intl.NumberFormat(config.locale, {

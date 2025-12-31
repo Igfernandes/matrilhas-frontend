@@ -1,13 +1,13 @@
 import { feedbackTexts } from "./texts/feedback";
 import { AddressTranslations } from "./texts/address";
-import { OthersTranslations } from "./words/others";
 import { PersonalTranslations } from "./texts/personal";
+import { OthersTextsTranslations } from "./texts/others";
 
 export const Texts = {
   ...feedbackTexts,
   ...AddressTranslations,
-  ...OthersTranslations,
   ...PersonalTranslations,
+  ...OthersTextsTranslations,
   back_page: "Voltar pra página anterior",
   created_new_password: "Criar nova senha",
   new_password: "Nova senha",
@@ -32,7 +32,7 @@ export const Texts = {
   address_origin: "Endereço de Embarque",
   filled_name: "Preencha o nome",
   filled_cpf: "Preencha o CPF",
-  filled_birthdate: "Preencha a idade",
+  filled_birthdate: "Preencha a data de nasc.",
   address_destiny: "Endereço de Desembarque",
   user_group: "Grupo de Usuário",
   select_option: "Selecione uma opção",

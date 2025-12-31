@@ -32,7 +32,7 @@ export const SalesSchema = z.object({
   }),
   boarding: z.string({ required_error: i18n("Validations.required") }),
   landing: z.string({ required_error: i18n("Validations.required") }),
-  residency: z.string().optional(),
+  residency_file: z.string().optional(),
   dependents: z
     .array(
       z.object({

@@ -1,19 +1,14 @@
-import { AgencyShape } from "@type/Agencies";
 import {
   FieldErrors,
   UseFormRegister,
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import { AgencyProfilePayload } from "./profileSchemas";
+import { SaleProfilePayload } from "./profileSchemas";
 
-export type ProfileManagerProps = {
-  agency?: AgencyShape;
-};
-
-export type ProfileFormProps = Pick<ProfileManagerProps, "agency"> & {
-  watch: UseFormWatch<AgencyProfilePayload>;
-  register: UseFormRegister<AgencyProfilePayload>;
-  errors: FieldErrors<AgencyProfilePayload>;
-  setValue: UseFormSetValue<AgencyProfilePayload>;
+export type ProfileFormProps = {
+  watch: UseFormWatch<SaleProfilePayload>;
+  register: UseFormRegister<SaleProfilePayload>;
+  errors: FieldErrors<SaleProfilePayload>;
+  setValue: UseFormSetValue<SaleProfilePayload>;
 };

@@ -18,6 +18,7 @@ export function useFieldsAnimation() {
     left: ".75rem",
     top: ".95rem",
   });
+  const [isLabelUp, setIsLabelUp] = useState<boolean>(false);
 
   /**
    * @function changeLabelClass
@@ -27,6 +28,7 @@ export function useFieldsAnimation() {
    */
   const changeLabelClass = useCallback((state: StatusLabelStyled) => {
     setLabelStateClass(labelStyled.current[state]);
+    setIsLabelUp(state === "UP");
   }, []);
 
   /**
@@ -55,5 +57,6 @@ export function useFieldsAnimation() {
     labelStyledState,
     handleTransitionLabel,
     changeLabelClass,
+    isLabelUp,
   };
 }

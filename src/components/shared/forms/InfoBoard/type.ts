@@ -6,6 +6,8 @@ export type TFields = {
   id?: string;
   element?: string;
   label?: string;
+  url?: string;
+  value?: string | number;
   type?: string;
   group?: string;
   style?: CSSProperties;
@@ -16,6 +18,7 @@ export type TFields = {
   height?: string;
   margin?: string;
   options?: string;
+  isFile?: boolean;
   labelColor?: string;
   labelWeight?: string;
   required?: string;

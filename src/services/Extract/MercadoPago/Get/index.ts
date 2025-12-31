@@ -2,24 +2,24 @@ import { API_ROUTES } from "@configs/routes/Api/api";
 import { GetExtractRequest } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { ChargeShape } from "@type/Charges";
+import { MercadoPagoPaymentShape } from "@type/Extracts/MercadoPago/MercadoPago";
 
 export default function useGet() {
-  const { extract } = API_ROUTES;
+  const { mercadoPagoExtract } = API_ROUTES;
   const { axios } = useAxios();
   const { setParams, setQueries } = useRoutes();
 
-  async function getCharges(request?: GetExtractRequest) {
+  async function getPayments(request?: GetExtractRequest) {
     const { ...query } = request ?? {};
-    return await axios.get<ChargeShape[]>(
+    return await axios.get<MercadoPagoPaymentShape>(
       setQueries({
-        url: setParams({ url: extract }),
+        url: setParams({ url: mercadoPagoExtract }),
         query,
       })
     );
   }
 
   return {
-    getCharges,
+    getPayments,
   };
 }

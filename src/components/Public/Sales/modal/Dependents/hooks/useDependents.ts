@@ -1,13 +1,12 @@
 import dayjs from "dayjs";
 import { useCallback, useMemo, useState } from "react";
-import { useForm, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
 export function useDependents() {
-  const { watch, setValue } = useFormContext();
-  const { register, getValues, setValue: setControl } = useForm();
+  const { watch, setValue, getValues, register } = useFormContext();
   const dependents = watch("dependents");
   const amount = useMemo(() => {
     const data = {
@@ -18,7 +17,7 @@ export function useDependents() {
     if (!dependents || dependents.length === 0) return data;
 
     for (const dependent of dependents) {
-      if (dayjs().diff(dayjs(dependent.birthdate, "DD/MM/YYYY"), "year") < 18) {
+      if (dayjs().diff(dayjs(dependent.birthdate), "year") < 18) {
         data.children += 1;
       } else {
         data.adults += 1;
@@ -30,9 +29,9 @@ export function useDependents() {
   const [errors, setErrors] = useState<boolean>(false);
 
   const handleAddDependent = useCallback(() => {
-    const { name, birthdate, cpf } = getValues();
+    const { dependent_name, dependent_birthdate, dependent_cpf } = getValues();
 
-    if (!name || !birthdate || !cpf) {
+    if (!dependent_name || !dependent_birthdate || !dependent_cpf) {
       setErrors(true);
       return;
     } else {
@@ -42,15 +41,15 @@ export function useDependents() {
     setValue("dependents", [
       ...(dependents ?? []),
       {
-        name: name || "",
-        cpf: cpf || "",
-        birthdate: birthdate || "",
+        name: dependent_name,
+        cpf: dependent_cpf,
+        birthdate: dependent_birthdate,
       },
     ]);
-    setControl("name", "");
-    setControl("cpf", "");
-    setControl("birthdate", "");
-  }, [dependents, setValue, getValues, setControl]);
+    setValue("dependent_name", "");
+    setValue("dependent_cpf", "");
+    setValue("dependent_birthdate", "");
+  }, [dependents, setValue, getValues]);
 
   return {
     dependents,

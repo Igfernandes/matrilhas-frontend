@@ -13,7 +13,7 @@ export async function getCharges(
   const { payments } = API_ROUTES;
   const { data } = await axios.get<PaymentShape[] | PaymentShape>(
     setQueries({
-      url: `${payments}/${request?.id}`,
+      url: `${payments}/${request?.payment_id}`,
       query,
     }),
     {

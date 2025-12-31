@@ -12,9 +12,11 @@ export const PersonalTranslations = {
   ative: "Ativar",
   family: "Família",
   birthdays: "Aniversários",
+  document: "Documento",
   birthday: "Aniversário",
   kinship: "Parentesco",
   personal: "Pessoal",
   username: "Nome do usuário",
   birthdate: "Data de Nasc",
+  revenue: "Receita"
 };

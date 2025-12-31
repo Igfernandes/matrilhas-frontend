@@ -1,6 +1,6 @@
 import { useSalesContext } from "@components/Public/Sales/context";
 import { SalesPayload } from "@components/Public/Sales/salesSchemas";
-import usePostSaleResume from "@services/Sales/postResume/usePost";
+import usePostSaleResume from "@services/Sales/PostResume/usePost";
 import dayjs from "dayjs";
 import { useEffect, useMemo } from "react";
 import { useFormContext } from "react-hook-form";

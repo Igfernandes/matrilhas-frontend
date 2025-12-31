@@ -13,6 +13,7 @@ export const StatusTranslations = {
   resolved: "Resolvida",
   successful: "Sucesso",
   pending: "Pendente",
+  pendents: "Pendentes",
   fixing: "Corrigir",
   proceed: "Prosseguir",
   created: "Criado",
@@ -29,4 +30,5 @@ export const StatusTranslations = {
   draft: "Rascunho",
   active: "Ativo",
   inactive: "Inativo",
+  canceled: "Cancelado",
 };

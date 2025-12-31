@@ -1,6 +1,8 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { clientsTranslations } from "./screens/dashboard/clients";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
+import { salesTranslations } from "./screens/dashboard/sales";
+import { staticsTranslations } from "./screens/dashboard/statics";
 import { ToursTranslations } from "./screens/dashboard/tours";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
@@ -54,6 +56,8 @@ export const Screens = {
     agencies: agenciesTranslations,
     galleries: galleriesTranslations,
     tours: ToursTranslations,
+    sales: salesTranslations,
+    statics: staticsTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",

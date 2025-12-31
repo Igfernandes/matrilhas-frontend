@@ -80,7 +80,8 @@ export function FileModal({
             type="button"
             text={i18n(`Words.save`)}
             className="bg-primary  text-white font-semibold disabled:bg-disable"
-            disabled={progress == 100 || isLoading ? false : true}
+            disabled={progress == 100 || !isLoading ? false : true}
+            isLoading={isLoading}
             onClick={() => {
               uploadFiles({
                 files: files ? Array.from(files) : [],

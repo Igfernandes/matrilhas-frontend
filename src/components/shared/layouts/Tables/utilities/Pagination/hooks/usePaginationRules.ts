@@ -33,7 +33,7 @@ export function usePaginationRules({
 
       if (pageNumber >= pageAmountRef && setOffset) {
         const offsetNew = (pageNumber - 1) * MAX_PAGINATION.current;
-        setOffset(offsetNew > 0 ? offsetNew : 0);
+        setOffset(offsetNew > 0 ? offsetNew : paginationInstance?.max  ?? 3);
       }
 
       setPagination((prev) => ({
