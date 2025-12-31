@@ -22,6 +22,7 @@ export function Filters({ children, id }: Props) {
     const { handleAlterFilters, handleSubmit, methods, filters } = useFiltersContext();
     const hasFilter = Object.values(filters[id] ?? {}).length > 0;
 
+    
     return (
         <div className="z-10 relative">
             <div className="flex items-center">
