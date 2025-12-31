@@ -31,11 +31,6 @@ export function Sidebar({ watch, isLoading }: Props) {
                     })} label={t("Words.price")} dataTestId="price" prefix="R$: " />
                 </div>
                 <div className="mb-4">
-                    <Select defaultValue={"REAL"} options={["REAL", "USD", "EURO"]
-                        .map(status => ({ text: status, value: status }))}
-                        {...register("currency")} dataTestId="currency" label={t("Words.currency")} />
-                </div>
-                <div className="mb-4">
                     <Input step={"00.01"} placeholder="00,00" type="number" {...register("discount", {
                         setValueAs: (value) => formatMoney(value, "REAL"),
                         valueAsNumber: true
