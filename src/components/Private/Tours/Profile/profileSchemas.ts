@@ -101,7 +101,8 @@ export const TourProfileSchema = z.object({
         list: "Sim, Não",
       }),
     })
-    .default("0"),
+    .default("0")
+    .or(z.boolean()),
 
   status: z
     .enum(["PUBLISHED", "DRAFT", "ARCHIVED"], {
