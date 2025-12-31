@@ -1,5 +1,5 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { TourShape } from "@type/Tours"
 import { RulesPayload, RulesSchema } from "../RulesSchema"
 import usePostTourRule from "@services/Tours/Rules/Post/usePost"
@@ -13,11 +13,20 @@ export function useRules({ tour }: Props = {} as Props) {
     const { rows: rules } = useGetTourRules({
         tour_id: tour.id,
     })
+    const rulesToGratuity = useMemo(() => {
+        return rules?.find(rule => rule.type === "AGE") ?? {} as RulesPayload["rule"][0]
+    }, [rules])
+    const rulesToResidency = useMemo(() => {
+        return rules?.find(rule => rule.type === "RESIDENCY") ?? {} as RulesPayload["rule"][0]
+    }, [rules])
 
     const { formMethods, handleSubmit, register, errors } = useFormRules<RulesPayload>({
         schema: RulesSchema,
         defaultValues: {
-            rule: rules ?? []
+            rule: [
+                rulesToGratuity,
+                rulesToResidency
+            ]
         }
     })
     const { mutateAsync: post, isPending: isLoading } = usePostTourRule()
@@ -31,12 +40,15 @@ export function useRules({ tour }: Props = {} as Props) {
     }, [post, tour])
 
     useEffect(() => {
-        if (rules?.length) {
-            formMethods.reset({
-                rule: rules,
-            });
-        }
-    }, [rules, formMethods]);
+
+        formMethods.reset({
+            rule: [
+                rulesToGratuity,
+                rulesToResidency
+            ],
+        });
+
+    }, [rulesToGratuity, rulesToResidency, , formMethods]);
 
     return {
         formMethods,

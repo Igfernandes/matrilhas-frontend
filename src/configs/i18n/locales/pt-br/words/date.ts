@@ -38,5 +38,8 @@ export const DateTranslations = {
   appellant: "Recorrente",
   punctual: "Pontual",
   shortly: "Em breve",
+  sold_at: "Vendido em",
   days: "Dias",
+  terminated_at: "Data de Término",
+  started_at: "Data de Início", 
 };

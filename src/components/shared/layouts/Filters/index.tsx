@@ -9,6 +9,7 @@ import { FormProvider } from "react-hook-form";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Navigation } from "swiper/modules";
+import { Manager } from "./presets/Manager";
 
 type Props = {
     id: string;
@@ -65,7 +66,7 @@ export function Filters({ children, id }: Props) {
                             if (!value) return null;
                             return (
                                 <SwiperSlide key={`filter_tag_${key}`} className="inline text-sm bg-primary text-white px-2 py-1 rounded-md mr-2 mt-2">
-                                    {String(value)}
+                                  <Manager  index={key} value={String(value)} />
                                 </SwiperSlide>
                             )
                         })}

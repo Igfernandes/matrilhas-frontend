@@ -38,6 +38,9 @@ export function Table<TableData extends Array<Record<string, unknown>>>({
     data,
     excludes,
     tHeads: currentTHeads as THeadRequiredProps,
+    pagination: {
+      max: options.pagination?.max ?? 3,
+    }
   });
 
   useEffect(() => {

@@ -25,7 +25,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }: InputProps,
     ref
   ) {
-    const { labelStyledState, handleTransitionLabel, changeLabelClass } =
+    const { labelStyledState, isLabelUp, handleTransitionLabel, changeLabelClass } =
       useFieldsAnimation();
     const IdCurrent = id ?? dataTestId;
     const { watch } = useFormContext();
@@ -33,11 +33,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const value = watch(name);
 
     useEffect(() => {
-      console.log("Input Rendered:", name, isUpLabel({ ...rest, placeholder, value }));
       if (isUpLabel({ ...rest, placeholder, value })) {
         changeLabelClass("UP");
       }
-    }, [value, placeholder, rest, isUpLabel, changeLabelClass]);
+    }, [value, placeholder, rest, isUpLabel, name, changeLabelClass]);
 
     return (
       <>
@@ -52,7 +51,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               <span className="text-red">*</span>
             </When>
           </label>
-          <When value={!!prefix && !!value}>
+          <When value={!!prefix && !!value || !!isLabelUp}>
             <span className="absolute  bottom-[.65rem] left-4 text-sm">{prefix}</span>
           </When>
           <input

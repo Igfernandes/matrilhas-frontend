@@ -1,6 +1,7 @@
-import { TourRuleShape } from "@type/Tours/Rule";
+import { TourRuleAction, TourRuleShape } from "@type/Tours/Rule";
 
-export type PostToursRulePayload = Array<Omit<
-  TourRuleShape,
-  "created_at" | "updated_at"
->>
+export type PostToursRulePayload = Array<
+  Omit<TourRuleShape, "action" | "created_at" | "updated_at">
+> & {
+  action?: TourRuleAction;
+};

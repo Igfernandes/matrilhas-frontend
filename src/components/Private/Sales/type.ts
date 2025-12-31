@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { SalesShape } from "@type/Sales";
+import { SaleShape } from "@type/Sales";
 
 export type HookSalesProps<SaleType> = {
   filter: string;
@@ -26,5 +26,5 @@ export type AgenciesStructProps = {
 export type ModalSaleOperationType = "SALE" | "DELETE" | boolean;
 
 export type SalesPageProps = {
-  targetSales: SalesShape;
+  targetSale: SaleShape;
 };

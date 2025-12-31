@@ -1,8 +1,9 @@
 import i18n from "@configs/i18n";
+import { SaleStatus } from "@type/Sales";
 import { useRef } from "react";
 
 type Props = {
-    is: "ACTIVE" | "INACTIVE" | "PUBLISHED" | "DRAFT" | "ARCHIVED";
+    is: SaleStatus  | "ACTIVE" | "INACTIVE" | "PUBLISHED" | "DRAFT" | "ARCHIVED";
 }
 
 export function Status({ is }: Props) {
@@ -12,6 +13,9 @@ export function Status({ is }: Props) {
         PUBLISHED: "bg-success",
         DRAFT: "bg-warning",
         ARCHIVED: "bg-danger",
+        PAID: "bg-success",
+        PENDING: "bg-warning",
+        CANCELED: "bg-error",
     });
 
     return (

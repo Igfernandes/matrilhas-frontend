@@ -54,9 +54,10 @@ export function getNumberFormatted(number?: string) {
   return `${value.slice(0, 16)}`;
 }
 
-export function handleMaskCPF(e: React.ChangeEvent<HTMLInputElement>) {
-  e.target.value = getCPFFormatted(e.target.value);
+export function handleMaskCPF(e: React.ChangeEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>) {
+  e.currentTarget.value = getCPFFormatted(e.currentTarget.value);
 }
+
 
 export function getCPFFormatted(cpf: string = ""): string {
   const digits = cpf.replace(/\D/g, ""); // Remove tudo que não for dígito

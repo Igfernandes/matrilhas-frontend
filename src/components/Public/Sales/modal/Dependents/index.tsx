@@ -13,9 +13,9 @@ export function Dependents() {
     const { handleStepChange, step } = useStep()
 
     return (
-        <div className="min-w-[30vw] py-2 mb-5">
-            <div className="mb-5">
-                <div className="bg-primary text-white rounded-sm px-2 py-1 mb-2">
+        <div className="min-w-[30vw] py-2 mb-3">
+            <div className="mb-1">
+                <div className="bg-primary text-white rounded-sm px-2 py-1 mb-1">
                     <h3 className="font-semibold">{t("Texts.people_additional")}</h3>
                 </div>
                 <p className="text-sm">{t("Screens.sales.dependents.text")}</p>
@@ -44,7 +44,7 @@ export function Dependents() {
 
             <div className="flex items-center justify-between mt-5">
                 <div className="w-[48%]">
-                    <button type="button" onClick={() => handleStep("ADDRESS")} className="w-full border-primary rounded-md target:scale-90 text-primary border py-2 text-center inline-block">
+                    <button type="button" onClick={() => handleStep("REFERENCES")} className="w-full border-primary rounded-md target:scale-90 text-primary border py-2 text-center inline-block">
                         {t("Words.back")}
                     </button>
                 </div>

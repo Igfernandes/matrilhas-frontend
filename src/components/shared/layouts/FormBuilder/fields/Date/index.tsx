@@ -57,7 +57,7 @@ export function Date({
           type={"text"}
           value={date}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const dateFormatted = getMaskDate(e);
+            const dateFormatted = getMaskDate(e.currentTarget.value);
             if (setValue) setValue(name, dateFormatted);
             setDate(dateFormatted);
           }}

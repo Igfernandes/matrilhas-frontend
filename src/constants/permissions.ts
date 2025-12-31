@@ -17,6 +17,7 @@ export const PERMISSIONS = {
     create: "sales_create",
     update: "sales_update",
     delete: "sales_delete",
+    view: "sales_view",
   },
   tours: {
     create: "tours_create",

@@ -8,6 +8,7 @@ import { TCpf } from "./Cpf";
 import { TGallery } from "./Gallery";
 import { TFile } from "./File";
 import { TFields } from "../type";
+import { TReference } from "./Reference";
 
 export const components = {
   text: TInput,
@@ -20,6 +21,7 @@ export const components = {
   dependents: TDependents,
   birthdate: TDate,
   cpf: TCpf,
+  reference: TReference,
   gallery: TGallery,
   file: TFile,
 } as Record<string, (props: TFields) => JSX.Element>;

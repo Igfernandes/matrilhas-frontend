@@ -24,7 +24,6 @@ export function useProfile({ agency = {} as AgencyShape }: Props = {} as Props) 
     const { mutateAsync: postAgency, isPending: isLoadingPost } = usePostAgency();
 
     const onSubmit = useCallback(async (payload: AgencyProfilePayload) => {
-        console.log("Submitting profile with payload:", payload);
         if (payload.id) {
             await putAgency({
                 ...payload,

@@ -1,34 +1,37 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
-import { handleMaskCNPJ, handleMaskPhone } from "@helpers/string";
-import { TextArea } from "@components/shared/forms/TextArea";
+import { handleMaskPhone } from "@helpers/string";
+import { CPF } from "@components/shared/forms/CPF";
+import { useFormContext } from "react-hook-form";
+import { useI18n } from "@contexts/I18n";
+import { Date } from "@components/shared/forms/Date";
 
 type Props = ProfileFormProps;
 
-export function Information({ register, errors }: Props) {
-
+export function Information({ errors }: Props) {
+    const { register } = useFormContext()
+    const { t } = useI18n()
     return (
         <div>
             <div className="mb-4">
-                <h2 className="text-2xl font-semibold text-primary ">{i18n("Words.information")}</h2>
-                <p className="text-sm">Informações de cadastro e gerais sobre a agência.</p>
+                <h2 className="text-2xl font-semibold text-primary ">{t("Texts.client_information")}</h2>
+                <p className="text-sm">{t("Screens.dashboard.sales.text_describe_client_information")}</p>
             </div>
             <div className="flex flex-wrap justify-between">
                 <div className="w-full my-2">
-                    <Input required={true} dataTestId="name" {...register("name")} label={i18n("Words.name")} errors={errors?.name} />
-                </div>
-                <div className="w-full my-2">
-                    <Input dataTestId="email" {...register("email")} label={i18n("Words.email")} errors={errors?.email} />
+                    <Input required={true} dataTestId="name" {...register("name")} label={t("Words.name")} errors={errors?.name} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <Input dataTestId="phone" {...register("phone")} onChangeCapture={handleMaskPhone} label={`${i18n("Words.phone")}/Whatsapp`} errors={errors?.phone} />
+                    <Input dataTestId="email" required={true}  {...register("email")} label={t("Words.email")} errors={errors?.email} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <Input {...register("cnpj")} required={true} onChangeCapture={handleMaskCNPJ} dataTestId="cnpj" label={i18n("Words.cnpj")} errors={errors?.cnpj} />
+                    <Input dataTestId="phone" required={true}  {...register("phone")} onChangeCapture={handleMaskPhone} label={`${t("Words.phone")}/Whatsapp`} errors={errors?.phone} />
                 </div>
-                <div className="w-full">
-                    <TextArea dataTestId="describe"  {...register("describe")} label={i18n("Words.describe")} className="h-40" errors={errors?.describe} ></TextArea>
+                <div className="w-full md:w-[48%] my-2">
+                    <CPF register={register} name="cpf" required={true} dataTestId="cpf" label={t("Words.cpf")} errors={errors?.cpf} />
+                </div>
+                <div className="w-full md:w-[48%] my-2">
+                    <Date dataTestId="birthdate" required={true}  {...register("birthdate")} label={t("Words.birthdate")} errors={errors?.birthdate} />
                 </div>
             </div>
         </div>

@@ -84,9 +84,9 @@ export function Resume({ isLoadingSubmit }: Props) {
                 </table>
             </div>
             <When value={hasResidency}>
-                <div>
-                    <File {...register('residency')} label={t("Screens.sales.file_residency")} dataTestId="sale_residency" />
-                    <span>{t("Screens.sales.residency_notice")}</span>
+                <div className="my-4">
+                    <File {...register('residency_file')} label={t("Screens.sales.file_residency")} dataTestId="sale_residency" />
+                    <span className="inline-block text-sm text-red mx-2 mt-1 mb-2">{t("Screens.sales.residency_notice")}</span>
                 </div>
             </When>
             <div className="flex items-center justify-between mt-5">

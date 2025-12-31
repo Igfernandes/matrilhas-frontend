@@ -10,3 +10,4 @@ export type TourRuleShape = {
   created_at: string;
   updated_at: string;
 };
+export type TourRuleAction = "FREE" | "PRICE" | "LIMIT";

@@ -20,7 +20,6 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
       name,
       required,
       handledChange,
-      defaultValue,
       ...rest
     }: InputProps,
     ref
@@ -29,18 +28,11 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
       useDatetime();
     const IdCurrent = id ?? dataTestId;
     const { setValue, watch } = useFormContext();
-    const datetimeValue = watch(name);
+    const currentDateValue = watch(name);
 
     useEffect(() => {
-      const source = datetimeValue || defaultValue;
-
-      if (source) {
-        const normalized = source.replace("T", " ");
-        setDatetime(dayjs(normalized).format("DD/MM/YYYY HH:mm"));
-      } else {
-        setDatetime("");
-      }
-    }, [defaultValue, datetimeValue, setDatetime]);
+      setDatetime(currentDateValue ? dayjs(currentDateValue).format("DD/MM/YYYY HH:mm") : "");
+    }, [currentDateValue, setDatetime]);
 
     return (
       <>

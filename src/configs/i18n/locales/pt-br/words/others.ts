@@ -119,4 +119,14 @@ export const OthersTranslations = {
   passenger: "Passageiro",
   subtotal: "Subtotal",
   reserve: "Reservar",
+  tour: "Passeio",
+  reference_id: "ID de referência",
+  payment_id: "ID de pagamento",
+  agency: "Agência",
+  voucher: "Voucher",
+  reference: "Identificador de referência",
+  logs: "Logs",
+  statics: "Estatísticas",
+  entries: "Entradas",
+  filter: "Filtrar"
 };

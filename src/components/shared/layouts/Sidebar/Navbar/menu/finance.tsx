@@ -1,21 +1,35 @@
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { MenuShape } from "./type";
 import i18n from "@configs/i18n";
-import { Wallet } from "@assets/Icons/black/Wallet";
-import { Graphic } from "@assets/Icons/black/Graphic";
+import { SaleBI } from "@assets/Icons/black/SaleBI";
+import { TimeBI } from "@assets/Icons/black/TimeBI";
+import { WalletBI } from "@assets/Icons/black/WalletBI";
+import { BarChartLineBI } from "@assets/Icons/black/BarChartLineBI";
 
 export const FINANCE_MENU = [
   {
     title: i18n("Words.charges"),
-    Icon: Wallet,
+    Icon: WalletBI,
     link: privateRoutes.finance,
     permissions: ["charges_view"],
   },
-    {
+  {
     title: i18n("Words.sales"),
-    Icon: Graphic,
+    Icon: SaleBI,
     link: privateRoutes.sales,
-    permissions: ["charges_view"],
+    permissions: ["sales_view"],
+  },
+  {
+    title: i18n("Words.logs"),
+    Icon: TimeBI,
+    link: privateRoutes.operations,
+    permissions: ["charges_view", "sales_view"],
+  },
+  {
+    title: i18n("Words.statics"),
+    Icon: BarChartLineBI,
+    link: privateRoutes.statics,
+    permissions: ["charges_view", "sales_view"],
   },
 ] as Array<MenuShape>;
 

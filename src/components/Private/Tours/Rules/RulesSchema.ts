@@ -14,19 +14,23 @@ export const RulesSchema = z.object({
 
       amount: z.coerce.number().optional(),
 
-      action: z
-        .enum(["FREE", "PRICE", "LIMIT"], {
-          required_error: i18n("Words.action", {
-            field: i18n("Words.action"),
-            list:
-              i18n("Words.free") +
-              ", " +
-              i18n("Words.price") +
-              ", " +
-              i18n("Words.limit"),
-          }),
-        })
-        .optional(),
+      action: z.preprocess(
+        (value) => (value === "" ? null : value),
+        z
+          .enum(["FREE", "PRICE", "LIMIT"], {
+            required_error: i18n("Words.action", {
+              field: i18n("Words.action"),
+              list:
+                i18n("Words.free") +
+                ", " +
+                i18n("Words.price") +
+                ", " +
+                i18n("Words.limit"),
+            }),
+          })
+          .nullable()
+          .optional()
+      ),
       price: z.coerce
         .number({
           invalid_type_error: i18n("Validations.number"),

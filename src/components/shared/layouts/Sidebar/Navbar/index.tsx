@@ -30,7 +30,7 @@ export function Navbar({
 
     if (!foundCurrentNavbarItem && !defaultActiveItem) return;
     setIsActiveItem(foundCurrentNavbarItem?.title ?? defaultActiveItem);
-  }, []);
+  }, [pathname, menu, defaultActiveItem]);
 
   return (
     <div {...rest}>

@@ -10,6 +10,7 @@ import { BRAZILIAN_STATES } from "../../../../data/address/states";
 import { When } from "@components/utilities/When";
 import { Date } from "@components/shared/forms/Date";
 import { useRules } from "./hooks/useRules";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     tour: TourShape;
@@ -21,6 +22,7 @@ export function TourRules({ tour }: Props) {
     const { register, errors, formMethods, handleSubmit, onSubmit, isLoading } = useRules({ tour })
     const actionInYearsOld = formMethods.watch("rule.0.action");
     const actionInAddress = formMethods.watch("rule.1.action");
+    const { t } = useI18n()
 
     return (
         <FormProvider {...formMethods}>
@@ -40,14 +42,19 @@ export function TourRules({ tour }: Props) {
                             </div>
                             <div className="w-full my-2">
                                 <Select defaultValue={"FREE"} dataTestId="rule_0_action"
-                                    options={[{
-                                        text: i18n("Words.gratuity"),
-                                        value: "FREE"
-                                    }, {
-                                        text: i18n("Words.discount"),
-                                        value: "PRICE"
-                                    }]}
-                                    {...register("rule.0.action")} label={i18n("Words.action")}
+                                    options={[
+                                        {
+                                            text: t("Texts.select_option"),
+                                            value: null
+                                        },
+                                        {
+                                            text: t("Words.gratuity"),
+                                            value: "FREE"
+                                        }, {
+                                            text: t("Words.discount"),
+                                            value: "PRICE"
+                                        }]}
+                                    {...register("rule.0.action")} label={t("Words.action")}
                                     errors={errors?.rule?.[0]?.action} />
                             </div>
                             <When value={actionInYearsOld === "PRICE"}>

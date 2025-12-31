@@ -1,103 +1,89 @@
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
-  LineElement,
-  PointElement,
-  TimeScale,
+  BarElement,
+  CategoryScale,
   LinearScale,
   Tooltip,
   Legend,
   Title,
-  Filler,
 } from "chart.js";
-import "chartjs-adapter-date-fns";
-import { TimeLineChartProps } from "./type";
-import { useTimeLineChart } from "./hooks/useTimeLineChart";
 
 ChartJS.register(
-  LineElement,
-  PointElement,
-  TimeScale,
+  BarElement,
+  CategoryScale,
   LinearScale,
   Tooltip,
   Legend,
-  Title,
-  Filler
+  Title
 );
 
-export default function TimelineChart({
-  data = [],
+type BarChartProps = {
+  title: string;
+  data: {
+    label: string;
+    value: number|string;
+    color?: string;
+  }[];
+};
+
+export default function BarChart({
   title,
-}: TimeLineChartProps) {
-  const { dates, labels } = useTimeLineChart({ data });
-
-  const datasets = labels.map((label) => {
-    const values = dates.map((date) => {
-      const monthTarget = new Date(date).getMonth();
-      const item = data.find(
-        (d) => new Date(d.date).getMonth() === monthTarget && d.label === label
-      );
-      return item ? item.value : 0;
-    });
-
-    const color =
-      data.find((item) => item.label === label)?.color || "#70707084";
-
-    return {
-      label,
-      data: values,
-      fill: false,
-      backgroundColor: color,
-      tension: 0.3,
-    };
-  });
-
+  data,
+}: BarChartProps) {
   return (
-    <div className="w-full h-60">
-      <Line
+    <div className="w-full h-64">
+      <Bar
         data={{
-          labels: dates,
-          datasets,
+          labels: data.map(item => item.label),
+          datasets: [
+            {
+              label: "Total de vendas",
+              data: data.map(item => item.value),
+              backgroundColor: data.map(
+                item => item.color ?? "#16a34a"
+              ),
+              borderRadius: 8,
+              barThickness: 22,
+            },
+          ],
         }}
         options={{
           responsive: true,
           maintainAspectRatio: false,
+
+          // ⭐ AQUI ESTÁ O PULO DO GATO
+          indexAxis: "y",
+
           plugins: {
             title: {
               display: true,
               text: title.toUpperCase(),
-              font: {
-                weight: 800,
-              },
+              font: { weight: "bold" },
+            },
+            legend: {
+              display: false,
             },
             tooltip: {
-              mode: "index",
-              intersect: false,
+              callbacks: {
+                label: ctx => ` ${ctx.raw} vendas`,
+              },
             },
           },
           scales: {
             x: {
-              type: "time",
-              time: {
-                unit: "month",
-                displayFormats: {
-                  month: "MM",
-                },
-              },
+              beginAtZero: true,
               ticks: {
-                callback: function (value) {
-                  return new Date(value as string).getMonth() + 1;
-                },
+                precision: 0,
               },
               title: {
                 display: true,
-                text: "(Operações p/ Meses)",
+                text: "Quantidade de vendas",
               },
             },
             y: {
-              title: {
-                display: true,
-                text: "Valor",
+              grid: {
+                display: false,
               },
             },
           },

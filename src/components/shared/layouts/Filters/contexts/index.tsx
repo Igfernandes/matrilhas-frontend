@@ -15,9 +15,10 @@ const FiltersContext = createContext<FiltersContextData>(
 
 function FiltersProvider({ children, id }: FiltersContextProps) {
   const methods = useForm();
-  const { handleSubmit, register } = methods
+  const { handleSubmit, register, reset } = methods
   const { handleToggleModal } = useModalContext()
   const [filters, setFilters] = useState<Record<string, Record<string, unknown>>>({})
+  const [references, setReferences] = useState<Record<string, (value: unknown) => unknown>>({})
 
   const handleAlterFilters = useCallback((newFilters: Record<string, Record<string, unknown>>) => {
     setFilters((prev) => {
@@ -25,12 +26,28 @@ function FiltersProvider({ children, id }: FiltersContextProps) {
       filters[id] = newFilters
       return filters;
     });
-    methods.reset(newFilters);
+    reset(newFilters);
     handleToggleModal("");
-  }, [handleToggleModal, methods, id]);
+  }, [handleToggleModal, reset, id]);
+
+  const updateReferences = useCallback((key: string, callback: (value: unknown) => unknown) => {
+    setReferences((prev) => {
+      prev[key] = callback;
+      return prev;
+    })
+  }, [])
 
 
-  const data = useMemo(() => ({ filters, handleAlterFilters, handleSubmit, register, methods }), [filters, handleAlterFilters, handleSubmit, register, methods]);
+  const data = useMemo(() => ({
+    filters,
+    updateReferences,
+    handleAlterFilters,
+    handleSubmit,
+    register,
+    methods,
+    references
+  }),
+    [filters, handleAlterFilters, handleSubmit, register, updateReferences, methods, references]);
 
   return (
     <FiltersContext.Provider value={data}>

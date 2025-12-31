@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<PaymentPageProps> = async ({
   const { id, paymentId } = params as { id: string; paymentId: string };
   const extract = await getExtract(tokenNavigation, {
     id: parseInt(id),
-    paymentId: parseInt(paymentId),
+    payment_id: paymentId,
   });
   
   if (!extract || Object.hasOwn(extract, "errors")) {

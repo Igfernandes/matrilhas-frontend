@@ -1,48 +1,24 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
-import { AgencyProfilePayload, AgencyProfileSchema } from "../profileSchemas"
 import { useCallback } from "react"
-import usePutAgency from "@services/Agencies/Put/usePut"
-import usePostAgency from "@services/Agencies/Post/usePost"
-import { AgencyShape } from "@type/Agencies"
-import { getCNPJFormatted, getNumberFormatted } from "@helpers/string"
+import { SaleProfilePayload, SaleProfileSchema } from "../profileSchemas"
+import usePostSale from "@services/Sales/Post/usePost"
 
-type Props = {
-    agency?: AgencyShape
-}
-
-export function useProfile({ agency = {} as AgencyShape }: Props = {} as Props) {
-    const { formMethods, handleSubmit, register, errors } = useFormRules<AgencyProfilePayload>({
-        schema: AgencyProfileSchema,
-        defaultValues: {
-            ...agency,
-            phone: getNumberFormatted(agency.phone),
-            cnpj: getCNPJFormatted(agency.cnpj),
-            logotype: "",
-        }
+export function useProfile() {
+    const { formMethods, handleSubmit, register, errors } = useFormRules<SaleProfilePayload>({
+        schema: SaleProfileSchema,
     })
-    const { mutateAsync: putAgency, isPending: isLoadingPut } = usePutAgency()
-    const { mutateAsync: postAgency, isPending: isLoadingPost } = usePostAgency();
+    const { mutateAsync: postSale, isPending: isLoadingPost } = usePostSale();
 
-    const onSubmit = useCallback(async (payload: AgencyProfilePayload) => {
-        console.log("Submitting profile with payload:", payload);
-        if (payload.id) {
-            await putAgency({
-                ...payload,
-                id: agency.id ?? 0,
-                logotype: payload.logotype === "" ? agency?.logotype : payload.logotype
-            })
-        } else {
-            await postAgency(payload)
-        }
-
-    }, [putAgency, postAgency, agency])
-
+    const onSubmit = useCallback(async (payload: SaleProfilePayload) => {
+        postSale(payload)
+    }, [postSale])
+    
     return {
         formMethods,
         handleSubmit,
         register,
         errors,
         onSubmit,
-        isLoading: isLoadingPut ?? isLoadingPost
+        isLoading: isLoadingPost
     }
 }

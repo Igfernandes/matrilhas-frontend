@@ -1,7 +1,12 @@
 import { When } from "@components/utilities/When";
 import { InputProps } from "./type";
-import React from "react";
+import React, { useEffect } from "react";
 import ErrorMessage from "@components/shared/others/ErrorMessage";
+import { useFormContext } from "react-hook-form";
+import dayjs from "dayjs";
+import { Calendar } from "@assets/Icons/black/Calendar";
+import { handleMaskDate } from "@helpers/date";
+import { useDate } from "./hooks/useDate";
 
 export const Date = React.forwardRef<HTMLInputElement, InputProps>(
   function Date(
@@ -12,7 +17,6 @@ export const Date = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       errors,
       name,
-      placeholder,
       required,
       handledChange,
       ...rest
@@ -20,6 +24,13 @@ export const Date = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) {
     const IdCurrent = id ?? dataTestId;
+    const { setValue, watch } = useFormContext();
+    const { setDate, date } = useDate()
+    const currentDateValue = watch(name)
+
+    useEffect(() => {
+      setDate(currentDateValue ? dayjs(currentDateValue).format("DD/MM/YYYY") : "");
+    }, [currentDateValue, setDate]);
 
     return (
       <>
@@ -33,22 +44,38 @@ export const Date = React.forwardRef<HTMLInputElement, InputProps>(
               <span className="text-red">*</span>
             </When>
           </label>
-          <input
-            {...rest}
-            ref={ref}
-            type={"date"}
-            name={name}
+          <input placeholder={"DD/MM/AAAA"}
+            className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
+              } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
+
+            id={IdCurrent} type="text"
+            value={date}
             onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-              if (rest.onChange) rest.onChange(ev);
+              const value = ev.currentTarget.value
+              const currentValue = dayjs(value, "DD/MM/YYYY");
               if (handledChange) handledChange(ev);
-            }}
-            placeholder={rest.type == "date" ? " " : placeholder}
-            className={`${className} ${
-              !!errors ? "border-amber-500 outline-amber-500" : ""
-            } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
-            data-testid={dataTestId}
-            id={IdCurrent}
-          />
+
+              if (currentValue.isValid()) {
+                setValue(name, currentValue.format("YYYY-MM-DD"))
+              }
+
+              setDate(handleMaskDate(ev))
+            }} />
+          <div className="absolute right-3 top-5">
+            <Calendar />
+            <input
+              {...rest}
+              ref={ref} data-testid={dataTestId}
+              type={"date"}
+              name={name}
+              onChange={(ev) => {
+                const value = ev.currentTarget.value;
+                setValue(name, value)
+                setDate(dayjs(value).format("DD/MM/YYYY"))
+              }}
+              className="opacity-0 absolute top-0 left-0 w-full h-full"
+            />
+          </div>
         </div>
         <ErrorMessage errors={errors?.message} />
       </>

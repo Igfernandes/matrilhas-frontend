@@ -45,6 +45,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
     excludes,
     ajax,
     filters: options.filters ? options.filters : {},
+    pagination: options.pagination,
     tHeads: currentTHeads as THeadRequiredProps,
   });
 
@@ -65,7 +66,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
         data={tRows}
         setOffset={setOffset}
         tHeads={currentTHeads}
-        offset={offset}
+        offset={(offset === 0 ? 1 : offset) * (options.pagination?.max ?? 3)}
         amountHiddenCols={amountHiddenCols}
         table={ref}
         {...options}
