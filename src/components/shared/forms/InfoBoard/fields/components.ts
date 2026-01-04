@@ -9,10 +9,12 @@ import { TGallery } from "./Gallery";
 import { TFile } from "./File";
 import { TFields } from "../type";
 import { TReference } from "./Reference";
+import { TNumber } from "./Number";
 
 export const components = {
   text: TInput,
   email: TEmail,
+  number: TNumber,
   password: TInput,
   phone: TPhone,
   name: TInput,

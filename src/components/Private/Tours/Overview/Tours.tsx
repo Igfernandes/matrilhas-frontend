@@ -71,7 +71,7 @@ export function ToursTable() {
           title={i18n("Words.tours")}
           tHeads={{
             data: tHeads.current,
-            widths: [60, 250, 70, 150, 150, 48],
+            widths: [60, 250, 90, 150, 150, 48],
           }}
         />
       </div>

@@ -34,7 +34,7 @@ export function useTours() {
   /** 🔥 useCallback para estável */
   const updateForTable = useCallback(
     (data: unknown) => {
-      const { id, title, status,  available_at, created_at } = data as TourShape;
+      const { id, title, status,  available_at, slug, created_at } = data as TourShape;
       const clientId = String(id);
 
       return {
@@ -43,7 +43,7 @@ export function useTours() {
         status: <Status is={status} />,
         available_at: dayjs(available_at).format("DD/MM/YYYY HH:mm"),
         created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm"),
-        actions: <TourActions handleToggleModal={handleToggleModal} id={id} />,
+        actions: <TourActions handleToggleModal={handleToggleModal} id={id} slug={slug} />,
       };
     },
     [handleToggleModal]

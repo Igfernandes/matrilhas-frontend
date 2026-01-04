@@ -1,8 +1,7 @@
 import { When } from "@components/utilities/When"
 import { useManager } from "../hooks/useManager"
 import dayjs from "dayjs"
-import { StatusText } from "@components/shared/others/StatusText";
-import { Status } from "@type/status";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     value: string;
@@ -10,18 +9,19 @@ type Props = {
 }
 
 export function Manager({ value, index }: Props) {
-    const { isDate, isOnlyString, builderText } = useManager()
+    const { t } = useI18n()
+    const { isDate, isOnlyString, builderText, isTranslateText } = useManager()
 
     return (
         <>
             <When value={isDate(value)}>
                 <span>{dayjs(value).format("DD/MM/YYYY")}</span>
             </When>
-            <When value={isOnlyString(value) && index !== "status"}>
+            <When value={isOnlyString(value) && !isTranslateText(index)}>
                 <span>{builderText(index, value)}</span>
             </When>
-            <When value={index === "status"}>
-                <StatusText status={value as Status} />
+            <When value={isTranslateText(index)}>
+                {t(`Words.${value.toLowerCase()}`)}
             </When>
         </>
     )

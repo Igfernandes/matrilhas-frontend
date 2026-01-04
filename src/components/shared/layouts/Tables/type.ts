@@ -2,7 +2,7 @@ import { TableActions } from "./utilities/Options/type";
 import { PaginationOptionShape } from "./utilities/Pagination/type";
 import { SortShape } from "./utilities/Sort/type";
 import { SelectorShape } from "../Selector/type";
-import { RefObject } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 export type TableProps<TableData> = {
   title: string;
@@ -24,7 +24,7 @@ export type TableProps<TableData> = {
 };
 
 export type TableSelectorProps = {
-  selectorRef: RefObject<SelectorShape[]>;
+  setSelectorRef: Dispatch<SetStateAction<SelectorShape[]>>;
 };
 
 export type HookTableDataProps<TableData> = {

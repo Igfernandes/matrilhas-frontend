@@ -29,11 +29,13 @@ export function usePaginationRules({
 
   const handleChangePagination = useCallback(
     (pageNumber: number) => {
-      const pageAmountRef = pageAmount - 30;
+      const pageAmountRef = pageAmount - 5;
+
+      if (pageAmountRef < 0) return;
 
       if (pageNumber >= pageAmountRef && setOffset) {
         const offsetNew = (pageNumber - 1) * MAX_PAGINATION.current;
-        setOffset(offsetNew > 0 ? offsetNew : paginationInstance?.max  ?? 3);
+        setOffset(offsetNew > 0 ? offsetNew : paginationInstance?.max ?? 3);
       }
 
       setPagination((prev) => ({
@@ -42,7 +44,7 @@ export function usePaginationRules({
           offset === 0 ? 1 : getOnlyNumberRange(pageNumber, 1, pageAmount),
       }));
     },
-    [pageAmount, setOffset, offset]
+    [pageAmount, setOffset, offset, paginationInstance]
   );
 
   return {

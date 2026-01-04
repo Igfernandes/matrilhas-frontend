@@ -5,8 +5,7 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import { z } from "zod";
 import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
 import useGetCategories from "@services/Clients/Categories/Get/useGetCategories";
-import { useEffect, useState } from "react";
-import { ClientCategoriesShape } from "@type/Clients/ClientCategories";
+import { useCallback, useMemo } from "react";
 
 type Props = {
   clients: ClientShape[];
@@ -20,42 +19,40 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
         clients: z.array(z.string().or(z.boolean())).optional(),
       }),
     });
+  const { setValue, getValues, watch, reset } = formMethods;
   const { handleSearch } = useSearch();
   const { handleToggleModal } = useModalContext();
   const { data: categoriesData } = useGetCategories();
-  const [categories, setCategories] = useState<Array<ClientCategoriesShape>>(
-    []
-  );
+  const categories = useMemo(() => categoriesData ?? [], [categoriesData]);
+  const targetCategory = watch("category");
+  const filteredClients = useMemo(() => {
+    const clientsFiltered = clients.filter((client) => {
+      if (!targetCategory) return true;
 
-  const submit = async (payload: ClientsPayedPayload) => {
-    const clientsId = payload.clients;
-
-    formMethods.reset();
-    await handleAddClients(
-      clients.filter((client) => clientsId.includes(String(client.id)))
-    );
-    handleToggleModal(formMethods.getValues());
-  };
-
-  const getClientsFiltered = (clients: Array<ClientShape>) => {
-    return clients.filter((client) => {
-      const category = formMethods.watch("category");
-
-      if (!category) return client;
-
-      formMethods.setValue("clients", []);
-      return (
-        client &&
-        client.categories.find(
-          (clientCategory) => clientCategory.id === +category
-        )
+      return client?.categories?.find(
+        (clientCategory) => clientCategory.id === +targetCategory
       );
     });
-  };
 
-  useEffect(() => {
-    setCategories(categoriesData ?? []);
-  }, [categoriesData]);
+    setValue("clients", []);
+    return clientsFiltered.map((client) => ({
+      label: client.name,
+      value: client.id,
+    }));
+  }, [clients, setValue, targetCategory]);
+
+  const submit = useCallback(
+    async (payload: ClientsPayedPayload) => {
+      const clientsId = payload.clients;
+
+      reset();
+      await handleAddClients(
+        clients.filter((client) => clientsId.includes(String(client.id)))
+      );
+      handleToggleModal(getValues());
+    },
+    [clients, handleAddClients, handleToggleModal, reset, getValues]
+  );
 
   return {
     formMethods,
@@ -63,7 +60,7 @@ export function useClientsPayed({ handleAddClients, clients }: Props) {
     handleSubmit,
     register,
     handleSearch,
-    getClientsFiltered,
+    filteredClients,
     categories,
   };
 }

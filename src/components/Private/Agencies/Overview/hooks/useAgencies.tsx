@@ -35,7 +35,7 @@ export function useAgencies() {
   /** 🔥 useCallback para estável */
   const updateForTable = useCallback(
     (data: unknown) => {
-      const { id, name, status, phone, created_at } = data as AgencyShape;
+      const { id, name, status, phone, created_at, cnpj } = data as AgencyShape;
       const clientId = String(id);
 
       return {
@@ -44,7 +44,7 @@ export function useAgencies() {
         status: <Status is={status} />,
         phone: getNumberFormatted(phone),
         created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm"),
-        actions: <AgencyActions handleToggleModal={handleToggleModal} id={id} />,
+        actions: <AgencyActions cnpj={cnpj} handleToggleModal={handleToggleModal} id={id} />,
       };
     },
     [handleToggleModal]

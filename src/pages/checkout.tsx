@@ -31,13 +31,11 @@ export default function Checkout({ charge }: PaymentPageProps) {
 // Tipagem para getServerSideProps
 export const getServerSideProps: GetServerSideProps<PaymentPageProps> = async ({
   query,
-  req,
 }) => {
-  const tokenNavigation = req.cookies["token_navigation"] ?? "";
   const { charge: reference } = query as { charge: string }; // Tipando o params
-  const charge = await getCharge(tokenNavigation, { reference: reference });
+  const { rows: charge } = await getCharge({ reference: reference });
 
-  if (!charge || Object.hasOwn(charge, "errors")) {
+  if (!Array.isArray(charge) || charge.length === 0) {
     return {
       redirect: {
         destination: `/404`, // Redireciona para a página principal
@@ -48,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<PaymentPageProps> = async ({
 
   return {
     props: {
-      charge, // Passa o ID para o componente
+      charge: charge[0], // Passa o ID para o componente
     },
   };
 };

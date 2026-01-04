@@ -16,6 +16,7 @@ import { MobileView } from "./MobileView";
 import { Skeleton } from "@components/utilities/Skeleton";
 import SelectorProvider from "../../contexts/selectors";
 import { ActionsBar } from "@components/shared/others/ActionsBar";
+import { isEquals } from "@helpers/json";
 
 export function SmartTable<TableData extends Array<Record<string, unknown>>>({
   title,
@@ -24,28 +25,21 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
   tHeads: currentTHeads,
   hasTFoot,
   ajax,
-  options = {
-    pagination: {
-      max: 3,
-    },
-    sort: {
-      type: "ASC",
-      reference: "name",
-    },
-  },
+  options,
 }: TableProps<TableData>) {
   const { ref, width } = useResizeObserver();
   const { windowSize } = useWindow();
+  const { pagination = { max: 3 }, sort , filters = {} } = options
 
   const { handleTruncateColumn, amountHiddenCols } = useColumnRules({
     tHeadsWidth: currentTHeads?.widths ?? [],
   });
-  const { tHeads, setOffset, tRows, count, isLoading, offset } = useTableData({
+  const { tHeads, setOffset, tRows, count, offset, filtersRef } = useTableData({
     data,
     excludes,
     ajax,
-    filters: options.filters ? options.filters : {},
-    pagination: options.pagination,
+    filters,
+    pagination,
     tHeads: currentTHeads as THeadRequiredProps,
   });
 
@@ -59,7 +53,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
         type: "table",
         amount: 1,
       }}
-      isLoading={!tRows || isLoading}
+      isLoading={!tRows || !isEquals(filters, filtersRef.current)}
     >
       <TableProvider
         excludes={excludes}
@@ -84,7 +78,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
                 </div>
                 <div className="flex lg:w-[30%] justify-end">
                   {options.buttons}
-                  <When value={!!options.sort}>
+                  <When value={!!sort}>
                     <Sort />
                   </When>
                   <When value={!!options.actions}>
@@ -96,7 +90,7 @@ export function SmartTable<TableData extends Array<Record<string, unknown>>>({
 
             <div className="min-w-[30vw] ">
               <When value={windowSize.width > 650}>
-                <table className="sm:table w-full border-collapse" ref={ref}>
+                <table className="sm:table w-full border-collapse table-fixed w-full" ref={ref}>
                   <THead tHeads={tHeads} widths={currentTHeads?.widths} />
                   <TBody tHeads={tHeads} />
                   <TFoot

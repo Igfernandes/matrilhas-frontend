@@ -64,7 +64,6 @@ export const Datetime = React.forwardRef<HTMLInputElement, InputProps>(
             placeholder={"DD/MM/YYYY HH:mm"}
             className={`${className} ${!!errors ? "border-amber-500 outline-amber-500" : ""
               } w-full px-3 pt-6 pb-2 bg-white border-secondary border-2 rounded-lg text-primary text-sm disabled:bg-disable`}
-            data-testid={dataTestId}
             id={IdCurrent}
           />
           <input {...rest} ref={ref} type="hidden" name={name} />

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import {
   ModalClientsOperationType,
@@ -18,7 +18,7 @@ export function useClients() {
   const { handleToggleModal, modal } =
     useModalContext<ModalClientsOperationType>();
   /** Esse sim precisa ser state */
-  const selectors = useRef<SelectorShape[]>([]);
+  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
 
   const { mutateAsync: deleteClient, isPending: isLoadingClientDelete } =
     useDeleteClient();
@@ -78,6 +78,7 @@ export function useClients() {
   return {
     tHeadsClient,
     selectors,
+    setSelectors,
     categories,
     getSelectedClients,
     handleDeleteClient,

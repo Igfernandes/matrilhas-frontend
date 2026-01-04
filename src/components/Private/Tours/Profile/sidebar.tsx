@@ -8,6 +8,10 @@ import dayjs from "dayjs";
 import { When } from "@components/utilities/When";
 import { useMemo } from "react";
 import { Select } from "@components/shared/forms/Select";
+import { useNavigator } from "@hooks/useNavigator";
+import useWindow from "@hooks/useWindow";
+import { Link } from "@assets/Icons/black/Link";
+import { publicRoutes } from "@configs/routes/Web/navigation";
 
 type Props = ProfileFormProps & {
     isLoading: boolean;
@@ -21,29 +25,35 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
 
         return tour?.banner ?? "/imgs/previews/preview-300x300.png"
     }, [bannerWatch, tour]);
+    const { handleCopy } = useNavigator();
+    const { baseUrl } = useWindow();
 
     return (
         <div className="flex flex-wrap justify-between h-full">
             <div className="w-full">
-                <div className="flex flex-wrap w-full mb-4">
-                    <div className="w-full">
-                        <ToggleSwitch
-                            setValue={setValue}
-                            label={i18n("Words.status")}
-                            dataTestId="status"
-                            name="status"
-                            defaultValue={watch("status")}
-                            options={{
-                                left: {
-                                    text: i18n("Words.active"),
-                                    value: "PUBLISHED",
-                                },
-                                right: {
-                                    text: i18n("Words.inactive"),
-                                    value: "DRAFT",
-                                },
-                            }}
-                        />
+                <div className="flex flex-wrap justify-between items-center w-full mb-4">
+                    <ToggleSwitch
+                        setValue={setValue}
+                        label={i18n("Words.status")}
+                        dataTestId="status"
+                        name="status"
+                        defaultValue={watch("status")}
+                        options={{
+                            left: {
+                                text: i18n("Words.active"),
+                                value: "PUBLISHED",
+                            },
+                            right: {
+                                text: i18n("Words.inactive"),
+                                value: "DRAFT",
+                            },
+                        }}
+                    />
+                    <div
+                        className="px-3 py-2 shadow-md hover:bg-primary rounded-md cursor-pointer ml-2"
+                        onClick={() => handleCopy(`${baseUrl + publicRoutes.tours}/${tour?.slug}`)}
+                    >
+                        <Link />
                     </div>
                 </div>
                 <div className="w-full mt-2">

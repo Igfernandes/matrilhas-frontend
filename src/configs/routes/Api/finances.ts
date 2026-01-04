@@ -2,9 +2,9 @@ export const financesRoutes = {
   charges: "charges",
   chargesId: "/charges/{id}",
   chargesPreview: "charges/preview",
-  chargesClients: "charges/clients",
+  chargesRelations: "charges/{id}/relations",
   checkout: "/checkout",
-  payments: "payments",
+  chargesPayments: "/charges/{id}/payments",
   operationsFailures: "/operations-failures/{id}",
   extract: "/charges/{id}/extracts/{paymentId}",
 };

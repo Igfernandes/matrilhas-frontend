@@ -5,6 +5,7 @@ import { useColumnMetrics } from "./useColumnMetrics";
 import { useTableMetrics } from "./useTableMetrics";
 import useGetTable from "./useGet";
 import { PaginationOptionShape } from "../utilities/Pagination/type";
+import { isEquals } from "@helpers/json";
 
 type Props<TableData> = HookTableDataProps<TableData> & {
   pagination: PaginationOptionShape | undefined;
@@ -23,10 +24,10 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
     return Array.from(map.values()) as TableData;
   }, []);
   const refRows = useRef<TableData>(resetDataRef);
-  const filtersRef = useRef<Record<string, unknown>>(null);
   const paginationMax = useMemo(() => pagination?.max ?? 3, [pagination]);
+  const filtersRef = useRef<Record<string, unknown>>(null);
   const [offset, setOffset] = useState<number>(0);
-  const { rows, count, isPending, refetch } = useGetTable(
+  const { rows, count, isPending } = useGetTable(
     {
       ...filters,
       limit: 100,
@@ -35,26 +36,31 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
     ajax?.url,
     ajax?.key
   );
-  const updateOffset = (newOffset: number) => {
-    setOffset(newOffset);
-    const offsetMin = 100 / paginationMax;
-    const offsetTotal = rows.length / paginationMax;
+  const updateOffset = useCallback(
+    (rowsReads: number) => {
+      const newOffset = rowsReads / paginationMax;
+      const offsetTotal = refRows.current.length / paginationMax;
 
-    if (offsetTotal > offsetMin && newOffset !== offset) {
-      refetch();
-    }
-  };
+      if (newOffset >= offsetTotal - 2 && newOffset !== offset) {
+        setOffset(rowsReads);
+      }
+    },
+    [offset, paginationMax]
+  );
 
-  const appendRows = useCallback((prev: TableData, newRows: TableData) => {
-    const map = new Map<unknown, unknown>();
+  const appendRows = useCallback(
+    (prev: TableData, newRows: TableData) => {
+      const map = new Map<unknown, unknown>();
 
-    prev.forEach((item, key) => map.set(item?.id ?? rows[key]?.id, item));
-    newRows.forEach((item: TableData[number], key) =>
-      map.set(item?.id ?? rows[key]?.id, item)
-    ); // sobrescreve
+      prev.forEach((item, key) => map.set(item?.id ?? rows[key]?.id, item));
+      newRows.forEach((item: TableData[number], key) =>
+        map.set(item?.id ?? rows[key]?.id, item)
+      ); // sobrescreve
 
-    return Array.from(map.values()) as TableData;
-  }, [rows]);
+      return Array.from(map.values()) as TableData;
+    },
+    [rows]
+  );
 
   const tRows = useMemo(() => {
     let rowData = data as TableData;
@@ -62,10 +68,14 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
       rowData = rows.map((row) => ajax.builder(row)) as TableData;
     }
 
-    const rowNew = appendRows(refRows.current, rowData) as TableData;
+    const refRowsCurrent = isEquals(filtersRef.current, filters)
+      ? refRows.current
+      : resetDataRef;
+    const rowNew = appendRows(refRowsCurrent, rowData) as TableData;
     refRows.current = rowNew;
     return rowNew;
-  }, [ajax, data, rows, appendRows]);
+  }, [ajax, data, rows, appendRows, filters, resetDataRef]);
+  
   const { data: tHeadsData = [], widths = [] } = tHeadProps ?? {};
 
   const { getCurrentWidthColumn, adjustCellContent } = useColumnMetrics({
@@ -116,13 +126,13 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
   );
 
   useEffect(() => {
-    if (filtersRef.current === filters || !filters) return;
+    if (!filters) return;
+    if (filtersRef.current === filters) return;
 
-    refRows.current = resetDataRef;
     filtersRef.current = filters;
+    refRows.current = resetDataRef;
     setOffset(0);
-    refetch();
-  }, [filters, resetDataRef, paginationMax, refetch]);
+  }, [filters, resetDataRef]);
 
   return {
     tHeads,
@@ -132,5 +142,6 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
     offset,
     isLoading: isPending,
     handleManagerColumn,
+    filtersRef,
   };
 }

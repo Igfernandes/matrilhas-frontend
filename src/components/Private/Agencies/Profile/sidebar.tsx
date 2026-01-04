@@ -6,6 +6,10 @@ import { ProfileFormProps } from "./type";
 import { Button } from "@components/shared/forms/Button";
 import dayjs from "dayjs";
 import { When } from "@components/utilities/When";
+import { useNavigator } from "@hooks/useNavigator";
+import useWindow from "@hooks/useWindow";
+import { Link } from "@assets/Icons/black/Link";
+import { publicRoutes } from "@configs/routes/Web/navigation";
 
 type Props = ProfileFormProps & {
     isLoading: boolean;
@@ -13,11 +17,14 @@ type Props = ProfileFormProps & {
 
 export function Sidebar({ setValue, watch, register, agency, isLoading }: Props) {
     const logotype = watch("logotype")
+    const { handleCopy } = useNavigator();
+    const { baseUrl } = useWindow();
+
     return (
         <div className="flex flex-wrap justify-between h-full">
             <div className="w-full">
-                <div className="flex flex-wrap w-full mb-4">
-                    <div className="w-full">
+                <div className="flex flex-wrap justify-between items-center w-full mb-4">
+                    <div>
                         <ToggleSwitch
                             setValue={setValue}
                             label={i18n("Words.status")}
@@ -35,6 +42,12 @@ export function Sidebar({ setValue, watch, register, agency, isLoading }: Props)
                                 },
                             }}
                         />
+                    </div>
+                    <div
+                        className="px-3 py-2 shadow-md hover:bg-primary rounded-md cursor-pointer ml-2"
+                        onClick={() => handleCopy(`${baseUrl + publicRoutes.agencies}/${agency?.cnpj}`)}
+                    >
+                        <Link />
                     </div>
                 </div>
                 <div className="w-full mt-8">

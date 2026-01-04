@@ -10,6 +10,7 @@ export type TFields = {
   value?: string | number;
   type?: string;
   group?: string;
+  prefix?: string;
   style?: CSSProperties;
   dataTestId?: string;
   placeholder?: string;
@@ -22,6 +23,7 @@ export type TFields = {
   labelColor?: string;
   labelWeight?: string;
   required?: string;
+  step?: string;
   name: string;
   errors?: string;
   defaultValue?: string;

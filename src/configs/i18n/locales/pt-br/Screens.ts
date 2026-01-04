@@ -1,4 +1,5 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
+import { ChargesDashboardTranslations } from "./screens/dashboard/charges";
 import { clientsTranslations } from "./screens/dashboard/clients";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
@@ -58,6 +59,7 @@ export const Screens = {
     tours: ToursTranslations,
     sales: salesTranslations,
     statics: staticsTranslations,
+    charges: ChargesDashboardTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",

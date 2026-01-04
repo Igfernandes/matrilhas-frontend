@@ -9,13 +9,14 @@ export function TData<TableData>({ data, keyRow }: TDataProps<TableData>) {
   const { amountHiddenCols } = useTableContext();
   const { selectors } = useSelectorContext();
 
+  console.log(selectors)
   return data.map((value, index) => {
     const isVisible =
       index === 0 || index === data.length - 1 || !amountHiddenCols[index];
 
     return (
       <When key={`when_${keyRow}_${index}`} value={isVisible}>
-        <td key={`data_${keyRow}_${index}`} className="px-1">
+        <td key={`data_${keyRow}_${index}`} className="break-words px-1">
           <span
             className={`${!["function", "object"].includes(typeof value)
               ? "line-clamp-1"

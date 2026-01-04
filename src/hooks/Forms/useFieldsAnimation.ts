@@ -1,3 +1,4 @@
+import { isEquals } from "@helpers/json";
 import { CSSProperties, FormEvent, useCallback, useRef, useState } from "react";
 
 type StatusLabelStyled = "UP" | "DOWN";
@@ -12,11 +13,13 @@ export function useFieldsAnimation() {
     DOWN: {
       left: ".75rem",
       top: ".95rem",
+      fontSize: "1rem",
     },
   });
   const [labelStyledState, setLabelStateClass] = useState<CSSProperties>({
     left: ".75rem",
     top: ".95rem",
+    fontSize: "1rem",
   });
   const [isLabelUp, setIsLabelUp] = useState<boolean>(false);
 
@@ -26,10 +29,19 @@ export function useFieldsAnimation() {
    *
    * @param {"UP"|"DOWN"} state O estado que defini a posição do label.
    */
-  const changeLabelClass = useCallback((state: StatusLabelStyled) => {
-    setLabelStateClass(labelStyled.current[state]);
-    setIsLabelUp(state === "UP");
-  }, []);
+  const changeLabelClass = useCallback(
+    (state: StatusLabelStyled) => {
+      if (
+        labelStyled.current[state] &&
+        isEquals(labelStyledState, labelStyled.current[state])
+      )
+        return;
+
+      setLabelStateClass(labelStyled.current[state]);
+      setIsLabelUp(state === "UP");
+    },
+    [labelStyledState]
+  );
 
   /**
    * @function handleTransitionLabel
@@ -40,18 +52,18 @@ export function useFieldsAnimation() {
    *
    * @returns {void}
    */
-  const handleTransitionLabel = (
-    ev: FormEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const input = ev.currentTarget;
-    const currentValue = input.value;
+  const handleTransitionLabel = useCallback(
+    (ev: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const input = ev.currentTarget;
+      const currentValue = input.value;
 
-    if (input.placeholder) return changeLabelClass("UP");
+      if (input.placeholder || currentValue || ev.type === "focus")
+        return changeLabelClass("UP");
 
-    if (currentValue || ev.type == "focus") return changeLabelClass("UP");
-
-    changeLabelClass("DOWN");
-  };
+      changeLabelClass("DOWN");
+    },
+    [changeLabelClass]
+  );
 
   return {
     labelStyledState,

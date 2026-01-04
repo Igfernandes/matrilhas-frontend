@@ -1,6 +1,6 @@
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import i18n from "@configs/i18n";
-import { useClientsTable } from "../../../Private/Finance/Create/hooks/useClientsTable";
+import { useClientsTable } from "../../../Private/Charges/Create/hooks/useClientsTable";
 import { ClientActions } from "./ClientActions";
 import { UserPlus } from "@assets/Icons/red/UserPlus";
 import { useModalContext } from "@contexts/Modal";
@@ -26,6 +26,7 @@ export function ClientsTable({
   return (
     <div>
       <SmartTable
+        key={"CLIENTS"}
         data={clientsSelected.map((client) => ({
           ID: client.id,
           name: client.name,

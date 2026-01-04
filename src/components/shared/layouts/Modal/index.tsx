@@ -7,7 +7,7 @@ export function Modal({ children, title, isShowModal, handleModal }: ModalProps)
   return (
     <When value={isShowModal}>
       <div className="modal fixed top-0 left-0 Z-[99999] w-full px-4 md:px-0 h-full bg-[#00000059] flex justify-center items-center">
-        <div className={`bg-white sm:max-w-[60%] max-h-[98vh] overflow-x-hidden overflow-y-auto  rounded-xl`}>
+        <div className={`bg-white sm:max-w-[90%] lg:max-w-[60%] max-h-[98vh] overflow-x-hidden overflow-y-auto  rounded-xl`}>
           <div className={`bg-primary  flex items-center border-b-2 border-b-secondary p-4 `}>
             <div className="pr-4">
               <h4 className={`txt-sm md:text-xl text-white`}>
