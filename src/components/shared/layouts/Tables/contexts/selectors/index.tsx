@@ -7,7 +7,7 @@ export const SelectorContext = createContext({} as SelectorContextData);
 export default function SelectorProvider({
   children,
   data,
-  selectorRef
+  setSelectorRef
 }: SelectorProps) {
   const [selectors, setSelectors] = useState<SelectorShape[]>([]);
 
@@ -20,12 +20,13 @@ export default function SelectorProvider({
         return { ...s, isChecked: !s.isChecked };
       });
 
-      if (selectorRef)
-        selectorRef.current = updated;
+      if (setSelectorRef)
+        setSelectorRef(updated);
+
       return updated;
     });
 
-  }, []);
+  }, [setSelectorRef]);
 
   useEffect(() => {
     const selectorsWithId = data.filter((register) => !!register.id)
@@ -49,9 +50,10 @@ export default function SelectorProvider({
     () => ({
       selectors,
       handleChangeSelector,
-      setSelectors
+      setSelectors,
+      setSelectorRef
     }),
-    [selectors, handleChangeSelector, setSelectors]
+    [selectors, handleChangeSelector, setSelectors, setSelectorRef]
   );
 
   return (

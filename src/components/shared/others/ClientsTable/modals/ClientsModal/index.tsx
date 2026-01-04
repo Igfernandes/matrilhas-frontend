@@ -30,12 +30,13 @@ export function ClientsModal({
     register,
     submit,
     handleSearch,
-    getClientsFiltered,
+    filteredClients,
     categories,
   } = useClientsPayed({
     handleAddClients,
     clients,
   });
+  const { setValue } = formMethods
   const { modal, handleToggleModal } = useModalContext();
 
   useEffect(() => {
@@ -44,13 +45,13 @@ export function ClientsModal({
     const clientsSelectedId = clientsSelected.map(
       (clientSelect) => clientSelect.id
     );
-    formMethods.setValue(
+    setValue(
       "clients",
       clients.map((client) =>
         clientsSelectedId.includes(client.id) ? String(client.id) : ""
       )
     );
-  }, [clientsSelected, clients]);
+  }, [clientsSelected, clients, setValue]);
 
   return (
     <Modal
@@ -63,7 +64,7 @@ export function ClientsModal({
           <div className="w-full">
             <Search
               label={i18n("Words.research")}
-              dataTestId="users"
+              dataTestId="clients"
               handleSearch={handleSearch}
               className="w-full"
             />
@@ -86,8 +87,8 @@ export function ClientsModal({
             />
           </div>
           <div>
-            <div className="form-title mt-6 mb-4">
-              <h4 className="text-sm md:text-lg md:w-[400px]">
+            <div className="form-title mt-4 mb-2">
+              <h4 className="text-sm md:text-md md:w-[400px]">
                 <strong className="mr-2">
                   {i18n("Components.clients_table.add_clients_text")}:
                 </strong>
@@ -95,18 +96,15 @@ export function ClientsModal({
             </div>
             <GroupChecks<ClientsPayedPayload>
               name={"clients"}
-              items={getClientsFiltered(clients).map((client) => ({
-                label: client.name,
-                value: client.id,
-              }))}
+              items={filteredClients}
             />
           </div>
-          <div>
+          <div className="mt-4">
             <Button
               type="submit"
               isLoading={isLoading}
               text={i18n("Words.save")}
-              className="bg-red text-white"
+              className="bg-primary font-semibold text-white"
             />
           </div>
         </form>

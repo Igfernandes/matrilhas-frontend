@@ -7,30 +7,31 @@ import { UserCancel } from "@assets/Icons/black/UserCancel";
 
 export const financeCardsBoard = [
   {
-    key: "monthly_income",
+    key: "clients_total",
     icon: <ChartPie />,
-    prefix: "R$ ",
-    title: i18n("Words.monthly_income"),
+    title: i18n("Texts.clients_total"),
   },
   {
-    key: "annual_revenue",
+    key: "agencies_total",
     icon: <ChartPie />,
-    prefix: "R$ ",
-    title: i18n("Words.annual_revenue"),
+    title: i18n("Texts.agencies_total"),
   },
   {
-    key: "linked_customers",
+    key: "payments_opened",
     icon: <UserCode />,
-    title: i18n("Words.linked_customers"),
+    prefix: "R$: ",
+    title: i18n("Words.pendent"),
   },
   {
-    key: "non_compliant",
+    key: "payments_received",
     icon: <UserDollar />,
-    title: i18n("Words.non_compliant"),
+    prefix: "R$: ",
+    title: i18n("Words.received"),
   },
   {
-    key: "defaulter",
+    key: "payments_not_received",
     icon: <UserCancel />,
-    title: i18n("Words.defaulter"),
+    prefix: "R$: ",
+    title: i18n("Words.canceled"),
   },
 ] as Array<CardItemShape>;

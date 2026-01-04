@@ -31,7 +31,6 @@ const TableProvider = ({
   // Hooks para manipulação dos dados da tabela
   const { sortTableData, getTRows, getPaginatedData } = useTableRules({ data });
   const { sort, handleChangeSort } = useSortRules({ sortInstance });
-
   const [filters, setFilters] = useState<Record<string, FilterCallback>>({});
   const amountRegisters = useMemo(() => data.length, [data]);
 

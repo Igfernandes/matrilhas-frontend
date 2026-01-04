@@ -5,6 +5,7 @@ export type PostCreateChargePayload = Omit<
   ChargeShape,
   "id" | "clients" | "status" | "reference"
 > & {
-  clients: Array<number>;
+  client_ids?: Array<number>;
+  agency_ids?: Array<number>;
   status?: Status;
 };

@@ -18,5 +18,6 @@ export const PersonalTranslations = {
   personal: "Pessoal",
   username: "Nome do usuário",
   birthdate: "Data de Nasc",
-  revenue: "Receita"
+  revenue: "Receita",
+  relations: "Relacionados"
 };

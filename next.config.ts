@@ -7,16 +7,10 @@ const nextConfig: NextConfig = {
         hostname: "localhost/**",
       },
       {
-        hostname: "192.168.1.5/**",
-      },
-      {
         hostname: "192.168.1.2/**",
       },
       {
-        hostname: "192.168.1.3/**",
-      },
-      {
-        hostname: "192.168.1.4/**",
+        hostname: "0.0.0.0/**",
       },
       {
         hostname: "api.matrilhas.com.br/**",

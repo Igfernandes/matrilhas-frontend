@@ -18,11 +18,11 @@ export function Clients() {
   const {
     tHeadsClient,
     selectors,
+    setSelectors,
     categories,
     getSelectedClients,
     handleDeleteClient,
     isLoadingClientDelete,
-
     updateClientForTable,
   } = useClients();
   const { handleToggleModal, modal } =
@@ -41,7 +41,7 @@ export function Clients() {
           }}
           options={{
             selector: {
-              selectorRef: selectors,
+              setSelectorRef: setSelectors,
             },
             pagination: {
               max: 6,
@@ -56,7 +56,7 @@ export function Clients() {
                 handle: () =>
                   handleToggleModal(
                     "DELETE",
-                    getSelectedClients(selectors.current)
+                    getSelectedClients(selectors)
                   ),
                 text: i18n("Texts.selected_delete"),
                 permissions: [PERMISSIONS.clients.delete],
@@ -82,7 +82,7 @@ export function Clients() {
             buttons: (
               <Shared
                 entity="CLIENTS"
-                in_ids={selectors.current
+                in_ids={selectors
                   .filter((selector) => !!selector.isChecked)
                   .map((selector) => +selector.value)}
               />
@@ -93,7 +93,7 @@ export function Clients() {
           excludes={["created_at", "updated_at"]}
           tHeads={{
             data: tHeadsClient.current,
-            widths: [60, 250, 70, 200, 100, 48],
+            widths: [70, 250, 70, 200, 100, 48],
           }}
         />
       </div>
@@ -118,7 +118,7 @@ export function Clients() {
           isShowModal={modal.type === "CHANGE_CATEGORY"}
           onModal={handleToggleModal}
           categories={categories}
-          selectors={selectors.current}
+          selectors={selectors}
         />
         <ClientCreateModal
           isShowModal={modal.type === "CLIENT"}

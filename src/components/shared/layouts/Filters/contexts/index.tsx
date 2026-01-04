@@ -15,7 +15,7 @@ const FiltersContext = createContext<FiltersContextData>(
 
 function FiltersProvider({ children, id }: FiltersContextProps) {
   const methods = useForm();
-  const { handleSubmit, register, reset } = methods
+  const { handleSubmit, register } = methods
   const { handleToggleModal } = useModalContext()
   const [filters, setFilters] = useState<Record<string, Record<string, unknown>>>({})
   const [references, setReferences] = useState<Record<string, (value: unknown) => unknown>>({})
@@ -23,12 +23,14 @@ function FiltersProvider({ children, id }: FiltersContextProps) {
   const handleAlterFilters = useCallback((newFilters: Record<string, Record<string, unknown>>) => {
     setFilters((prev) => {
       const filters = prev;
+      if (filters[id] === newFilters) return prev;
+
       filters[id] = newFilters
       return filters;
     });
-    reset(newFilters);
+    methods.reset();
     handleToggleModal("");
-  }, [handleToggleModal, reset, id]);
+  }, [handleToggleModal, methods, id]);
 
   const updateReferences = useCallback((key: string, callback: (value: unknown) => unknown) => {
     setReferences((prev) => {
@@ -36,7 +38,6 @@ function FiltersProvider({ children, id }: FiltersContextProps) {
       return prev;
     })
   }, [])
-
 
   const data = useMemo(() => ({
     filters,

@@ -25,9 +25,14 @@ export function useManager() {
     [references]
   );
 
+  const isTranslateText = useCallback((index: string) => {
+    return index === "status" || index === "type";
+  }, []);
+
   return {
     isDate,
     isOnlyString,
     builderText,
+    isTranslateText,
   };
 }

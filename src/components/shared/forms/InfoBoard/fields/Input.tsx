@@ -8,15 +8,16 @@ export function TInput({
   type,
   required,
   defaultValue,
+  dataTestId,
+  id,
   ...props
 }: TFields) {
   const { register } = useFormContext();
-  const currentId = `input_${name}`;
+  const currentId = id ??  dataTestId ;
   return (
     <tr
-      className={`border-t-2 border-t-zinc-200 ${
-        type == "hidden" ? "hidden" : ""
-      }`}
+      className={`border-t-2 border-t-zinc-200 ${type == "hidden" ? "hidden" : ""
+        }`}
     >
       <td className="py-2 pl-4 w-2/6">
         <strong>{label}</strong>
@@ -29,8 +30,7 @@ export function TInput({
             defaultValue={String(defaultValue)}
             required={required === "true"}
             className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
-            data-testid={currentId}
-            id={String(props.id)}
+            id={currentId ?? `input-${name}`}
             type={type}
           />
         </div>

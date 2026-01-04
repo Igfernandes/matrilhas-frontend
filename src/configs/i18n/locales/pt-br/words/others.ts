@@ -128,5 +128,6 @@ export const OthersTranslations = {
   logs: "Logs",
   statics: "Estatísticas",
   entries: "Entradas",
-  filter: "Filtrar"
+  filter: "Filtrar",
+  received: "Recebido",
 };

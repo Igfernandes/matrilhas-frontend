@@ -3,13 +3,15 @@ import { useSelectorContext } from "@components/shared/layouts/Tables/contexts/s
 import { useCallback } from "react";
 
 export function useActionsBar() {
-  const { setSelectors } = useSelectorContext();
+  const { setSelectors, setSelectorRef } = useSelectorContext();
 
   const handleUncheckAll = useCallback(() => {
-    setSelectors((selectors: SelectorShape[]) =>
-      selectors.map((s) => ({ ...s, isChecked: false }))
-    );
-  }, [setSelectors]);
+    setSelectors((selectors: SelectorShape[]) => {
+      const selectorsNew = selectors.map((s) => ({ ...s, isChecked: false }));
+      if (setSelectorRef) setSelectorRef(selectorsNew);
+      return selectorsNew;
+    });
+  }, [setSelectors, setSelectorRef]);
 
   return {
     handleUncheckAll,

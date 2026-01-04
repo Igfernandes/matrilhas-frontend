@@ -1,23 +1,25 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setQueries } from "@helpers/routes";
-import { GetChargePreviewRequest } from "./types";
-import { ChargePreviewShape } from "@components/Public/Payment/types";
+import { GetChargePreviewRequest, GetChargePreviewResponse } from "./types";
 
 export async function getCharge(
-  tokenNavigation: string,
   request?: GetChargePreviewRequest
-): Promise<ChargePreviewShape> {
+): Promise<GetChargePreviewResponse> {
   const query = request ?? {};
 
   const { chargesPreview } = API_ROUTES;
 
-  const { data } = await axios.get<ChargePreviewShape>(
+  const { data, ...rest } = await axios.get<GetChargePreviewResponse>(
     setQueries({
       url: chargesPreview,
       query,
     })
   );
 
-  return data;
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }

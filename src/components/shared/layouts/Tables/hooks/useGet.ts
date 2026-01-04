@@ -23,9 +23,9 @@ export default function useGetTable(
   }
 
   const { data, ...rest } = useQueryGuard({
-    queryKey: [key],
+    queryKey: [key, request],
     queryFn: handle,
-    
+    enabled: true,
   });
 
   return useMemo(
