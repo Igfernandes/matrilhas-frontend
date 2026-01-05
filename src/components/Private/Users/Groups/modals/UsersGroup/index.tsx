@@ -58,7 +58,7 @@ export function ModalFormUsersGroup({
           <div>
             <GroupChecks<UsersGroupPayload>
               name="permissions"
-              items={permissions.map((permission) => ({
+              data={permissions.map((permission) => ({
                 label: i18n(`Permissions.${permission.name}`) as string,
                 value: permission.id,
               }))}

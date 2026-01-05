@@ -4,11 +4,11 @@ import i18n from "@configs/i18n";
 import { getNumberFormatted } from "@helpers/string";
 import { TourAgencyShape } from "@type/Tours/Agency";
 import dayjs from "dayjs";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { AgencyActions } from "../AgencyActions";
 
 export function useTable() {
-    const selectors = useRef<SelectorShape[]>([]);
+    const [selectors, setSelectors] = useState<SelectorShape[]>([]);
     /** tHeads NÃO depende de estado → useRef é perfeito aqui */
     const tHeads = useRef<Array<string>>([
         "ID",
@@ -29,7 +29,7 @@ export function useTable() {
                 status: <Status is={status} />,
                 phone: getNumberFormatted(phone),
                 created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm"),
-                actions: <AgencyActions  id={agency_id} />,
+                actions: <AgencyActions id={agency_id} />,
             };
         },
         []
@@ -37,6 +37,6 @@ export function useTable() {
 
     return {
         tHeads,
-        updateForTable, selectors
+        updateForTable, selectors, setSelectors
     }
 }

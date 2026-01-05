@@ -12,7 +12,7 @@ import { GalleryCreateModal } from "./Modals/Store";
 
 export function GalleriesTable() {
   const {
-    handleDelete, isLoadingDelete, tHeads, selectors, updateForTable, getSelected
+    handleDelete, isLoadingDelete, tHeads, selectors, setSelectors, updateForTable, getSelected
   } = useGalleries();
   const { handleToggleModal, modal } =
     useModalContext<ModalGalleryOperationType>();
@@ -30,7 +30,7 @@ export function GalleriesTable() {
           }}
           options={{
             selector: {
-              selectorRef: selectors,
+              setSelectorRef: setSelectors,
             },
             pagination: {
               max: 6,
@@ -40,7 +40,7 @@ export function GalleriesTable() {
                 handle: () =>
                   handleToggleModal(
                     "DELETE",
-                    getSelected(selectors.current)
+                    getSelected(selectors)
                   ),
                 text: i18n("Texts.selected_delete"),
                 permissions: [PERMISSIONS.galleries.delete],

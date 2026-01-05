@@ -12,7 +12,7 @@ export function useOverviewCharge() {
   const [charges, setCharges] = useState<Array<ChargeShape>>([]);
   const [payments, setPayments] = useState<Array<PaymentShape>>([]);
   const [cardsBoard, setCardsBoard] = useState<Array<CardItemShape>>([]);
-  const { data: paymentsData } = useGetPayments();
+  const { rows: paymentsData } = useGetPayments();
 
 
   const updateLinkedCustomers = (cardBoard: CardItemShape) => {

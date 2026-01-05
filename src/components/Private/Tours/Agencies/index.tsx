@@ -14,7 +14,7 @@ type Props = {
 }
 
 export function TourAgencies({ tour }: Props) {
-    const { tHeads, updateForTable, selectors } = useTable()
+    const { tHeads, updateForTable, setSelectors} = useTable()
     const { handleDeleteAgencyRelation, isLoadingDelete } = useRules({ tour })
     const { setParams } = useRoutes()
     const { handleToggleModal, modal } = useModalContext()
@@ -45,7 +45,7 @@ export function TourAgencies({ tour }: Props) {
                     }}
                     options={{
                         selector: {
-                            selectorRef: selectors,
+                            setSelectorRef: setSelectors,
                         },
                         pagination: {
                             max: 6,

@@ -96,7 +96,7 @@ export function ClientsModal({
             </div>
             <GroupChecks<ClientsPayedPayload>
               name={"clients"}
-              items={filteredClients}
+              data={filteredClients}
             />
           </div>
           <div className="mt-4">
