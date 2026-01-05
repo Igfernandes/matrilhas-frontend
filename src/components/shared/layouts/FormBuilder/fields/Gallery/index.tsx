@@ -31,7 +31,7 @@ export function Gallery({
 
   return (
     <>
-      <div className="relative w-full  my-4 z-50" >
+      <div className="relative w-full my-4" >
         <div>
           <div>
             <p className="line-clamp-1">{label}</p>
@@ -54,13 +54,7 @@ export function Gallery({
             >
               {i18n("Words.add")}
             </button>
-            <UploadModal
-              files={filesUploaded}
-              galleryRef={galleryRef}
-              handleUpdateFilesUploaded={handleUpdateFilesUploaded}
-              isShow={isShowModal}
-              handleModal={handleModal}
-            />
+
           </div>
           <div>
             <input
@@ -78,6 +72,7 @@ export function Gallery({
             />
           </div>
         </div>
+
       </div>
       <ErrorMessage
         errors={
@@ -86,6 +81,15 @@ export function Gallery({
             : undefined
         }
       />
+      <div className="relative z-10">
+        <UploadModal
+          files={filesUploaded}
+          galleryRef={galleryRef}
+          handleUpdateFilesUploaded={handleUpdateFilesUploaded}
+          isShow={isShowModal}
+          handleModal={handleModal}
+        />
+      </div>
     </>
   );
 }

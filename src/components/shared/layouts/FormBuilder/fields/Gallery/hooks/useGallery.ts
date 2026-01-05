@@ -30,13 +30,15 @@ export function useGallery({ IdCurrent, setValue, name }: Props) {
   };
 
   const handleUpdateFilesUploaded = (files: Array<GalleryFileShape>) => {
-    setFilesUploaded(files);
+    setFilesUploaded((prev) => {
+      return [...prev, ...files];
+    });
     handleModal(false);
     if (setValue)
       setValue(name, {
         package: galleryRef.current,
-        files: files.map((file) => file.url),
-      },);
+        files: [...filesUploaded.map((file) => file.url), ...files.map((file) => file.url)],
+      });
   };
 
   return {
