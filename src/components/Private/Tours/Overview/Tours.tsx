@@ -12,7 +12,7 @@ import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 
 export function ToursTable() {
   const {
-    handleDelete, isLoadingDelete, tHeads, selectors, updateForTable, getSelected
+    handleDelete, isLoadingDelete, tHeads, selectors, setSelectors, updateForTable, getSelected
   } = useTours();
   const { handleToggleModal, modal } =
     useModalContext<ModalTourOperationType>();
@@ -30,7 +30,7 @@ export function ToursTable() {
           }}
           options={{
             selector: {
-              selectorRef: selectors,
+              setSelectorRef: setSelectors,
             },
             pagination: {
               max: 6,
@@ -40,7 +40,7 @@ export function ToursTable() {
                 handle: () =>
                   handleToggleModal(
                     "DELETE",
-                    getSelected(selectors.current)
+                    getSelected(selectors)
                   ),
                 text: i18n("Texts.selected_delete"),
                 permissions: [PERMISSIONS.tours.delete],
@@ -61,7 +61,7 @@ export function ToursTable() {
             buttons: (
               <Shared
                 entity="TOURS"
-                in_ids={selectors.current
+                in_ids={selectors
                   .filter((selector) => !!selector.isChecked)
                   .map((selector) => +selector.value)}
               />

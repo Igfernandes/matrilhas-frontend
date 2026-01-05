@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import {
   ModalSaleOperationType,
 } from "../../type";
@@ -17,7 +17,7 @@ export function useSales() {
   const { handleToggleModal, modal } =
     useModalContext<ModalSaleOperationType>();
   /** Esse sim precisa ser state */
-  const selectors = useRef<SelectorShape[]>([]);
+  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
 
   const { mutateAsync: deleteSale, isPending: isLoadingDelete } =
     useDeleteSales();
@@ -66,7 +66,7 @@ export function useSales() {
 
   return {
     tHeads,
-    selectors,
+    selectors, setSelectors,
     handleDelete,
     isLoadingDelete,
     updateForTable,

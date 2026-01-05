@@ -22,7 +22,7 @@ export function Users({ users }: Props) {
             <div className="form-group">
                 <GroupChecks
                     name="linked"
-                    items={users.map((user) => ({
+                    data={users.map((user) => ({
                         label: user.name,
                         value: String(user.id),
                     }))}
