@@ -10,12 +10,11 @@ export function TDatetime({
   name,
   className,
   type,
-  required,
   dataTestId,
   id,
   ...props
 }: TFields) {
-  const { watch, setValue } = useFormContext();
+  const { watch, setValue, register } = useFormContext();
   const currentId = id ?? dataTestId;
   const { handleUpdateDatetimePreview, datetime, setDatetime } =
     useDatetime();
@@ -24,6 +23,7 @@ export function TDatetime({
   useEffect(() => {
     setDatetime(currentDateValue ? dayjs(currentDateValue).format("DD/MM/YYYY HH:mm") : "");
   }, [currentDateValue, setDatetime]);
+
   return (
     <tr
       className={`relative border-t-2 border-t-zinc-200 ${type == "hidden" ? "hidden" : ""
@@ -35,7 +35,6 @@ export function TDatetime({
       <td className="py-2">
         <div className="flex">
           <input
-            {...props}
             onChange={(ev) => {
               const value = ev.currentTarget.value;
               const datetimeUpdated = dayjs(value, "DD/MM/YYYY HH:mm");
@@ -47,10 +46,9 @@ export function TDatetime({
               }
               handleUpdateDatetimePreview(value);
             }}
-            value={datetime ?? ""}
+            defaultValue={datetime ?? ""}
             placeholder={"DD/MM/YYYY HH:mm"}
             type={"text"}
-            required={required === "true"}
             className={`${className ?? ""
               }  w-full px-2 py-1 border-secondary bg-zinc-100  border-2 rounded-lg text-primary text-md disabled:bg-disable`}
             id={currentId ?? `datetime_${name}`}
@@ -60,6 +58,8 @@ export function TDatetime({
               <Calendar />
             </label>
             <input
+              {...props}
+              {...register(name)}
               type="datetime-local"
               onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
                 const formatted = ev.currentTarget.value.replace("T", " ");

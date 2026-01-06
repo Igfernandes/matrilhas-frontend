@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { TFields } from "../type";
 import { When } from "@components/utilities/When";
 
-export function TNumber({
+export function TColor({
   label,
   name,
   className,
@@ -31,12 +31,10 @@ export function TNumber({
           </When>
           <input
             {...props}
-            {...register(name, {
-              setValueAs: (value) => (value ? String(value) : ""),
-            })}
-            type="number"
+            {...register(name)}
+            type="color"
             defaultValue={defaultValue}
-            className={`w-full ${prefix ? "pl-9" : "pl-2"} text-md pt-2  py-1 bg-zinc-100 ${className}`}
+            className={`w-full ${prefix ? "pl-9" : "pl-2"} text-md  bg-zinc-100 ${className}`}
             id={currentId ?? `input_number_${name}`}
           />
         </div>

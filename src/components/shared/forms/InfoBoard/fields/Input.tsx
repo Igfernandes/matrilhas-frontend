@@ -6,7 +6,6 @@ export function TInput({
   name,
   className,
   type,
-  required,
   defaultValue,
   dataTestId,
   id,
@@ -28,7 +27,6 @@ export function TInput({
             {...props}
             {...register(name)}
             defaultValue={String(defaultValue)}
-            required={required === "true"}
             className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
             id={currentId ?? `input-${name}`}
             type={type}

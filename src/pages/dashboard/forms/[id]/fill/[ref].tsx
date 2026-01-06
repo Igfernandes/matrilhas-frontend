@@ -13,7 +13,7 @@ import { useFillsSubmit } from "@components/Private/Forms/Profile/Fills/hooks/us
 import { useFillFieldsForms } from "@components/Private/Forms/Profile/Fills/hooks/useFillFieldsForms";
 
 export default function FillField({ fields, form }: FieldsPageProps) {
-  const { formMethods, fieldsData} = useFillFieldsForms({ fields, form });
+  const { formMethods, fieldsData } = useFillFieldsForms({ fields, form });
   const { handleSubmit, isLoading } = useFillsSubmit({
     ref: fields[0].ref,
     formId: form.id,
@@ -27,19 +27,22 @@ export default function FillField({ fields, form }: FieldsPageProps) {
             {i18n("Words.fill_register")}
           </h1>
         </div>
-        <InfoBoard
-          submit={handleSubmit}
-          isLoading={isLoading}
-          formMethods={formMethods}
-        >
-          {fieldsData.map((props: FieldsShape, key) => (
-            <TViewer
-              key={`${props.label.replaceAll(" ", "")}_${key}`}
-              {...props}
-              id={String(props.id)}
-            />
-          ))}
-        </InfoBoard>
+        <div className="p-4">
+          <InfoBoard
+            submit={handleSubmit}
+            isLoading={isLoading}
+            formMethods={formMethods}
+          >
+            {fieldsData.map((props: FieldsShape, key) => (
+              <TViewer
+                key={`${props.label.replaceAll(" ", "")}_${key}`}
+                {...props}
+                name={`input_${props.id}`}
+                id={String(props.id)}
+              />
+            ))}
+          </InfoBoard>
+        </div>
       </div>
     </DashboardContainer>
   );

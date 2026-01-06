@@ -22,7 +22,7 @@ export type TFields = {
   isFile?: boolean;
   labelColor?: string;
   labelWeight?: string;
-  required?: string;
+  required?: boolean;
   step?: string;
   name: string;
   errors?: string;

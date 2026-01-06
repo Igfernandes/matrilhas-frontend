@@ -6,7 +6,6 @@ export function TEmail({
   name,
   className,
   type,
-  required,
   ...props
 }: TFields) {
   const { register } = useFormContext();
@@ -25,7 +24,6 @@ export function TEmail({
           <input
             {...register(name)}
             {...props}
-            required={required === "true"}
             type="email"
             className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
             data-testid={currentId}
