@@ -11,7 +11,7 @@ import { SaleHeader } from "./SaleHeader";
 
 export function SalesTable() {
   const {
-    handleDelete, isLoadingDelete, tHeads, selectors, updateForTable
+    handleDelete, setSelectors, isLoadingDelete, tHeads, selectors, updateForTable
   } = useSales();
   const { handleToggleModal, modal } =
     useModalContext<ModalSaleOperationType>();
@@ -29,7 +29,7 @@ export function SalesTable() {
           }}
           options={{
             selector: {
-              selectorRef: selectors,
+              setSelectorRef: setSelectors,
             },
             pagination: {
               max: 6,
@@ -37,7 +37,7 @@ export function SalesTable() {
             buttons: (
               <Shared
                 entity="SALES"
-                in_ids={selectors.current
+                in_ids={selectors
                   .filter((selector) => !!selector.isChecked)
                   .map((selector) => +selector.value)}
               />

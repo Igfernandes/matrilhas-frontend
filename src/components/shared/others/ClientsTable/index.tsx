@@ -1,12 +1,12 @@
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import i18n from "@configs/i18n";
-import { useClientsTable } from "../../../Private/Charges/Create/hooks/useClientsTable";
 import { ClientActions } from "./ClientActions";
 import { UserPlus } from "@assets/Icons/red/UserPlus";
 import { useModalContext } from "@contexts/Modal";
 import { ClientShape } from "@type/Clients";
 import { Notice } from "@components/shared/others/Notice";
 import { getNumberFormatted } from "@helpers/string";
+import { useClientsTable } from "./hooks/useClientsTable";
 
 type Props = {
   title?: string;

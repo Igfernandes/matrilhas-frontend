@@ -13,7 +13,7 @@ import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 
 export function AgenciesTable() {
   const {
-    handleDelete, isLoadingDelete, tHeads, selectors, updateForTable, getSelected
+    handleDelete, isLoadingDelete, tHeads, selectors, updateForTable, getSelected, setSelectors
   } = useAgencies();
   const { handleToggleModal, modal } =
     useModalContext<ModalAgencyOperationType>();
@@ -31,7 +31,7 @@ export function AgenciesTable() {
           }}
           options={{
             selector: {
-              selectorRef: selectors,
+              setSelectorRef: setSelectors,
             },
             pagination: {
               max: 6,
@@ -41,7 +41,7 @@ export function AgenciesTable() {
                 handle: () =>
                   handleToggleModal(
                     "DELETE",
-                    getSelected(selectors.current)
+                    getSelected(selectors)
                   ),
                 text: i18n("Texts.selected_delete"),
                 permissions: [PERMISSIONS.agencies.delete],
@@ -62,7 +62,7 @@ export function AgenciesTable() {
             buttons: (
               <Shared
                 entity="AGENCIES"
-                in_ids={selectors.current
+                in_ids={selectors
                   .filter((selector) => !!selector.isChecked)
                   .map((selector) => +selector.value)}
               />
@@ -79,7 +79,7 @@ export function AgenciesTable() {
       </div>
 
       <div className="relative z-10">
-         <Notice
+        <Notice
           headerTitle={i18n("Words.attention")}
           title={i18n("Screens.dashboard.agencies.title_already_exclude")}
           text={i18n("Screens.dashboard.agencies.text_already_exclude")}

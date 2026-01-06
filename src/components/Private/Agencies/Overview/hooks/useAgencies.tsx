@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import {
   ModalAgencyOperationType,
@@ -17,7 +17,7 @@ export function useAgencies() {
   const { handleToggleModal, modal } =
     useModalContext<ModalAgencyOperationType>();
   /** Esse sim precisa ser state */
-  const selectors = useRef<SelectorShape[]>([]);
+  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
 
   const { mutateAsync: deleteAgency, isPending: isLoadingDelete } =
     useDeleteAgencies();
@@ -78,7 +78,7 @@ export function useAgencies() {
 
   return {
     tHeads,
-    selectors,
+    selectors, setSelectors,
     handleDelete,
     isLoadingDelete,
     updateForTable,

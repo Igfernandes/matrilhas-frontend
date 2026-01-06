@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import {
   ModalTourOperationType,
@@ -16,7 +16,7 @@ export function useTours() {
   const { handleToggleModal, modal } =
     useModalContext<ModalTourOperationType>();
   /** Esse sim precisa ser state */
-  const selectors = useRef<SelectorShape[]>([]);
+  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
 
   const { mutateAsync: deleteTour, isPending: isLoadingDelete } =
     useDeleteTours();
@@ -34,7 +34,7 @@ export function useTours() {
   /** 🔥 useCallback para estável */
   const updateForTable = useCallback(
     (data: unknown) => {
-      const { id, title, status,  available_at, slug, created_at } = data as TourShape;
+      const { id, title, status, available_at, slug, created_at } = data as TourShape;
       const clientId = String(id);
 
       return {
@@ -80,7 +80,8 @@ export function useTours() {
     selectors,
     handleDelete,
     isLoadingDelete,
-    updateForTable,
+    updateForTable, 
+    setSelectors,
     getSelected
   };
 }

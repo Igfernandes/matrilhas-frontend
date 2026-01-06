@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import i18n from "@configs/i18n";
 import {
   DeleteGalleryPayload,
@@ -16,7 +16,7 @@ export function useGalleries() {
   const { handleToggleModal, modal } =
     useModalContext<ModalGalleryOperationType>();
   /** Esse sim precisa ser state */
-  const selectors = useRef<SelectorShape[]>([]);
+  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
 
   const { mutateAsync: deleteGallery, isPending: isLoadingDelete } =
     useDeleteGalleries();
@@ -75,7 +75,7 @@ export function useGalleries() {
 
   return {
     tHeads,
-    selectors,
+    selectors, setSelectors,
     handleDelete,
     isLoadingDelete,
     updateForTable,
