@@ -7,7 +7,6 @@ export function TPhone({
   name,
   className,
   type,
-  required,
   ...props
 }: TFields) {
   const { register } = useFormContext();
@@ -26,7 +25,6 @@ export function TPhone({
           <input
             {...props}
             {...register(name)}
-            required={required === "true"}
             className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
             data-testid={currentId}
             onChange={handleMaskPhone}

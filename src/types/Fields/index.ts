@@ -12,7 +12,7 @@ export type FieldsShape = {
   is_sensitive: boolean;
   is_required: boolean;
   className?: string;
-  required?: string;
+  required?: boolean;
   value?: string;
   defaultValue?: string;
   group_id: number;

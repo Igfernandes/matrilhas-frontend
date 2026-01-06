@@ -5,24 +5,22 @@ export function useResizeObserver() {
   const ref = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
     const handleResize = () => {
       setTimeout(() => {
-        if (ref.current) setWidth(ref.current.offsetWidth);
+        setWidth(element.offsetWidth);
       }, 300);
     };
 
-    // Initialize the ResizeObserver
     const resizeObserver = new ResizeObserver(handleResize);
 
-    if (ref.current) {
-      resizeObserver.observe(ref.current);
-    }
+    resizeObserver.observe(element);
 
-    // Cleanup observer when component unmounts
     return () => {
-      if (ref.current) {
-        resizeObserver.unobserve(ref.current);
-      }
+      resizeObserver.unobserve(element);
+      resizeObserver.disconnect();
     };
   }, []);
 

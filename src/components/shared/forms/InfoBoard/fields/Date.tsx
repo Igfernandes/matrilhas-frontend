@@ -1,6 +1,6 @@
 import { Calendar } from "@assets/Icons/black/Calendar";
 import i18n from "@configs/i18n";
-import { formatToYMD, handleMaskDate } from "@helpers/date";
+import { handleMaskDate } from "@helpers/date";
 import dayjs from "dayjs";
 import { useFormContext } from "react-hook-form";
 import { TFields } from "../type";
@@ -11,7 +11,6 @@ export function TDate({
   className,
   defaultValue,
   type,
-  required,
   ...props
 }: TFields) {
   const { register, setValue } = useFormContext();
@@ -19,9 +18,8 @@ export function TDate({
 
   return (
     <tr
-      className={`relative border-t-2 border-t-zinc-200 ${
-        type == "hidden" ? "hidden" : ""
-      }`}
+      className={`relative border-t-2 border-t-zinc-200 ${type == "hidden" ? "hidden" : ""
+        }`}
     >
       <td className="py-2 pl-4 w-2/6">
         <strong>{label}</strong>
@@ -29,12 +27,10 @@ export function TDate({
       <td className="py-2">
         <div className="flex">
           <input
-            {...register(name)}
             {...props}
             type={"text"}
-            required={required === "true"}
             onChange={handleMaskDate}
-            defaultValue={dayjs(formatToYMD(defaultValue)).format(
+            defaultValue={dayjs(defaultValue).format(
               i18n("Configs.format.date")
             )}
             placeholder="Dia/Mes/Ano"
@@ -46,6 +42,7 @@ export function TDate({
               <Calendar />
             </label>
             <input
+              {...register(name)}
               id={`calendar_${name}`}
               type="date"
               onChange={(ev) => {

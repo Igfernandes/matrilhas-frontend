@@ -10,6 +10,10 @@ import { TFile } from "./File";
 import { TFields } from "../type";
 import { TReference } from "./Reference";
 import { TNumber } from "./Number";
+import { TDatetime } from "./Datetime";
+import { TTime } from "./Time";
+import { TColor } from "./Color";
+import { TTextarea } from "./Textarea";
 
 export const components = {
   text: TInput,
@@ -19,7 +23,11 @@ export const components = {
   phone: TPhone,
   name: TInput,
   date: TDate,
-  time: TInput,
+  "datetime-local": TDatetime,
+  url: TInput,
+  time: TTime,
+  color: TColor,
+  textarea: TTextarea,
   dependents: TDependents,
   birthdate: TDate,
   cpf: TCpf,
