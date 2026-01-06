@@ -5,9 +5,10 @@ export type InputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
-  dataTestId: string;
+  dataTestId?: string;
   isLoading?: boolean;
   label?: string;
+  required?: boolean | string;
   name: string;
   errors?: FieldError;
   tooltip?: string;

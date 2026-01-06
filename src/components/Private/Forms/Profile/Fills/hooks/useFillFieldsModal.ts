@@ -1,6 +1,7 @@
 import { useModalContext } from "@contexts/Modal";
 import useDeleteFillField from "@services/Forms/Fills/Delete/useDelete";
 import { ModalFormsOperationType } from "../../type";
+import { useCallback } from "react";
 
 type Props = {
   formId: number;
@@ -11,7 +12,7 @@ export function useFillFieldsModal({ formId }: Props) {
     useModalContext<ModalFormsOperationType>();
   const { mutateAsync: deleteFillField, isPending: isLoadingFillFieldDelete } =
     useDeleteFillField();
-  const handleDeleteFillField = () => {
+  const handleDeleteFillField = useCallback(() => {
     const IdString = modal.id.toLocaleString();
 
     deleteFillField({
@@ -20,7 +21,7 @@ export function useFillFieldsModal({ formId }: Props) {
     }).then(() => {
       handleToggleModal(false);
     });
-  };
+  }, [deleteFillField, formId, handleToggleModal, modal.id]);
 
   return {
     handleDeleteFillField,

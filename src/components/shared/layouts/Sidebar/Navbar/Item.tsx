@@ -1,3 +1,5 @@
+"use client";
+
 import { othersColors } from "@assets/colors/colors";
 import { When } from "@components/utilities/When";
 import Link from "next/link";
@@ -35,7 +37,7 @@ export function Item({
       }}
     >
       <Link
-        href={link}
+        href={link ?? "#"}
         className="flex items-center hover:text-active duration-300"
         style={{
           justifyContent: sidebarState ? "initial" : "end",

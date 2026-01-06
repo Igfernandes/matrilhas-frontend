@@ -5,13 +5,12 @@ import { Footer } from "@components/Public/Footer";
 import { isErrorRequest } from "@helpers/routes";
 import { FormBuilderPreview } from "@components/shared/layouts/FormBuilder/Preview";
 import { useForm } from "@components/Public/Forms/hooks/useForm";
-import { Button } from "@components/shared/forms/Button";
-import i18n from "@configs/i18n";
+
 import { getCSRF } from "@services/Authentications/CSRF/SSR";
 import { getFormPreview } from "@services/Forms/GetPreview/SSR";
 
 export default function Form({ form, csrf }: FormPageProps) {
-  const { handleSubmit, isLoading, handleChange, components } = useForm({
+  const { handleSubmit, isLoading, components } = useForm({
     form,
     csrf,
   });
@@ -30,24 +29,18 @@ export default function Form({ form, csrf }: FormPageProps) {
             </div>
           </div>
           <div className="w-full lg:w-[60%] px-4 lg:px-0 mx-auto">
-            <form
-              onSubmit={handleSubmit}
+            <div
               className="flex flex-col min-h-[60vh] justify-between"
             >
               <FormBuilderPreview
-                handleValue={handleChange}
+                isLoading={isLoading}
+                onSubmit={handleSubmit}
                 fields={components ?? "{}"}
               />
               <div className="flex justify-end items-center">
-                <div className="mt-4 ml-4 mb-6">
-                  <Button
-                    className="text-white font-semibold w-[190px]"
-                    text={i18n("Words.send")}
-                    isLoading={isLoading}
-                  />
-                </div>
+
               </div>
-            </form>
+            </div>
           </div>
         </main>
         <Footer />
@@ -63,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<FormPageProps> = async ({
   const { slug } = params as { slug: string }; // Tipando o params
   const form = await getFormPreview({ slug });
   const csrf = await getCSRF();
-  
+
   if (!form || isErrorRequest(form)) {
     return {
       redirect: {

@@ -24,4 +24,6 @@ export const Validations = {
   invalid_end_date: "A data de encerramento deve ser maior do que a de início",
   invalid_schedule_linked:
     "O agendamento deve conter pelo menos um usuário vinculado",
+  file_size_exceeded: 'O arquivo "{{name}}" excede {{size}}MB.',
+  file_total_size_exceeded: "O total de arquivos excede {{size}}MB.",
 };

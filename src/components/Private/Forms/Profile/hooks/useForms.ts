@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FormsPayload, formsSchema } from "../schema";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import usePutForm from "@services/Forms/Put/usePut";
@@ -28,29 +28,35 @@ export function useForms({ form }: Props) {
     usePostCreateForm();
   const { mutateAsync: putForm, isPending: isLoadingPut } = usePutForm();
 
-  const submit = (FormsPayload: FormsPayload) => {
-    const payload = {
-      ...FormsPayload,
-      components: JSON.stringify(components),
-      started_at: dayjs(FormsPayload.started_at).format("YYYY-MM-DD HH:mm"),
-      expired_at: dayjs(FormsPayload.expired_at).format("YYYY-MM-DD HH:mm"),
-      category: FormsPayload.category,
-      status: FormsPayload.status as "PUBLISHED" | "DRAFT",
-    };
+  const submit = useCallback(
+    (FormsPayload: FormsPayload) => {
+      const payload = {
+        ...FormsPayload,
+        components: JSON.stringify(components),
+        started_at: dayjs(FormsPayload.started_at).format("YYYY-MM-DD HH:mm"),
+        expired_at: dayjs(FormsPayload.expired_at).format("YYYY-MM-DD HH:mm"),
+        category: FormsPayload.category,
+        status: FormsPayload.status as "PUBLISHED" | "DRAFT",
+      };
 
-    if (FormsPayload.id)
-      putForm({
-        ...payload,
-        id: FormsPayload.id,
-      });
-    else {
-      postForm(payload);
-    }
-  };
+      if (FormsPayload.id)
+        putForm({
+          ...payload,
+          id: FormsPayload.id,
+        });
+      else {
+        postForm(payload);
+      }
+    },
+    [components, postForm, putForm]
+  );
 
-  const handleChangeFormFields = (fieldsForm: Array<FieldShape>) => {
-    setComponents(fieldsForm);
-  };
+  const handleChangeFormFields = useCallback(
+    (fieldsForm: Array<FieldShape>) => {
+      setComponents(fieldsForm);
+    },
+    []
+  );
 
   return {
     submit,

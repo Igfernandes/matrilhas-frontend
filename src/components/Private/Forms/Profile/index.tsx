@@ -35,7 +35,7 @@ export function FormsProfile({ form, step }: Props) {
                             />
                         </When>
                         <When value={step === 3}>
-                            <FormBuilderPreview fields={components} />
+                            <FormBuilderPreview  fields={components} />
                         </When>
                         <When value={step === 4}>
                             <FilledFormsTable components={components} formId={form?.id ?? 0} />

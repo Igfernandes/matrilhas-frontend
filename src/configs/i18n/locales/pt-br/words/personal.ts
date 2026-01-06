@@ -14,6 +14,7 @@ export const PersonalTranslations = {
   birthdays: "Aniversários",
   document: "Documento",
   birthday: "Aniversário",
+  checkboxes: "Caixas de seleção",
   kinship: "Parentesco",
   personal: "Pessoal",
   username: "Nome do usuário",
