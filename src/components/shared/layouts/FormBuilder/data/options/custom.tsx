@@ -35,4 +35,19 @@ export const optionsCustom = [
     ],
     icon: <Pen width={12} height={12} />,
   },
+  {
+    id: "checkboxes",
+    field: "checkboxes",
+    editTabs: [
+      {
+        name: "settings",
+        component: SettingsGroupsTab,
+      },
+      {
+        name: "sizes",
+        component: SizesTab,
+      },
+    ],
+    icon: <Pen width={12} height={12} />,
+  },
 ] as Array<OptionData>;

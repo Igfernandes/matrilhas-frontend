@@ -4,8 +4,9 @@ import { useMemo } from "react";
 
 export function useFormsData() {
   const { rows: formsData } = useGetForms();
-  const { data: categories } = useGetCategories();
+  const { data: categoriesData } = useGetCategories();
   const forms = useMemo(() => formsData, [formsData]);
+  const categories = useMemo(() => categoriesData, [categoriesData]);
 
   return {
     forms,
