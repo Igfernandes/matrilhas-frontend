@@ -31,7 +31,7 @@ export const Gallery = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <>
-        <div className="relative w-full  my-4 z-50" >
+        <div className="relative w-full my-4 z-50" >
           <div>
             <div>
               <p className="line-clamp-1">{label}</p>
@@ -54,13 +54,7 @@ export const Gallery = React.forwardRef<HTMLInputElement, InputProps>(
               >
                 {i18n("Words.add")}
               </button>
-              <UploadModal
-                files={filesUploaded}
-                galleryRef={galleryRef}
-                handleUpdateFilesUploaded={handleUpdateFilesUploaded}
-                isShow={isShowModal}
-                handleModal={handleModal}
-              />
+
             </div>
             <div>
               <input
@@ -72,7 +66,6 @@ export const Gallery = React.forwardRef<HTMLInputElement, InputProps>(
                     ? JSON.stringify(filesUploaded)
                     : undefined
                 }
-                required={!!required}
                 id={IdCurrent}
               />
             </div>
@@ -85,6 +78,15 @@ export const Gallery = React.forwardRef<HTMLInputElement, InputProps>(
               : undefined
           }
         />
+        <div className="relative z-[9999]">
+          <UploadModal
+            files={filesUploaded}
+            galleryRef={galleryRef}
+            handleUpdateFilesUploaded={handleUpdateFilesUploaded}
+            isShow={isShowModal}
+            handleModal={handleModal}
+          />
+        </div>
       </>
     );
   }
