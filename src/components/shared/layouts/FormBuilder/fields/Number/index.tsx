@@ -66,6 +66,7 @@ export const Number = React.forwardRef<HTMLInputElement, InputProps>(
             fill="black"
           />
         </When>
+        <span className="text-xs text-gray-500"><small>Insira Apenas números</small></span>
         <ErrorMessage errors={!!error ? error?.message as string : undefined} />
       </div>
     );
