@@ -32,7 +32,7 @@ export function TNumber({
           <input
             {...props}
             {...register(name, {
-              setValueAs: (value) => (value ? String(value) : ""),
+              valueAsNumber: true,
             })}
             type="number"
             defaultValue={defaultValue}

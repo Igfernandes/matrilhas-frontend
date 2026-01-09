@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { Modal } from "@components/shared/layouts/Modal";
@@ -6,18 +5,20 @@ import { useModal } from "./hooks/useModal";
 import { useModalContext } from "@contexts/Modal";
 import { GroupChecks } from "@components/shared/forms/GroupChecks";
 import { TourShape } from "@type/Tours";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   tour: TourShape;
 };
 
 export function ToursAgenciesModal({ tour }: Props) {
+  const { t } = useI18n()
   const { modal, handleToggleModal } = useModalContext();
   const { agencies, formMethods, handleSubmit, submit, isLoading } = useModal({ tour });
 
   return (
     <Modal
-      title={i18n("Texts.agencies_linked")}
+      title={t("Texts.agencies_linked")}
       isShowModal={modal.type === "STORE"}
       handleModal={(isShow) => {
         handleToggleModal(isShow);
@@ -29,10 +30,10 @@ export function ToursAgenciesModal({ tour }: Props) {
 
             <div className="form-title mb-4">
               <h4 className="text-lg">
-                <strong>{i18n("Texts.list_linked_agencies")}</strong>
+                <strong>{t("Texts.list_linked_agencies")}</strong>
               </h4>
               <span className="text-sm text-primary">
-                <i>Selecione abaixo as agências vinculadas ao passeio</i>
+                <i>{t("Screens.dashboard.tours.text_select_linked")}</i>
               </span>
             </div>
             <div className="form-group">
@@ -48,7 +49,7 @@ export function ToursAgenciesModal({ tour }: Props) {
                 <Button
                   type={"button"}
                   className="border-primary border text-primary"
-                  text={i18n(`Words.cancel`)}
+                  text={t(`Words.cancel`)}
                   onClick={() => handleToggleModal(false)}
                 />
               </div>
@@ -58,7 +59,7 @@ export function ToursAgenciesModal({ tour }: Props) {
                 <Button
                   type={"submit"}
                   className="bg-primary text-white"
-                  text={i18n(`Words.save`)}
+                  text={t(`Words.save`)}
                   isLoading={isLoading}
                 />
               </div>

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useSnackbar } from "./useSnackbar";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 
 export function useNavigator() {
+  const { t } = useI18n();
   const [isCopied, setIsCopied] = useState(false);
   const { dispatchSnackbar } = useSnackbar();
 
@@ -21,8 +22,8 @@ export function useNavigator() {
       document.execCommand("copy");
       dispatchSnackbar({
         type: "notice",
-        title: `${i18n("Words.link_copied")}`,
-        message: i18n("Words.copied_success"),
+        title: `${t("Texts.link_copied")}`,
+        message: t("Texts.copied_success"),
       });
       setTimeout(() => setIsCopied(false), 2000); // Feedback por 2 segundos
     } catch (err) {

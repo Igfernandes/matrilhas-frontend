@@ -1,5 +1,5 @@
-import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
 import { UserShape } from "@type/Users";
 import Link from "next/link";
 
@@ -10,6 +10,8 @@ type Props = {
 
 export function UserFeedback({ users, date }: Props) {
   const { usersManager } = privateRoutes;
+  const { t } = useI18n()
+
   return (
     <>
       {users
@@ -17,7 +19,7 @@ export function UserFeedback({ users, date }: Props) {
         .map((user) => (
           <li key={user.id} className="bg-white px-2 rounded-md mb-2">
             <Link href={`${usersManager}`}>
-              <span>{`${i18n("Words.birthday_of")} ${user.name}`}</span>
+              <span>{`${t("Texts.birthday_of")} ${user.name}`}</span>
             </Link>
           </li>
         ))}

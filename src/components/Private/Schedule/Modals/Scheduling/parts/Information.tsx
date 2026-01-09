@@ -19,6 +19,7 @@ export function Information() {
                     dataTestId="title"
                     required={true}
                     errors={errors.title}
+                    maxLength={200}
                 />
             </div>
             <div className="form-group my-4">
@@ -46,6 +47,7 @@ export function Information() {
                     {...register("describe")}
                     label={i18n("Words.subject")}
                     dataTestId="describe"
+                    maxLength={600}
                 />
             </div>
             <div className="w-full ">

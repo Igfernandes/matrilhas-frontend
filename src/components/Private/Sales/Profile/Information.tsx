@@ -1,10 +1,10 @@
 import { Input } from "@components/shared/forms/Input";
 import { ProfileFormProps } from "./type";
-import { handleMaskPhone } from "@helpers/string";
 import { CPF } from "@components/shared/forms/CPF";
 import { useFormContext } from "react-hook-form";
 import { useI18n } from "@contexts/I18n";
 import { Date } from "@components/shared/forms/Date";
+import { Phone } from "@components/shared/forms/Phone";
 
 type Props = ProfileFormProps;
 
@@ -19,16 +19,16 @@ export function Information({ errors }: Props) {
             </div>
             <div className="flex flex-wrap justify-between">
                 <div className="w-full my-2">
-                    <Input required={true} dataTestId="name" {...register("name")} label={t("Words.name")} errors={errors?.name} />
+                    <Input required={true} dataTestId="name" maxLength={100} {...register("name")} label={t("Words.name")} errors={errors?.name} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
                     <Input dataTestId="email" required={true}  {...register("email")} label={t("Words.email")} errors={errors?.email} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <Input dataTestId="phone" required={true}  {...register("phone")} onChangeCapture={handleMaskPhone} label={`${t("Words.phone")}/Whatsapp`} errors={errors?.phone} />
+                    <Phone dataTestId="phone" required={true}  {...register("phone")} label={`${t("Words.phone")}/Whatsapp`} errors={errors?.phone} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <CPF register={register} name="cpf" required={true} dataTestId="cpf" label={t("Words.cpf")} errors={errors?.cpf} />
+                    <CPF {...register("cpf")}  required={true} dataTestId="cpf" label={t("Words.cpf")} errors={errors?.cpf} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
                     <Date dataTestId="birthdate" required={true}  {...register("birthdate")} label={t("Words.birthdate")} errors={errors?.birthdate} />

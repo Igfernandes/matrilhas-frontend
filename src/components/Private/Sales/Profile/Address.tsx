@@ -44,7 +44,7 @@ export function Address({ register, errors }: Props) {
                     </div>
                 </When>
                 <div className="w-full my-2">
-                    <Input dataTestId="city" required={true}  {...register("city")} label={t("Words.city")} errors={errors?.city} />
+                    <Input dataTestId="city" maxLength={100} required={true}  {...register("city")} label={t("Words.city")} errors={errors?.city} />
                 </div>
             </div>
         </div>

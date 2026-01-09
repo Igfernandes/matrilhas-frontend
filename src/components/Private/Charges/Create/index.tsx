@@ -1,13 +1,14 @@
 import { FormProvider } from "react-hook-form";
-import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { Definitions } from "@components/Private/Charges/Create/Definitions";
 import { Button } from "@components/shared/layouts/Button";
 import { useCharge } from "./hooks/useCharge";
 import { useRouter } from "next/router";
 import { CheckList } from "../CheckList";
+import { useI18n } from "@contexts/I18n";
 
 export function CreateCharge() {
+  const { t } = useI18n()
   const { formMethods, submit, isPending } = useCharge();
   const router = useRouter();
 
@@ -26,7 +27,7 @@ export function CreateCharge() {
               <div className="lg:ml-8 w-[47%] lg:w-auto">
                 <Button
                   className="p-3 border-[1px] border-secondary rounded-xl w-full"
-                  text={i18n(`Words.cancel`)}
+                  text={t(`Words.cancel`)}
                   type="button"
                   onClick={() => router.push(privateRoutes.finance)}
                 />
@@ -34,7 +35,7 @@ export function CreateCharge() {
               <div className="ml-4 w-[47%] lg:w-auto">
                 <Button
                   className="p-3 bg-primary text-white rounded-xl w-full"
-                  text={true ? i18n(`Words.save`) : i18n(`Words.update`)}
+                  text={true ? t(`Words.save`) : t(`Words.update`)}
                   isLoading={isPending}
                 />
               </div>

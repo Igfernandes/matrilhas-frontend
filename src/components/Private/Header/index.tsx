@@ -2,13 +2,13 @@ import { ArrowNarrowLeft } from "@assets/Icons/black/ArrowNarrowLeft";
 import { Bars } from "@assets/Icons/black/Bars";
 import { Bell } from "@assets/Icons/black/Bell";
 import { When } from "@components/utilities/When";
-import i18n from "@configs/i18n";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import useWindow from "@hooks/useWindow";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import { Flags } from "../../shared/layouts/Flags";
 import { Skeleton } from "@components/utilities/Skeleton";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   title?: string;
@@ -23,9 +23,10 @@ export function Header({
   title,
   notificationsAmount,
 }: Props) {
+  const { t } = useI18n()
   const { screenType } = useWindow();
   const { userAuth } = useUserNavigationContext();
-  const welcomeMessage = i18n("Words.welcome_message") as string;
+  const welcomeMessage = t("Texts.welcome_message") as string;
   const route = useRouter();
   const isShowBackRoute = useRef(route.asPath.split("/").length > 3);
 
@@ -55,7 +56,7 @@ export function Header({
                     className="mr-2 cursor-pointer"
                     onClick={() => route.back()}
                   />
-                  <span> {title ?? i18n("Words.back_before_page")}</span>
+                  <span> {title ?? t("Texts.back_before_page")}</span>
                 </strong>
               </When>
             </h3>

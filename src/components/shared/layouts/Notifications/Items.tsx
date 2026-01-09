@@ -15,25 +15,25 @@ export function NotificationItem({
     <div className="bg-secondary shadow-md p-4 rounded-xl my-4">
       <div className="flex justify-between">
         <div>
-          <h4 className="font-semibold">
+          <h4 className="text-sm text-primary font-semibold">
             {i18n(`Notifications.title_${scope}_${action.toLowerCase()}`)}
           </h4>
         </div>
         <When value={!!author && !!author.name}>
-          <div className="text-sm">
+          <div className="text-xs">
             <span><strong>{i18n("Words.author")}</strong>:  {author?.name}</span>
           </div>
         </When>
       </div>
-      <div className="">
+      <div className="mt-1">
         <div>
           <p className="text-dark text-sm">
             {message ??
               i18n(`Notifications.text_${scope}_${action.toLowerCase()}`)}
           </p>
 
-          <div className="flex items-center justify-between mt-4">
-            <div>
+          <div className="flex items-center justify-between mt-2">
+            <div >
               <span className="text-primary text-sm mt-4">
                 {dayjs().format("DD/MM/YYYY - HH:mm")}
               </span>

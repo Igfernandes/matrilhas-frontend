@@ -1,6 +1,5 @@
 import { File } from "@components/shared/forms/File";
 import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
-import i18n from "@configs/i18n";
 import Image from "next/image";
 import { ProfileFormProps } from "./type";
 import { Button } from "@components/shared/forms/Button";
@@ -12,12 +11,14 @@ import { useNavigator } from "@hooks/useNavigator";
 import useWindow from "@hooks/useWindow";
 import { Link } from "@assets/Icons/black/Link";
 import { publicRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
 
 type Props = ProfileFormProps & {
     isLoading: boolean;
 };
 
 export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: Props) {
+    const { t } = useI18n()
     const bannerWatch = watch("banner")
     const banner = useMemo(() => {
         if (!!bannerWatch && bannerWatch !== "")
@@ -27,6 +28,7 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
     }, [bannerWatch, tour]);
     const { handleCopy } = useNavigator();
     const { baseUrl } = useWindow();
+    const status = watch("status")
 
     return (
         <div className="flex flex-wrap justify-between h-full">
@@ -34,17 +36,17 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
                 <div className="flex flex-wrap justify-between items-center w-full mb-4">
                     <ToggleSwitch
                         setValue={setValue}
-                        label={i18n("Words.status")}
+                        label={t("Words.status")}
                         dataTestId="status"
                         name="status"
-                        defaultValue={watch("status")}
+                        defaultValue={status}
                         options={{
                             left: {
-                                text: i18n("Words.active"),
+                                text: t("Words.active"),
                                 value: "PUBLISHED",
                             },
                             right: {
-                                text: i18n("Words.inactive"),
+                                text: t("Words.inactive"),
                                 value: "DRAFT",
                             },
                         }}
@@ -58,7 +60,7 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
                 </div>
                 <div className="w-full mt-2">
                     <Image className="h-[8rem] object-cover mx-auto mb-2 border-2 border-secondary" width={300} height={130} src={banner} alt="Banner" />
-                    <File dataTestId="banner" accept=".png,.jpg,.jpeg" {...register("banner")} label={i18n("Words.banner")} />
+                    <File dataTestId="banner" accept=".png,.jpg,.jpeg" {...register("banner")} label={t("Words.banner")} />
                 </div>
                 <hr className="my-2 border-secondary" />
                 <When value={!!tour}>
@@ -75,15 +77,15 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
                     <Select
                         dataTestId="featured"
                         {...register("featured")}
-                        label={i18n("Words.featured")}
+                        label={t("Words.featured")}
                         errors={errors?.featured}
                         options={[
                             {
-                                text: i18n("Words.not"),
+                                text: t("Words.not"),
                                 value: "0"
                             },
                             {
-                                text: i18n("Words.yes"),
+                                text: t("Words.yes"),
                                 value: "1"
                             }
 
@@ -94,7 +96,7 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
             </div>
             <div className="w-full mt-auto">
                 <div className="w-full ml-auto  mb-1">
-                    <Button isLoading={isLoading} text={watch('id') ? i18n("Words.update") : i18n("Words.create")} />
+                    <Button isLoading={isLoading} text={watch('id') ? t("Words.update") : t("Words.create")} />
                 </div>
             </div>
 

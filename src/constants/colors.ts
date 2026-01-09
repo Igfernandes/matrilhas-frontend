@@ -1,8 +1,13 @@
-type ShapeColors = {
+export type ShapeColors = {
   success: "green";
   notice: "indigo";
   error: "yellow";
   void: "gray";
+  paid: "green";
+  pendent: "yellow";
+  overdue: "red";
+  active: "green";
+  inactive: "gray";
 };
 
 export const COLORS = {
@@ -10,4 +15,9 @@ export const COLORS = {
   notice: "indigo",
   error: "yellow",
   void: "gray",
+  paid: "green",
+  pendent: "yellow",
+  overdue: "red",
+  active: "green",
+  inactive: "gray",
 } as ShapeColors;

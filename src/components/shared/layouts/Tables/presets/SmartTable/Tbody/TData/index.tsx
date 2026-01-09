@@ -9,7 +9,6 @@ export function TData<TableData>({ data, keyRow }: TDataProps<TableData>) {
   const { amountHiddenCols } = useTableContext();
   const { selectors } = useSelectorContext();
 
-  console.log(selectors)
   return data.map((value, index) => {
     const isVisible =
       index === 0 || index === data.length - 1 || !amountHiddenCols[index];

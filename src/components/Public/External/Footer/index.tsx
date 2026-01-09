@@ -3,6 +3,7 @@ import { BrandTikTok } from "@assets/Icons/black/BrandTiktok";
 import { BrandYoutube } from "@assets/Icons/black/BrandYoutube";
 import { PrivacyAndCookies } from "@components/shared/layouts/PrivacyAndCookies";
 import { When } from "@components/utilities/When";
+import { useI18n } from "@contexts/I18n";
 import Link from "next/link";
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export function Footer({ hasPoliticsCookies = true }: Props) {
+  const { t } = useI18n()
   return (
     <footer>
       <div className="text-center border-t-2 border-secondary">
@@ -34,7 +36,7 @@ export function Footer({ hasPoliticsCookies = true }: Props) {
             </ul>
           </div>
           <div className="mb-4">
-            <p>© 2024 Matrilhas | Todos os direitos reservados.</p>
+            <p>© 2024 Matrilhas | {t("Screens.footer.all_rights_reserved")}.</p>
           </div>
         </div>
       </div>

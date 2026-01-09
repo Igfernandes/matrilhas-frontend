@@ -16,7 +16,7 @@ export const AgenciesApiTranslations = {
     name: "O nome informado da agência encontra-se inválido",
     name_max_length_100:
       "A agência contém nome com o limite acima do máximo de 100 caracteres.",
-    loogotype: "O avatar da agência contém uma url inválida",
+    logotype: "O avatar da agência contém uma url inválida",
     phone: "O telefone informado da agência encontra-se utilizado ou inválido",
     phone_max_length_35:
       "A agência contém telefone com o limite acima do máximo de 35 caracteres.",
@@ -24,11 +24,15 @@ export const AgenciesApiTranslations = {
     describe: "A descrição informada da agência encontra-se inválida",
     website: "O site informado da agência encontra-se inválido",
     email: "O e-mail informado da agência encontra-se inválido",
+    status: "O status informado da agência encontra-se inválido",
     email_max_length_255:
       "A agência contém e-mail com o limite acima do máximo de 255 caracteres.",
     created_at: "A data de criação informada da agência encontra-se inválida",
     updated_at:
       "A data de atualização informada da agência encontra-se inválida",
     not_found_category: "A categoria escondida está inválida ou indisponível",
+    limit: "O limite informado encontra-se inválido",
+    start: "O offset informado encontra-se inválido",
+    excel: "O sistema não conseguiu gerar o arquivo excel. Tente novamente mais tarde",
   },
 };

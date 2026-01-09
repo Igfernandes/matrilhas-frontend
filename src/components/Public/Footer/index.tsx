@@ -14,7 +14,7 @@ export function Footer({ type = "DEFAULT" }: FooterProps) {
       <footer>
         <When value={type === "DEFAULT" || !type}>
           <FooterDefault />
-        </When>{" "}
+        </When>
         <When value={type === "LOGIN"}>
           <FooterLogin />
         </When>

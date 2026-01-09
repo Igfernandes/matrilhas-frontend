@@ -9,7 +9,7 @@ export const ClientsApiTranslations = {
       client_id: "O cliente informado não existe ou está inválido",
       name: "O nome da categoria informada está inválido",
       name_contains: "O nome da categoria informada está inválido",
-      description: "A descrição da categoria informada está inválido",
+      description_contains: "A descrição da categoria informada está inválida",
       created_at: "A data de criação da categoria está inválida",
       updated_at: "A data de atualização da categoria está inválida",
       categories: "As categories informadas estão ausentes ou inválidas",
@@ -33,20 +33,6 @@ export const ClientsApiTranslations = {
       status: "O status do envio encontra-se inválido",
       dispatcher: "O envio encontra-se inválido",
       message_id: "O conteúdo do envio encontra-se inválido",
-    },
-  },
-  events: {
-    success: {
-      post: "O(s) cliente(s) foi(ram) inscrito(s) com sucesso!",
-      inscribe: "O usuário foi inscrito com sucesso!",
-    },
-    isConfirm: {
-      success: "Confirmado com sucesso!",
-    },
-    invalid: {
-      already_inscribe:
-        "O seu cpf já está vinculado a um preenchimento deste formulário. Uso outro e tente novamente",
-      status: "O evento está inativado e não poderá receber novas inscrições",
     },
   },
   fields: {

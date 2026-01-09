@@ -1,5 +1,4 @@
 import { DotsOptions } from "@components/shared/others/DotsOptions";
-import i18n from "@configs/i18n";
 import { FormBuildProps } from "./type";
 import { capitalize } from "@helpers/string";
 import { FormBuilderViewed } from "./states/Viewed";
@@ -9,6 +8,7 @@ import useWindow from "@hooks/useWindow";
 import { When } from "@components/utilities/When";
 import { useModalContext } from "../../context/Modal";
 import { useFieldsGroupsContext } from "../../context/FieldsGroups";
+import { useI18n } from "@contexts/I18n";
 
 export function Builder({
   fields = [],
@@ -16,6 +16,7 @@ export function Builder({
   isEditing,
   createdAt,
 }: FormBuildProps) {
+  const { t } = useI18n()
   const { screenType } = useWindow();
   const { handleToggleModal, isShowModal } = useModalContext();
   const { handleFieldsGroupToEditing, fieldsGroupEditing, fieldsGroups } =
@@ -28,7 +29,7 @@ export function Builder({
           {/* <GripVertical className="cursor-pointer" /> */}
           <h2 className="text-2xl ml-1">
             <strong>
-              {capitalize(i18n(`Words.${title?.toLowerCase()}`) || title)}
+              {capitalize(t(`Words.${title?.toLowerCase()}`) || title)}
             </strong>
           </h2>
           <When value={screenType === "MOBILE" && fieldsGroupEditing != title}>
@@ -36,7 +37,7 @@ export function Builder({
               <DotsOptions
                 actions={[
                   {
-                    text: i18n("Words.edit"),
+                    text: t("Words.edit"),
                     handle: () => handleFieldsGroupToEditing(title),
                   },
                 ]}
@@ -47,8 +48,8 @@ export function Builder({
         <div className="flex">
           <When value={!!createdAt}>
             <div className="mr-2">
-              <span className="text-secondary text-xs  md:text-base">
-                {`Atualizado em: ${new Date(createdAt).toLocaleString()}`}
+              <span className="text-primary text-xs  md:text-sm">
+                {`${t("Texts.updated_at")}: ${new Date(createdAt).toLocaleString()}`}
               </span>
             </div>
           </When>
@@ -57,7 +58,7 @@ export function Builder({
               <DotsOptions
                 actions={[
                   {
-                    text: i18n("Words.edit") || "Edit",
+                    text: t("Words.edit") || "Edit",
                     handle: () => handleFieldsGroupToEditing(title),
                   },
                 ]}

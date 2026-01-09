@@ -19,6 +19,7 @@ function FieldProvider({
   entity,
   entityType,
   handleSubmitFields,
+  isLoading
 }: FieldProviderProps) {
   const [viewedField, setViewedField] = useState<ViewedEntityShape>(entity);
   const [fields, setFields] = useState<FieldsShape[]>([]);
@@ -42,8 +43,9 @@ function FieldProvider({
       fields,
       entityType,
       handleSubmitFields,
+      isLoading
     }),
-    [viewedField, fields, handleSubmitFields, entityType]
+    [viewedField, fields, handleSubmitFields, entityType, isLoading]
   );
 
   return (

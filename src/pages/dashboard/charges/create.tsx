@@ -1,11 +1,11 @@
 import { CreateCharge } from "@components/Private/Charges/Create";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 
 export default function FinanceCreate() {
-
+  const { t } = useI18n()
   return (
-    <DashboardContainer title={i18n("Words.new_charge")}>
+    <DashboardContainer title={t("Texts.new_charge")}>
       <CreateCharge />
     </DashboardContainer>
   );

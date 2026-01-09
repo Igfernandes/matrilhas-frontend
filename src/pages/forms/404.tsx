@@ -1,10 +1,11 @@
 import { Footer } from "@components/Public/External/Footer";
 import { Header } from "@components/Public/External/Header";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Form404() {
+  const { t } = useI18n()
   return (
     <div className="min-h-[100vh] flex flex-col justify-between">
       <Header />
@@ -21,12 +22,12 @@ export default function Form404() {
         <div className="text text-center max-w-[428px] mx-auto mb-6">
 
           <p className="text-md ">
-            {i18n("Screens.forms.not_stock")}&nbsp;
+            {t("Screens.forms.not_stock")}&nbsp;
             <Link
               className="text-white font-semibold bg-primary py-2 px-4 block rounded-lg mt-4"
               href={`/`}
             >
-              {i18n("Texts.home_page")}
+              {t("Texts.home_page")}
             </Link>
           </p>
         </div>

@@ -1,14 +1,15 @@
 import { useUsers } from "./hooks/useUsers";
 import { UsersStructProps } from "../type";
-import i18n from "@configs/i18n";
 import { ModalFormUsers } from "../Modals/Users";
 import { Notice } from "@components/shared/others/Notice";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import useDeleteUsers from "../../../../services/Users/Delete/useDelete";
 import usePatchStatusUsers from "../../../../services/Users/Patch/Status/usePatch";
 import { API_ROUTES } from "@configs/routes/Api/api";
+import { useI18n } from "@contexts/I18n";
 
 export function Users({ search, groups }: UsersStructProps) {
+  const { t } = useI18n()
   const { updateUserForTable, tHeadsUser, handleToggleModal, modal } = useUsers();
   const { mutateAsync: deleteUser } = useDeleteUsers();
   const { mutateAsync: patchStatusUsers } = usePatchStatusUsers();
@@ -30,25 +31,25 @@ export function Users({ search, groups }: UsersStructProps) {
               name_contains: search
             }
           }}
-          title={i18n("Words.users")}
+          title={t("Words.users")}
           excludes={["cpf", "cnpj", "category", "created_at", "updated_at"]}
           tHeads={{
-            data: tHeadsUser.current,
-            widths: [60, 166.5, 166.5, 166.5, 120, 166.5, 48],
+            data: tHeadsUser,
+            widths: [60, 166.5, 166.5, 166.5, 120, 100, 70],
           }}
         />
       </div>
       <div>
         <ModalFormUsers
           groups={groups}
-          title={i18n("Words.update_user")}
+          title={t("Texts.update_user")}
           isShowModal={modal.type === "DEFAULT_USER"}
           onModal={handleToggleModal}
         />
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.users.user.title_already_desative")}
-          text={i18n("Screens.dashboard.users.user.text_already_desative")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.users.user.title_already_desative")}
+          text={t("Screens.dashboard.users.user.text_already_desative")}
           onSubmit={() => {
             patchStatusUsers({
               id: modal.id as number,
@@ -59,9 +60,9 @@ export function Users({ search, groups }: UsersStructProps) {
           onModal={handleToggleModal}
         />
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.users.user.title_already_active")}
-          text={i18n("Screens.dashboard.users.user.text_already_active")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.users.user.title_already_active")}
+          text={t("Screens.dashboard.users.user.text_already_active")}
           onSubmit={() => {
             patchStatusUsers({
               id: modal.id as number,
@@ -72,9 +73,9 @@ export function Users({ search, groups }: UsersStructProps) {
           onModal={handleToggleModal}
         />
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.users.user.title_already_exclude")}
-          text={i18n("Screens.dashboard.users.user.text_already_exclude")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.users.user.title_already_exclude")}
+          text={t("Screens.dashboard.users.user.text_already_exclude")}
           onSubmit={() => {
             deleteUser({
               id: modal.id as number,

@@ -1,8 +1,8 @@
-import { FieldErrors, useFormContext, UseFormRegister } from "react-hook-form";
-import i18n from "@configs/i18n";
+import { FieldErrors, UseFormRegister } from "react-hook-form";
 import dayjs from "dayjs";
 import { PeriodsPayload } from "../PeriodsSchemas";
 import { Input } from "@components/shared/forms/Input";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     register: UseFormRegister<PeriodsPayload>;
@@ -11,15 +11,15 @@ type Props = {
 }
 
 export function MonthlyFields({ register, errors, id }: Props) {
-    const { watch } = useFormContext()
+    const { t } = useI18n()
 
     return (
         <div className="flex flex-wrap justify-between">
             <div className="w-full md:w-[49%] my-2">
-                <Input value={watch(`period.${id}.by_monthday.0`)} required={true} min="1" type="number" dataTestId={`period_0_${dayjs().millisecond()}`} {...register(`period.${id}.by_monthday.0`, { valueAsNumber: true })} label={i18n("Words.start")} errors={errors?.period?.[id]?.by_monthday?.[0]} />
+                <Input required={true} min="1" type="number" dataTestId={`period_0_${dayjs().millisecond()}`} {...register(`period.${id}.by_monthday.0`, { valueAsNumber: true })} label={t("Words.start")} errors={errors?.period?.[id]?.by_monthday?.[0]} />
             </div>
             <div className="w-full md:w-[49%] my-2">
-                <Input value={watch(`period.${id}.by_monthday.1`)} required={true} min="1" type="number" dataTestId={`period_1_${dayjs().millisecond()}`} {...register(`period.${id}.by_monthday.1`, { valueAsNumber: true })} label={i18n(`Words.end`)} errors={errors?.period?.[id]?.by_monthday?.[1]} />
+                <Input required={true} min="1" type="number" dataTestId={`period_1_${dayjs().millisecond()}`} {...register(`period.${id}.by_monthday.1`, { valueAsNumber: true })} label={t(`Words.end`)} errors={errors?.period?.[id]?.by_monthday?.[1]} />
             </div>
         </div>
     )

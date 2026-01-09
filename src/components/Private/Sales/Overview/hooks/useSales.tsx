@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   ModalSaleOperationType,
 } from "../../type";
@@ -23,7 +23,7 @@ export function useSales() {
     useDeleteSales();
 
   /** tHeads NÃO depende de estado → useRef é perfeito aqui */
-  const tHeads = useRef<Array<string>>([
+  const tHeads = useMemo<Array<string>>(() => [
     t("Words.tour"),
     t("Words.name"),
     t("Words.status"),
@@ -32,7 +32,7 @@ export function useSales() {
     "Uni.",
     t("Words.sold_at"),
     t("Words.actions"),
-  ]);
+  ], [t]);
 
   /** 🔥 useCallback para estável */
   const updateForTable = useCallback(

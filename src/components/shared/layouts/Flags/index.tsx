@@ -26,7 +26,7 @@ export function Flags() {
 
   return (
     <div
-      className="relative mx-4 z-[1]"
+      className="relative mx-4 z-[1] hover:z-[999]"
       onMouseEnter={() => setIsShowFlags(true)}
       onMouseLeave={() => setIsShowFlags(false)}
     >
@@ -35,7 +35,7 @@ export function Flags() {
         <ArrowDownSimple className="ml-2" />
       </div>
       <ul
-        className="absolute left-[-8px] top-10 bg-white shadow-md px-4 rounded-b-lg transition-all overflow-hidden"
+        className="absolute left-[-8px] top-8 bg-white shadow-md px-4 rounded-b-lg transition-all overflow-hidden"
         style={{
           height: isShowFlags ? "9rem" : "0rem",
         }}

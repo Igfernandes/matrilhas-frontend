@@ -1,9 +1,10 @@
 import { Footer } from "@components/Public/External/Footer";
 import { Header } from "@components/Public/External/Header";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 import Image from "next/image";
 
 export default function Page404() {
+  const { t } = useI18n()
   return (
     <div className="min-h-[100vh] flex flex-col justify-between">
       <Header />
@@ -19,7 +20,7 @@ export default function Page404() {
         </div>
         <div className="text text-center max-w-[428px] mx-auto mb-6">
           <p className="text-xl font-bold">
-            {i18n("Words.page_not_available")}
+            {t("Words.page_not_available")}
           </p>
         </div>
       </div>

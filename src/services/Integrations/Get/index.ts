@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetIntegrationsRequest } from "./types";
+import { GetIntegrationsRequest, GetIntegrationsResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { IntegrationShape } from "@type/Integrations";
 
 export default function useGet() {
   const { integrations } = API_ROUTES;
@@ -12,7 +11,7 @@ export default function useGet() {
   async function getIntegrations(request?: GetIntegrationsRequest) {
     const { id, ...query } = request ?? {};
 
-    return await axios.get<IntegrationShape[]>(
+    return await axios.get<GetIntegrationsResponse>(
       setQueries({
         url: setParams({
           url: integrations,

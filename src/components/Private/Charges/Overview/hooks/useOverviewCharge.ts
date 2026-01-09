@@ -1,55 +1,13 @@
-import { CardItemShape } from "@components/shared/layouts/CardBoard/types";
 import useGetCharges from "@services/Charges/Get/useGetCharges";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { financeCardsBoard } from "../../../../../data/finance/cardsBoard";
 import useGetPayments from "@services/Charges/Payments/Get/useGet";
-import dayjs from "dayjs";
 
 export function useChargeOverview() {
   const { rows: chargesData } = useGetCharges();
   const charges = useMemo(() => chargesData ?? [], [chargesData]);
   const { rows: paymentsData } = useGetPayments();
   const payments = useMemo(() => paymentsData ?? [], [paymentsData]);
-
-  const updateLinkedCustomers = useCallback(
-    (cardBoard: CardItemShape) => {
-      const clientsLinked = charges
-        .map((charge) => charge.clients?.length)
-        .reduce((acc: number, c) => acc + (c ?? 0), 0);
-      return {
-        ...cardBoard,
-        value: String(clientsLinked),
-      };
-    },
-    [charges]
-  );
-
-  const getPaymentsExtract = useCallback(() => {
-    let monthlyIncome = 0;
-    let revenueIncome = 0;
-
-    const quantity = payments.filter(({ created_at, status, paid_amount }) => {
-      const paymentDate = dayjs(created_at);
-      const nowDate = dayjs();
-
-      if (
-        paymentDate.month() === nowDate.month() &&
-        paymentDate.year() === nowDate.year()
-      )
-        monthlyIncome += status === "PAID" ? paid_amount : 0;
-
-      if (paymentDate.year() === nowDate.year())
-        revenueIncome += status === "PAID" ? paid_amount : 0;
-
-      return status === "PAID";
-    }).length;
-
-    return {
-      quantity,
-      monthly: monthlyIncome,
-      revenue: revenueIncome,
-    };
-  }, [payments]);
 
   const cardsBoard = useMemo(() => {
     const updatedLinkedCostumers = financeCardsBoard.map((card) => {
@@ -89,7 +47,7 @@ export function useChargeOverview() {
     });
 
     return updatedLinkedCostumers;
-  }, [payments, getPaymentsExtract, updateLinkedCustomers]);
+  }, [payments, charges]);
 
   return {
     charges,

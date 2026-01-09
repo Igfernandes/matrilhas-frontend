@@ -1,19 +1,22 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import { TourShape } from "@type/Tours"
 import { RulesPayload, RulesSchema } from "../AgencySchema"
 import useDeleteToursAgency from "@services/Tours/Agency/Delete/useDeleteToursAgencies"
 import { useModalContext } from "@contexts/Modal"
+import { useI18n } from "@contexts/I18n"
 
 type Props = {
     tour: TourShape
 }
 
 export function useRules({ tour }: Props = {} as Props) {
+    const { t } = useI18n()
+    const schema = useMemo(() => RulesSchema(t), [t])
     const { modal, handleToggleModal } = useModalContext()
     const { mutateAsync: deleteToursRelationAgencies, isPending: isLoadingDelete } = useDeleteToursAgency()
     const { formMethods, handleSubmit, register, errors } = useFormRules<RulesPayload>({
-        schema: RulesSchema,
+        schema,
         defaultValues: {
         }
     })

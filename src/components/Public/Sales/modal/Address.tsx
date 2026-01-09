@@ -41,12 +41,12 @@ export function Address() {
             </When>
             <When value={country !== "Brasil"}>
                 <div className="w-full my-2">
-                    <Input defaultValue={"Rio de Janeiro"} dataTestId="state" {...register("state")}
+                    <Input maxLength={100} defaultValue={"Rio de Janeiro"} dataTestId="state" {...register("state")}
                         label={t("Words.state")} errors={errors?.state} />
                 </div>
             </When>
             <div className="w-full my-2">
-                <Input dataTestId="city" {...register("city")} label={t("Words.city")} errors={errors?.city} />
+                <Input maxLength={100} dataTestId="city"  {...register("city")} label={t("Words.city")} errors={errors?.city} />
             </div>
             <div className="flex items-center justify-between mt-5">
                 <div className="w-[48%]">

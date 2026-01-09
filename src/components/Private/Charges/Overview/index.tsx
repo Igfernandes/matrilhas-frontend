@@ -46,10 +46,10 @@ export function ChargesOverview() {
             ),
             filters: filters["CHARGES"] ?? {},
           }}
-          title={i18n("Words.my_charges")}
+          title={i18n("Words.charges")}
           excludes={["created_at", "updated_at"]}
           tHeads={{
-            data: tHeadsFinance.current,
+            data: tHeadsFinance,
             widths: [60, 300, 100, 100, 100, 100, 48],
           }}
         />

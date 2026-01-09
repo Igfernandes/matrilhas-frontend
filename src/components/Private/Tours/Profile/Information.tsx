@@ -28,6 +28,7 @@ export function Information({ register, errors }: Props) {
                         dataTestId="title"
                         {...register("title")}
                         label={t("Words.title")}
+                        maxLength={200}
                         errors={errors?.title}
                     />
                 </div>
@@ -36,7 +37,7 @@ export function Information({ register, errors }: Props) {
                     <Datetime
                         dataTestId="available_at"
                         {...register("available_at")}
-                        label={t("Words.viewed_at")}
+                        label={t("Texts.viewed_at")}
                         errors={errors?.available_at}
                     />
                 </div>
@@ -46,7 +47,7 @@ export function Information({ register, errors }: Props) {
                     <Datetime
                         dataTestId="unavailable_at"
                         {...register("unavailable_at")}
-                        label={t("Words.unavailable_at")}
+                        label={t("Texts.unavailable_at")}
                         errors={errors?.unavailable_at}
                     />
                 </div>
@@ -58,6 +59,7 @@ export function Information({ register, errors }: Props) {
                         dataTestId="slug"
                         {...register("slug")}
                         label={t("Words.slug")}
+                        maxLength={30}
                         errors={errors?.slug}
                     />
                 </div>
@@ -105,6 +107,7 @@ export function Information({ register, errors }: Props) {
                         dataTestId="video"
                         {...register("video")}
                         label={t("Words.video")}
+                        maxLength={600}
                         errors={errors?.video}
                     />
                 </div>
@@ -116,6 +119,7 @@ export function Information({ register, errors }: Props) {
                         {...register("short_description")}
                         label={t("Words.short_description")}
                         className="h-24"
+                        maxLength={200}
                         errors={errors?.short_description}
                     />
                 </div>
@@ -126,8 +130,9 @@ export function Information({ register, errors }: Props) {
                         {...register("description")}
                         dataTestId="description"
                         label={t("Words.description")}
-                        placeholder={t("Words.about_description")}
+                        placeholder={t("Texts.about_description")}
                         errors={errors?.description}
+                        maxLength={6000}
                     />
                 </div>
             </div>

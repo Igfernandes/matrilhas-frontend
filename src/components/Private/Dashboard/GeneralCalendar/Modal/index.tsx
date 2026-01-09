@@ -1,11 +1,11 @@
 import { Modal } from "@components/shared/layouts/Modal";
-import i18n from "@configs/i18n";
 import { useModalContext } from "@contexts/Modal";
 import { ManagerEntitiesProps } from "../../type";
 import { ChargeFeedback } from "./ChargeFeedback";
 import { ClientFeedback } from "./ClientFeedback";
 import { UserFeedback } from "./UserFeedback";
 import { FormFeedback } from "./FormFeedback";
+import { useI18n } from "@contexts/I18n";
 
 export function ModalScheduled({
   charges,
@@ -14,10 +14,11 @@ export function ModalScheduled({
   forms = []
 }: ManagerEntitiesProps) {
   const { handleToggleModal, modal } = useModalContext();
+  const { t } = useI18n()
 
   return (
     <Modal
-      title={i18n("Words.month_events")}
+      title={t("Texts.month_events")}
       isShowModal={modal.type === "SCHEDULED"}
       handleModal={handleToggleModal}
     >

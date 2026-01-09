@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { InfoBoard } from "@components/shared/forms/InfoBoard/viewer";
 import { TViewer } from "@components/shared/forms/InfoBoard/fields/Viewer";
 import { Sidebar } from "./sidebar";
@@ -32,7 +31,6 @@ export function Information({ sale }: Props) {
         PENDING: textColors.orange,
         CANCELED: textColors.red,
     };
-    console.log(sale)
 
     return (
         <FormProvider {...formMethods}>
@@ -54,17 +52,17 @@ export function Information({ sale }: Props) {
                             <h3>{t(`Screens.dashboard.sales.status.${status.toLocaleLowerCase()}`)}</h3>
                         </div>
                         <InfoBoard>
-                            <TViewer name="reference" label={i18n("Words.reference_id")} defaultValue={sale.reference} />
-                            <TViewer name="payment_id" label={i18n("Words.payment_id")} defaultValue={sale.payment_id ?? "--"} />
-                            <TViewer element="reference" name="agency" url={agency?.url} label={i18n("Words.agency")}
+                            <TViewer name="reference" label={t("Words.reference_id")} defaultValue={sale.reference} />
+                            <TViewer name="payment_id" label={t("Words.payment_id")} defaultValue={sale.payment_id ?? "--"} />
+                            <TViewer element="reference" name="agency" url={agency?.url} label={t("Words.agency")}
                                 value={agency?.name} />
-                            <TViewer name="tour" label={i18n("Words.tour")} defaultValue={sale.tour.name ?? "--"} />
-                            <TViewer name="bank" label={i18n("Words.bank")} defaultValue={sale?.bank?.name ?? "Mercado Pago"} />
+                            <TViewer name="tour" label={t("Words.tour")} defaultValue={sale.tour.name ?? "--"} />
+                            <TViewer name="bank" label={t("Words.bank")} defaultValue={sale?.bank?.name ?? "Mercado Pago"} />
                             <When value={!!metadata?.boarding}>
-                                <TViewer name="landing" label={i18n("Texts.landing_at")} defaultValue={String(metadata?.boarding) ?? "--"} />
+                                <TViewer name="landing" label={t("Texts.landing_at")} defaultValue={String(metadata?.boarding) ?? "--"} />
                             </When>
                             <When value={!!metadata?.landing}>
-                                <TViewer name="landing" label={i18n("Texts.landing_at")} defaultValue={String(metadata?.landing) ?? "--"} />
+                                <TViewer name="landing" label={t("Texts.landing_at")} defaultValue={String(metadata?.landing) ?? "--"} />
                             </When>
                         </InfoBoard>
                         <hr className="border-secondary my-4" />
@@ -74,11 +72,11 @@ export function Information({ sale }: Props) {
                                 <p className="text-sm">{t("Screens.dashboard.sales.text_describe_client_information")}</p>
                             </div>
                             <InfoBoard>
-                                <TViewer element="reference" name="client" url={`${privateRoutes.clients}/${sale.client.id}`} label={i18n("Words.client")} value={sale.client.name ?? "--"} />
-                                <TViewer name="document" label={i18n("Words.document")} defaultValue={getCPFFormatted(String(metadata?.cpf)) ?? "--"} />
-                                <TViewer name="email" label={i18n("Words.email")} defaultValue={String(metadata?.email) ?? "--"} />
-                                <TViewer name="phone" label={i18n("Words.phone")} defaultValue={String(metadata?.phone) ?? "--"} />
-                                <TViewer name="bank" label={i18n("Words.bank")} defaultValue={sale?.bank?.name ?? "Mercado Pago"} />
+                                <TViewer element="reference" name="client" url={`${privateRoutes.clients}/${sale.client.id}`} label={t("Words.client")} value={sale.client.name ?? "--"} />
+                                <TViewer name="document" label={t("Words.document")} defaultValue={getCPFFormatted(String(metadata?.cpf)) ?? "--"} />
+                                <TViewer name="email" label={t("Words.email")} defaultValue={String(metadata?.email) ?? "--"} />
+                                <TViewer name="phone" label={t("Words.phone")} defaultValue={String(metadata?.phone) ?? "--"} />
+                                <TViewer name="bank" label={t("Words.bank")} defaultValue={sale?.bank?.name ?? "Mercado Pago"} />
 
                             </InfoBoard>
                             <hr className="border-secondary my-4" />
@@ -87,11 +85,11 @@ export function Information({ sale }: Props) {
                                 <p className="text-sm">{t("Screens.dashboard.sales.text_describe_client_address")}</p>
                             </div>
                             <InfoBoard>
-                                <TViewer name="country" label={i18n("Words.country")} defaultValue={String(metadata?.country) ?? "--"} />
-                                <TViewer name="state" label={i18n("Words.state")} defaultValue={String(metadata?.state) ?? "--"} />
-                                <TViewer name="city" label={i18n("Words.city")} defaultValue={String(metadata?.city) ?? "--"} />
+                                <TViewer name="country" label={t("Words.country")} defaultValue={String(metadata?.country) ?? "--"} />
+                                <TViewer name="state" label={t("Words.state")} defaultValue={String(metadata?.state) ?? "--"} />
+                                <TViewer name="city" label={t("Words.city")} defaultValue={String(metadata?.city) ?? "--"} />
                                 <When value={!!metadata?.residency_file}>
-                                    <TViewer name="residency_file" isFile={true} label={i18n("Screens.sales.residency_file")} defaultValue={String(metadata?.residency_file) ?? "--"} />
+                                    <TViewer name="residency_file" isFile={true} label={t("Screens.sales.residency_file")} defaultValue={String(metadata?.residency_file) ?? "--"} />
                                 </When>
                             </InfoBoard>
                             <hr className="border-secondary my-4" />

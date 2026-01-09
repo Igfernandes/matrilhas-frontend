@@ -32,13 +32,13 @@ export function Dependents() {
             {Array.from({ length: amount }).map((_, index) => (
                 <div key={`dependent_${index}`} className="flex flex-wrap justify-between bg-secondary my-4 px-2">
                     <div className="w-full my-2">
-                        <Input required={true} dataTestId="name" {...register(`dependents.${index}.name`)} label={t("Words.name")} errors={errors?.dependents?.[index]?.name} />
+                        <Input maxLength={100} required={true} dataTestId="name" {...register(`dependents.${index}.name`)} label={t("Words.name")} errors={errors?.dependents?.[index]?.name} />
                     </div>
                     <div className="w-full md:w-[48%] my-2">
-                        <CPF register={register} name={`dependents.${index}.cpf`} required={true} dataTestId="cpf" label={t("Words.cpf")} errors={errors?.dependents?.[index]?.cpf} />
+                        <CPF {...register(`dependents.${index}.cpf`)} name={`dependents.${index}.cpf`} required={true} dataTestId="cpf" label={t("Words.cpf")} errors={errors?.dependents?.[index]?.cpf} />
                     </div>
                     <div className="w-full md:w-[48%] my-2">
-                        <Date name={`dependents.${index}.birthdate`} required={true} dataTestId="birthdate" label={t("Words.birthdate")} errors={errors?.dependents?.[index]?.birthdate} />
+                        <Date {...register(`dependents.${index}.birthdate`)} name={`dependents.${index}.birthdate`} required={true} dataTestId="birthdate" label={t("Words.birthdate")} errors={errors?.dependents?.[index]?.birthdate} />
                     </div>
                     <div className="w-full text-right mt-1 mb-2">
                         <span onClick={() => handleRemove(index)}

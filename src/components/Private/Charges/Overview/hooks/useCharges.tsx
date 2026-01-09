@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import i18n from "@configs/i18n";
+import { useMemo, useState } from "react";
 
 import { ChargeShape } from "@type/Charges";
 import dayjs from "dayjs";
@@ -10,8 +9,10 @@ import { Period } from "@type/status";
 import { ChargesActions } from "../ChargesActions";
 import { Status } from "@components/utilities/Status";
 import { SelectorShape } from "@components/shared/layouts/Selector/type";
+import { useI18n } from "@contexts/I18n";
 
 export function useCharges() {
+  const { t } = useI18n()
   const [selectors, setSelectors] = useState<Array<SelectorShape>>([])
   const { handleToggleModal, modal } = useModalContext();
   const { mutateAsync: deleteCharge, isPending } = useDeleteCharges();
@@ -24,15 +25,15 @@ export function useCharges() {
     });
   };
 
-  const tHeadsFinance = useRef<Array<string>>([
+  const tHeadsFinance = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Words.name"),
-    i18n("Words.type"),
-    i18n("Words.status"),
-    i18n("Words.clients"),
-    i18n("Words.agencies"),
-    i18n("Words.actions"),
-  ]);
+    t("Words.name"),
+    t("Words.type"),
+    t("Words.status"),
+    t("Words.clients"),
+    t("Words.agencies"),
+    t("Words.actions"),
+  ], [t]);
 
   const updateChargeForTable = (data: unknown): TDataCharges => {
     const { id, title, type, status, clients, agencies, reference, created_at }: ChargeShape = data as ChargeShape;
@@ -40,11 +41,11 @@ export function useCharges() {
     return {
       id: chargeId,
       title,
-      type: i18n(`Words.${type?.toLowerCase()}`) as Period,
+      type: t(`Words.${type?.toLowerCase()}`) as Period,
       status: <Status is={status} />,
       clients: clients?.length ?? 0,
       agencies: agencies?.length ?? 0,
-      created_at: dayjs(created_at).format(i18n("Configs.format.date")),
+      created_at: dayjs(created_at).format(t("Configs.format.date")),
       actions: <ChargesActions reference={reference} handleToggleModal={handleToggleModal} id={id} />,
     };
   };

@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, InputHTMLAttributes } from "react";
-import { FieldError, UseFormRegister } from "react-hook-form";
+import { FieldError } from "react-hook-form";
 
-export type InputProps = DetailedHTMLProps<
+export type CPFProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 > & {
@@ -11,8 +11,6 @@ export type InputProps = DetailedHTMLProps<
   name: string;
   errors?: FieldError;
   tooltip?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: UseFormRegister<any>;
   prefix?: string;
   handleChange?: (ev: React.ChangeEvent<HTMLInputElement> | undefined) => void;
 };

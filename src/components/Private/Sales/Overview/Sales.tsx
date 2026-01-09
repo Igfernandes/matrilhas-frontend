@@ -1,5 +1,4 @@
 import { useSales } from "./hooks/useSales";
-import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
 import { useModalContext } from "@contexts/Modal";
 import { ModalSaleOperationType } from "../type";
@@ -8,8 +7,10 @@ import { Shared } from "@components/shared/others/Shared";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 import { SaleHeader } from "./SaleHeader";
+import { useI18n } from "@contexts/I18n";
 
 export function SalesTable() {
+  const { t } = useI18n()
   const {
     handleDelete, setSelectors, isLoadingDelete, tHeads, selectors, updateForTable
   } = useSales();
@@ -23,7 +24,7 @@ export function SalesTable() {
         <SaleHeader />
         <SmartTable
           ajax={{
-            key: "agencies",
+            key: "sales",
             url: API_ROUTES.sales,
             builder: updateForTable
           }}
@@ -44,19 +45,19 @@ export function SalesTable() {
             ),
             filters: filters["SALES"] ?? {},
           }}
-          title={i18n("Words.sales")}
+          title={t("Words.sales")}
           excludes={["updated_at"]}
           tHeads={{
-            data: tHeads.current,
-            widths: [230, 120, 70, 70, 70, 70, 150, 48],
+            data: tHeads,
+            widths: [230, 150, 100, 80, 70, 50, 150, 48],
           }}
         />
       </div>
       <div className="relative z-10">
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.sales.title_already_exclude")}
-          text={i18n("Screens.dashboard.sales.text_already_exclude")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.sales.title_already_exclude")}
+          text={t("Screens.dashboard.sales.text_already_exclude")}
           onSubmit={handleDelete}
           isShowModal={modal.type === "DELETE"}
           onModal={handleToggleModal}

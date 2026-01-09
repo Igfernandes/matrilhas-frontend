@@ -1,5 +1,4 @@
-import { useCallback, useRef, useState } from "react";
-import i18n from "@configs/i18n";
+import { useCallback, useMemo, useState } from "react";
 import {
   ModalTourOperationType,
 } from "../../type";
@@ -11,8 +10,10 @@ import { Status } from "@components/utilities/Status";
 import useDeleteTours from "@services/Tours/Delete/useDeleteTours";
 import { TourShape } from "@type/Tours";
 import { DeleteTourPayload } from "@services/Tours/Delete/type";
+import { useI18n } from "@contexts/I18n";
 
 export function useTours() {
+  const { t } = useI18n()
   const { handleToggleModal, modal } =
     useModalContext<ModalTourOperationType>();
   /** Esse sim precisa ser state */
@@ -22,14 +23,14 @@ export function useTours() {
     useDeleteTours();
 
   /** tHeads NÃO depende de estado → useRef é perfeito aqui */
-  const tHeads = useRef<Array<string>>([
-    "ID",
-    i18n("Words.title"),
-    i18n("Words.status"),
-    i18n("Words.available_at"),
-    i18n("Words.created_at"),
-    i18n("Words.actions"),
-  ]);
+  const tHeads = useMemo<Array<string>>(() => [
+      "ID",
+      t("Words.title"),
+      t("Words.status"),
+      t("Texts.available_at"),
+      t("Words.created_at"),
+      t("Words.actions"),
+    ], [t]);
 
   /** 🔥 useCallback para estável */
   const updateForTable = useCallback(
@@ -80,7 +81,7 @@ export function useTours() {
     selectors,
     handleDelete,
     isLoadingDelete,
-    updateForTable, 
+    updateForTable,
     setSelectors,
     getSelected
   };

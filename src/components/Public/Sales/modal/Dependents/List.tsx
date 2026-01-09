@@ -23,7 +23,7 @@ export function List({ register, handleAddDependent, errors }: Props) {
                             <Input dataTestId="dependent_name" type="text" {...register("dependent_name")} className="w-full p-2" label={t("Texts.filled_name")} />
                         </div>
                         <div className="w-full my-2">
-                            <CPF dataTestId="dependent_cpf" register={register} name="dependent_cpf" className="w-full p-2" label={t("Texts.filled_cpf")} />
+                            <CPF dataTestId="dependent_cpf" {...register("dependent_cpf")} name="dependent_cpf" className="w-full p-2" label={t("Texts.filled_cpf")} />
                         </div>
                         <div className="w-full my-2">
                             <Date dataTestId="dependent_birthdate" {...register("dependent_birthdate")} className="w-full p-2" label={t("Texts.filled_birthdate")} />

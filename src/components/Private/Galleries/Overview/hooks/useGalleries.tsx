@@ -1,5 +1,4 @@
 import { useCallback, useRef, useState } from "react";
-import i18n from "@configs/i18n";
 import {
   DeleteGalleryPayload,
   ModalGalleryOperationType,
@@ -11,8 +10,10 @@ import { Status } from "@components/utilities/Status";
 import { GalleryShape } from "@type/Galleries";
 import { GalleriesActions } from "../GalleriesActions";
 import useDeleteGalleries from "@services/Galleries/Delete/useDelete";
+import { useI18n } from "@contexts/I18n";
 
 export function useGalleries() {
+  const { t } = useI18n()
   const { handleToggleModal, modal } =
     useModalContext<ModalGalleryOperationType>();
   /** Esse sim precisa ser state */
@@ -24,10 +25,10 @@ export function useGalleries() {
   /** tHeads NÃO depende de estado → useRef é perfeito aqui */
   const tHeads = useRef<Array<string>>([
     "ID",
-    i18n("Words.title"),
-    i18n("Words.status"),
-    i18n("Words.created_at"),
-    i18n("Words.actions"),
+    t("Words.title"),
+    t("Words.status"),
+    t("Words.created_at"),
+    t("Words.actions"),
   ]);
 
   /** 🔥 useCallback para estável */
@@ -40,13 +41,12 @@ export function useGalleries() {
         id: clientId,
         title,
         status: <Status is={status} />,
-        created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm"),
+        created_at: dayjs(created_at).format(t("Configs.format.datetime")),
         actions: <GalleriesActions handleToggleModal={handleToggleModal} id={id} />,
       };
     },
-    [handleToggleModal]
+    [handleToggleModal, t]
   );
-
 
   /** DELETE otimizado */
   const handleDelete = useCallback(() => {
@@ -70,7 +70,6 @@ export function useGalleries() {
       .map((s) => s.value)
       .join(",");
   }, []);
-
 
 
   return {

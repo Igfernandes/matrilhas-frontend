@@ -14,6 +14,7 @@ export function FormHub({
   entityType,
   handleSubmitFields,
   handleUpdateClient,
+  isLoading
 }: FormBuildProps) {
   return (
     <div className="relative z-0">
@@ -24,6 +25,7 @@ export function FormHub({
               entity={entity}
               entityType={entityType}
               fieldsRelation={fields}
+              isLoading={isLoading}
               handleSubmitFields={handleSubmitFields}
             >
               <OptionsBar

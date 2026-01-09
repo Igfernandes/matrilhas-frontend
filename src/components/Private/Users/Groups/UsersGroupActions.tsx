@@ -1,8 +1,8 @@
 import { ButtonConfig } from "@components/shared/others/ButtonConfig";
 import { ModalUserOperationType } from "../type";
-import i18n from "@configs/i18n";
 import { UsersGroupShape } from "@type/Users/UsersGroup";
 import { useModalContext } from "@contexts/Modal";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     userGroup: UsersGroupShape;
@@ -10,16 +10,17 @@ type Props = {
 
 export function UsersGroupActions({ userGroup }: Props) {
     const { handleToggleModal } = useModalContext<ModalUserOperationType>();
+    const { t } = useI18n()
 
     return (
         <ButtonConfig
             actions={[
                 {
-                    text: i18n("Words.edit"),
+                    text: t("Words.edit"),
                     handle: () => handleToggleModal("DEFAULT_GROUP", userGroup.id),
                 },
                 {
-                    text: i18n(
+                    text: t(
                         `Words.${userGroup.status == "ACTIVE" ? "desative" : "ative"}`
                     ),
                     handle: () =>
@@ -31,7 +32,7 @@ export function UsersGroupActions({ userGroup }: Props) {
                         ),
                 },
                 {
-                    text: i18n("Words.exclude"),
+                    text: t("Words.exclude"),
                     handle: () => handleToggleModal("DELETE_GROUP", userGroup.id),
                 },
             ]}

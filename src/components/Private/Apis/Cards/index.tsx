@@ -1,9 +1,11 @@
 import { Config } from "@assets/Icons/black/Config";
-import i18n from "@configs/i18n";
 import Image from "next/image";
 import { CardsProps } from "./type";
+import { useI18n } from "@contexts/I18n";
 
 export function Cards({ items }: CardsProps) {
+  const { t } = useI18n()
+  
   return (
     <div className="cards flex flex-wrap justify-between p-2">
       {items.map(({ id, img, status, handleModal, text }, key) => (
@@ -24,14 +26,14 @@ export function Cards({ items }: CardsProps) {
             <div className="footer flex flex-wrap justify-between border-t-2 border-t-tertiary pt-3 mt-2">
               <div className="status">
                 <p className="bg-red px-2 text-white rounded-lg">
-                  {i18n(`Words.${status.toLocaleLowerCase()}`)}
+                  {t(`Words.${status.toLocaleLowerCase()}`)}
                 </p>
               </div>
               <div
                 className="cursor-pointer flex"
                 onClick={() => handleModal(true, id)}
               >
-                <span>{i18n(`Words.connect`)} </span>
+                <span>{t(`Words.connect`)} </span>
                 <Config className="w-5 ml-1" />
               </div>
             </div>

@@ -7,16 +7,18 @@ import "yet-another-react-lightbox/styles.css";
 import { When } from "@components/utilities/When";
 import Share from "yet-another-react-lightbox/plugins/share";
 import { Skeleton } from "@components/utilities/Skeleton";
+import { useI18n } from "@contexts/I18n";
 
 export function Galleries() {
+    const { t } = useI18n()
     const { galleries, handleChangeTargetPhotos, targetPhotos, isLoading } = useGalleries()
 
     return (
         <Section>
             <div className="min-h-[70vh] my-10">
                 <div className="text-center mb-10">
-                    <h1 className="text-3xl text-primary font-bold">Galeria de Fotos</h1>
-                    <p>Os melhores momentos com matrilhas e suas experiências</p>
+                    <h1 className="text-3xl text-primary font-bold">{t("Screens.galleries.title")}</h1>
+                    <p>{t("Screens.galleries.description")}</p>
                 </div>
                 <div className="flex flex-wrap ">
                     <Skeleton isLoading={isLoading} settings={{
@@ -33,12 +35,12 @@ export function Galleries() {
                                 <div className="my-1">
                                     <When value={gallery?.images && gallery?.images?.length > 0}>
                                         <span onClick={() => handleChangeTargetPhotos(gallery.images, gallery.title)} className="inline-block w-full text-center cursor-pointer hover:bg-primary hover:text-white border-primary border rounded-sm">
-                                            visualizar
+                                            {t("Words.see")}
                                         </span>
                                     </When>
                                     <When value={!gallery?.images || gallery?.images?.length === 0}>
                                         <span className="w-full inline-block text-center cursor-pointer hover:bg-primary hover:text-white rounded-sm">
-                                            Ainda não há imagens
+                                            {t("Words.images")}
                                         </span>
                                     </When>
                                 </div>

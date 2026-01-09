@@ -1,4 +1,9 @@
 export const SalesApiTranslations = {
+  checkout: {
+    success: {
+      post: "Processamento finalizado! Logo será redirecionado para concluir o pagamento!",
+    },
+  },
   success: {
     imports: "As vendas foram importadas com sucesso",
     post: "A venda foi criada com sucesso!",
@@ -12,7 +17,27 @@ export const SalesApiTranslations = {
     in_ids: "As vendas informadas encontram-se com alguma irregularidade",
     client: "A venda informada encontra-se inexistente ou inválida",
     clients: "As vendas informadas encontram-se inexistentes ou inválidas",
-    updated_at:
-      "A data de atualização informada da venda encontra-se inválida",
+    tour_id: "O passeio informado encontra-se inexistente ou inválido",
+    name: "O nome informado da venda encontra-se inválido",
+    cpf: "O CPF informado da venda encontra-se inválido",
+    birthdate: "A data de nascimento informada da venda encontra-se inválida",
+    email: "O e-mail informado da venda encontra-se inválido",
+    sale: "A venda informada encontra-se inválida",
+    currency: "A moeda informada da venda encontra-se inválida",
+    reference: "A referência informada da venda encontra-se inválida",
+    price: "O preço informado da venda encontra-se inválido",
+    status: "O status informado da venda encontra-se inválido",
+    discounts: "Os descontos informados da venda encontram-se inválidos",
+    installments: "O número de parcelas informado da venda encontra-se inválido",
+    phone: "O telefone informado da venda encontra-se inválido",
+    password: "A senha informada da venda encontra-se inválida",
+    country: "O país informado da venda encontra-se inválido",
+    state: "O estado informado da venda encontra-se inválido",
+    residency_file:
+      "O arquivo de residência informado da venda encontra-se inválido",
+    city: "A cidade informada da venda encontra-se inválida",
+    landing: "O local de desembarque informado da venda encontra-se inválido",
+    boarding: "O ponto de embarque informado da venda encontra-se inválido",
+    updated_at: "A data de atualização informada da venda encontra-se inválida",
   },
 };

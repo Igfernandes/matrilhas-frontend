@@ -8,7 +8,7 @@ type Props = {
 
 export function useSocialMedias({ socialMedias }: Props) {
   const { getValues, setValue } = useFormContext();
-  const [lines, setLines] = useState<number>(socialMedias?.length || 1);
+  const [lines, setLines] = useState<number>(socialMedias?.length || 0);
 
   const handleRemoveSocialMedia = useCallback(
     (index: number) => {

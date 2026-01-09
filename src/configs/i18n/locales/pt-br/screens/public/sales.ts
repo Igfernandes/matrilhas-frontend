@@ -21,6 +21,10 @@ export const SalesTranslations = {
     title: "Informações de contato",
     text: "Preencha as informações de contato.",
   },
+  resume: {
+    title: "Resumo da Compra",
+    text: "Abaixo está o resumo da sua compra"
+  },
   filled_all_fields: "Preencha todos os campos para prosseguir",
   gratuity_by_age: "Gratuidade pela idade",
   residency_file: "Comprovante de Residência",

@@ -1,23 +1,24 @@
 import { SelectorShape } from "@components/shared/layouts/Selector/type";
 import { Status } from "@components/utilities/Status";
-import i18n from "@configs/i18n";
 import { getNumberFormatted } from "@helpers/string";
 import { TourAgencyShape } from "@type/Tours/Agency";
 import dayjs from "dayjs";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AgencyActions } from "../AgencyActions";
+import { useI18n } from "@contexts/I18n";
 
 export function useTable() {
+    const { t } = useI18n()
     const [selectors, setSelectors] = useState<SelectorShape[]>([]);
     /** tHeads NÃO depende de estado → useRef é perfeito aqui */
-    const tHeads = useRef<Array<string>>([
+    const tHeads = useMemo<Array<string>>(() => [
         "ID",
-        i18n("Words.name"),
-        i18n("Words.status"),
-        i18n("Words.phone"),
-        i18n("Words.created_at"),
-        i18n("Words.actions"),
-    ]);
+        t("Words.name"),
+        t("Words.status"),
+        t("Words.phone"),
+        t("Words.created_at"),
+        t("Words.actions"),
+    ], [t]);
 
     /** 🔥 useCallback para estável */
     const updateForTable = useCallback(

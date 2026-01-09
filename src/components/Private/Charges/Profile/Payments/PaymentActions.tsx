@@ -1,6 +1,6 @@
 import { DotsOptions } from "@components/shared/others/DotsOptions";
-import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
 import { useRouter } from "next/router";
 
 type Props = {
@@ -9,6 +9,7 @@ type Props = {
 };
 
 export function PaymentActions({ chargeId, paymentId }: Props) {
+  const { t } = useI18n()
   const router = useRouter();
 
   return (
@@ -16,7 +17,7 @@ export function PaymentActions({ chargeId, paymentId }: Props) {
       <DotsOptions
         actions={[
           {
-            text: i18n("Words.more_details"),
+            text: t ("Texts.more_details"),
             handle: () =>
               router.push(
                 privateRoutes.financePayments

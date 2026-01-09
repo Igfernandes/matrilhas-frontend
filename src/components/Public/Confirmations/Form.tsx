@@ -2,13 +2,14 @@ import { Button } from "@components/shared/forms/Button";
 import { useForm } from "./hooks/useForm";
 import { FormProvider } from "react-hook-form";
 import i18n from "@configs/i18n";
-import { Input } from "@components/shared/forms/Input";
 import { Phone } from "@components/shared/forms/Phone";
 import { When } from "@components/utilities/When";
 import Link from "next/link";
-import { getCPFFormatted } from "@helpers/string";
+import { useI18n } from "@contexts/I18n";
+import { CPF } from "@components/shared/forms/CPF";
 
 export function ConfirmationForm() {
+  const { t } = useI18n()
   const { formMethods, register, isLoading, handleSubmit, confirmations } =
     useForm();
 
@@ -19,28 +20,24 @@ export function ConfirmationForm() {
           <form onSubmit={handleSubmit}>
             <div className="form-title text-center mb-2">
               <h2 className="font-semibold text-red text-xl">
-                {i18n("Screens.confirmations.title")}
+                {t("Screens.confirmations.title")}
               </h2>
             </div>
             <div className="form-text text-center">
-              <p className="text-sm">{i18n("Screens.confirmations.text")}</p>
+              <p className="text-sm">{t("Screens.confirmations.text")}</p>
             </div>
             <div className="form-group my-4">
               <Phone
                 {...register("phone")}
                 dataTestId="phone"
-                label={i18n("Words.phone")}
+                label={t("Words.phone")}
               />
             </div>
             <div className="form-group my-4">
-              <Input
-                {...register("cpf", {
-                  onChange: (e) => {
-                    e.target.value = getCPFFormatted(e.target.value);
-                  },
-                })}
+              <CPF
+                {...register("cpf")}
                 dataTestId="cpf"
-                label={i18n("Words.cpf")}
+                label={t("Words.cpf")}
               />
               <div className="text-justify leading-3 mt-2">
                 <span className="text-xs text-red">
@@ -72,7 +69,7 @@ export function ConfirmationForm() {
           <div>
             <div className="mb-5 text-center font-semibold">
               <span className="block text-lg">
-                Clique em um dos links abaixo <br/> e faça a confirmação.
+                Clique em um dos links abaixo <br /> e faça a confirmação.
               </span>
             </div>
             <ul>

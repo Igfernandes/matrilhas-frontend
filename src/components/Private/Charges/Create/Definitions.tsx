@@ -7,12 +7,12 @@ import { Datetime } from "@components/shared/forms/DateTime";
 import { useI18n } from "@contexts/I18n";
 
 export function Definitions() {
+  const { t } = useI18n()
   const {
     watch,
     register,
     formState: { errors },
   } = useFormContext<ChargesPayload>();
-  const { t } = useI18n()
 
   return (
     <div className="bg-white  py-4 px-6 rounded-xl mb-6">
@@ -25,9 +25,9 @@ export function Definitions() {
         <Input
           {...register("title")}
           dataTestId="title"
-          label={t("Words.charge_name")}
+          label={t("Words.title")}
           errors={errors.title}
-          maxLength={400}
+          maxLength={100}
         />
       </div>
 
@@ -52,7 +52,7 @@ export function Definitions() {
           <Select
             {...register("type")}
             dataTestId="type"
-            label={t("Words.charge_type")}
+            label={t("Words.type")}
             options={["APPELLANT", "PUNCTUAL"].map((type) => ({
               text: t(`Words.${type.toLowerCase()}`),
               value: type,
@@ -83,7 +83,7 @@ export function Definitions() {
             <Input
               {...register("amount")}
               dataTestId="amount"
-              label={`${t("Words.charge_amount")}`}
+              label={`${t("Texts.charge_amount")}`}
               min={1}
               type="number"
               required={true}
@@ -99,7 +99,7 @@ export function Definitions() {
             type="number"
             min="1"
             dataTestId="expired_days"
-            label={`${t("Words.expired_days")} (${t("Words.optional")})`}
+            label={`${t("Texts.expired_days")} (${t("Words.optional")})`}
             errors={errors.expired_days}
           />
         </div>

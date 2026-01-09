@@ -22,7 +22,7 @@ export function SaleBoards({ statics }: Props) {
                     background: "bg-blue",
                     title: t("Screens.dashboard.statics.sales_by_tour").toUpperCase(),
                 }} items={tours.map((tour) => ({
-                    label: tour.title,
+                    label: tour.title ?? t("Words.deleted"),
                     value: tour.total_sales,
                     url: `${toursRoute}/${tour.id}`,
                 }))} />
@@ -32,7 +32,7 @@ export function SaleBoards({ statics }: Props) {
                     background: "bg-primary",
                     title: t("Screens.dashboard.statics.sales_by_agency").toUpperCase(),
                 }} items={agencies.map((agency) => ({
-                    label: agency.name,
+                    label: agency.name ?? t("Words.deleted"),
                     value: agency.total_sales,
                     url: `${agenciesRoute}/${agency.id}`,
                 }))} />
@@ -42,7 +42,7 @@ export function SaleBoards({ statics }: Props) {
                     background: "bg-primary",
                     title: t("Screens.dashboard.statics.sales_by_clients").toUpperCase(),
                 }} items={clients.map((client) => ({
-                    label: client.name,
+                    label: client.name ?? t("Words.deleted"),
                     value: client.total_purchases,
                     url: `${clientsRoute}/${client.id}`,
                 }))} />

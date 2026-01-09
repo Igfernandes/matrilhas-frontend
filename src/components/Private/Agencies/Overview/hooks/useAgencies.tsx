@@ -1,5 +1,4 @@
-import { useCallback, useRef, useState } from "react";
-import i18n from "@configs/i18n";
+import { useCallback, useMemo, useState } from "react";
 import {
   ModalAgencyOperationType,
 } from "../../type";
@@ -12,8 +11,10 @@ import { DeleteAgencyPayload } from "@services/Agencies/Delete/type";
 import { AgencyActions } from "../AgencyActions";
 import dayjs from "dayjs";
 import { Status } from "@components/utilities/Status";
+import { useI18n } from "@contexts/I18n";
 
 export function useAgencies() {
+  const { t } = useI18n()
   const { handleToggleModal, modal } =
     useModalContext<ModalAgencyOperationType>();
   /** Esse sim precisa ser state */
@@ -23,14 +24,14 @@ export function useAgencies() {
     useDeleteAgencies();
 
   /** tHeads NÃO depende de estado → useRef é perfeito aqui */
-  const tHeads = useRef<Array<string>>([
+  const tHeads = useMemo(() => ([
     "ID",
-    i18n("Words.name"),
-    i18n("Words.status"),
-    i18n("Words.phone"),
-    i18n("Words.created_at"),
-    i18n("Words.actions"),
-  ]);
+    t("Words.name"),
+    t("Words.status"),
+    t("Words.phone"),
+    t("Words.created_at"),
+    t("Words.actions"),
+  ]), [t]);
 
   /** 🔥 useCallback para estável */
   const updateForTable = useCallback(

@@ -1,12 +1,13 @@
-import i18n from "@configs/i18n";
 import { RecoverPasswordForm } from "./Form";
 import { EmailForward } from "@assets/Icons/colorful/EmailForward";
 import { SquareRoundedChevronLeft } from "@assets/Icons/black/SquareRoundedChevronLeft";
 import Link from "next/link";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import { useRef } from "react";
+import { useI18n } from "@contexts/I18n";
 
 export function ForgotPasswordContent() {
+  const { t } = useI18n()
   const { login } = publicRoutes;
   const texts = useRef<Record<string, string>>({
     title: "Screens.forgot_password.title",
@@ -21,11 +22,11 @@ export function ForgotPasswordContent() {
       </div>
       <div className="mb-1">
         <h2 className="text-2xl">
-          <strong>{i18n(texts.current.title)}</strong>
+          <strong>{t(texts.current.title)}</strong>
         </h2>
       </div>
       <div className="mb-6">
-        <p className="text-sm">{i18n(texts.current.text)}</p>
+        <p className="text-sm">{t(texts.current.text)}</p>
       </div>
       <RecoverPasswordForm />
       <div className="sm:px-8 mt-4">
@@ -34,7 +35,7 @@ export function ForgotPasswordContent() {
           href={login}
         >
           <SquareRoundedChevronLeft className="mr-2" />
-          <strong>{i18n(texts.current.back_page)}</strong>
+          <strong>{t(texts.current.back_page)}</strong>
         </Link>
       </div>
     </>

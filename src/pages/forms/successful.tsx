@@ -1,12 +1,12 @@
 import { Checks } from "@assets/Icons/colorful/Checks";
 import { FormSuccessfulPageProps } from "@components/Public/Forms/types";
 import { ExternalContainer } from "@components/shared/layouts/ExternalContainer";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 import { getFormPreview } from "@services/Forms/GetPreview/SSR";
 import { GetServerSideProps } from "next";
 
 export default function Successful({ form }: FormSuccessfulPageProps) {
- 
+  const { t } = useI18n()
   return (
     <ExternalContainer>
       <div className="row">
@@ -16,7 +16,7 @@ export default function Successful({ form }: FormSuccessfulPageProps) {
           </div>
           <div className="text-center mb-6">
             <h2 className="text-2xl">
-              <strong>{i18n("Screens.forms.successful.form_received")}</strong>
+              <strong>{t("Screens.forms.successful.form_received")}</strong>
             </h2>
           </div>
           <div
@@ -24,7 +24,7 @@ export default function Successful({ form }: FormSuccessfulPageProps) {
             dangerouslySetInnerHTML={{
               __html:
                 form?.thanks_message ??
-                i18n("Screens.forms.successful.form_message"),
+                t("Screens.forms.successful.form_message"),
             }}
           ></div>
         </div>

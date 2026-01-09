@@ -8,6 +8,7 @@ import useGetTourAgencies from "@services/Tours/Agency/Get/useGet";
 import { TourShape } from "@type/Tours";
 import useGetAgencies from "@services/Agencies/Get/useGet";
 import usePostTourAgency from "@services/Tours/Agency/Post/usePost";
+import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);
 
@@ -16,12 +17,14 @@ type Props = {
 };
 
 export function useModal({ tour }: Props) {
+  const { t } = useI18n();
+  const schema = useMemo(() => ToursAgenciesSchema(t), [t]);
   const { rows: agenciesRelations } = useGetTourAgencies({
     tour_id: tour?.id,
   });
   const { formMethods, handleSubmit } =
     useFormRules<ToursAgenciesUpdatePayload>({
-      schema: ToursAgenciesSchema,
+      schema,
     });
 
   const { rows: agenciesData } = useGetAgencies();
@@ -44,13 +47,6 @@ export function useModal({ tour }: Props) {
   const { mutateAsync: postTourAgency, isPending: isLoadingPost } =
     usePostTourAgency();
 
-  const handleDeleteSchedule = async () => {
-    // await deleteSchedule({
-    //   id: parseInt(modal.id as string),
-    // });
-    handleToggleModal(false);
-  };
-
   const submit = async ({ agencies }: ToursAgenciesUpdatePayload) => {
     await postTourAgency({
       tour_id: tour.id,
@@ -68,6 +64,5 @@ export function useModal({ tour }: Props) {
     submit,
     isLoading: isLoadingPost,
     agencies,
-    handleDeleteSchedule,
   };
 }

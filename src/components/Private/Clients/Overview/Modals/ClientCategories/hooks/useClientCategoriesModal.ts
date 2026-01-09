@@ -4,15 +4,19 @@ import { SelectorShape } from "@components/shared/layouts/Selector/type";
 import { PatchClientsCategoryPayload } from "../../../../../../../services/Clients/PatchCategory/type";
 import usePatchClientCategory from "../../../../../../../services/Clients/PatchCategory/usePatch";
 import { useModalContext } from "@contexts/Modal";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
 type Props = {
   selectors: SelectorShape[];
 };
 
 export function useClientCategoriesModal({ selectors }: Props) {
+  const { t } = useI18n();
+  const schema = useMemo(() => ClientCategoryModalSchema(t), [t]);
   const { formMethods, register, errors } = useFormRules<ClientCategoryPayload>(
     {
-      schema: ClientCategoryModalSchema,
+      schema,
     }
   );
   const { handleToggleModal, modal } = useModalContext();

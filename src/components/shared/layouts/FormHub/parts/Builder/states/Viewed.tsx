@@ -2,12 +2,14 @@ import { When } from "@components/utilities/When";
 import { FormBuildProps } from "../type";
 import { translateOrFallback } from "@helpers/i18nHelper";
 import Link from "next/link";
-import i18n from "@configs/i18n";
 import { Upload } from "@assets/Icons/black/Upload";
+import { useI18n } from "@contexts/I18n";
 
 type Props = Pick<FormBuildProps, "isEditing" | "fields">;
 
 export function FormBuilderViewed({ isEditing, fields }: Props) {
+  const { t } = useI18n();
+
   return (
     <When value={!isEditing}>
       <div className="border-t-[1px] border-secondary">
@@ -22,7 +24,7 @@ export function FormBuilderViewed({ isEditing, fields }: Props) {
                   {translateOrFallback(field.name)}
                 </label>
               </div>
-              <div className="w-full lg:w-[70%]">
+              <div className="w-full flex flex-wrap lg:w-[70%]">
                 <When value={field.type != "FILE"}>
                   <input
                     id={`field_${field.id}`}
@@ -30,13 +32,14 @@ export function FormBuilderViewed({ isEditing, fields }: Props) {
                     value={field.value ?? ""}
                     disabled={true}
                     required={!!field.is_required}
-                    className="w-full border-none text-secondary"
+                    className="w-full border-none bg-secondary px-2 py-1 text-primary"
                   />
                 </When>
                 <When value={field.type == "FILE"}>
+                  <span className="w-[82%] line-clamp-1">{field?.value}</span>
                   <Link className="flex bg-cross-white-secondary pl-2" href={field.value ?? ""} target="_blank">
                     <Upload />
-                    <span className="ml-2">{i18n("Texts.see_more")}</span>
+                    <span className="ml-2">{t("Texts.see_more")}</span>
                   </Link>
                 </When>
               </div>

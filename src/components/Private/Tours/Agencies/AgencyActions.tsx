@@ -1,14 +1,15 @@
 import { DotsOptions } from "@components/shared/others/DotsOptions";
-import i18n from "@configs/i18n";
 import { PERMISSIONS } from "@constants/permissions";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { useModalContext } from "@contexts/Modal";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   id: number;
 };
 
 export function AgencyActions({ id }: Props) {
+  const { t } = useI18n()
   const { handleToggleModal } = useModalContext()
   const { hasPermission } = useUserNavigationContext();
 
@@ -18,7 +19,7 @@ export function AgencyActions({ id }: Props) {
         actions={[
           {
 
-            text: i18n("Words.exclude") as string,
+            text: t("Words.exclude"),
             handle: () => handleToggleModal("DELETE", id),
             permissions: [PERMISSIONS.agencies.delete],
           },

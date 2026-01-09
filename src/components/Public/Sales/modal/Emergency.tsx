@@ -22,7 +22,7 @@ export function Emergency() {
                 <p className="text-sm">{t("Screens.sales.emergency.text")}</p>
             </div>
             <div className="my-2">
-                <Input {...register("contacts.name")} label={t("Words.name")} dataTestId="sale_contact_name" />
+                <Input maxLength={100} {...register("contacts.name")} label={t("Words.name")} dataTestId="sale_contact_name" />
             </div>
             <div className="my-2">
                 <Select options={[

@@ -10,21 +10,23 @@ import { othersColors } from "@assets/colors/colors";
 import { formatMoney } from "@helpers/currencies";
 import { TravelBag } from "@assets/Icons/black/TravelBag";
 import { useSalesContext } from "@components/Public/Sales/context";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     tour: TourPreviewShape
 }
 
 export function Profile({ tour }: Props) {
+    const {t} = useI18n()
     const { handleTargetTour } = useSalesContext()
     return (
         <div className="px-2 lg:px-12 mt-5 mb-[5rem]">
             <div className="relative">
-                <Image className="w-full h-[80vh] object-cover" src={tour.banner ?? "/imgs/illustration.png"} alt={tour.title} width={800} height={400} />
+                <Image className="w-full h-[80vh] brightness-50 object-cover" src={tour.banner ?? "/imgs/illustration.png"} alt={tour.title} width={800} height={400} />
 
                 <When value={!!tour.featured}>
                     <div className="absolute top-0 left-0 bg-emerald-400 text-white px-4 py-2 m-5 rounded-md text-lg font-bold">
-                        <span>Excursão em Destaque</span>
+                        <span>{t("Screens.tours.featured_tour")}</span>
                     </div>
                 </When>
                 <div className="absolute bottom-10 w-[90%] md:w-auto left-4">
@@ -35,7 +37,7 @@ export function Profile({ tour }: Props) {
                     <div className="md:inline-block">
                         <div className="flex items-center flex-wrap md:flex-nowrap border-secondary border pb-1 pt-2 px-4">
                             <div className="flex items-center text-white ">
-                                <ClockBI fill={othersColors.white} className="mr-2" /> <span><strong>Duração: </strong> &nbsp;{tour?.activity_period?.label}</span>
+                                <ClockBI fill={othersColors.white} className="mr-2" /> <span><strong>{t("Screens.tours.duration")}: </strong> &nbsp;{tour?.activity_period?.label}</span>
                             </div>
                             <div className="mx-5">
                                 <span className="text-white">|</span>
@@ -45,13 +47,13 @@ export function Profile({ tour }: Props) {
                                 <span style={{
                                     textDecoration: tour.promotional_price ? "line-through" : "none"
                                 }} className="text-white">{formatMoney(tour.price, tour.currency)}</span>
-                                <span className="text-emerald-400 inline-block ml-2">{tour.promotional_price ? " Por " + formatMoney(tour.promotional_price, tour.currency) : ""}</span>
+                                <span className="text-emerald-400 inline-block ml-2">{tour.promotional_price ? t("Screens.tours.for") + " " + formatMoney(tour.promotional_price, tour.currency) : ""}</span>
                             </div>
                         </div>
                     </div>
                     <div className="mb-[-3rem] mt-10">
                         <span onClick={() => tour.is_available_for_sale && handleTargetTour(tour.id)} className={`${tour.is_available_for_sale ? "hover:bg-white border-emerald-400 border hover:text-emerald-400 bg-emerald-400" : "bg-zinc-500 cursor-not-allowed"} py-4 px-10 inline-block rounded-md text-white font-semibold cursor-pointer`}>
-                            {tour.is_available_for_sale ? "Reservar Agora" : "Indisponível para Reserva"}
+                            {tour.is_available_for_sale ? t("Screens.tours.book_now") : t("Screens.tours.unavailable_for_booking")}
                         </span>
                     </div>
                 </div>
@@ -60,7 +62,7 @@ export function Profile({ tour }: Props) {
                 <div className="flex flex-wrap">
                     <div className="w-full md:w-1/2 lg:w-3/5">
                         <div className=" border-b-2 border-slate-200 mb-5">
-                            <h2 className="text-2xl font-sans text-dark font-bold mb-5">Visão Geral</h2>
+                            <h2 className="text-2xl font-sans text-dark font-bold mb-5">{t("Screens.tours.overview")}</h2>
                         </div>
                         <div className="px-2 mt-5 text-justify md:text-left" dangerouslySetInnerHTML={{ __html: tour.description as string }}>
                         </div>

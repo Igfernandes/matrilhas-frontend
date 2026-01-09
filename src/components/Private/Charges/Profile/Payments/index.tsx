@@ -1,15 +1,16 @@
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
-import i18n from "@configs/i18n";
 import { usePayments } from "./hooks/usePayments";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useRoutes } from "@hooks/useRoutes";
 import { ChargeShape } from "@type/Charges";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   charge: ChargeShape;
 }
 
 export function PaymentsTable({ charge }: Props) {
+  const { t } = useI18n()
   const { chargesPayments } = API_ROUTES
   const { setParams } = useRoutes()
   const { tHeadsPayment, builderPaymentRows, chargeQuery } = usePayments({ charge });
@@ -31,10 +32,10 @@ export function PaymentsTable({ charge }: Props) {
           },
         }}
         tHeads={{
-          data: tHeadsPayment.current,
+          data: tHeadsPayment,
           widths: [50, 200, 180, 100, 150, 60],
         }}
-        title={i18n("Words.payments")}
+        title={t("Words.payments")}
       />
     </div>
   );

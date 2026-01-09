@@ -2,8 +2,8 @@ import { privateRoutes } from "@configs/routes/Web/navigation";
 import { MenuShape } from "./type";
 import i18n from "@configs/i18n";
 import { UsersManager } from "@assets/Icons/black/UsersManager";
-import { Schedule } from "@assets/Icons/black/Schedule";
 import { Identify } from "@assets/Icons/black/Identify";
+import { CalendarWeekBI } from "@assets/Icons/black/CalendarWeekBI";
 
 export const ADMINISTRATIVE_MENU = [
   {
@@ -20,7 +20,7 @@ export const ADMINISTRATIVE_MENU = [
   },
   {
     title: i18n("Words.schedule"),
-    Icon: Schedule,
+    Icon: CalendarWeekBI,
     link: privateRoutes.schedule,
     permissions: ["dispatchers_view"],
   },

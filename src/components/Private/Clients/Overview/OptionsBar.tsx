@@ -1,13 +1,14 @@
-import i18n from "@configs/i18n";
 import { useModalContext } from "@contexts/Modal";
 import { ModalClientsOperationType } from "../type";
 import { Button } from "@components/shared/layouts/Button";
 import { AccessControl } from "@components/shared/settings/AccessControl";
 import { PERMISSIONS } from "@constants/permissions";
 import { ClientFilters } from "./ClientFilters";
+import { useI18n } from "@contexts/I18n";
 
 
 export function OptionsBar() {
+  const { t } = useI18n()
   const { handleToggleModal } = useModalContext<ModalClientsOperationType>();
 
   return (
@@ -21,7 +22,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.clients.create]}>
               <Button
                 className="border border-zinc-300 px-3 font-bold rounded-xl bg-white text-primary"
-                text={i18n("Words.register")}
+                text={t("Words.register")}
                 type="button"
                 onClick={() => handleToggleModal("CLIENT")}
               />
@@ -31,7 +32,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.categories.create]}>
               <Button
                 className="border bg-white border-zinc-300 px-3 font-bold rounded-xl text-primary"
-                text={i18n("Words.category_manager")}
+                text={t("Texts.category_manager")}
                 type="button"
                 onClick={() => handleToggleModal("CATEGORY")}
               />
@@ -41,7 +42,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.clients.create]}>
               <Button
                 className="bg-white border border-zinc-300 px-3 font-bold rounded-xl text-primary"
-                text={i18n("Words.import_clients")}
+                text={t("Texts.import_clients")}
                 type="button"
                 onClick={() => handleToggleModal("IMPORT")}
               ></Button>

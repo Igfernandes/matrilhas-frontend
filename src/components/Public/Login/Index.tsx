@@ -1,18 +1,19 @@
 import { UserShare } from "@assets/Icons/colorful/UserShare";
-import i18n from "@configs/i18n";
 import { LoginForm } from "./Form";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
 import { useEffect, useState } from "react";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   csrf: CSRFShape;
 };
 
 export function LoginContent({ csrf }: Props) {
+  const { t } = useI18n()
   const [texts, setTexts] = useState<Record<string, string>>({
-      title: "Screens.login.title",
-      text: "Screens.login.text",
-    });
+    title: "Screens.login.title",
+    text: "Screens.login.text",
+  });
 
   useEffect(() => {
     setTexts({
@@ -28,11 +29,11 @@ export function LoginContent({ csrf }: Props) {
       </div>
       <div className="mb-1">
         <h2 className="text-2xl text-primary">
-          <strong>{i18n(texts?.title)}</strong>
+          <strong>{t(texts?.title)}</strong>
         </h2>
       </div>
       <div className="mb-6">
-        <p className="text-sm">{i18n(texts?.text)}</p>
+        <p className="text-sm">{t(texts?.text)}</p>
       </div>
       <LoginForm csrf={csrf} />
     </>

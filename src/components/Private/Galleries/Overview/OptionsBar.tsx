@@ -1,11 +1,12 @@
-import i18n from "@configs/i18n";
 import { Button } from "@components/shared/layouts/Button";
 import { AccessControl } from "@components/shared/settings/AccessControl";
 import { PERMISSIONS } from "@constants/permissions";
 import { GalleriesFilters } from "./GalleriesFilters";
 import { useModalContext } from "@contexts/Modal";
+import { useI18n } from "@contexts/I18n";
 
 export function OptionsBar() {
+  const { t } = useI18n()
   const { handleToggleModal } = useModalContext()
 
   return (
@@ -19,7 +20,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.galleries.create]}>
               <Button
                 className="border border-zinc-300 px-3 font-bold rounded-xl bg-white text-primary"
-                text={i18n("Words.register")}
+                text={t("Words.register")}
                 type="button"
                 onClick={() => handleToggleModal("CREATE")}
               />

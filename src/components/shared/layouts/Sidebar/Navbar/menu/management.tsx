@@ -1,15 +1,15 @@
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { MenuShape } from "./type";
 import i18n from "@configs/i18n";
-import { Peoples } from "@assets/Icons/black/Peoples";
-import { Form } from "@assets/Icons/black/Form";
 import { Company } from "@assets/Icons/black/Company";
 import { Bag } from "@assets/Icons/black/Bag";
+import { PeopleBI } from "@assets/Icons/black/PeopleBI";
+import { CardListBI } from "@assets/Icons/black/CardListBI";
 
 export const MANAGEMENT_MENU = [
   {
     title: i18n("Words.clients"),
-    Icon: Peoples,
+    Icon: PeopleBI,
     link: privateRoutes.clients,
     permissions: ["clients_view"],
   },
@@ -27,7 +27,7 @@ export const MANAGEMENT_MENU = [
   },
   {
     title: i18n("Words.forms"),
-    Icon: Form,
+    Icon: CardListBI,
     link: privateRoutes.forms,
     permissions: ["forms_view"],
   },

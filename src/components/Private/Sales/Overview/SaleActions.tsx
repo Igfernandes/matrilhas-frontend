@@ -1,5 +1,4 @@
 import { DotsOptions } from "@components/shared/others/DotsOptions";
-import i18n from "@configs/i18n";
 import { ModalSaleOperationType } from "../type";
 import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
@@ -7,6 +6,7 @@ import { Shared } from "@components/shared/others/Shared";
 import { PERMISSIONS } from "@constants/permissions";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import usePostExports from "@services/Exports/Post/usePost";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   handleToggleModal: (
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export function AgencyActions({ handleToggleModal, id }: Props) {
+  const { t } = useI18n()
   const router = useRouter();
   const { mutateAsync: postExport } = usePostExports()
   const { sales } = privateRoutes;
@@ -28,19 +29,19 @@ export function AgencyActions({ handleToggleModal, id }: Props) {
       <DotsOptions
         actions={[
           {
-            text: i18n("Words.edit") as string,
+            text: t("Words.edit") as string,
             handle: () => {
               router.push(`${sales}/${id}`);
             },
             permissions: [PERMISSIONS.sales.update],
           },
           {
-            text: i18n("Words.exclude") as string,
+            text: t("Words.exclude") as string,
             handle: () => handleToggleModal("DELETE", id),
             permissions: [PERMISSIONS.sales.delete],
           },
           {
-            text: i18n("Words.voucher") as string,
+            text: t("Words.voucher") as string,
             handle: () => {
               postExport({
                 entity: "VOUCHERS",

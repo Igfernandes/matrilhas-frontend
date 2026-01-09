@@ -1,12 +1,13 @@
-import i18n from "@configs/i18n";
 import { Button } from "@components/shared/layouts/Button";
 import { AccessControl } from "@components/shared/settings/AccessControl";
 import { PERMISSIONS } from "@constants/permissions";
 import { SaleFilters } from "./SaleFilters";
 import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
 
 export function OptionsBar() {
+  const { t } = useI18n()
   const router = useRouter();
   const { sales } = privateRoutes;
 
@@ -21,7 +22,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.sales.create]}>
               <Button
                 className="border border-zinc-300 px-3 font-bold rounded-xl bg-white text-primary"
-                text={i18n("Words.register")}
+                text={t("Words.register")}
                 type="button"
                 onClick={() => router.push(`${sales}/create`)}
               />

@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import i18n from "@configs/i18n";
 import {
   ModalClientsOperationType,
 } from "../../type";
@@ -11,8 +10,10 @@ import useDeleteClient from "../../../../../services/Clients/Delete/useDeleteCli
 import { DeleteClientPayload } from "../../../../../services/Clients/Delete/type";
 import { getNumberFormatted } from "@helpers/string";
 import useGetCategories from "@services/Clients/Categories/Get/useGetCategories";
+import { useI18n } from "@contexts/I18n";
 
 export function useClients() {
+  const { t } = useI18n()
   const { data: categoryData } = useGetCategories();
   const categories = useMemo(() => categoryData, [categoryData]);
   const { handleToggleModal, modal } =
@@ -26,11 +27,11 @@ export function useClients() {
   /** tHeads NÃO depende de estado → useRef é perfeito aqui */
   const tHeadsClient = useRef<Array<string>>([
     "ID",
-    i18n("Words.name"),
-    i18n("Words.status"),
-    i18n("Words.phone"),
-    i18n("Words.category"),
-    i18n("Words.actions"),
+    t("Words.name"),
+    t("Words.status"),
+    t("Words.phone"),
+    t("Words.category"),
+    t("Words.actions"),
   ]);
 
   /** 🔥 useCallback para estável */
@@ -42,13 +43,13 @@ export function useClients() {
       return {
         id: clientId,
         name,
-        status: i18n(`Words.${status.toLowerCase()}`) as "ACTIVE" | "INACTIVE",
+        status: t(`Words.${status.toLowerCase()}`) as "ACTIVE" | "INACTIVE",
         phone: getNumberFormatted(phone),
         category: categories.map((c) => c.name).join(", "),
         actions: <ClientActions handleToggleModal={handleToggleModal} id={id} />,
       };
     },
-    [handleToggleModal]
+    [handleToggleModal, t]
   );
 
   /** Criar nomes selecionados */

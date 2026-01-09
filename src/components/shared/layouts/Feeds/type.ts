@@ -4,6 +4,9 @@ export type FeedProps = {
 };
 
 export type FeedDataShape = {
+  title: string;
   message: string;
   scape: string;
+  date: string;
+  status?: string;
 };

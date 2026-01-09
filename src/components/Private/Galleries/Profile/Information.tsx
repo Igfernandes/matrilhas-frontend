@@ -1,41 +1,44 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
 import { ToggleSwitch } from "@components/shared/forms/ToggleSwitch";
 import { File } from "@components/shared/forms/File";
 import Image from "next/image";
 import { When } from "@components/utilities/When";
+import { useI18n } from "@contexts/I18n";
 
 type Props = ProfileFormProps;
 
 export function Information({ register, errors, setValue, watch }: Props) {
+    const { t } = useI18n()
     const cover = watch("cover") ?? ""
+    const status = watch("status")
+
     return (
         <div>
             <div className="mb-4">
                 <div className="flex flex-wrap">
                     <div className="w-1/2">
                         <h2 className="text-2xl font-semibold text-primary">
-                            {i18n("Words.information")}
+                            {t("Words.information")}
                         </h2>
                         <p className="text-sm">
-                            Informações gerais da galeria.
+                            {t("Screens.dashboard.galleries.text_about_information")}
                         </p>
                     </div>
                     <div className="ml-auto">
                         <ToggleSwitch
                             setValue={setValue}
-                            label={i18n("Words.status")}
+                            label={t("Words.status")}
                             dataTestId="status"
                             name="status"
-                            defaultValue={watch("status")}
+                            defaultValue={status}
                             options={{
                                 left: {
-                                    text: i18n("Words.active"),
+                                    text: t("Words.active"),
                                     value: "PUBLISHED",
                                 },
                                 right: {
-                                    text: i18n("Words.inactive"),
+                                    text: t("Words.inactive"),
                                     value: "DRAFT",
                                 },
                             }}
@@ -53,22 +56,19 @@ export function Information({ register, errors, setValue, watch }: Props) {
                     </When>
                     <div className="w-full">
                         <div className="mt-1">
-                            <File dataTestId="cover" {...register("cover")} accept=".png,.jpg,.jpeg" label={i18n("Words.cover")} errors={errors?.cover} />
+                            <File dataTestId="cover" {...register("cover")} accept=".png,.jpg,.jpeg" label={t("Words.cover")} errors={errors?.cover} />
                         </div>
                         <div className="mt-2">
                             <Input
                                 required
                                 dataTestId="title"
                                 {...register("title")}
-                                label={i18n("Words.title")}
+                                label={t("Words.title")}
                                 errors={errors?.title}
+                                maxLength={200}
                             />
                         </div>
                     </div>
-                </div>
-                {/* Title */}
-                <div className="w-full my-2">
-
                 </div>
 
             </div>

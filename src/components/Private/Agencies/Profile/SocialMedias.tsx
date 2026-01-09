@@ -1,29 +1,32 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
 import { Select } from "@components/shared/forms/Select";
 import { useMemo } from "react";
 import { Trash } from "@assets/Icons/black/Trash";
 import { textColors } from "@assets/colors/colors";
 import { useSocialMedias } from "./hooks/useSocialMedias";
+import { useI18n } from "@contexts/I18n";
 
 type Props = ProfileFormProps;
 
 export function SocialMedias({ register, agency, errors }: Props) {
+    const { t } = useI18n()
     const options = useMemo(() => ["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP"].map((media) => ({
-        text: i18n(`Words.${media.toLowerCase()}`),
+        text: t(`Words.${media.toLowerCase()}`),
         value: media
-    })), []);
+    })), [t]);
     const { lines, setLines, handleRemoveSocialMedia } = useSocialMedias({ socialMedias: agency?.social_media || [] });
 
     return (
         <div className="mt-6">
             <div className="mb-4">
-                <h2 className="text-2xl font-semibold text-primary ">{i18n("Words.social_medias")}</h2>
-                <p className="text-sm">Informações sobre redes sociais, como links de referência e etc.</p>
+                <h2 className="text-2xl font-semibold text-primary ">{t("Texts.social_medias")}</h2>
+                <p className="text-sm">{t("Screens.dashboard.agencies.social_medias_description")}</p>
             </div>
             <div className="text-end mb-3">
-                <span onClick={() => setLines(lines + 1)} className="inline-block bg-primary hover:bg-white border border-primary hover:text-primary text-white rounded-md py-2 cursor-pointer px-6">{i18n("Words.add")}</span>
+                <span onClick={() => setLines(lines + 1)} className="inline-block bg-primary hover:bg-white border border-primary hover:text-primary text-white rounded-md py-2 cursor-pointer px-6">
+                    {t("Words.add")}
+                </span>
             </div>
             <div className="bg-secondary min-h-20 px-2 rounded-md">
                 {Array.from({ length: lines }).map((_, index) => (
@@ -36,14 +39,14 @@ export function SocialMedias({ register, agency, errors }: Props) {
                             <div className=" w-full md:w-[48%] my-2">
                                 <Select defaultValue={agency?.social_media?.[index]?.platform}   {...register(`social_media.${index}.platform`)} errors={errors?.social_media?.[index]?.platform} options={[
                                     {
-                                        text: i18n("Words.selection"),
+                                        text: t("Words.selection"),
                                         value: ""
                                     },
                                     ...options
-                                ]} dataTestId="platform" label={i18n("Words.platform")} />
+                                ]} dataTestId="platform" label={t("Words.platform")} />
                             </div>
                             <div className="w-full md:w-[48%] my-2">
-                                <Input defaultValue={agency?.social_media?.[index]?.link} type="url" dataTestId="link" {...register(`social_media.${index}.link`)} errors={errors?.social_media?.[index]?.link} label={i18n("Words.url")} />
+                                <Input defaultValue={agency?.social_media?.[index]?.link} type="url" dataTestId="link" {...register(`social_media.${index}.link`)} errors={errors?.social_media?.[index]?.link} label={t("Words.url")} />
                             </div>
                         </div>
                     </div>

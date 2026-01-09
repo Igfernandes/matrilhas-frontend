@@ -5,5 +5,17 @@ export const PublicToursTranslations = {
   address_destiny: "Endereço de Destino",
   address_boarding: "Endereço de Embarque",
   address_landing: "Endereço de Desembarque",
-  not_found: "Nenhum passeio encontrado para o período selecionado."
+  not_found: "Nenhum passeio encontrado para o período selecionado.",
+  title: "Explore nossos passeios",
+  description: "Descubra destinos incríveis e viva experiências inesquecíveis com nossos passeios exclusivos.",
+  loading: "Carregando passeios...",
+  filters_by_date: "Filtros por Data",
+  filters_by_price: "Filtros por Preço",
+  filters_by_region: "Filtros por Região",
+  featured_tour: "Excursão em Destaque",
+  duration: "Duração",
+  for: "Por",
+  book_now: "Reservar Agora",
+  unavailable_for_booking: "Indisponível para Reserva",
+  overview: "Visão Geral",
 };

@@ -26,7 +26,7 @@ export function Navbar({
   const [isActiveItem, setIsActiveItem] = useState("");
 
   useEffect(() => {
-    const foundCurrentNavbarItem = menu.find((item) => item.link == pathname);
+    const foundCurrentNavbarItem = menu.find((item) => pathname.includes(item.link));
 
     if (!foundCurrentNavbarItem && !defaultActiveItem) return;
     setIsActiveItem(foundCurrentNavbarItem?.title ?? defaultActiveItem);

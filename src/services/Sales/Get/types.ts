@@ -1,6 +1,7 @@
 import { SaleShape } from "@type/Sales";
+import { GetRequestShape } from "@type/service";
 
-export type GetSalesRequest = {
+export type GetSalesRequest = GetRequestShape & {
   id?: number;
 };
 

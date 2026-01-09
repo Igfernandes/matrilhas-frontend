@@ -22,9 +22,9 @@ export function Resume({ isLoadingSubmit }: Props) {
         <div className="min-w-[30vw] py-2 mb-5">
             <div className="mb-5">
                 <div className="bg-primary text-white rounded-sm px-2 py-1 mb-2">
-                    <h3 className="font-semibold">Resumo da Compra</h3>
+                    <h3 className="font-semibold">{t("Screens.sales.resume.title")}</h3>
                 </div>
-                <p className="text-sm">Abaixo está o resumo da sua compra.</p>
+                <p className="text-sm">{t("Screens.sales.resume.text")}</p>
             </div>
             <div>
                 <table className="w-full border border-zinc-300 rounded-md">

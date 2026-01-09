@@ -7,6 +7,7 @@ export type FormBuildProps = {
   fields: Array<FieldsShape>;
   groups: Array<FieldsGroupsShape>;
   entityType: ScopeFields;
+  isLoading?: boolean;
   handleSubmitFields: (viewedId: number, payload: PayloadFieldValues) => void;
   handleUpdateClient: (isShow: boolean) => void;
 };

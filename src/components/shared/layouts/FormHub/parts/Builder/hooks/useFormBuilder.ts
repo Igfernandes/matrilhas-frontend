@@ -6,10 +6,11 @@ import { useFieldsGroupsContext } from "../../../context/FieldsGroups";
 
 export function useFormBuilder() {
   const { formMethods, errors } = useFormRules<FormBuilderPayload>({
-    schema: formBuilderSchema
+    schema: formBuilderSchema,
   });
   const { handleSubmit, register } = formMethods;
-  const { handleSubmitFields, viewedField, entityType } = useFieldContext();
+  const { handleSubmitFields, viewedField, entityType, isLoading } =
+    useFieldContext();
   const { handleFieldsGroupToEditing } = useFieldsGroupsContext();
   const { mutateAsync: deleteField } = useDeleteFields();
 
@@ -28,6 +29,7 @@ export function useFormBuilder() {
     register,
     handleSubmit,
     formMethods,
+    isLoading,
     errors,
     submit,
     deleteField,

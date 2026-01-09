@@ -1,3 +1,4 @@
+
 export const Validations = {
   required: "O campo é obrigatório",
   boolean: "O valor não é um boleano válido",
@@ -26,4 +27,8 @@ export const Validations = {
     "O agendamento deve conter pelo menos um usuário vinculado",
   file_size_exceeded: 'O arquivo "{{name}}" excede {{size}}MB.',
   file_total_size_exceeded: "O total de arquivos excede {{size}}MB.",
+  required_file: "O arquivo é obrigatório",
+  invalid_file_xls: "O arquivo deve ser do tipo .xls ou .xlsx",
+  cpf: "O CPF inserido encontra-se inválido",
+  enum: "O valor deve ser um dos seguintes: {{list}}",
 };

@@ -9,11 +9,14 @@ export default function useGetSales(request: GetSalesRequest = {}) {
     const { data } = await getSales(request);
     return data ?? null;
   }
-
   const { data, ...rest } = useQueryGuard({
     queryKey: ["sales", request],
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  return {
+    rows: data?.rows ?? [],
+    count: data?.count ?? 0,
+    ...rest,
+  };
 }

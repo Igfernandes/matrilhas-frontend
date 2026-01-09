@@ -1,21 +1,23 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import { TourShape } from "@type/Tours"
 import { TourProfilePayload, TourProfileSchema } from "../profileSchemas"
 import usePutTour from "@services/Tours/Put/usePut"
 import usePostTour from "@services/Tours/Post/usePost"
 import dayjs from "dayjs"
+import { useI18n } from "@contexts/I18n"
 
 type Props = {
     tour?: TourShape
 }
 
 export function useProfile({ tour = {} as TourShape }: Props = {} as Props) {
+    const { t } = useI18n();
+    const schema = useMemo(() => TourProfileSchema(t), [t]);
     const { formMethods, handleSubmit, register, errors } = useFormRules<TourProfilePayload>({
-        schema: TourProfileSchema,
+        schema,
         defaultValues: {
             ...tour,
-            banner: "",
             featured: tour?.featured ? "1" : "0",
         }
     })
@@ -46,6 +48,6 @@ export function useProfile({ tour = {} as TourShape }: Props = {} as Props) {
         register,
         errors,
         onSubmit,
-        isLoading: isLoadingPut ?? isLoadingPost
+        isLoading: isLoadingPut || isLoadingPost
     }
 }

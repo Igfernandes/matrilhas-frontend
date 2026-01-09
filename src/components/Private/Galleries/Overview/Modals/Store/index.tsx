@@ -1,22 +1,23 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
-import { useModalForm } from "./hooks/useClientCreateModal";
+import { useGalleryCreateModal } from "./hooks/useGalleryCreateModal";
 import { Modal } from "../../../../../shared/layouts/Modal";
 import { FieldError, FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { useModalContext } from "@contexts/Modal";
 import { Select } from "@components/shared/forms/Select";
+import { useI18n } from "@contexts/I18n";
 
 export function GalleryCreateModal() {
   const { handleToggleModal, modal } = useModalContext()
-  const { formMethods, handleSubmit, submit, isLoading } = useModalForm();
+  const { formMethods, handleSubmit, submit, isLoading } = useGalleryCreateModal();
   const {
     register,
     formState: { errors },
   } = formMethods;
+  const { t } = useI18n()
 
   return (
-    <Modal title={i18n("Screens.dashboard.galleries.title_create")} isShowModal={modal.type === "CREATE"} handleModal={() => handleToggleModal(false)}>
+    <Modal title={t("Screens.dashboard.galleries.title_create")} isShowModal={modal.type === "CREATE"} handleModal={() => handleToggleModal(false)}>
       <FormProvider {...formMethods}>
         <form onSubmit={handleSubmit(submit)} className="md:w-[300px]">
           <div className="my-2 md:my-6">
@@ -25,7 +26,7 @@ export function GalleryCreateModal() {
               <div className="form-group my-4">
                 <Input
                   {...register("title")}
-                  label={i18n("Words.title")}
+                  label={t("Words.title")}
                   dataTestId="title"
                   required={true}
                   errors={errors.title}
@@ -34,16 +35,16 @@ export function GalleryCreateModal() {
               <div className="form-group">
                 <Select
                   {...register("status")}
-                  label={i18n("Words.status")}
+                  label={t("Words.status")}
                   id="status"
                   dataTestId="status"
                   options={[
                     {
-                      text: i18n("Words.active"),
+                      text: t("Words.active"),
                       value: "PUBLISHED",
                     },
                     {
-                      text: i18n("Words.inactive"),
+                      text: t("Words.inactive"),
                       value: "DRAFT",
                     },
                   ]}
@@ -58,7 +59,7 @@ export function GalleryCreateModal() {
                 <Button
                   type="submit"
                   className="bg-primary font-semibold text-white"
-                  text={i18n("Words.save")}
+                  text={t("Words.save")}
                   isLoading={isLoading}
                 />
               </div>

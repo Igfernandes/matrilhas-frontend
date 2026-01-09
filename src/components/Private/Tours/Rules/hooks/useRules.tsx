@@ -1,34 +1,29 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
-import { useCallback, useEffect, useMemo } from "react"
+import { useCallback, useEffect, useMemo, useRef } from "react"
 import { TourShape } from "@type/Tours"
 import { RulesPayload, RulesSchema } from "../RulesSchema"
 import usePostTourRule from "@services/Tours/Rules/Post/usePost"
 import useGetTourRules from "@services/Tours/Rules/Get/useGet"
+import { useI18n } from "@contexts/I18n"
 
 type Props = {
     tour: TourShape
 }
 
 export function useRules({ tour }: Props = {} as Props) {
+    const { t } = useI18n();
+    const schema = useMemo(() => RulesSchema(t), [t]);
     const { rows: rules } = useGetTourRules({
         tour_id: tour.id,
     })
-    const rulesToGratuity = useMemo(() => {
-        return rules?.find(rule => rule.type === "AGE") ?? {} as RulesPayload["rule"][0]
-    }, [rules])
-    const rulesToResidency = useMemo(() => {
-        return rules?.find(rule => rule.type === "RESIDENCY") ?? {} as RulesPayload["rule"][0]
-    }, [rules])
-
+    const initializedRef = useRef(false)
     const { formMethods, handleSubmit, register, errors } = useFormRules<RulesPayload>({
-        schema: RulesSchema,
+        schema,
         defaultValues: {
-            rule: [
-                rulesToGratuity,
-                rulesToResidency
-            ]
+            rule: []
         }
     })
+    const { reset } = formMethods
     const { mutateAsync: post, isPending: isLoading } = usePostTourRule()
 
     const onSubmit = useCallback(async ({ rule: payload }: RulesPayload) => {
@@ -40,15 +35,17 @@ export function useRules({ tour }: Props = {} as Props) {
     }, [post, tour])
 
     useEffect(() => {
+        if (rules.length === 0 || initializedRef.current) return
 
-        formMethods.reset({
+        reset({
             rule: [
-                rulesToGratuity,
-                rulesToResidency
+                rules?.find(rule => rule.type === "AGE") ?? {} as RulesPayload["rule"][0],
+                rules?.find(rule => rule.type === "RESIDENCY") ?? {} as RulesPayload["rule"][0]
             ],
         });
 
-    }, [rulesToGratuity, rulesToResidency, , formMethods]);
+        initializedRef.current = true
+    }, [rules, reset]);
 
     return {
         formMethods,

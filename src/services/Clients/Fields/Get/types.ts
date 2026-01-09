@@ -1,3 +1,5 @@
+import { FieldsShape } from "@type/Fields";
+
 export type GetClientsFieldsRequest = {
   id?: number;
   fieldId?: number;
@@ -11,3 +13,7 @@ export type GetClientsFieldsRequest = {
   description_contains?: string;
 };
 
+export type GetClientsFieldsResponse = {
+  rows: Array<FieldsShape>;
+  count: number;
+};
