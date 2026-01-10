@@ -1,5 +1,4 @@
 import { useGalleries } from "./hooks/useGalleries";
-import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
 import { useModalContext } from "@contexts/Modal";
 import { ModalGalleryOperationType } from "../type";
@@ -9,8 +8,10 @@ import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 import { GalleryCreateModal } from "./Modals/Store";
+import { useI18n } from "@contexts/I18n";
 
 export function GalleriesTable() {
+  const { t } = useI18n()
   const {
     handleDelete, isLoadingDelete, tHeads, selectors, setSelectors, updateForTable, getSelected
   } = useGalleries();
@@ -42,7 +43,7 @@ export function GalleriesTable() {
                     "DELETE",
                     getSelected(selectors)
                   ),
-                text: i18n("Texts.selected_delete"),
+                text: t("Texts.selected_delete"),
                 permissions: [PERMISSIONS.galleries.delete],
               },
             ].filter((action) => hasPermission(action.permissions)),
@@ -53,14 +54,14 @@ export function GalleriesTable() {
                     "DELETE",
                     "-1"
                   ),
-                text: i18n("Texts.all_delete"),
+                text: t("Texts.all_delete"),
                 permissions: [PERMISSIONS.galleries.delete],
               },
 
             ].filter((action) => hasPermission(action.permissions)),
             filters: filters["GALLERIES"] ?? {},
           }}
-          title={i18n("Words.galleries")}
+          title={t("Words.galleries")}
           tHeads={{
             data: tHeads.current,
             widths: [60, 250, 70, 150, 48],
@@ -70,9 +71,9 @@ export function GalleriesTable() {
 
       <div className="relative z-10">
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.galleries.title_already_exclude")}
-          text={i18n("Screens.dashboard.galleries.text_already_exclude")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.galleries.title_already_exclude")}
+          text={t("Screens.dashboard.galleries.text_already_exclude")}
           onSubmit={handleDelete}
           isShowModal={modal.type === "DELETE"}
           onModal={handleToggleModal}

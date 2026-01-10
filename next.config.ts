@@ -4,10 +4,16 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "192.168.1.5/**",
+        hostname: "localhost/**",
+      },
+      {
+        hostname: "192.168.1.3/**",
       },
       {
         hostname: "0.0.0.0/**",
+      },
+      {
+        hostname: "192.168.1.5/**",
       },
       {
         hostname: "api.matrilhas.com.br/**",

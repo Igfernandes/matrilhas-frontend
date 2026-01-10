@@ -5,13 +5,16 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useModalContext } from "@contexts/Modal";
 import { Validations } from "@helpers/validations";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
 dayjs.extend(customParseFormat);
 
 export function useModalForm() {
+  const { t } = useI18n();
+  const schema = useMemo(() => ClientCreateSchema(t), [t]);
   const { formMethods, handleSubmit } = useFormRules<ClientCreatePayload>({
-    schema: ClientCreateSchema,
+    schema,
   });
   const { handleToggleModal } = useModalContext();
   const { mutateAsync: postCreateClient, isPending } = usePostCreateClient();
@@ -21,9 +24,9 @@ export function useModalForm() {
     if (Validations.cpf(payload.cpf))
       return setError("cpf", {
         type: "manual",
-        message: i18n("Validations.cpf"),
+        message: t("Validations.cpf"),
       });
-      
+
     postCreateClient({
       ...payload,
       birthdate: birthdate

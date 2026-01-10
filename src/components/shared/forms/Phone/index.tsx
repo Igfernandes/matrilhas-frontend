@@ -30,8 +30,10 @@ export const Phone = React.forwardRef<HTMLInputElement, PhoneProps>(
     const value = watch(name);
 
     useEffect(() => {
-      changeLabelClass(isUpLabel({ placeholder,value, ...rest }) ? "UP" : "DOWN");
-    }, [placeholder, value, rest, isUpLabel, changeLabelClass]);
+      if (isUpLabel({ ...rest, placeholder, value })) {
+        changeLabelClass("UP");
+      }
+    }, [value, placeholder, rest, isUpLabel, name, changeLabelClass]);
 
     return (
       <>

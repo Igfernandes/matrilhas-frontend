@@ -1,23 +1,24 @@
-import i18n from "@configs/i18n";
 import { PaymentShape } from "@type/Payments";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo } from "react";
 import { PaymentActions } from "../PaymentActions";
 import { formatMoney } from "@helpers/currencies";
 import { ChargeShape } from "@type/Charges";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   charge: ChargeShape
 }
 
 export function usePayments({ charge }: Props) {
-  const tHeadsPayment = useRef<Array<string>>([
+  const { t } = useI18n()
+  const tHeadsPayment = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Words.name"),
-    i18n("Words.paid_amount"),
-    i18n("Words.status"),
-    i18n("Words.bank"),
-    i18n("Words.actions"),
-  ]);
+    t("Words.name"),
+    t("Texts.paid_amount"),
+    t("Words.status"),
+    t("Words.bank"),
+    t("Words.actions"),
+  ], [t]);
   const chargeQuery = useMemo(() => {
     return { id: charge.id }
   }, [charge])
@@ -28,11 +29,11 @@ export function usePayments({ charge }: Props) {
       ID: id,
       name: client.name,
       paid_amount: formatMoney(paid_amount),
-      status: i18n(`Words.${status.toLocaleLowerCase()}`),
+      status: t(`Words.${status.toLocaleLowerCase()}`),
       bank: bank?.name,
       action: <PaymentActions chargeId={id} paymentId={id} />
     };
-  }, []);
+  }, [t]);
 
   return {
     tHeadsPayment,

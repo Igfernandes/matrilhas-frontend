@@ -1,11 +1,11 @@
 import { Input } from "@components/shared/forms/Input";
 import { ProfileFormProps } from "./type";
-import { handleMaskPhone } from "@helpers/string";
 import { useFormContext } from "react-hook-form";
 import { useI18n } from "@contexts/I18n";
 import { Select } from "@components/shared/forms/Select";
 import { KINSHIP } from "@constants/kinship";
 import { SaleProfilePayload } from "./profileSchemas";
+import { Phone } from "@components/shared/forms/Phone";
 
 type Props = ProfileFormProps;
 
@@ -21,13 +21,13 @@ export function Contact({ errors }: Props) {
             </div>
             <div className="flex flex-wrap justify-between">
                 <div className="w-full my-2">
-                    <Input required={true} dataTestId="name" {...register("contact.name")} label={t("Words.name")} errors={errors?.contact?.name} />
+                    <Input required={true} maxLength={100} dataTestId="name" {...register("contact.name")} label={t("Words.name")} errors={errors?.contact?.name} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <Input  required={true}  dataTestId="phone" {...register("contact.phone")} onChangeCapture={handleMaskPhone} label={`${t("Words.phone")}/Whatsapp`} errors={errors?.contact?.phone} />
+                    <Phone required={true} dataTestId="phone" {...register("contact.phone")}  label={`${t("Words.phone")}/Whatsapp`} errors={errors?.contact?.phone} />
                 </div>
                 <div className="w-full md:w-[48%] my-2">
-                    <Select required={true}  options={[
+                    <Select required={true} options={[
                         {
                             text: t("Texts.select_option"),
                             value: ""

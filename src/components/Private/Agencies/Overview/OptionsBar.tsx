@@ -1,14 +1,15 @@
-import i18n from "@configs/i18n";
 import { useModalContext } from "@contexts/Modal";
 import { ModalAgencyOperationType } from "../type";
 import { Button } from "@components/shared/layouts/Button";
 import { AccessControl } from "@components/shared/settings/AccessControl";
 import { PERMISSIONS } from "@constants/permissions";
 import { AgencyFilters } from "./AgencyFilters";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
 
 export function OptionsBar() {
+  const { t } = useI18n()
   const router = useRouter();
   const { agencies } = privateRoutes;
   const { handleToggleModal } = useModalContext<ModalAgencyOperationType>();
@@ -24,7 +25,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.agencies.create]}>
               <Button
                 className="border border-zinc-300 px-3 font-bold rounded-xl bg-white text-primary"
-                text={i18n("Words.register")}
+                text={t("Words.register")}
                 type="button"
                 onClick={() => router.push(`${agencies}/create`)}
               />
@@ -35,7 +36,7 @@ export function OptionsBar() {
             <AccessControl targetPermissions={[PERMISSIONS.agencies.create]}>
               <Button
                 className="bg-white border border-zinc-300 px-3 font-bold rounded-xl text-primary"
-                text={i18n("Texts.import_agencies")}
+                text={t("Texts.import_agencies")}
                 type="button"
                 onClick={() => handleToggleModal("IMPORT")}
               ></Button>

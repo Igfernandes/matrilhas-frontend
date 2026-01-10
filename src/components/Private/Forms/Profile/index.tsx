@@ -8,8 +8,8 @@ import { FormBuilderPreview } from "@components/shared/layouts/FormBuilder/Previ
 import { FormBuilder } from "@components/shared/layouts/FormBuilder";
 import { FooterForms } from "./FooterForms";
 import { Notice } from "@components/shared/others/Notice";
-import i18n from "@configs/i18n";
 import { useFillFieldsModal } from "./Fills/hooks/useFillFieldsModal";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     form?: FormShape;
@@ -17,6 +17,7 @@ type Props = {
 }
 
 export function FormsProfile({ form, step }: Props) {
+    const { t } = useI18n()
     const { formMethods, components, handleChangeFormFields, isLoading, submit } = useForms({ form })
     const { handleDeleteFillField, isLoadingFillFieldDelete, modal, handleToggleModal } = useFillFieldsModal({ formId: form?.id ?? 0 });
 
@@ -35,7 +36,7 @@ export function FormsProfile({ form, step }: Props) {
                             />
                         </When>
                         <When value={step === 3}>
-                            <FormBuilderPreview  fields={components} />
+                            <FormBuilderPreview fields={components} />
                         </When>
                         <When value={step === 4}>
                             <FilledFormsTable components={components} formId={form?.id ?? 0} />
@@ -45,9 +46,9 @@ export function FormsProfile({ form, step }: Props) {
                 </form>
             </FormProvider>
             <Notice
-                headerTitle={i18n("Words.attention")}
-                title={i18n("Screens.dashboard.forms.fills.title_already_exclude")}
-                text={i18n("Screens.dashboard.forms.fills.text_already_exclude")}
+                headerTitle={t("Words.attention")}
+                title={t("Screens.dashboard.forms.fills.title_already_exclude")}
+                text={t("Screens.dashboard.forms.fills.text_already_exclude")}
                 onSubmit={handleDeleteFillField}
                 isShowModal={modal.type === "EXCLUDE"}
                 onModal={handleToggleModal}

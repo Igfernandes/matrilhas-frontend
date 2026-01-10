@@ -1,5 +1,4 @@
 import { Select } from "@components/shared/forms/Select";
-import i18n from "@configs/i18n";
 import { PRIVACY } from "@constants/options";
 import { ChargeShape } from "@type/Charges";
 import dayjs from "dayjs";
@@ -10,6 +9,7 @@ import { Link } from "@assets/Icons/black/Link";
 import { useNavigator } from "@hooks/useNavigator";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import useWindow from "@hooks/useWindow";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   setValue: UseFormSetValue<ChargeUpdatePayload>;
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export function FormBoardHeader({ charge, setValue }: Props) {
+  const { t } = useI18n()
   const { handleCopy } = useNavigator();
   const { baseUrl } = useWindow();
 
@@ -24,22 +25,22 @@ export function FormBoardHeader({ charge, setValue }: Props) {
     <div className="header mb-4">
       <div className="content flex justify-between">
         <div className="title mb-4">
-          <h1 className="font-bold text-xl">{i18n(`Words.definitions`)}</h1>
+          <h1 className="font-bold text-xl">{t(`Words.definitions`)}</h1>
         </div>
         <div className="dates flex">
           <div className="status mr-5">
             <ToggleSwitch
               setValue={setValue}
               name="status"
-              label={i18n("Words.status")}
+              label={t("Words.status")}
               dataTestId="status"
               options={{
                 left: {
-                  text: i18n(`Words.active`),
+                  text: t(`Words.active`),
                   value: "ACTIVE",
                 },
                 right: {
-                  text: i18n(`Words.inactive`),
+                  text: t(`Words.inactive`),
                   value: "INACTIVE",
                 },
               }}
@@ -47,7 +48,7 @@ export function FormBoardHeader({ charge, setValue }: Props) {
           </div>
           <div className="created_at text-center text-xs mr-2">
             <div>
-              <span className="font-semibold">{i18n("Words.created")}</span>
+              <span className="font-semibold">{t("Words.created")}</span>
             </div>
             <div>
               <span>{dayjs(charge.created_at).format("DD/MM/YYYY")}</span>
@@ -56,7 +57,7 @@ export function FormBoardHeader({ charge, setValue }: Props) {
           <div className="updated_at text-center text-xs ">
             <div className="border-l-2 border-l-slate-300 pl-2">
               <span className="font-semibold">
-                {i18n("Words.last_updated")}
+                {t("Texts.last_updated")}
               </span>
             </div>
             <div>
@@ -76,10 +77,10 @@ export function FormBoardHeader({ charge, setValue }: Props) {
       <div className="box flex justify-between my-4">
         <div className="status w-[20%]">
           <Select
-            label={i18n("Words.privacy")}
+            label={t("Words.privacy")}
             dataTestId="privacy"
             options={PRIVACY.map((privacy) => ({
-              text: i18n(`Words.${privacy.toLowerCase()}`),
+              text: t(`Words.${privacy.toLowerCase()}`),
               value: privacy,
             }))}
             defaultValue={charge.privacy}
@@ -93,10 +94,10 @@ export function FormBoardHeader({ charge, setValue }: Props) {
         </div>
         <div className="type w-[20%]">
           <Select
-            label={i18n("Words.type")}
+            label={t("Words.type")}
             dataTestId="type"
             options={["APPELLANT", "PUNCTUAL"].map((type) => ({
-              text: i18n(`Words.${type.toLowerCase()}`),
+              text: t(`Words.${type.toLowerCase()}`),
               value: type,
             }))}
             defaultValue={charge.type}

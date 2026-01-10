@@ -28,15 +28,15 @@ export function TourSidebar({ tours, onFilters }: Props) {
                     </div>
                     <div>
                         <div className="text-center mt-7">
-                            <span className="text-primary font-semibold"><u>Filtros por Data</u></span>
+                            <span className="text-primary font-semibold"><u>{t("Screens.tours.filters_by_date")}</u></span>
                         </div>
                         <div className="mt-2">
-                            <Date  {...register("tour_at")} label={t("Words.available_at")} dataTestId="available_at" />
+                            <Date  {...register("tour_at")} label={t("Texts.available_at")} dataTestId="available_at" />
                         </div>
                     </div>
                     <div>
                         <div className="text-center mt-7">
-                            <span className="text-primary font-semibold"><u>Filtros por Preço</u></span>
+                            <span className="text-primary font-semibold"><u>{t("Screens.tours.filters_by_price")}</u></span>
                         </div>
                         <div className="mt-2">
                             <Input step={0.01} type="number" prefix="R$: " {...register("price", { valueAsNumber: true })} label={t("Texts.price_until")} dataTestId="price" />
@@ -44,7 +44,7 @@ export function TourSidebar({ tours, onFilters }: Props) {
                     </div>
                     <div className="mt-7">
                         <div className="text-center ">
-                            <span className="text-primary font-semibold"><u>Filtros por Região</u></span>
+                            <span className="text-primary font-semibold"><u>{t("Screens.tours.filters_by_region")}</u></span>
                         </div>
                         <div className="my-2">
                             <SelectSearch {...register("country")} options={addresses.countries.map(

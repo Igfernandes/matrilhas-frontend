@@ -1,5 +1,4 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { Checkbox } from "@components/shared/layouts/Checkbox";
@@ -7,36 +6,31 @@ import { Modal } from "@components/shared/layouts/Modal";
 import { useStoreFieldsModal } from "./hooks/useStoreFieldsModal";
 import { Select } from "@components/shared/forms/Select";
 import { StoreFieldsModalProps } from "./type";
-import { useEffect, useState } from "react";
-import { When } from "@components/utilities/When";
+import { useI18n } from "@contexts/I18n";
+import { ComponentsManager } from "./Manager";
 
 export function StoreFieldsModal({
   isShowModal,
   onModal,
   groups,
 }: StoreFieldsModalProps) {
+  const { t } = useI18n()
   const { formMethods, register, errors, handleSubmit, submit, isLoading } =
     useStoreFieldsModal({ handleModal: onModal });
-  const [isFileField, setIsFileField] = useState<boolean>(false);
-  const { watch } = formMethods;
-
-  useEffect(() => {
-    setIsFileField(watch("type") === "FILE");
-  }, [watch("type")]);
 
   return (
     <Modal
-      title={i18n("Words.new_data")}
+      title={t("Texts.new_data")}
       isShowModal={isShowModal}
       handleModal={onModal}
     >
       <FormProvider {...formMethods}>
         <form onSubmit={handleSubmit(submit)} className="md:w-[424px]">
-          <div className="my-6">
-            <div className="form-title mt-6 mb-4">
+          <div className="mb-6">
+            <div className="form-title mb-4">
               <h4 className="text-xs md:text-lg">
                 <strong>
-                  {i18n("Components.form_hub.text_field_fill_information")}
+                  {t("Components.form_hub.text_field_fill_information")}
                 </strong>
               </h4>
             </div>
@@ -46,11 +40,11 @@ export function StoreFieldsModal({
                   {...register("group")}
                   options={groups.map((group) => {
                     return {
-                      text: i18n(`Words.${group.name.toLowerCase()}`) as string,
+                      text: t(`Words.${group.name.toLowerCase()}`) as string,
                       value: group.id,
                     };
                   })}
-                  label={i18n("Words.group")}
+                  label={t("Words.group")}
                   dataTestId="group"
                   required={true}
                   errors={errors.group}
@@ -59,9 +53,10 @@ export function StoreFieldsModal({
               <div className="form-group my-4">
                 <Input
                   {...register("name")}
-                  label={i18n("Words.name")}
+                  label={t("Words.name")}
                   dataTestId="name"
                   required={true}
+                  maxLength={100}
                   errors={errors.name}
                 />
               </div>
@@ -77,33 +72,27 @@ export function StoreFieldsModal({
                       "FILE",
                       "DATETIME-LOCAL",
                     ].map((type) => ({
-                      text: i18n(`Words.${type.toLowerCase()}`),
+                      text: t(`Words.${type.toLowerCase()}`),
                       value: type,
                     }))}
-                    label={i18n("Words.field_type")}
+                    label={t("Texts.field_type")}
                     dataTestId="type"
                     errors={errors.type}
                   />
                 </div>
-                <When value={!isFileField}>
-                  <div className="form-group my-4">
-                    <Input
-                      {...register("value")}
-                      label={i18n("Words.value")}
-                      dataTestId="identify"
-                      errors={errors.value}
-                    />
-                  </div>
-                </When>
+                <div className="form-group my-4">
+                  <ComponentsManager />
+                 
+                </div>
                 <div className="form-group my-4">
                   <Select
                     {...register("is_sensitive")}
                     options={["YES", "NOT"].map((type) => ({
-                      text: i18n(`Words.${type.toLowerCase()}`),
+                      text: t(`Words.${type.toLowerCase()}`),
                       value: type,
                     }))}
                     defaultValue={"NOT"}
-                    label={i18n("Words.is_sensitive")}
+                    label={t("Texts.is_sensitive")}
                     dataTestId="is_sensitive"
                     errors={errors.group}
                   />
@@ -117,7 +106,7 @@ export function StoreFieldsModal({
                 {...register("hasContinueRegister")}
                 dataTestId="continue_register_field"
                 id="continue_register_field"
-                label={i18n(`Texts.continue_register`)}
+                label={t(`Texts.continue_register`)}
               />
             </div>
             <div className="w-1/2">
@@ -125,7 +114,7 @@ export function StoreFieldsModal({
                 <Button
                   type="submit"
                   className="bg-primary text-white"
-                  text={i18n("Words.save")}
+                  text={t("Words.save")}
                   isLoading={isLoading}
                 />
               </div>

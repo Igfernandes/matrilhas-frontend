@@ -45,7 +45,7 @@ export function Subscribe() {
               </div>
               <div className="w-full md:w-[10rem] my-3">
                 <Button
-                  text="Inscrever-se"
+                  text={t("Words.subscribe")}
                   className="border-white border-2 py-3 text-white font-semibold"
                   isLoading={isLoading}
                 />

@@ -1,0 +1,64 @@
+export const UsersApiTranslations = {
+  notifications: {
+    invalid: {
+      id: "The notification cannot be found with the provided ID",
+      in_ids: "The provided notifications have some irregularity",
+      user_id: "The user associated with the notification is invalid",
+      start: "The start value of the notification records is invalid",
+      limit: "The limit value of the notification records is invalid",
+    },
+  },
+  groups: {
+    success: {
+      post: "The group was successfully created!",
+      put: "The group was successfully updated!",
+      status: "The group status was successfully changed!",
+      delete: "The group was successfully deleted!",
+      patch_password: "Password changed successfully!",
+      patch_status: "Status changed successfully!",
+    },
+    invalid: {
+      name: "The provided group name is invalid",
+      name_max_length_100:
+        "The group name exceeds the maximum limit of 100 characters.",
+      name_unique: "The group name is already in use",
+      description: "The provided group description is invalid",
+      permissions: "The provided permissions are invalid",
+      not_found: "The group was not found",
+      not_found_permission: "Some of the provided permissions are invalid",
+    },
+  },
+  success: {
+    post: "Your account was created successfully!",
+    put: "The account was updated successfully!",
+    delete: "The user was deleted successfully!",
+    recover_password: "Check your email and follow the instructions",
+    alter_password: "Your password has been changed successfully",
+    patch_status: "Status changed successfully!",
+  },
+  invalid: {
+    name: "The provided group name is invalid",
+    name_max_length_100:
+      "The group name exceeds the maximum limit of 100 characters.",
+    name_unique: "The group name is already in use",
+    cpf: "The CPF is empty or has an invalid format",
+    birthdate: "The user's birthdate provided is invalid",
+    keyword: "The user's keyword is empty or invalid",
+    password: "The password format is invalid or missing",
+    operation: "The token is invalid or expired",
+    already_exists_cpf: "The provided CPF is already in use",
+    status: "The user's status is invalid",
+    not_found_invite: "The invitation link is expired or invalid",
+    incorrect_password_formatted:
+      "The provided password is invalid or does not meet the allowed standards",
+    not_found_permission: "Some of the provided permissions are invalid",
+    already_exists_phone: "The provided phone number is already in use",
+    already_exists_email: "The provided email is already in use",
+    email_max_length_255: "The email exceeds the maximum limit of 255 characters",
+    phone_max_length_35: "The phone number exceeds the maximum limit of 35 characters",
+    not_found: "The user was not found",
+    not_found_token: "The token is invalid or does not exist",
+    created_at: "The user's creation date provided is invalid",
+    updated_at: "The user's update date provided is invalid",
+  },
+};

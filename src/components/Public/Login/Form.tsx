@@ -6,9 +6,9 @@ import Link from "next/link";
 import { useForm } from "./hooks/useForm";
 import { Input } from "@components/shared/forms/Input";
 import { FormProvider } from "react-hook-form";
-import i18n from "@configs/i18n";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
 import { useRecaptcha } from "@hooks/useRecaptcha";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   csrf: CSRFShape;
@@ -26,6 +26,7 @@ export function LoginForm({ csrf }: Props) {
     isSuccess
   } = useForm({ csrf, recaptchaInstance });
   const { forgotPassword } = publicRoutes;
+  const { t } = useI18n()
 
 
   return (
@@ -36,14 +37,14 @@ export function LoginForm({ csrf }: Props) {
             errors={errors.login}
             {...register("login")}
             dataTestId="login"
-            label={"E-mail"}
+            label={t("Words.email")}
           />
         </div>
         <div className="form-group my-4">
           <Password
             errors={errors.password}
             dataTestId="password"
-            label={i18n("Words.password")}
+            label={t("Words.password")}
             {...register("password")}
           />
         </div>
@@ -54,7 +55,7 @@ export function LoginForm({ csrf }: Props) {
               errors={errors.rememberMe}
               dataTestId="remember-me"
               {...register("rememberMe")}
-              label={i18n("Screens.login.remember_me")}
+              label={t("Screens.login.remember_me")}
             />
           </div>
           <div className="mt-4 sm:mt-0">
@@ -62,13 +63,13 @@ export function LoginForm({ csrf }: Props) {
               href={forgotPassword}
               className="text-sm text-primary relative top-[-3.5px]"
             >
-              <strong>{i18n("Screens.login.forgot_password")}</strong>
+              <strong>{t("Screens.login.forgot_password")}</strong>
             </Link>
           </div>
         </div>
         <div className="form-submit mt-2">
           <Button
-            text={isSuccess ? i18n("Texts.redirect") : i18n("Words.send")}
+            text={isSuccess ? t("Texts.redirect") : t("Words.send")}
             type="submit"
             isLoading={isLoading || isRecaptchaLoaded}
             disabled={!isAllFilled || isSuccess}

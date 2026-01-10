@@ -8,12 +8,15 @@ import useGetGroupsPermissions from "../../../../../../../services/Permissions/G
 import usePutGroup from "../../../../../../../services/Users/Groups/Put/usePutGroup";
 import { PermissionData } from "@type/Permissions/GroupsPermissions";
 import useGetGroups from "@services/Users/Groups/Get/useGetGroups";
+import { useI18n } from "@contexts/I18n";
+import { isEquals } from "@helpers/json";
 
 type Props = {
   onModal: (isShow: boolean) => void;
 };
 
 export function useModalForm({ onModal }: Props) {
+  const { t } = useI18n();
   const { rows } = useGetPermissions();
   const { modal } = useModalContext();
   const { rows: dataGroupPermissions } = useGetGroupsPermissions({
@@ -28,9 +31,9 @@ export function useModalForm({ onModal }: Props) {
   );
   const groupCurrent = useMemo(() => dataGroups?.[0], [dataGroups]);
   const permissions = useMemo(() => rows ?? [], [rows]);
-
+  const schema = useMemo(() => GroupModalSchema(t), [t]);
   const { formMethods } = useFormRules<UsersGroupPayload>({
-    schema: GroupModalSchema,
+    schema,
     defaultValues: {
       permissions: [],
     },
@@ -42,6 +45,7 @@ export function useModalForm({ onModal }: Props) {
     setValue,
     formState: { errors },
     reset,
+    getValues,
   } = formMethods;
   const { mutateAsync: postGroup, isPending } = usePostCreateGroup();
   const { mutateAsync: putGroup, isPending: isPendingPut } = usePutGroup();
@@ -76,17 +80,19 @@ export function useModalForm({ onModal }: Props) {
   }, [groupCurrent, setValue]);
 
   useEffect(() => {
-    setValue(
-      "permissions",
-      permissions.map((permission) => {
-        const hasPermission = groupsPermissions.find(
-          (groupPermission) => groupPermission.id === permission.id
-        );
+    const permissionsCurrent = getValues("permissions") || [];
+    const permissionsNew = permissions.map((permission) => {
+      const hasPermission = groupsPermissions.find(
+        (groupPermission) => groupPermission.id === permission.id
+      );
 
-        return hasPermission ? permission.id.toString() : false;
-      })
-    );
-  }, [permissions, groupsPermissions, setValue]);
+      return hasPermission ? permission.id.toString() : false;
+    });
+
+    if (isEquals(permissionsCurrent, permissionsNew)) return;
+    setValue("permissions", permissionsNew);
+    
+  }, [permissions, groupsPermissions, setValue, getValues]);
 
   return {
     formMethods,

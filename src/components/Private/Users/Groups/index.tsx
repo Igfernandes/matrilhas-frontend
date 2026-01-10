@@ -3,18 +3,19 @@ import { ModalUserOperationType } from "../type";
 import { useUsersGroup } from "./hooks/useUsersGroup";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { API_ROUTES } from "@configs/routes/Api/api";
-import i18n from "@configs/i18n";
 import { ModalFormUsersGroup } from "./modals/UsersGroup";
 import { Notice } from "@components/shared/others/Notice";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
     search: string;
 }
 
 export function Groups({ search }: Props) {
-    const { updateUserGroupForTable, tHeadUsersGroup, deleteUsersGroup, patchUsersGroup } = useUsersGroup();
+    const { updateUserGroupForTable, tHeadUsersGroup, deleteUsersGroup, patchUsersGroup, isLoadingPatch, isLoadingDelete } = useUsersGroup();
     const { handleToggleModal, modal } =
         useModalContext<ModalUserOperationType>();
+    const { t } = useI18n()
 
     return (
         <>
@@ -33,7 +34,7 @@ export function Groups({ search }: Props) {
                             name_contains: search
                         }
                     }}
-                    title={i18n("Words.groups")}
+                    title={t("Words.groups")}
                     excludes={["updated_at"]}
                     tHeads={{
                         data: tHeadUsersGroup,
@@ -47,9 +48,9 @@ export function Groups({ search }: Props) {
                     onModal={handleToggleModal}
                 />
                 <Notice
-                    headerTitle={i18n("Words.attention")}
-                    title={i18n("Screens.dashboard.users.group.title_already_desative")}
-                    text={i18n("Screens.dashboard.users.group.text_already_desative")}
+                    headerTitle={t("Words.attention")}
+                    title={t("Screens.dashboard.users.group.title_already_desative")}
+                    text={t("Screens.dashboard.users.group.text_already_desative")}
                     onSubmit={() =>
                         patchUsersGroup({
                             id: modal.id as number,
@@ -57,11 +58,12 @@ export function Groups({ search }: Props) {
                     }
                     isShowModal={modal.type === "DESATIVE_GROUP"}
                     onModal={handleToggleModal}
+                    isLoading={isLoadingPatch}
                 />
                 <Notice
-                    headerTitle={i18n("Words.attention")}
-                    title={i18n("Screens.dashboard.users.group.title_already_active")}
-                    text={i18n("Screens.dashboard.users.group.text_already_active")}
+                    headerTitle={t("Words.attention")}
+                    title={t("Screens.dashboard.users.group.title_already_active")}
+                    text={t("Screens.dashboard.users.group.text_already_active")}
                     onSubmit={() =>
                         patchUsersGroup({
                             id: modal.id as number,
@@ -69,11 +71,12 @@ export function Groups({ search }: Props) {
                     }
                     isShowModal={modal.type === "ACTIVE_GROUP"}
                     onModal={handleToggleModal}
+                    isLoading={isLoadingPatch}
                 />
                 <Notice
-                    headerTitle={i18n("Words.attention")}
-                    title={i18n("Screens.dashboard.users.group.title_already_exclude")}
-                    text={i18n("Screens.dashboard.users.group.text_already_exclude")}
+                    headerTitle={t("Words.attention")}
+                    title={t("Screens.dashboard.users.group.title_already_exclude")}
+                    text={t("Screens.dashboard.users.group.text_already_exclude")}
                     onSubmit={() =>
                         deleteUsersGroup({
                             id: modal.id as number,
@@ -81,6 +84,7 @@ export function Groups({ search }: Props) {
                     }
                     isShowModal={modal.type === "DELETE_GROUP"}
                     onModal={handleToggleModal}
+                    isLoading={isLoadingDelete}
                 />
             </div>
         </>

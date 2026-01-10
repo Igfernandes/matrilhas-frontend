@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import i18n from "@configs/i18n";
 
 import { SelectorShape } from "@components/shared/layouts/Selector/type";
@@ -9,6 +9,7 @@ import {
 } from "@type/OperationsFailures";
 import useGetOperationsFailures from "@services/OperationsFailures/Get/useGet";
 import { OperationsFailuresActions } from "../OperationsFailuresActions";
+import { useI18n } from "@contexts/I18n";
 
 type Props = Pick<
   HookFinancesProps,
@@ -16,20 +17,21 @@ type Props = Pick<
 >;
 
 export function useOperationsFailures({ filter }: Props) {
+  const { t } = useI18n()
   const [selectors, setSelectors] = useState<SelectorShape[]>([]);
   const [tDataOperationsFailures, setTDataOperationsFailures] = useState<
     Array<Record<string, unknown>>
   >([]);
   const { data: operationsFailuresData } = useGetOperationsFailures();
 
-  const tHeadsOperationsFailures = useRef<Array<string>>([
+  const tHeadsOperationsFailures = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Words.operation_type"),
-    i18n("Words.status"),
-    i18n("Words.error_message"),
-    i18n("Words.resolved_at"),
-    i18n("Words.actions"),
-  ]);
+    t("Texts.operation_type"),
+    t("Words.status"),
+    t("Texts.error_message"),
+    t("Texts.resolved_at"),
+    t("Words.actions"),
+  ], [t]);
   const updateOperationsFailuresForTable = ({
     id,
     operation_type,

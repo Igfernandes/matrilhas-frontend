@@ -23,10 +23,10 @@ export function Dependents() {
             <div className="flex text-sm justify-between">
                 <ul className="flex">
                     <li className="mx-2">
-                        <strong>Adultos:</strong> {amount.adults}
+                        <strong>{t("Words.adults")}:</strong> {amount.adults}
                     </li>
                     <li className="mx-2">
-                        <strong>Crianças:</strong> {amount.children}
+                        <strong>{t("Words.children")}:</strong> {amount.children}
                     </li>
                 </ul>
                 <div className="text-right">

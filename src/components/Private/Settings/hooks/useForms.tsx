@@ -14,6 +14,7 @@ export function useForms() {
   const { formMethods, handleSubmit, errors } = useFormRules<SettingsPayload>({
     schema: SettingsSchema,
   });
+  const { setValue } = formMethods
   const { mutateAsync: putUsers, isPending } = usePutUsers();
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
 
@@ -31,13 +32,13 @@ export function useForms() {
 
     Object.entries({
       name: userAuth?.name,
-      birthdate: dayjs(userAuth?.birthdate, "YYYY-MM-DD").format("DD/MM/YYYY"),
+      birthdate: userAuth?.birthdate,
       cpf: getCPFFormatted(userAuth?.cpf),
       phone: getNumberFormatted(userAuth?.phone),
     }).forEach(([colName, ColValue]) =>
-      formMethods.setValue(colName as keyof SettingsPayload, ColValue)
+      setValue(colName as keyof SettingsPayload, ColValue)
     );
-  }, [userAuth]);
+  }, [userAuth, setValue]);
 
   const handleToggleModel = (isShowModal: boolean) => {
     setIsShowModal(isShowModal);

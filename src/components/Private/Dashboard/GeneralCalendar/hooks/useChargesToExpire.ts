@@ -1,9 +1,8 @@
 import useGetCharges from "@services/Charges/Get/useGetCharges";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { CalendarEventShape } from "../type";
 import moment from "moment";
-import i18n from "@configs/i18n";
-import { isEquals } from "@helpers/json";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   refData: string;
@@ -13,18 +12,13 @@ export function useChargesToExpire({ refData }: Props) {
   const { rows: charges, isPending: isLoading } = useGetCharges({
     started_at: refData,
   });
-  const [chargesToExpired, setChargesToExpired] = useState<
-    CalendarEventShape[]
-  >([]);
-
-  useEffect(() => {
-    if (isEquals(chargesToExpired, charges)) return;
-
+  const { t } = useI18n();
+  const chargesToExpired = useMemo<CalendarEventShape[]>(() => {
     const chargesWithExpiredDate = charges.filter(
       (charge) => charge.expired_days
     );
 
-    const data = chargesWithExpiredDate.map((charge) => {
+    return chargesWithExpiredDate.map((charge) => {
       const chargeDate = moment(charge.created_at).add(
         charge.expired_days,
         "days"
@@ -33,16 +27,14 @@ export function useChargesToExpire({ refData }: Props) {
       const date = chargeDate.year(thisYear);
 
       return {
-        title: i18n("Words.charge") + "🎉",
+        title: t("Words.charge") + "🎉",
         start: date.toDate(),
         end: date.toDate(),
         allDay: true,
         resource: String(charge.expired_days) ?? "",
       };
     });
-
-    setChargesToExpired(data);
-  }, [refData, charges, chargesToExpired]);
+  }, [charges, t]);
 
   return {
     chargesToExpired,

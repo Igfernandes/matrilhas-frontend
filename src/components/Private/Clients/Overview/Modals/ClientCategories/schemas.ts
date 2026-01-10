@@ -1,8 +1,11 @@
-import i18n from "@configs/i18n";
+import { TFunction } from "@contexts/I18n";
 import { z } from "zod";
 
-export const ClientCategoryModalSchema = z.object({
-  category: z.string({ required_error: i18n("Validations.required") })
-});
+export const ClientCategoryModalSchema = (t: TFunction) =>
+  z.object({
+    category: z.string({ required_error: t("Validations.required") }),
+  });
 
-export type ClientCategoryPayload = z.infer<typeof ClientCategoryModalSchema>;
+export type ClientCategoryPayload = z.infer<
+  ReturnType<typeof ClientCategoryModalSchema>
+>;

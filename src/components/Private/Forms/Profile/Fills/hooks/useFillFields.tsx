@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import i18n from "@configs/i18n";
 import { useModalContext } from "@contexts/Modal";
 import dayjs from "dayjs";
@@ -8,6 +8,7 @@ import useGetFillFields from "@services/Forms/Fills/Get/useGetFillFields";
 import useDeleteFillField from "@services/Forms/Fills/Delete/useDelete";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import { ModalFormsOperationType } from "../../type";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   formId: number;
@@ -15,6 +16,7 @@ type Props = {
 };
 
 export function useFillFields({ formId, components }: Props) {
+  const { t } = useI18n()
   const [tDataFields, setTDataFields] = useState<
     Array<Record<string, unknown>>
   >([]);
@@ -25,13 +27,12 @@ export function useFillFields({ formId, components }: Props) {
     useDeleteFillField();
   const { data: fieldsData } = useGetFillFields({ formId });
 
-  const tHeadsFields = useRef<Array<string>>([
+  const tHeadsFields = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Texts.first_column"),
-    i18n("Texts.inscribe_at"),
-    i18n("Words.created_at"),
-    i18n("Words.actions"),
-  ]);
+    t("Texts.first_column"),
+    t("Words.created_at"),
+    t("Words.actions"),
+  ], [t]);
 
   const handleChangeColumn = useCallback((fieldId: string) => setFirstColumn(fieldId), []);
 
@@ -41,13 +42,11 @@ export function useFillFields({ formId, components }: Props) {
       form_id,
       value,
       ref,
-      inscribed_at,
       created_at,
     }: FormFillField) => {
       return {
         id,
         value: value.length > 40 ? value.slice(0, 40) + "..." : value,
-        inscribe_at: inscribed_at ?? "",
         created_at: dayjs(created_at).format("DD/MM/YYYY HH:mm:ss"),
         actions: (
           <FillFieldsActions
@@ -81,12 +80,12 @@ export function useFillFields({ formId, components }: Props) {
     );
 
     if (nameColumn && !firstColumnId) {
-      tHeadsFields.current[1] = i18n("Words.name");
+      tHeadsFields[1] = t("Words.name");
       setFirstColumn(nameColumn.id);
     } else if (firstColumnId) {
       const field = components.find((field) => field.id == firstColumnId);
-      tHeadsFields.current[1] = field?.label ?? "";
-    } else tHeadsFields.current[1] = i18n("Texts.first_column");
+      tHeadsFields[1] = field?.label ?? "";
+    } else tHeadsFields[1] = i18n("Texts.first_column");
 
     const tDataFields = fieldsData.map((FieldsProps) => {
       FieldsProps.sort((a, b) => a.field_id - b.field_id);
@@ -102,6 +101,8 @@ export function useFillFields({ formId, components }: Props) {
     updateFieldForTable,
     firstColumnId,
     components,
+    tHeadsFields,
+    t
   ]);
 
   return {

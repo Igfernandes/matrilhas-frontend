@@ -13,11 +13,21 @@ export const Permissions = {
   agencies_update: "Atualizar Agências",
   agencies_delete: "Excluir Agências",
   agencies_view: "Visualizar todas as Agências",
-  
+
+  galleries_create: "Criar Galerias",
+  galleries_update: "Atualizar Galerias",
+  galleries_delete: "Excluir Galerias",
+  galleries_view: "Visualizar todas as Galerias",
+
+  sales_create: "Criar Vendas",
+  sales_update: "Atualizar Vendas",
+  sales_delete: "Excluir Vendas",
+  sales_view: "Visualizar todas as Vendas",
+
   tours_create: "Criar Passeios",
   tours_update: "Atualizar Passeios",
   tours_delete: "Excluir Passeios",
-  tours_view: "Visualizar todos os Passeios",  
+  tours_view: "Visualizar todos os Passeios",
 
   forms_fills_create: "Criar preenchimentos de formulários",
   forms_fills_update: "Atualizar preenchimentos de formulários",

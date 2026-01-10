@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { Modal } from "@components/shared/layouts/Modal";
@@ -8,9 +7,11 @@ import { When } from "@components/utilities/When";
 import { useModalForm } from "./hooks/useModalForm";
 import { Information } from "./parts/Information";
 import { Users } from "./parts/Users";
+import { useI18n } from "@contexts/I18n";
 
 
 export function SchedulingModal() {
+  const { t } = useI18n()
   const { modal, handleToggleModal } = useModalContext();
   const {
     formMethods,
@@ -19,12 +20,12 @@ export function SchedulingModal() {
     setStep,
     step, scheduleCurrent,
     handleSteps
-  } = useModal({ scheduleId: modal.id ? parseInt(modal.id as string) : undefined });
-  const { handleDeleteSchedule, isLoading, submit } = useModalForm({ setStep, reset: formMethods.reset });
+  } = useModal();
+  const { handleDeleteSchedule, isLoading, isLoadingDelete, submit } = useModalForm({ setStep, reset: formMethods.reset });
 
   return (
     <Modal
-      title={i18n("Words.new_scheduling")}
+      title={t("Texts.new_scheduling")}
       isShowModal={modal.type === "SCHEDULE"}
       handleModal={(isShow) => {
         setStep("INFORMATION");
@@ -49,7 +50,8 @@ export function SchedulingModal() {
                   <Button
                     type="button"
                     className="border-primary text-primary border-tertiary  font-semibold border-2"
-                    text={i18n(`Words.exclude`)}
+                    text={t(`Words.exclude`)}
+                    isLoading={isLoadingDelete}
                     onClick={handleDeleteSchedule}
                   />
                 </When>
@@ -57,7 +59,7 @@ export function SchedulingModal() {
                   <Button
                     type="button"
                     className="border-primary text-primary font-semibold border-2"
-                    text={i18n(`Words.go_back`)}
+                    text={t(`Texts.go_back`)}
                     onClick={() => handleSteps("PREV")}
                   />
                 </When>
@@ -69,7 +71,7 @@ export function SchedulingModal() {
                   <Button
                     type={"button"}
                     className="bg-primary text-white"
-                    text={i18n(`Words.continue`)}
+                    text={t(`Words.continue`)}
                     onClick={() => handleSteps("NEXT")}
                   />
                 </When>
@@ -77,7 +79,7 @@ export function SchedulingModal() {
                   <Button
                     type={"submit"}
                     className="bg-primary text-white"
-                    text={i18n(`Words.save`)}
+                    text={t(`Words.save`)}
                     isLoading={isLoading}
                   />
                 </When>

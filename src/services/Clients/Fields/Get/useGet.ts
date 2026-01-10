@@ -13,9 +13,9 @@ export default function useGetClientsFields(
   }
 
   const { data, ...rest } = useQueryGuard({
-    queryKey: ["clients/fields"],
+    queryKey: ["clients/fields", request],
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  return { rows: data?.rows ?? [], count: data?.count ?? 0, ...rest };
 }

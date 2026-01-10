@@ -9,6 +9,9 @@ export const PersonalTranslations = {
   textarea: "Texto Grande",
   register: "Cadastrar",
   cpf_cnpj: "CPF/CNPJ",
+  clients: "Clientes",
+  created_at: "Criado em",
+  describe: "Descrição",
   ative: "Ativar",
   family: "Família",
   birthdays: "Aniversários",
@@ -20,5 +23,5 @@ export const PersonalTranslations = {
   username: "Nome do usuário",
   birthdate: "Data de Nasc",
   revenue: "Receita",
-  relations: "Relacionados"
+  relations: "Relacionados",
 };

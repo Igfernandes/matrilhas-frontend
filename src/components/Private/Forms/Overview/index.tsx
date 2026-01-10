@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
 import { useModalContext } from "@contexts/Modal";
 import { ModalFormsOperationType } from "../type";
@@ -12,8 +11,10 @@ import dayjs from "dayjs";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { FormTabs } from "./parts/Tabs";
 import { useFormsTab } from "./hooks/useFormsTab";
+import { useI18n } from "@contexts/I18n";
 
 export function FormsCard() {
+  const { t } = useI18n()
   const { formStatus, setFormStatus, handleFilterForms } = useFormsTab()
   const { forms, handleToggleStatusForm, isLoadingDeleteForm } =
     useFormsOverview();
@@ -42,11 +43,11 @@ export function FormsCard() {
                 {
                   handle: () =>
                     handleCopy(`${baseUrl}${formsRoutePublic}/${form.slug}`),
-                  text: i18n(`Words.link_copy`) as string,
+                  text: t("Texts.link_copy") as string,
                 },
                 {
                   handle: () => handleToggleModal("EXCLUDE", form.id),
-                  text: i18n(`Words.exclude`) as string,
+                  text: t("Words.exclude") as string,
                   permissions: ["forms_delete"],
                 },
               ].filter(
@@ -61,9 +62,9 @@ export function FormsCard() {
         />
       </div>
       <Notice
-        headerTitle={i18n("Words.attention")}
-        title={i18n("Screens.dashboard.forms.title_already_exclude")}
-        text={i18n("Screens.dashboard.forms.text_already_exclude")}
+        headerTitle={t("Words.attention")}
+        title={t("Screens.dashboard.forms.title_already_exclude")}
+        text={t("Screens.dashboard.forms.text_already_exclude")}
         onSubmit={handleToggleStatusForm}
         isShowModal={modal.type === "EXCLUDE"}
         onModal={handleToggleModal}

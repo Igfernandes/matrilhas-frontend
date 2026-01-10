@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
-import { PostImportClientPayload } from "./type";
-import i18n from "@configs/i18n";
+import { PostImportAgencyPayload } from "./type";
 import { AxiosError } from "axios";
-import { useImportClientsService } from ".";
+import { useImportAgenciesService } from ".";
+import { useI18n } from "@contexts/I18n";
 
-export default function usePostImportClient() {
+export default function usePostImportAgency() {
+  const { t } = useI18n();
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
-  const { postImportClient } = useImportClientsService();
+  const { postImportAgency } = useImportAgenciesService();
   const queryClient = useQueryClient();
 
-  const handleMutate = async (payload: PostImportClientPayload) => {
-    const { data } = await postImportClient(payload);
-
+  const handleMutate = async (payload: PostImportAgencyPayload) => {
+    const { data } = await postImportAgency(payload);
     return data;
   };
 
@@ -22,16 +22,11 @@ export default function usePostImportClient() {
     mutationFn: handleMutate,
     onSuccess: ({ success }) => {
       dispatchSnackbar({
-        message: i18n(success),
+        message: t(success),
         type: "success",
       });
 
-      queryClient.removeQueries({ queryKey: ["clients"] });
-      
-      queryClient.invalidateQueries({
-        queryKey: ["categories", {}],
-        refetchType: "active",
-      });
+      queryClient.removeQueries({ queryKey: ["agencies"], type: "all" });
     },
     onError: (err: AxiosError) => {
       handleAxiosError(err);

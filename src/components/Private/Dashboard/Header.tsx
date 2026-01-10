@@ -3,8 +3,8 @@ import { UserGroup } from "@assets/Icons/black/UserGroup";
 import { UsersManager } from "@assets/Icons/black/UsersManager";
 import { Wallet } from "@assets/Icons/black/Wallet";
 import { CardAmountBoard } from "@components/shared/layouts/CardAmountBoard";
-import i18n from "@configs/i18n";
 import { ManagerProps } from "./type";
+import { useI18n } from "@contexts/I18n";
 
 export function DashboardHeader({
   clients,
@@ -13,6 +13,7 @@ export function DashboardHeader({
   charges,
   isLoading
 }: ManagerProps) {
+  const { t } = useI18n()
   return (
     <CardAmountBoard
       viewLimit={4}
@@ -20,25 +21,25 @@ export function DashboardHeader({
       items={[
         {
           icon: <UserGroup fill="white" />,
-          title: i18n("Words.clients"),
+          title: t("Words.clients"),
           value: String(clients).padStart(6, "0"),
         },
         {
           icon: <UsersManager fill="white" />,
           background: "bg-red",
-          title: i18n("Words.users"),
+          title: t("Words.users"),
           value: String(users).padStart(6, "0"),
         },
         {
           icon: <Form fill="white" />,
           background: "bg-purple",
-          title: i18n("Words.forms"),
+          title: t("Words.forms"),
           value: String(forms).padStart(6, "0"),
         },
         {
           icon: <Wallet fill="white" />,
           background: "bg-orange",
-          title: i18n("Words.charges"),
+          title: t("Words.charges"),
           value: String(charges).padStart(6, "0"),
         },
       ]}

@@ -1,6 +1,6 @@
 import { Button } from "@components/shared/forms/Button";
 import { When } from "@components/utilities/When";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 import { ChargeType } from "@type/Charges";
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
@@ -9,7 +9,7 @@ type Props = {
   type: ChargeType;
   products: Array<Product>;
   isLoading: boolean;
-  hasAllFilledFields: () => boolean;
+  hasAllFilledFields: boolean;
 };
 type Product = {
   title: string;
@@ -24,6 +24,7 @@ export function OrderSummary({
   isLoading,
   hasAllFilledFields,
 }: Props) {
+  const { t } = useI18n()
   const { register } = useFormContext();
   const total = useRef<number>(
     products
@@ -35,12 +36,12 @@ export function OrderSummary({
     <div className="order-summary p-6 border-2 border-stone-200 rounded-lg ml-6">
       <div className="title mb-4">
         <h5>
-          <strong>{i18n("Words.order_summary")}</strong>
+          <strong>{t("Texts.order_summary")}</strong>
         </h5>
       </div>
       <div className="product-title flex items-center">
         <span className="text-xs uppercase font-semibold">
-          {i18n("Words.products")}
+          {t("Words.products")}
         </span>{" "}
         <hr className="w-[80%] text-stone-300 ml-2" />
       </div>
@@ -65,13 +66,17 @@ export function OrderSummary({
               <div className="amount flex justify-between">
                 <div className="w-1/2">
                   <label htmlFor={`amounts.${index}`} className="text-xs">
-                    {i18n("Words.amount")}
+                    {t("Words.amount")}
                   </label>
                 </div>
-                <div className="w-1/2 text-end">
-                  <span>x</span>
+                <div className=" text-end border border-stone-300 pl-3 pr-1 py-1 rounded-md">
+                  <span className="text-lg inline-block">x</span>
                   <input
-                    className="w-14 text-center border-none outline-none"
+                    className="w-14 text-center border-none outline-none   
+                    [&::-webkit-inner-spin-button]:opacity-100
+                    [&::-webkit-outer-spin-button]:opacity-100
+                    [&::-webkit-inner-spin-button]:appearance-auto
+                    [&::-webkit-outer-spin-button]:appearance-auto"
                     type="number"
                     {...register(`amounts.${index}`)}
                     id={`amounts.${index}`}
@@ -84,8 +89,8 @@ export function OrderSummary({
               </div>
               <div>
                 <span className="text-xs text-red">
-                  {max == 1 ? "Resta" : "Restam"} apenas {max}{" "}
-                  {max == 1 ? "disponível" : "disponíveis"}*
+                  {max == 1 ? t("Texts.remaining_singular") : t("Texts.remaining_plural")} {max}{" "}
+                  {max == 1 ? t("Texts.available_singular") : t("Texts.available_plural")}*
                 </span>
               </div>
             </When>
@@ -95,7 +100,7 @@ export function OrderSummary({
 
       <div className="total flex justify-between pb-4 my-4 border-b-2 border-b-stone-200">
         <div className="title">
-          <span className="font-semibold">{i18n("Words.total")}</span>
+          <span className="font-semibold">{t("Words.total")}</span>
         </div>
         <div className="text">
           <span className="font-semibold">
@@ -108,10 +113,10 @@ export function OrderSummary({
       </div>
       <div className="submit">
         <Button
-          text={i18n("Words.continue")}
+          text={t("Words.continue")}
           type="submit"
           isLoading={isLoading}
-          disabled={!hasAllFilledFields()}
+          disabled={!hasAllFilledFields}
         />
       </div>
     </div>

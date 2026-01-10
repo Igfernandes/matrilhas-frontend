@@ -21,7 +21,7 @@ export function Contact() {
                 <p className="text-sm">{t("Screens.sales.contact.text")}</p>
             </div>
             <div className="my-2">
-                <Input {...register("email")} required={true} label={t("Words.email")} dataTestId="sale_email" />
+                <Input {...register("email")} maxLength={200} required={true} label={t("Words.email")} dataTestId="sale_email" />
             </div>
             <div className="my-2">
                 <Phone {...register("phone", {

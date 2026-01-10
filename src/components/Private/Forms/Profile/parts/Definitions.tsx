@@ -1,6 +1,5 @@
 import { Input } from "@components/shared/forms/Input";
 import { TextArea } from "@components/shared/forms/TextArea";
-import i18n from "@configs/i18n";
 import { useFormContext } from "react-hook-form";
 import { Select } from "@components/shared/forms/Select";
 import { When } from "@components/utilities/When";
@@ -12,6 +11,7 @@ import { useFormsData } from "../hooks/useFormsData";
 import { ComponentsProps } from "../../type";
 import { FormsPayload } from "../schema";
 import { TopBar } from "@components/Private/Forms/Profile/parts/TopBar";
+import { useI18n } from "@contexts/I18n";
 
 type Props = Pick<ComponentsProps, "handleChangeFormFields"> & {
   slug?: string;
@@ -19,6 +19,7 @@ type Props = Pick<ComponentsProps, "handleChangeFormFields"> & {
 };
 
 export function Definitions({ handleChangeFormFields, slug }: Props) {
+  const { t } = useI18n()
   const { forms, categories } = useFormsData();
   const {
     register,
@@ -33,9 +34,10 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
         <div className="form-group w-full">
           <Input
             {...register("name")}
-            label={i18n(`Words.form_name`)}
+            label={t(`Texts.form_name`)}
             dataTestId="form_name"
             required={true}
+            maxLength={200}
             errors={errors.name}
           />
         </div>
@@ -65,20 +67,20 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
               handleChangeFormFields(JSON.parse(targetForm?.components));
             }}
             dataTestId="templates-forms"
-            label={i18n("Words.templates")}
+            label={t("Words.templates")}
             errors={errors.template}
           />
         </When>
         <When value={forms.length == 0}>
           <span className="bg-disabled border-2 border-tertiary block p-4">
-            {i18n("Words.not_found_templates")}
+            {t("Texts.not_found_templates")}
           </span>
         </When>
       </div>
       <div className="form-group w-full">
         <Input
           {...register("stock", { valueAsNumber: true })}
-          label={i18n(`Words.vacancies_total`)}
+          label={t(`Texts.vacancies_total`)}
           dataTestId="form_stock"
           type="number"
           errors={errors.stock}
@@ -91,7 +93,7 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
         <div className="form-group w-full md:w-1/2 md:mr-2">
           <Datetime
             {...register("started_at")}
-            label={i18n("Words.started_inscribed")}
+            label={t("Texts.started_inscribed")}
             dataTestId="started_at"
             errors={errors.started_at}
           />
@@ -99,7 +101,7 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
         <div className="form-group w-full my-4 md:my-auto md:w-1/2 md:ml-2">
           <Datetime
             {...register("expired_at")}
-            label={i18n("Words.final_inscribed")}
+            label={t("Texts.final_inscribed")}
             dataTestId="expired_at"
             errors={errors.expired_at}
           />
@@ -108,7 +110,7 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
       <div className="form-group my-6">
         <Select
           {...register("category", { valueAsNumber: true })}
-          label={i18n("Words.relation_category")}
+          label={t("Texts.relation_category")}
           dataTestId="category"
           options={[
             {
@@ -122,14 +124,13 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
           ]}
         />
         <span className="text-red text-sm">
-          <strong>AVISO:</strong> A categoria acima selecionada será atrelada aos clientes gerados por
-          esse formulário.
+          <strong>{t("Words.warning")}:</strong> {t("Screens.dashboard.forms.about_relation_category")}
         </span>
       </div>
       <div className="form-group">
         <TextArea
           {...register("description")}
-          label={i18n("Words.description")}
+          label={t("Words.description")}
           dataTestId="description"
           maxLength={800}
           errors={errors.description}
@@ -139,10 +140,11 @@ export function Definitions({ handleChangeFormFields, slug }: Props) {
         <TextEdit
           {...register("thanks_message")}
           dataTestId="alerts"
-          label={i18n(`Texts.thanks_message`)}
+          label={t(`Texts.thanks_message`)}
           defaultValue={getValues("thanks_message") ?? ""}
-          placeholder={i18n("Screens.dashboard.forms.about_thanks_message")}
+          placeholder={t("Screens.dashboard.forms.about_thanks_message")}
           errors={errors.thanks_message}
+          maxLength={6000}
         />
       </div>
     </div>

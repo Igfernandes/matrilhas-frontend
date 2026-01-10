@@ -2,7 +2,6 @@ import { When } from "@components/utilities/When";
 import { formatNumber } from "@helpers/numbers";
 import { USER_OPTIONS } from "@constants/options";
 import { Button } from "@components/shared/layouts/Button";
-import i18n from "@configs/i18n";
 import { FormBuildProps } from "../../type";
 import { useModalContext } from "../../context/Modal";
 import { useFieldContext } from "../../context/Fields";
@@ -11,10 +10,12 @@ import { AccessControl } from "@components/shared/settings/AccessControl";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { Avatar } from "@assets/Icons/black/Avatar";
 import { useEffect, useState } from "react";
+import { useI18n } from "@contexts/I18n";
 
 type Props = Pick<FormBuildProps, "handleUpdateClient">;
 
 export function OptionsBar({ handleUpdateClient }: Props) {
+  const { t } = useI18n()
   const { handleToggleModal } = useModalContext();
   const { viewedField } = useFieldContext();
   const { hasPermission, permissions } = useUserNavigationContext();
@@ -63,7 +64,7 @@ export function OptionsBar({ handleUpdateClient }: Props) {
           <div className="mx-2 w-full lg:w-auto">
             <Button
               className="border border-zinc-300 px-3 font-bold rounded-xl"
-              text={i18n("Texts.new_field")}
+              text={t("Texts.new_field")}
               type="button"
               onClick={() => handleToggleModal(true)}
             />

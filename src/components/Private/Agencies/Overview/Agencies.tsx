@@ -1,5 +1,4 @@
 import { useAgencies } from "./hooks/useAgencies";
-import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
 import { useModalContext } from "@contexts/Modal";
 import { ModalAgencyOperationType } from "../type";
@@ -10,8 +9,10 @@ import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { ImportModal } from "./Modals/Import";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
+import { useI18n } from "@contexts/I18n";
 
 export function AgenciesTable() {
+  const { t } = useI18n()
   const {
     handleDelete, isLoadingDelete, tHeads, selectors, updateForTable, getSelected, setSelectors
   } = useAgencies();
@@ -43,7 +44,7 @@ export function AgenciesTable() {
                     "DELETE",
                     getSelected(selectors)
                   ),
-                text: i18n("Texts.selected_delete"),
+                text: t("Texts.selected_delete"),
                 permissions: [PERMISSIONS.agencies.delete],
               },
             ].filter((action) => hasPermission(action.permissions)),
@@ -54,7 +55,7 @@ export function AgenciesTable() {
                     "DELETE",
                     "-1"
                   ),
-                text: i18n("Texts.all_delete"),
+                text: t("Texts.all_delete"),
                 permissions: [PERMISSIONS.agencies.delete],
               },
 
@@ -69,10 +70,10 @@ export function AgenciesTable() {
             ),
             filters: filters["AGENCIES"] ?? {},
           }}
-          title={i18n("Words.agencies")}
+          title={t("Words.agencies")}
           excludes={["updated_at"]}
           tHeads={{
-            data: tHeads.current,
+            data: tHeads,
             widths: [60, 250, 70, 150, 150, 48],
           }}
         />
@@ -80,9 +81,9 @@ export function AgenciesTable() {
 
       <div className="relative z-10">
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.agencies.title_already_exclude")}
-          text={i18n("Screens.dashboard.agencies.text_already_exclude")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.agencies.title_already_exclude")}
+          text={t("Screens.dashboard.agencies.text_already_exclude")}
           onSubmit={handleDelete}
           isShowModal={modal.type === "DELETE"}
           onModal={handleToggleModal}

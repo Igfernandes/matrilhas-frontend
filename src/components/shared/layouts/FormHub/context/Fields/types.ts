@@ -4,6 +4,7 @@ export type FieldContextData = {
   viewedField: ViewedEntityShape;
   handleChangeField: (field: FieldsShape) => void;
   fields: FieldsShape[];
+  isLoading?: boolean;
   entityType: ScopeFields;
   handleSubmitFields: (viewedId: number, payload: PayloadFieldValues) => void;
 };
@@ -13,6 +14,7 @@ export type FieldProviderProps = {
   entity: ViewedEntityShape;
   children: React.ReactNode;
   entityType: ScopeFields;
+  isLoading?: boolean;
   handleSubmitFields: (viewedId: number, payload: PayloadFieldValues) => void;
 };
 

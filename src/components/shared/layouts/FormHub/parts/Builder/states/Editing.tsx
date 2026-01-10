@@ -4,11 +4,11 @@ import { Input } from "../../../../../forms/Input";
 import { translateOrFallback } from "@helpers/i18nHelper";
 import { FieldError, FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
-import i18n from "@configs/i18n";
 import { useFormBuilder } from "../hooks/useFormBuilder";
 import { File } from "@components/shared/forms/File";
 import { DotsOptions } from "@components/shared/others/DotsOptions";
 import useWindow from "@hooks/useWindow";
+import { useI18n } from "@contexts/I18n";
 
 type Props = Pick<FormBuildProps, "isEditing" | "fields"> & {
   onModal: (isShowModal: boolean) => void;
@@ -21,6 +21,7 @@ export function FormBuilderEditing({
   handleEdit,
   onModal,
 }: Props) {
+  const { t } = useI18n()
   const {
     register,
     formMethods,
@@ -28,7 +29,7 @@ export function FormBuilderEditing({
     handleSubmit,
     errors,
     deleteField,
-    entityType,
+    entityType, isLoading
   } = useFormBuilder();
   const { screenType } = useWindow();
 
@@ -80,7 +81,7 @@ export function FormBuilderEditing({
                           {
                             handle: () =>
                               deleteField({ id: field.id, scope: entityType }),
-                            text: i18n("Words.exclude"),
+                            text: t("Words.exclude"),
                           },
                         ]}
                       />
@@ -95,7 +96,7 @@ export function FormBuilderEditing({
                   <Button
                     onClick={() => onModal(true)}
                     type="button"
-                    text={i18n("Words.new_data")}
+                    text={t("Texts.new_data")}
                     className="text-primary font-bold"
                   />
                 </div>
@@ -105,14 +106,15 @@ export function FormBuilderEditing({
                   <Button
                     onClick={() => handleEdit("")}
                     type="button"
-                    text={i18n("Words.cancel")}
+                    text={t("Words.cancel")}
                     className="border-secondary border-2 px-4"
                   />
                 </div>
                 <div className="w-[43%] lg:w-auto">
                   <Button
                     type="submit"
-                    text={i18n("Words.save")}
+                    text={t("Words.save")}
+                    isLoading={isLoading}
                     className="bg-primary font-semibold text-white px-4"
                   />
                 </div>

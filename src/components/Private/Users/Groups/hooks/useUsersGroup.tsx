@@ -1,43 +1,45 @@
 import { useCallback, useMemo } from "react";
-import i18n from "@configs/i18n";
 import dayjs from "dayjs";
 import { UsersGroupShape } from "../../../../../types/Users/UsersGroup";
 import { UsersGroupActions } from "../UsersGroupActions";
 import { Status } from "@components/utilities/Status";
 import useDeleteGroup from "@services/Users/Groups/Delete/useDelete";
 import useDPatchGroup from "@services/Users/Groups/Patch/usePatchGroup";
+import { useI18n } from "@contexts/I18n";
 
 export function useUsersGroup() {
-  const { mutateAsync: deleteUsersGroup } = useDeleteGroup();
-  const { mutateAsync: patchUsersGroup } = useDPatchGroup();
+  const { t } = useI18n()
+  const { mutateAsync: deleteUsersGroup, isPending: isLoadingDelete } = useDeleteGroup();
+  const { mutateAsync: patchUsersGroup, isPending: isLoadingPatch } = useDPatchGroup();
   const tHeadUsersGroup = useMemo(() => [
     "ID",
-    i18n("Words.name"),
-    i18n("Words.status"),
-    i18n("Words.total"),
-    i18n("Words.created_date"),
-    i18n("Words.actions"),
-  ], []);
+    t("Words.name"),
+    t("Words.status"),
+    t("Words.total"),
+    t("Words.created_at"),
+    t("Words.actions"),
+  ], [t]);
 
   const updateUserGroupForTable = useCallback((data: unknown) => {
     const userGroup = data as UsersGroupShape;
-    const convertDate = dayjs(userGroup.created_at).format(
-      i18n("Configs.format.datetime")
-    );
-
     return {
       id: userGroup.id,
       name: userGroup.name,
       status: <Status is={userGroup.status} />,
       total: userGroup.total,
-      created_at: convertDate != "Invalid Date" ? convertDate : userGroup.created_at,
+      created_at: dayjs(userGroup.created_at).format(t("Configs.format.datetime")),
       actions: (
         <UsersGroupActions userGroup={userGroup} />
       ),
     }
-  }, []);
+  }, [t]);
 
   return {
-    tHeadUsersGroup, updateUserGroupForTable, deleteUsersGroup, patchUsersGroup
+    tHeadUsersGroup,
+    updateUserGroupForTable,
+    deleteUsersGroup,
+    patchUsersGroup,
+    isLoadingDelete,
+    isLoadingPatch
   };
 }

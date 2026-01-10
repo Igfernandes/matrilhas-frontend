@@ -1,4 +1,5 @@
 export const clientsTranslations = {
+  clients_importer: "Importador de clientes",
   categories: {
     text_create_category:
       "Para criar uma categoria, clique em adicionar ou edite uma categoria abaixo:",
@@ -14,4 +15,9 @@ export const clientsTranslations = {
   title_already_exclude: "Você deseja excluir este cliente?",
   text_already_exclude:
     "Ao continuar, todos os dados dos clientes selecionados serão excluídos, e eles não poderão mais acessar até que sejam recadastrados.",
+  text_filters_below_to_refine_client_search:
+    "Utilize os filtros abaixo para refinar a busca de clientes",
+  partial_name_search: "Faça uma busca usando o valor parcial do nome",
+  complete_cpf_value: "Insira o valor completo do CPF",
+  complete_phone_value: "Insira o valor completo do telefone",
 };

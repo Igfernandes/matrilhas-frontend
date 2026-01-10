@@ -1,9 +1,10 @@
-import i18n from "@configs/i18n";
 import Link from "next/link";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { ChargesFilters } from "./ChargesFilters";
+import { useI18n } from "@contexts/I18n";
 
 export function OptionsBar() {
+  const { t } = useI18n()
   return (
     <div className="flex justify-between flex-wrap md:flex-nowrap mb-6">
       <ChargesFilters />
@@ -14,7 +15,7 @@ export function OptionsBar() {
             className="inline-block border border-zinc-300 px-3 py-3 font-bold rounded-xl"
             type="button"
           >
-            {i18n("Words.generate_charge")}
+            {t("Texts.generate_charge")}
           </Link>
         </div>
       </div>

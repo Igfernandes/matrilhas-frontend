@@ -13,6 +13,8 @@ export const DateTranslations = {
   october: "Outubro",
   november: "Novembro",
   december: "Dezembro",
+  one_time: "Única vez",
+  expired_at: "Expirado em",
   frequency: "Frequência",
   weekly: "Semanal",
   monthly: "Mensal",

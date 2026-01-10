@@ -1,5 +1,4 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { ModalFormProps } from "./type";
@@ -7,12 +6,14 @@ import { Modal } from "@components/shared/layouts/Modal";
 import { useIntegrationModal } from "./hooks/useIntegrationModal";
 import { Select } from "@components/shared/forms/Select";
 import { useEffect, useRef } from "react";
+import { useI18n } from "@contexts/I18n";
 
 export function IntegrationsModal({
   isShowModal,
   onModal,
   integrations,
 }: ModalFormProps) {
+  const { t } = useI18n()
   const {
     formMethods,
     handleSubmit,
@@ -36,7 +37,7 @@ export function IntegrationsModal({
 
   return (
     <Modal
-      title={`${i18n("Words.integration")} - ${integration?.provider}`}
+      title={`${t("Words.integration")} - ${integration?.provider}`}
       isShowModal={isShowModal}
       handleModal={onModal}
     >
@@ -46,7 +47,7 @@ export function IntegrationsModal({
             <div className="form-title mt-6 mb-4">
               <h4 className="text-lg">
                 <strong>
-                  {i18n("Screens.dashboard.apis.text_fill_information")}
+                  {t("Screens.dashboard.apis.text_fill_information")}
                 </strong>
               </h4>
             </div>
@@ -58,12 +59,12 @@ export function IntegrationsModal({
                   {...register("status")}
                   options={["ACTIVE", "INACTIVE"].map((status) => {
                     return {
-                      text: i18n(`Words.${status.toLowerCase()}`) as string,
+                      text: t(`Words.${status.toLowerCase()}`) as string,
                       value: status,
                       selected: integration?.status === status,
                     };
                   })}
-                  label={i18n("Words.status")}
+                  label={t("Words.status")}
                   dataTestId="status"
                   errors={errors.status}
                 />
@@ -72,7 +73,7 @@ export function IntegrationsModal({
               <div className="form-group my-4">
                 <Input
                   {...register("public_token")}
-                  label={i18n("Words.public_token")}
+                  label={t("Words.public_token")}
                   dataTestId="public_token"
                   defaultValue={integration?.public_token}
                   errors={errors.public_token}
@@ -81,7 +82,7 @@ export function IntegrationsModal({
               <div className="form-group my-4">
                 <Input
                   {...register("private_token")}
-                  label={i18n("Words.private_token")}
+                  label={t("Words.private_token")}
                   dataTestId="private_token"
                   defaultValue={integration?.private_token}
                   errors={errors.private_token}
@@ -94,8 +95,8 @@ export function IntegrationsModal({
               <div className=" ml-auto">
                 <Button
                   type="submit"
-                  className="bg-red text-white"
-                  text={i18n("Words.save")}
+                  className="bg-primary text-white"
+                  text={t("Words.save")}
                   isLoading={isLoading}
                 />
               </div>

@@ -11,7 +11,7 @@ export function ToggleSwitch<Payload extends FieldValues>({
   defaultValue,
   errors,
 }: ToggleSwitchProps<Payload>) {
-  const [switched, setSwitched] = useState<string>(String(left.value));
+  const [switched, setSwitched] = useState<string>(String(defaultValue ?? left.value));
   const { getStyledSwitchButton } = useToggleSwitch();
 
   useEffect(() => {

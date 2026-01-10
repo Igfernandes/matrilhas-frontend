@@ -60,6 +60,7 @@ export function useModalForm({ setStep, reset }: Props) {
   return {
     submit,
     isLoading: isLoadingPost || isLoadingPut || isLoadingDelete,
+    isLoadingDelete,
     handleDeleteSchedule,
   };
 }

@@ -1,10 +1,11 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChargeUpdatePayload, ChargeUpdateSchema } from "../schemas";
 import usePutCharge from "@services/Charges/Put/usePut";
 import { ChargeShape } from "@type/Charges";
+import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);
 
@@ -13,9 +14,11 @@ type Props = {
 };
 
 export function useForms({ charge }: Props) {
+  const { t } = useI18n()
+  const schema = useMemo(() => ChargeUpdateSchema(t), [t]);
   const { formMethods, handleSubmit, errors } =
     useFormRules<ChargeUpdatePayload>({
-      schema: ChargeUpdateSchema,
+      schema,
       defaultValues: charge,
     });
   const [isShowModal, setIsShowModal] = useState<boolean>(false);

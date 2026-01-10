@@ -17,6 +17,7 @@ export default function ClientProfile({ targetClient }: ClientPageProps) {
     handleSubmitFields,
     handleToggleModal,
     isShowModalUpdateUser,
+    isLoading
   } = useClientsUpdate({
     client: targetClient,
   });
@@ -30,6 +31,7 @@ export default function ClientProfile({ targetClient }: ClientPageProps) {
         entity={targetClient}
         groups={fieldsGroups}
         fields={fields ?? []}
+        isLoading={isLoading}
         handleUpdateClient={handleToggleModal}
       />
       <ClientUpdateModal

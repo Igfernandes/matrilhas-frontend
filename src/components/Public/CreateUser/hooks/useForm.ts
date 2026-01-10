@@ -1,16 +1,18 @@
 import usePostCreateUsers from "@services/Users/Post/usePost";
 import { useFormRules } from "@hooks/Forms/useFormRules";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { CreateUserPayload, useCreateUserSchema } from "./useSchema";
+import { CreateUserPayload, CreateUserSchema } from "./useSchema";
+import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);
 
 type Payload = CreateUserPayload;
 
 export function useForm() {
-  const { schema } = useCreateUserSchema();
+  const { t } = useI18n();
+  const schema = useMemo(() => CreateUserSchema(t), [t]);
   const [stageForm, setStageForm] = useState<"PERSONAL" | "CREDENTIALS">(
     "PERSONAL"
   );

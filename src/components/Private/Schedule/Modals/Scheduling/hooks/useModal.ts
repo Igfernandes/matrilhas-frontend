@@ -2,7 +2,7 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ScheduleSchema, SchedulePayload } from "../schemas";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useGetUsers from "@services/Users/Get/useGetUsers";
 import { UserShape } from "@type/Users";
 import usePostCreateSchedule from "@services/Schedule/Post/usePost";
@@ -10,25 +10,24 @@ import { useModalContext } from "@contexts/Modal";
 import usePutCreateSchedule from "@services/Schedule/Put/usePut";
 import useDeleteSchedule from "@services/Schedule/Delete/useDelete";
 import { hasInvalidDateRange } from "@helpers/date";
-import i18n from "@configs/i18n";
 import useGetSchedules from "@services/Schedule/Get/useGet";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);
 
-type Props = {
-  scheduleId?: number;
-};
-
-export function useModal({ scheduleId }: Props) {
+export function useModal() {
+  const { t } = useI18n();
+  const { handleToggleModal, modal } = useModalContext();
   const { rows: schedules } = useGetSchedules({
-    id: scheduleId ?? undefined,
+    id: modal.id ? parseInt(modal.id as string) : undefined,
   });
+  const schema = useMemo(() => ScheduleSchema(t), [t]);
   const { userAuth } = useUserNavigationContext();
   const [step, setStep] = useState<"INFORMATION" | "USERS">("INFORMATION");
-  const scheduleCurrent = useMemo(() => schedules?.[0] , [schedules]);
+  const scheduleCurrent = useMemo(() => schedules?.[0], [schedules]);
   const { formMethods, handleSubmit } = useFormRules<SchedulePayload>({
-    schema: ScheduleSchema,
+    schema,
     defaultValues: {
       ...scheduleCurrent,
       linked: scheduleCurrent?.linked?.map((user) => String(user.id)) || [],
@@ -36,7 +35,6 @@ export function useModal({ scheduleId }: Props) {
   });
 
   const { watch, trigger, reset } = formMethods;
-  const { handleToggleModal, modal } = useModalContext();
   const { rows: usersData } = useGetUsers();
   const users = useMemo<Array<UserShape>>(() => {
     return usersData.filter((user) => user.id != userAuth.id);
@@ -66,7 +64,7 @@ export function useModal({ scheduleId }: Props) {
 
       if (!isValid)
         formMethods.setError("end_date", {
-          message: i18n("Validations.invalid_end_date"),
+          message: t("Validations.invalid_end_date"),
         });
     }
 
@@ -115,6 +113,14 @@ export function useModal({ scheduleId }: Props) {
     },
     [modal, putSchedule, postSchedule, handleToggleModal]
   );
+
+  useEffect(() => {
+
+    reset({
+      ...scheduleCurrent,
+      linked: scheduleCurrent?.linked?.map((user) => String(user.id)) || [],
+    });
+  }, [scheduleCurrent, reset]);
 
   return {
     formMethods,

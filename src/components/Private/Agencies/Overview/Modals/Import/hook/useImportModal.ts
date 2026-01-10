@@ -1,17 +1,19 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { ImportPayload, ImportSchema } from "../schemas";
-import { useEffect, useState } from "react";
-import i18n from "@configs/i18n";
-import usePostImportClient from "@services/Clients/Import/usePost";
+import { useEffect, useMemo, useState } from "react";
 import { ImportModalsProps } from "../type";
+import { useI18n } from "@contexts/I18n";
+import usePostImportAgency from "@services/Agencies/Import/usePost";
 
 export function useImportModal({ onModal }: ImportModalsProps) {
+  const { t } = useI18n();
+  const schema = useMemo(() => ImportSchema(t), [t]);
   const { register, formMethods, handleSubmit } = useFormRules<ImportPayload>({
-    schema: ImportSchema,
+    schema,
   });
   const { watch } = formMethods;
   const { mutateAsync: postImport, isPending: isLoading } =
-    usePostImportClient();
+    usePostImportAgency();
 
   const [fileName, setFileName] = useState<string>(""); // estado para armazenar o nome
   const fileList = watch("excel"); // retorna o File | undefined
@@ -21,13 +23,13 @@ export function useImportModal({ onModal }: ImportModalsProps) {
     if (fileList && fileList.length > 0) {
       setFileName(fileList[0].name); // pega o primeiro arquivo
     } else {
-      setFileName(i18n("Texts.text_upload"));
+      setFileName(t("Texts.text_upload"));
     }
-  }, [fileList]);
-  
+  }, [fileList, t]);
+
   const onSubmit = async (payload: ImportPayload) => {
     await postImport(payload);
-    setFileName(i18n("Texts.text_upload"));
+    setFileName(t("Texts.text_upload"));
     onModal(false);
   };
 

@@ -52,16 +52,18 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       required,
       defaultValue,
       placeholder,
+      maxLength,
       ...rest
     }: TextAreaProps,
     ref
   ) {
     const IdCurrent = id ?? dataTestId;
-    const { setValue: updateValue, getValues } = useFormContext();
-
+    const { setValue: updateValue, getValues, watch } = useFormContext();
+    const value = watch(rest.name); // obtém o valor atual
+    
     return (
       <>
-        <div className="relative">
+        <div className="relative h-full">
           <label htmlFor={IdCurrent} className="font-semibold ml-1">
             {label}:
             <When value={required}>
@@ -85,6 +87,9 @@ export const TextEdit = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
               placeholder={placeholder}
             />
           </div>
+          <When value={!!maxLength}>
+            <span className="absolute right-4 bottom-[.55rem] p-1 text-xs bg-white">{value?.length ?? 0}/{maxLength}</span>
+          </When>
         </div>
         <ErrorMessage errors={errors?.message} />
       </>

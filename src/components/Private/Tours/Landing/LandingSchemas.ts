@@ -1,17 +1,17 @@
-import i18n from "@configs/i18n";
+import { TFunction } from "@contexts/I18n";
 import { z } from "zod";
 
-export const LandingSchemas = z.object({
+export const LandingSchemas = (t: TFunction) => z.object({
   address: z.array(
     z.object({
       type: z.enum(["DESTINY", "ORIGIN"]),
       tour_id: z.number().optional(),
-      country: z.string({ required_error: i18n("Validations.required") }),
-      state: z.string({ required_error: i18n("Validations.required") }),
-      city: z.string({ required_error: i18n("Validations.required") }),
-      complement: z.string({ required_error: i18n("Validations.required") }),
+      country: z.string({ required_error: t("Validations.required") }),
+      state: z.string({ required_error: t("Validations.required") }),
+      city: z.string({ required_error: t("Validations.required") }),
+      complement: z.string({ required_error: t("Validations.required") }),
     })
   ),
 });
 
-export type LandingPayload = z.infer<typeof LandingSchemas>;
+export type LandingPayload = z.infer<ReturnType<typeof LandingSchemas>>;

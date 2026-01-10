@@ -1,0 +1,22 @@
+export const PublicToursTranslations = {
+  addresses_origin: "Origin Addresses",
+  addresses_destiny: "Destination Addresses",
+  address_origin: "Origin Address",
+  address_destiny: "Destination Address",
+  address_boarding: "Boarding Address",
+  address_landing: "Landing Address",
+  not_found: "No tours found for the selected period.",
+  title: "Explore Our Tours",
+  description:
+    "Discover amazing destinations and enjoy unforgettable experiences with our exclusive tours.",
+  loading: "Loading tours...",
+  filters_by_date: "Filters by Date",
+  filters_by_price: "Filters by Price",
+  filters_by_region: "Filters by Region",
+  featured_tour: "Featured Tour",
+  duration: "Duration",
+  for: "For",
+  book_now: "Book Now",
+  unavailable_for_booking: "Unavailable for Booking",
+  overview: "Overview",
+};

@@ -19,11 +19,6 @@ export function FilledFormsTable(props: Props) {
           pagination: {
             max: 10,
           },
-          filters: {
-            tag: {
-              key: "inscribe_at"
-            }
-          },
           buttons: (
             <FilledFormsActions
               formId={props.formId}
@@ -35,8 +30,8 @@ export function FilledFormsTable(props: Props) {
         data={tDataFields ?? []}
         title={i18n("Words.registers")}
         tHeads={{
-          data: tHeadsFields.current,
-          widths: [60, 300, 150, 180, 48],
+          data: tHeadsFields,
+          widths: [60, 300, 180, 48],
         }}
       />
     </>

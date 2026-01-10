@@ -2,21 +2,22 @@ import { Password } from "@components/shared/forms/Password";
 import { PasswordValidation } from "@components/shared/forms/PasswordValidation";
 import { Modal } from "@components/shared/layouts/Modal";
 import { ModalProps } from "@components/shared/layouts/Modal/type";
-import i18n from "@configs/i18n";
 import { FormProvider } from "react-hook-form";
 import { useModalAlterPassword } from "./hooks/useModalAlterPassword";
 import { Button } from "@components/shared/forms/Button";
+import { useI18n } from "@contexts/I18n";
 
 type Props = Pick<ModalProps, "handleModal" | "isShowModal"> & {};
 
 export function ModalAlterPassword({ handleModal, isShowModal }: Props) {
+  const { t } = useI18n()
   const { formMethods, handleSubmit, submit, errors, isLoading } =
     useModalAlterPassword({ handleModal });
   const { register } = formMethods;
 
   return (
     <Modal
-      title={i18n("Words.password_alter")}
+      title={t("Words.password_alter")}
       handleModal={handleModal}
       isShowModal={isShowModal}
     >
@@ -27,18 +28,18 @@ export function ModalAlterPassword({ handleModal, isShowModal }: Props) {
         >
           <Password
             {...register("current_password")}
-            label={i18n("Words.current_password")}
+            label={t("Words.current_password")}
             dataTestId="password"
             errors={errors.current_password}
           />
           <PasswordValidation
             className="mt-4"
             dataTestId="new_password"
-            label={i18n("Texts.new_password")}
+            label={t("Texts.new_password")}
           />
           <Button
             type="submit"
-            text={i18n(`Words.alter`)}
+            text={t("Words.alter")}
             isLoading={isLoading}
             className="mt-6"
           />

@@ -1,20 +1,27 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { ChargesDashboardTranslations } from "./screens/dashboard/charges";
 import { clientsTranslations } from "./screens/dashboard/clients";
+import { dashboardFormsTranslations } from "./screens/dashboard/forms";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
 import { ToursTranslations } from "./screens/dashboard/tours";
+import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
+import { CookiesTranslations } from "./screens/public/cookies";
+import { PublicFooterTranslations } from "./screens/public/footer";
 import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
 import { formsTranslations } from "./screens/public/forms";
+import { PublicGalleriesTranslations } from "./screens/public/galleries";
 import { HomeAboutUsTranslations } from "./screens/public/home/aboutUs";
 import { homeAgenciesTranslations } from "./screens/public/home/agencies";
 import { HomeFaqTranslations } from "./screens/public/home/faq";
 import { HomeGalleryTranslations } from "./screens/public/home/gallery";
 import { HomeNewsletterTranslations } from "./screens/public/home/newsletter";
+import { HomeToursTranslations } from "./screens/public/home/tours";
 import { loginTranslations } from "./screens/public/login";
 import { NewsletterTranslations } from "./screens/public/newsletter";
+import { PoliticsTranslations } from "./screens/public/politics";
 import { SalesTranslations } from "./screens/public/sales";
 import { PublicToursTranslations } from "./screens/public/tours";
 
@@ -60,6 +67,7 @@ export const Screens = {
     sales: salesTranslations,
     statics: staticsTranslations,
     charges: ChargesDashboardTranslations,
+    forms: dashboardFormsTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",
@@ -78,18 +86,6 @@ export const Screens = {
       text_already_exclude:
         "Ao continuar, o envio será excluído e seus agendamento cancelados.",
       title_already_exclude: "Você deseja excluir este envio?",
-    },
-    forms: {
-      about_thanks_message:
-        "Escreva aqui instruções ou informações para serem exibidas após o preenchimento dos formulários",
-      text_already_exclude:
-        "Ao continuar, os dados vinculados a esse registro serão excluído do sistema.",
-      title_already_exclude: "Você deseja excluir este registro?",
-      fills: {
-        text_already_exclude:
-          "Ao continuar, os dados vinculados a esse registro serão excluído do sistema.",
-        title_already_exclude: "Você deseja excluir este registro?",
-      },
     },
     services: {
       settings_privacy: "Configure a privacidade do serviço:",
@@ -172,7 +168,14 @@ export const Screens = {
     },
   },
   newsletter: NewsletterTranslations,
+  footer: PublicFooterTranslations,
+  agencies: PublicAgenciesTranslations,
+  galleries: PublicGalleriesTranslations,
+  politics: PoliticsTranslations,
+  cookies: CookiesTranslations,
   home: {
+    tours: HomeToursTranslations,
+    search_label: "Busque seu novo destino",
     agencies: homeAgenciesTranslations,
     contact: {
       address_title: "Nosso Endereço",

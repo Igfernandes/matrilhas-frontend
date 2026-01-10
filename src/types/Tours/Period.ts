@@ -1,7 +1,7 @@
 export type TourPeriodShape = {
   tour_id: number;
-  model: "SALE" | "TOUR";
-  frequency?: "ONE_TIME" | "WEEKLY" | "MONTHLY" | "YEARLY";
+  model: TourPeriodModelOptions;
+  frequency: TourPeriodFrequencyOptions;
   by_weekday?: string[];
   by_monthday?: number[];
   by_month?: number[];
@@ -9,3 +9,10 @@ export type TourPeriodShape = {
   created_at: string;
   updated_at: string;
 };
+
+export type TourPeriodModelOptions = "SALE" | "TOUR";
+export type TourPeriodFrequencyOptions =
+  | "ONE_TIME"
+  | "WEEKLY"
+  | "MONTHLY"
+  | "YEARLY";

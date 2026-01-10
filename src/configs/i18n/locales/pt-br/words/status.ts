@@ -14,6 +14,7 @@ export const StatusTranslations = {
   successful: "Sucesso",
   pending: "Pendente",
   pendents: "Pendentes",
+  warning: "Aviso",
   fixing: "Corrigir",
   proceed: "Prosseguir",
   created: "Criado",

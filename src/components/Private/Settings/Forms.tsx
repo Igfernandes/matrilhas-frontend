@@ -5,15 +5,11 @@ import { TInput } from "@components/shared/forms/InfoBoard/fields/Input";
 import i18n from "@configs/i18n";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import {
-  getCPFFormatted,
-  getNumberFormatted,
-  handleMaskCPF,
-  handleMaskPhone,
-} from "@helpers/string";
-import { handleMaskDate } from "@helpers/date";
 import { ModalAlterPassword } from "./modals/AlterPassword";
 import { TSpan } from "@components/shared/forms/InfoBoard/fields/Span";
+import { TDate } from "@components/shared/forms/InfoBoard/fields/Date";
+import { TPhone } from "@components/shared/forms/InfoBoard/fields/Phone";
+import { TCpf } from "@components/shared/forms/InfoBoard/fields/Cpf";
 
 dayjs.extend(customParseFormat);
 
@@ -42,40 +38,24 @@ export function SettingsForms() {
           errors={errors.name?.message}
           defaultValue={userAuth.name}
         />
-        <TInput
+        <TCpf
           label={i18n("Words.cpf")}
           name={"cpf"}
           dataTestId="cpf"
           errors={errors.cpf?.message}
-          onChange={(ev) => {
-            handleMaskCPF(ev);
-            formMethods.setValue("cpf", ev.currentTarget.value);
-          }}
-          defaultValue={getCPFFormatted(userAuth.cpf)}
         />
-        <TInput
+        <TDate
           label={i18n("Words.birthdate")}
           name={"birthdate"}
           dataTestId="birthdate"
           errors={errors.birthdate?.message}
-          defaultValue={dayjs(userAuth.birthdate, "YYYY-MM-DD").format(
-            "DD/MM/YYYY"
-          )}
-          onChange={(ev) => {
-            handleMaskDate(ev);
-            formMethods.setValue("birthdate", ev.currentTarget.value);
-          }}
+          defaultValue={userAuth.birthdate}
         />
-        <TInput
+        <TPhone
           label={i18n("Words.phone")}
           name={"phone"}
           dataTestId="phone"
           errors={errors.phone?.message}
-          onChange={(ev) => {
-            handleMaskPhone(ev);
-            formMethods.setValue("phone", ev.currentTarget.value);
-          }}
-          defaultValue={getNumberFormatted(userAuth.phone)}
         />
         <TSpan
           text={i18n("Words.email")}
@@ -94,15 +74,6 @@ export function SettingsForms() {
             background: bgColors.white,
           }}
           placeholder="************"
-          // action={
-          //   <button
-          //     onClick={() => handleToggleModel(true)}
-          //     type="button"
-          //     className="font-semibold text-red mr-1"
-          //   >
-          //     {i18n("Words.alter")}
-          //   </button>
-          // }
           disabled
         />
       </InfoBoard>

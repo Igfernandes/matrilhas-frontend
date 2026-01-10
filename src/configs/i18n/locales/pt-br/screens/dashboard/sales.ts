@@ -1,5 +1,5 @@
 export const salesTranslations = {
-  pendent_total: "Total Entrada",
+  pendent_total: "Total Pendente",
   completed_total: "Total de Caixa",
   canceled_total: "Total Cancelado",
   text_select_information:
@@ -24,4 +24,10 @@ export const salesTranslations = {
     "Informações do contato de emergência cadastrada na compra.",
   text_describe_dependent_information:
     "Informações do dependente cadastrada na compra.",
+  sales_filters: "Filtros de vendas",
+  tour_filter_hint: "Filtre as vendas pelo passeio selecionado.",
+  name_filter_hint: "Filtre as vendas pelo nome do cliente.",
+  cpf_filter_hint: "Filtre as vendas pelo CPF do cliente.",
+  phone_filter_hint: "Filtre as vendas pelo telefone do cliente.",
+  sold_at_filter_hint: "Filtre as vendas pela data em que foram realizadas.",
 };

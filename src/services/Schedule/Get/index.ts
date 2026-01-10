@@ -4,7 +4,7 @@ import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
 
 export default function useGet() {
-  const { schedule } = API_ROUTES;
+  const { scheduleId } = API_ROUTES;
   const { axios } = useAxios();
   const { setParams, setQueries } = useRoutes();
 
@@ -13,7 +13,7 @@ export default function useGet() {
     return await axios.get<GetSchedulesResponse>(
       setQueries({
         url: setParams({
-          url: schedule,
+          url: scheduleId,
           data: {
             id: id ?? "",
           },

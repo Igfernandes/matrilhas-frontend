@@ -1,5 +1,5 @@
-import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
 import { ChargeShape } from "@type/Charges";
 import moment from "moment";
 import Link from "next/link";
@@ -11,6 +11,7 @@ type Props = {
 
 export function ChargeFeedback({ charges, date }: Props) {
   const { finance } = privateRoutes;
+  const { t } = useI18n()
   return (
     <>
       {charges
@@ -23,7 +24,7 @@ export function ChargeFeedback({ charges, date }: Props) {
         .map((charge) => (
           <li key={charge.id} className="bg-white px-2 rounded-md mb-2">
             <Link href={`${finance}/${charge.id}`}>
-              <span>{`${i18n("Words.expired_charge")}: ${charge.title}`}</span>
+              <span>{`${t("Texts.expired_charge")}: ${charge.title}`}</span>
             </Link>
           </li>
         ))}

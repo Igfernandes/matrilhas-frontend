@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { FormsPayload, formsSchema } from "../schema";
 import { FieldShape } from "@components/shared/layouts/FormBuilder/type";
 import usePutForm from "@services/Forms/Put/usePut";
@@ -6,14 +6,17 @@ import usePostCreateForm from "@services/Forms/Post/usePost";
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { FormShape } from "@type/Forms";
 import dayjs from "dayjs";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   form?: FormShape;
 };
 
 export function useForms({ form }: Props) {
+  const { t } = useI18n();
+  const schema = useMemo(() => formsSchema(t), [t]);
   const { formMethods, errors } = useFormRules<FormsPayload>({
-    schema: formsSchema,
+    schema,
     criteriaMode: "all",
     shouldUseNativeValidation: false,
     defaultValues: {

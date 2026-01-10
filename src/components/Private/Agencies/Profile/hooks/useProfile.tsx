@@ -1,23 +1,25 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
 import { AgencyProfilePayload, AgencyProfileSchema } from "../profileSchemas"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import usePutAgency from "@services/Agencies/Put/usePut"
 import usePostAgency from "@services/Agencies/Post/usePost"
 import { AgencyShape } from "@type/Agencies"
 import { getCNPJFormatted, getNumberFormatted } from "@helpers/string"
+import { useI18n } from "@contexts/I18n"
 
 type Props = {
     agency?: AgencyShape
 }
 
 export function useProfile({ agency = {} as AgencyShape }: Props = {} as Props) {
+    const { t } = useI18n()
+    const schema = useMemo(() => AgencyProfileSchema(t), [t])
     const { formMethods, handleSubmit, register, errors } = useFormRules<AgencyProfilePayload>({
-        schema: AgencyProfileSchema,
+        schema: schema,
         defaultValues: {
             ...agency,
             phone: getNumberFormatted(agency.phone),
             cnpj: getCNPJFormatted(agency.cnpj),
-            logotype: "",
         }
     })
     const { mutateAsync: putAgency, isPending: isLoadingPut } = usePutAgency()
@@ -42,6 +44,6 @@ export function useProfile({ agency = {} as AgencyShape }: Props = {} as Props) 
         register,
         errors,
         onSubmit,
-        isLoading: isLoadingPut ?? isLoadingPost
+        isLoading: isLoadingPut || isLoadingPost
     }
 }

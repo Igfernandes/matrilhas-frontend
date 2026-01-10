@@ -2,6 +2,8 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import { StoreFieldsPayload, StoreFieldsSchema } from "../schemas";
 import usePostCreateFields from "@services/Fields/Post/usePost";
 import { useFieldContext } from "@components/shared/layouts/FormHub/context/Fields";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
 type Props = {
   handleModal: (isShow: boolean) => void;
@@ -9,9 +11,11 @@ type Props = {
 
 export function useStoreFieldsModal({ handleModal }: Props) {
   const { entityType, viewedField } = useFieldContext();
+  const {t} = useI18n()
+  const schema = useMemo(() => StoreFieldsSchema(t), [t]);
   const { formMethods, errors, handleSubmit, register } =
     useFormRules<StoreFieldsPayload>({
-      schema: StoreFieldsSchema,
+      schema,
       defaultValues: {
         is_required: "NOT",
         is_sensitive: "NOT",

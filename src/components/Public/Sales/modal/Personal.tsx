@@ -21,10 +21,10 @@ export function Personal() {
                 <p className="text-sm">{t("Screens.sales.personal.text")}</p>
             </div>
             <div className="my-2">
-                <Input {...register("name")} required={true} label={t("Words.name")} dataTestId="sale_name" />
+                <Input {...register("name")} maxLength={150} required={true} label={t("Words.name")} dataTestId="sale_name" />
             </div>
             <div className="my-2">
-                <CPF name="cpf" register={register} required={true} label={t("Words.cpf")} dataTestId="sale_cpf" />
+                <CPF {...register("cpf")} required={true} label={t("Words.cpf")} dataTestId="sale_cpf" />
             </div>
             <div className="my-2">
                 <Date {...register("birthdate")} required={true} label={t("Words.birthdate")} dataTestId="sale_birthdate" />

@@ -27,12 +27,12 @@ export function Header() {
                   />
                 </Link>
               </div>
-              <div  className="relative z-[999]"> 
-                <MenuBI  fill={othersColors.primary} width={50} height={50} className="md:hidden" onClick={() => setOpenMenu(!openMenu)} />
+              <div className="relative z-[999]">
+                <MenuBI fill={othersColors.primary} width={50} height={50} className="md:hidden" onClick={() => setOpenMenu(!openMenu)} />
                 <ul className={`md:flex ${openMenu ? "block" : "hidden"} absolute md:relative mt-0 w-[8rem] md:w-auto md:h-auto h-[8rem] rounded-md bg-white  shadow-sm shadow-black  p-2 md:p-0 md:shadow-none`}>
                   <li className="mx-2 my-2">
                     <Link className="font-bold text-primary hover:text-emerald-500" href={"/#about_us"}>
-                      <span>{t("Words.about_us")}</span>
+                      <span>{t("Texts.about_us")}</span>
                     </Link>
                   </li>
                   <li className="mx-2 my-2">
@@ -45,6 +45,11 @@ export function Header() {
                       <span>{t("Words.tours")}</span>
                     </Link>
                   </li>
+                  <li className="mx-2 my-2">
+                    <Link className="font-bold text-primary hover:text-emerald-500" href={"/galleries"}>
+                      <span>{t("Words.galleries")}</span>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -52,7 +57,7 @@ export function Header() {
               <div className="hidden md:flex items-center bg-secondary p-2 rounded-lg">
                 <LockSquareRoundedFilled className="mr-2" />
                 <span className="text-xs">
-                  <strong>Site protegido</strong>
+                  <strong>{t("Texts.site_protected")}</strong>
                 </span>
               </div>
               <Flags />

@@ -1,5 +1,4 @@
 import { useClients } from "./hooks/useClients";
-import i18n from "@configs/i18n";
 import { Notice } from "@components/shared/others/Notice";
 import { ModalFormCategories } from "./Modals/Categories";
 import { useModalContext } from "@contexts/Modal";
@@ -13,8 +12,10 @@ import { useUserNavigationContext } from "@contexts/UserNavigation";
 import { ImportModal } from "./Modals/Import";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
+import { useI18n } from "@contexts/I18n";
 
 export function Clients() {
+  const { t } = useI18n()
   const {
     tHeadsClient,
     selectors,
@@ -49,7 +50,7 @@ export function Clients() {
             actionsBar: [
               {
                 handle: () => handleToggleModal("CHANGE_CATEGORY"),
-                text: i18n("Texts.selected_alter_category"),
+                text: t("Texts.selected_alter_category"),
                 permissions: [PERMISSIONS.clients.update],
               },
               {
@@ -58,14 +59,14 @@ export function Clients() {
                     "DELETE",
                     getSelectedClients(selectors)
                   ),
-                text: i18n("Texts.selected_delete"),
+                text: t("Texts.selected_delete"),
                 permissions: [PERMISSIONS.clients.delete],
               },
             ].filter((action) => hasPermission(action.permissions)),
             actions: [
               {
                 handle: () => handleToggleModal("CHANGE_CATEGORY", "-1"),
-                text: i18n("Texts.all_alter_category"),
+                text: t("Texts.all_alter_category"),
                 permissions: [PERMISSIONS.clients.update],
               },
               {
@@ -74,7 +75,7 @@ export function Clients() {
                     "DELETE",
                     "-1"
                   ),
-                text: i18n("Texts.all_delete"),
+                text: t("Texts.all_delete"),
                 permissions: [PERMISSIONS.clients.delete],
               },
 
@@ -89,7 +90,7 @@ export function Clients() {
             ),
             filters: filters["CLIENTS"] ?? {},
           }}
-          title={i18n("Words.clients")}
+          title={t("Words.clients")}
           excludes={["created_at", "updated_at"]}
           tHeads={{
             data: tHeadsClient.current,
@@ -100,15 +101,15 @@ export function Clients() {
 
       <div className="relative z-50">
         <ModalFormCategories
-          title={i18n("Words.category")}
+          title={t("Words.category")}
           isShowModal={modal.type === "CATEGORY"}
           onModal={handleToggleModal}
           categories={categories}
         />
         <Notice
-          headerTitle={i18n("Words.attention")}
-          title={i18n("Screens.dashboard.clients.title_already_exclude")}
-          text={i18n("Screens.dashboard.clients.text_already_exclude")}
+          headerTitle={t("Words.attention")}
+          title={t("Screens.dashboard.clients.title_already_exclude")}
+          text={t("Screens.dashboard.clients.text_already_exclude")}
           onSubmit={handleDeleteClient}
           isShowModal={modal.type === "DELETE"}
           onModal={handleToggleModal}
@@ -123,7 +124,7 @@ export function Clients() {
         <ClientCreateModal
           isShowModal={modal.type === "CLIENT"}
           onModal={handleToggleModal}
-          title={i18n("Words.new_client")}
+          title={t("Texts.new_client")}
           categories={categories ?? []}
         />
         <ImportModal

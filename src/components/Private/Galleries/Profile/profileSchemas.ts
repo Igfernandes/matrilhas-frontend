@@ -1,28 +1,31 @@
-import i18n from "@configs/i18n";
+import { TFunction } from "@contexts/I18n";
 import { z } from "zod";
 
-export const GalleryProfileSchema = z.object({
-  id: z.number().optional(),
-  title: z
-    .string({ required_error: i18n("Validations.string") })
-    .min(1, {
-      message: i18n("Validations.min_length", {
-        field: i18n("Words.title"),
-        length: "1",
+export const GalleryProfileSchema = (t: TFunction) =>
+  z.object({
+    id: z.number().optional(),
+    title: z
+      .string({ required_error: t("Validations.string") })
+      .min(1, {
+        message: t("Validations.min_length", {
+          field: t("Words.title"),
+          length: "1",
+        }),
+      })
+      .max(200, {
+        message: t("Validations.max_length", {
+          field: t("Words.title"),
+          length: "200",
+        }),
       }),
-    })
-    .max(200, {
-      message: i18n("Validations.max_length", {
-        field: i18n("Words.title"),
-        length: "200",
-      }),
-    }),
-  cover: z.string().optional(),
-  status: z
-    .enum(["PUBLISHED", "DRAFT"], {
-      invalid_type_error: i18n("Api.tours.invalid.status"),
-    })
-    .default("DRAFT"),
-});
+    cover: z.string().optional(),
+    status: z
+      .enum(["PUBLISHED", "DRAFT"], {
+        invalid_type_error: t("Api.tours.invalid.status"),
+      })
+      .default("DRAFT"),
+  });
 
-export type GalleryProfilePayload = z.infer<typeof GalleryProfileSchema>;
+export type GalleryProfilePayload = z.infer<
+  ReturnType<typeof GalleryProfileSchema>
+>;

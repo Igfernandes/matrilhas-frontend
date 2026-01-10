@@ -1,8 +1,8 @@
 import i18n from "@configs/i18n";
 import { handleSnackbar } from "./snackbar";
 
-export const handleMaskDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-  let value = event.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+export const handleMaskDate = (event: React.KeyboardEvent<HTMLInputElement>|React.ChangeEvent<HTMLInputElement>) => {
+  let value = event.currentTarget.value.replace(/\D/g, ""); // Remove tudo que não for número
 
   if (value.length > 2) {
     const dateStringUpdated = value.slice(0, 2) + "/" + value.slice(2);
@@ -30,7 +30,7 @@ export const handleMaskDate = (event: React.ChangeEvent<HTMLInputElement>) => {
       +i18n("Configs.format.year_position")
     );
 
-  event.target.value = value;
+  event.currentTarget.value = value;
   return value
 };
 

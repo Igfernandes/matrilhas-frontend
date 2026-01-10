@@ -10,7 +10,7 @@ export const publicRoutes = {
 };
 
 export const privateRoutes = {
-  dashboard: "/dashboard",
+  dashboard: "/dashboard/overview",
   clients: "/dashboard/clients",
   agencies: "/dashboard/agencies",
   sales: "/dashboard/sales",
@@ -26,7 +26,7 @@ export const privateRoutes = {
   financesCreate: "/dashboard/charges/create",
   financePayments: "/dashboard/charges/{id}/payment/{payment_id}",
   usersManager: "/dashboard/users",
-  userGroups: "/dashboard/users/groups",
+  userGroups: "/dashboard/groups",
   apisManager: "/dashboard/apis",
   settings: "/dashboard/settings",
   logout: "/dashboard/logout",

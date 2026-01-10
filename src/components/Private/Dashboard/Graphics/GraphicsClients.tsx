@@ -5,20 +5,20 @@ import { useGraphicClients } from "./hooks/useGraphicClients";
 
 
 export function GraphicsClients() {
-  const { fieldsPendents } = useGraphicClients();
+  const { fieldsPendents, isLoading } = useGraphicClients();
 
   return (
-    <div className="my-4">
-      <div className="content flex flex-wrap justify-around">
-        <div className="w-full md:w-[30%] ml-2">
+    <div className="w-full md:w-[33%] my-4">
+      <div className="content">
+        <div className=" shadow ml-2">
           <Skeleton
-            isLoading={!fieldsPendents}
+            isLoading={isLoading}
             settings={{
               type: "board",
             }}
           >
             <Feeds
-              title={i18n("Words.dependencies_historic")}
+              title={i18n("Texts.dependencies_historic")}
               data={fieldsPendents ?? []}
             />
           </Skeleton>

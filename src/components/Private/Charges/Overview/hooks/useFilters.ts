@@ -21,6 +21,7 @@ export function useChargesFilter() {
     });
     return clientsData || [];
   }, [clientsData, updateReferences]);
+  
   return {
     agencies,
     clientsData,

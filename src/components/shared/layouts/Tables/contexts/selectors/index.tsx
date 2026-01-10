@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { SelectorContextData, SelectorProps } from "./types";
 import { SelectorShape } from "../../utilities/Selector/type";
+import { isEquals } from "@helpers/json";
 
 export const SelectorContext = createContext({} as SelectorContextData);
 
@@ -18,17 +19,15 @@ export default function SelectorProvider({
       const updated = prev.map(s => {
         if (s.value !== value) return s;
         return { ...s, isChecked: !s.isChecked };
-      });
-
-      if (setSelectorRef)
-        setSelectorRef(updated);
+      })
 
       return updated;
     });
 
-  }, [setSelectorRef]);
+  }, []);
 
   useEffect(() => {
+    if (data.length === 0) return setSelectors([]);
     const selectorsWithId = data.filter((register) => !!register.id)
 
     const selectorsNew = selectorsWithId.map((register) => ({
@@ -45,6 +44,12 @@ export default function SelectorProvider({
       return Array.from(map.values()) as SelectorShape[];
     })
   }, [data]);
+
+  useEffect(() => {
+    if (setSelectorRef) {
+      setSelectorRef((prev) => isEquals(prev, selectors) ? prev : selectors);
+    }
+  }, [selectors, setSelectorRef]);
 
   const contextValue = useMemo(
     () => ({

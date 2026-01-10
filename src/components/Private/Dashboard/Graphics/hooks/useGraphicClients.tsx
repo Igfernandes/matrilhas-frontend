@@ -8,11 +8,11 @@ import { useEffect, useMemo, useRef, useState } from "react"
 
 export function useGraphicClients() {
     const routesRef = useRef(privateRoutes);
-    const { rows: clientsData } = useGetClients({
+    const { rows: clientsData, isPending: isLoadingClient } = useGetClients({
         email: '',
         limit: 500
     })
-    const { rows: invitesData } = useGetUsersInvite({
+    const { rows: invitesData, isPending: isLoadingInvites } = useGetUsersInvite({
         is_valid: true,
         limit: 500
     })
@@ -20,22 +20,27 @@ export function useGraphicClients() {
 
     useEffect(() => {
         const clientRows = clientsData.map((client) => ({
+            title: client.name,
             scape: `${routesRef.current.clients}/${client.id}`,
-            message: `${i18n("Words.not_fill_email")}:  ${client.name}`,
+            message: `${i18n("Texts.not_fill_email")}`,
+            date: client.created_at,
         }))
         const inviteRows = invitesData.map((invite) => ({
-            message: `${i18n("Words.invite_pending")}: ${invite.email.slice(0, 14)}...`,
+            title: invite.email,
+            message: `${i18n("Texts.invite_pending")}`,
             scape: routesRef.current.usersManager,
+            date: invite.created_at,
         }))
 
         const fieldsPendentsNew = [...clientRows, ...inviteRows]
 
-        if(isEquals(fieldsPendents, fieldsPendentsNew)) return;
+        if (isEquals(fieldsPendents, fieldsPendentsNew)) return;
 
         setFieldsPendents([...clientRows, ...inviteRows])
     }, [invitesData, clientsData, fieldsPendents])
     // Hook logic here
     return useMemo(() => ({
-        fieldsPendents
-    }), [fieldsPendents])
+        fieldsPendents,
+        isLoading: isLoadingClient || isLoadingInvites
+    }), [fieldsPendents, isLoadingClient, isLoadingInvites])
 }

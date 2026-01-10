@@ -28,7 +28,7 @@ export function GroupChecks<Payload extends FieldValues>({
             placeholder={t("Texts.search_placeholder")}
             className="w-full shadow py-2 px-2 rounded-sm border border-secondary  bg-white" />
         </div>
-        <div onScroll={(ev) => handleScroll(ev.currentTarget)} className="bg-secondary h-[35vh] overflow-x-hidden overflow-y-auto py-2 px-1 shadow-md">
+        <div onScroll={(ev) => handleScroll(ev.currentTarget)} className="bg-secondary h-[30vh] overflow-x-hidden overflow-y-auto py-2 px-1 shadow-md">
           {items.map((item, index) => (
             <div key={`key_group_checks_${index}`} className="bg-white shadow-sm border border-secondary p-1 mb-2">
               <Checkbox

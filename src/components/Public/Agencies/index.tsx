@@ -11,9 +11,11 @@ import { othersColors } from "@assets/colors/colors";
 import { getCNPJFormatted } from "@helpers/string";
 import { useMemo } from "react";
 import { ToursRelations } from "../Tours/ToursRelations";
+import { useI18n } from "@contexts/I18n";
 
 export function AgenciesPreviewPage({ targetAgency }: AgencyPreviewPageProps) {
     const address = useMemo(() => targetAgency.address, [targetAgency])
+    const { t } = useI18n()
     return (
         <Section>
             <div className="mx-2 md:mx-10">
@@ -27,13 +29,13 @@ export function AgenciesPreviewPage({ targetAgency }: AgencyPreviewPageProps) {
                         </div>
                         <div className="mt-10">
                             <div>
-                                <h2 className="text-xl text-primary font-semibold">Passeios Relacionados</h2>
-                                <span><small>A baixo estão a lista dos passeios disponíveis pela a agência</small></span>
+                                <h2 className="text-xl text-primary font-semibold">{t("Screens.agencies.related_tours")}</h2>
+                                <span><small>{t("Screens.agencies.related_tours_description")}</small></span>
                             </div>
                             <div>
-                               <ToursRelations query={{
-                                agency_id: targetAgency.id
-                               }} />
+                                <ToursRelations query={{
+                                    agency_id: targetAgency.id
+                                }} />
                             </div>
                         </div>
                     </div>
@@ -44,7 +46,7 @@ export function AgenciesPreviewPage({ targetAgency }: AgencyPreviewPageProps) {
                                 className="mx-auto" />
                             <div className="mt-4">
                                 <div>
-                                    <span className="text-primary">Nos siga nas redes sociais</span>
+                                    <span className="text-primary">{t("Screens.agencies.follow_us_on_social_media")}</span>
                                 </div>
                                 <ul className="flex justify-around py-2 w-full mx-auto">
                                     {targetAgency.social_media?.map((social, key) => (
@@ -58,10 +60,10 @@ export function AgenciesPreviewPage({ targetAgency }: AgencyPreviewPageProps) {
                                 </ul>
                             </div>
                             <div className="mt-1 mb-2">
-                                <p><strong className="text-primary">CNPJ: </strong>{getCNPJFormatted(targetAgency.cnpj)}</p>
+                                <p><strong className="text-primary">{t("Screens.agencies.cnpj")}: </strong>{getCNPJFormatted(targetAgency.cnpj)}</p>
                             </div>
                             <div className="mt-2">
-                                <span className="bg-primary block text-white mb-1"><strong>Localizada em:</strong></span>
+                                <span className="bg-primary block text-white mb-1"><strong>{t("Screens.agencies.located_at")}</strong></span>
                                 <p className="text-sm text-justify bg-secondary p-1 shadow-md">{address?.number}, {address?.complement}, {address?.city}. {address?.state} - {address?.country}, {address?.zip_code}.</p>
                             </div>
                         </div>

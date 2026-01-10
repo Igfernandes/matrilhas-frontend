@@ -1,23 +1,26 @@
 import { useFormRules } from "@hooks/Forms/useFormRules"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { TourShape } from "@type/Tours"
 import { BoardingSchemas, BoardingPayload } from "../BoardingSchemas"
 import useGetTourAddresses from "@services/Tours/Address/Get/useGet"
 import usePostTourAddress from "@services/Tours/Address/Post/usePost"
+import { useI18n } from "@contexts/I18n"
 
 type Props = {
     tour: TourShape
 }
 
 export function useBoarding({ tour }: Props = {} as Props) {
+    const { t } = useI18n()
     const { rows: addresses, count, isPending: isLoadingAddresses } = useGetTourAddresses({
         tour_id: tour.id,
         type: "ORIGIN"
     })
     const [amount, setAmount] = useState(count ?? 1);
+    const schema = useMemo(() => BoardingSchemas(t), [t])
 
     const { formMethods, handleSubmit, register, errors } = useFormRules<BoardingPayload>({
-        schema: BoardingSchemas,
+        schema,
         defaultValues: {
             address: addresses ?? []
         }

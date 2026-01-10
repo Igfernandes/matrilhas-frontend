@@ -25,7 +25,7 @@ export function TCpf({
           <input
             {...props}
             {...register(name)}
-            onChange={handleMaskCPF}
+            onChangeCapture={handleMaskCPF}
             className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
             data-testid={currentId}
             id={String(props.id)}

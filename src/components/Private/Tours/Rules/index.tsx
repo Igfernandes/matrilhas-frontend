@@ -31,7 +31,7 @@ export function TourRules({ tour }: Props) {
                     <div className=" md:w-[48%] mt-4">
                         <div className="mb-4">
                             <h2 className="text-2xl font-semibold text-primary ">{i18n("Texts.discount_by_years")}</h2>
-                            <p className="text-sm">Configurações para regras do passeio na gratuidade.</p>
+                            <p className="text-sm">{t("Screens.dashboard.tours.discount_by_years_description")}</p>
                         </div>
                         <div className="flex flex-wrap justify-between">
                             <Input type="hidden" dataTestId="rule_type" {...register('rule.0.type')} defaultValue={"AGE"} />
@@ -70,7 +70,7 @@ export function TourRules({ tour }: Props) {
                     <div className=" md:w-[48%]  mt-6">
                         <div className="mb-4">
                             <h2 className="text-2xl font-semibold text-primary ">{i18n("Texts.discount_by_address")}</h2>
-                            <p className="text-sm">Informações de endereço e localização da agência.</p>
+                            <p className="text-sm">{t("Screens.dashboard.tours.discount_by_address_description")}</p>
                         </div>
                         <Input type="hidden" dataTestId="rule_type" {...register('rule.1.type')} defaultValue={"RESIDENCY"} />
                         <Input type="hidden" dataTestId="rule_expression" {...register('rule.1.expression')} defaultValue={"IN"} />

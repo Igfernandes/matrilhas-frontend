@@ -1,0 +1,22 @@
+export const PublicToursTranslations = {
+  addresses_origin: "Direcciones de origen",
+  addresses_destiny: "Direcciones de destino",
+  address_origin: "Dirección de origen",
+  address_destiny: "Dirección de destino",
+  address_boarding: "Dirección de embarque",
+  address_landing: "Dirección de desembarque",
+  not_found: "No se encontró ningún tour para el período seleccionado.",
+  title: "Explora nuestros tours",
+  description:
+    "Descubre destinos increíbles y vive experiencias inolvidables con nuestros tours exclusivos.",
+  loading: "Cargando tours...",
+  filters_by_date: "Filtros por fecha",
+  filters_by_price: "Filtros por precio",
+  filters_by_region: "Filtros por región",
+  featured_tour: "Tour destacado",
+  duration: "Duración",
+  for: "Por",
+  book_now: "Reservar ahora",
+  unavailable_for_booking: "No disponible para reserva",
+  overview: "Resumen general",
+};

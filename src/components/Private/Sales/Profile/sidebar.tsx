@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
 import { Button } from "@components/shared/forms/Button";
 import { useFormContext } from "react-hook-form";
@@ -38,14 +37,14 @@ export function Sidebar({ watch, isLoading }: Props) {
                 </div>
                 <div className="mb-4">
                     <Datetime
-                        {...register("created_at")} dataTestId="created_at" label={t("Words.realized_at")} />
+                        {...register("created_at")} dataTestId="created_at" label={t("Texts.realized_at")} />
                 </div>
                 <hr className="my-2 border-secondary" />
 
             </div>
             <div className="w-full mt-auto">
                 <div className="w-full ml-auto mt-2  mb-3">
-                    <Button isLoading={isLoading} text={watch('id') ? i18n("Words.update") : i18n("Words.create")} />
+                    <Button isLoading={isLoading} text={watch('id') ? t("Words.update") : t("Words.create")} />
                 </div>
             </div>
 

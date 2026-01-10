@@ -1,24 +1,25 @@
-import { useCallback, useRef } from "react";
-import i18n from "@configs/i18n";
+import { useCallback, useMemo } from "react";
 import { StatusText } from "@components/shared/others/StatusText";
 import { UserShape } from "../../../../../types/Users";
 import { ModalUserOperationType, TDataUser } from "../../type";
 import { useModalContext } from "@contexts/Modal";
 import { UsersActions } from "../UsersActions";
+import { useI18n } from "@contexts/I18n";
 
 export function useUsers() {
+  const { t } = useI18n()
   const { handleToggleModal, modal } =
     useModalContext<ModalUserOperationType>();
 
-  const tHeadsUser = useRef<Array<string>>([
+  const tHeadsUser = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Words.name"),
-    i18n("Words.email"),
-    i18n("Words.phone"),
-    i18n("Words.group"),
-    i18n("Words.status"),
-    i18n("Words.actions"),
-  ]);
+    t("Words.name"),
+    t("Words.email"),
+    t("Words.phone"),
+    t("Words.group"),
+    t("Words.status"),
+    t("Words.actions"),
+  ], [t]);
 
   const updateUserForTable = useCallback((data: unknown): TDataUser => {
     const { id, name, email, phone, status, groups } = data as UserShape;

@@ -1,6 +1,6 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { paymentFormSchema, PaymentPayload } from "../schemas";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useMercadoPago } from "@hooks/useMercadoPago";
 import useGetClientPreview from "@services/Clients/GetPreview/useGet";
 import usePostCheckout from "@services/Checkout/Post/usePost";
@@ -20,15 +20,20 @@ export function usePaymentForm() {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    setValue,
+    getValues,
+    watch,
+    formState: { errors },
   } = formMethods;
   const [hasFillPhone, setHasFillPhone] = useState<boolean>(false);
   const { handleUpdateMpProductKey } = useMercadoPago();
-  const { mutateAsync: postCheckout } = usePostCheckout();
+  const { mutateAsync: postCheckout, isPending: isLoading } = usePostCheckout();
   const { query } = useRouter();
   const router = useRouter();
 
-  const onSubmit = async (payload: PaymentPayload) => {
+  const hasAllFilledFields = !!watch("phone") && !!watch("cpf") && !!watch("name") && !!watch("email");
+
+  const onSubmit = useCallback(async (payload: PaymentPayload) => {
     const { product_id, product_url } = await postCheckout({
       ...payload,
       product: query.charge as string,
@@ -39,11 +44,11 @@ export function usePaymentForm() {
     if (product_url) return router.push(product_url);
 
     handleUpdateMpProductKey(product_id);
-  };
+  }, [postCheckout, query, router, handleUpdateMpProductKey]);
 
   useEffect(() => {
     if (!phone || phone.length < 16) return setHasFillPhone(false);
-    const { setValue } = formMethods;
+
 
     refetch().then(({ data: client }) => {
       if (Object.hasOwn(client ?? {}, "name")) {
@@ -52,13 +57,13 @@ export function usePaymentForm() {
       }
       setHasFillPhone(true);
     });
-  }, [phone]);
+  }, [phone, setValue, refetch]);
 
-  const handleCaptureClientByPhone = () => {
-    const phone = formMethods.getValues("phone");
+  const handleCaptureClientByPhone = useCallback(() => {
+    const phone = getValues("phone");
 
     setPhone(phone);
-  };
+  }, [getValues]);
 
   return {
     register,
@@ -66,8 +71,8 @@ export function usePaymentForm() {
     onSubmit,
     errors,
     formMethods,
-    isLoading: isSubmitting,
+    isLoading,
     hasFillPhone,
-    handleCaptureClientByPhone,
+    handleCaptureClientByPhone, hasAllFilledFields
   };
 }

@@ -16,6 +16,7 @@ export default async function handler(
   }
 
   try {
+    return true;
     const data = req.body;
 
     if (!data || Object.keys(data).length === 0) {

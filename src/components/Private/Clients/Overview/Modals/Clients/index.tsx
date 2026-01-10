@@ -1,14 +1,14 @@
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { useModalForm } from "./hooks/useClientCreateModal";
 import { ModalFormProps } from "./type";
 import { Modal } from "../../../../../shared/layouts/Modal";
 import { FormProvider } from "react-hook-form";
 import { Button } from "@components/shared/layouts/Button";
 import { Checkbox } from "@components/shared/layouts/Checkbox";
-import { handleMaskDate } from "@helpers/date";
 import { handleMaskCPF, handleMaskPhone } from "@helpers/string";
 import { SelectSearch } from "@components/shared/forms/SelectSearch";
+import { useI18n } from "@contexts/I18n";
+import { Date } from "@components/shared/forms/Date";
 
 export function ClientCreateModal({
   isShowModal,
@@ -16,6 +16,7 @@ export function ClientCreateModal({
   title,
   categories,
 }: ModalFormProps) {
+  const { t } = useI18n()
   const { formMethods, handleSubmit, submit, isLoading } = useModalForm();
   const {
     setValue,
@@ -30,7 +31,7 @@ export function ClientCreateModal({
           <div className="form-title mb-4">
             <h4 className="text-sm md:text-lg">
               <strong>
-                {i18n("Screens.dashboard.clients.text_select_category")}
+                {t("Screens.dashboard.clients.text_select_category")}
               </strong>
             </h4>
           </div>
@@ -43,7 +44,7 @@ export function ClientCreateModal({
                   value: category.id,
                 };
               })}
-              label={i18n("Words.category")}
+              label={t("Words.category")}
               dataTestId="category"
               required={true}
               errors={errors.category}
@@ -53,7 +54,7 @@ export function ClientCreateModal({
             <div className="form-title mt-4 md:mt-6 mb-2 md:mb-4">
               <h4 className="text-sm md:text-lg">
                 <strong>
-                  {i18n(
+                  {t(
                     "Screens.dashboard.clients.text_fill_information"
                   )}
                 </strong>
@@ -68,16 +69,17 @@ export function ClientCreateModal({
               <div className="form-group my-4">
                 <Input
                   {...register("name")}
-                  label={i18n("Words.name")}
+                  label={t("Words.name")}
                   dataTestId="name"
                   required={true}
+                  maxLength={150}
                   errors={errors.name}
                 />
               </div>
               <div className="form-group my-4">
                 <Input
                   {...register("cpf")}
-                  label={i18n("Words.cpf")}
+                  label={t("Words.cpf")}
                   dataTestId="cpf"
                   onChange={(ev) => {
                     handleMaskCPF(ev);
@@ -88,30 +90,27 @@ export function ClientCreateModal({
                 />
               </div>
               <div className="form-group my-4">
-                <Input
+                <Date
                   {...register("birthdate")}
-                  label={i18n("Words.birthdate")}
+                  label={t("Words.birthdate")}
                   dataTestId="birthdate"
-                  placeholder={i18n(`Configs.format.date`)}
-                  onChange={(ev) => {
-                    handleMaskDate(ev);
-                    setValue("birthdate", ev.currentTarget.value);
-                  }}
+                  placeholder={t(`Configs.format.date`)}
                   errors={errors.birthdate}
                 />
               </div>
               <div className="form-group my-4">
                 <Input
                   {...register("email")}
-                  label={i18n("Words.email")}
+                  label={t("Words.email")}
                   dataTestId="email"
+                  maxLength={250}
                   errors={errors.email}
                 />
               </div>
               <div className="form-group my-4">
                 <Input
                   {...register("phone")}
-                  label={i18n("Words.phone")}
+                  label={t("Words.phone")}
                   dataTestId="phone"
                   onChange={(ev) => {
                     handleMaskPhone(ev);
@@ -128,7 +127,7 @@ export function ClientCreateModal({
                 {...register("hasContinueRegister")}
                 dataTestId="continue_register"
                 id={"continue_register"}
-                label={i18n(`Texts.continue_register`)}
+                label={t(`Texts.continue_register`)}
               />
             </div>
             <div className="mt-4 md:my-auto w-full md:w-1/2">
@@ -136,7 +135,7 @@ export function ClientCreateModal({
                 <Button
                   type="submit"
                   className="bg-primary font-semibold text-white"
-                  text={i18n("Words.save")}
+                  text={t("Words.save")}
                   isLoading={isLoading}
                 />
               </div>

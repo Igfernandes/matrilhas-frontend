@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { ProfileFormProps } from "./type";
 import { Button } from "@components/shared/forms/Button";
 import dayjs from "dayjs";
@@ -35,7 +34,7 @@ export function Sidebar({ register, sale, isLoading }: Props) {
                             <tr>
                                 <td className="w-20">
                                     <label htmlFor="price" className="block text-sm border border-black text-black mb-1 rounded-sm text-center font-semibold py-1">
-                                        {i18n("Words.price")}
+                                        {t("Words.price")}
                                     </label>
                                 </td>
                                 <td>
@@ -45,7 +44,7 @@ export function Sidebar({ register, sale, isLoading }: Props) {
                             <tr>
                                 <td className="w-20">
                                     <label htmlFor="amount" className="block text-sm border border-black text-black mb-1 rounded-sm text-center font-semibold py-1">
-                                        {i18n("Words.amount")}
+                                        {t("Words.amount")}
                                     </label>
                                 </td>
                                 <td>
@@ -55,7 +54,7 @@ export function Sidebar({ register, sale, isLoading }: Props) {
                             <tr>
                                 <td className="w-[7rem]">
                                     <label htmlFor="subtotal" className="block text-sm bg-warning text-white mb-1 rounded-sm text-center font-semibold py-1">
-                                        {i18n("Words.subtotal")}
+                                        {t("Words.subtotal")}
                                     </label>
                                 </td>
                                 <td>
@@ -65,7 +64,7 @@ export function Sidebar({ register, sale, isLoading }: Props) {
                             <tr>
                                 <td className="w-[7rem]">
                                     <label htmlFor="discount" className="block text-sm bg-slate-400 text-white mb-1 rounded-sm text-center font-semibold py-1">
-                                        {i18n("Words.discount")}
+                                        {t("Words.discount")}
                                     </label>
                                 </td>
                                 <td>
@@ -75,7 +74,7 @@ export function Sidebar({ register, sale, isLoading }: Props) {
                             <tr>
                                 <td className="w-[7rem]">
                                     <label htmlFor="total" className="block text-sm bg-primary text-white mb-1 rounded-sm text-center font-semibold py-1">
-                                        {i18n("Words.total")}
+                                        {t("Words.total")}
                                     </label>
                                 </td>
                                 <td>
@@ -99,7 +98,7 @@ export function Sidebar({ register, sale, isLoading }: Props) {
             </div>
             <div className="w-full mt-auto ">
                 <div className="w-full ml-auto mt-3  mb-1">
-                    <Button isLoading={isLoading} text={i18n("Words.update")} />
+                    <Button isLoading={isLoading} text={t("Words.update")} />
                 </div>
             </div>
 

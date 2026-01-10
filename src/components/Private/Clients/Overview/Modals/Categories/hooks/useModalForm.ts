@@ -3,11 +3,14 @@ import { CategoryModalSchema, CategoryPayload } from "../schemas";
 import usePostCategories from "../../../../../../../services/Clients/Categories/Post/usePostCategories";
 import { ModalClientsOperationType } from "@components/Private/Clients/type";
 import { useModalContext } from "@contexts/Modal";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { useI18n } from "@contexts/I18n";
 
 export function useModalForm() {
+  const { t } = useI18n();
+  const schema = useMemo(() => CategoryModalSchema(t), [t]);
   const { formMethods } = useFormRules<CategoryPayload>({
-    schema: CategoryModalSchema,
+    schema,
   });
   const { handleToggleModal } = useModalContext<ModalClientsOperationType>();
   const { handleSubmit } = formMethods;

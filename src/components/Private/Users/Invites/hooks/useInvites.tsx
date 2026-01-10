@@ -1,30 +1,32 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useMemo } from "react";
 import i18n from "@configs/i18n";
 import { ModalUserOperationType, TDataInvite } from "../../type";
 import { ButtonConfig } from "@components/shared/others/ButtonConfig";
 import { useModalContext } from "@contexts/Modal";
 import { InvitesShape } from "../../../../../types/Invites";
 import dayjs from "dayjs";
+import { useI18n } from "@contexts/I18n";
 
 export function useInvites() {
+  const { t } = useI18n();
   const { handleToggleModal, modal } =
     useModalContext<ModalUserOperationType>();
-  const tHeadsInvite = useRef<Array<string>>([
+  const tHeadsInvite = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Words.email"),
-    i18n("Words.is_valid"),
-    i18n("Words.expired_at"),
-    i18n("Words.created_at"),
-    i18n("Words.actions"),
-  ]);
+    t("Words.email"),
+    t("Texts.is_valid"),
+    t("Words.expired_at"),
+    t("Words.created_at"),
+    t("Words.actions"),
+  ], [t]);
 
   const updateInviteForTable = useCallback((data: unknown): TDataInvite => {
     const { id, email, is_valid, expired_at, created_at } = data as InvitesShape;
     const expiredAtDate = dayjs(expired_at).format(
-      i18n("Configs.format.datetime")
+      t("Configs.format.datetime")
     );
     const createdAtDate = dayjs(created_at).format(
-      i18n("Configs.format.datetime")
+      t("Configs.format.datetime")
     );
 
     return {
@@ -37,18 +39,18 @@ export function useInvites() {
         <ButtonConfig
           actions={[
             {
-              text: i18n("Words.resend"),
+              text: t("Words.resend"),
               handle: () => handleToggleModal("RESEND_INVITE", id),
             },
             {
-              text: i18n("Words.exclude"),
+              text: t("Words.exclude"),
               handle: () => handleToggleModal("DELETE_INVITE", id),
             },
           ]}
         />
       ),
     };
-  }, [handleToggleModal]);
+  }, [handleToggleModal, t]);
 
   return {
     tHeadsInvite,

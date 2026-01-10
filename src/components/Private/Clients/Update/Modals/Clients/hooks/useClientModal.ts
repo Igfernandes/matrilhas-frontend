@@ -3,12 +3,12 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { ClientSchema, ClientUpdatePayload } from "../schemas";
 import { ClientCategoriesShape } from "@type/Clients/ClientCategories";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useGetCategories from "@services/Clients/Categories/Get/useGetCategories";
 import usePutClient from "@services/Clients/Put/usePut";
 import { ClientShape } from "@type/Clients";
-import i18n from "@configs/i18n";
 import { getCPFFormatted, getNumberFormatted } from "@helpers/string";
+import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);
 
@@ -17,14 +17,14 @@ type Props = {
 };
 
 export function useClientModal({ client }: Props) {
+  const { t } = useI18n();
+  const schema = useMemo(() => ClientSchema(t), [t]);
   const { formMethods, handleSubmit } = useFormRules<ClientUpdatePayload>({
-    schema: ClientSchema,
+    schema,
     defaultValues: {
       ...client.current,
       cpf: getCPFFormatted(client.current?.cpf ?? ""),
-      birthdate: client.current?.birthdate
-        ? dayjs(client.current.birthdate).format(i18n("Configs.format.date"))
-        : undefined,
+      birthdate: client.current?.birthdate,
       phone: client.current?.phone
         ? getNumberFormatted(client.current.phone)
         : undefined,
@@ -44,19 +44,15 @@ export function useClientModal({ client }: Props) {
     setCategories(categoryData);
   }, [categoryData, isFetchedCategory]);
 
-  const submit = ({ birthdate, ...payload }: ClientUpdatePayload) => {
+  const submit = (payload: ClientUpdatePayload) => {
     putClient({
       ...payload,
       id: client.current.id,
       cpf: client.current.cpf,
-      birthdate: birthdate
-        ? dayjs(birthdate, i18n("Configs.format.date")).format("YYYY-MM-DD")
-        : undefined,
     });
     client.current = {
       ...client.current,
       ...payload,
-      birthdate,
     } as ClientShape;
   };
 

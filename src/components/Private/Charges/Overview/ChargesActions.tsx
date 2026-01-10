@@ -1,11 +1,11 @@
 import { DotsOptions } from "@components/shared/others/DotsOptions";
-import i18n from "@configs/i18n";
 import { useRouter } from "next/navigation";
 import { privateRoutes, publicRoutes } from "@configs/routes/Web/navigation";
 import { ModalChargesOperationType } from "./type";
 import { useNavigator } from "@hooks/useNavigator";
 import useWindow from "@hooks/useWindow";
 import { Shared } from "@components/shared/others/Shared";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   handleToggleModal: (
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export function ChargesActions({ handleToggleModal, id, reference }: Props) {
+  const { t } = useI18n()
   const router = useRouter();
   const { finance } = privateRoutes;
   const { handleCopy } = useNavigator();
@@ -28,15 +29,15 @@ export function ChargesActions({ handleToggleModal, id, reference }: Props) {
       <DotsOptions
         actions={[
           {
-            text: i18n("Words.edit"),
+            text: t("Words.edit"),
             handle: () => router.push(`${finance}/${id}`),
           },
           {
-            text: i18n("Words.exclude"),
+            text: t("Words.exclude"),
             handle: () => handleToggleModal("DELETE", id),
           },
           {
-            text: i18n("Texts.link_copy"),
+            text: t("Texts.link_copy"),
             handle: () => handleCopy(`${baseUrl + publicRoutes.checkout}?charge=${reference}`),
           }
         ]}

@@ -1,11 +1,12 @@
-import i18n from "@configs/i18n";
 import { Button } from "@components/shared/layouts/Button";
 import { useRouter } from "next/navigation";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { AccessControl } from "@components/shared/settings/AccessControl";
 import { FormFilters } from "./FormFilters";
+import { useI18n } from "@contexts/I18n";
 
 export function OptionsBar() {
+  const { t } = useI18n()
   const route = useRouter();
   const { forms } = privateRoutes;
 
@@ -13,16 +14,13 @@ export function OptionsBar() {
     <div className="flex flex-wrap md:flex-none items-center justify-between mb-6">
       <div className="w-full md:w-[45%] xl:w-[25%]">
         <FormFilters />
-        <div>
-
-        </div>
       </div>
       <AccessControl targetPermissions={['forms_create']}>
         <div className="w-full md:w-[55%] xl:w-[75%] flex justify-end mt-2 md:mt-0">
           <div className="mx-2 w-full md:w-auto">
             <Button
-              className="border border-zinc-300 px-3 font-bold rounded-xl bg-secondary text-primary"
-              text={i18n("Words.new_form")}
+              className="border border-zinc-300 px-3 font-bold rounded-xl bg-white shadow text-primary"
+              text={t("Texts.new_form")}
               type="button"
               onClick={() => route.push(`${forms}/create`)}
             />

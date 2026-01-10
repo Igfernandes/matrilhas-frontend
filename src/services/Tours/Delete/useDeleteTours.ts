@@ -24,7 +24,10 @@ export default function useDeleteTours() {
         message: i18n(success),
         type: "success",
       });
-      queryClient.removeQueries({ queryKey: ["tours"] });
+      queryClient.invalidateQueries({
+        queryKey: ["tours"],
+        refetchType: "active",
+      });
     },
     onError: (err: AxiosError) => {
       handleAxiosError(err);

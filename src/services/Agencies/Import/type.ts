@@ -1,3 +1,3 @@
-export type PostImportClientPayload = {
+export type PostImportAgencyPayload = {
   excel: FileList;
 };

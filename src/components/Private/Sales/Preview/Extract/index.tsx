@@ -1,11 +1,11 @@
 import { InfoBoard } from "@components/shared/forms/InfoBoard/viewer";
-import i18n from "@configs/i18n";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useRef } from "react";
 import { ExtractHeader } from "./header";
 import { TSpan } from "@components/shared/forms/InfoBoard/fields/Span";
 import useGetMercadoPagoPayment from "@services/Extract/MercadoPago/Get/useGetCharges";
+import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);
 
@@ -14,6 +14,7 @@ type Props = {
 }
 
 export function Extract({ paymentId }: Props) {
+  const { t } = useI18n()
   const { data: payment } = useGetMercadoPagoPayment({
     payment_id: paymentId
   })
@@ -26,27 +27,27 @@ export function Extract({ paymentId }: Props) {
       <ExtractHeader payment={payment} />
       <InfoBoard>
         <TSpan
-          text={i18n("Words.operation_type")}
+          text={t("Words.operation_type")}
           dataTestId="operation_type"
           defaultValue={payment?.operation_type}
         />
         <TSpan
-          text={i18n("Words.order")}
+          text={t("Words.order")}
           dataTestId="order"
           defaultValue={payment?.order?.id}
         />
         <TSpan
-          text={i18n("Words.status")}
+          text={t("Words.status")}
           dataTestId="status"
           defaultValue={payment?.status}
         />
         <TSpan
-          text={i18n("Words.status_detail")}
+          text={t("Words.status_detail")}
           dataTestId="status_detail"
           defaultValue={payment?.status_detail}
         />
         <TSpan
-          text={i18n("Words.amount")}
+          text={t("Words.amount")}
           dataTestId="amount"
           defaultValue={
             Array.isArray(additionalInfo) && additionalInfo[0]
@@ -55,74 +56,74 @@ export function Extract({ paymentId }: Props) {
           }
         />
         <TSpan
-          text={i18n("Words.ip_address_payer")}
+          text={t("Words.ip_address_payer")}
           dataTestId="ip_address_payer"
           defaultValue={payment?.additional_info?.ip_address}
         />
         <TSpan
-          text={i18n("Words.taxes_amount")}
+          text={t("Words.taxes_amount")}
           dataTestId="taxes_amount"
           defaultValue={payment?.taxes_amount}
         />
         <TSpan
-          text={i18n("Words.payment_type")}
+          text={t("Words.payment_type")}
           dataTestId="payment_type"
           defaultValue={payment?.payment_type ?? ""}
         />
         <TSpan
-          text={i18n("Words.date_approved")}
+          text={t("Words.date_approved")}
           dataTestId="date_approved"
           defaultValue={payment?.date_approved}
         />
         <TSpan
-          text={i18n("Words.currency_type")}
+          text={t("Words.currency_type")}
           dataTestId="currency_id"
           defaultValue={payment?.currency_id}
         />
         <TSpan
-          text={i18n("Words.transaction_amount")}
+          text={t("Words.transaction_amount")}
           dataTestId="transaction_amount"
           defaultValue={payment?.transaction_amount}
         />
         <TSpan
-          text={i18n("Words.transaction_amount_refunded")}
+          text={t("Words.transaction_amount_refunded")}
           dataTestId="transaction_amount_refunded"
           defaultValue={payment?.transaction_amount_refunded}
         />
         <TSpan
-          text={i18n("Words.shipping_cost")}
+          text={t("Words.shipping_cost")}
           dataTestId="shipping_cost"
           defaultValue={payment?.shipping_cost ?? 0}
         />
         <TSpan
-          text={i18n("Words.total_paid_amount")}
+          text={t("Words.total_paid_amount")}
           dataTestId="total_paid_amount"
           defaultValue={payment?.total_paid_amount ?? 0}
         />
         <TSpan
-          text={i18n("Words.payer_name")}
+          text={t("Words.payer_name")}
           dataTestId="payer_name"
           defaultValue={`${payment?.payer.first_name ?? ""} ${payment?.payer.last_name ?? "--"}`}
         />
         <TSpan
           text={
-            payment?.payer.identification?.type ?? i18n("Words.identification")
+            payment?.payer.identification?.type ?? t("Words.identification")
           }
           dataTestId="identification"
           defaultValue={payment?.payer.identification?.number}
         />
         <TSpan
-          text={i18n("Words.flag")}
+          text={t("Words.flag")}
           dataTestId="flag"
           defaultValue={payment?.payment_method_id}
         />
         <TSpan
-          text={i18n("Words.payment_method")}
+          text={t("Texts.payment_method")}
           dataTestId="payment_method"
           defaultValue={payment?.payment_type_id}
         />
         <TSpan
-          text={i18n("Words.bank_tax")}
+          text={t("Texts.bank_tax")}
           dataTestId="bank_tax"
           defaultValue={
             Array.isArray(chargesDetails) && chargesDetails[0]
@@ -131,7 +132,7 @@ export function Extract({ paymentId }: Props) {
           }
         />
         <TSpan
-          text={i18n("Words.bank_tax_refunded")}
+          text={t("Texts.bank_tax_refunded")}
           dataTestId="bank_tax_refunded"
           defaultValue={
             Array.isArray(chargesDetails) && chargesDetails[0]

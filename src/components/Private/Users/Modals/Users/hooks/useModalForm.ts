@@ -6,12 +6,14 @@ import useGetUsers from "@services/Users/Get/useGetUsers";
 import { useModalContext } from "@contexts/Modal";
 import { useMemo } from "react";
 import { UserShape } from "@type/Users";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   onModal: (isModal: boolean) => void;
 };
 
 export function useModalForm({ onModal }: Props) {
+  const { t } = useI18n();
   const { modal } = useModalContext();
   const { rows } = useGetUsers({
     id: parseInt(modal.id as string),
@@ -19,8 +21,9 @@ export function useModalForm({ onModal }: Props) {
   const user = useMemo(() => {
     return rows.length > 0 ? rows[0] : ({} as UserShape);
   }, [rows]);
+  const schema = useMemo(() => UsersModalSchema(t), []);
   const formProps = useFormRules<UsersPayload>({
-    schema: UsersModalSchema,
+    schema,
     defaultValues: {
       ...user,
       group: user?.groups?.map((group) => group.id.toString()) || [],
@@ -29,8 +32,9 @@ export function useModalForm({ onModal }: Props) {
   const {
     formMethods: { reset },
   } = formProps;
-  const { mutateAsync: postInviteUser, isPending } = usePostInviteUser();
-  const { mutateAsync: putUsers } = usePutUsers();
+  const { mutateAsync: postInviteUser, isPending: isLoadingPost } =
+    usePostInviteUser();
+  const { mutateAsync: putUsers, isPending: isLoadingPut } = usePutUsers();
 
   const submit = ({ group, id, ...rest }: UsersPayload) => {
     const payload = {
@@ -51,7 +55,7 @@ export function useModalForm({ onModal }: Props) {
 
   return {
     ...formProps,
-    isLoading: isPending,
+    isLoading: isLoadingPost || isLoadingPut,
     submit,
   };
 }

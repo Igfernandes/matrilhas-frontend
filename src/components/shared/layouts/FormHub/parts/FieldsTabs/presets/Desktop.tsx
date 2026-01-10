@@ -1,5 +1,5 @@
-import i18n from "@configs/i18n";
 import { PresetsFieldsTabsProps } from "./type";
+import { useI18n } from "@contexts/I18n";
 
 export function FieldsTabsDesktop({
   fields,
@@ -8,6 +8,7 @@ export function FieldsTabsDesktop({
   handleToggleTab,
   handleChangeTab,
 }: PresetsFieldsTabsProps) {
+  const { t } = useI18n()
   return (
     <ul className="flex pb-2 flex-wrap overflow-x-auto overflow-y-hidden">
       <li key={`field_group_all`} className="mx-2">
@@ -15,7 +16,7 @@ export function FieldsTabsDesktop({
           className={`${tailwindClass} ${handleToggleTab("ALL")}`}
           onClick={() => handleChangeTab("ALL")}
         >
-          {i18n(`Words.all`)}
+          {t(`Words.all`)}
         </span>
       </li>
       {fieldsGroups.map((group, key) => (
@@ -24,7 +25,7 @@ export function FieldsTabsDesktop({
             className={`${tailwindClass} ${handleToggleTab(group.name)}`}
             onClick={() => handleChangeTab(group.name)}
           >
-            {i18n(`Words.${group.name.toLowerCase()}`)}(
+            {t(`Words.${group.name.toLowerCase()}`)}(
             {fields.filter((fields) => fields.group_id == group.id).length})
           </span>
         </li>

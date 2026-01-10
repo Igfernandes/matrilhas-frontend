@@ -1,16 +1,19 @@
 import { Input } from "@components/shared/forms/Input";
 import { FormProvider } from "react-hook-form";
 import { usePaymentForm } from "./hooks/usePaymentForm";
-import i18n from "@configs/i18n";
 import { OrderSummary } from "./OrderSummary";
-import { handleMaskPhone } from "@helpers/string";
 import { ChargePreviewShape } from "./types";
+import { Phone } from "@components/shared/forms/Phone";
+import { CPF } from "@components/shared/forms/CPF";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
 type Props = {
   charge: ChargePreviewShape;
 };
 
 export function PaymentForm({ charge }: Props) {
+  const { t } = useI18n()
   const {
     errors,
     formMethods,
@@ -18,9 +21,11 @@ export function PaymentForm({ charge }: Props) {
     onSubmit,
     register,
     isLoading,
-    hasFillPhone,
-    handleCaptureClientByPhone,
+    hasAllFilledFields
   } = usePaymentForm();
+  const currentPrice = useMemo(() => charge.promotional_price
+    ? charge.promotional_price
+    : charge.price, [charge.price, charge.promotional_price]);
 
   return (
     <FormProvider {...formMethods}>
@@ -28,47 +33,39 @@ export function PaymentForm({ charge }: Props) {
         <div className="content flex">
           <div className="w-4/6">
             <div className="form-group w-full mb-4 lg:mb-6">
-              <Input
+              <Phone
                 {...register("phone")}
                 dataTestId="phone"
-                label={i18n("Words.phone")}
-                onChange={(ev) => {
-                  handleMaskPhone(ev);
-                  formMethods.setValue("phone", ev.currentTarget.value);
-                  handleCaptureClientByPhone();
-                }}
+                label={t("Words.phone")}
                 required={true}
                 errors={errors.phone}
               />
             </div>
             <div className="form-group w-full mb-4 lg:mb-6">
-              <Input
+              <CPF
                 {...register("cpf")}
                 dataTestId="cpf"
-                label={i18n("Words.cpf")}
+                label={t("Words.cpf")}
                 required={true}
                 errors={errors.cpf}
-                disabled={!hasFillPhone}
               />
             </div>
             <div className="form-group w-full mb-4 lg:mb-6">
               <Input
                 {...register("name")}
                 dataTestId="name"
-                label={i18n("Words.name")}
+                label={t("Words.name")}
                 required={true}
                 errors={errors.name}
-                disabled={!hasFillPhone}
               />
             </div>
             <div className="form-group w-full mb-4 lg:mb-6">
               <Input
                 {...register("email")}
                 dataTestId="email"
-                label={i18n("Words.email")}
+                label={t("Words.email")}
                 required={true}
                 errors={errors.email}
-                disabled={!hasFillPhone}
               />
             </div>
           </div>
@@ -78,15 +75,13 @@ export function PaymentForm({ charge }: Props) {
               products={[
                 {
                   title: charge.title,
-                  price: charge.promotional_price
-                    ? charge.promotional_price
-                    : charge.price,
+                  price: currentPrice,
                   amount: 1,
                   max: charge.amount ?? 1,
                 },
               ]}
               isLoading={isLoading}
-              hasAllFilledFields={() => false}
+              hasAllFilledFields={hasAllFilledFields}
             />
           </div>
         </div>

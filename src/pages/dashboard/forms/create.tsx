@@ -3,27 +3,28 @@
 import { FormsProfile } from "@components/Private/Forms/Profile";
 import { DashboardContainer } from "@components/shared/layouts/Dashboard";
 import { StepBar } from "@components/shared/layouts/StepBar";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 import { useState } from "react";
 
 export default function Create() {
+  const { t } = useI18n()
   const [stepActive, setStepActive] = useState<number>(1);
 
   return (
-    <DashboardContainer title={i18n("Words.new_form")}>
+    <DashboardContainer title={t("Texts.new_form")}>
       <StepBar
         setStepActive={setStepActive}
         steps={[
           {
-            title: i18n(`Words.definitions`),
+            title: t(`Words.definitions`),
             active: stepActive == 1,
           },
           {
-            title: i18n(`Words.customization`),
+            title: t(`Words.customization`),
             active: stepActive == 2,
           },
           {
-            title: i18n(`Words.preview`),
+            title: t(`Words.preview`),
             active: stepActive == 3,
           },
         ]}

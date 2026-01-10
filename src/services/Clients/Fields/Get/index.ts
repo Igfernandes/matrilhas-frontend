@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetClientsFieldsRequest } from "./types";
+import { GetClientsFieldsRequest, GetClientsFieldsResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { FieldsShape } from "../../../../types/Fields";
 
 export default function useGet() {
   const { clientsFields } = API_ROUTES;
@@ -12,7 +11,7 @@ export default function useGet() {
   async function getClientsFields(payload?: GetClientsFieldsRequest) {
     const { id, fieldId, ...query } = payload ?? {};
 
-    return await axios.get<FieldsShape[]>(
+    return await axios.get<GetClientsFieldsResponse>(
       setQueries({
         url: setParams({
           url: clientsFields,

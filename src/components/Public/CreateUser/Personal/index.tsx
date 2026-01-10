@@ -1,42 +1,38 @@
 import { useFormContext } from "react-hook-form";
 import { Input } from "@components/shared/forms/Input";
-import i18n from "@configs/i18n";
 import { Button } from "@components/shared/layouts/Button";
-import { handleMaskCPF } from "@helpers/string";
 import { CreateUserPayload } from "../hooks/useSchema";
 import dayjs from "dayjs";
 import { Date } from "@components/shared/forms/Date";
+import { useI18n } from "@contexts/I18n";
+import { CPF } from "@components/shared/forms/CPF";
 
 type Props = {
   handleToggleStageForm: (stageForm: "PERSONAL" | "CREDENTIALS") => void;
 };
 
 export function Personal({ handleToggleStageForm }: Props) {
+  const { t } = useI18n()
   const {
     register,
-    setValue,
     formState: { errors },
   } = useFormContext<CreateUserPayload>();
 
   return (
     <div>
       <div className="form-group my-6">
-        <Input
+        <CPF
           {...register("cpf")}
-          label={i18n("Words.cpf")}
+          label={t("Words.cpf")}
           dataTestId="name"
           required={true}
-          onChange={(ev) => {
-            handleMaskCPF(ev);
-            setValue("cpf", ev.currentTarget.value);
-          }}
           errors={errors.cpf}
         />
       </div>
       <div className="form-group my-6">
         <Date
           {...register("birthdate")}
-          label={i18n("Words.birthdate")}
+          label={t("Words.birthdate")}
           dataTestId="name"
           required={true}
           max={dayjs().subtract(15, "years").format("YYYY-MM-DD")}
@@ -47,7 +43,7 @@ export function Personal({ handleToggleStageForm }: Props) {
       <div className="form-group my-6">
         <Input
           {...register("keyword")}
-          label={i18n("Words.keyword")}
+          label={t("Words.keyword")}
           dataTestId="keyword"
           required={true}
           errors={errors.keyword}
@@ -59,7 +55,7 @@ export function Personal({ handleToggleStageForm }: Props) {
         <Button
           onClick={() => handleToggleStageForm("CREDENTIALS")}
           type="button"
-          text={i18n("Words.proceed")}
+          text={t("Words.proceed")}
           className="bg-primary font-semibold text-white"
         />
       </div>

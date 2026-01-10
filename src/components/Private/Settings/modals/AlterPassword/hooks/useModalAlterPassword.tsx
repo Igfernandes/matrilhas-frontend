@@ -2,15 +2,19 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import { alterPasswordFormSchema, AlterPasswordPayload } from "../schemas";
 import usePatchPasswordUsers from "@services/Users/Patch/Password/usePatchPassword";
 import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
 type Props = {
   handleModal: (isShow: boolean) => void;
 };
 
 export function useModalAlterPassword({ handleModal }: Props) {
+  const {t } = useI18n()
+  const schema = useMemo(() => alterPasswordFormSchema(t), [t]);
   const { formMethods, handleSubmit, errors } =
     useFormRules<AlterPasswordPayload>({
-      schema: alterPasswordFormSchema,
+      schema,
     });
   const { userAuth } = useUserNavigationContext();
   const { mutateAsync: patchPassword, isPending: isLoading } = usePatchPasswordUsers();

@@ -3,6 +3,9 @@ import { FeedProps } from "./type";
 import i18n from "@configs/i18n";
 import { useRef } from "react";
 import { useFeed } from "./hooks/useFeed";
+import dayjs from "dayjs";
+import { COLORS } from "@constants/colors";
+import { ArrowLeft } from "@assets/Icons/black/ArrowLeft";
 
 export function Feeds({ title, data }: FeedProps) {
   const { feeds, handleSearch } = useFeed({ data });
@@ -16,12 +19,25 @@ export function Feeds({ title, data }: FeedProps) {
       <div className="px-1 py-1">
         <input name={feedKey.current} id={feedKey.current} type="search" onChange={(e) => handleSearch(e.target.value)} placeholder={`${i18n("Words.search")}...`} className="px-2 py-1 text-sm w-full shadow-md" />
       </div>
-      <div className="content bg-white h-[40vh] overflow-auto p-2">
+      <div className="content bg-secondary h-[40vh] overflow-auto p-2">
         {feeds.map((item, key) => (
-          <div className="row" key={`feed_${key}`}>
-            <div className="bg-white rounded-md px-2 p-[1px] my-1">
-              <Link href={item.scape}>
-                <span className="text-xs line-clamp-1">{item.message}</span>
+          <div className="row shadow" key={`feed_${key}`}>
+            <div className="bg-white rounded-md py-1 px-1 my-1">
+              <Link href={item.scape} className="cursor-pointer text-xs">
+                <div className="relative">
+                  <p className="text-primary font-semibold text-xs line-clamp-1">{item.title}</p>
+
+                  <ArrowLeft width={8} height={8} className="rotate-180 absolute top-[2px] right-1" />
+
+                </div>
+                <div className="bg-secondary w-full">
+
+                  <div className="flex justify-between py-1">
+                    <span className={`px-1 ${item.status ? "bg-" + COLORS[item.status as keyof typeof COLORS] : ""} text-xs line-clamp-1`}>{item.message}</span>
+                    <span className="text-primary text-[.6rem] text-right inline-block w-[40%]">{dayjs(item.date).format("DD/MM/YYYY HH:mm")}</span>
+                  </div>
+
+                </div>
               </Link>
             </div>
           </div>

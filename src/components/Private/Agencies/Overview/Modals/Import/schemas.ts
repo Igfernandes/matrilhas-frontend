@@ -1,11 +1,12 @@
+import { TFunction } from "@contexts/I18n";
 import { z } from "zod";
 
-export const ImportSchema = z.object({
+export const ImportSchema = (t: TFunction) => z.object({
   excel: z
     .custom<FileList>(
       (files) => files instanceof FileList && files.length > 0,
       {
-        message: "Arquivo é obrigatório",
+        message: t("Validations.file_required"),
       }
     )
     .refine(
@@ -22,9 +23,9 @@ export const ImportSchema = z.object({
         return validExt && validMime;
       },
       {
-        message: "Somente arquivos Excel (.xls ou .xlsx) são permitidos",
+        message: t("Validations.file_excel_only"),
       }
     ),
 });
 
-export type ImportPayload = z.infer<typeof ImportSchema>;
+export type ImportPayload = z.infer<ReturnType<typeof ImportSchema>>;

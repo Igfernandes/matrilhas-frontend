@@ -1,38 +1,38 @@
-import i18n from "@configs/i18n";
+import { TFunction } from "@contexts/I18n";
 import { z } from "zod";
 
-export const UsersModalSchema = z.object({
+export const UsersModalSchema = (t: TFunction) => z.object({
   id: z.number().nullable().optional(),
-  group: z.array(z.string({ required_error: i18n("Validations.required") })),
+  group: z.array(z.string({ required_error: t("Validations.required") })),
   name: z
-    .string({ required_error: i18n("Validations.required") })
+    .string({ required_error: t("Validations.required") })
     .min(3, {
-      message: i18n("Validations.min_length", {
-        field: i18n("Words.name"),
+      message: t("Validations.min_length", {
+        field: t("Words.name"),
         length: "3",
       }) as string,
     })
     .max(100, {
-      message: i18n("Validations.max_length", {
-        field: i18n("Words.name"),
+      message: t("Validations.max_length", {
+        field: t("Words.name"),
         length: "100",
       }) as string,
     }),
   email: z
-    .string({ required_error: i18n("Validations.required") })
+    .string({ required_error: t("Validations.required") })
     .max(250, {
-      message: i18n("Validations.max_length", {
-        field: i18n("Words.email"),
+      message: t("Validations.max_length", {
+        field: t("Words.email"),
         length: "250",
       }) as string,
     })
-    .email({ message: i18n("Validations.email") }),
-  phone: z.string({ required_error: i18n("Validations.required") }).max(20, {
-    message: i18n("Validations.max_length", {
-      field: i18n("Words.phone"),
+    .email({ message: t("Validations.email") }),
+  phone: z.string({ required_error: t("Validations.required") }).max(20, {
+    message: t("Validations.max_length", {
+      field: t("Words.phone"),
       length: "20",
     }) as string,
   }),
 });
 
-export type UsersPayload = z.infer<typeof UsersModalSchema>;
+export type UsersPayload = z.infer<ReturnType<typeof UsersModalSchema>>;
