@@ -36,7 +36,6 @@ export const getServerSideProps: GetServerSideProps<PaymentPageProps> = async ({
   const { charge: reference } = query as { charge: string }; // Tipando o params
   const { rows: charge } = await getCharge({ reference: reference });
 
-  console.log(charge);
   if (!Array.isArray(charge) || charge.length === 0) {
     return {
       redirect: {
