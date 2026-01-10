@@ -16,6 +16,7 @@ import { PermissionsApiTranslations } from "./api/permissions";
 import { SalesApiTranslations } from "./api/sales";
 import { SchedulesApiTranslations } from "./api/schedules";
 import { SubscribeApiTranslations } from "./api/subscribe";
+import { SubscribersApiTranslations } from "./api/subscribers";
 import { ToursApiTranslations } from "./api/tours";
 import { UsersApiTranslations } from "./api/users";
 
@@ -41,6 +42,7 @@ export const Api = {
   permissions: PermissionsApiTranslations,
   schedules: SchedulesApiTranslations,
   users: UsersApiTranslations,
+  subscribers: SubscribersApiTranslations,
   mailer: {
     invalid: {
       email:

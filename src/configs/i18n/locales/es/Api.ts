@@ -16,6 +16,7 @@ import { PermissionsApiTranslations } from "./api/permissions";
 import { SalesApiTranslations } from "./api/sales";
 import { SchedulesApiTranslations } from "./api/schedules";
 import { SubscribeApiTranslations } from "./api/subscribe";
+import { SubscribersApiTranslations } from "./api/subscribers";
 import { ToursApiTranslations } from "./api/tours";
 import { UsersApiTranslations } from "./api/users";
 
@@ -41,6 +42,7 @@ export const Api = {
   permissions: PermissionsApiTranslations,
   schedules: SchedulesApiTranslations,
   users: UsersApiTranslations,
+  subscribers: SubscribersApiTranslations,
   mailer: {
     invalid: {
       email:
@@ -54,16 +56,13 @@ export const Api = {
       "El usuario fue desconectado o no tiene permisos para continuar con la acción",
     internal_error:
       "Ocurrió un error grave en la aplicación. Póngase en contacto con el soporte.",
-    error:
-      "Estamos analizando el problema. Inténtelo nuevamente más tarde.",
+    error: "Estamos analizando el problema. Inténtelo nuevamente más tarde.",
   },
   invalid: {
-    email:
-      "El correo electrónico no existe o es inválido",
+    email: "El correo electrónico no existe o es inválido",
     recaptcha:
       "La página tiene recursos desactualizados. Recargue e intente nuevamente.",
-    csrf:
-      "La página tiene recursos desactualizados o inexistentes. Recargue e intente nuevamente.",
+    csrf: "La página tiene recursos desactualizados o inexistentes. Recargue e intente nuevamente.",
   },
   remember: {
     success: {

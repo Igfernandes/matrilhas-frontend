@@ -5,6 +5,7 @@ import { dashboardFormsTranslations } from "./screens/dashboard/forms";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
+import { subscribersTranslations } from "./screens/dashboard/subscribers";
 import { ToursTranslations } from "./screens/dashboard/tours";
 import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
@@ -68,6 +69,7 @@ export const Screens = {
     statics: staticsTranslations,
     charges: ChargesDashboardTranslations,
     forms: dashboardFormsTranslations,
+    subscribers: subscribersTranslations,
     finances: {
       about_name_and_service:
         "Caso não seja dado o nome a cobrança, ela irá herdar o nome do serviço",

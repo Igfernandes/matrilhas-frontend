@@ -5,6 +5,7 @@ import { dashboardFormsTranslations } from "./screens/dashboard/forms";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
+import { subscribersTranslations } from "./screens/dashboard/subscribers";
 import { ToursTranslations } from "./screens/dashboard/tours";
 import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
@@ -36,18 +37,15 @@ export const Screens = {
   sales: SalesTranslations,
   confirmations: {
     title: "Check your registration",
-    text:
-      "Enter your CPF to check whether you are already registered for any event.",
+    text: "Enter your CPF to check whether you are already registered for any event.",
   },
 
   successful: {
-    need_go_back_login:
-      "Now, go to the login page to access the platform.",
+    need_go_back_login: "Now, go to the login page to access the platform.",
   },
   create_user: {
     title: "First access",
-    text:
-      "To access the platform, tell us how you would like to be called and create a password.",
+    text: "To access the platform, tell us how you would like to be called and create a password.",
   },
   services: {
     modal: {
@@ -60,8 +58,7 @@ export const Screens = {
   },
 
   logout: {
-    text:
-      "You have logged out safely. Matrilhas awaits you next time! 🐾",
+    text: "You have logged out safely. Matrilhas awaits you next time! 🐾",
   },
   dashboard: {
     clients: clientsTranslations,
@@ -72,6 +69,7 @@ export const Screens = {
     statics: staticsTranslations,
     charges: ChargesDashboardTranslations,
     forms: dashboardFormsTranslations,
+    subscribers: subscribersTranslations,
     finances: {
       about_name_and_service:
         "If no name is given to the charge, it will inherit the service name",
@@ -81,106 +79,78 @@ export const Screens = {
         "When choosing a service, privacy will be defined by it*",
       text_already_exclude:
         "By continuing, all charge data will be deleted, and it will no longer be accessible until it is re-registered.",
-      title_already_exclude:
-        "Do you want to delete this charge?",
+      title_already_exclude: "Do you want to delete this charge?",
     },
     dispatchers: {
-      select_shape_send:
-        "Select one or more sending methods:",
+      select_shape_send: "Select one or more sending methods:",
       ask_about_send_files_images:
         "Will files such as PDFs or documents be sent?",
       text_already_exclude:
         "By continuing, the dispatch will be deleted and its schedules canceled.",
-      title_already_exclude:
-        "Do you want to delete this dispatch?",
+      title_already_exclude: "Do you want to delete this dispatch?",
     },
     services: {
-      settings_privacy:
-        "Configure the service privacy:",
-      has_limit_vacancies:
-        "Will there be a vacancy limit?",
-      inform_limit_vacancies:
-        "Enter the maximum vacancy limit",
-      has_limit_reservation:
-        "Will it be possible to join waiting list spots?",
-      inform_limit_reservation:
-        "Enter the maximum reservation limit",
-      service_image:
-        "Add an image to the service:",
+      settings_privacy: "Configure the service privacy:",
+      has_limit_vacancies: "Will there be a vacancy limit?",
+      inform_limit_vacancies: "Enter the maximum vacancy limit",
+      has_limit_reservation: "Will it be possible to join waiting list spots?",
+      inform_limit_reservation: "Enter the maximum reservation limit",
+      service_image: "Add an image to the service:",
       text_alert_about_alerts_inscribes:
         "Write detailed notices for registrants",
-      inscribes_alert:
-        "Notices for registrants",
+      inscribes_alert: "Notices for registrants",
       awaiting_inscribe:
         "Please wait while the client is being registered and the confirmation is sent",
     },
     events: {
-      has_limit_vacancies:
-        "Will there be a vacancy limit?",
-      inform_limit_vacancies:
-        "Enter the maximum vacancy limit",
-      event_image:
-        "Add an image to the event:",
+      has_limit_vacancies: "Will there be a vacancy limit?",
+      inform_limit_vacancies: "Enter the maximum vacancy limit",
+      event_image: "Add an image to the event:",
       text_alert_about_alerts_inscribes:
         "Write detailed notices for registrants",
-      inscribes_alert:
-        "Notices for registrants",
+      inscribes_alert: "Notices for registrants",
       awaiting_inscribe:
         "Please wait while the client is being registered and the confirmation is sent",
     },
     schedules: {
-      required_users:
-        "It is mandatory to select a user",
+      required_users: "It is mandatory to select a user",
     },
     users: {
-      create_user_groups:
-        "Create user groups",
-      invite_users:
-        "Invite users",
-      users_groups:
-        "User groups",
-      user_group:
-        "User group",
-      group_desative:
-        "Deactivate group",
+      create_user_groups: "Create user groups",
+      invite_users: "Invite users",
+      users_groups: "User groups",
+      user_group: "User group",
+      group_desative: "Deactivate group",
 
       group: {
-        text_insert_name:
-          "Enter a name for the user group:",
+        text_insert_name: "Enter a name for the user group:",
         text_select_permissions:
           "Select the permissions that will be active for this group:",
-        title_already_active:
-          "Do you want to activate this user group?",
+        title_already_active: "Do you want to activate this user group?",
         text_already_active:
           "By continuing, all users in this group will regain access and permissions.",
-        title_already_desative:
-          "Do you want to deactivate this user group?",
+        title_already_desative: "Do you want to deactivate this user group?",
         text_already_desative:
           "By continuing, all users in this group will lose access as their permissions will be blocked.",
         text_already_exclude:
           "By continuing, all users in this group will lose access as their permissions will be blocked.",
-        title_already_exclude:
-          "Do you want to delete this user group?",
+        title_already_exclude: "Do you want to delete this user group?",
       },
       user: {
-        text_select_group:
-          "Select the groups to which the user will belong:",
+        text_select_group: "Select the groups to which the user will belong:",
         text_fill_information:
           "Fill in the information below to invite a new user:",
         text_awaiting_after_delete_desative:
           "By continuing, all users will lose access as their permissions will be blocked.",
-        title_already_active:
-          "Do you want to activate this user?",
+        title_already_active: "Do you want to activate this user?",
         text_already_active:
           "By continuing, the user will regain access and permissions.",
         text_already_desative:
           "By continuing, all data of the selected user will be deleted, and they will no longer be able to access until restored.",
-        title_already_desative:
-          "Do you want to deactivate this client?",
+        title_already_desative: "Do you want to deactivate this client?",
         text_already_exclude:
           "By continuing, all data of the selected user will be disabled, and they will no longer be able to access until reactivated.",
-        title_already_exclude:
-          "Do you want to delete this client?",
+        title_already_exclude: "Do you want to delete this client?",
       },
       invites: {
         text_already_resend:
@@ -189,21 +159,15 @@ export const Screens = {
           "Do you want to resend the invitation to the user?",
         text_already_exclude:
           "By continuing, the invitation will be invalidated and the attached user data will be removed from the system.",
-        title_already_exclude:
-          "Do you want to delete this invitation?",
-        success_title_resend:
-          "Invitation resent",
-        success_text_resend:
-          "Your invitation has been resent successfully!",
-        success_title_delete:
-          "Invitation deleted",
-        success_text_delete:
-          "Your invitation has been deleted successfully!",
+        title_already_exclude: "Do you want to delete this invitation?",
+        success_title_resend: "Invitation resent",
+        success_text_resend: "Your invitation has been resent successfully!",
+        success_title_delete: "Invitation deleted",
+        success_text_delete: "Your invitation has been deleted successfully!",
       },
     },
     apis: {
-      text_fill_information:
-        "Fill in the integration information:",
+      text_fill_information: "Fill in the integration information:",
     },
   },
   newsletter: NewsletterTranslations,
@@ -214,22 +178,15 @@ export const Screens = {
   cookies: CookiesTranslations,
   home: {
     tours: HomeToursTranslations,
-    search_label:
-      "Search for your next destination",
+    search_label: "Search for your next destination",
     agencies: homeAgenciesTranslations,
     contact: {
-      address_title:
-        "Our address",
-      address:
-        "São José do Imbassai, Maricá - RJ",
-      phone_title:
-        "Contact us",
-      phone:
-        "(21) 9 8897-4586",
-      email_title:
-        "Send us an email",
-      email:
-        "contato@matrilhas.com.br",
+      address_title: "Our address",
+      address: "São José do Imbassai, Maricá - RJ",
+      phone_title: "Contact us",
+      phone: "(21) 9 8897-4586",
+      email_title: "Send us an email",
+      email: "contato@matrilhas.com.br",
     },
     menu: {
       logo: "AGM logotype",
@@ -248,44 +205,38 @@ export const Screens = {
       subtitle: "Our attractions and activities",
       not_available: {
         title: "No events available",
-        text:
-          "There are no events available at the moment, but we will have news soon. Stay tuned!",
+        text: "There are no events available at the moment, but we will have news soon. Stay tuned!",
       },
     },
     gallery: HomeGalleryTranslations,
     support_network: {
       title: "Support network",
-      subtitle:
-        "Institutions that strengthen our work",
+      subtitle: "Institutions that strengthen our work",
     },
     faq: HomeFaqTranslations,
     newsletter: HomeNewsletterTranslations,
     testimonials: [
       {
         title: "Traveler comment",
-        text:
-          "I loved joining the tour through Maricá with AGM in the jeeps! It was a wonderful experience, full of beautiful landscapes and unforgettable moments.",
+        text: "I loved joining the tour through Maricá with AGM in the jeeps! It was a wonderful experience, full of beautiful landscapes and unforgettable moments.",
         author: "Igor Fernandes",
         info: "Resident of Maricá - RJ",
       },
       {
         title: "Traveler comment",
-        text:
-          "It was incredible to live this experience with AGM! The activities were very well organized, with fun and special moments from start to finish. I already want to join again!",
+        text: "It was incredible to live this experience with AGM! The activities were very well organized, with fun and special moments from start to finish. I already want to join again!",
         author: "Joyce Pedro",
         info: "Resident of Ouro Preto - MG",
       },
       {
         title: "Traveler comment",
-        text:
-          "Matrilhas deserves congratulations! Participating in the activities was wonderful, everything very well planned and full of unique moments. I recommend it to everyone!",
+        text: "Matrilhas deserves congratulations! Participating in the activities was wonderful, everything very well planned and full of unique moments. I recommend it to everyone!",
         author: "Jofre Martins",
         info: "Resident of São Gonçalo - RJ",
       },
       {
         title: "Traveler comment",
-        text:
-          "An unforgettable experience with AGM! Every detail of the activities was thoughtfully planned, providing fun, learning, and lots of positive energy.",
+        text: "An unforgettable experience with AGM! Every detail of the activities was thoughtfully planned, providing fun, learning, and lots of positive energy.",
         author: "Henrique José",
         info: "Resident of Maricá - RJ",
       },
