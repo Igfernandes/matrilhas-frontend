@@ -35,7 +35,7 @@ export const optionsUser = [
   },
   {
     id: "zipcode",
-    field: "cep",
+    field: "zipcode",
     icon: <Pen width={12} height={12} />,
   },
   {
