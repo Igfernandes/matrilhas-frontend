@@ -8,7 +8,7 @@ import { Texts } from "./Texts";
 import { Validations } from "./Validations";
 import { Words } from "./Words";
 
-export const translateEN = {
+export const translatePT_BR = {
   Api,
   Words,
   Screens,

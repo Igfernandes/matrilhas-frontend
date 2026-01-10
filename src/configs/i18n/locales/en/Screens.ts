@@ -1,175 +1,240 @@
+import { agenciesTranslations } from "./screens/dashboard/agencies";
+import { ChargesDashboardTranslations } from "./screens/dashboard/charges";
+import { clientsTranslations } from "./screens/dashboard/clients";
+import { dashboardFormsTranslations } from "./screens/dashboard/forms";
+import { galleriesTranslations } from "./screens/dashboard/galleries";
+import { salesTranslations } from "./screens/dashboard/sales";
+import { staticsTranslations } from "./screens/dashboard/statics";
+import { ToursTranslations } from "./screens/dashboard/tours";
+import { PublicAgenciesTranslations } from "./screens/public/agencies";
+import { alterPasswordTranslations } from "./screens/public/alterPassword";
+import { CookiesTranslations } from "./screens/public/cookies";
+import { PublicFooterTranslations } from "./screens/public/footer";
+import { forgotPasswordTranslations } from "./screens/public/forgotPassword";
+import { formsTranslations } from "./screens/public/forms";
+import { PublicGalleriesTranslations } from "./screens/public/galleries";
+import { HomeAboutUsTranslations } from "./screens/public/home/aboutUs";
+import { homeAgenciesTranslations } from "./screens/public/home/agencies";
+import { HomeFaqTranslations } from "./screens/public/home/faq";
+import { HomeGalleryTranslations } from "./screens/public/home/gallery";
+import { HomeNewsletterTranslations } from "./screens/public/home/newsletter";
+import { HomeToursTranslations } from "./screens/public/home/tours";
+import { loginTranslations } from "./screens/public/login";
+import { NewsletterTranslations } from "./screens/public/newsletter";
+import { PoliticsTranslations } from "./screens/public/politics";
+import { SalesTranslations } from "./screens/public/sales";
+import { PublicToursTranslations } from "./screens/public/tours";
+
 export const Screens = {
-  login: {
-    title: "Welcome!",
-    text: "Log in with your registered email account",
-    remember_me: "Remember me",
-    forgot_password: "I forgot my password",
+  forgot_password: forgotPasswordTranslations,
+  login: loginTranslations,
+  alter_password: alterPasswordTranslations,
+  forms: {
+    ...formsTranslations,
   },
-  "forgot-password": {
-    title: "Enter your registered email",
-    text: "If you have an account on the platform, we will send a link to the registered email so you can recover your account.",
+  tours: PublicToursTranslations,
+  sales: SalesTranslations,
+  confirmations: {
+    title: "Check your registration",
+    text:
+      "Enter your CPF to check whether you are already registered for any event.",
   },
-  "alter-password": {
-    title: "New password",
-    text: "Create a new password to access the platform.",
-    submit: "Create new password",
-  },
+
   successful: {
-    need_go_back_login: "Now, go back to login to access the platform.",
+    need_go_back_login:
+      "Now, go to the login page to access the platform.",
   },
   create_user: {
     title: "First access",
-    text: "To access the platform, let us know how you'd like to be called and create a password.",
+    text:
+      "To access the platform, tell us how you would like to be called and create a password.",
   },
   services: {
-    confirmation: {
-      title: "Attendance Confirmation",
-      text: "By clicking the button below, you will be confirming your attendance at the event",
+    modal: {
+      title_already_exclude: "Are you sure you want to delete?",
+      text_already_exclude:
+        "Once confirmed, the service and all related records will be deleted.",
     },
+    switch_event: "Choose an event",
+    selected_form: "Select a form",
   },
-  forms: {
-    not_found:
-      "Form unavailable. Please contact the central office at the number",
-    not_stock:
-      "No slots available for this activity. Visit the event page to see other activities available for registration",
-    successful: {
-      form_received:
-        "Form unavailable. Please contact the central office at the number",
-      form_message:
-        "Your response is very important to help us understand and improve continuously.",
-    },
+
+  logout: {
+    text:
+      "You have logged out safely. Matrilhas awaits you next time! 🐾",
   },
   dashboard: {
-    clients: {
-      category: {
-        text_create_category:
-          "To create a category, click add or edit a category below:",
-        text_organized_items: "To reorder the category, hold and drag.",
-        text_select_category: "Select the new category for the chosen base",
-        add_clients_text: "Select the clients you want to add below",
-      },
-      client: {
-        text_select_information:
-          "Select which information groups will be shared",
-        text_insert_email:
-          "Enter the email of the user who will receive the data",
-        text_select_category: "Select the category the client will belong to:",
-        text_fill_information:
-          "Fill in the information below to create a new client:",
-        title_already_exclude: "Do you want to delete this client?",
-        text_already_exclude:
-          "By continuing, all data of the selected clients will be deleted, and they will no longer have access until they are registered again.",
-      },
-    },
+    clients: clientsTranslations,
+    agencies: agenciesTranslations,
+    galleries: galleriesTranslations,
+    tours: ToursTranslations,
+    sales: salesTranslations,
+    statics: staticsTranslations,
+    charges: ChargesDashboardTranslations,
+    forms: dashboardFormsTranslations,
     finances: {
       about_name_and_service:
-        "If no name is given to the charge, it will inherit the service's name",
+        "If no name is given to the charge, it will inherit the service name",
       about_period:
-        "Set above the number of months for the billing interval. Ex: 1 (Monthly), 3 (Quarterly), etc.",
+        "Define above the number of months related to the interval of each charge. E.g.: 1 (Monthly), 3 (Quarterly), etc.",
       about_privacy_and_services:
-        "By choosing a service, the privacy will be set by it*",
+        "When choosing a service, privacy will be defined by it*",
       text_already_exclude:
-        "By continuing, all charge data will be deleted, and it will no longer be accessible until it is registered again.",
-      title_already_exclude: "Do you want to delete this charge?",
+        "By continuing, all charge data will be deleted, and it will no longer be accessible until it is re-registered.",
+      title_already_exclude:
+        "Do you want to delete this charge?",
     },
     dispatchers: {
-      select_shape_send: "Select one or more sending methods:",
-      ask_about_send_files_images: "Will files like PDFs or documents be sent?",
+      select_shape_send:
+        "Select one or more sending methods:",
+      ask_about_send_files_images:
+        "Will files such as PDFs or documents be sent?",
       text_already_exclude:
-        "By continuing, the dispatch will be deleted and its scheduled events canceled.",
-      title_already_exclude: "Do you want to delete this dispatch?",
-    },
-    forms: {
-      text_already_exclude:
-        "By continuing, the data linked to this record will be deleted from the system.",
-      title_already_exclude: "Do you want to delete this record?",
-      fills: {
-        text_already_exclude:
-          "By continuing, the data linked to this record will be deleted from the system.",
-        title_already_exclude: "Do you want to delete this record?",
-      },
+        "By continuing, the dispatch will be deleted and its schedules canceled.",
+      title_already_exclude:
+        "Do you want to delete this dispatch?",
     },
     services: {
-      settings_privacy: "Configure the service's privacy:",
-      has_limit_vacancies: "Will there be a vacancy limit?",
-      inform_limit_vacancies: "Enter the maximum number of vacancies",
-      has_limit_reservation: "Will it be possible to have reservation spots?",
-      inform_limit_reservation: "Enter the maximum reservation limit",
-      service_image: "Add an image to the service:",
+      settings_privacy:
+        "Configure the service privacy:",
+      has_limit_vacancies:
+        "Will there be a vacancy limit?",
+      inform_limit_vacancies:
+        "Enter the maximum vacancy limit",
+      has_limit_reservation:
+        "Will it be possible to join waiting list spots?",
+      inform_limit_reservation:
+        "Enter the maximum reservation limit",
+      service_image:
+        "Add an image to the service:",
       text_alert_about_alerts_inscribes:
-        "Write detailed warnings for subscribers",
-      inscribes_alert: "Warnings for subscribers",
+        "Write detailed notices for registrants",
+      inscribes_alert:
+        "Notices for registrants",
       awaiting_inscribe:
-        "Please wait while the client is being enrolled and the confirmation is being sent",
+        "Please wait while the client is being registered and the confirmation is sent",
+    },
+    events: {
+      has_limit_vacancies:
+        "Will there be a vacancy limit?",
+      inform_limit_vacancies:
+        "Enter the maximum vacancy limit",
+      event_image:
+        "Add an image to the event:",
+      text_alert_about_alerts_inscribes:
+        "Write detailed notices for registrants",
+      inscribes_alert:
+        "Notices for registrants",
+      awaiting_inscribe:
+        "Please wait while the client is being registered and the confirmation is sent",
+    },
+    schedules: {
+      required_users:
+        "It is mandatory to select a user",
     },
     users: {
-      create_user_groups: "Create user groups",
-      invite_users: "Invite users",
-      users_groups: "User Groups",
-      user_group: "User Group",
-      group_desative: "Deactivate group",
+      create_user_groups:
+        "Create user groups",
+      invite_users:
+        "Invite users",
+      users_groups:
+        "User groups",
+      user_group:
+        "User group",
+      group_desative:
+        "Deactivate group",
 
       group: {
-        text_insert_name: "Enter a name for the user group:",
+        text_insert_name:
+          "Enter a name for the user group:",
         text_select_permissions:
           "Select the permissions that will be active for this group:",
-        title_already_active: "Do you want to activate this user group?",
+        title_already_active:
+          "Do you want to activate this user group?",
         text_already_active:
-          "By continuing, all users in this group will regain access and their permissions.",
-        title_already_desative: "Do you want to deactivate this user group?",
+          "By continuing, all users in this group will regain access and permissions.",
+        title_already_desative:
+          "Do you want to deactivate this user group?",
         text_already_desative:
           "By continuing, all users in this group will lose access as their permissions will be blocked.",
         text_already_exclude:
           "By continuing, all users in this group will lose access as their permissions will be blocked.",
-        title_already_exclude: "Do you want to delete this user group?",
+        title_already_exclude:
+          "Do you want to delete this user group?",
       },
       user: {
-        text_select_group: "Select the groups the user will belong to:",
+        text_select_group:
+          "Select the groups to which the user will belong:",
         text_fill_information:
           "Fill in the information below to invite a new user:",
         text_awaiting_after_delete_desative:
           "By continuing, all users will lose access as their permissions will be blocked.",
-        title_already_active: "Do you want to activate this user?",
+        title_already_active:
+          "Do you want to activate this user?",
         text_already_active:
-          "By continuing, the user will regain access and their permissions.",
+          "By continuing, the user will regain access and permissions.",
         text_already_desative:
-          "By continuing, all data of the selected user will be deleted, and they will no longer have access until restored.",
-        title_already_desative: "Do you want to deactivate this client?",
+          "By continuing, all data of the selected user will be deleted, and they will no longer be able to access until restored.",
+        title_already_desative:
+          "Do you want to deactivate this client?",
         text_already_exclude:
-          "By continuing, all data of the selected user will be disabled, and they will no longer have access until reactivated.",
-        title_already_exclude: "Do you want to delete this client?",
+          "By continuing, all data of the selected user will be disabled, and they will no longer be able to access until reactivated.",
+        title_already_exclude:
+          "Do you want to delete this client?",
       },
       invites: {
         text_already_resend:
-          "By continuing, the previously sent invitation with the token and other details will be invalidated.",
+          "By continuing, the previously sent invitation with its token and related information will be invalidated.",
         title_already_resend:
           "Do you want to resend the invitation to the user?",
         text_already_exclude:
           "By continuing, the invitation will be invalidated and the attached user data will be removed from the system.",
-        title_already_exclude: "Do you want to delete this invitation?",
-        success_title_resend: "Invitation resent",
-        success_text_resend: "Your invitation has been successfully resent!",
-        success_title_delete: "Invitation deleted",
-        success_text_delete: "Your invitation has been successfully deleted!",
+        title_already_exclude:
+          "Do you want to delete this invitation?",
+        success_title_resend:
+          "Invitation resent",
+        success_text_resend:
+          "Your invitation has been resent successfully!",
+        success_title_delete:
+          "Invitation deleted",
+        success_text_delete:
+          "Your invitation has been deleted successfully!",
       },
     },
     apis: {
-      text_fill_information: "Fill in the integration information:",
+      text_fill_information:
+        "Fill in the integration information:",
     },
   },
+  newsletter: NewsletterTranslations,
+  footer: PublicFooterTranslations,
+  agencies: PublicAgenciesTranslations,
+  galleries: PublicGalleriesTranslations,
+  politics: PoliticsTranslations,
+  cookies: CookiesTranslations,
   home: {
+    tours: HomeToursTranslations,
+    search_label:
+      "Search for your next destination",
+    agencies: homeAgenciesTranslations,
     contact: {
-      address_title: "Our Address",
-      address: "São José do Imbassai, Maricá - RJ",
-      phone_title: "Contact us",
-      phone: "(21) 97129-2030",
-      email_title: "Send us an email",
-      email: "contato@agmturismomarica.com.br",
+      address_title:
+        "Our address",
+      address:
+        "São José do Imbassai, Maricá - RJ",
+      phone_title:
+        "Contact us",
+      phone:
+        "(21) 9 8897-4586",
+      email_title:
+        "Send us an email",
+      email:
+        "contato@matrilhas.com.br",
     },
     menu: {
       logo: "AGM logotype",
-      about_us: "About Us",
-      partners: "Our Partners",
+      about_us: "About us",
+      partners: "Our partners",
     },
     status: {
       tours: "+100 Tours",
@@ -177,109 +242,50 @@ export const Screens = {
       modalities: "+6 Modalities",
       travelers: "+1000 Travelers",
     },
-    about: {
-      title: "A little about us",
-      subtitle: "Maricá Tourist Guides Association",
-      description_1:
-        "The Maricá Tourist Guides Association (AGM) is a non-profit entity that brings together qualified professionals committed to promoting responsible, sustainable, and high-quality tourism in Maricá and the region.",
-      description_2:
-        "Founded with the aim of valuing and strengthening the tour guide profession, AGM acts as a reference point for visitors, agencies, operators, and partners in the tourism trade, always prioritizing excellence in service, safety, and the preservation of natural, cultural, and historical heritage.",
-    },
+    about: HomeAboutUsTranslations,
     events: {
       title: "Schedule and services",
       subtitle: "Our attractions and activities",
       not_available: {
         title: "No events available",
-        text: "At the moment there are no events available, but soon we will have news. Stay tuned!",
+        text:
+          "There are no events available at the moment, but we will have news soon. Stay tuned!",
       },
     },
-    gallery: {
-      title: "AGM & YOU",
-      subtitle: "Our memories",
-      description:
-        "Each photo here holds a piece of our history. For AGM, it is a great joy to share unique moments with our clients and friends who participate in our tourist activities. Every smile and every experience we share reinforces our purpose: to transform tours into unforgettable memories.",
-    },
+    gallery: HomeGalleryTranslations,
     support_network: {
       title: "Support network",
-      subtitle: "Institutions that strengthen our work",
+      subtitle:
+        "Institutions that strengthen our work",
     },
-    faq: {
-      title: "Questions & Answers",
-      description: "Find the answers in our FAQ",
-      questions: [
-        {
-          question: "What are the Association’s functions?",
-          answer:
-            "AGM acts as a driving force for local tourism, promoting sustainable and high-quality tourism. We offer training, market updates, and networking opportunities for tour guides. We also work in partnership with local authorities to regulate and strengthen the profession.",
-        },
-        {
-          question: "When was the Association founded?",
-          answer: "AGM was founded on July 13, 2021.",
-        },
-        {
-          question: "Who is the president of AGM?",
-          answer:
-            "Currently, the president is Alberto Matrilhas and the vice-president is Thaís Bellotti.",
-        },
-        {
-          question: "Where is AGM’s headquarters?",
-          answer:
-            "Our headquarters, also called the Central de Passeios, is located at Rua Abreu Sodré, 43 - Centro, Maricá - RJ, 24913-775.",
-        },
-        {
-          question: "What are the service days and hours?",
-          answer:
-            "We are open every day of the week, Monday to Sunday, from 9 a.m. to 5 p.m.",
-        },
-        {
-          question: "Why become a member of AGM?",
-          answer:
-            "By becoming a member, you join a community that values the history, culture, and tourist attractions of the region. In addition to expanding knowledge and opportunities, you contribute to providing tourists with authentic and safe experiences, further strengthening tourism in Maricá.",
-        },
-        {
-          question: "Who can become a member?",
-          answer:
-            "Both individuals and legal entities can join, including tour guides, conductors, monitors, tourism professionals and companies, hotels, gastronomy establishments, printing companies, collaborators, and supporters.",
-        },
-        {
-          question: "What is AGM’s contribution to tourism in Maricá?",
-          answer:
-            "AGM actively participates in local events and initiatives, such as Caravana Celebrar Maricá, Expo Valley, Expo Maricá, Vem Viver Maricá, Vem Viver Espraiado, Recantando, Curta Itaocaia, Espraiado de Portas Abertas, Conheça Maricá, Maricá Games, FLIN, Hydrogen Congress, Career Fair, BRICS+, as well as technical visits and training sessions. Our commitment is the continuous strengthening of tourism in Maricá through partnerships and actions that value professionals and raise the quality of the sector.",
-        },
-      ],
-    },
-    newsletter: {
-      title: "Travel with us",
-      subtitle: "Be another traveler connected with us",
-      description: "Sign up to receive news and updates",
-      form: {
-        name: "Name",
-        phone: "Phone",
-        button: "Subscribe",
-      },
-    },
+    faq: HomeFaqTranslations,
+    newsletter: HomeNewsletterTranslations,
     testimonials: [
       {
-        title: "Traveler’s comment",
-        text: "I loved joining the tour in Maricá with AGM in the jeeps! It was a wonderful experience, full of beautiful landscapes and unforgettable moments.",
+        title: "Traveler comment",
+        text:
+          "I loved joining the tour through Maricá with AGM in the jeeps! It was a wonderful experience, full of beautiful landscapes and unforgettable moments.",
         author: "Igor Fernandes",
         info: "Resident of Maricá - RJ",
       },
       {
-        title: "Traveler’s comment",
-        text: "It was amazing to live this experience with AGM! The activities were very well organized, with fun and special moments from start to finish. I can’t wait to join again!",
+        title: "Traveler comment",
+        text:
+          "It was incredible to live this experience with AGM! The activities were very well organized, with fun and special moments from start to finish. I already want to join again!",
         author: "Joyce Pedro",
         info: "Resident of Ouro Preto - MG",
       },
       {
-        title: "Traveler’s comment",
-        text: "Congratulations to AGM! Taking part in the activities was wonderful, everything was well planned and full of unique moments. I highly recommend it!",
+        title: "Traveler comment",
+        text:
+          "Matrilhas deserves congratulations! Participating in the activities was wonderful, everything very well planned and full of unique moments. I recommend it to everyone!",
         author: "Jofre Martins",
         info: "Resident of São Gonçalo - RJ",
       },
       {
-        title: "Traveler’s comment",
-        text: "An unforgettable experience with AGM! Every detail of the activities was carefully planned, providing fun, learning, and lots of positive energy.",
+        title: "Traveler comment",
+        text:
+          "An unforgettable experience with AGM! Every detail of the activities was thoughtfully planned, providing fun, learning, and lots of positive energy.",
         author: "Henrique José",
         info: "Resident of Maricá - RJ",
       },
