@@ -5,6 +5,7 @@ import { dashboardFormsTranslations } from "./screens/dashboard/forms";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
+import { subscribersTranslations } from "./screens/dashboard/subscribers";
 import { ToursTranslations } from "./screens/dashboard/tours";
 import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
@@ -45,8 +46,7 @@ export const Screens = {
   },
   create_user: {
     title: "Primer acceso",
-    text:
-      "Para acceder a la plataforma, indica cómo te gustaría ser llamado y crea una contraseña.",
+    text: "Para acceder a la plataforma, indica cómo te gustaría ser llamado y crea una contraseña.",
   },
   services: {
     modal: {
@@ -70,6 +70,7 @@ export const Screens = {
     statics: staticsTranslations,
     charges: ChargesDashboardTranslations,
     forms: dashboardFormsTranslations,
+    subscribers: subscribersTranslations,
     finances: {
       about_name_and_service:
         "Si no se asigna un nombre al cobro, heredará el nombre del servicio",
@@ -93,10 +94,8 @@ export const Screens = {
       settings_privacy: "Configura la privacidad del servicio:",
       has_limit_vacancies: "¿Habrá un límite de cupos?",
       inform_limit_vacancies: "Indica el límite máximo de cupos",
-      has_limit_reservation:
-        "¿Será posible adherirse a cupos de reserva?",
-      inform_limit_reservation:
-        "Indica el límite máximo de reservas",
+      has_limit_reservation: "¿Será posible adherirse a cupos de reserva?",
+      inform_limit_reservation: "Indica el límite máximo de reservas",
       service_image: "Agrega una imagen al servicio:",
       text_alert_about_alerts_inscribes:
         "Escribe detalles y avisos para los inscritos",
@@ -125,22 +124,18 @@ export const Screens = {
       group_desative: "Desactivar grupo",
 
       group: {
-        text_insert_name:
-          "Ingresa un nombre para el grupo de usuarios:",
+        text_insert_name: "Ingresa un nombre para el grupo de usuarios:",
         text_select_permissions:
           "Selecciona los permisos que estarán activos para este grupo:",
-        title_already_active:
-          "¿Deseas activar este grupo de usuarios?",
+        title_already_active: "¿Deseas activar este grupo de usuarios?",
         text_already_active:
           "Al continuar, todos los usuarios de este grupo recuperarán el acceso y sus permisos.",
-        title_already_desative:
-          "¿Deseas desactivar este grupo de usuarios?",
+        title_already_desative: "¿Deseas desactivar este grupo de usuarios?",
         text_already_desative:
           "Al continuar, todos los usuarios de este grupo perderán el acceso, ya que sus permisos serán bloqueados.",
         text_already_exclude:
           "Al continuar, todos los usuarios de este grupo perderán el acceso, ya que sus permisos serán bloqueados.",
-        title_already_exclude:
-          "¿Deseas eliminar este grupo de usuarios?",
+        title_already_exclude: "¿Deseas eliminar este grupo de usuarios?",
       },
       user: {
         text_select_group:
@@ -149,39 +144,31 @@ export const Screens = {
           "Completa la información a continuación para invitar a un nuevo usuario:",
         text_awaiting_after_delete_desative:
           "Al continuar, todos los usuarios perderán el acceso, ya que sus permisos serán bloqueados.",
-        title_already_active:
-          "¿Deseas activar este usuario?",
+        title_already_active: "¿Deseas activar este usuario?",
         text_already_active:
           "Al continuar, el usuario recuperará el acceso y sus permisos.",
         text_already_desative:
           "Al continuar, todos los datos del usuario seleccionado serán eliminados y no podrá acceder hasta que sea restaurado.",
-        title_already_desative:
-          "¿Deseas desactivar este cliente?",
+        title_already_desative: "¿Deseas desactivar este cliente?",
         text_already_exclude:
           "Al continuar, todos los datos del usuario seleccionado serán deshabilitados y no podrá acceder hasta que sea activado nuevamente.",
-        title_already_exclude:
-          "¿Deseas eliminar este cliente?",
+        title_already_exclude: "¿Deseas eliminar este cliente?",
       },
       invites: {
         text_already_resend:
           "Al continuar, el convite enviado anteriormente con el token y demás informaciones será invalidado.",
-        title_already_resend:
-          "¿Deseas reenviar la invitación al usuario?",
+        title_already_resend: "¿Deseas reenviar la invitación al usuario?",
         text_already_exclude:
           "Al continuar, la invitación será invalidada y los datos del usuario vinculados desaparecerán del sistema.",
-        title_already_exclude:
-          "¿Deseas eliminar esta invitación?",
+        title_already_exclude: "¿Deseas eliminar esta invitación?",
         success_title_resend: "Invitación reenviada",
-        success_text_resend:
-          "¡Tu invitación fue reenviada con éxito!",
+        success_text_resend: "¡Tu invitación fue reenviada con éxito!",
         success_title_delete: "Invitación eliminada",
-        success_text_delete:
-          "¡Tu invitación fue eliminada con éxito!",
+        success_text_delete: "¡Tu invitación fue eliminada con éxito!",
       },
     },
     apis: {
-      text_fill_information:
-        "Completa la información de la integración:",
+      text_fill_information: "Completa la información de la integración:",
     },
   },
   newsletter: NewsletterTranslations,
@@ -219,8 +206,7 @@ export const Screens = {
       subtitle: "Nuestras atracciones y actividades",
       not_available: {
         title: "No hay eventos disponibles",
-        text:
-          "Por el momento no hay eventos disponibles, pero pronto tendremos novedades. ¡Mantente atento!",
+        text: "Por el momento no hay eventos disponibles, pero pronto tendremos novedades. ¡Mantente atento!",
       },
     },
     gallery: HomeGalleryTranslations,
@@ -233,29 +219,25 @@ export const Screens = {
     testimonials: [
       {
         title: "Comentario del viajero",
-        text:
-          "¡Me encantó participar del paseo por Maricá con la AGM en jeeps! Fue una experiencia maravillosa, llena de paisajes increíbles y momentos inolvidables.",
+        text: "¡Me encantó participar del paseo por Maricá con la AGM en jeeps! Fue una experiencia maravillosa, llena de paisajes increíbles y momentos inolvidables.",
         author: "Igor Fernandes",
         info: "Residente de Maricá - RJ",
       },
       {
         title: "Comentario del viajero",
-        text:
-          "¡Fue increíble vivir esta experiencia con la AGM! Las actividades estuvieron muy bien organizadas, con momentos divertidos y especiales de principio a fin. ¡Quiero repetir!",
+        text: "¡Fue increíble vivir esta experiencia con la AGM! Las actividades estuvieron muy bien organizadas, con momentos divertidos y especiales de principio a fin. ¡Quiero repetir!",
         author: "Joyce Pedro",
         info: "Residente de Ouro Preto - MG",
       },
       {
         title: "Comentario del viajero",
-        text:
-          "¡Matrilhas está de felicitaciones! Participar en las actividades fue maravilloso, todo muy bien planificado y lleno de momentos únicos. ¡Lo recomiendo a todos!",
+        text: "¡Matrilhas está de felicitaciones! Participar en las actividades fue maravilloso, todo muy bien planificado y lleno de momentos únicos. ¡Lo recomiendo a todos!",
         author: "Jofre Martins",
         info: "Residente de São Gonçalo - RJ",
       },
       {
         title: "Comentario del viajero",
-        text:
-          "¡Una experiencia inolvidable con la AGM! Cada detalle de las actividades fue pensado con cariño, brindando diversión, aprendizaje y mucha energía positiva.",
+        text: "¡Una experiencia inolvidable con la AGM! Cada detalle de las actividades fue pensado con cariño, brindando diversión, aprendizaje y mucha energía positiva.",
         author: "Henrique José",
         info: "Residente de Maricá - RJ",
       },

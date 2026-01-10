@@ -1,3 +1,4 @@
+
 export const publicRoutes = {
   login: "/login",
   forgotPassword: "/forgot-password",
@@ -18,6 +19,7 @@ export const privateRoutes = {
   statics: "/dashboard/statics",
   tours: "/dashboard/tours",
   dispatcher: "/dashboard/dispatcher",
+  subscribers: "/dashboard/subscribers",
   forms: "/dashboard/forms",
   schedule: "/dashboard/schedule",
   galleries: "/dashboard/galleries",

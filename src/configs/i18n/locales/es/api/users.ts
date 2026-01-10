@@ -37,6 +37,7 @@ export const UsersApiTranslations = {
     patch_status: "¡Estado cambiado con éxito!",
   },
   invalid: {
+    not_permission: "No tienes permiso para realizar esta acción",
     name: "El nombre del grupo proporcionado es inválido",
     name_max_length_100:
       "El grupo contiene un nombre que excede el límite máximo de 100 caracteres.",

@@ -16,4 +16,5 @@ export type EntitiesShape =
   | "TOURS"
   | "INSCRIBES"
   | "SALES"
+  | "SUBSCRIBERS"
   | "VOUCHERS";

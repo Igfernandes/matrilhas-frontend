@@ -16,6 +16,7 @@ import { PermissionsApiTranslations } from "./api/permissions";
 import { SalesApiTranslations } from "./api/sales";
 import { SchedulesApiTranslations } from "./api/schedules";
 import { SubscribeApiTranslations } from "./api/subscribe";
+import { SubscribersApiTranslations } from "./api/subscribers";
 import { ToursApiTranslations } from "./api/tours";
 import { UsersApiTranslations } from "./api/users";
 
@@ -41,6 +42,7 @@ export const Api = {
   permissions: PermissionsApiTranslations,
   schedules: SchedulesApiTranslations,
   users: UsersApiTranslations,
+  subscribers: SubscribersApiTranslations,
   mailer: {
     invalid: {
       email:
@@ -58,18 +60,15 @@ export const Api = {
   },
   invalid: {
     email: "The email does not exist or is invalid",
-    recaptcha:
-      "The page has outdated resources. Please reload and try again.",
-    csrf:
-      "The page has outdated or missing resources. Please reload and try again.",
+    recaptcha: "The page has outdated resources. Please reload and try again.",
+    csrf: "The page has outdated or missing resources. Please reload and try again.",
   },
   remember: {
     success: {
       post: "Please wait. You will be redirected shortly!",
     },
     invalid: {
-      token:
-        "Unable to connect automatically. Please log in manually.",
+      token: "Unable to connect automatically. Please log in manually.",
     },
   },
 };

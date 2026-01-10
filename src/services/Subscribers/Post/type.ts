@@ -1,5 +1,5 @@
 export type PostSubscribePayload = {
   phone: string;
   type: string;
-  data: string;
+  data: Record<string, unknown>;
 };

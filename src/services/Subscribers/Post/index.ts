@@ -5,10 +5,10 @@ import { API_ROUTES } from "@configs/routes/Api/api";
 
 export function usePostSubscribe() {
   const { axios } = useAxios();
-  const { subscribe } = API_ROUTES;
+  const { subscribers } = API_ROUTES;
 
   async function postSubscribe(payload: PostSubscribePayload) {
-    return axios.post(subscribe, getPayloadJSON({ ...payload }));
+    return axios.post(subscribers, getPayloadJSON({ ...payload }));
   }
 
   return {
