@@ -1,5 +1,5 @@
 export type DeleteAgencyPayload = {
-  id?: number;
+  agency_id?: number;
   all?: boolean;
-  in_subscribers?: Array<number>;
+  in_agencies?: Array<number>;
 };
