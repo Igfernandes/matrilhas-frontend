@@ -5,12 +5,12 @@ import {
 import { SelectorShape } from "@components/shared/layouts/Selector/type";
 import { useModalContext } from "@contexts/Modal";
 import { getNumberFormatted } from "@helpers/string";
-import { SubscriberShape } from "@type/Agencies";
-import { DeleteAgencyPayload } from "@services/Agencies/Delete/type";
 import { SubscribersActions } from "../SubscribersActions";
 import dayjs from "dayjs";
 import { useI18n } from "@contexts/I18n";
 import useDeleteSubscribers from "@services/Subscribers/Delete/useDeleteSubscribers";
+import { SubscriberShape } from "@type/Subscribers";
+import { DeleteSubscriberPayload } from "@services/Subscribers/Delete/type";
 
 export function useSubscribers() {
   const { t } = useI18n()
@@ -53,7 +53,7 @@ export function useSubscribers() {
 
   /** DELETE otimizado */
   const handleDelete = useCallback(() => {
-    const payload = {} as DeleteAgencyPayload;
+    const payload = {} as DeleteSubscriberPayload;
     const idString = String(modal.id);
 
     if (idString.includes(",")) {

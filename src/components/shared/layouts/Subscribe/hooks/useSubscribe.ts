@@ -1,4 +1,3 @@
-import usePostSubscribeService from "@services/Notifications/Subscribe/usePost";
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { SubscriptionShape } from "../type";
 import { SubscribePayload, subscribeSchema } from "../schema";
@@ -7,6 +6,7 @@ import { handleStore } from "../handles/Store";
 import { handlePermissions } from "../handles/Permissions";
 import { handleSubscribe } from "../handles/Subscribe";
 import { useCookies } from "@hooks/useCookies";
+import usePostSubscribeService from "@services/Subscribers/Post/usePost";
 
 export function useSubscribe() {
   const { formMethods } = useFormRules<SubscribePayload>({
@@ -23,12 +23,12 @@ export function useSubscribe() {
   const { register } = formMethods;
   const handleSubmitSubscribe = useCallback(postSubscribe, [postSubscribe]);
 
-  const handleEnd = () => {
+  const handleEnd = useCallback(() => {
     setShowPopUp(false);
     saveCookies({
       PUSH_NOTIFICATION: true,
     });
-  };
+  }, [saveCookies]);
 
   const submit = async ({ phone }: SubscribePayload) => {
     setIsLoading(true);
@@ -52,15 +52,15 @@ export function useSubscribe() {
     handleSubmitSubscribe({
       phone,
       type: "PUSH_NOTIFICATION",
-      data: JSON.stringify(subscription),
+      data: subscription,
     }).then(() => handleEnd());
-  }, [subscription, phone, handleSubmitSubscribe]);
+  }, [subscription, phone, handleSubmitSubscribe, handleEnd]);
 
   useLayoutEffect(() => {
     const cookies = getCookies(["PUSH_NOTIFICATION"]);
 
     if (!cookies.PUSH_NOTIFICATION) setShowPopUp(true);
-  }, []);
+  }, [getCookies]);
 
   return {
     register,
