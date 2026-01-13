@@ -8,6 +8,7 @@ export type PostSaleGatewayPayload = {
   state: string;
   city: string;
   dependents?: DependentsData[];
+  agency_id?: number;
 };
 
 type DependentsData = {

@@ -3,6 +3,7 @@ export type SaleContextData = {
 };
 
 export type SaleContextProps = {
+  agency_id?: number;
   children: React.ReactNode;
 };
 

@@ -9,11 +9,12 @@ type SalesContextType = {
   tour?: TourPreviewShape;
   handleTargetTour: (tour: number | undefined) => void;
   step: SaleSteps;
-  handleStep: (step: SaleSteps) => void;
+  handleStep: (step: SaleSteps) => void; 
+  agency_id?: number;
 };
 
 const SalesContext = createContext<SalesContextType>({} as SalesContextType);
-export function SalesProvider({ children }: SaleContextProps) {
+export function SalesProvider({ children, agency_id }: SaleContextProps) {
   const [targetTourId, setTargetTourId] = useState<number | undefined>();
   const { rows } = useGetToursPreview({
     id: targetTourId
@@ -34,7 +35,8 @@ export function SalesProvider({ children }: SaleContextProps) {
       tour,
       handleTargetTour,
       step,
-      handleStep
+      handleStep,
+      agency_id
     }}>
       {children}
       <When value={!!targetTourId}>
