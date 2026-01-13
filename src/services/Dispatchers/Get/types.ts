@@ -9,3 +9,8 @@ export type GetMessagesDispatcherRequest = Omit<
   in_ids?: Array<number>;
   status?: Status;
 };
+
+export type GetMessagesDispatcherResponse = {
+  rows: MessagesDispatcherShape[];
+  count: number;
+};

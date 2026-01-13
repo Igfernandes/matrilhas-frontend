@@ -25,7 +25,7 @@ export function Feeds({ title, data }: FeedProps) {
             <div className="bg-white rounded-md py-1 px-1 my-1">
               <Link href={item.scape} className="cursor-pointer text-xs">
                 <div className="relative">
-                  <p className="text-primary font-semibold text-xs line-clamp-1">{item.title}</p>
+                  <p className="text-primary font-semibold text-xs line-clamp-1 min-h-[1.25rem]">{item.title}</p>
 
                   <ArrowLeft width={8} height={8} className="rotate-180 absolute top-[2px] right-1" />
 

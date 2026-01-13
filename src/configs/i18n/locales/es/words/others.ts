@@ -14,6 +14,7 @@ export const OthersTranslations = {
   communication: "Comunicação",
   services: "Serviços",
   finance: "Financeiro",
+  finish: "Finalizar",
   system: "Sistema",
   deleted: "Removido",
   settings: "Configurações",

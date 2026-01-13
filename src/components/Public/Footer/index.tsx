@@ -9,6 +9,7 @@ export type FooterProps = {
 };
 
 export function Footer({ type = "DEFAULT" }: FooterProps) {
+
   return (
     <>
       <footer>
@@ -19,6 +20,7 @@ export function Footer({ type = "DEFAULT" }: FooterProps) {
           <FooterLogin />
         </When>
       </footer>
+     
       <PrivacyAndCookies />
     </>
   );

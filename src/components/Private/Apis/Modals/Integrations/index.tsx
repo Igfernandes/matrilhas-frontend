@@ -73,7 +73,7 @@ export function IntegrationsModal({
               <div className="form-group my-4">
                 <Input
                   {...register("public_token")}
-                  label={t("Words.public_token")}
+                  label={t("Texts.public_token")}
                   dataTestId="public_token"
                   defaultValue={integration?.public_token}
                   errors={errors.public_token}
@@ -82,7 +82,7 @@ export function IntegrationsModal({
               <div className="form-group my-4">
                 <Input
                   {...register("private_token")}
-                  label={t("Words.private_token")}
+                  label={t("Texts.private_token")}
                   dataTestId="private_token"
                   defaultValue={integration?.private_token}
                   errors={errors.private_token}

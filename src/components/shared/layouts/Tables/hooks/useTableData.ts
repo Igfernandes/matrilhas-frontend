@@ -138,7 +138,7 @@ export function useTableData<TableData extends Array<Record<string, unknown>>>({
     tHeads,
     tRows,
     setOffset: updateOffset,
-    count,
+    count: data?.length ??  count ,
     offset,
     isLoading: isPending,
     handleManagerColumn,

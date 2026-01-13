@@ -1,12 +1,14 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { ChargesDashboardTranslations } from "./screens/dashboard/charges";
 import { clientsTranslations } from "./screens/dashboard/clients";
+import { dispatchersTranslations } from "./screens/dashboard/dispatchers";
 import { dashboardFormsTranslations } from "./screens/dashboard/forms";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
 import { subscribersTranslations } from "./screens/dashboard/subscribers";
 import { ToursTranslations } from "./screens/dashboard/tours";
+import { AccessTranslations } from "./screens/public/access";
 import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { CookiesTranslations } from "./screens/public/cookies";
@@ -60,6 +62,7 @@ export const Screens = {
   logout: {
     text: "Você saiu com segurança. A Matrilhas te espera na próxima! 🐾",
   },
+  needs_help: "Precisa de ajuda?",
   dashboard: {
     clients: clientsTranslations,
     agencies: agenciesTranslations,
@@ -81,14 +84,7 @@ export const Screens = {
         "Ao continuar, todos os dados da cobrança serão excluídos, e ela não poderá mais ser acessado até que seja recadastrado.",
       title_already_exclude: "Você deseja excluir esta cobrança?",
     },
-    dispatchers: {
-      select_shape_send: "Selecione um ou mais formas de envio:",
-      ask_about_send_files_images:
-        "Será enviado arquivos como PDFs ou documentos?",
-      text_already_exclude:
-        "Ao continuar, o envio será excluído e seus agendamento cancelados.",
-      title_already_exclude: "Você deseja excluir este envio?",
-    },
+    dispatchers: dispatchersTranslations,
     services: {
       settings_privacy: "Configure a privacidade do serviço:",
       has_limit_vacancies: "Haverá um limite de vagas?",
@@ -175,6 +171,7 @@ export const Screens = {
   galleries: PublicGalleriesTranslations,
   politics: PoliticsTranslations,
   cookies: CookiesTranslations,
+  access: AccessTranslations,
   home: {
     tours: HomeToursTranslations,
     search_label: "Busque seu novo destino",
@@ -183,7 +180,7 @@ export const Screens = {
       address_title: "Nosso Endereço",
       address: "São José do Imbassai, Maricá - RJ",
       phone_title: "Fale conosco",
-      phone: "(21) 9 8897-4586",
+      phone: "+55 (21) 99507-1974",
       email_title: "Nos envie um e-mail",
       email: "contato@matrilhas.com.br",
     },

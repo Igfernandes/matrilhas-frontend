@@ -20,7 +20,7 @@ export default function Page404() {
         </div>
         <div className="text text-center max-w-[428px] mx-auto mb-6">
           <p className="text-xl font-bold">
-            {t("Words.page_not_available")}
+            {t("Texts.page_not_available")}
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { agenciesTranslations } from "./screens/dashboard/agencies";
 import { ChargesDashboardTranslations } from "./screens/dashboard/charges";
 import { clientsTranslations } from "./screens/dashboard/clients";
+import { dispatchersTranslations } from "./screens/dashboard/dispatchers";
 import { dashboardFormsTranslations } from "./screens/dashboard/forms";
 import { galleriesTranslations } from "./screens/dashboard/galleries";
 import { salesTranslations } from "./screens/dashboard/sales";
@@ -58,6 +59,7 @@ export const Screens = {
     selected_form: "Selecciona un formulario",
   },
 
+  needs_help: "¿Necesitas ayuda?",
   logout: {
     text: "Has cerrado sesión de forma segura. ¡Matrilhas te espera la próxima! 🐾",
   },
@@ -82,14 +84,7 @@ export const Screens = {
         "Al continuar, todos los datos del cobro serán eliminados y no podrá accederse nuevamente hasta que sea registrado otra vez.",
       title_already_exclude: "¿Deseas eliminar este cobro?",
     },
-    dispatchers: {
-      select_shape_send: "Selecciona una o más formas de envío:",
-      ask_about_send_files_images:
-        "¿Se enviarán archivos como PDF o documentos?",
-      text_already_exclude:
-        "Al continuar, el envío será eliminado y sus programaciones canceladas.",
-      title_already_exclude: "¿Deseas eliminar este envío?",
-    },
+    dispatchers: dispatchersTranslations,
     services: {
       settings_privacy: "Configura la privacidad del servicio:",
       has_limit_vacancies: "¿Habrá un límite de cupos?",
@@ -185,7 +180,7 @@ export const Screens = {
       address_title: "Nuestra dirección",
       address: "São José do Imbassai, Maricá - RJ",
       phone_title: "Contáctanos",
-      phone: "(21) 9 8897-4586",
+      phone: "+55 (21) 9 9507-1974",
       email_title: "Envíanos un correo",
       email: "contato@matrilhas.com.br",
     },

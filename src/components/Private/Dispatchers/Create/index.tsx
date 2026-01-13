@@ -1,17 +1,13 @@
 import { When } from "@components/utilities/When";
 import { Definitions } from "./Definitions";
-import { ClientsProps } from "./type";
 import { Send } from "./Send";
 
 type Props = {
   step: number;
-} & ClientsProps;
+} ;
 
 export function MessagesDispatcherForm({
-  step,
-  clients,
-  clientsSelected,
-  handleUpdateClients,
+  step
 }: Props) {
 
   return (
@@ -21,9 +17,6 @@ export function MessagesDispatcherForm({
       </When>
       <When value={step === 2}>
         <Send
-          clients={clients}
-          clientsSelected={clientsSelected}
-          handleUpdateClients={handleUpdateClients}
         />
       </When>
     </div>

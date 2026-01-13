@@ -6,6 +6,6 @@ export type PostMessagesDispatcherPayload = Omit<
   "id" | "clients" | "status" | "reference" | "created_at" | "updated_at"
 > & {
   all_clients?: boolean;
-  clients: Array<number>;
+  client_ids: Array<number>;
   status?: Status;
 };

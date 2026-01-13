@@ -1,49 +1,57 @@
-import i18n from "@configs/i18n";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import {
   ModalMessagesDispatcherOperationType,
-  MessagesDispatcherProps,
+
 } from "./type";
 import { Notice } from "@components/shared/others/Notice";
 import { useModalContext } from "@contexts/Modal";
 import { useMessagesDispatcher } from "./hooks/useMessagesDispatcher";
+import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
+import { API_ROUTES } from "@configs/routes/Api/api";
+import { useI18n } from "@contexts/I18n";
 
-export function MessagesDispatcherTable({
-  search,
-}: MessagesDispatcherProps) {
+export function MessagesDispatcherTable() {
+  const { t } = useI18n()
   const {
-    tDatMessagesDispatcher,
     tHeadsServices,
     handleDeleteMessageDispatcher,
     isLoadingDeleteDispatcher,
-  } = useMessagesDispatcher({
-    filter: search,
-  });
+    setSelectors, updateDispatchersForTable
+  } = useMessagesDispatcher();
   const { handleToggleModal, modal } =
     useModalContext<ModalMessagesDispatcherOperationType>();
+  const { filters } = useFiltersContext();
 
   return (
     <>
       <div>
         <SmartTable
-          options={{
-            pagination: {
-              max: 10,
-            },
+          ajax={{
+            key: "clients",
+            url: API_ROUTES.messagesDispatcher,
+            builder: updateDispatchersForTable
           }}
-          data={tDatMessagesDispatcher}
-          title={i18n("Words.my_shipments")}
+          options={{
+            selector: {
+              setSelectorRef: setSelectors,
+            },
+            pagination: {
+              max: 6,
+            },
+            filters: filters["DISPATCHERS"] ?? {},
+          }}
+          title={t("Texts.my_shipments")}
           excludes={["updated_at"]}
           tHeads={{
-            data: tHeadsServices.current,
-            widths: [60, 250, 90, 70, 100, 48],
+            data: tHeadsServices,
+            widths: [70, 250, 200, 100, 100, 48],
           }}
         />
       </div>
       <Notice
-        headerTitle={i18n("Words.attention")}
-        title={i18n("Screens.dashboard.dispatchers.title_already_exclude")}
-        text={i18n("Screens.dashboard.dispatchers.text_already_exclude")}
+        headerTitle={t("Words.attention")}
+        title={t("Screens.dashboard.dispatchers.title_already_exclude")}
+        text={t("Screens.dashboard.dispatchers.text_already_exclude")}
         onSubmit={handleDeleteMessageDispatcher}
         isShowModal={modal.type === "DELETE"}
         isLoading={isLoadingDeleteDispatcher}

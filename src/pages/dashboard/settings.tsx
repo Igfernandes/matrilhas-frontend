@@ -1,5 +1,5 @@
 import { SettingsForms } from "@components/Private/Settings/Forms";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import i18n from "@configs/i18n";
 
 export default function Settings() {

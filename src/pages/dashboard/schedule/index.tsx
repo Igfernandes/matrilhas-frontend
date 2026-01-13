@@ -1,7 +1,7 @@
 import { ScheduleCalendar } from "@components/Private/Schedule/Calendar";
 import { SchedulingModal } from "@components/Private/Schedule/Modals/Scheduling";
 import { OptionsBar } from "@components/Private/Schedule/OptionsBar";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 
 export default function Schedule() {
   return (

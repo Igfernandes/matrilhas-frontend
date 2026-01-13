@@ -13,11 +13,11 @@ type Props = {
 export function Footer({ hasPoliticsCookies = true }: Props) {
   const { t } = useI18n()
   return (
-    <footer>
+    <footer className="relative z-10 bg-white pb-2">
       <div className="text-center border-t-2 border-secondary">
         <div className="content max-w-[1100px] mx-auto">
           <div>
-            <ul className="flex justify-center my-4">
+            <ul className="flex justify-center mt-4 mb-2">
               <li className="mx-2">
                 <Link href="">
                   <BrandTikTok />
@@ -35,7 +35,7 @@ export function Footer({ hasPoliticsCookies = true }: Props) {
               </li>
             </ul>
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <p>© 2024 Matrilhas | {t("Screens.footer.all_rights_reserved")}.</p>
           </div>
         </div>

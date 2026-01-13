@@ -9,16 +9,12 @@ export const platformsCards = [
     label: i18n("Words.email") as string,
     value: "EMAIL",
     text: "Só pode enviar texto e links.",
-    hasFile: "SIM",
-    hasImage: "SIM",
   },
   {
     icon: <WhatsApp />,
     label: i18n("Words.whatsapp") as string,
     value: "WHATSAPP",
     text: "Só pode enviar texto e links.",
-    hasFile: "NÃO",
-    hasImage: "SIM",
   },
   // {
   //   icon: <Instagram />,

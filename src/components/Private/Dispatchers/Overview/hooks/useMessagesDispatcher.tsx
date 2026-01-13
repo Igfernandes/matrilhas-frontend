@@ -1,52 +1,50 @@
-import { useEffect, useRef, useState } from "react";
-import i18n from "@configs/i18n";
+import { useMemo, useState } from "react";
 import { useModalContext } from "@contexts/Modal";
 import {
-  HookMessagesDispatcherProps,
   ModalMessagesDispatcherOperationType,
   TDataMessagesDispatcher,
 } from "../type";
 import { NotificationsActions } from "../NotificationsActions";
-import useGetMessagesDispatcher from "@services/Dispatchers/Get/useGet";
 import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
 import useDeleteMessageDispatcher from "@services/Dispatchers/Delete/useDelete";
 import { Status } from "@type/status";
+import { SelectorShape } from "@components/shared/layouts/Tables/utilities/Selector/type";
+import { useI18n } from "@contexts/I18n";
 
-export function useMessagesDispatcher({
-  filter,
-}: HookMessagesDispatcherProps) {
-  const [tDatMessagesDispatcher, settDatMessagesDispatcher] = useState<
-    Array<Record<string, unknown>>
-  >([]);
+export function useMessagesDispatcher() {
+  const { t } = useI18n()
+  /** Esse sim precisa ser state */
+  const [selectors, setSelectors] = useState<SelectorShape[]>([]);
   const { handleToggleModal, modal } =
     useModalContext<ModalMessagesDispatcherOperationType>();
-  const { data: dispatchersData } = useGetMessagesDispatcher();
   const {
     mutateAsync: deleteMessageDispatcher,
     isPending: isLoadingDeleteDispatcher,
   } = useDeleteMessageDispatcher();
-  const tHeadsServices = useRef<Array<string>>([
+  const tHeadsServices = useMemo<Array<string>>(() => [
     "ID",
-    i18n("Words.title"),
-    i18n("Words.linked"),
-    i18n("Words.author"),
-    i18n("Words.status"),
-    i18n("Words.actions"),
-  ]);
+    t("Words.title"),
+    t("Words.author"),
+    t("Words.linked"),
+    t("Words.status"),
+    t("Words.actions"),
+  ], [t]);
 
-  const updateUserForTable = ({
-    id,
-    title,
-    linked,
-    author,
-    status,
-  }: MessagesDispatcherShape): TDataMessagesDispatcher => {
-    return {
+  const updateDispatchersForTable = (data: unknown): TDataMessagesDispatcher => {
+    const {
       id,
       title,
       linked,
       author,
-      status: i18n(`Words.${status.toLowerCase()}`) as Status,
+      status,
+    } = data as MessagesDispatcherShape
+
+    return {
+      id,
+      title,
+      author,
+      linked,
+      status:  t(`Words.${status.toLowerCase()}`) as Status,
       actions: (
         <NotificationsActions handleToggleModal={handleToggleModal} id={id} />
       ),
@@ -59,21 +57,11 @@ export function useMessagesDispatcher({
     );
   };
 
-  /** Adding news keys of table and the lasted column to table data services */
-  useEffect(() => {
-    if (!dispatchersData) return;
-
-    const tDataDispatcher = dispatchersData.map((notification) =>
-      updateUserForTable(notification)
-    );
-
-    settDatMessagesDispatcher(tDataDispatcher);
-  }, [dispatchersData, filter]);
 
   return {
-    tDatMessagesDispatcher,
     tHeadsServices,
+    updateDispatchersForTable,
     handleDeleteMessageDispatcher,
-    isLoadingDeleteDispatcher,
+    isLoadingDeleteDispatcher, setSelectors, selectors
   };
 }

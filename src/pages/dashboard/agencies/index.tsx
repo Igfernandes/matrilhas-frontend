@@ -1,4 +1,4 @@
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 
 import { OptionsBar } from "@components/Private/Agencies/Overview/OptionsBar";
 import FiltersProvider from "@components/shared/layouts/Filters/contexts";

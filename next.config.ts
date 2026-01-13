@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
         hostname: "localhost/**",
       },
       {
-        hostname: "192.168.1.3/**",
+        hostname: "192.168.1.6/**",
       },
       {
         hostname: "0.0.0.0/**",

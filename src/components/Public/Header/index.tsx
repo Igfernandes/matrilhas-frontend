@@ -1,3 +1,4 @@
+import { PersonLockBI } from "@assets/Icons/black/PersonLockBI";
 import { Flags } from "@components/shared/layouts/Flags";
 import { useI18n } from "@contexts/I18n";
 
@@ -41,8 +42,9 @@ export function Header() {
               </span>
               <br />
               <Link
-                className="text-sm hover:text-rose-300"
-                href="https://wa.me/5521988974586?text=Ol%C3%A1%20Matrilhas.Eu%20vim%20ddo%20dsite%20de%20preciso%20de%20ajuda%20e%20tenho%20d%C3%BAvidas"
+              target="_blank"
+                className="text-sm hover:text-emerald-300"
+                href="https://wa.me/5521995071974?text=Ol%C3%A1%20Matrilhas.Eu%20vim%20ddo%20dsite%20de%20preciso%20de%20ajuda%20e%20tenho%20d%C3%BAvidas"
               >
                 {t("Screens.home.contact.phone")}
               </Link>
@@ -53,7 +55,7 @@ export function Header() {
               </span>
               <br />
               <Link
-                className="text-sm hover:text-rose-300"
+                className="text-sm hover:text-emerald-300"
                 href="mailto:contato@matrilhas.com.br"
               >
                 {t("Screens.home.contact.email")}
@@ -68,11 +70,11 @@ export function Header() {
                 src={"/imgs/logotype.png"}
                 width={90}
                 height={80}
-                className="h-16 object-contain" 
+                className="h-16 object-contain"
                 alt="logotype matrilhas"
               />
             </div>
-            <div  className="hidden md:block">
+            <div className="hidden md:block">
               <ul className="flex items-center mx-4">
                 <li className="mx-2">
                   <Link className="font-semibold text-zinc-600 hover:text-primary" href={"#about_us"}>
@@ -98,6 +100,11 @@ export function Header() {
             </div>
           </div>
           <div className=" flex items-center">
+            <div>
+              <Link href={"/access"} className="flex items-center bg-primary p-3 rounded-full text-white hover:text-primary hover:bg-white border-2 border-primary">
+                <PersonLockBI width={20} height={20} />
+              </Link>
+            </div>
             <div className="languages">
               <Flags />
             </div>

@@ -12,8 +12,9 @@ export async function hasErrorAuthentication(
 
   const isNotAuth =
     error.response?.status && [BAD_AUTH].includes(error.response.status);
+  const routeUsers = error.response?.config.url?.includes("users/auth");
 
-  if (isNotAuth) {
+  if (isNotAuth && routeUsers) {
     const referenceToken = getCookie("remember_referenceToken");
     if (!referenceToken) {
       handleLogout();
