@@ -1,4 +1,4 @@
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { useSearch } from "@components/shared/forms/Search/hooks/useSearch";
 import { ModalUserOperationType } from "@components/Private/Users/type";
 import { Groups } from "@components/Private/Users/Groups";

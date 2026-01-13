@@ -1,7 +1,7 @@
 
 
 import { FormsProfile } from "@components/Private/Forms/Profile";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { StepBar } from "@components/shared/layouts/StepBar";
 import { useI18n } from "@contexts/I18n";
 import { useState } from "react";

@@ -6,18 +6,16 @@ import { Select } from "@components/shared/forms/Select";
 import dayjs from "dayjs";
 import { GroupChecks } from "@components/shared/forms/GroupChecks";
 import { GroupCards } from "@components/shared/forms/GroupCards";
-import { useDefinitions } from "./hooks/useDefinitions";
 import { When } from "@components/utilities/When";
 import { Datetime } from "@components/shared/forms/DateTime";
+import { platformsCards } from "../../constants/platforms";
 
 export function Definitions() {
   const {
     register,
     formState: { errors },
     watch,
-    setValue,
   } = useFormContext<FormsPayload>();
-  const { platforms } = useDefinitions({ watch, setValue });
 
   return (
     <div className="form-definitions">
@@ -120,7 +118,7 @@ export function Definitions() {
           </span>
         </div>
         <div className="form-group">
-          <GroupCards register={register} name="platforms" items={platforms} />
+          <GroupCards register={register} name="platforms" items={platformsCards} />
         </div>
       </div>
     </div>

@@ -7,11 +7,14 @@ export function AuthenticationsInterceptor(config: InternalAxiosRequestConfig) {
 
   // Adiciona um token Bearer ao cabeçalho da requisição
   const token_navigation = getCookie("token_navigation"); // Substitua com o token real
+  const token_access = getCookie("token_access"); // Substitua com o token real
 
   if (!config.headers) return config;
 
   // Adiciona os headers com as informações necessárias
-  config.headers["Authorization"] = `Bearer ${token_navigation}`;
+  config.headers["Authorization"] = `Bearer ${
+    token_navigation ?? token_access
+  }`;
   config.headers["X-User-IP"] = ip;
 
   return config;

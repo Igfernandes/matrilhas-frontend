@@ -1,17 +1,19 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { axios } from "@configs/axios";
 import { setParams, setQueries } from "@helpers/routes";
-import { GetMessagesDispatcherRequest } from "./types";
-import { MessagesDispatcherShape } from "@type/MessagesDispatcherShape";
+import {
+  GetMessagesDispatcherRequest,
+  GetMessagesDispatcherResponse,
+} from "./types";
 
 export async function getMessagesDispatcherRequest(
   tokenNavigation: string,
   request?: GetMessagesDispatcherRequest
-): Promise<MessagesDispatcherShape[] | MessagesDispatcherShape> {
+): Promise<GetMessagesDispatcherResponse> {
   const { id, ...query } = request ?? {};
 
   const { messagesDispatcher } = API_ROUTES;
-  const { data } = await axios.get<MessagesDispatcherShape[] | MessagesDispatcherShape>(
+  const { data } = await axios.get<GetMessagesDispatcherResponse>(
     setQueries({
       url: setParams({
         url: messagesDispatcher,
@@ -28,5 +30,8 @@ export async function getMessagesDispatcherRequest(
     }
   );
 
-  return data;
+  return {
+    rows: data.rows ?? [],
+    count: data.count ?? 0,
+  };
 }

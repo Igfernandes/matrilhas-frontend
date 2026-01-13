@@ -35,5 +35,6 @@ export function useMessagesDispatcherStep({ formMethods }: Props) {
     stepActive,
     handlePrevStep,
     isLastStep,
+    setStepActive,
   };
 }

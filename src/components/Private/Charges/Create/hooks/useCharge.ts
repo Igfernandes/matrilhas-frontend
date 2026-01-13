@@ -3,10 +3,14 @@ import { ChargeSchema, ChargesPayload } from "../schemas";
 import usePostCreateCharge from "@services/Charges/Post/usePost";
 import { useRouter } from "next/router";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
 export function useCharge() {
+  const { t } = useI18n();
+  const schema = useMemo(() => ChargeSchema(t), [t]);
   const { formMethods, errors } = useFormRules<ChargesPayload>({
-    schema: ChargeSchema,
+    schema,
   });
   const { mutateAsync: postCharge, isPending } = usePostCreateCharge();
   const router = useRouter();

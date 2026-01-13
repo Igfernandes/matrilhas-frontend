@@ -13,8 +13,8 @@ export function Header() {
 
   return (
     <>
-      <header>
-        <div className=" px-6 py-4 border-b-2 border-zinc-200">
+      <header className="relative z-[10]">
+        <div className="bg-white px-6 py-4 border-b-2 border-zinc-200">
           <div className="content flex justify-between items-center max-w-[1100px] mx-auto">
             <div className="flex items-center">
               <div className="mr-4">

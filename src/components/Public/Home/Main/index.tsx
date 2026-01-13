@@ -22,7 +22,7 @@ export function Main() {
             {SLIDES.map((slide, i) => (
               <SwiperSlide key={`slide_${i}`}>
                 <Image
-                  className="w-full max-h-[600px] h-[95vh] object-cover bg-left-top brightness-75"
+                  className="w-full max-h-[600px] h-[95vh] object-cover bg-left-top brightness-[65%]"
                   src={slide.src}
                   alt={slide.alt}
                   width={2400}

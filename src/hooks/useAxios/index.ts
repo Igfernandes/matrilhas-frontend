@@ -60,9 +60,10 @@ export function useAxios() {
     const shapeError = {
       message: i18n("Api.default.error") as string,
     };
+    
     const typedError = error as CustomAxiosError;
-    const status = typedError.response?.status ?? STATUS_SERVICE.INTERNAL_ERROR;
-    const jsonResponseData = typedError.response?.data ?? "";
+    const status = typedError?.response?.status ?? STATUS_SERVICE.INTERNAL_ERROR;
+    const jsonResponseData = typedError?.response?.data ?? "";
     const responseData = isValidJSON(jsonResponseData)
       ? JSON.parse(jsonResponseData)
       : null;

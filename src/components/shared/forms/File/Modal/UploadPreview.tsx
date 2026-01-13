@@ -23,7 +23,7 @@ export function UploadPreview({ file, onCleanFile, progress }: Props) {
           "
             >
               {file?.name && file?.name.length > 40
-                ? file?.name.substring(0, 39) + "..." + file.type.split("/")[1]
+                ? file?.name.substring(0, 35) + "..." + file.type.split("/")[1]
                 : file?.name}
             </span>
             <span className="block text-xs">{formatFileSize(file)}</span>

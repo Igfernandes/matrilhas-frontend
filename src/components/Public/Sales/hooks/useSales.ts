@@ -7,7 +7,7 @@ export function useSales() {
   const { register, formMethods, handleSubmit } = useFormRules<SalesPayload>({
     schema: SalesSchema,
   });
-  const { tour } = useSalesContext();
+  const { tour, agency_id} = useSalesContext();
   const { mutateAsync: postGateway, isPending: isLoadingSubmit } =
     usePostSaleGateway();
 
@@ -17,6 +17,7 @@ export function useSales() {
     postGateway({
       ...data,
       tour_id: tour?.id,
+      agency_id
     });
   };
 

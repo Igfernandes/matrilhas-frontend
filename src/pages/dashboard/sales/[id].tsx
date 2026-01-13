@@ -1,4 +1,4 @@
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { GetServerSideProps } from "next";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import i18n from "@configs/i18n";

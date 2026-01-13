@@ -1,6 +1,6 @@
 import { AgencyProfile } from "@components/Private/Agencies/Profile";
 import { ModalAgencyOperationType } from "@components/Private/Agencies/type";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 
 export default function Create() {
 

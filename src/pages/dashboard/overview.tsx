@@ -3,7 +3,7 @@ import { Graphics } from "@components/Private/Dashboard/Graphics";
 import { DashboardHeader } from "@components/Private/Dashboard/Header";
 import { useOverviewData } from "@components/Private/Dashboard/hooks/useData";
 import { DashboardPageProps } from "@components/Private/Dashboard/type";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { publicRoutes } from "@configs/routes/Web/navigation";
 import { getUserAuth } from "@services/Users/GetAuth/SSR";
 import { GetServerSideProps } from "next";

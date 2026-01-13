@@ -1,6 +1,6 @@
 import { ChargeProfile } from "@components/Private/Charges/Profile";
 import { ChargePageProps } from "@components/Private/Charges/Profile/type";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { getCharges } from "@services/Charges/Get/SSR";

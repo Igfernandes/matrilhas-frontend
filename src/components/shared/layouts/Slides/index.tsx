@@ -8,10 +8,11 @@ import { SwiperOptions } from "swiper/types";
 
 type Props = SwiperOptions & {
     slides: Array<React.ReactNode>
+    className?: string
 }
-export function Slides({ slides, ...swiperProps }: Props) {
+export function Slides({ slides, className, ...swiperProps }: Props) {
     return (
-        <div className="w-full">
+        <div className={`w-full ${className}`}>
             <Skeleton isLoading={!slides} settings={{
                 type: "board"
             }}>

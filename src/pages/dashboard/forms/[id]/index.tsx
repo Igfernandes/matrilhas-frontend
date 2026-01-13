@@ -1,5 +1,5 @@
 import { FormsPageProps } from "@components/Private/Forms/type";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import i18n from "@configs/i18n";
 import { GetServerSideProps } from "next";
 import { privateRoutes } from "@configs/routes/Web/navigation";

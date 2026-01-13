@@ -4,11 +4,12 @@ import { usePostAuthService } from ".";
 import { useSnackbar } from "@hooks/useSnackbar";
 import { useAxios } from "@hooks/useAxios";
 import { useRememberMe } from "@hooks/useRememberMe";
-import i18n from "@configs/i18n";
 import { privateRoutes } from "@configs/routes/Web/navigation";
 import { useCookies } from "@hooks/useCookies";
+import { useI18n } from "@contexts/I18n";
 
 export default function usePostAuth() {
+  const { t } = useI18n();
   const { handleAxiosError } = useAxios();
   const { dispatchSnackbar } = useSnackbar();
   const { postAuth } = usePostAuthService();
@@ -27,7 +28,7 @@ export default function usePostAuth() {
       const data = res;
 
       dispatchSnackbar({
-        message: i18n(data.success),
+        message: t(data.success),
         type: "success",
       });
 
@@ -39,7 +40,7 @@ export default function usePostAuth() {
 
       if (!data.token_navigation)
         return dispatchSnackbar({
-          message: i18n("Api.default.internal_error"),
+          message: t("Api.default.internal_error"),
           type: "error",
         });
 

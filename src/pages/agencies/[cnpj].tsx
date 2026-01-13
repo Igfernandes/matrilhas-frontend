@@ -9,7 +9,7 @@ import { SalesProvider } from "@components/Public/Sales/context";
 
 export default function AgencyUpdate({ targetAgency }: AgencyPreviewPageProps) {
     return (
-        <SalesProvider>
+        <SalesProvider agency_id={targetAgency.id}>
             <Header />
             <AgenciesPreviewPage targetAgency={targetAgency} />
             <Subscribe />

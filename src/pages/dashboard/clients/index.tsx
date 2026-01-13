@@ -1,4 +1,4 @@
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { Clients as ClientTable } from "@components/Private/Clients/Overview/Clients";
 import { ModalClientsOperationType } from "@components/Private/Clients/type";
 import { OptionsBar } from "@components/Private/Clients/Overview/OptionsBar";

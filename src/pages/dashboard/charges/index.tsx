@@ -1,5 +1,5 @@
 import { CardBoard } from "@components/shared/layouts/CardBoard";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { useChargeOverview } from "@components/Private/Charges/Overview/hooks/useOverviewCharge";
 import FiltersProvider from "@components/shared/layouts/Filters/contexts";
 import { ChargesOverview } from "@components/Private/Charges/Overview";

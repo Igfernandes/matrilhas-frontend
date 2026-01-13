@@ -1,8 +1,7 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
-import { FormsPayload, formsSchema } from "../schema";
+import { DispatchersSchema, FormsPayload } from "../schema";
 import { useMessagesDispatcherStep } from "./useMessagesDispatcherStep";
 import usePostMessagesDispatcher from "@services/Dispatchers/Post/usePost";
-import { ClientShape } from "@type/Clients";
 import {
   TypesPeriodsMessagesDispatcher,
   TypesPlatformsMessagesDispatchers,
@@ -10,41 +9,43 @@ import {
 } from "@type/MessagesDispatcherShape";
 import { useRouter } from "next/router";
 import { privateRoutes } from "@configs/routes/Web/navigation";
+import { useI18n } from "@contexts/I18n";
+import { useMemo } from "react";
 
-type Props = {
-  clientsSelected: ClientShape[];
-};
-
-export function useMessagesDispatcherForms({ clientsSelected }: Props) {
+export function useMessagesDispatcherForms() {
+  const { t } = useI18n();
+  const schema = useMemo(() => DispatchersSchema(t), [t]);
   const { formMethods, handleSubmit } = useFormRules<FormsPayload>({
-    schema: formsSchema,
+    schema,
     defaultValues: {
       all_clients: false,
     },
   });
   const router = useRouter();
-  const { handleNextStep, handlePrevStep, stepActive, isLastStep } =
-    useMessagesDispatcherStep({
-      formMethods,
-    });
+  const {
+    handleNextStep,
+    handlePrevStep,
+    stepActive,
+    isLastStep,
+    setStepActive,
+  } = useMessagesDispatcherStep({
+    formMethods,
+  });
   const {
     mutateAsync: postMessagesDispatcher,
     isPending: isLoadingPostNotification,
   } = usePostMessagesDispatcher();
 
   const submit = ({
-    service_id,
-    charge_id,
     platforms,
     period,
     weekday,
+    client_ids,
     ...payload
   }: FormsPayload) => {
     postMessagesDispatcher({
       ...payload,
-      clients: clientsSelected.map((client) => client.id),
-      service_id: service_id ? +service_id : undefined,
-      charge_id: charge_id ? +charge_id : undefined,
+      client_ids: client_ids.filter((id) => id > 0) as number[],
       platforms: platforms.filter(
         (platform) => typeof platform !== "boolean"
       ) as TypesPlatformsMessagesDispatchers,
@@ -52,8 +53,7 @@ export function useMessagesDispatcherForms({ clientsSelected }: Props) {
       weekday: (weekday ?? []).filter(
         (platform) => typeof platform !== "boolean"
       ) as TypesWeekdaysMessagesDispatcher,
-    })
-    .then(() => router.push(privateRoutes.dispatcher));
+    }).then(() => router.push(privateRoutes.dispatcher));
   };
 
   return {
@@ -63,6 +63,7 @@ export function useMessagesDispatcherForms({ clientsSelected }: Props) {
     stepActive,
     isLastStep,
     handleSubmit,
+    setStepActive,
     submit,
     isLoading: isLoadingPostNotification,
   };

@@ -1,8 +1,8 @@
 import { SVGProps } from "react";
 
 export function Bag({
-    width = 32,
-    height = 32,
+    width = 16,
+    height = 16,
     ...props
 }: SVGProps<SVGSVGElement>) {
     return (

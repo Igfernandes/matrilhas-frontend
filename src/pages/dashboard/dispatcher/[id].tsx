@@ -1,6 +1,6 @@
 import { DispatcherPreview } from "@components/Private/Dispatchers/Update";
 import { MessagesDispatcherSinglePageProps } from "@components/Private/Dispatchers/Update/type";
-import { DashboardContainer } from "@components/shared/layouts/Dashboard";
+import { DashboardContainer } from "@components/Private/Container";
 import { getMessagesDispatcherRequest } from "@services/Dispatchers/Get/SSR";
 import { GetServerSideProps } from "next";
 
@@ -20,11 +20,11 @@ export const getServerSideProps: GetServerSideProps<
 > = async ({ params, req }) => {
   const tokenNavigation = req.cookies["token_navigation"] ?? "";
   const { id } = params as { id: string };
-  const dispatcher = await getMessagesDispatcherRequest(tokenNavigation, {
+  const { rows: dispatchers } = await getMessagesDispatcherRequest(tokenNavigation, {
     id: parseInt(id),
   });
 
-  if (!dispatcher || Object.hasOwn(dispatcher, "errors")) {
+  if (!Array.isArray(dispatchers) || dispatchers.length === 0) {
     return {
       redirect: {
         destination: `/404`, // Redireciona para a página principal
@@ -35,9 +35,7 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
-      targetMessagesDispatcher: Array.isArray(dispatcher)
-        ? dispatcher[0]
-        : dispatcher, // Passa o ID para o componente
+      targetMessagesDispatcher: dispatchers[0]
     },
   };
 };

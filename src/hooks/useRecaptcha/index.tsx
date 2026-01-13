@@ -28,6 +28,15 @@ export function useRecaptcha() {
           ref={recaptchaRef}
           onVerify={async (token) => {
             await callbackFn?.(token)
+
+            setIsRecaptchaLoaded(false)
+            recaptchaInstance.reset();
+          }}
+          onClose={() => {
+            setIsRecaptchaLoaded(false)
+            recaptchaInstance.reset();
+          }}
+          onChalExpired={() => {
             setIsRecaptchaLoaded(false)
             recaptchaInstance.reset();
           }}
