@@ -24,7 +24,7 @@ export function TPhone({
           <input
             {...props}
             {...register(name)}
-            className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
+            className={`w-full pl-2 py-1 ${!props.disabled ? "border-2  border-zinc-300" : ""} bg-zinc-100 ${className ?? ""}`}
             data-testid={currentId}
             onChangeCapture={(ev: React.ChangeEvent<HTMLInputElement>) => {
               handleMaskPhone(ev)

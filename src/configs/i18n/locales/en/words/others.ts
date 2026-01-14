@@ -15,6 +15,7 @@ export const OthersTranslations = {
   services: "Services",
   finance: "Finance",
   finish: "Finish",
+  pay: "Pay",
   system: "System",
   deleted: "Deleted",
   settings: "Settings",

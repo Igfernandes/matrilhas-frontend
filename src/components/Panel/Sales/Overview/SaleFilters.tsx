@@ -5,7 +5,7 @@ import { Filters } from "@components/shared/layouts/Filters";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 import { useI18n } from "@contexts/I18n";
 import { handleMaskCPF, handleMaskPhone } from "@helpers/string";
-import useGetTours from "@services/Tours/Get/useGet";
+import useGetToursPreview from "@services/Tours/GetPreview/useGet";
 import { useMemo } from "react";
 import { FieldError } from "react-hook-form";
 
@@ -14,7 +14,7 @@ export function SaleFilters() {
     const { t } = useI18n()
     const { register, methods, updateReferences } = useFiltersContext()
     const { errors } = methods.formState;
-    const { rows: toursData } = useGetTours()
+    const { rows: toursData } = useGetToursPreview()
 
     const tours = useMemo(() => {
         updateReferences("tour_id", (tourId: unknown) => {

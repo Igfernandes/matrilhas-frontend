@@ -8,6 +8,7 @@ import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
 import { subscribersTranslations } from "./screens/dashboard/subscribers";
 import { ToursTranslations } from "./screens/dashboard/tours";
+import { AccessTranslations } from "./screens/public/access";
 import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { CookiesTranslations } from "./screens/public/cookies";
@@ -40,7 +41,7 @@ export const Screens = {
     title: "Check your registration",
     text: "Enter your CPF to check whether you are already registered for any event.",
   },
-
+  access: AccessTranslations,
   successful: {
     need_go_back_login: "Now, go to the login page to access the platform.",
   },

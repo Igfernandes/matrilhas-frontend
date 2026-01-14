@@ -25,7 +25,7 @@ export function TEmail({
             {...register(name)}
             {...props}
             type="email"
-            className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
+            className={`w-full pl-2 py-1 ${!props.disabled ? "border-2  border-zinc-300" : ""} ${className ?? "bg-zinc-100 "}`}
             data-testid={currentId}
             id={String(props.id)}
           />

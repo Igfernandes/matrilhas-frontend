@@ -5,7 +5,7 @@ import { ModalTourOperationType } from "../type";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { Shared } from "@components/shared/others/Shared";
 import { PERMISSIONS } from "@constants/permissions";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 import { useI18n } from "@contexts/I18n";

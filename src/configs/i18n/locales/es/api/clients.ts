@@ -60,6 +60,8 @@ export const ClientsApiTranslations = {
     put: "¡El cliente se actualizó con éxito!",
     delete: "¡El cliente se eliminó con éxito!",
     patch: "¡La categoría del(los) cliente(s) se actualizó con éxito!",
+    profile: "¡La información se actualizó con éxito!",
+    patch_password: "¡La contraseña se cambió con éxito!",
   },
   invalid: {
     id: "El cliente no se pudo encontrar",

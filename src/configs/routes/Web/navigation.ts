@@ -1,5 +1,6 @@
 export const publicRoutes = {
   access: "/access",
+  accessForgotPasswords: "/access/forgot-password",
   login: "/login",
   forgotPassword: "/forgot-password",
   successful: "/successful",
@@ -19,8 +20,20 @@ export const privateAgencyRoutes = {
   settings: "/panel/settings",
 };
 
+export const privateClientsRoutes = {
+  overview: "/account/overview",
+  charges: "/account/charges",
+  sales: "/account/sales",
+  statics: "/account/statics",
+  tours: "/account/tours",
+  logout: "/account/logout",
+  settings: "/account/settings",
+};
+
 export const privateRoutes = {
   panel: privateAgencyRoutes,
+  account: privateClientsRoutes,
+
   dashboard: "/dashboard/overview",
   clients: "/dashboard/clients",
   agencies: "/dashboard/agencies",

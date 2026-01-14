@@ -11,7 +11,7 @@ import usePutCreateSchedule from "@services/Schedule/Put/usePut";
 import useDeleteSchedule from "@services/Schedule/Delete/useDelete";
 import { hasInvalidDateRange } from "@helpers/date";
 import useGetSchedules from "@services/Schedule/Get/useGet";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { useI18n } from "@contexts/I18n";
 
 dayjs.extend(customParseFormat);

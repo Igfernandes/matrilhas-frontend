@@ -1,6 +1,7 @@
 export const clientsRoutes = {
   clients: "/clients",
   clientsById: "/clients/{id}",
+  clientsAuth: "/clients/auth",
   clientsImport: "/clients/imports",
   categories: "/clients/categories",
   clientsFields: "/clients/{id}/fields/{fieldId}",
@@ -9,4 +10,13 @@ export const clientsRoutes = {
   clientsEvents: "/clients/{id}/events/{eventId}",
   clientsSubscribe: "/clients/subscribe",
   clientsConfirmation: "/clients/confirmation",
+  clientsChargesById: "/clients/{id}/charges",
+  clientsCharges: "/clients/charges",
+  clientsPayments: "/clients/charges/{charge_id}/payments",
+  clientsSales: "/clients/sales",
+  clientsSalesById: "/clients/sales/{id}",
+  clientsExports: "/clients/exports",
+  clientsSaleGateway: "/clients/sales/checkout",
+  clientsProfile: "/clients/profile",
+  clientsProfilePassword: "/clients/profile/password",
 };

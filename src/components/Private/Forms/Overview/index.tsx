@@ -8,7 +8,7 @@ import { AmountInscribes } from "./parts/AmountInscribes";
 import { useNavigator } from "@hooks/useNavigator";
 import useWindow from "@hooks/useWindow";
 import dayjs from "dayjs";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { FormTabs } from "./parts/Tabs";
 import { useFormsTab } from "./hooks/useFormsTab";
 import { useI18n } from "@contexts/I18n";

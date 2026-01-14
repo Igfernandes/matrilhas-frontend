@@ -21,7 +21,7 @@ export function TSpan({ text, dataTestId, isFile, className, value }: Props) {
       <td className="py-2">
         <div className="flex justify-between">
           <input
-            className={`w-full line-clamp-1  pl-2 py-1 bg-zinc-100 ${className}`}
+            className={`w-full line-clamp-1  pl-2 py-1  ${className ?? "bg-zinc-100"}`}
             data-testid={dataTestId}
             value={String(value)}
             readOnly

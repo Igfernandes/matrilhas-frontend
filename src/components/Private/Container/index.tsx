@@ -1,5 +1,5 @@
 import ModalProvider from "@contexts/Modal";
-import UserNavigationProvider from "@contexts/UserNavigation";
+import UserNavigationProvider from "@contexts/Navigation/User";
 import { DashboardContent } from "./Content";
 import { UserShape } from "@type/Users";
 

@@ -7,7 +7,7 @@ import { useModalContext } from "../../context/Modal";
 import { useFieldContext } from "../../context/Fields";
 import { Pencil } from "@assets/Icons/black/Pencil";
 import { AccessControl } from "@components/shared/settings/AccessControl";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { Avatar } from "@assets/Icons/black/Avatar";
 import { useEffect, useState } from "react";
 import { useI18n } from "@contexts/I18n";

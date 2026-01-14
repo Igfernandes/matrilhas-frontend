@@ -4,7 +4,7 @@ import { CalendarEventShape } from "../type";
 import moment from "moment";
 import { useI18n } from "@contexts/I18n";
 import useGetToursPreview from "@services/Tours/GetPreview/useGet";
-import { useAgencyNavigationContext } from "@contexts/AgencyNavigation";
+import { useAgencyNavigationContext } from "@contexts/Navigation/Agency";
 
 type Props = {
   refData: string;
