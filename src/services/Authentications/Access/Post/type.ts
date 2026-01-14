@@ -1,4 +1,4 @@
-import { CSRFShape } from "../CSRF/types";
+import { CSRFShape } from "@services/Authentications/CSRF/types";
 
 export type PostAuthPayload = {
   login: string;
