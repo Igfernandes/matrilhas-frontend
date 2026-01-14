@@ -12,7 +12,7 @@ export function TInput({
   ...props
 }: TFields) {
   const { register } = useFormContext();
-  const currentId = id ??  dataTestId ;
+  const currentId = id ?? dataTestId;
   return (
     <tr
       className={`border-t-2 border-t-zinc-200 ${type == "hidden" ? "hidden" : ""
@@ -27,7 +27,7 @@ export function TInput({
             {...props}
             {...register(name)}
             defaultValue={String(defaultValue)}
-            className={`w-full pl-2 py-1 bg-zinc-100 ${className}`}
+            className={`w-full pl-2 py-1 ${!props.disabled ? "border-2  border-zinc-300" : ""} bg-zinc-100 ${className}`}
             id={currentId ?? `input-${name}`}
             type={type}
           />

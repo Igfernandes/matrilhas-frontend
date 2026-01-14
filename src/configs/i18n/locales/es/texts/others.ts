@@ -14,6 +14,8 @@ export const OthersTextsTranslations = {
   agencies_total: "Total de agencias",
   clients_total: "Total de clientes",
   payments_opened: "Pagos abiertos",
+  alter_password: "Cambiar contraseña",
+  latest_purchases: "Últimas compras",
   payments_received: "Pagos recibidos",
   payments_not_received: "Pagos no recibidos",
   selected_clients: "Clientes seleccionados",

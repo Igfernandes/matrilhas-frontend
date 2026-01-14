@@ -41,8 +41,12 @@ export default function usePostAccess() {
       saveCookies({
         token_access: data.token_access,
       });
+      const type = data.type as "AGENCY" | "CLIENT";
+      
+      let redirectRoute = privateRoutes.panel.overview;
+      if (type === "CLIENT") redirectRoute = privateRoutes.account.overview;
 
-      window.location.href = privateRoutes.panel.overview;
+      window.location.href = redirectRoute;
     },
     onError: (err) => {
       handleAxiosError(err);

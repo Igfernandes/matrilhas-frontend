@@ -16,6 +16,7 @@ export const OthersTranslations = {
   finance: "Financeiro",
   finish: "Finalizar",
   system: "Sistema",
+  pay: "Pagar",
   deleted: "Removido",
   settings: "Configurações",
   go_out: "Sair",

@@ -2,7 +2,7 @@ import { useValidations } from "./hooks/useValidations";
 import { statusColors } from "@assets/colors/default";
 import { useFormContext } from "react-hook-form";
 import { Input } from "../../Input";
-import i18n from "@configs/i18n";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   password: string;
@@ -15,12 +15,13 @@ export function PasswordConfirm({ password }: Props) {
   const colorStatus =
     validationsStatus == "void" ? "#6a6a6a" : statusColors[validationsStatus];
   const { register } = useFormContext();
+  const { t } = useI18n()
 
   return (
     <div>
       <div className="mt-2 relative">
         <Input
-          label={i18n("Words.password_confirmation")}
+          label={t("Texts.password_confirmation")}
           {...register("passwordConfirm")}
           type={"text"}
           dataTestId={"password_confirm"}
@@ -46,7 +47,7 @@ export function PasswordConfirm({ password }: Props) {
               color: colorStatus,
             }}
           >
-            {i18n("Validations.password_need_equal")}
+            {t("Validations.password_need_equal")}
           </li>
         </ul>
       </div>

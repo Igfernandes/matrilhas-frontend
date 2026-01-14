@@ -13,6 +13,7 @@ import { InvitesApiTranslations } from "./api/invites";
 import { NotificationsApiTranslations } from "./api/notifications";
 import { OperationsApiTranslations } from "./api/operations";
 import { PermissionsApiTranslations } from "./api/permissions";
+import { RecoversApiTranslations } from "./api/recovers";
 import { SalesApiTranslations } from "./api/sales";
 import { SchedulesApiTranslations } from "./api/schedules";
 import { SubscribeApiTranslations } from "./api/subscribe";
@@ -43,6 +44,7 @@ export const Api = {
   schedules: SchedulesApiTranslations,
   users: UsersApiTranslations,
   subscribers: SubscribersApiTranslations,
+  recovers: RecoversApiTranslations,
   mailer: {
     invalid: {
       email:

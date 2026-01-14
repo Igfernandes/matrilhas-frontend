@@ -8,6 +8,7 @@ import { salesTranslations } from "./screens/dashboard/sales";
 import { staticsTranslations } from "./screens/dashboard/statics";
 import { subscribersTranslations } from "./screens/dashboard/subscribers";
 import { ToursTranslations } from "./screens/dashboard/tours";
+import { AccessTranslations } from "./screens/public/access";
 import { PublicAgenciesTranslations } from "./screens/public/agencies";
 import { alterPasswordTranslations } from "./screens/public/alterPassword";
 import { CookiesTranslations } from "./screens/public/cookies";
@@ -36,6 +37,7 @@ export const Screens = {
   },
   tours: PublicToursTranslations,
   sales: SalesTranslations,
+  access: AccessTranslations,
   confirmations: {
     title: "Consulta tu inscripción",
     text: "Ingresa tu CPF para saber si ya estás registrado en algún evento.",

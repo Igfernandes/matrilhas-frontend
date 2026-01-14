@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Gear } from "@assets/Icons/black/Gear";
 import { publicRoutes } from "@configs/routes/Web/navigation";
-import { useAgencyNavigationContext } from "@contexts/AgencyNavigation";
+import { useAgencyNavigationContext } from "@contexts/Navigation/Agency";
 import { MenuShape } from "./Navbar/menu/type";
 
 type Props = {

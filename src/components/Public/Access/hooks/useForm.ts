@@ -4,7 +4,7 @@ import { useFormRules } from "@hooks/Forms/useFormRules";
 import { CSRFShape } from "@services/Authentications/CSRF/types";
 import { useI18n } from "@contexts/I18n";
 import { useMemo } from "react";
-import usePostAccess from "@services/Authentications/Access/usePostAccess";
+import usePostAccess from "@services/Authentications/Access/Post/usePostAccess";
 type Payload = PostAuthPayload;
 
 type Props = {

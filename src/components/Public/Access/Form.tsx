@@ -24,7 +24,7 @@ export function AccessForm({ csrf }: Props) {
     errors,
     isSuccess
   } = useForm({ csrf, recaptchaInstance });
-  const { forgotPassword } = publicRoutes;
+  const { accessForgotPasswords } = publicRoutes;
   const { t } = useI18n()
 
   return (
@@ -51,7 +51,7 @@ export function AccessForm({ csrf }: Props) {
         
           <div className="mt-4 sm:mt-0 ml-auto">
             <Link
-              href={forgotPassword}
+              href={accessForgotPasswords ?? "#"}
               className="text-sm text-white relative top-[-3.5px]"
             >
               <strong>{t("Screens.login.forgot_password")}</strong>

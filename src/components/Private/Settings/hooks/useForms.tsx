@@ -1,6 +1,6 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { SettingsPayload, SettingsSchema } from "../schemas";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import usePutUsers from "@services/Users/Put/usePutUsers";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";

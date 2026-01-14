@@ -4,7 +4,7 @@ import { useModalContext } from "@contexts/Modal";
 import { ModalGalleryOperationType } from "../type";
 import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable";
 import { PERMISSIONS } from "@constants/permissions";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 import { GalleryCreateModal } from "./Modals/Store";

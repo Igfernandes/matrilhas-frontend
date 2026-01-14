@@ -1,7 +1,7 @@
 import ModalProvider from "@contexts/Modal";
 import { Content } from "./Content";
 import { AgencyShape } from "@type/Agencies";
-import AgencyNavigationProvider from "@contexts/AgencyNavigation";
+import AgencyNavigationProvider from "@contexts/Navigation/Agency";
 
 type Props = {
   agency?: AgencyShape;

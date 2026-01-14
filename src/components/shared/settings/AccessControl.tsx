@@ -1,5 +1,5 @@
 import { When } from "@components/utilities/When";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 
 type Props = {
   children: React.ReactNode;

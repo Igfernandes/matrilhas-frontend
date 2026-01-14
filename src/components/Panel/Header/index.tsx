@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { Flags } from "../../shared/layouts/Flags";
 import { Skeleton } from "@components/utilities/Skeleton";
 import { useI18n } from "@contexts/I18n";
-import { useAgencyNavigationContext } from "@contexts/AgencyNavigation";
+import { useAgencyNavigationContext } from "@contexts/Navigation/Agency";
 
 type Props = {
   title?: string;

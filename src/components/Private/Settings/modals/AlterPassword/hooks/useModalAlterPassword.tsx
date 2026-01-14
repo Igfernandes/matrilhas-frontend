@@ -1,7 +1,7 @@
 import { useFormRules } from "@hooks/Forms/useFormRules";
 import { alterPasswordFormSchema, AlterPasswordPayload } from "../schemas";
 import usePatchPasswordUsers from "@services/Users/Patch/Password/usePatchPassword";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { useI18n } from "@contexts/I18n";
 import { useMemo } from "react";
 

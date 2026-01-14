@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { UserShape } from "../../types/Users";
+import { UserShape } from "../../../types/Users";
 import { PermissionsData } from "@type/Users/UsersGroup";
 
 export type UserNavigationContextData = {

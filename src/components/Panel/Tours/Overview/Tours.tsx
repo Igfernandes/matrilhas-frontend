@@ -3,7 +3,7 @@ import { SmartTable } from "@components/shared/layouts/Tables/presets/SmartTable
 import { API_ROUTES } from "@configs/routes/Api/api";
 import { useFiltersContext } from "@components/shared/layouts/Filters/contexts";
 import { useI18n } from "@contexts/I18n";
-import { useAgencyNavigationContext } from "@contexts/AgencyNavigation";
+import { useAgencyNavigationContext } from "@contexts/Navigation/Agency";
 
 export function ToursTable() {
   const { t } = useI18n()

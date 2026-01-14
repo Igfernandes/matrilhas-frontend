@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next";
-import { handleRememberMe } from "../server/handleRememberMe";
 import { getCSRF } from "@services/Authentications/CSRF/SSR";
 import { LoginPageProps } from "@components/Public/Login/types";
 import { Header } from "@components/Public/External/Header";
@@ -7,6 +6,7 @@ import { Footer } from "@components/Public/External/Footer";
 import { AccessContent } from "@components/Public/Access/Index";
 import { TourBanners } from "@components/Public/Access/TourBanners";
 import Image from "next/image";
+import { handleRememberMe } from "../../server/handleRememberMe";
 
 export default function Access({ csrf }: LoginPageProps) {
   return (

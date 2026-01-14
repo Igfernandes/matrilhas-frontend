@@ -2,7 +2,7 @@ import { ArrowNarrowLeft } from "@assets/Icons/black/ArrowNarrowLeft";
 import { Bars } from "@assets/Icons/black/Bars";
 import { Bell } from "@assets/Icons/black/Bell";
 import { When } from "@components/utilities/When";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import useWindow from "@hooks/useWindow";
 import { useRouter } from "next/router";
 import { useRef } from "react";

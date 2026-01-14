@@ -15,7 +15,9 @@ export const OthersTextsTranslations = {
   clients_total: "Total Clients",
   payments_opened: "Open Payments",
   payments_received: "Payments Received",
+  alter_password: "Change Password",
   payments_not_received: "Payments Not Received",
+  latest_purchases: "Latest Purchases",
   selected_clients: "Selected Clients",
   about_description:
     "Describe the tour information here, such as itinerary, inclusions, exclusions, important information, among others.",

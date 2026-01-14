@@ -1,6 +1,6 @@
 import { DotsOptions } from "@components/shared/others/DotsOptions";
 import { PERMISSIONS } from "@constants/permissions";
-import { useUserNavigationContext } from "@contexts/UserNavigation";
+import { useUserNavigationContext } from "@contexts/Navigation/User";
 import { useModalContext } from "@contexts/Modal";
 import { useI18n } from "@contexts/I18n";
 

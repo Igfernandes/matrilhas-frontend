@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { UserNavigationContextData, UserNavigationProps } from "./types";
-import { UserShape } from "../../types/Users";
+import { UserShape } from "../../../types/Users";
 import { usePermissions } from "@hooks/usePermissions";
 import useGetUsers from "@services/Users/Get/useGetUsers";
 

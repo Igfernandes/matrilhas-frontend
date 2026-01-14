@@ -11,7 +11,7 @@ export function usePatchClientsCategoryService() {
     return axios.patch(
       clients,
       getPayloadJSON({
-        path: "category",
+        operation: "category",
         data: payload,
       })
     );
