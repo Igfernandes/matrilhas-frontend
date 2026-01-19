@@ -63,8 +63,8 @@ export function Sidebar({ setValue, watch, register, agency, isLoading }: Props)
                 <When value={!!agency}>
                     <div>
                         <ul className="text-center">
-                            <li className="mb-2"><strong className="bg-primary text-white mb-1 block rounded-sm">Criado em:</strong> <span>{dayjs(agency?.created_at).format("DD/MM/YYYY HH:mm")}</span> </li>
-                            <li><strong className="block bg-primary text-white mb-1 rounded-sm">Aturalizado em:</strong> <span>{dayjs(agency?.updated_at).format("DD/MM/YYYY HH:mm")}</span> </li>
+                            <li className="mb-2"><strong className="bg-primary text-white mb-1 block rounded-sm">{t("Words.created_at")}:</strong> <span>{dayjs(agency?.created_at).format("DD/MM/YYYY HH:mm")}</span> </li>
+                            <li><strong className="block bg-primary text-white mb-1 rounded-sm">{t("Words.updated_at")}:</strong> <span>{dayjs(agency?.updated_at).format("DD/MM/YYYY HH:mm")}</span> </li>
                         </ul>
                     </div>
                     <hr className="border-secondary" />

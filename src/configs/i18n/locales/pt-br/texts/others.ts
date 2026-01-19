@@ -22,6 +22,7 @@ export const OthersTextsTranslations = {
     "Descreva aqui as informações do passeio, como roteiro, inclusões, exclusões, informações importantes, entre outros.",
   selected_agencies: "Agências Selecionadas",
   link_copy: "Copiar Link",
+  general_information: "Informações Gerais",
   dependencies_historic: "Histórico de dependências",
   payments_historic: "Histórico de pagamentos",
   sales_historic: "Histórico de vendas",

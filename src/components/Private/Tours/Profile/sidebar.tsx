@@ -66,8 +66,8 @@ export function Sidebar({ setValue, watch, register, tour, errors, isLoading }: 
                 <When value={!!tour}>
                     <div>
                         <ul className="text-center">
-                            <li className="mb-2"><strong className="bg-primary text-sm text-white mb-1 block rounded-sm">Criado em:</strong> <span className="text-xs">{dayjs(tour?.created_at).format("DD/MM/YYYY HH:mm")}</span> </li>
-                            <li><strong className="block bg-primary text-sm text-white mb-1 rounded-sm">Aturalizado em:</strong> <span className="text-xs">{dayjs(tour?.updated_at).format("DD/MM/YYYY HH:mm")}</span> </li>
+                            <li className="mb-2"><strong className="bg-primary text-sm text-white mb-1 block rounded-sm">{t("Words.created_at")}:</strong> <span className="text-xs">{dayjs(tour?.created_at).format("DD/MM/YYYY HH:mm")}</span> </li>
+                            <li><strong className="block bg-primary text-sm text-white mb-1 rounded-sm">{t("Words.updated_at")}:</strong> <span className="text-xs">{dayjs(tour?.updated_at).format("DD/MM/YYYY HH:mm")}</span> </li>
                         </ul>
                     </div>
                     <hr className="border-secondary" />
