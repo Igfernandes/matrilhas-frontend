@@ -15,11 +15,11 @@ export function Information({ tour }: Props) {
     return (
         <div className="bg-secondary shadow-zinc-400 shadow-sm p-4 md:ml-7 rounded-md">
             <div>
-                <h2 className="text-black text-2xl">Informações Gerais</h2>
+                <h2 className="text-black text-2xl">{t("Texts.general_information")}</h2>
             </div>
             <div className="mt-5">
                 <div className="bg-primary text-white py-1 border-2 text-center">
-                    <p className="font-semibold"> {t("Screens.tours.addresses_origin")}</p>
+                    <p className="font-semibold"> {t("Screens.tours.address_landing")}</p>
                 </div>
                 {origin.map((origin, index) => (
                     <div key={`address_origin_${index}`} className="bg-secondary text-sm mx-1 px-2 border border-b-none  shadow-sm shadow-zinc-300 py-2">
@@ -29,7 +29,7 @@ export function Information({ tour }: Props) {
             </div>
             <div className="mt-5">
                 <div className="bg-primary text-white py-1 border-2 text-center">
-                    <p className="font-semibold"> {t("Texts.address_destiny")}</p>
+                    <p className="font-semibold"> {t("Screens.tours.address_boarding")}</p>
                 </div>
                 {destiny.map((destiny, index) => (
                     <div key={`address_destiny_${index}`} className="bg-secondary text-sm mx-1 px-2 border border-b-none  shadow-sm shadow-zinc-300 py-2">

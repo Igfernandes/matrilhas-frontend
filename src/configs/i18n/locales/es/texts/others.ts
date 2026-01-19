@@ -13,6 +13,7 @@ export const OthersTextsTranslations = {
   select_type: "Selecciona el tipo",
   agencies_total: "Total de agencias",
   clients_total: "Total de clientes",
+  general_information: "Información General",
   payments_opened: "Pagos abiertos",
   alter_password: "Cambiar contraseña",
   latest_purchases: "Últimas compras",

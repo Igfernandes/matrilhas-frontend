@@ -11,6 +11,7 @@ export const OthersTextsTranslations = {
   enter_complete_payment_date: "Enter the full payment date",
   enter_client_name: "Search by client name",
   select_type: "Select type",
+  general_information: "General Information",
   agencies_total: "Total Agencies",
   clients_total: "Total Clients",
   payments_opened: "Open Payments",
