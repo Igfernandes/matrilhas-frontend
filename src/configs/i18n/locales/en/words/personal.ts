@@ -11,6 +11,7 @@ export const PersonalTranslations = {
   cpf_cnpj: "CPF/CNPJ",
   clients: "Clients",
   created_at: "Created at",
+  updated_at: "Updated at",
   describe: "Description",
   ative: "Activate",
   family: "Family",
