@@ -50,7 +50,7 @@ export function Resume({ isLoadingSubmit }: Props) {
                                                 <When value={item.gratuities}>
                                                     {item.gratuities ? t("Screens.sales.gratuity_by_age") : ""}
                                                 </When>
-                                                <When value={!!item.discount}>
+                                                <When value={!!item.discount && !item.gratuities}>
                                                     {item.discount && item.discount > 0 ? `${t("Words.discount")}: R$ ${item.discount.toFixed(2)}` : ""}
                                                 </When>
                                                 <When value={!item.gratuities && !item.discount}>

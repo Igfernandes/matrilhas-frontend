@@ -4,13 +4,13 @@ import Image from "next/image"
 import { formatMoney } from "@helpers/currencies"
 import Link from "next/link"
 import { ClockBI } from "@assets/Icons/black/ClockBI"
-import { PeopleAddBI } from "@assets/Icons/black/PeopleAddBI"
 import i18n from "@configs/i18n"
 import { othersColors } from "@assets/colors/colors"
 import { CalendarBI } from "@assets/Icons/black/CalendarBI"
 import dayjs from "dayjs"
 import { useI18n } from "@contexts/I18n"
 import { useSalesContext } from "@components/Public/Sales/context"
+import { TicketPerforatedBI } from "@assets/Icons/black/TicketPerforatedBI"
 
 type Props = {
     tour: TourPreviewShape
@@ -67,7 +67,7 @@ export function TourCard({ tour }: Props) {
                             </When>
                             <div>
                                 <span className="flex items-center mt-1 px-1 ml-4">
-                                    <strong><PeopleAddBI fill={othersColors.primary} width={20} height={20} /></strong>
+                                    <strong><TicketPerforatedBI fill={othersColors.primary} width={20} height={20} /></strong>
                                     <span className="text-sm ml-2">{tour.slots}</span>
                                 </span>
                             </div>
