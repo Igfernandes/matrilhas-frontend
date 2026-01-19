@@ -25,6 +25,7 @@ export const SalesTranslations = {
     title: "Resumen de la compra",
     text: "A continuación se muestra el resumen de su compra",
   },
+  file_residency: "Comprobante de residencia",
   filled_all_fields: "Complete todos los campos para continuar",
   gratuity_by_age: "Gratuidad por edad",
   residency_file: "Comprobante de residencia",

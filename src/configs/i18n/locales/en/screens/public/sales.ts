@@ -25,6 +25,7 @@ export const SalesTranslations = {
     title: "Purchase Summary",
     text: "Below is the summary of your purchase",
   },
+  file_residency: "Proof of Residence",
   filled_all_fields: "Fill in all fields to proceed",
   gratuity_by_age: "Age-based gratuity",
   residency_file: "Proof of Residence",
