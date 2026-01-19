@@ -43,7 +43,7 @@ export function TourCard({ tour }: Props) {
                 <div>
                     <ul>
                         <li className="text-justify text-sm py-2 px-1">
-                            <p className="text-sm line-clamp-2">{tour.short_description}</p>
+                            <p className="text-sm">{tour.short_description}</p>
                         </li>
 
                         <When value={!!tour?.activity_period?.start}>
