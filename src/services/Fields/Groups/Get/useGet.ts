@@ -3,7 +3,7 @@ import { GetFieldsGroupsRequest } from "./types";
 import { useQueryGuard } from "@hooks/useAxios";
 
 export default function useGetFieldsGroups(
-  request: GetFieldsGroupsRequest = {}
+  request: GetFieldsGroupsRequest = {},
 ) {
   const { getFieldsGroups } = useGet();
 
@@ -17,5 +17,5 @@ export default function useGetFieldsGroups(
     queryFn: handle,
     enabled: true,
   });
-  return { data, ...rest };
+  return { rows: data?.rows ?? [], count: data?.count ?? 0, ...rest };
 }
