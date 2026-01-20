@@ -36,7 +36,6 @@ export function Modal() {
       currentField: currentField,
     });
 
-
   return (
     <When value={isShowModal}>
       <div className="modal fixed top-0 left-0 Z-[999] w-full h-full bg-[#00000059] flex justify-center items-center">

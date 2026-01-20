@@ -34,7 +34,7 @@ export const Gallery = React.forwardRef<HTMLInputElement, InputProps>(
         <div className="relative w-full my-4 z-50" >
           <div>
             <div>
-              <p className="line-clamp-1">{label}</p>
+              <p >{label}</p>
             </div>
             <div className="p-1 border-2 border-disabled rounded-lg shadow-md">
               <ul className="flex flex-wrap min-h-40">

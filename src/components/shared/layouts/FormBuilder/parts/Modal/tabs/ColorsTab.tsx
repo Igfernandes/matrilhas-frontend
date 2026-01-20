@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import { FieldShape } from "../../../type";
 import { FormGroup } from "../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   field?: FieldShape;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export function ColorsTab({ field, oChangeField, tabActive }: Props) {
+  const { t } = useI18n()
   return (
     <When value={tabActive === "colors"}>
       <div
@@ -21,7 +23,7 @@ export function ColorsTab({ field, oChangeField, tabActive }: Props) {
       >
         <FormGroup
           defaultValue={field?.style?.color}
-          label="color"
+          label={t("Words.color")}
           type="color"
           name="style.color"
           key={"fontSize"}
@@ -30,7 +32,7 @@ export function ColorsTab({ field, oChangeField, tabActive }: Props) {
         <When value={!["layout"].includes(field?.group ?? "")}>
           <FormGroup
             defaultValue={field?.labelColor}
-            label="title_color"
+            label={t("Texts.title_color")}
             type="color"
             name="labelColor"
             key={"labelColor"}
@@ -39,7 +41,7 @@ export function ColorsTab({ field, oChangeField, tabActive }: Props) {
         </When>
         <FormGroup
           defaultValue={field?.style?.backgroundColor}
-          label="background_color"
+          label={t("Texts.background_color")}
           type="color"
           name="style.backgroundColor"
           key={"backgroundColor"}
@@ -48,7 +50,7 @@ export function ColorsTab({ field, oChangeField, tabActive }: Props) {
         <When value={!["layout"].includes(field?.group ?? "")}>
           <FormGroup
             defaultValue={field?.style?.borderColor}
-            label="border_color"
+            label={t("Texts.border_color")}
             type="color"
             name="style.borderColor"
             key={"borderColor"}

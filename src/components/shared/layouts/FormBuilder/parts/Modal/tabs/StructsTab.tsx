@@ -3,6 +3,7 @@ import { FieldShape } from "../../../type";
 import { FormGroup } from "../fieldsGroup/FormGroup";
 import { FormRange } from "../fieldsGroup/FormRange";
 import { When } from "@components/utilities/When";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   field?: FieldShape;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export function StructsTab({ field, oChangeField, tabActive }: Props) {
+  const { t } = useI18n()
   return (
     <When value={tabActive === "structs"}>
       <div
@@ -22,28 +24,28 @@ export function StructsTab({ field, oChangeField, tabActive }: Props) {
       >
         <FormRange
           defaultValue={field?.width}
-          label="width"
+          label={t("Words.width")}
           name="width"
           key={"width"}
           onChange={oChangeField}
         />
         <FormRange
           defaultValue={field?.height}
-          label="height"
+          label={t("Words.height")}
           name="height"
           key={"height"}
           onChange={oChangeField}
         />
         <FormRange
           defaultValue={field?.style?.padding as string}
-          label="padding"
+          label={t("Words.padding")}
           name="style.padding"
           key={"padding"}
           onChange={oChangeField}
         />
         <FormRange
           defaultValue={field?.style?.borderWidth as string}
-          label="border"
+          label={t("Words.border")}
           name="style.borderWidth"
           key={"borderWidth"}
           measure="px"
@@ -51,14 +53,14 @@ export function StructsTab({ field, oChangeField, tabActive }: Props) {
         />
         <FormRange
           defaultValue={field?.margin as string}
-          label="margin"
+          label={t("Words.margin")}
           name="margin"
           key={"margin"}
           onChange={oChangeField}
         />
         <FormGroup
           defaultValue={field?.className}
-          label="styled_class"
+          label={t("Texts.styled_class")}
           name="className"
           key={"className"}
           onChange={oChangeField}

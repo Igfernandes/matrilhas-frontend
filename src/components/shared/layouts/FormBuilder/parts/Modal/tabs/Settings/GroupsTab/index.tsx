@@ -1,11 +1,11 @@
 import { FormGroup } from "../../../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
 import { FormSelect } from "../../../fieldsGroup/FormSelect";
-import i18n from "@configs/i18n";
 import { Options } from "./Options";
 import { OptionShape } from "./type";
 import { TabProps } from "../../type";
 import { useMemo } from "react";
+import { useI18n } from "@contexts/I18n";
 
 export function SettingsGroupsTab({
   field,
@@ -13,6 +13,7 @@ export function SettingsGroupsTab({
   handleUpdateField,
   tabActive,
 }: TabProps) {
+  const { t } = useI18n()
   const parsedOptions = useMemo(() => {
     try {
       return JSON.parse(field?.options ?? "[]") as Array<OptionShape>;
@@ -20,7 +21,7 @@ export function SettingsGroupsTab({
       return [];
     }
   }, [field]);
-  
+
   return (
     <When value={tabActive === "settings"}>
       <div
@@ -32,7 +33,7 @@ export function SettingsGroupsTab({
       >
         <FormGroup
           defaultValue={field?.label}
-          label="title"
+          label={t("Words.title")}
           name="label"
           key={"label"}
           onChange={oChangeField}
@@ -44,17 +45,18 @@ export function SettingsGroupsTab({
         <FormSelect
           options={[
             {
-              text: i18n("Words.not"),
+              text: t("Words.not"),
               value: "",
             },
             {
-              text: i18n("Words.yes"),
+              text: t("Words.yes"),
               value: "true",
             },
           ]}
-          label="is_required"
+          label={t("Words.is_required")}
           name="required"
           key={"required"}
+          defaultValue={String(field?.required)}
           onChange={oChangeField}
         />
       </div>

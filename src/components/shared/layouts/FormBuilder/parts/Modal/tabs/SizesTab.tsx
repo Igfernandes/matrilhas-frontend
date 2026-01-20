@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import { FieldShape } from "../../../type";
 import { FormGroup } from "../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   field?: FieldShape;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export function SizesTab({ field, oChangeField, tabActive }: Props) {
+  const {t} = useI18n()
   return (
     <When value={tabActive === "sizes"}>
       <div
@@ -21,7 +23,7 @@ export function SizesTab({ field, oChangeField, tabActive }: Props) {
       >
         <FormGroup
           defaultValue={field?.style?.fontSize as string}
-          label="size"
+          label={t("Words.size")}
           type="number"
           name="style.fontSize"
           key={"fontSize"}
@@ -30,7 +32,7 @@ export function SizesTab({ field, oChangeField, tabActive }: Props) {
         />
         <FormGroup
           defaultValue={field?.style?.fontWeight as string}
-          label="weight"
+          label={t("Words.weight")}
           type="number"
           name="style.fontWeight"
           min={100}
