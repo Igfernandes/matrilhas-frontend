@@ -15,8 +15,9 @@ type Props = {
 export function Resume({ isLoadingSubmit }: Props) {
     const { handleStep, tour } = useSalesContext()
     const { t } = useI18n()
-    const { register } = useFormContext()
+    const { register, watch } = useFormContext()
     const { resume, amountPaid, hasResidency, price, isLoadingResume } = useResume();
+    const hasFileWhenHasDiscountByResidency = !hasResidency || hasResidency && watch("residency_file")
 
     return (
         <div className="min-w-[30vw] py-2 mb-5">
@@ -85,7 +86,9 @@ export function Resume({ isLoadingSubmit }: Props) {
             </div>
             <When value={hasResidency}>
                 <div className="my-4">
-                    <File {...register('residency_file')} label={t("Screens.sales.file_residency")} dataTestId="sale_residency" />
+                    <File {...register('residency_file', {
+                        required: true,
+                    })} required label={t("Screens.sales.file_residency")} dataTestId="sale_residency" />
                     <span className="inline-block text-sm text-red mx-2 mt-1 mb-2">{t("Screens.sales.residency_notice")}</span>
                 </div>
             </When>
@@ -96,7 +99,7 @@ export function Resume({ isLoadingSubmit }: Props) {
                     </button>
                 </div>
                 <div className="w-[48%]">
-                    <Button isLoading={isLoadingSubmit} text={t("Words.finish")} className="w-full bg-primary text-white disabled:bg-zinc-300 disabled:border-zinc-300 disabled:text-gray-500 target:scale-90 border border-primary rounded-md py-2 text-center inline-block" />
+                    <Button isLoading={isLoadingSubmit} disabled={!hasFileWhenHasDiscountByResidency} text={t("Words.finish")} className="w-full bg-primary text-white disabled:bg-zinc-300 disabled:border-zinc-300 disabled:text-gray-500 target:scale-90 border border-primary rounded-md py-2 text-center inline-block" />
                 </div>
             </div>
         </div>
