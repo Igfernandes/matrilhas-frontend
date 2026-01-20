@@ -11,7 +11,7 @@ type Props = {
 
 export function useClientsUpdate({ client }: Props) {
   const { rows: clientsFields = [] } = useGetClientsFields({ id: client.id });
-  const { data: fieldsGroupsData = [], refetch } = useGetFieldsGroups({
+  const { rows: fieldsGroupsData = [], refetch } = useGetFieldsGroups({
     scope: "CLIENT",
   });
   const { mutateAsync: postClientsFields, isPending: isLoading } =

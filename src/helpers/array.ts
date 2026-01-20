@@ -1,9 +1,10 @@
 export function helperRemoveDuplicatesInArrayOfObjects<
-  Data extends Record<string, unknown>
+  Data extends Record<string, unknown>,
 >(array: Array<Data>, key: string): Array<Data> {
+  if (!Array.isArray(array) || array.length === 0) return [];
   return array.filter(
     (filteringItem, index, self) =>
-      index === self.findIndex((item) => item[key] === filteringItem[key])
+      index === self.findIndex((item) => item[key] === filteringItem[key]),
   );
 }
 export function convertToBooleanArray(values: Array<number>) {
@@ -19,13 +20,12 @@ export function convertToBooleanArray(values: Array<number>) {
 
 export function mergeById<T extends { id: unknown }>(
   prev: T[],
-  next: T[]
+  next: T[],
 ): T[] {
   const map = new Map<unknown, T>();
 
-  prev.forEach(item => map.set(item.id, item));
-  next.forEach(item => map.set(item.id, item)); // sobrescreve
+  prev.forEach((item) => map.set(item.id, item));
+  next.forEach((item) => map.set(item.id, item)); // sobrescreve
 
   return Array.from(map.values());
 }
-

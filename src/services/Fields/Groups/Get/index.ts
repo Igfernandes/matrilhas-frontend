@@ -1,8 +1,7 @@
 import { API_ROUTES } from "@configs/routes/Api/api";
-import { GetFieldsGroupsRequest } from "./types";
+import { GetFieldsGroupsRequest, GetFieldsGroupsResponse } from "./types";
 import { useAxios } from "@hooks/useAxios";
 import { useRoutes } from "@hooks/useRoutes";
-import { FieldsGroupsShape } from "@type/Fields/fieldsGroups";
 
 export default function useGet() {
   const { fieldsGroups } = API_ROUTES;
@@ -12,7 +11,7 @@ export default function useGet() {
   async function getFieldsGroups(request?: GetFieldsGroupsRequest) {
     const { id, fieldId, ...query } = request ?? {};
 
-    return await axios.get<FieldsGroupsShape[]>(
+    return await axios.get<GetFieldsGroupsResponse>(
       setQueries({
         url: setParams({
           url: fieldsGroups,
