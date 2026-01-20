@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { FormGroupProps } from "./type";
 
 export function FormGroup({
@@ -15,7 +14,7 @@ export function FormGroup({
   return (
     <div className="form-group my-3">
       <label htmlFor="label" className="font-semibold">
-        {i18n(`Words.${label}`) ?? ""}:
+        {label ?? ""}:
       </label>
       <input
         {...inputProps}

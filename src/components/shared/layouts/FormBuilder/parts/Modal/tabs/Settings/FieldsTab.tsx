@@ -1,12 +1,14 @@
 import { FormGroup } from "../../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
 import { FormSelect } from "../../fieldsGroup/FormSelect";
-import i18n from "@configs/i18n";
 import { TabProps } from "../type";
+import { useI18n } from "@contexts/I18n";
 
 
 export function SettingsFieldsTab({ field, oChangeField, tabActive }: TabProps) {
+  const { t } = useI18n()
 
+  console.log("field", field);
   return (
     <When value={tabActive === "settings"}>
       <div
@@ -18,21 +20,21 @@ export function SettingsFieldsTab({ field, oChangeField, tabActive }: TabProps) 
       >
         <FormGroup
           defaultValue={field?.label}
-          label="title"
+          label={t("Words.title")}
           name="label"
           key={"label"}
           onChange={oChangeField}
         />
         <FormGroup
           defaultValue={field?.defaultValue}
-          label="filled_value"
+          label={t("Texts.filled_value")}
           name="defaultValue"
           key={"defaultValue"}
           onChange={oChangeField}
         />
         <FormGroup
           defaultValue={field?.placeholder}
-          label="value_example"
+          label={t("Texts.value_example")}
           name="placeholder"
           key={"placeholder"}
           onChange={oChangeField}
@@ -40,17 +42,18 @@ export function SettingsFieldsTab({ field, oChangeField, tabActive }: TabProps) 
         <FormSelect
           options={[
             {
-              text: i18n("Words.not"),
+              text: t("Words.not"),
               value: "",
             },
             {
-              text: i18n("Words.yes"),
+              text: t("Words.yes"),
               value: "true",
             }
           ]}
-          label="is_required"
+          label={t("Texts.is_required")}
           name="required"
           key={"required"}
+          value={String(field?.required)}
           onChange={oChangeField}
         />
       </div>

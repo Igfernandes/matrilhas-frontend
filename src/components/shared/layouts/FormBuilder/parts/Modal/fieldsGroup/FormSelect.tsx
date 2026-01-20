@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { FormSelectProps } from "./type";
 
 export function FormSelect({
@@ -12,7 +11,7 @@ export function FormSelect({
   return (
     <div className="form-group my-3">
       <label htmlFor="label" className="font-semibold">
-        {i18n(`Words.${label}`) ?? ""}:
+        {label ?? ""}:
       </label>
       <select
         {...inputProps}

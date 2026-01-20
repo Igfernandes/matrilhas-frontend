@@ -24,7 +24,7 @@ export function FooterDefault() {
       </div>
       <div className="whatsApp fixed z-[99999999] bottom-28 md:bottom-10 left-2 md:left-auto  md:right-10 p-3 shadow shadow-black rounded-full bg-emerald-600 ">
         <span className="hidden md:block absolute w-[10rem] p-2 rounded-xl rounded-br shadow shadow-cross-black-secondary right-10 bg-white bottom-12">{t("Screens.needs_help")}</span>
-        <Link target="_blank" href={"https://api.whatsapp.com/send/?phone=5521995071974&text=Olá+Matrilhas.Eu+vim+ddo+dsite+de+preciso+de+ajuda+e+tenho+dúvidas&type=phone_number&app_absent=0"}>
+        <Link target="_blank" href={"https://api.whatsapp.com/send/?phone=5521995071974&text=Olá+Matrilhas.+Eu+vim+do+site+e+preciso+de+ajuda.+tenho+dúvidas&type=phone_number&app_absent=0"}>
           <WhatsAppBI fill="white" width={30} height={30} />
         </Link>
       </div>

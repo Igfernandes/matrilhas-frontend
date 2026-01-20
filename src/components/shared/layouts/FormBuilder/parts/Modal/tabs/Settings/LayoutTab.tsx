@@ -1,9 +1,11 @@
 import { FormGroup } from "../../fieldsGroup/FormGroup";
 import { When } from "@components/utilities/When";
 import { TabProps } from "../type";
+import { useI18n } from "@contexts/I18n";
 
 
 export function SettingsLayoutTab({ field, oChangeField, tabActive }: TabProps) {
+  const { t } = useI18n()
   return (
     <When value={tabActive === "settings"}>
       <div
@@ -15,7 +17,7 @@ export function SettingsLayoutTab({ field, oChangeField, tabActive }: TabProps) 
       >
         <FormGroup
           defaultValue={field?.defaultValue}
-          label="text"
+          label={t("Words.text")}
           name="defaultValue"
           key={"defaultValue"}
           onChange={oChangeField}

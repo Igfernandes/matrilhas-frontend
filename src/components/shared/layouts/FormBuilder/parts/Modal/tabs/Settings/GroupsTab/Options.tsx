@@ -1,7 +1,7 @@
-import i18n from "@configs/i18n";
 import { Option } from "./Option";
 import { useGroupsTab } from "./hooks/useGroupsTab";
 import { OptionShape } from "./type";
+import { useI18n } from "@contexts/I18n";
 
 type Props = {
   currentOptions: Array<OptionShape>;
@@ -15,6 +15,7 @@ export function Options({ onChange, currentOptions }: Props) {
     handleChangeOption,
     options,
   } = useGroupsTab({ currentOptions, onChange });
+  const { t } = useI18n()
 
   return (
     <div className="mb-6">
@@ -24,13 +25,13 @@ export function Options({ onChange, currentOptions }: Props) {
           className="bg-primary text-white p-2 rounded-md mb-1"
           type="button"
         >
-          {i18n("Words.add")}
+          {t("Words.add")}
         </button>
       </div>
       <table className="w-full">
         <thead>
           <tr>
-            <th className="bg-disabled border-2">{i18n("Words.text")}</th>
+            <th className="bg-disabled border-2">{t("Words.text")}</th>
             <th className="bg-disabled border-2"></th>
           </tr>
         </thead>

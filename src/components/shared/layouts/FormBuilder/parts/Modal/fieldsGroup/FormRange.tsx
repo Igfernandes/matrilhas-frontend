@@ -1,4 +1,3 @@
-import i18n from "@configs/i18n";
 import { ChangeEvent, useState } from "react";
 
 type Props = {
@@ -24,7 +23,7 @@ export function FormRange({
   return (
     <div className="form-group my-3">
       <label htmlFor="label" className="font-semibold">
-        {i18n(`Words.${label}`)}:
+        {label}:
         <span className="text-lg font-light text-blue-600 ml-2">{value}</span>
       </label>
       <input
