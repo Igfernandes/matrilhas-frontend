@@ -6,7 +6,8 @@ import { useForm } from "@components/Public/Forms/hooks/useForm";
 
 import { getCSRF } from "@services/Authentications/CSRF/SSR";
 import { getFormPreview } from "@services/Forms/GetPreview/SSR";
-import { ExternalContainer } from "@components/shared/layouts/ExternalContainer";
+import { Header } from "@components/Public/External/Header";
+import { Footer } from "@components/Public/External/Footer";
 
 export default function Form({ form, csrf }: FormPageProps) {
   const { handleSubmit, isLoading, components } = useForm({
@@ -16,7 +17,7 @@ export default function Form({ form, csrf }: FormPageProps) {
 
   return (
     <>
-      <ExternalContainer >
+      <Header />
         <div className="flex flex-col justify-between min-h-[85vh] mx-w-[1440px]">
           <main>
             <div className="bg-tertiary max-w-[800px] p-4 mx-auto mt-4">
@@ -43,7 +44,7 @@ export default function Form({ form, csrf }: FormPageProps) {
             </div>
           </main>
         </div>
-      </ExternalContainer>
+      <Footer />
     </>
   );
 }

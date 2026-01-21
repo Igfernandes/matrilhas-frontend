@@ -36,7 +36,7 @@ export type TourShape = BaseShape & {
 
 export type TourPreviewShape = Omit<
   TourShape,
-  "owner_id"  | "unavailable_at" | "status" | "updated_at"
+  "owner_id" | "unavailable_at" | "status" | "updated_at"
 > & {
   activity_period: {
     value: number;
@@ -45,6 +45,10 @@ export type TourPreviewShape = Omit<
     start: string;
     end: string;
   };
+  agencies?: Array<{
+    name: string;
+    phone: string;
+  }>;
   sale_at?: string;
   is_available_for_sale: boolean;
   addresses: Omit<TourAddressShape, "updated_at" | "created_at" | "tour_id">[];

@@ -15,6 +15,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       className,
       id,
       label,
+      labelColor,
       placeholder,
       required,
       ...rest
@@ -37,6 +38,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={`absolute transition-all duration-350 line-clamp-1`}
           style={{
             ...labelStyledState,
+            color: labelColor ?? "#000"
           }}
         >
           {label}

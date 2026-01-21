@@ -92,7 +92,7 @@ export function Header() {
                   </Link>
                 </li>
                 <li className="mx-2">
-                  <Link className="font-semibold text-zinc-600 hover:text-primary" href={"#partners"}>
+                  <Link className="font-semibold text-zinc-600 hover:text-primary" href={"/tours"}>
                     {t("Words.tours")}
                   </Link>
                 </li>

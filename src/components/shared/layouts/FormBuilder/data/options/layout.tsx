@@ -20,11 +20,6 @@ export const optionsLayout = [
     icon: <Pen width={12} height={12} />,
   },
   {
-    id: "link",
-    field: "link",
-    icon: <Pen width={12} height={12} />,
-  },
-  {
     id: "hr",
     field: "hr",
     hiddenSettings: true,

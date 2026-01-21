@@ -15,6 +15,7 @@ export const Email = React.forwardRef<HTMLInputElement, InputProps>(
       id,
       label,
       placeholder,
+      labelColor,
       required,
       ...rest
     }: InputProps,
@@ -41,6 +42,7 @@ export const Email = React.forwardRef<HTMLInputElement, InputProps>(
           className={`absolute transition-all duration-350 line-clamp-1`}
           style={{
             ...labelStyledState,
+            color: labelColor ?? "#000"
           }}
         >
           {label}
