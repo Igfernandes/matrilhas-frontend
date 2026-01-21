@@ -43,7 +43,7 @@ export function ToursRelations({ query, slidesPerView }: ToursRelationsProps) {
                     }}
                 >
                     {tours.map((tour, key) => (
-                        <SwiperSlide key={`tour_${key}`} className="w-full md:w-[250px] mx-4">
+                        <SwiperSlide key={`tour_${key}`} className="w-full md:w-[400px] mx-4">
                             <TourCard tour={tour} />
                         </SwiperSlide>
                     ))}

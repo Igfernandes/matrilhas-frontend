@@ -8,7 +8,6 @@ import { useI18n } from "@contexts/I18n";
 export function SettingsFieldsTab({ field, oChangeField, tabActive }: TabProps) {
   const { t } = useI18n()
 
-  console.log("field", field);
   return (
     <When value={tabActive === "settings"}>
       <div

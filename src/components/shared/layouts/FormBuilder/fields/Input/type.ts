@@ -11,6 +11,7 @@ export type InputProps = Omit<
   errors?: FieldError;
   required?: string | boolean;
   tooltip?: string;
+  labelColor?: string;
   handledChange?: (ev: React.ChangeEvent<HTMLInputElement> | undefined) => void;
   setValue?: SetValue;
 };

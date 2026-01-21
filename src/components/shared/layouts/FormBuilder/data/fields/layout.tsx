@@ -18,11 +18,6 @@ export const fieldsLayout = {
       {defaultValue}
     </span>
   ),
-  link: ({ className, defaultValue, ...props }: FieldShape) => (
-    <a className={`${classNameDefault} ${className}`} {...props}>
-      {defaultValue}
-    </a>
-  ),
   hr: ({ className, ...props }: FieldShape) => (
     <hr className={`${classNameDefault} ${className}`} {...props} />
   ),
