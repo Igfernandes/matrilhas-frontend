@@ -68,11 +68,11 @@ export const AgencyProfileSchema = (t: TFunction) =>
       .array(
         z.object({
           platform: z.enum(
-            ["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP"],
+            ["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP", "SITE"],
             {
               required_error: t("Validations.required"),
               message: t("Validations.enum", {
-                list: "FACEBOOK, INSTAGRAM, TWITTER, LINKEDIN, WHATSAPP",
+                list: "FACEBOOK, INSTAGRAM, TWITTER, LINKEDIN, WHATSAPP, SITE",
               }),
             }
           ),
