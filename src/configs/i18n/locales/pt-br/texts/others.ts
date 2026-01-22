@@ -28,6 +28,7 @@ export const OthersTextsTranslations = {
   sales_historic: "Histórico de vendas",
   new_client: "Novo cliente",
   is_valid: "É valido?",
+  watch_now: "Assista a Apresentação",
   expired_at: "Expirado em",
   created_at: "Criado em",
 

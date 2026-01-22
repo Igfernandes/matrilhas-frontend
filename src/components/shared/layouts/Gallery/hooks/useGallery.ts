@@ -13,7 +13,7 @@ type Props = {
 export function useGallery({ url, key }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const { rows: gallery } = useGetGalleries(
+  const { rows: gallery, isPending: isLoading } = useGetGalleries(
     {
       limit: 100,
       start: 0,
@@ -74,6 +74,7 @@ export function useGallery({ url, key }: Props) {
   return {
     handleUploadFiles,
     images,
+    isLoading,
     postFile,
     fileRef,
     handleDeleteImage,

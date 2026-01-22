@@ -8,7 +8,7 @@ import { When } from "@components/utilities/When"
 
 export function Footer() {
     const { t } = useI18n()
-    const { tour } = useSalesContext()
+    const { tour } = useSalesContext();
 
     return (
         <div className="hidden md:block mt-2 bg-secondary p-2 text-center font-semibold shadow-sm">

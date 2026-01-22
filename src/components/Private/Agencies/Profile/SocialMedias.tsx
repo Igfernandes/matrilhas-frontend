@@ -11,7 +11,7 @@ type Props = ProfileFormProps;
 
 export function SocialMedias({ register, agency, errors }: Props) {
     const { t } = useI18n()
-    const options = useMemo(() => ["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP"].map((media) => ({
+    const options = useMemo(() => ["FACEBOOK", "INSTAGRAM", "TWITTER", "LINKEDIN", "WHATSAPP", "SITE"].map((media) => ({
         text: t(`Words.${media.toLowerCase()}`),
         value: media
     })), [t]);
