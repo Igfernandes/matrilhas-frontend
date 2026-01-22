@@ -7,4 +7,4 @@ export type AgencySocialMediaShape = {
 };
 
 export type AgencySocialMediaPlatforms =
-  "FACEBOOK" | "INSTAGRAM" | "TWITTER" | "LINKEDIN" | "WHATSAPP";
+  "FACEBOOK" | "INSTAGRAM" | "TWITTER" | "LINKEDIN" | "WHATSAPP" | "SITE";

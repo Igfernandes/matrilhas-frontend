@@ -64,7 +64,7 @@ export function AgenciesPreviewPage({ targetAgency }: AgencyPreviewPageProps) {
                             </div>
                             <div className="mt-2">
                                 <span className="bg-primary block text-white mb-1"><strong>{t("Screens.agencies.located_at")}</strong></span>
-                                <p className="text-sm text-justify bg-secondary p-1 shadow-md">{address?.number}, {address?.complement}, {address?.city}. {address?.state} - {address?.country}, {address?.zip_code}.</p>
+                                <p className="text-sm text-justify bg-secondary p-1 shadow-md">{address?.complement}, {address?.number}, {address?.city}. {address?.state} - {address?.country}, {address?.zip_code}.</p>
                             </div>
                         </div>
                     </div>

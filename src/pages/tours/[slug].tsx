@@ -6,14 +6,17 @@ import { getToursPreview } from "@services/Tours/GetPreview/SSR";
 import { TourPreviewPageProps } from "@components/Public/Tours/type";
 import { Profile } from "@components/Public/Tours/Profile";
 import { SalesProvider } from "@components/Public/Sales/context";
+import ModalProvider from "@contexts/Modal";
 
 export default function TourPreview({ targetTour }: TourPreviewPageProps) {
     return (
         <SalesProvider>
-            <Header />
-            <Profile tour={targetTour} />
-            <Subscribe />
-            <Footer />
+            <ModalProvider>
+                <Header />
+                <Profile tour={targetTour} />
+                <Subscribe />
+                <Footer />
+            </ModalProvider>
         </SalesProvider>
     );
 }
