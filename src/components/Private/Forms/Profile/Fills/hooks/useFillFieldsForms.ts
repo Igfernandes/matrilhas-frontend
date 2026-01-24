@@ -11,7 +11,7 @@ export function useFillFieldsForms({ fields, form }: HookFillFieldsProps) {
 
     return components
       .filter((component) =>
-        ["simple", "user", "custom"].includes(component?.group ?? "")
+        ["simple", "user", "custom"].includes(component?.group ?? ""),
       )
       .map((component) => {
         const field = fields.find((field) => field.field_id == component?.id);
@@ -27,17 +27,19 @@ export function useFillFieldsForms({ fields, form }: HookFillFieldsProps) {
   const { formMethods } = useFormRules({
     schema: z.object(
       Object.fromEntries(
-        fieldsData.map(({ id }: FieldsShape) => [
+        fieldsData.map(({ id, type }: FieldsShape) => [
           `input_${id}`,
-          z.string().optional().nullable(),
-        ])
-      )
+          type === "number"
+            ? z.number().optional().nullable()
+            : z.string().optional().nullable(),
+        ]),
+      ),
     ),
     defaultValues: Object.fromEntries(
       fieldsData.map(({ id, defaultValue }: FieldsShape) => [
         `input_${id}`,
         defaultValue ?? "",
-      ])
+      ]),
     ),
   });
 

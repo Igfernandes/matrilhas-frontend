@@ -24,7 +24,7 @@ export default function FillField({ fields, form }: FieldsPageProps) {
       <div className="bg-white">
         <div className="title p-4">
           <h1 className="text-2xl font-semibold">
-            {i18n("Words.fill_register")}
+            {i18n("Texts.fill_register")}
           </h1>
         </div>
         <div className="p-4">
