@@ -27,9 +27,9 @@ export function useFillFieldsForms({ fields, form }: HookFillFieldsProps) {
   const { formMethods } = useFormRules({
     schema: z.object(
       Object.fromEntries(
-        fieldsData.map(({ id, type }: FieldsShape) => [
+        fieldsData.map(({ id, element }: FieldsShape) => [
           `input_${id}`,
-          type === "number"
+          element === "number"
             ? z.number().optional().nullable()
             : z.string().optional().nullable(),
         ]),
