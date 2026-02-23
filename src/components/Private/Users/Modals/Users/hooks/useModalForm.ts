@@ -4,7 +4,7 @@ import usePostInviteUser from "../../../../../../services/Invites/Post/Users/use
 import usePutUsers from "@services/Users/Put/usePutUsers";
 import useGetUsers from "@services/Users/Get/useGetUsers";
 import { useModalContext } from "@contexts/Modal";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { UserShape } from "@type/Users";
 import { useI18n } from "@contexts/I18n";
 
@@ -16,11 +16,12 @@ export function useModalForm({ onModal }: Props) {
   const { t } = useI18n();
   const { modal } = useModalContext();
   const { rows } = useGetUsers({
-    id: parseInt(modal.id as string),
+    id: parseInt((modal.id ?? "0") as string),
   });
   const user = useMemo(() => {
     return rows.length > 0 ? rows[0] : ({} as UserShape);
   }, [rows]);
+
   const schema = useMemo(() => UsersModalSchema(t), []);
   const formProps = useFormRules<UsersPayload>({
     schema,
@@ -30,8 +31,9 @@ export function useModalForm({ onModal }: Props) {
     },
   });
   const {
-    formMethods: { reset },
+    formMethods: { reset, watch },
   } = formProps;
+  const id = watch("id");
   const { mutateAsync: postInviteUser, isPending: isLoadingPost } =
     usePostInviteUser();
   const { mutateAsync: putUsers, isPending: isLoadingPut } = usePutUsers();
@@ -39,7 +41,7 @@ export function useModalForm({ onModal }: Props) {
   const submit = ({ group, id, ...rest }: UsersPayload) => {
     const payload = {
       ...rest,
-      group: group.map((groupId) => parseInt(groupId)),
+      groups: group.map((groupId) => parseInt(groupId)),
     };
     if (id) {
       putUsers({
@@ -52,6 +54,12 @@ export function useModalForm({ onModal }: Props) {
         onModal(false);
       });
   };
+
+  useEffect(() => {
+    if (!user || user.id === id) return;
+
+    reset(user);
+  }, [user, reset, id]);
 
   return {
     ...formProps,

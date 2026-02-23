@@ -6,16 +6,16 @@ import { useRoutes } from "@hooks/useRoutes";
 export default function useGet() {
   const { users } = API_ROUTES;
   const { axios } = useAxios();
-  const { setParams, setQueries } = useRoutes();
+  const { setQueries } = useRoutes();
 
   async function getUsers(request?: GetUsersRequest) {
-    const { id, ...query } = request ?? {};
+    const query = request ?? {};
 
     return await axios.get<GetUsersResponse>(
       setQueries({
-        url: setParams({ url: users, data: { id: id ?? "" } }),
+        url: users,
         query,
-      })
+      }),
     );
   }
   return {
