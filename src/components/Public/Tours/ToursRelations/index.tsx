@@ -20,12 +20,10 @@ export function ToursRelations({ query, slidesPerView }: ToursRelationsProps) {
                 type: "board"
             }}>
                 <Swiper
-                    slidesPerView={"auto"}
+
                     modules={[Autoplay, Navigation]}
-
-
                     navigation={{
-                        nextEl: ".gallery-button-next",
+                        nextEl: ".tours-relations-button-next",
                     }}
                     autoplay={{
                         delay: 4000,
@@ -38,12 +36,20 @@ export function ToursRelations({ query, slidesPerView }: ToursRelationsProps) {
                         },
                         640: {
                             // tablets em pé
+                            slidesPerView: 2,
+                        },
+                        800: {
+                            // tablets em pé
+                            slidesPerView: 3,
+                        },
+                        1024: {
+                            // tablets em pé
                             slidesPerView: slidesPerView ?? 3,
                         },
                     }}
                 >
                     {tours.map((tour, key) => (
-                        <SwiperSlide key={`tour_${key}`} className="w-full md:w-[400px] mx-4">
+                        <SwiperSlide key={`tour_${key}`} className="w-full md:w-[400px] px-2">
                             <TourCard tour={tour} />
                         </SwiperSlide>
                     ))}

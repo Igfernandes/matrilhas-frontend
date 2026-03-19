@@ -23,30 +23,32 @@ export function TourCard({ tour }: Props) {
     const agency = useMemo(() => tour?.agencies?.[0], [tour]);
 
     return (
-        <div className=" my-5 md:my-0 shadow-sm p-2 border-2 border-zinc-200 rounded-lg bg-white mx-4 md:mx-1">
-            <div className="relative">
+        <div className="min-h-[90vh] flex flex-col justify-between my-5 md:my-0 shadow-sm p-2 border-2 border-zinc-200 rounded-lg bg-white mx-4 md:mx-1">
+            <div className="relative h-full ">
                 <Image
                     src={tour.banner ?? "/imgs/illustration.png"}
                     alt={tour.title}
                     width={700}
                     height={700}
-                    className="w-full h-[8rem] object-cover brightness-90"
+                    className="w-full h-[10rem] object-cover brightness-90"
                 />
                 <When value={!!tour.featured}>
                     <div className="bg-warning absolute top-1 right-2 shadow-sm shadow-white text-white px-2 py-1 rounded-md text-xs font-bold">
                         <span> {t("Words.featured")}</span>
                     </div>
                 </When>
-            </div>
-            <div className="relative">
                 <div className="bg-primary">
                     <h2 className="text-white px-2 py-1 line-clamp-2 font-bold text-sm">{tour.title}</h2>
                 </div>
+                <div className="text-justify text-sm py-2 px-1">
+                    <p className="text-sm">{tour.short_description}</p>
+                </div>
+
+            </div>
+            <div className="relative h-full">
+
                 <div>
                     <ul>
-                        <li className="text-justify text-sm py-2 px-1">
-                            <p className="text-sm">{tour.short_description}</p>
-                        </li>
 
                         <When value={!!tour?.activity_period?.start}>
                             <li className="mb-2">
