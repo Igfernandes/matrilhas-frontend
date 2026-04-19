@@ -15,9 +15,8 @@ export function Gallery({ api, id }: GalleryProps) {
             type: "board"
         }}>
             <div className="w-full bg-secondary h-[60vh] overflow-y-auto p-1 border-2 border-zinc-300 mt-5">
+                <input ref={fileRef} onChange={handleUploadFiles} className="opacity-0 absolute top-0 left-0 w-full h-full flex-1" type="file" multiple />
                 <div className="relative flex flex-wrap justify-start items-start w-full h-full">
-                    <input ref={fileRef} onChange={handleUploadFiles} className="opacity-0 absolute top-0 left-0 w-full h-full" type="file" multiple />
-
                     <When value={images.length > 0}>
                         {images.map((image, key) => (
                             <div key={`gallery_${key}_${id}`} className="relative z-10 text-center mx-[1px] h-60 md:h-40 w-full md:w-[24.7%] xl:w-[19.7%] border-primary border mb-1">
