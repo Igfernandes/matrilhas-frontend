@@ -13,7 +13,10 @@ export function Gallery({ api, id }: GalleryProps) {
         <>
         <div className="w-full bg-secondary h-[20vh] overflow-y-auto p-1 border-2 border-zinc-300 mt-5">
              <input ref={fileRef} onChange={handleUploadFiles} accept=".png,.jpg,.jpge" className="opacity-0 absolute top-0 left-0 z-20 w-full h-full flex-1" type="file" multiple />
-              
+                 <div className="flex items-center justify-center py-14 ml-[1px] h-50 w-full text-center">
+                        <span>Arraste e solte <br /> imagens aqui</span>
+                    </div>
+
         </div>
             <div className="w-full bg-secondary h-[60vh] overflow-y-auto p-1 border-2 border-zinc-300">
                  <div className="relative flex flex-wrap justify-start items-start w-full h-full">
@@ -28,10 +31,7 @@ export function Gallery({ api, id }: GalleryProps) {
                             </div>
                         ))}
                     </When>
-                    <div className="flex items-center justify-center py-14 ml-[1px] h-50 w-full md:w-[24.7%] xl:w-[19.7%] text-center border-primary border">
-                        <span>Arraste e solte <br /> imagens aqui</span>
-                    </div>
-
+                 
                 </div>
             </div>
             <div className="relative z-10">
