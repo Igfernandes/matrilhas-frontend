@@ -5,7 +5,8 @@ import { useMemo, useState } from "react"
 
 export function useGalleries() {
     const { rows, isPending } = useGetGalleriesPreview()
-    const galleries = useMemo(() => rows, [rows])
+
+    const galleries = useMemo(() => rows.sort((a, b) => a.title.localeCompare(b.title)), [rows])
     const [targetPhotos, setTargetPhotos] = useState<Array<ImageShape>>([])
 
     const handleChangeTargetPhotos = (photos: Array<GalleryPhotoShape> = [], galleryTitle?: string) => {
