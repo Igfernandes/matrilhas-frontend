@@ -23,15 +23,15 @@ export function Credentials({ handleToggleStageForm, isLoading }: Props) {
       <div className="button-group flex flex-wrap md:flex-nowrap ">
         <div className="form-prev mt-6 md:mt-0 w-full md:mr-2 md:w-1/2">
           <Button
-            className="bg-white border-black border-2 "
+            className="bg-white text-primary border-black border-2 "
             onClick={() => handleToggleStageForm("PERSONAL")}
-            text={t("Words.go_back")}
+            text={t("Texts.go_back")}
             type="button"
           />
         </div>
         <div className="form-submit mt-6  md:mt-0 w-full md:w-1/2">
           <Button
-            text={t("Words.create_account")}
+            text={t("Texts.create_account")}
             type="submit"
             isLoading={isLoading}
           />
