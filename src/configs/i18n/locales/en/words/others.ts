@@ -11,6 +11,7 @@ export const OthersTranslations = {
   sales: "Sales",
   management: "Management",
   schedule: "Schedule",
+  exhausted: "Exhausted",
   communication: "Communication",
   services: "Services",
   finance: "Finance",
