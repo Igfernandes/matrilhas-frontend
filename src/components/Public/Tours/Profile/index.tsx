@@ -11,7 +11,6 @@ import { formatMoney } from "@helpers/currencies";
 import { TravelBag } from "@assets/Icons/black/TravelBag";
 import { useSalesContext } from "@components/Public/Sales/context";
 import { useI18n } from "@contexts/I18n";
-import { useMemo } from "react";
 import Link from "next/link";
 
 type Props = {
@@ -21,7 +20,6 @@ type Props = {
 export function Profile({ tour }: Props) {
     const { t } = useI18n()
     const { handleTargetTour } = useSalesContext()
-    const agency = useMemo(() => tour?.agencies?.[0], [tour]);
 
     return (
         <div className="px-2 lg:px-12 mt-5 mb-[5rem]">
@@ -29,7 +27,7 @@ export function Profile({ tour }: Props) {
                 <Image className="w-full h-[110vh] md:h-[80vh] brightness-50 object-cover" src={tour.banner ?? "/imgs/illustration.png"} alt={tour.title} width={800} height={400} />
 
                 <When value={!!tour.featured}>
-                    <div className="absolute top-0 left-0 bg-emerald-400 text-white px-4 py-2 m-5 rounded-md text-lg font-bold">
+                    <div className="absolute top-0 left-0 bg-rose-400 text-white px-4 py-2 m-5 rounded-md text-lg font-bold">
                         <span>{t("Screens.tours.featured_tour")}</span>
                     </div>
                 </When>
@@ -57,29 +55,21 @@ export function Profile({ tour }: Props) {
                                         <span style={{
                                             textDecoration: tour.promotional_price ? "line-through" : "none"
                                         }} className="text-white">{formatMoney(tour.price, tour.currency)}</span>
-                                        <span className="text-emerald-400 inline-block ml-2">{tour.promotional_price ? t("Screens.tours.for") + " " + formatMoney(tour.promotional_price, tour.currency) : ""}</span>
+                                        <span className="text-rose-400 inline-block ml-2">{tour.promotional_price ? t("Screens.tours.for") + " " + formatMoney(tour.promotional_price, tour.currency) : ""}</span>
                                     </div>
                                 </div>
                             </When>
                         </div>
                     </div>
                     <div className="flex flex-wrap items-center mb-[-3rem] mt-10">
-                        <When value={tour.price === 0 && !!agency}>
-                            <Link target="_blank"
-                                href={`https://wa.me/55${agency?.phone}?text=Eu%20acabei%20de%20vir%20do%20site%20do%20Matrilhas%20e%20tenho%20interesse%20em%20reservar%20${tour.title}`}
-                                className={`${tour.is_available_for_sale ? "hover:bg-white border-emerald-400 border hover:text-emerald-400 bg-emerald-400" : "bg-zinc-500 cursor-not-allowed"} py-4 px-10 inline-block rounded-md text-white font-semibold cursor-pointer`}>
-                                {t("Screens.tours.book_now")}
-                            </Link>
-                        </When>
-                        <When value={tour.price > 0}>
-                            <span onClick={() => tour.is_available_for_sale && handleTargetTour(tour.id)}
-                                className={`${tour.is_available_for_sale ? "hover:bg-white border-emerald-400 border hover:text-emerald-400 bg-emerald-400" : "bg-zinc-500 cursor-not-allowed"} py-4 px-10 inline-block rounded-md text-white font-semibold cursor-pointer`}>
-                                {tour.is_available_for_sale ? t("Screens.tours.book_now") : t("Screens.tours.unavailable_for_booking")}
-                            </span>
-                        </When>
+
+                        <span onClick={() => tour.is_available_for_sale && handleTargetTour(tour.id)}
+                            className={`${tour.is_available_for_sale ? "hover:bg-white border-rose-400 border hover:text-rose-400 bg-rose-400" : "bg-zinc-500 cursor-not-allowed"} py-4 px-10 inline-block rounded-md text-white font-semibold cursor-pointer`}>
+                            {tour.is_available_for_sale ? t("Screens.tours.book_now") : t("Screens.tours.unavailable_for_booking")}
+                        </span>
                         <When value={!!tour.video}>
                             <div className="md:w-auto mt-6 md:mt-0 ml-2 ">
-                                <Link href={tour.video ?? ""} target="_blank" className="cursor-pointer py-4 px-10 border-2 bg-white border-emerald-400 text-center text-emerald-400 rounded-md font-semibold">{t("Texts.watch_now")}</Link>
+                                <Link href={tour.video ?? ""} target="_blank" className="cursor-pointer py-4 px-10 border-2 bg-white border-rose-400 text-center text-rose-400 rounded-md font-semibold">{t("Texts.watch_now")}</Link>
                             </div>
                         </When>
                     </div>
