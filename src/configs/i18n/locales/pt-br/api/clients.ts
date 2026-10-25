@@ -8,6 +8,7 @@ export const ClientsApiTranslations = {
       id: "A categoria informado não existe ou está inválido",
       client_id: "O cliente informado não existe ou está inválido",
       name: "O nome da categoria informada está inválido",
+      cpf: "O cpf encontra-se utilizado ou incorreto",
       name_contains: "O nome da categoria informada está inválido",
       description_contains: "A descrição da categoria informada está inválida",
       created_at: "A data de criação da categoria está inválida",
@@ -19,7 +20,7 @@ export const ClientsApiTranslations = {
   },
   subscribes: {
     success: {
-      post: "A Matrilhas agradece a sua inscrição e manterá você informado sobre todas as novidades",
+      post: "A AGM agradece a sua inscrição e manterá você informado sobre todas as novidades",
     },
     invalid: {
       name: "É obrigatório preencher o seu nome",
@@ -72,6 +73,8 @@ export const ClientsApiTranslations = {
     clients: "Os clientes informados encontram-se inexistentes ou inválidos",
     category: "A categoria do cliente informada encontra-se vazia ou inválida",
     name: "O nome informado do cliente encontra-se inválido",
+    imports:
+      "Existem alguns registros sem nome ou telefone ou cpf e não foram possíveis ser cadastrados",
     name_max_length_100:
       "O cliente contém nome com o limite acima do máximo de 100 caracteres.",
     avatar: "O avatar do cliente contém uma url inválida",

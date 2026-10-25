@@ -20,8 +20,12 @@ export const SaleProfileSchema = (t: TFunction) =>
           length: "150",
         }),
       }),
-    boarding: z.string({ required_error: t("Validations.required") }),
-    landing: z.string({ required_error: t("Validations.required") }),
+    boarding: z.string({ required_error: t("Validations.required") }).nonempty({
+      message: t("Validations.required")
+    }),
+    landing: z.string({ required_error: t("Validations.required") }).nonempty({
+      message: t("Validations.required")
+    }),
     payment_id: z
       .string({ required_error: t("Validations.required") })
       .max(150, {
@@ -113,10 +117,10 @@ export const SaleProfileSchema = (t: TFunction) =>
               field: t("Words.birthdate"),
               length: "22",
             }),
-          }),
+          }) ,
       })
-    ),
-    contact: z.object({
+    ).default([]),
+    contacts: z.object({
       name: z
         .string({ required_error: t("Validations.required") })
         .min(3, {
@@ -145,7 +149,7 @@ export const SaleProfileSchema = (t: TFunction) =>
             length: "22",
           }),
         }),
-      relation: z
+      kinship: z
         .string({ required_error: t("Validations.required") })
         .min(3, {
           message: t("Validations.min_length", {

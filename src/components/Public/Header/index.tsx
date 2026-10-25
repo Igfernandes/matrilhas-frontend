@@ -43,8 +43,8 @@ export function Header() {
               <br />
               <Link
               target="_blank"
-                className="text-sm hover:text-emerald-300"
-                href="https://wa.me/5521995071974?text=Ol%C3%A1%20Matrilhas.Eu%20vim%20ddo%20dsite%20de%20preciso%20de%20ajuda%20e%20tenho%20d%C3%BAvidas"
+                className="text-sm hover:text-rose-300"
+                href="https://wa.me/5521995071974?text=Ol%C3%A1%20AGM.Eu%20vim%20ddo%20dsite%20de%20preciso%20de%20ajuda%20e%20tenho%20d%C3%BAvidas"
               >
                 {t("Screens.home.contact.phone")}
               </Link>
@@ -55,8 +55,8 @@ export function Header() {
               </span>
               <br />
               <Link
-                className="text-sm hover:text-emerald-300"
-                href="mailto:contato@matrilhas.com.br"
+                className="text-sm hover:text-rose-300"
+                href="mailto:contato@agmturismomarica.com.br"
               >
                 {t("Screens.home.contact.email")}
               </Link>
@@ -71,7 +71,7 @@ export function Header() {
                 width={90}
                 height={80}
                 className="h-16 object-contain"
-                alt="logotype matrilhas"
+                alt="logotype agm"
               />
             </div>
             <div className="hidden md:block">

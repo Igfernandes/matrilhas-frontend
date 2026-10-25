@@ -13,6 +13,7 @@ export function Definitions() {
     register,
     formState: { errors },
   } = useFormContext<ChargesPayload>();
+  const type = watch("type");
 
   return (
     <div className="bg-white  py-4 px-6 rounded-xl mb-6">
@@ -62,10 +63,13 @@ export function Definitions() {
         </div>
       </div>
       <div className="form-row flex flex-wrap mb-6 justify-between">
-        <When value={watch("type") === "APPELLANT"}>
+        <When value={type === "APPELLANT"}>
           <div className="w-full md:w-[48%] ">
             <Input
-              {...register("period")}
+              {...register("period", {
+                valueAsNumber: true,
+                required: true,
+              })}
               dataTestId="period"
               type="number"
               min={1}
@@ -78,13 +82,17 @@ export function Definitions() {
             </span>
           </div>
         </When>
-        <When value={watch("type") !== "APPELLANT"}>
+        <When value={type !== "APPELLANT"}>
           <div className="form-group w-full lg:w-[48%] lg:mt-0">
             <Input
-              {...register("amount")}
+              {...register("amount", {
+                valueAsNumber: true,
+                required: true
+              })}
               dataTestId="amount"
               label={`${t("Texts.charge_amount")}`}
               min={1}
+              defaultValue={1}
               type="number"
               required={true}
               errors={errors.amount}
@@ -122,8 +130,10 @@ export function Definitions() {
           <Input
             {...register("price", {
               valueAsNumber: true,
+              required: true
             })}
             dataTestId="price"
+            required={true}
             step={"0.01"}
             prefix="R$: "
             type="number"

@@ -1,4 +1,5 @@
 export const OthersTranslations = {
+  free: "Gratuidade",
   code: "Código",
   galleries: "Galerias",
   cover: "Capa",
@@ -11,10 +12,10 @@ export const OthersTranslations = {
   sales: "Vendas",
   management: "Gerenciamento",
   schedule: "Agenda",
+  exhausted: "Esgotado",
   communication: "Comunicação",
   services: "Serviços",
   finance: "Financeiro",
-  exhausted: "Esgotado",
   finish: "Finalizar",
   system: "Sistema",
   pay: "Pagar",
