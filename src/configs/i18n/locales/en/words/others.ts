@@ -1,4 +1,5 @@
 export const OthersTranslations = {
+  free: "Free",
   code: "Code",
   galleries: "Galleries",
   cover: "Cover",
@@ -8,10 +9,10 @@ export const OthersTranslations = {
   more: "More",
   client: "Client",
   main: "Main",
+  exhausted: "Exhausted",
   sales: "Sales",
   management: "Management",
   schedule: "Schedule",
-  exhausted: "Exhausted",
   communication: "Communication",
   services: "Services",
   finance: "Finance",

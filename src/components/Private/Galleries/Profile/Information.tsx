@@ -50,13 +50,14 @@ export function Information({ register, errors, setValue, watch }: Props) {
             <div className="flex flex-wrap justify-between">
                 <div className="w-full flex">
                     <When value={!!cover}>
-                        <div className="bg-white w-[15rem] mb-2 p-2 shadow">
+                        <div className="bg-white text-center w-[15rem] mb-2 p-2 pb-0 shadow">
                             <Image className="h-[20vh] object-contain w-full" src={cover} alt={watch("title")} width={400} height={400} />
                         </div>
                     </When>
                     <div className="w-full">
                         <div className="mt-1">
                             <File dataTestId="cover" {...register("cover")} accept=".png,.jpg,.jpeg" label={t("Words.cover")} errors={errors?.cover} />
+                            <span className="text-xs">Formato: 400x400</span>
                         </div>
                         <div className="mt-2">
                             <Input

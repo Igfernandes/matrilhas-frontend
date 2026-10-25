@@ -34,7 +34,7 @@ export default function useSnackbarMessage({
       };
 
       snackbarUpdate(snackbar);
-    }, 1000);
+    }, 2000);
 
     setTypeSnackbar(snackbar.type);
     return () => clearInterval(interval);

@@ -6,7 +6,7 @@ import { useI18n } from "@contexts/I18n";
 export function ToursTabs({ tabs }: TourTabProps) {
     const { handleChangeTab, tab } = useTabs()
     const { t } = useI18n()
-    const tabStyled = useRef<string>("text-md md:text-sm xl:text-md px-2 border-primary border border-b-0 rounded-sm cursor-pointer hover:bg-emerald-600 hover:text-white px-2 py-1");
+    const tabStyled = useRef<string>("text-md md:text-sm xl:text-md px-2 border-primary border border-b-0 rounded-sm cursor-pointer hover:bg-rose-600 hover:text-white px-2 py-1");
 
     return (
         <>
@@ -32,6 +32,9 @@ export function ToursTabs({ tabs }: TourTabProps) {
                     </li>
                     <li className={`${tabStyled.current} ${tab === "AGENCIES" ? "bg-primary text-white" : "text-primary bg-white"}`} onClick={() => handleChangeTab("AGENCIES")}>
                         <a className="tab-link">{t("Words.agencies")}</a>
+                    </li>
+                    <li className={`${tabStyled.current} ${tab === "SALES" ? "bg-primary text-white" : "text-primary bg-white"}`} onClick={() => handleChangeTab("SALES")}>
+                        <a className="tab-link">{t("Words.sales")}</a>
                     </li>
                 </ul>
             </div>

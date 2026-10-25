@@ -4,16 +4,15 @@ import { useDefinitions } from "./hooks/useDefinitions";
 import { Select } from "@components/shared/forms/Select";
 import { useI18n } from "@contexts/I18n";
 import { Input } from "@components/shared/forms/Input";
-import { useAddress } from "@components/Public/Sales/hooks/useAddress";
+import { useAddress } from "./hooks/useAddress";
 
 
 export function Definitions() {
-    const { tours, agencies } = useDefinitions()
+    const { tours, agencies, dataTours } = useDefinitions()
     const { t } = useI18n()
     const { register, formState: { errors } } = useFormContext<SaleProfilePayload>()
-    const { destinyAddresses, originAddresses, builderOption } = useAddress()
+    const { destinyAddresses, originAddresses, builderOption } = useAddress({ tours: dataTours })
 
-    console.log(errors)
     return (
         <div className="mb-5">
             <div className="mb-4">
@@ -45,14 +44,14 @@ export function Definitions() {
                 </div>
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-[48%] mb-2">
-                        <Input {...register("reference")} label={t("Words.reference")} dataTestId="reference" />
+                        <Input {...register("reference")} required={true} label={t("Words.reference")} dataTestId="reference" />
                     </div>
                     <div className="w-full md:w-[48%] mb-2">
                         <Input {...register("payment_id")} label={t("Words.payment_id")} dataTestId="payment_id" />
                     </div>
                 </div>
                 <div className="w-full my-2">
-                    <Select dataTestId="boarding" options={[
+                    <Select dataTestId="boarding" required={true} options={[
                         {
                             text: t("Texts.select_option"),
                             value: ""
@@ -63,7 +62,7 @@ export function Definitions() {
                         label={t("Screens.tours.address_boarding")} errors={errors?.boarding} />
                 </div>
                 <div className="w-full my-2">
-                    <Select dataTestId="landing" options={[
+                    <Select dataTestId="landing" required={true} options={[
                         {
                             text: t("Texts.select_option"),
                             value: ""

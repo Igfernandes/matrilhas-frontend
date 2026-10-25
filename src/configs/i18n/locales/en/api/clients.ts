@@ -9,6 +9,7 @@ export const ClientsApiTranslations = {
       client_id: "The informed client does not exist or is invalid",
       name: "The category name is invalid",
       name_contains: "The category name is invalid",
+      cpf: "The CPF is already in use or is incorrect",
       description_contains: "The category description is invalid",
       created_at: "The category creation date is invalid",
       updated_at: "The category update date is invalid",
@@ -19,7 +20,7 @@ export const ClientsApiTranslations = {
   },
   subscribes: {
     success: {
-      post: "Matrilhas thanks you for subscribing and will keep you updated on all news",
+      post: "AGM thanks you for subscribing and will keep you updated on all news",
     },
     invalid: {
       name: "Your name is required",
