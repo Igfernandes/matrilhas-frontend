@@ -61,7 +61,7 @@ export const Api = {
   clients: {
     subscribes: {
       success: {
-        post: "AGM thanks you for your subscription and will keep you informed about all news",
+        post: "Matrilhas thanks you for your subscription and will keep you informed about all news",
       },
       invalid: {
         name: "Name is required",

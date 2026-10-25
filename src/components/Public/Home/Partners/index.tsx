@@ -31,13 +31,13 @@ export function Partners() {
                   />
                 </div>
                 <div className="bg-slate-50 ">
-                  <div className="agm w-full">
+                  <div className="Matrilhas w-full">
                     <div className="w-16 mx-auto bg-white p-2 pb-0 shadow-sm rounded-md">
                       <Image
                         src={"/imgs/selo.png"}
                         width={400}
                         height={400}
-                        alt="selo AGM"
+                        alt="selo Matrilhas"
                       />
                     </div>
                   </div>

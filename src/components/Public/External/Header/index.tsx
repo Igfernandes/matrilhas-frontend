@@ -23,7 +23,7 @@ export function Header() {
                     src={"/imgs/logotype.png"}
                     width={53}
                     height={56}
-                    alt="logotipo AGM"
+                    alt="logotipo Matrilhas"
                   />
                 </Link>
               </div>

@@ -77,7 +77,7 @@ export const CookiesTranslations = {
   contact: {
     title: "Contáctenos",
     text: "Si tiene dudas sobre nuestra Política de Cookies o desea más información:",
-    email: "contato@agmturismomarica.com.br",
+    email: "contato@Matrilhasturismomarica.com.br",
     address:
       "Rua Vinicius Oliveira da Rocha, 079, Lagoa Amendoeiras, São José do Imbassai, 24931-315",
   },

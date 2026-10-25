@@ -20,7 +20,7 @@ export const ClientsApiTranslations = {
   },
   subscribes: {
     success: {
-      post: "AGM thanks you for subscribing and will keep you updated on all news",
+      post: "Matrilhas thanks you for subscribing and will keep you updated on all news",
     },
     invalid: {
       name: "Your name is required",

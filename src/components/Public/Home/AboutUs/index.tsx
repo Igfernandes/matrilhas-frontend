@@ -40,13 +40,13 @@ export function AboutUs() {
               </ul>
             </div>
           </div>
-          <div className="agm my-4 w-full md:w-[70%] lg:w-[40%] mx-auto">
+          <div className="Matrilhas my-4 w-full md:w-[70%] lg:w-[40%] mx-auto">
             <Image
-              src="/imgs/AGM-TEAM.jpeg"
+              src="/imgs/Matrilhas-TEAM.jpeg"
               width={800}
               height={800}
               className="rounded-lg shadow-md"
-              alt="agm"
+              alt="Matrilhas"
             />
           </div>
         </div>

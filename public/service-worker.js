@@ -6,7 +6,7 @@ self.addEventListener("push", (event) => {
   const title = data.title || "Nova Notificação";
   const options = {
     body: data.body || "Você tem uma nova mensagem.",
-    icon: "/imgs/agm-round-logo.png", // substitua pelo seu ícone
+    icon: "/imgs/Matrilhas-round-logo.png", // substitua pelo seu ícone
     badge: "/badge.png",
     data: {
       url: data.url || "/", // Adicione a URL para abrir quando clicado

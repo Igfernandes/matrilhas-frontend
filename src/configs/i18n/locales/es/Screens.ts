@@ -63,7 +63,7 @@ export const Screens = {
 
   needs_help: "¿Necesitas ayuda?",
   logout: {
-    text: "Has cerrado sesión de forma segura. AGM te espera la próxima! 🐾",
+    text: "Has cerrado sesión de forma segura. Matrilhas te espera la próxima! 🐾",
   },
   dashboard: {
     clients: clientsTranslations,
@@ -184,10 +184,10 @@ export const Screens = {
       phone_title: "Contáctanos",
       phone: "+55 (21) 9 9507-1974",
       email_title: "Envíanos un correo",
-      email: "contato@agmturismomarica.com.br",
+      email: "contato@Matrilhasturismomarica.com.br",
     },
     menu: {
-      logo: "logotipo AGM",
+      logo: "logotipo Matrilhas",
       about_us: "Sobre nosotros",
       partners: "Nuestros socios",
     },
@@ -216,25 +216,25 @@ export const Screens = {
     testimonials: [
       {
         title: "Comentario del viajero",
-        text: "¡Me encantó participar del paseo por Maricá con la AGM en jeeps! Fue una experiencia maravillosa, llena de paisajes increíbles y momentos inolvidables.",
+        text: "¡Me encantó participar del paseo por Maricá con la Matrilhas en jeeps! Fue una experiencia maravillosa, llena de paisajes increíbles y momentos inolvidables.",
         author: "Igor Fernandes",
         info: "Residente de Maricá - RJ",
       },
       {
         title: "Comentario del viajero",
-        text: "¡Fue increíble vivir esta experiencia con la AGM! Las actividades estuvieron muy bien organizadas, con momentos divertidos y especiales de principio a fin. ¡Quiero repetir!",
+        text: "¡Fue increíble vivir esta experiencia con la Matrilhas! Las actividades estuvieron muy bien organizadas, con momentos divertidos y especiales de principio a fin. ¡Quiero repetir!",
         author: "Joyce Pedro",
         info: "Residente de Ouro Preto - MG",
       },
       {
         title: "Comentario del viajero",
-        text: "AGM está de felicitaciones! Participar en las actividades fue maravilloso, todo muy bien planificado y lleno de momentos únicos. ¡Lo recomiendo a todos!",
+        text: "Matrilhas está de felicitaciones! Participar en las actividades fue maravilloso, todo muy bien planificado y lleno de momentos únicos. ¡Lo recomiendo a todos!",
         author: "Jofre Martins",
         info: "Residente de São Gonçalo - RJ",
       },
       {
         title: "Comentario del viajero",
-        text: "¡Una experiencia inolvidable con la AGM! Cada detalle de las actividades fue pensado con cariño, brindando diversión, aprendizaje y mucha energía positiva.",
+        text: "¡Una experiencia inolvidable con la Matrilhas! Cada detalle de las actividades fue pensado con cariño, brindando diversión, aprendizaje y mucha energía positiva.",
         author: "Henrique José",
         info: "Residente de Maricá - RJ",
       },
