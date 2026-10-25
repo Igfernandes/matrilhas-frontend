@@ -30,7 +30,7 @@ export function TourBanners() {
                 ))} />
             </When>
             <When value={tours.length == 0}>
-                <Image width={800} height={700} className="h-full object-cover w-full" src={"/imgs/banners/banner-1.jpg"} alt={`Banner for tour`} />
+                <Image width={800} height={700} className="h-full object-cover w-full" src={"/imgs/banners/banner-1.png"} alt={`Banner for tour`} />
             </When>
         </div>
     )
