@@ -14,7 +14,7 @@ export default function Page404() {
             src={"/imgs/404.png"}
             width={250}
             height={200}
-            alt="Dog da AGM"
+            alt="Dog da Matrilhas"
             className="mx-auto"
           />
         </div>

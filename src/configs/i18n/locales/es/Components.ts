@@ -10,6 +10,6 @@ export const Components = {
     title_already_exclude: "¿Desea eliminar a este cliente?",
   },
   subscribe: {
-    notification_to_you: "¡La AGM quiere enviarte notificaciones!",
+    notification_to_you: "¡La Matrilhas quiere enviarte notificaciones!",
   },
 };
