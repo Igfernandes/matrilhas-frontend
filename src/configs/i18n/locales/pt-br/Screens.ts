@@ -180,7 +180,7 @@ export const Screens = {
       address_title: "Nosso Endereço",
       address: "São José do Imbassai, Maricá - RJ",
       phone_title: "Fale conosco",
-      phone: "+55  (21) 97129-2030",
+      phone: "+55  (21) 98897-4586",
       email_title: "Nos envie um e-mail",
       email: "contato@Matrilhasturismomarica.com.br",
     },
