@@ -56,7 +56,7 @@ export function Header() {
               <br />
               <Link
                 className="text-sm hover:text-rose-300"
-                href="mailto:contato@Matrilhasturismomarica.com.br"
+                href="mailto:contato@matrilhas.com.br"
               >
                 {t("Screens.home.contact.email")}
               </Link>
