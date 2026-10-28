@@ -26,8 +26,11 @@ export function useModalForm({ onModal }: Props) {
     id: +(modal.id ?? "") as number,
   });
   const groupsPermissions = useMemo(
-    () => dataGroupPermissions?.[0]?.permissions ?? ([] as PermissionData[]),
-    [dataGroupPermissions]
+    () =>
+      modal.id != "0"
+        ? dataGroupPermissions?.[0]?.permissions
+        : ([] as PermissionData[]),
+    [dataGroupPermissions, modal.id],
   );
   const groupCurrent = useMemo(() => dataGroups?.[0], [dataGroups]);
   const permissions = useMemo(() => rows ?? [], [rows]);
@@ -58,13 +61,13 @@ export function useModalForm({ onModal }: Props) {
   const submit = (formData: UsersGroupPayload) => {
     const permissions = formMethods.getValues().permissions;
     const permissionsAvailable = permissions.filter(
-      (permission) => !!permission
+      (permission) => !!permission,
     );
 
     const payload = {
       ...formData,
       permissions: permissionsAvailable.map((permission) =>
-        parseInt(permission as string)
+        parseInt(permission as string),
       ),
       id: modal.id as number,
     };
@@ -83,7 +86,7 @@ export function useModalForm({ onModal }: Props) {
     const permissionsCurrent = getValues("permissions") || [];
     const permissionsNew = permissions.map((permission) => {
       const hasPermission = groupsPermissions.find(
-        (groupPermission) => groupPermission.id === permission.id
+        (groupPermission) => groupPermission.id === permission.id,
       );
 
       return hasPermission ? permission.id.toString() : false;
@@ -91,7 +94,6 @@ export function useModalForm({ onModal }: Props) {
 
     if (isEquals(permissionsCurrent, permissionsNew)) return;
     setValue("permissions", permissionsNew);
-    
   }, [permissions, groupsPermissions, setValue, getValues]);
 
   return {

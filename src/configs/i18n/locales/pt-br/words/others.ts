@@ -8,6 +8,7 @@ export const OthersTranslations = {
   tours: "Passeios",
   more: "Mais",
   client: "Cliente",
+  payed_at: "Pago em",
   main: "Principal",
   sales: "Vendas",
   management: "Gerenciamento",

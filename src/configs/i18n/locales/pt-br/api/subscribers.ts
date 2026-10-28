@@ -16,5 +16,7 @@ export const SubscribersApiTranslations = {
     created_at: "A data de criação informada do assinante encontra-se inválida",
     limit: "O limite informado encontra-se inválido",
     start: "O offset informado encontra-se inválido",
+    not_found:
+      "Não foi possível encontrar registros válidos para essa operação",
   },
 };

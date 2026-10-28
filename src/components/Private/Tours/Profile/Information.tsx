@@ -38,7 +38,7 @@ export function Information({ register, errors }: Props) {
                     <Datetime
                         dataTestId="available_at"
                         {...register("available_at")}
-                        label={t("Texts.viewed_at")}
+                        label={t("Texts.viewed_at")} required={true}
                         errors={errors?.available_at}
                     />
                 </div>
@@ -49,6 +49,7 @@ export function Information({ register, errors }: Props) {
                         dataTestId="unavailable_at"
                         {...register("unavailable_at")}
                         label={t("Texts.unavailable_at")}
+                        required={true}
                         errors={errors?.unavailable_at}
                     />
                 </div>

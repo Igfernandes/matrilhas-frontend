@@ -12,6 +12,7 @@ import { GalleriesApiTranslations } from "./api/galleries";
 import { InvitesApiTranslations } from "./api/invites";
 import { NotificationsApiTranslations } from "./api/notifications";
 import { OperationsApiTranslations } from "./api/operations";
+import { paymentsApiTranslations } from "./api/payments";
 import { PermissionsApiTranslations } from "./api/permissions";
 import { RecoversApiTranslations } from "./api/recovers";
 import { SalesApiTranslations } from "./api/sales";
@@ -37,6 +38,7 @@ export const Api = {
   dispatchers: DispatchersApiTranslations,
   fields: FieldsApiTranslations,
   integrations: AuthenticationsApiTranslations,
+  payments: paymentsApiTranslations,
   invites: InvitesApiTranslations,
   notifications: NotificationsApiTranslations,
   subscribe: SubscribeApiTranslations,

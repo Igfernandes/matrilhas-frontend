@@ -14,7 +14,7 @@ type Props = {
 };
 
 export function AccessForm({ csrf }: Props) {
-  const { Recaptcha, recaptchaInstance, isRecaptchaLoaded } = useRecaptcha()
+  const { Recaptcha, recaptchaInstance, isRecaptchaLoaded , setIsRecaptchaLoaded} = useRecaptcha()
   const {
     handleSubmit,
     register,
@@ -23,7 +23,7 @@ export function AccessForm({ csrf }: Props) {
     isLoading,
     errors,
     isSuccess
-  } = useForm({ csrf, recaptchaInstance });
+  } = useForm({ csrf, recaptchaInstance, setIsRecaptchaLoaded });
   const { accessForgotPasswords } = publicRoutes;
   const { t } = useI18n()
 
