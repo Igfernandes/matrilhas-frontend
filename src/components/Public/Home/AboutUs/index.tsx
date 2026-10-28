@@ -42,7 +42,7 @@ export function AboutUs() {
           </div>
           <div className="Matrilhas my-4 w-full md:w-[70%] lg:w-[40%] mx-auto">
             <Image
-              src="/imgs/Matrilhas-TEAM.jpeg"
+              src="/imgs/MATRILHAS-TEAM.jpeg"
               width={800}
               height={800}
               className="rounded-lg shadow-md"

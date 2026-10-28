@@ -184,7 +184,7 @@ export const Screens = {
       phone_title: "Contáctanos",
       phone: "+55 (21) 9 9507-1974",
       email_title: "Envíanos un correo",
-      email: "contato@Matrilhasturismomarica.com.br",
+      email: "contato@matrilhas.com.br",
     },
     menu: {
       logo: "logotipo Matrilhas",
