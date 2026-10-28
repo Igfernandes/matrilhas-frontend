@@ -5,9 +5,10 @@ import { z } from "zod";
 export const ClientCreateSchema = (t: TFunction) => z.object({
   category: z.string({ required_error: t("Validations.required") }),
   name: z.string({ required_error: t("Validations.required") }).min(3, {
-    message: (t("Validations.min_length") as string)
-      .replace("${field}", t("Words.name"))
-      .replace("${length}", "3"),
+    message: (t("Validations.min_length", {
+      field: t("Words.name"),
+      length: 3
+    }) as string),
   }),
   birthdate: z
     .string({ required_error: t("Validations.required") })
