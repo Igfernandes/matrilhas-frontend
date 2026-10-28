@@ -13,9 +13,9 @@ export const SubscribersApiTranslations = {
       "El teléfono proporcionado del suscriptor ya está en uso o es inválido",
     phone_max_length_35:
       "El suscriptor tiene un teléfono que supera el límite máximo de 35 caracteres.",
-    created_at:
-      "La fecha de creación proporcionada del suscriptor es inválida",
+    created_at: "La fecha de creación proporcionada del suscriptor es inválida",
     limit: "El límite proporcionado es inválido",
     start: "El offset proporcionado es inválido",
+    not_found: "No se pudieron encontrar registros válidos para esta operación",
   },
 };

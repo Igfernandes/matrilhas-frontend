@@ -1,4 +1,4 @@
-export const chargesApiTranslations = {
+export const paymentsApiTranslations = {
   success: {
     post: "You will be redirected to complete your purchase!",
   },

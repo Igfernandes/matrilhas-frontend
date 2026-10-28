@@ -48,4 +48,34 @@ export const Permissions = {
   dispatchers_update: "Atualizar Disparo",
   dispatchers_delete: "Excluir Disparo",
   dispatchers_view: "Visualizar Disparo",
+
+  subscribers_create: "Criar Inscrito",
+  subscribers_update: "Atualizar Inscrito",
+  subscribers_delete: "Excluir Inscrito",
+  subscribers_view: "Visualizar Inscrito",
+
+  forms_fill_create: "Criar Inscrição de Formulário",
+  forms_fill_update: "Atualizar Inscrição de Formulário",
+  forms_fill_delete: "Excluir Inscrição de Formulário",
+  forms_fill_view: "Visualizar Inscrição de Formulário",
+
+  sales_create: "Criar Venda",
+  sales_update: "Atualizar Venda",
+  sales_delete: "Excluir Venda",
+  sales_view: "Visualizar Venda",
+
+  galleries_create: "Criar Galerias",
+  galleries_update: "Atualizar Galerias",
+  galleries_delete: "Excluir Galerias",
+  galleries_view: "Visualizar Galerias",
+
+  tours_create: "Criar Passeios",
+  tours_update: "Atualizar Passeios",
+  tours_delete: "Excluir Passeios",
+  tours_view: "Visualizar Passeios",
+
+  agencies_create: "Criar Agências",
+  agencies_update: "Atualizar Agências",
+  agencies_delete: "Excluir Agências",
+  agencies_view: "Visualizar Agências",
 };

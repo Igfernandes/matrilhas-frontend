@@ -48,4 +48,34 @@ export const Permissions = {
   dispatchers_update: "Update dispatches",
   dispatchers_delete: "Delete dispatches",
   dispatchers_view: "View dispatches",
+
+  subscribers_create: "Create Subscriber",
+  subscribers_update: "Update Subscriber",
+  subscribers_delete: "Delete Subscriber",
+  subscribers_view: "View Subscriber",
+
+  forms_fill_create: "Create Form Submission",
+  forms_fill_update: "Update Form Submission",
+  forms_fill_delete: "Delete Form Submission",
+  forms_fill_view: "View Form Submission",
+
+  sales_create: "Create Sale",
+  sales_update: "Update Sale",
+  sales_delete: "Delete Sale",
+  sales_view: "View Sale",
+
+  galleries_create: "Create Galleries",
+  galleries_update: "Update Galleries",
+  galleries_delete: "Delete Galleries",
+  galleries_view: "View Galleries",
+
+  tours_create: "Create Tours",
+  tours_update: "Update Tours",
+  tours_delete: "Delete Tours",
+  tours_view: "View Tours",
+
+  agencies_create: "Create Agencies",
+  agencies_update: "Update Agencies",
+  agencies_delete: "Delete Agencies",
+  agencies_view: "View Agencies",
 };

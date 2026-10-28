@@ -13,9 +13,9 @@ export const SubscribersApiTranslations = {
       "The provided subscriber phone number is already in use or is invalid",
     phone_max_length_35:
       "The subscriber has a phone number that exceeds the maximum limit of 35 characters.",
-    created_at:
-      "The provided subscriber creation date is invalid",
+    created_at: "The provided subscriber creation date is invalid",
     limit: "The provided limit is invalid",
     start: "The provided offset is invalid",
+    not_found: "No valid records could be found for this operation",
   },
 };

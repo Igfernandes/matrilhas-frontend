@@ -5,11 +5,14 @@ import { z } from "zod";
 
 export const SettingsSchema = z.object({
   name: z.string({ required_error: i18n("Validations.required") }).min(3, {
-    message: (i18n("Validations.min_length") as string)
-      .replace("${field}", i18n("Words.name"))
-      .replace("${length}", "3"),
+    message: i18n("Validations.min_length", {
+      field: i18n("Words.name"),
+      length: 3,
+    }) as string,
   }),
-  cpf: z.string({ required_error: i18n("Validations.required") }).nonempty(i18n("Validations.required")),
+  cpf: z
+    .string({ required_error: i18n("Validations.required") })
+    .nonempty(i18n("Validations.required")),
   birthdate: z
     .string({ required_error: i18n("Validations.required") })
     .or(z.literal("")) // Permite string vazia ("")
